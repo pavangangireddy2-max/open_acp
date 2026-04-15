@@ -13,3 +13,7 @@ The `v1` branch is the incremental migration layer on top of the M0-M4 baseline.
 - runtime wiki outputs under `storage/wiki` instead of tracked source-tree wiki state
 
 See [docs/v1_architecture.md](/Users/pavangangireddy/Desktop/projects/open_acp/docs/v1_architecture.md) for the full architecture package and migration roadmap.
+
+## Architecture
+
+For the stable high-level system view, see [docs/architecture/README.md](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/README.md).

@@ -1,0 +1,66 @@
+# Storage And Memory
+
+## Storage Categories
+
+Open ACP has four distinct storage categories.
+
+## 1. Tracked Source Inputs
+
+These belong in Git because they are canonical inputs:
+
+- raw knowledge sources
+- learner and competitor seed files
+- source manifests
+- style corpus exports
+- derived human-authored analyses
+- schemas, prompts, and pipeline definitions
+
+## 2. Runtime Knowledge State
+
+These are generated and should not be treated as canonical tracked source files:
+
+- runtime wiki entities
+- wiki indexes
+- wiki logs
+- crystallized runtime knowledge artifacts
+
+These should live under `storage/wiki` or another runtime-owned location.
+
+## 3. Execution Outputs
+
+These are generated artifacts from pipeline runs:
+
+- per-stage JSON outputs
+- final assembled markdown
+- future rendered assets
+
+These belong under `outputs/`.
+
+## 4. Memory Stores
+
+The system conceptually wants multiple memory types:
+
+- working memory
+  - transient state carried during a run or graph execution
+- episodic memory
+  - run records, cycle summaries, and historical execution traces
+- semantic memory
+  - reusable knowledge structures and retrieval-oriented memory
+- feedback memory
+  - evaluator outputs, insights, and fix history
+
+Today some of this is file-backed. Over time, this can mature into more durable stores such as:
+
+- PostgreSQL for episodic and feedback records
+- vector or hybrid retrieval stores for semantic memory
+- richer graph-like structures for wiki relationships
+
+## Storage Design Rule
+
+The key rule is:
+
+- version canonical inputs
+- persist runtime state separately
+- never confuse generated knowledge views with tracked source-of-truth inputs
+
+That separation is what keeps the system reproducible without making Git carry every mutable artifact.
