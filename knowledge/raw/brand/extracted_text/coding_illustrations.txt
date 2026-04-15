@@ -1,0 +1,1988 @@
+# coding_illustrations (251 pages, 165 with text)
+
+--- Page 1 ---
+Coders
+
+--- Page 2 ---
+For Key Takeaways
+
+--- Page 4 ---
+Agenda
+
+--- Page 51 ---
+HTTP Server
+Client
+
+--- Page 55 ---
+Browser Context
+Class Context
+Inﬁnite loop
+
+--- Page 59 ---
+Provider
+Consumer
+Consumer
+Consumer
+Context
+ Provider
+Consumer
+Consumer
+Consumer
+Context
+
+--- Page 60 ---
+Chrome
+Safari
+Firefox
+
+--- Page 61 ---
+Rewards
+
+--- Page 68 ---
+Learning
+
+--- Page 74 ---
+Checklist
+
+--- Page 82 ---
+Infographics
+
+--- Page 83 ---
+22%
+35%
+11%
+26%
+37%
+18%
+20%
+42%
+15%
+
+--- Page 84 ---
+Mercury
+Mars
+Jupiter
+Venus
+Despite being 
+red, Mars is a 
+cold place
+It's a gas giant 
+and the biggest 
+planet
+It's the closest 
+planet to the Sun
+
+--- Page 85 ---
+Mercury
+Mercury is the closest planet to the 
+Sun and also the smallest one
+25%
+45%
+85%
+10%
+25%
+30%
+15%
+40%
+55%
+2018
+2019
+2020
+Despite being red, Mars is a cold 
+place full of iron oxide dust
+Mars
+It's a gas giant and the biggest planet 
+in the Solar System
+Jupiter
+
+--- Page 86 ---
+Jupiter is a gas giant and the 
+biggest planet in the Solar 
+System
+JUPITER
+Saturn, the ringed planet, is 
+composed mostly of hydrogen 
+and helium
+SATURN
+
+--- Page 87 ---
+Defining 
+Technical Requirements
+Defining
+Use Cases
+Defining the 
+New Technology
+Stage 2
+Stage 1
+Stage 3
+
+--- Page 88 ---
+Feedback
+Topic Name
+Feed Us With Your Feedback, 
+We are Very Hungry to Serve 
+You Better
+
+--- Page 89 ---
+Feedback
+Topic Name
+Feed Us With Your Feedback, 
+We are Very Hungry to Serve 
+You Better
+
+--- Page 90 ---
+Expressions
+
+--- Page 102 ---
+How can we solve this 
+issue?
+
+--- Page 103 ---
+Mercury is the 
+closest planet 
+to the sun
+Despite being 
+red, Mars is 
+cold place
+Jupiter is gas 
+giant and the 
+biggest planet
+Neptune is the 
+farthest planet 
+from the sun
+1
+2
+4
+3
+
+--- Page 104 ---
+ReactJS
+Bootstrap
+React Native
+
+--- Page 105 ---
+Creating a Heading Element
+Summary
+           React.createElement()
+    ReactDOM.render()
+<h1>Hello World!</h1>
+ReactDOM.render()
+document.createElement() 
+rootElement.appendChild()
+
+--- Page 106 ---
+Updating
+Mounting 
+Unmounting
+State Change
+Triggers Update
+<Component />
+
+--- Page 107 ---
+h1
+div
+button
+<div id="root"> 
+Hello
+submit
+<Component />
+HTML DOM
+Inserted into the DOM
+
+--- Page 108 ---
+React Component
+Three Phases
+Updating
+Mounting 
+Unmounting
+State Change
+Triggers Update
+Every React Component goes through three phases 
+throughout its lifetime
+
+--- Page 109 ---
+Mounting Phase
+The instance of a component 
+is created 
+<Component />
+
+--- Page 110 ---
+Mounting Phase
+h1
+div
+button
+<div id="root"> 
+Hello
+submit
+<Component />
+HTML DOM
+Inserted into the DOM
+
+--- Page 111 ---
+Updating Phase 
+A component is updated 
+whenever there is a change 
+in the component's state 
+ Component
+      
+state
+
+--- Page 112 ---
+Component instance is 
+removed from the DOM
+<div id="root"> 
+h1
+div
+button
+Hello
+submit
+
+--- Page 113 ---
+○
+Difference
+○
+Symmetric Difference 
+○
+Union
+○
+Intersection
+
+--- Page 114 ---
+Testing the checkout process, 
+which includes shipping details, 
+payment method, payment details
+Prone to Human Error
+Checking login/logout functionality 
+Adding/removing products in the 
+shopping cart
+Checking each product's name, 
+description, price, category, and 
+image
+Tedious Tasks
+Repetitive Tasks
+Advantages
+
+--- Page 115 ---
+Advantages
+< / >
+Technical Complexity
+?
+?
+Limited Collaboration
+
+--- Page 116 ---
+Requirement 
+Analysis
+Planning
+Test case 
+Development
+Test 
+Environment 
+Setup
+Test 
+Execution
+Test Cycle 
+Closure
+Software Testing 
+Life Cycle
+Requirement 
+Analysis
+Planning
+Test case 
+Development
+Test 
+Environment 
+Setup
+Test 
+Execution
+Test Cycle 
+Closure
+Software Testing 
+Life Cycle
+STLC
+
+--- Page 117 ---
+Unit 
+Testing
+Integration 
+Testing
+Regression 
+Testing
+Web-based 
+Automated 
+Testing
+Multiple OS
+Multiple 
+Browsers
+Multiple 
+Programmin
+g Languages
+Multiple 
+Framework
+s
+Open 
+Source
+Seleniu
+m
+
+--- Page 118 ---
+Automation 
+Testing Tool
+Selenium
+QTP
+Telerik 
+Studio
+Watir
+Testim
+Automation 
+Testing Tool
+Selenium
+QTP
+Telerik 
+Studio
+Watir
+Testim
+
+--- Page 119 ---
+Selenium Suite
+Selenium 
+Grid
+Selenium 
+WebDriver
+Selenium 
+IDE
+Selenium Suite
+Selenium 
+Grid
+Selenium 
+WebDriver
+Selenium 
+IDE
+
+--- Page 120 ---
+To test payment 
+functionalities
+To test user 
+functionalities
+Where the application 
+will be hosted
+Web Server
+Simulated Payment 
+Gateway
+Dummy User 
+Accounts
+
+--- Page 121 ---
+1
+2
+03
+Package your      
+Python dependencies
+Create a deployment 
+package (ZIP file)
+Make sure your code 
+is ready to deploy
+
+--- Page 122 ---
+Create new 
+Lambda function
+Conﬁgure awsgi
+Zip & Upload your 
+deployment package
+Upload dependencies 
+using Layers
+Link Layer to 
+Lambda function
+03
+04
+05
+01
+02
+
+--- Page 123 ---
+Create new API
+Deﬁne resources 
+and methods
+Connect to Lambda 
+function
+
+--- Page 124 ---
+●
+ pytorch
+●
+ tensorflow
+●
+ Tkinter
+●
+ NumPy
+●
+ Pandas
+●
+ Pillow 
+●
+ Scikit-learn
+●
+ Beautiful Soup
+
+--- Page 125 ---
+Your code
+Web application
+Web driver
+
+--- Page 126 ---
+Your code
+Web driver
+Chrome Driver
+Edge Driver
+Gecko Driver
+Safari Driver
+
+--- Page 127 ---
+Write structured test scripts
+Manage test dependencies
+Execute parallel tests
+Generate comprehensive test reports
+many more…
+
+--- Page 128 ---
+TestNG 
+Framework
+Test Scripts
+Test Report
+Login page
+Product page
+Home page
+1
+2
+
+--- Page 129 ---
+methods
+instances
+classes
+tests
+Values
+Real-World 
+Projects
+Approach
+Responsiveness
+Github Best 
+Practices
+Clean Code 
+Guidelines
+Deployment
+many more...
+
+--- Page 130 ---
+Registration & 
+Login
+Product Browsing
+Adding items 
+in the cart
+Placing an order
+
+--- Page 131 ---
+id
+name
+class 
+name
+link 
+text
+CSS 
+Selector
+XPath 
+expressions
+partial 
+Link 
+text
+Tag
+
+--- Page 132 ---
+In this course, we will be learning about 
+how cucumber supports BDD
+
+--- Page 133 ---
+Simple POM
+●
+Finding web elements using By
+●
+One needs to initialize every page 
+object individually
+●
+Finding web elements using 
+@FindBy
+●
+All page objects are initialized by 
+using the initElements() method
+Page Factory
+
+--- Page 134 ---
+Tests are explained as a 
+behavior of an application 
+and are more user-focused
+Tests are written in plain 
+descriptive English-type grammar
+
+--- Page 135 ---
+BDD
+DDD
+TDD
+Approaches
+
+--- Page 136 ---
+Feature File
+Step Deﬁnitions 
+Test Runner File
+Cucumber BDD framework mainly 
+consists of three major parts
+
+--- Page 137 ---
+Search
+Header
+Book Info
+Cart Items
+Book 
+Store
+Add to Cart
+Checkout
+Book Items
+Filter
+Place Order
+Order Form
+Home
+Book List
+Book Details
+ Cart
+Checkout
+Go Back
+Remove 
+from Cart
+Banner
+Go Back
+
+--- Page 138 ---
+Map Pages to 
+Features
+Draw the User flow
+2
+4
+List Features
+Add Page details 
+with Navigation
+3
+1
+
+--- Page 139 ---
+View Books
+View Details of a Book
+Add Book to a Cart
+View cart Items
+Remove Book from a Cart
+Place Order
+Search Books
+Filter Books
+F
+E
+A
+T
+U
+R
+E
+S
+Template
+ ….
+Completion Instructions
+Functionality
+ ….
+●
+Build a ReactJS application with 
+multiple pages/components, 
+including Home, Book Listing, Book 
+Details, Shopping Cart, and 
+Checkout pages
+●
+Implement features such as book 
+search, book filtering, add to cart, 
+remove from cart, and order 
+placement
+●
+ Implement User 
+Authentication
+
+--- Page 140 ---
+View Books
+View Details of a Book
+Add Book to a Cart
+View cart Items
+Remove Book from a Cart
+Place Order
+Search Books
+Filter Books
+Book List
+Book Details
+Book Details
+Cart
+Cart
+Checkout
+Book List
+Book List
+F
+E
+A
+T
+U
+R
+E
+S
+P
+A
+G
+E
+S
+
+--- Page 141 ---
+Home
+Book List
+Book Details
+Shopping Cart
+Checkout
+We have taken the Crossword  
+website as our Selected 
+Design File . We will use it as a 
+reference for building our 
+application
+For example, Page Details are 
+not given  for Home Page  in our 
+Requirement Document
+
+--- Page 142 ---
+ui8
+Colorlib 
+Dribble
+Envato 
+●
+Feature
+●
+Scenario
+●
+When
+●
+Then
+●
+And 
+●
+But
+Special Keywords
+
+--- Page 143 ---
+Acquiring a lock
+Lock acquired
+Notiﬁcation acquired
+Wait timedout
+Waiting for timeout
+Waiting for notiﬁcation
+Timed 
+Waiting
+Blocked
+Waiting
+new thread()
+New
+Terminated
+start()
+run()
+Runnable
+Life Cycle of a Thread
+
+--- Page 144 ---
+●
+Feature
+●
+Scenario
+●
+When
+●
+Then
+●
+And 
+●
+But
+Special Keywords
+Special keywords or special terms
+
+--- Page 145 ---
+11
+22
+33
+44
+Boost Productivity with AI-driven solutions
+Spearhead your organization initiatives with Generative AI
+Leverage AI to captivate your stakeholders & standout
+Future proof your career with the AI skills
+
+--- Page 146 ---
+Revanth Konakanchi  
+Head of Engineering at NxtWave
+An alumnus of IIT Guwahati
+with a computer science degree
+Leading AI Adoption @ NxtWave
+About Me
+
+--- Page 147 ---
+GENERATIVE AI 
+MASTERY SERIES
+WELCOME
+GENERATIVE AI 
+MASTERY SERIES
+
+--- Page 148 ---
+You Became an AI Creator , 
+not just an AI user!
+”
+Congratulations!
+
+--- Page 149 ---
+GENERATIVE AI FOR ALL!
+Data Analyst
+Software Developer
+Product Manager
+Executive
+CXO
+many more…
+
+--- Page 150 ---
+Quiz Time!
+
+--- Page 151 ---
+ChatGPT
+Answers
+Questions on 
+Public Data ?
+ChatGPT
+Answers
+Questions on 
+Enterprise Data?
+
+--- Page 152 ---
+Impact On 
+Productivity
+United Kingdom’s entire 
+GDP in 2021
+$2.6 
+trillion
+$4.4 
+trillion
+To
+$3.1 
+trillion
+Source: Gartner
+
+--- Page 153 ---
+40%
+30%
+60%
+15%
+2024
+2025
+2026
+2027
+Source: Gartner
+Enterprise applications 
+will have embedded 
+conversational AI
+Enterprises will have 
+implemented an 
+AI-augmented 
+development and 
+testing strategy
+Generative Design AI will 
+automate the design 
+effort for new websites 
+and mobile apps
+Applications will be 
+automatically 
+generated by AI 
+without a human in loop
+
+--- Page 154 ---
+Data
+Text
+Image
+Speech
+Tasks
+Image 
+Captioning
+Object 
+Recognition
+Text 
+Generation
+Sentiment 
+analysis
+Foundation 
+Model
+Training
+Fine-Tuning
+Capabilities
+
+--- Page 155 ---
+Prepare Training 
+Data
+Train AI Model 
+on Data
+Deploy (run)
+model
+Specify prompt
+Deploy Model
+Typical ML Models
+Prompt-based AI
+1 month
+3 months
+3 months
+minutes/hour
+hours/days
+
+--- Page 156 ---
+Routes
+Components
+State
+Identify
+
+--- Page 157 ---
+Git push
+Local repository
+Remote repository
+Book Store
+app.css
+index.js
+Book Store
+Bookstore
+app.css
+index.js
+Book Store
+head
+app.css
+index.js
+Modiﬁed Files
+Staging Area
+Commit History
+8
+
+--- Page 158 ---
+> ...book-store:...$ git init
+Terminal
+1
+Initialize a Local 
+Git Repository
+> ...book-store:...$ git remote add origin <repository-url>
+Terminal
+1
+Link Local & Remote 
+Git Repositories
+5
+6
+
+--- Page 159 ---
+CHECKLIST
+Code Quality
+Documentation
+Project Demo
+Deployment
+Submission
+Polishing
+Deﬁning a proper direction  to reach our 
+objective  based on the given instructions
+
+--- Page 160 ---
+11
+Meaningful Names
+22
+Comments
+33
+Error Boundaries
+
+--- Page 161 ---
+Deﬁning a proper direction  to reach our 
+objective  based on the given instructions
+Commits
+Commit
+Commit Messages
+
+--- Page 162 ---
+git commit -m "Update user registration 
+validation rules"
+git commit -m "I have updated user 
+registration validation rules"
+Imperative
+Use the imperative present tense
+T
+
+--- Page 163 ---
+… Previous Commits 
+Fix X & Y bugs
+… Previous Commits 
+Fix X bug
+Fix Y bug
+
+--- Page 164 ---
+Finding food options 
+PROBLEM
+An app showing nearby rest
+options and their menu
+SOLUTION
+
+--- Page 165 ---
+Head
+aa02ef1246bc
+Add initial project setup with create-react-app
+bb02ed1234ba
+Add necessary third-party packages
+cc02ed1234ba
+Add initial route setup in app.js
+dd02ed1234ba
+Add route for Home page
+many more...
+Head
+Commits
+
+--- Page 167 ---
+❏
+Are all "must-have" functionalities implemented as 
+per the requirement document?
+❏
+Are all guidelines and checklists followed as per the 
+requirement document?
+❏
+Does the application run without any errors?
+❏
+Is the application responsive and looking good 
+on both mobile and desktop?
+?
+
+--- Page 168 ---
+Ensures Highest Quality in 
+Meeting Requirements
+Boosts Conﬁdence
+No Details Missed
+CHECKLIST
+
+--- Page 169 ---
+Reusability
+Namings
+Comments
+Clean Code Guidelines
+many more…
+
+--- Page 170 ---
+Is the project submitted as per the requirement document?
+Is there a demo version of the application included in the README?
+Are all "must-have" functionalities implemented as per the requirement document?
+Are all guidelines and checklists followed as per the requirement document?
+Does the application run without any errors?
+Is the application responsive and looking good on both mobile and desktop?
+Is a version control system used for the application?
+Are commit messages consistent and aligned with established guidelines?
+Is the code readable and easy to understand?
+Has all unnecessary code been removed?
+Is there a README ﬁle with instructions for local setup and other relevant information?
+Is the application deployed and running without errors?
+
+--- Page 171 ---
+Hard to read
+Difﬁcult to Update
+
+--- Page 172 ---
+‘
+Even bad code can function. But if code isn’t clean, it can bring a 
+development organization to its knees. 
+Every year, countless hours and signiﬁcant resources are lost because
+of poorly written code. But it doesn’t have to be that way!
+-  Robert C. Martin
+
+--- Page 173 ---
+Are all "must-have" functionalities implemented as
+per the requirement document?
+Are all guidelines and checklists followed as per the 
+requirement document?
+Does the application run without any errors?
+Is the application responsive and looking good
+on both mobile and desktop?
+
+--- Page 174 ---
+User Interaction
+Inputs Validation
+Error Handling
+Elements in Design
+Responsiveness
+Consistency in 
+Appearance
+Testing Functionality
+Testing Design
+No Errors
+
+--- Page 175 ---
+Create a GitHub Account
+Generate a Personal Access Token
+Create a Repository on GitHub
+Set up Git
+Initialize a Local Git Repository
+Link Local & Remote Git Repositories
+2
+3
+4
+5
+6
+Push Changes to Remote Git Repository
+8
+1
+Stage and Commit Changes
+7
+
+--- Page 176 ---
+> ...book-store:...$ git init
+Terminal
+1
+Initialize a Local 
+Git Repository
+> ...book-store:...$ git remote add origin <repository-url>
+Terminal
+1
+Link Local & Remote 
+Git Repositories
+5
+6
+
+--- Page 177 ---
+Entity 2
+Entity 1
+Uni-directional
+Entity 2
+Entity 1
+ Bi-directional
+Template
+Title
+Objective
+Tech Stack
+Completion Instructions
+Functionality
+Guidelines to develop a project
+Submission Instructions
+Resources
+Design Files
+API
+Third-party packages
+Must have
+Nice to have
+Must have
+Nice to have
+Must have
+Nice to have
+List the Design Files required to complete the assignment
+List the APIs required to complete the assignment
+List the Third-party packages required to complete the assignment
+Write the title of the assignment
+Write the main goal or purpose of the assignment
+Write the Tech Stack of the assignment
+
+--- Page 178 ---
+Spring Boot
+Spring Framework
+Application Context
+Application Context
+Services
+Conﬁguration
+Controller
+DAO
+Spring
+Auto Conﬁg
+Web
+DAO
+
+--- Page 179 ---
+Spring Framework
+BookH2Service 
+class
+Injects
+Instance of 
+JdbcTemplate
+Simple
+Prompt
+Conﬁrmation
+Alert
+
+--- Page 180 ---
+Application Class
+Creates an object of 
+Class Engine
+Injector Class
+Car Class 
+Engine Class 
+depends on
+1
+Dependent Class
+Dependency Class
+
+--- Page 181 ---
+Pages
+Login page Elements
+Home page Elements
+Product page Elements
+UI Test 1
+UI Test 2
+UI Test 3
+UI Test 3
+UI Test 4
+Execution 
+Using 
+Selenium
+
+--- Page 182 ---
+LoginPageTest Class
+●
+Username Input
+●
+Password Inputs
+●
+Login Button Element
+●
+enterUsername()
+●
+enterPassword()
+●
+clickOnLoginButton()
+LoginPage Class
+Web Elements
+Actions Performed
+loginWithValidCredentials
+loginWithInvalidCredentials
+Execution 
+Using 
+Selenium
+
+--- Page 186 ---
+1
+2
+6
+5
+4
+3
+1
+2
+3
+4
+5
+6
+
+--- Page 187 ---
+DevOps is also not 
+a standard
+A Cultural 
+Movement
+DevOps is not 
+a set of tools
+It's by practitioners, 
+for practitioners
+
+--- Page 188 ---
+Models of SDLC
+SDLC
+Waterfall model
+Spiral model
+
+--- Page 189 ---
+Models of SDLC
+SDLC
+Iterative model 
+Agile model
+
+--- Page 190 ---
+Dev
+Ops
+
+--- Page 191 ---
+Software 
+Development
+AI/ML
+Cloud Computing
+Big Data
+Smart 
+Devices/IOT
+DevOps Applications
+
+--- Page 192 ---
+Career boost
+Market demand
+Future-prooﬁng
+Efﬁciency & Innovation
+
+--- Page 193 ---
+CONGRATULATIONS !!
+You have Successfully Deployed your First 
+Application on AWS
+
+--- Page 194 ---
+Operation teams need stability, 
+and the dev team needs speed
+Shared measurements 
+Immediate recovery from failures 
+Both teams care about 
+speed and stability
+Focus on Time to Market 
+In the DevOps Team, 
+both Share the same goals
+
+--- Page 195 ---
+Build Full stack Application
+Web Browser
+Node.js Runtine
+Front-en
+d
+Back-en
+d
+Back-
+end
+Front-
+end
+●
+Next.js comes with Node.js Runtime which 
+allows us to build full stack application
+●
+We can write frontend code and backend 
+code in the same application
+
+--- Page 196 ---
+Server Sending 
+Response to Browser
+Browser 
+Download JS
+Browser 
+Executes React
+Page is viewable 
+and interactable
+loading
+loading
+loading
+
+--- Page 197 ---
+Build Full stack 
+Applications
+Built-in Routing System
+Server Side Rendering
+Faster Development & 
+Enhanced User Experience
+
+--- Page 198 ---
+For syntax
+Correct Password: rahul@2021
+In Code Snippet 0 and 1, we can see 
+a lot of texts written in green color. 
+These are comments. 
+ϫт Preprocessor Directive ϩи
+
+--- Page 199 ---
+Note from Single Source of Truth
+This does not mean that every piece of state in your app must go 
+into the Redux store!
+
+--- Page 200 ---
+Live editing
+create-next-app comes pre-conﬁgured with:
+ESLint
+Prettier
+Babel
+Webpack
+...
+
+--- Page 201 ---
+Database
+Data 
+extracted
+Executes 
+SQL Query
+Requesting 
+data for Your 
+Orders Page
+Server sends 
+Data to Your 
+Orders page 
+Data sent 
+to server
+Server
+Backend
+Frontend
+
+--- Page 202 ---
+Eclipse
+Theia
+Atom
+IntelliJ IDEA
+VS Code
+
+--- Page 203 ---
+Financial Reports
+Train schedules 
+Marksheets
+
+--- Page 204 ---
+Moves the element 
+from its original position to 
+a new position
+Changes the size of an 
+element
+Rotates the element by 
+a speciﬁc angle
+Introduction
+CSS Transforms
+Slants the element by 
+a speciﬁc angle
+
+--- Page 205 ---
+X
+Y
+Original Position
+Changed 
+Position
+0
+1
+2
+3
+4
+1
+2
+3
+
+--- Page 206 ---
+2 dimensions
+3 dimensions
+Y
+X
+Y
+X
+Z
+
+--- Page 207 ---
+X
+Y
+0
+1
+2
+3
+4
+1
+2
+3
+Z
+1
+2
+●
+translate
+●
+scale
+●
+rotate
+●
+skew
+   
+Transform Property values
+
+--- Page 208 ---
+Flex
+Item
+Flex
+Item
+Extra Space
+90px
+90px
+Use Grid when the layout is based on the 
+rows and columns with strict.
+Example:  navigation links
+Use Flexbox when the layout is based on 
+the content size and ﬂexible.
+Example:  product cards layout
+SUMMARY
+
+--- Page 209 ---
+Rows
+Grid Item
+1
+2
+3
+4
+5
+1
+2
+3
+4
+5
+Columns
+1
+2
+3
+4
+justify-content: start;
+
+--- Page 210 ---
+Place items exactly within 
+Grid, unlike Flexbox which 
+aligns along a single direction
+Supports fractional units, named 
+areas, subgrids, and minmax()
+Results in fewer lines of code, 
+unlike Flexbox that needs nested 
+elements and extra classes
+Manages both rows and 
+columns, unlike Flexbox 
+which is 1 dimensional
+Exact Placement
+Advanced Features
+Two-Dimensional Layout
+Cleaner Code
+Why 
+CSS Grid?
+
+--- Page 211 ---
+nth-child
+Selecting and interacting 
+with a speciﬁc menu item 
+at a particular position
+nth-of-type
+Selecting and interacting 
+with a speciﬁc item in a list 
+at a particular position
+ﬁrst-child/last-child
+Checking the appearance 
+of a special badge or label 
+on the ﬁrst product
+ﬁrst-of-type/last-of-type
+Checking the appearance of 
+an error message next to 
+the ﬁrst or last form input 
+Pseudo 
+classes
+
+--- Page 212 ---
+Grid Items Grid Items Grid Items
+Grid Items Grid Items Grid Items
+Grid Items Grid Items Grid Items
+{
+{
+{
+10 px
+10 px
+{
+CSS Transitions
+CSS Animations
+CSS Transforms
+
+--- Page 213 ---
+Color 
+Properties
+●color
+●background-color
+●border-color
+●outline-color
+●width
+●height
+●margin
+●padding
+●letter-spacing
+●word-spacing
+●text-indent
+●text-shadow
+●border-radius
+●box-shadow
+●background-
+position
+●background-size
+Length 
+Properties
+Text 
+Properties
+Box Model 
+Properties
+Background
+ Properties
+
+--- Page 214 ---
+Code Snippet 2: 
+●
+You can, as before, go ahead and try 
+it out yourself by running the code 
+and altering variables
+
+--- Page 215 ---
+HTML1.0
+HTML2
+HTML3.2
+HTML4.01
+HTML5
+1995
+1997
+1997
+2014
+1993
+
+--- Page 216 ---
+Setup API Gateway
+Create Lambda Function
+Setup CloudWatch
+Prepare Your Code
+
+--- Page 217 ---
+Program 
+P1
+Program 
+CPU
+Memory RAM
+DISK
+Program is executed 
+on CPU
+Compiled 
+executable 
+of P1 (exe)
+Program gets loaded 
+into the RAM
+Program
+Steps of program execution
+Figure 1
+
+--- Page 218 ---
+Figure 3 shows a snapshot of how the RAM 
+looks when an int variable is declared and 
+initialized: 'int num = 4;'
+Memory RAM
+1000
+1001
+1002
+1003
+1004
+1005
+1006
+1007
+1008
+1009
+int num = 4
+Memory allocation
+1010
+1011
+
+--- Page 219 ---
+Data is Everywhere
+Data Types
+We write computer programs to solve 
+real-world problems. For this, programs 
+must be very efﬁcient in handling 
+real-world data
+
+--- Page 220 ---
+int
+age
+Data type
+Variable_name
+The program steps are as follows:
+START
+6
+5
+4
+3
+2
+1
+Input the numbers num1, num2
+Initialize sum = 0
+Set sum = num1 + num2
+Print sum
+END
+
+--- Page 221 ---
+#include <stdio.h>
+int main() {
+  int age = 20, marks = 80;
+  printf("Age: %d\n", age);
+  printf("Marks: %d\n", marks);
+  return 0;
+}
+Variable initialization
+Age: 20
+Marks: 80
+
+--- Page 222 ---
+R
+U
+L
+E
+S
+❏
+Every variable name should start with an alphabet or an underscore and can 
+contain alphabets, numbers, and underscores only
+❏
+Variable names cannot be a keyword. Keywords in C are reserved words for 
+special purposes. Examples: int, main, return, struct
+❏
+Variable names are case-sensitive (e.g., Number and number are different)
+❏
+Preferably, variable names should be meaningful, denoting the value the 
+variable will store (e.g., age and number)
+
+--- Page 223 ---
+Using a const qualiﬁer in a variable declaration, we can
+ add a const qualiﬁer in front of the declaration to tell 
+the compiler that this variable declaration is a constant 
+declaration, not a variable declaration 
+There are two ways of deﬁning constants in C.
+1
+
+--- Page 224 ---
+const
+#define
+Memory Allocation: Declares a constant that takes 
+up actual memory space in RAM
+Compiler Behavior: The compiler enforces that the 
+value cannot be changed during the program 
+execution
+Usage: Suitable for deﬁning constants with speciﬁc 
+data types
+Memory Allocation: This does not declare a variable; 
+instead, it performs a text substitution before compilation
+Compiler Behavior: The compiler replaces occurrences 
+of the deﬁned name with the speciﬁed value before the 
+compilation starts
+Usage: Suitable for deﬁning constant values and 
+macro-like constants without type speciﬁcation
+VS
+
+--- Page 225 ---
+Let’s get started with our ﬁrst C program. 
+We will write a program to ﬁnd out the 
+sum of two numbers
+                   +                 =
+?
+?
+?
+
+--- Page 226 ---
+#include<stdio.h>
+#
+studio.h
+instructs
+insert
+.h 
+informs
+use
+C
+standard pre-written 
+C functions
+
+--- Page 227 ---
+performs
+information about 
+functions
+contains
+C
+stored
+stdio.h 
+calling
+printf()
+scanf()
+executes
+passing 
+parameters
+
+--- Page 228 ---
+int square(int number) {
+ return number * number;
+}
+C
+function
+parameters
+passes
+square(4) 
+result is 16
+square(7) 
+result is 49
+square(10) 
+result is 100
+Program 1
+Program 3
+Program 2
+int main() { 
+return 0; 
+}
+1010101010
+101010
+compilation
+High-level code
+Low-level code
+
+--- Page 229 ---
+int main() { 
+return 0; 
+}
+While compilation/execution
+or
+After compilation/execution 
+Write C 
+Program and 
+save with 
+.c extension
+Compile 
+program using 
+gcc<filename>.c
+Generate 
+executable 
+file a.out
+Run 
+executable 
+using ./a.out
+OS loads 
+executable to 
+RAM
+CPU 
+executes 
+program line 
+by line
+
+--- Page 230 ---
+Compile-time errors:  occur when some 
+statements in our code do not follow the rules 
+of the programming language in which they are 
+written. These errors are raised by the compiler 
+while trying to compile our code
+There are three types of errors: 
+Run-time errors:  occur during the execution 
+of our program but are not detected during 
+compilation
+Semantic errors:  occur when the code 
+compiles and executes successfully but 
+does not perform the intended task
+!
+
+--- Page 231 ---
+Learn, understand, 
+and remember 
+concepts easily
+Each topic is designed 
+for optimal learning
+
+--- Page 232 ---
+Knowledge 
+Capabilities 
+Generative AI
+Super Intelligent Human
+Millions of books 
+1 Billion websites
+Wikipedia
+Analytical Thinking 
+Problem Solving
+Creativity
+> > > >
+<<<<
+> > > 
+> > >
+
+--- Page 233 ---
+GPT
+Gemini
+LLAMA
+https://chatgpt.com/  
+https://gemini.google.com/ 
+https://www.meta.ai/
+
+--- Page 234 ---
+●
+AI Chatbots
+●
+Virtual Try-ons
+●
+3D Visualizations
+●
+Inventory Optimization & many more…
+eCommerce
+●
+Fraud Detection
+●
+Portfolio Management
+●
+Risk Assessment
+●
+Trade Strategies & many more…
+Finance
+
+--- Page 235 ---
+AI Speech Generation Tools
+Fliki
+Murfai
+The better we communicate with this models, 
+the better our results would be. 
+This process of communicating with a gen AI 
+model is known as prompt engineering
+
+--- Page 236 ---
+I have a bug in my [language] code.
+Here's what it looks like:
+[code snippet]
+The problem I'm experiencing is [describe the issue]
+Can you help me find and fix the bug?
+
+--- Page 237 ---
+●
+ pytorch
+●
+ tensorflow
+●
+ Tkinter
+●
+ NumPy
+●
+ Pandas
+●
+ Pillow 
+●
+ Scikit-learn
+●
+ Beautiful Soup
+
+--- Page 238 ---
+Google
+Youtube
+ChatGPT
+Gemini
+Meta AI
+Need Information or Got an issue
+Need Information or Got an issue
+
+--- Page 239 ---
+Bootstrap requires four main files to be added 
+in the project for development which requires 
+heavy space to be occupied about 300 kb
+We just need style sheets to get our task done
+This CSS file occupies about 30kb of the space
+Bootstrap
+Tailwind CSS
+VS
+
+--- Page 240 ---
+●
+●
+●
+●
+●
+●
+https://x.com/OpenAI
+●
+https://x.com/generativeaihub (lists)
+
+--- Page 241 ---
+Self Learning
+Generative AI
+Explore yourself on prompting techniques and tactics 
+for getting better results
+ref: https://platform.openai.com/docs/guides/prompt-engineering
+
+--- Page 242 ---
+What apps do you use for ﬁnding and ordering food?
+How about apps for sending money or paying bills?
+What about sharing photos with friends?
+?
+
+--- Page 243 ---
+Case Study 1: A Popular Food Delivery App
+Case Study 2: A Popular Payment App
+Case Study 3: A Popular Photo Sharing App
+
+--- Page 244 ---
+'Face' of the app
+What you see 
+and touch on 
+your phone
+'Engine' of the app
+You can't see it,
+but it powers 
+everything
+'Brain' of the app
+Making smart 
+decisions
+Frontend
+Backend
+Data Science 
+& AI/ML
+
+--- Page 245 ---
+●
+Shows a list of restaurants with 
+colorful food pictures
+●
+Uses your phone's GPS to ﬁnd and display 
+nearby restaurants & delivery location
+●
+Lets you easily ﬁlter restaurants by 
+cuisine, rating, or delivery time, etc.
+many more…
+
+--- Page 246 ---
+Let’s discover How AI is 
+reshaping Web Development
+
+--- Page 247 ---
+I encountered an error while running my Python code. Can you explain what 
+it means and why it might occur, without providing the fix?
+Prompt
+Code:
+[Your code here]
+Error:
+[Error message here]
+
+--- Page 248 ---
+I have a bug in my [language] code
+Prompt
+My code:
+[code snippet]
+Input:
+[add input]
+Expected output:
+[add output]
+Actual output:
+[add actual output]
+The problem I'm experiencing is [describe the issue]
+Could you please explain the working of my code, identify any issues, and then walk me 
+through the necessary fixes?
+
+--- Page 249 ---
+Action 
+Shortcut
+Insert or edit link
+Ctrl + k
+Open link
+Alt + Enter
+Delete
+Delete
+Select all
+Ctrl + a
+Select none
+Ctrl + Shift + a
+Find
+Ctrl + f
+
+--- Page 250 ---
+Code Snippet
+def greet(count):
+count = 0
+greet(count)
+Code
+3
+Input
+RecursionError:
+maximum recursion
+depth exceeded
+Output
+pip install requests
+Terminal
+We can also use destructuring 
+directly in the function parameters
+
+--- Page 251 ---
+result = _input.fĐrst()
+if result.binary and 'data' in result.binary:
+  if result.binary['data'].get('fĐleName'):
+     result.binary['data']['fĐleName'] =      
+result.binary['data']['fĐleName'].replace('.oga', '.ogg')
+return result
+Python
+Correct Password: rahul@2021
+Correct Password: rahul@2021

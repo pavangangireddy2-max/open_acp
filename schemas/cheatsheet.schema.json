@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Summary Cheatsheet",
+  "type": "object",
+  "required": ["content_markdown", "title"],
+  "properties": {
+    "title": {"type": "string"},
+    "content_markdown": {"type": "string", "minLength": 200},
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "heading": {"type": "string"},
+          "key_points": {"type": "array", "items": {"type": "string"}},
+          "code_snippets": {"type": "array", "items": {"type": "string"}},
+          "formulas": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "quick_reference_table": {"type": "object"},
+    "common_mistakes": {"type": "array", "items": {"type": "string"}},
+    "word_count": {"type": "integer"}
+  }
+}

@@ -1,0 +1,59 @@
+inherits: _session_base
+pipeline_id: project_building
+content_type: project_building
+display_name: "Project Building Session"
+description: "Video session (PPT) guiding learners through spec, architecture, incremental build, and integration"
+
+stages:
+  - id: outline
+    skill: pipelines/project_building/01_outline
+    tools: [claude_generate]
+    artifact_schema: outline.schema.json
+    model_tier: strong
+    review_focus:
+      - "Project spec is clearly defined with acceptance criteria"
+      - "Architecture decisions are justified and age-appropriate"
+      - "Build milestones are incremental and testable"
+
+  - id: objectives
+    skill: pipelines/project_building/02_objectives
+    tools: [claude_generate]
+    artifact_schema: objectives.schema.json
+    model_tier: strong
+    review_focus:
+      - "Objectives map to spec, architecture, build, and integration phases"
+      - "Create-level Bloom verbs are present"
+
+  - id: core_content
+    skill: pipelines/project_building/03_core_content
+    tools: [claude_generate]
+    artifact_schema: core_content.schema.json
+    model_tier: strong
+    review_focus:
+      - "Each build step produces a working intermediate artifact"
+      - "Integration points between components are explicit"
+      - "Architecture rationale is explained, not just prescribed"
+
+  - id: activities
+    skill: pipelines/project_building/04_activities
+    tools: [claude_generate]
+    artifact_schema: activities.schema.json
+    model_tier: strong
+    review_focus:
+      - "Activities follow spec -> architecture -> build -> integrate flow"
+      - "Each activity has clear deliverables"
+      - "Checkpoints verify incremental progress"
+
+  - id: brand_polish
+    skill: pipelines/project_building/05_brand_polish
+    tools: [claude_generate]
+    artifact_schema: brand_polish.schema.json
+    model_tier: cheap
+
+  - id: slide_deck
+    skill: pipelines/project_building/06_slide_deck
+    tools: [claude_generate]
+    artifact_schema: slide_deck.schema.json
+    model_tier: cheap
+
+style: default

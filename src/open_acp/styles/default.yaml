@@ -1,0 +1,241 @@
+# Brand Playbook — ForgeAI / NxtWave
+# Extracted from: Slide Preparation Guide (101 slides) + Coding Illustrations (251 slides)
+# + Sample PPTs across Python, C++, DSA, ReactJS, GenAI
+
+brand_id: "forgeai_default"
+version: 1
+
+# ─── TYPOGRAPHY ─────────────────────────────────────────────────────────────────
+
+typography:
+  # Session titles (cover/section slides)
+  session_title:
+    font_family: "Montserrat SemiBold"
+    font_size: 26          # min 23-24 if title is long
+    font_color: "#006daf"
+
+  # Section header titles (title slides within a session)
+  section_title:
+    font_family: "Montserrat Medium"
+    font_size: 30          # max
+    font_color: "#006daf"
+    case: "title_case"     # Always Title Case
+
+  # Main heading (every slide has a clear heading = main topic being discussed)
+  main_heading:
+    font_family: "Muli"
+    font_size: 15
+    font_color: "#434343"
+
+  # Subheading (what we're going to explain in this particular slide)
+  subheading:
+    font_family: "Montserrat Medium"
+    font_size: 25          # min 22
+    font_color: "#006daf"
+
+  # Body text
+  body:
+    font_family: "Montserrat Medium"
+    font_size: 15          # min 12
+    font_color: "#434343"
+    line_height: 1.5
+
+  # Code snippets
+  code:
+    font_family: "Fira Code"
+    font_weight: "normal"
+    font_size: 12          # max 14
+    highlight_color: "transparent"
+    line_height: 1.36
+    theme: "VS Code Light+"
+    indentation: 2         # Two-space indentation always
+    attribute_color: "#d26f00"   # HTML/XML attributes
+
+  # Terminal snippets
+  terminal:
+    font_family: "Fira Code"
+
+# ─── COLOR PALETTE ──────────────────────────────────────────────────────────────
+
+colors:
+  primary_blue: "#006daf"        # Main brand color — headings, titles, links, highlights
+  body_text: "#434343"           # Standard body text
+  highlight_orange: "#ff9900"    # Code highlighting rectangles, focus borders
+  dark_orange: "#f79903"         # Use INSTEAD of red — never use dark red
+  new_code_blue: "#006daf"       # Blue box for newly added lines of code
+  bullet_green: "green"          # Green bullet points for listed points
+  code_label_bg: "varies"        # Code snippet language label (HTML, Python, etc.)
+
+  # FORBIDDEN COLORS
+  forbidden:
+    - dark_red                   # "Never use dark red color in slides"
+
+# ─── SLIDE STRUCTURE ────────────────────────────────────────────────────────────
+
+slide_structure:
+  # Standard session flow
+  session_flow:
+    - "WELCOME slide"
+    - "Session Title slide"
+    - "Recap slide (review previous session)"
+    - "Agenda slide (outline of today's session)"
+    - "Content slides (main instruction)"
+    - "Key Takeaways slide"
+    - "Feedback slide (every 4 sessions)"
+    - "THANK YOU slide"
+
+  # Content constraints per slide
+  content_rules:
+    max_words_per_slide: 40      # "Never add more than 30-40 words in a single slide"
+    ideal_lines: 3               # "Try to adjust the content in 4 lines. Best case is 3"
+    max_lines: 5                 # "Text lines can go till 5 lines"
+    no_end_period: true          # "Never add an end period(.) when a paragraph ends"
+    paste_rule: "ctrl_shift_v"   # "Always paste using Ctrl+Shift+V for consistent formatting"
+
+  # Recap slide rules
+  recap:
+    before_agenda: "When there is an immediate session before"
+    after_agenda: "When the slides are there in any of the previous courses before"
+
+  # Agenda slide
+  agenda:
+    content: "Outline of session covering all major points that will be explained"
+
+  # Key takeaways
+  key_takeaways:
+    content: "Whatever is there in the agenda slide will be there in the key takeaways"
+
+# ─── CODE FORMATTING ────────────────────────────────────────────────────────────
+
+code_formatting:
+  # Use the branded code template box for all code snippets
+  template: "branded_code_box"
+
+  # Language label
+  language_label: true             # Always show language label (HTML, Python, JavaScript, etc.)
+
+  # Syntax highlighting
+  vs_code_theme: "Light+"          # VS Code Light+ theme for all code
+  vs_code_settings: true           # Use standardized VS Code settings (JSON in speaker notes)
+
+  # Code verification
+  test_before_adding: true         # "Test the code snippets in the CCBP IDE and then add"
+  copy_from_vs_code: true          # "Copy the code from VS Code"
+
+  # New code highlighting
+  new_code_indicator: "blue_box"   # "When new line of code is added, blue box should be used"
+
+  # File naming for code
+  save_with_extension: true        # "Save the file with the required extension for formatting"
+
+  # Indentation
+  indentation_spaces: 2            # "Follow two spaces indentations in the code snippets"
+
+  # Long URLs in code
+  long_url_handling: "placeholder" # "If Image URL is large, give IMAGE_URL as placeholder and put URL in speaker notes"
+
+# ─── VISUAL STANDARDS ───────────────────────────────────────────────────────────
+
+visuals:
+  # Illustrations
+  illustration_source: "freepik"   # "Use websites like freepik — choose vector images"
+  illustration_type: "vector"      # Vector images preferred
+  fallback: "Tag graphic design team if exact image not found"
+
+  # Aspect ratio
+  aspect_ratio: "locked"           # "Always lock the aspect ratio — Ctrl+Shift and drag from corner"
+
+  # Screenshots
+  screenshot_rules:
+    remove_unnecessary_details: true
+    add_drop_shadow: true          # "Add drop shadow for every screenshot"
+    capture_tool_desktop: "Fn + Print Screen/Insert"
+
+  # GIFs
+  gif_tool: "PEEK"                # "Use PEEK tool for recording gifs"
+
+  # Shapes and icons
+  state_transitions: "green_arrow" # "When showing transitions from one state to another use green arrow"
+
+  # Highlighting / Focus
+  code_highlight:
+    shape: "rectangle"
+    border_color: "#ff9900"        # Orange border for code highlighting
+    note: "Make sure to adjust highlightings properly — no extra spacing"
+
+  image_highlight:
+    color: "orange"                # "Inside image, highlight specific parts with orange colour"
+
+  # Color boxes
+  color_boxes: true                # "Adding color boxes makes it easy to understand hex codes"
+
+  # Black box
+  black_box:
+    required: true                 # "Place the black box in each slide"
+    rule: "Content shouldn't overlap with the Black Box"
+
+  # Guides
+  guides_enabled: true             # "Use guides to place images or codes at fixed positions"
+
+  # Git-style formatting
+  git_diff_formatting: true        # "If a statement in code is replaced, use git type formatting"
+
+# ─── BULLET POINTS ──────────────────────────────────────────────────────────────
+
+bullets:
+  numbered_lists: "step-by-step processes"
+  bulleted_lists: "explaining different types"
+  highlight_color: "green"         # "Use green color bullet points for writing points"
+
+# ─── SPEAKER NOTES ──────────────────────────────────────────────────────────────
+
+speaker_notes:
+  required: true                   # Every slide must have speaker notes
+  content: "Add triggers for presenters — what they need to speak at that slide"
+  update_on_duplicate: true        # "Update the speaker notes relevantly while duplicating slides"
+  long_urls: true                  # Put long URLs and image URLs in speaker notes
+
+# ─── NAMING CONVENTIONS ─────────────────────────────────────────────────────────
+
+naming:
+  assets:
+    pattern: "{name}-img.{ext}"    # "Images name should contain -img as prefix along with image name"
+    example: "image-name-img.png"
+
+# ─── CONTENT VOICE ──────────────────────────────────────────────────────────────
+
+voice:
+  tone: "clear, instructional, encouraging"
+  perspective: "direct instruction (addressing learner)"
+  formality: "semi-formal"
+  jargon_policy: "introduce then use"
+
+  # Audience awareness
+  audience_awareness:
+    - "Know the audience — if they've seen array representation in a particular course, use same format for familiarity"
+    - "Use terminology consistently across courses (e.g., 'List' word used with caution for Python background learners)"
+    - "When displaying code output, copy-paste from the console being used by the learner for familiarity"
+
+  # Teaching patterns observed in samples
+  teaching_patterns:
+    analogy_first: true            # Start with real-world analogy (e.g., "driving a car" for learning languages)
+    comparison_tables: true        # Use comparison tables for contrasting concepts (Python vs JavaScript)
+    progressive_reveal: true       # Build concepts step by step across slides
+    recap_before_new: true         # Always recap before introducing new concepts
+
+# ─── QUALITY CHECKLIST ──────────────────────────────────────────────────────────
+
+checklist:
+  - "Formatting — all typography rules followed"
+  - "Visuals — illustrations, screenshots with drop shadow, aspect ratio locked"
+  - "Grammar Check — use Grammarly before final review"
+  - "Headings and Subheadings — every slide has clear heading"
+  - "Recap, Agenda and Key Takeaways — all present"
+  - "Title slides (Section) — properly formatted"
+  - "Highlighting — orange borders for code, no extra spacing"
+  - "Code tested in IDE before adding to slides"
+  - "Speaker notes present for every slide"
+  - "No dark red color used anywhere"
+  - "Black box placed, no content overlap"
+  - "Max 30-40 words per slide"
+  - "No end period on paragraphs"

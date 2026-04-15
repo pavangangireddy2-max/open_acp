@@ -1,0 +1,59 @@
+inherits: _session_base
+pipeline_id: induction
+content_type: induction
+display_name: "Induction Session"
+description: "Video session (PPT) covering program overview, expectations, tools setup, and first steps"
+
+stages:
+  - id: outline
+    skill: pipelines/induction/01_outline
+    tools: [claude_generate]
+    artifact_schema: outline.schema.json
+    model_tier: strong
+    review_focus:
+      - "Program overview is comprehensive but not overwhelming"
+      - "Expectations are explicit and actionable"
+      - "Tool setup instructions are platform-specific where needed"
+      - "First steps give learners a quick win"
+
+  - id: objectives
+    skill: pipelines/induction/02_objectives
+    tools: [claude_generate]
+    artifact_schema: objectives.schema.json
+    model_tier: strong
+    review_focus:
+      - "Objectives cover orientation, setup, and first-task completion"
+      - "Learner knows where to go for help after this session"
+
+  - id: core_content
+    skill: pipelines/induction/03_core_content
+    tools: [claude_generate]
+    artifact_schema: core_content.schema.json
+    model_tier: strong
+    review_focus:
+      - "Program structure and timeline are clearly communicated"
+      - "Tool installation steps are verified and version-pinned"
+      - "First steps exercise is completable in the session time"
+
+  - id: activities
+    skill: pipelines/induction/04_activities
+    tools: [claude_generate]
+    artifact_schema: activities.schema.json
+    model_tier: strong
+    review_focus:
+      - "Setup verification activity confirms tools are working"
+      - "First steps activity produces a tangible output"
+
+  - id: brand_polish
+    skill: pipelines/induction/05_brand_polish
+    tools: [claude_generate]
+    artifact_schema: brand_polish.schema.json
+    model_tier: cheap
+
+  - id: slide_deck
+    skill: pipelines/induction/06_slide_deck
+    tools: [claude_generate]
+    artifact_schema: slide_deck.schema.json
+    model_tier: cheap
+
+style: default

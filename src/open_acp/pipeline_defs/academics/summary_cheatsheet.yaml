@@ -1,0 +1,43 @@
+inherits: _base
+pipeline_id: summary_cheatsheet
+content_type: summary_cheatsheet
+display_name: "Summary Cheatsheet"
+description: "Condensed reference document for end-of-course review"
+family: written
+
+stages:
+  - id: outline
+    skill: pipelines/summary_cheatsheet/01_outline
+    tools: [claude_generate]
+    artifact_schema: outline.schema.json
+    model_tier: strong
+
+  - id: objectives
+    skill: pipelines/summary_cheatsheet/02_objectives
+    tools: [claude_generate]
+    artifact_schema: objectives.schema.json
+    model_tier: cheap
+
+  - id: core_content
+    skill: pipelines/summary_cheatsheet/03_core_content
+    tools: [claude_generate]
+    artifact_schema: core_content.schema.json
+    model_tier: strong
+    review_focus:
+      - "Concise -- each concept in 3 sentences or less"
+      - "Covers all key topics from the course"
+      - "Quick-reference format (tables, bullet points)"
+
+  - id: brand_polish
+    skill: pipelines/summary_cheatsheet/04_brand_polish
+    tools: [claude_generate]
+    artifact_schema: brand_polish.schema.json
+    model_tier: cheap
+
+  - id: format_output
+    skill: pipelines/summary_cheatsheet/05_format_output
+    tools: [claude_generate]
+    artifact_schema: cheatsheet.schema.json
+    model_tier: cheap
+
+style: default

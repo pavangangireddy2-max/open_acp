@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Outline Artifact",
+  "type": "object",
+  "required": ["sections", "teaching_flow"],
+  "properties": {
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["heading", "purpose", "estimated_minutes"],
+        "properties": {
+          "heading": {"type": "string"},
+          "purpose": {"type": "string"},
+          "estimated_minutes": {"type": "number", "minimum": 1},
+          "bloom_level": {"type": "string"},
+          "subsections": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "teaching_flow": {"type": "string", "minLength": 10},
+    "prerequisite_check": {"type": "string"},
+    "total_estimated_minutes": {"type": "number"}
+  }
+}

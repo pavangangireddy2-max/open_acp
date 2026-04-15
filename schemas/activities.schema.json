@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Activities Artifact",
+  "type": "object",
+  "required": ["activities"],
+  "properties": {
+    "activities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["type", "instructions", "time_minutes"],
+        "properties": {
+          "type": {"type": "string", "enum": ["exercise", "quiz", "discussion", "project", "case_study", "reflection"]},
+          "title": {"type": "string"},
+          "instructions": {"type": "string", "minLength": 20},
+          "expected_output": {"type": "string"},
+          "time_minutes": {"type": "number", "minimum": 1},
+          "bloom_level": {"type": "string"},
+          "objective_ids": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "total_activity_time_minutes": {"type": "number"}
+  }
+}

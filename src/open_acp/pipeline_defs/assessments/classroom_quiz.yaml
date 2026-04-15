@@ -1,0 +1,58 @@
+inherits: _assessment_base
+pipeline_id: classroom_quiz
+content_type: classroom_quiz
+display_name: "Classroom Quiz"
+description: "Quick in-class quiz (15-20 min), 5-8 questions targeting Remember/Understand Bloom levels"
+
+frequency: every_session
+duration_minutes: 20
+question_count: { min: 5, max: 8 }
+bloom_target: [Remember, Understand]
+
+stages:
+  - id: scope_definition
+    skill: pipelines/classroom_quiz/01_scope_definition
+    tools: [claude_generate]
+    artifact_schema: outline.schema.json
+    model_tier: strong
+    review_focus:
+      - "Scope is limited to the most recent session content"
+      - "Question count is within 5-8 range"
+
+  - id: question_generation
+    skill: pipelines/classroom_quiz/02_question_generation
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: strong
+    review_focus:
+      - "Questions target Remember and Understand Bloom levels"
+      - "No trick questions -- assesses genuine understanding"
+      - "Completable within 15-20 minutes"
+
+  - id: rubric_design
+    skill: pipelines/classroom_quiz/03_rubric_design
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: strong
+    review_focus:
+      - "Each question has a clear marking scheme"
+      - "Partial credit criteria are explicit"
+
+  - id: difficulty_balancing
+    skill: pipelines/classroom_quiz/04_difficulty_balancing
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: cheap
+    review_focus:
+      - "Mix of easy and medium difficulty"
+      - "No questions beyond Understand level"
+
+  - id: review
+    skill: pipelines/classroom_quiz/05_review
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: cheap
+    checkpoint_required: true
+    human_approval_default: true
+
+style: default

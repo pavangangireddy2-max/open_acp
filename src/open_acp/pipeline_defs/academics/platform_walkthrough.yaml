@@ -1,0 +1,58 @@
+inherits: _session_base
+pipeline_id: platform_walkthrough
+content_type: platform_walkthrough
+display_name: "Platform Walkthrough Session"
+description: "Video session (PPT) demonstrating platform features with step-by-step demos, tips, and gotchas"
+
+stages:
+  - id: outline
+    skill: pipelines/platform_walkthrough/01_outline
+    tools: [claude_generate]
+    artifact_schema: outline.schema.json
+    model_tier: strong
+    review_focus:
+      - "Features are introduced in logical usage order"
+      - "Demo steps are concrete and reproducible"
+      - "Known gotchas and workarounds are catalogued"
+
+  - id: objectives
+    skill: pipelines/platform_walkthrough/02_objectives
+    tools: [claude_generate]
+    artifact_schema: objectives.schema.json
+    model_tier: strong
+    review_focus:
+      - "Objectives map to feature discovery, demo execution, and troubleshooting"
+      - "Learner can independently use the feature after the session"
+
+  - id: core_content
+    skill: pipelines/platform_walkthrough/03_core_content
+    tools: [claude_generate]
+    artifact_schema: core_content.schema.json
+    model_tier: strong
+    review_focus:
+      - "Each feature has numbered step-by-step instructions"
+      - "Screenshots or visual descriptions accompany each key step"
+      - "Tips and gotchas are clearly called out with visual markers"
+
+  - id: activities
+    skill: pipelines/platform_walkthrough/04_activities
+    tools: [claude_generate]
+    artifact_schema: activities.schema.json
+    model_tier: strong
+    review_focus:
+      - "Activities require learners to perform the steps themselves"
+      - "Common errors are anticipated with troubleshooting guidance"
+
+  - id: brand_polish
+    skill: pipelines/platform_walkthrough/05_brand_polish
+    tools: [claude_generate]
+    artifact_schema: brand_polish.schema.json
+    model_tier: cheap
+
+  - id: slide_deck
+    skill: pipelines/platform_walkthrough/06_slide_deck
+    tools: [claude_generate]
+    artifact_schema: slide_deck.schema.json
+    model_tier: cheap
+
+style: default

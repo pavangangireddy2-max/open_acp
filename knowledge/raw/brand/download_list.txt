@@ -1,0 +1,37 @@
+# Python Concept Explainers (5)
+python_s1|19Hf8CxuwO62djHYb2T4iTWCb0Y8O2Iy1pzsO3_TG_mU|DONE
+python_s2|1oACV_neDNMbrHBLd9wrT6kr1aI-t6aV1YL0ujOAGfTY|DONE
+python_s3|1UZy6kZgA0DYNXxcGbb9f_jO3gvnPVXiBHzFN-953wxY|DONE
+python_s4|1hCODT4QrxVvOIT1TTgGHPWxGudW0enWUPH3W31tRaxQ|NEW
+python_s5|1jq0YoLpDT4ZlB2yF3mtZ7jkF1YcUD7KjPaHxf0Z6R6M|NEW
+# HTML/CSS (3)
+htmlcss_s1|12CnRVGjSHJWSVMiRxpo-UrqLq0Jg2_qOIm8MfD6qWyY|NEW
+htmlcss_s2|1D8J8CS7Jo4SkQA6arklEwJcCDkLRRbqNz9tAWBoKUXo|NEW
+htmlcss_s3|10-H-Q64yRPbNkMr-XeLRo0dq6Bj1Qbw4RBToB6r4GdQ|NEW
+# C++ (10)
+cpp_s1|10ffDecBpM41defLEzyElV9KSexTEQOex8iKS1GcWD8k|DONE
+cpp_s2|1R3ZlnhN283ZLbGpsDPeu_pdB0sklY7F7KFcDlIWPthc|NEW
+cpp_s3|13OsPCDeI4C_0kMwSwC3GbtOfFDuVoitny_pQG_QcGTg|NEW
+cpp_s4|1gOFdEty_QMawfYs6zfJjCU8hwlOk-v0uA2xMikMvkZ0|NEW
+cpp_s5|1U_ao4ArNGO3Q09hC1WHZrXWQoju3Hpj6JTqhvqFP3yI|NEW
+cpp_s6|1nLohKBxsFvCDxAqGRJlY6HgpjGAPqxatjEPcoluxmsg|NEW
+cpp_s7|1NG4FQzbKaa5egw6qE2gL2x64osuDth9AM69rPqsltyI|NEW
+cpp_s8|1M2wbVS2IZ7vDMSzRxlot91J-Nk74LYgRxRIiGQgc1pI|NEW
+cpp_s9|1G3qBqFr1Vbtl_yI8sHXF3urhMyVFLu4lNLuDmMgxDco|NEW
+cpp_s10|1AB1JeuKssdyEwyIk63FifRlMLmCfeG-KrS7Qwn164j0|NEW
+# DSA (4)
+dsa_s1|1ylwIGFlL1CfopPla6943J1-BeIeSwHitXWC58aUJODY|DONE
+dsa_s2|127w2AAk2xQpyUV-d8sTcBjFG_-1FxKEH5IogtmQZit4|NEW
+dsa_s3|1hlfBQyoWqo_Th_mtLLObsSS8ZLk-wmb8OV_NyH7_0G8|NEW
+dsa_s4|1AePiMEWD_wj37Q0ZDX_aVQ_DGn1M_69KFxwyou1yHkg|NEW
+# ReactJS Project (4)
+react_s1|11RENV8mwhEydxszWGQnvzYbJPjgS0Tf6kB0MnMgV91U|DONE
+react_s2|1GDimS8wR8V9V3nmPc3vB6AejLBQJZs8ehNdXi8xrGqc|NEW
+react_s3|1S2vOXYjzgmlHyV3tjYaX3W5EV9BxQgIqib26s-hgxI8|NEW
+react_s4|1ZScLU2nyJTG7XTOxCZWuMf3Fx5br8QqazaQHD8Z2Nnc|NEW
+# GenAI Project (5)
+genai_s1|1yRHXA-w45eyn8P1t8pVvDD-C9o1M7fCn--nOE0eq6ak|DONE
+genai_s2|1CXGaJUwv7RkGx0dwi8YzNnyr71MdCiRvyqKXC3B30s8|NEW
+genai_s3|1miLne283zjhq_UBs372x11EJ41ja1hMqcD6Ww7GRDo4|NEW
+genai_s4|10qr298PFvuBuDEFORbRPkVoR0ywZQhH7ko_OTQR9Or0|NEW
+genai_s5|1bIpAmU6KCPv2YKu6qwhgIw9eVLH9Qth6cm596gshFWY|NEW

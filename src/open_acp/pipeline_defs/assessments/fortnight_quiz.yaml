@@ -1,0 +1,58 @@
+inherits: _assessment_base
+pipeline_id: fortnight_quiz
+content_type: fortnight_quiz
+display_name: "Fortnight Quiz"
+description: "Biweekly assessment, 15-20 questions targeting Apply/Analyze Bloom levels"
+
+frequency: biweekly
+duration_minutes: 45
+question_count: { min: 15, max: 20 }
+bloom_target: [Apply, Analyze]
+
+stages:
+  - id: scope_definition
+    skill: pipelines/fortnight_quiz/01_scope_definition
+    tools: [claude_generate]
+    artifact_schema: outline.schema.json
+    model_tier: strong
+    review_focus:
+      - "Scope covers two weeks of content"
+      - "Integration across topics is tested, not just recall"
+
+  - id: question_generation
+    skill: pipelines/fortnight_quiz/02_question_generation
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: strong
+    review_focus:
+      - "Questions target Apply and Analyze Bloom levels"
+      - "Analyze-level questions require breaking down problems"
+      - "Scenarios are realistic and domain-relevant"
+
+  - id: rubric_design
+    skill: pipelines/fortnight_quiz/03_rubric_design
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: strong
+    review_focus:
+      - "Analyze-level rubrics assess reasoning quality, not just answers"
+      - "Partial credit rewards correct methodology even with wrong final answer"
+
+  - id: difficulty_balancing
+    skill: pipelines/fortnight_quiz/04_difficulty_balancing
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: cheap
+    review_focus:
+      - "Roughly 50% Apply, 50% Analyze distribution"
+      - "No questions below Apply level"
+
+  - id: review
+    skill: pipelines/fortnight_quiz/05_review
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: cheap
+    checkpoint_required: true
+    human_approval_default: true
+
+style: default

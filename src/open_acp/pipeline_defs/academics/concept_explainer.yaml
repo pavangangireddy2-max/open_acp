@@ -1,0 +1,77 @@
+inherits: _session_base
+pipeline_id: concept_explainer
+content_type: concept_explainer
+display_name: "Concept Explainer Session"
+description: "Video session (PPT) explaining a core concept with theory, examples, analogies, and visuals"
+
+stages:
+  - id: outline
+    skill: pipelines/concept_explainer/01_outline
+    tools: [claude_generate]
+    artifact_schema: outline.schema.json
+    model_tier: strong
+    review_focus:
+      - "Every learning objective maps to at least one section"
+      - "Bloom levels progress (remember → understand → apply minimum)"
+      - "Total duration within 10% of module estimated hours"
+    success_criteria:
+      - "Schema-valid outline with at least 3 sections"
+      - "Teaching flow describes pedagogical progression"
+
+  - id: objectives
+    skill: pipelines/concept_explainer/02_objectives
+    tools: [claude_generate]
+    artifact_schema: objectives.schema.json
+    model_tier: strong
+    review_focus:
+      - "Each objective uses measurable verb + condition + criterion"
+      - "Bloom levels match the outline section progression"
+      - "Coverage matrix shows no orphan objectives"
+
+  - id: core_content
+    skill: pipelines/concept_explainer/03_core_content
+    tools: [claude_generate]
+    artifact_schema: core_content.schema.json
+    model_tier: strong
+    review_focus:
+      - "Content addresses all learning objectives"
+      - "Examples are concrete and domain-relevant"
+      - "Key terms are defined on first use"
+      - "Citations support factual claims"
+    success_criteria:
+      - "Minimum 500 words per section"
+      - "At least 1 example per section"
+
+  - id: activities
+    skill: pipelines/concept_explainer/04_activities
+    tools: [claude_generate]
+    artifact_schema: activities.schema.json
+    model_tier: strong
+    review_focus:
+      - "Activities cover all Bloom levels present in objectives"
+      - "Time estimates are realistic"
+      - "Instructions are clear enough to follow without additional context"
+
+  - id: brand_polish
+    skill: pipelines/concept_explainer/05_brand_polish
+    tools: [claude_generate]
+    artifact_schema: brand_polish.schema.json
+    model_tier: cheap
+    review_focus:
+      - "Voice matches brand playbook"
+      - "Formatting is consistent"
+      - "No jargon without definition"
+
+  - id: slide_deck
+    skill: pipelines/concept_explainer/06_slide_deck
+    tools: [claude_generate]
+    artifact_schema: slide_deck.schema.json
+    model_tier: cheap
+    review_focus:
+      - "Slides follow one-idea-per-slide principle"
+      - "Speaker notes cover what to say, not just what's on screen"
+      - "Visual descriptions are actionable"
+    checkpoint_required: true
+    human_approval_default: false
+
+style: default

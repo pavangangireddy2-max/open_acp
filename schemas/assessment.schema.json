@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Assessment",
+  "type": "object",
+  "required": ["assessment_type", "questions"],
+  "properties": {
+    "assessment_type": {"type": "string", "enum": ["classroom_quiz", "module_quiz", "fortnight_quiz", "final_course_quiz", "final_course_project", "graded_assessment"]},
+    "time_limit_minutes": {"type": "integer", "minimum": 5},
+    "total_marks": {"type": "integer"},
+    "passing_score_percent": {"type": "number", "minimum": 0, "maximum": 100},
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["question_id", "type", "content", "marks"],
+        "properties": {
+          "question_id": {"type": "string"},
+          "type": {"type": "string", "enum": ["mcq", "short_answer", "coding", "essay", "case_study", "project_milestone"]},
+          "content": {"type": "string", "minLength": 10},
+          "marks": {"type": "integer", "minimum": 1},
+          "bloom_level": {"type": "string"},
+          "rubric": {"type": "object"},
+          "options": {"type": "array", "items": {"type": "object"}},
+          "solution": {"type": "string"},
+          "objective_ids": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "bloom_distribution": {"type": "object"},
+    "instructions": {"type": "string"}
+  }
+}

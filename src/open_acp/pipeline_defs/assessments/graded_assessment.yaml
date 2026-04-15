@@ -1,0 +1,63 @@
+inherits: _assessment_base
+pipeline_id: graded_assessment
+content_type: graded_assessment
+display_name: "Graded Assessment"
+description: "Formal graded exam (Mid 1 / Mid 2 / End Sem), 30-40 questions spanning the full Bloom taxonomy"
+
+frequency: mid1_mid2_endsem
+duration_minutes: 120
+question_count: { min: 30, max: 40 }
+bloom_target: [Remember, Understand, Apply, Analyze, Evaluate, Create]
+gate_blocking: true
+
+stages:
+  - id: scope_definition
+    skill: pipelines/graded_assessment/01_scope_definition
+    tools: [claude_generate]
+    artifact_schema: outline.schema.json
+    model_tier: strong
+    review_focus:
+      - "Scope matches the official syllabus for the exam period"
+      - "Bloom level distribution covers all six levels"
+      - "Marks allocation is proportional to topic weight"
+
+  - id: question_generation
+    skill: pipelines/graded_assessment/02_question_generation
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: strong
+    review_focus:
+      - "Questions span all six Bloom levels"
+      - "Mix of question types (MCQ, short answer, long answer, coding)"
+      - "No ambiguous or double-barreled questions"
+      - "Total marks sum correctly"
+
+  - id: rubric_design
+    skill: pipelines/graded_assessment/03_rubric_design
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: strong
+    review_focus:
+      - "Every question has a detailed marking scheme"
+      - "Partial credit rules are explicit and fair"
+      - "Model answers are provided for all question types"
+
+  - id: difficulty_balancing
+    skill: pipelines/graded_assessment/04_difficulty_balancing
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: cheap
+    review_focus:
+      - "Bloom distribution: ~10% Remember, ~20% Understand, ~25% Apply, ~20% Analyze, ~15% Evaluate, ~10% Create"
+      - "Difficulty ramp allows early momentum"
+      - "Time allocation per question is realistic"
+
+  - id: review
+    skill: pipelines/graded_assessment/05_review
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: cheap
+    checkpoint_required: true
+    human_approval_default: true
+
+style: default

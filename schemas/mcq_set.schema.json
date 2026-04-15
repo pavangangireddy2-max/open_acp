@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MCQ Practice Set",
+  "type": "object",
+  "required": ["questions"],
+  "properties": {
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["stem", "options", "bloom_level"],
+        "properties": {
+          "question_id": {"type": "string"},
+          "stem": {"type": "string", "minLength": 10},
+          "options": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {
+              "type": "object",
+              "required": ["text", "is_correct"],
+              "properties": {
+                "text": {"type": "string"},
+                "is_correct": {"type": "boolean"},
+                "explanation": {"type": "string"}
+              }
+            }
+          },
+          "bloom_level": {"type": "string", "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]},
+          "difficulty": {"type": "string", "enum": ["easy", "medium", "hard"]},
+          "topic": {"type": "string"},
+          "objective_ids": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "total_questions": {"type": "integer"},
+    "bloom_distribution": {"type": "object"},
+    "difficulty_distribution": {"type": "object"}
+  }
+}

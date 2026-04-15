@@ -1,0 +1,58 @@
+inherits: _assessment_base
+pipeline_id: module_quiz
+content_type: module_quiz
+display_name: "Module Quiz"
+description: "Module-level quiz every 4 sessions, 10-15 questions targeting Understand/Apply Bloom levels"
+
+frequency: every_4_sessions
+duration_minutes: 30
+question_count: { min: 10, max: 15 }
+bloom_target: [Understand, Apply]
+
+stages:
+  - id: scope_definition
+    skill: pipelines/module_quiz/01_scope_definition
+    tools: [claude_generate]
+    artifact_schema: outline.schema.json
+    model_tier: strong
+    review_focus:
+      - "Scope covers all sessions in the module"
+      - "Key concepts from each session are represented"
+
+  - id: question_generation
+    skill: pipelines/module_quiz/02_question_generation
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: strong
+    review_focus:
+      - "Questions target Understand and Apply Bloom levels"
+      - "Coverage spans the full module, not just recent sessions"
+      - "Application questions use realistic scenarios"
+
+  - id: rubric_design
+    skill: pipelines/module_quiz/03_rubric_design
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: strong
+    review_focus:
+      - "Rubric distinguishes partial understanding from guessing"
+      - "Apply-level questions have solution-step rubrics"
+
+  - id: difficulty_balancing
+    skill: pipelines/module_quiz/04_difficulty_balancing
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: cheap
+    review_focus:
+      - "Roughly 40% Understand, 60% Apply distribution"
+      - "Difficulty ramp within the quiz"
+
+  - id: review
+    skill: pipelines/module_quiz/05_review
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: cheap
+    checkpoint_required: true
+    human_approval_default: true
+
+style: default

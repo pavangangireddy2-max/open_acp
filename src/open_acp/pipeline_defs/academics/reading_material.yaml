@@ -1,0 +1,46 @@
+inherits: _base
+pipeline_id: reading_material
+content_type: reading_material
+display_name: "Reading Material / Tutorial"
+description: "Long-form written tutorial with code, diagrams, and exercises"
+family: written
+
+stages:
+  - id: outline
+    skill: pipelines/reading_material/01_outline
+    tools: [claude_generate]
+    artifact_schema: outline.schema.json
+    model_tier: strong
+
+  - id: objectives
+    skill: pipelines/reading_material/02_objectives
+    tools: [claude_generate]
+    artifact_schema: objectives.schema.json
+    model_tier: strong
+
+  - id: core_content
+    skill: pipelines/reading_material/03_core_content
+    tools: [claude_generate]
+    artifact_schema: core_content.schema.json
+    model_tier: strong
+    review_focus:
+      - "Code examples are complete and runnable"
+      - "Diagrams are described with enough detail to create"
+      - "Reading level matches target audience"
+
+  - id: brand_polish
+    skill: pipelines/reading_material/04_brand_polish
+    tools: [claude_generate]
+    artifact_schema: brand_polish.schema.json
+    model_tier: cheap
+
+  - id: format_output
+    skill: pipelines/reading_material/05_format_output
+    tools: [claude_generate]
+    artifact_schema: reading_material.schema.json
+    model_tier: cheap
+    review_focus:
+      - "Markdown formatting is clean and consistent"
+      - "All code blocks have language tags"
+
+style: default

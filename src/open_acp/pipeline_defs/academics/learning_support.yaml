@@ -1,0 +1,58 @@
+inherits: _session_base
+pipeline_id: learning_support
+content_type: learning_support
+display_name: "Learning Support Session"
+description: "Video session (PPT) addressing common misconceptions with targeted correction and reinforcement"
+
+stages:
+  - id: outline
+    skill: pipelines/learning_support/01_outline
+    tools: [claude_generate]
+    artifact_schema: outline.schema.json
+    model_tier: strong
+    review_focus:
+      - "Misconceptions are identified from real learner data or known pitfalls"
+      - "Correction strategy is constructive, not just negation"
+      - "Reinforcement activities target the specific misconception"
+
+  - id: objectives
+    skill: pipelines/learning_support/02_objectives
+    tools: [claude_generate]
+    artifact_schema: objectives.schema.json
+    model_tier: strong
+    review_focus:
+      - "Objectives address diagnostic, corrective, and reinforcement phases"
+      - "Success is measurable against the original misconception"
+
+  - id: core_content
+    skill: pipelines/learning_support/03_core_content
+    tools: [claude_generate]
+    artifact_schema: core_content.schema.json
+    model_tier: strong
+    review_focus:
+      - "Each misconception is stated explicitly before correction"
+      - "Correct mental model is built through contrast with the misconception"
+      - "Examples show both the wrong and right reasoning paths"
+
+  - id: activities
+    skill: pipelines/learning_support/04_activities
+    tools: [claude_generate]
+    artifact_schema: activities.schema.json
+    model_tier: strong
+    review_focus:
+      - "Activities test whether the misconception has been resolved"
+      - "Reinforcement exercises prevent regression to the wrong model"
+
+  - id: brand_polish
+    skill: pipelines/learning_support/05_brand_polish
+    tools: [claude_generate]
+    artifact_schema: brand_polish.schema.json
+    model_tier: cheap
+
+  - id: slide_deck
+    skill: pipelines/learning_support/06_slide_deck
+    tools: [claude_generate]
+    artifact_schema: slide_deck.schema.json
+    model_tier: cheap
+
+style: default

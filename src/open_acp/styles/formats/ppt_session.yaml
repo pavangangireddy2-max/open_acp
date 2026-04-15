@@ -1,0 +1,141 @@
+# Format Guidelines: PPT Session (Concept Explainer / Problem Solving / Project Building)
+# Extracted from: Slide Prep Guide + 9 sample PPTs across Python, C++, DSA, ReactJS
+
+version: 1
+format: ppt_session
+applies_to:
+  - concept_explainer
+  - problem_solving
+  - project_building
+  - learning_support
+  - platform_walkthrough
+  - induction
+
+# ─── SLIDE STRUCTURE ────────────────────────────────────────────────────────────
+
+required_slides:
+  opening:
+    - type: welcome
+      content: "WELCOME (branded slide)"
+    - type: session_title
+      content: "Session N | Topic Title"
+    - type: recap
+      content: "Bullet points from previous session (activate prior knowledge)"
+      rule: "Recap before agenda when there's an immediate session before; after agenda when referencing earlier courses"
+    - type: agenda
+      content: "Outline with visual icons for each major section"
+
+  closing:
+    - type: key_takeaways
+      content: "Mirrors agenda items — split into Part 1/N if substantial"
+      rule: "Every agenda item should have a corresponding takeaway"
+    - type: next_session
+      content: "Preview of next session topic"
+    - type: thank_you
+      content: "THANK YOU (branded slide)"
+    - type: all_the_best
+      content: "ALL THE BEST (branded slide)"
+
+  periodic:
+    - type: feedback
+      frequency: "After every 4 sessions"
+      content: "Feed Us With Your Feedback, We are Very Hungry to Serve You Better"
+
+# ─── CONTENT SLIDE PATTERNS ─────────────────────────────────────────────────────
+
+content_patterns:
+
+  concept_introduction:
+    description: "Pattern for introducing a new concept"
+    slide_sequence:
+      - "Section header slide (just the concept name — clean break)"
+      - "Definition slide (formal definition, 1-2 sentences)"
+      - "Real-life analogy slide (everyday analogy with illustration)"
+      - "Examples slide (programming examples — visual list)"
+      - "Detail slides (progressive explanation, one aspect per slide)"
+    observed: "DSA S1: 'What is a Data Structure?' → Definition → Bookshelf analogy → Examples list"
+
+  code_demonstration:
+    description: "Pattern for showing code"
+    slide_sequence:
+      - "Syntax comparison slide (if bridging from another language)"
+      - "Minimal code slide (just the new construct, nothing else)"
+      - "Progressive build slides (add one line at a time, blue box highlights new code)"
+      - "Input/Output slide (show Input box, Code box, Output box)"
+      - "Error demonstration slide (show what goes wrong, explain error message)"
+      - "Fixed code slide (show the corrected version)"
+    observed: "C++ data types: 5-6 slides per data type following this exact pattern"
+    rules:
+      - "Always show Input → Code → Output on every code example"
+      - "Blue box (#006daf) highlights newly added lines"
+      - "Orange rectangle (#ff9900) border highlights focused code"
+      - "Git-style formatting for code replacement (red line removed, green line added)"
+      - "Code must be tested in IDE before adding to slides"
+
+  comparison:
+    description: "Pattern for comparing two things"
+    slide_sequence:
+      - "Title slide ('X vs Y')"
+      - "Comparison table (aspects as rows, X and Y as columns)"
+      - "Key difference callout (1-2 most important differences)"
+    observed: "C++ S1: compiler vs interpreter, cin vs input(), float vs double"
+
+  practice_section:
+    description: "Pattern for practice problems in a session"
+    slide_sequence:
+      - "Section break ('Practice Questions')"
+      - "Problem statement slide (visual representation of the problem)"
+      - "Solution slide (code in both languages if applicable, with Input/Output)"
+    observed: "C++ S1: 'Calculate Area of Circle' and 'Simple Interest' at end of session"
+
+# ─── SLIDE DENSITY RULES ────────────────────────────────────────────────────────
+
+density:
+  words_per_slide:
+    max: 40
+    ideal: 20-30
+    rule: "Never add more than 30-40 words in a single slide"
+
+  lines_per_slide:
+    ideal: 3
+    max: 5
+    rule: "Try to adjust the content in 4 lines. Best case is 3. Max 5."
+
+  concepts_per_slide: 1
+  rule: "One idea per slide — if you need more, add another slide"
+
+  code_lines_per_slide:
+    max: 15
+    rule: "If code exceeds 15 lines, split across slides with progressive reveal"
+
+  bullet_points_per_slide:
+    max: 6
+    rule: "Maximum 6 bullet points — prefer 3-4 with sub-bullets"
+
+# ─── PROGRESSIVE REVEAL PATTERN ─────────────────────────────────────────────────
+
+progressive_reveal:
+  description: "Multi-slide build-up of complex content"
+  rules:
+    - "Start with the skeleton (e.g., boilerplate code without the logic)"
+    - "Each subsequent slide adds ONE new element (highlighted with blue box)"
+    - "Show the output change at each step"
+    - "End with the complete version"
+  observed:
+    - "C++ boilerplate: 5 slides to reveal #include, main(), code area, return 0"
+    - "C++ data type input: 4 slides to show declare → cin → cout → output"
+    - "ReactJS: vanilla JS → add imports → createElement → render"
+
+# ─── SPEAKER NOTES GUIDELINES ───────────────────────────────────────────────────
+
+speaker_notes:
+  required: true
+  content_type: "presenter triggers"
+  rules:
+    - "Every slide MUST have speaker notes"
+    - "Notes should tell the presenter WHAT TO SAY, not just repeat what's on screen"
+    - "Include talking points, transition phrases, expected questions"
+    - "For code slides: explain the logic verbally (the 'why', not just the 'what')"
+    - "For comparison slides: highlight the key takeaway to emphasize"
+    - "Update notes when duplicating slides — don't leave stale notes"
+    - "Put long URLs and image URLs in speaker notes (not on slide)"

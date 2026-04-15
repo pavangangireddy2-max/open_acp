@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Coding Challenge Set",
+  "type": "object",
+  "required": ["challenges"],
+  "properties": {
+    "challenges": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["problem_statement", "starter_code", "test_cases"],
+        "properties": {
+          "challenge_id": {"type": "string"},
+          "problem_statement": {"type": "string", "minLength": 20},
+          "constraints": {"type": "string"},
+          "starter_code": {"type": "string"},
+          "solution": {"type": "string"},
+          "test_cases": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "required": ["input", "expected_output"],
+              "properties": {
+                "input": {"type": "string"},
+                "expected_output": {"type": "string"},
+                "is_hidden": {"type": "boolean"}
+              }
+            }
+          },
+          "hints": {"type": "array", "items": {"type": "string"}},
+          "bloom_level": {"type": "string"},
+          "difficulty": {"type": "string", "enum": ["easy", "medium", "hard"]},
+          "time_limit_minutes": {"type": "integer"},
+          "language": {"type": "string"}
+        }
+      }
+    },
+    "total_challenges": {"type": "integer"}
+  }
+}

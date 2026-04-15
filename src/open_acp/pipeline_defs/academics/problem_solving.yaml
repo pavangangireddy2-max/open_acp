@@ -1,0 +1,54 @@
+inherits: _session_base
+pipeline_id: problem_solving
+content_type: problem_solving
+display_name: "Problem Solving Session"
+description: "Video session (PPT) teaching problem-solving approaches with worked examples"
+
+stages:
+  - id: outline
+    skill: pipelines/problem_solving/01_outline
+    tools: [claude_generate]
+    artifact_schema: outline.schema.json
+    model_tier: strong
+    review_focus:
+      - "Problem types are clearly categorized"
+      - "Difficulty progression is appropriate"
+
+  - id: objectives
+    skill: pipelines/problem_solving/02_objectives
+    tools: [claude_generate]
+    artifact_schema: objectives.schema.json
+    model_tier: strong
+
+  - id: core_content
+    skill: pipelines/problem_solving/03_core_content
+    tools: [claude_generate]
+    artifact_schema: core_content.schema.json
+    model_tier: strong
+    review_focus:
+      - "Each problem has a complete worked solution"
+      - "Solution approach is explained, not just the answer"
+      - "Common mistakes are addressed"
+
+  - id: activities
+    skill: pipelines/problem_solving/04_activities
+    tools: [claude_generate]
+    artifact_schema: activities.schema.json
+    model_tier: strong
+    review_focus:
+      - "Problems progress from guided to independent"
+      - "Hints system provides scaffolding without giving answers"
+
+  - id: brand_polish
+    skill: pipelines/problem_solving/05_brand_polish
+    tools: [claude_generate]
+    artifact_schema: brand_polish.schema.json
+    model_tier: cheap
+
+  - id: slide_deck
+    skill: pipelines/problem_solving/06_slide_deck
+    tools: [claude_generate]
+    artifact_schema: slide_deck.schema.json
+    model_tier: cheap
+
+style: default

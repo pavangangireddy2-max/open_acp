@@ -1,0 +1,12 @@
+inherits: _base
+family: assessment
+description: "Base configuration for assessment pipelines (scored, time-boxed)"
+
+defaults:
+  model_tier: strong
+  gate:
+    type: G3
+    blocking: true
+
+output_format: json
+bloom_distribution_required: true

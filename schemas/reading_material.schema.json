@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reading Material",
+  "type": "object",
+  "required": ["content_markdown", "title"],
+  "properties": {
+    "title": {"type": "string"},
+    "content_markdown": {"type": "string", "minLength": 500},
+    "table_of_contents": {"type": "array", "items": {"type": "string"}},
+    "word_count": {"type": "integer"},
+    "reading_time_minutes": {"type": "number"},
+    "code_blocks_count": {"type": "integer"},
+    "diagrams": {"type": "array", "items": {"type": "object", "properties": {"description": {"type": "string"}, "type": {"type": "string"}}}},
+    "key_takeaways": {"type": "array", "items": {"type": "string"}, "minItems": 3},
+    "further_reading": {"type": "array", "items": {"type": "string"}}
+  }
+}

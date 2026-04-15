@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Brand Polish Artifact",
+  "type": "object",
+  "required": ["polished_content"],
+  "properties": {
+    "polished_content": {"type": "string", "minLength": 100},
+    "changes_made": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "section": {"type": "string"},
+          "change_type": {"type": "string"},
+          "before": {"type": "string"},
+          "after": {"type": "string"}
+        }
+      }
+    },
+    "style_compliance_score": {"type": "number", "minimum": 0, "maximum": 1},
+    "brand_voice_notes": {"type": "string"}
+  }
+}

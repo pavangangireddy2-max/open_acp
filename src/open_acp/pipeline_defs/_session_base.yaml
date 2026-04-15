@@ -1,0 +1,11 @@
+inherits: _base
+family: session
+description: "Base configuration for session pipelines (PPT + speaker notes output)"
+
+defaults:
+  model_tier: strong
+  gate:
+    type: G3
+    blocking: true
+
+output_format: pptx

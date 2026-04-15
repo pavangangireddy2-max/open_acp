@@ -1,0 +1,59 @@
+inherits: _assessment_base
+pipeline_id: final_course_project
+content_type: final_course_project
+display_name: "Final Course Project"
+description: "End-of-course capstone project targeting Create Bloom level with milestones and rubric"
+
+frequency: end_of_course
+bloom_target: [Create]
+
+stages:
+  - id: scope_definition
+    skill: pipelines/final_course_project/01_scope_definition
+    tools: [claude_generate]
+    artifact_schema: outline.schema.json
+    model_tier: strong
+    review_focus:
+      - "Project scope is achievable within the given timeframe"
+      - "Scope exercises Create-level skills from the course"
+      - "Multiple valid approaches exist for the project"
+
+  - id: project_specification
+    skill: pipelines/final_course_project/02_project_specification
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: strong
+    review_focus:
+      - "Deliverables are clearly defined and measurable"
+      - "Technical requirements are explicit but allow creative freedom"
+      - "Submission format and expectations are unambiguous"
+
+  - id: rubric_design
+    skill: pipelines/final_course_project/03_rubric_design
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: strong
+    review_focus:
+      - "Rubric assesses process and product, not just final output"
+      - "Create-level criteria reward originality and integration"
+      - "Rubric categories map to course learning objectives"
+
+  - id: milestone_planning
+    skill: pipelines/final_course_project/04_milestone_planning
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: strong
+    review_focus:
+      - "Milestones are spaced to allow iterative feedback"
+      - "Each milestone has clear deliverables and check-in criteria"
+      - "Final milestone includes integration and presentation"
+
+  - id: review
+    skill: pipelines/final_course_project/05_review
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: cheap
+    checkpoint_required: true
+    human_approval_default: true
+
+style: default

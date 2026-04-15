@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Wiki Entity",
+  "type": "object",
+  "required": ["entity_id", "entity_type", "title", "content"],
+  "properties": {
+    "entity_id": {"type": "string"},
+    "entity_type": {"type": "string", "enum": ["skill", "competitor", "audience_segment", "concept", "domain"]},
+    "title": {"type": "string", "minLength": 1},
+    "content": {"type": "string", "minLength": 10},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "durability": {"type": "string", "enum": ["durable", "perishable", "unknown"]},
+    "sources": {"type": "array", "items": {"type": "string"}},
+    "cross_references": {"type": "array", "items": {"type": "string"}},
+    "supersedes": {"type": "string"},
+    "created_at": {"type": "string"},
+    "updated_at": {"type": "string"}
+  }
+}

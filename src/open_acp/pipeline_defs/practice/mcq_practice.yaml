@@ -1,0 +1,46 @@
+inherits: _base
+pipeline_id: mcq_practice
+content_type: mcq_practice
+display_name: "MCQ Practice Set"
+description: "Multiple choice question bank with explanations for each option"
+family: practice
+
+stages:
+  - id: topic_selection
+    skill: pipelines/mcq_practice/01_topic_selection
+    tools: [claude_generate]
+    artifact_schema: outline.schema.json
+    model_tier: cheap
+    review_focus:
+      - "Topics cover the module learning objectives"
+      - "Difficulty distribution matches target Bloom levels"
+
+  - id: question_generation
+    skill: pipelines/mcq_practice/02_question_generation
+    tools: [claude_generate]
+    artifact_schema: mcq_set.schema.json
+    model_tier: strong
+    review_focus:
+      - "Each question has exactly 4 options"
+      - "Distractors are plausible but clearly wrong to a competent learner"
+      - "Question stems are unambiguous"
+
+  - id: solution_design
+    skill: pipelines/mcq_practice/03_solution_design
+    tools: [claude_generate]
+    artifact_schema: mcq_set.schema.json
+    model_tier: strong
+    review_focus:
+      - "Each option has an explanation (correct and incorrect)"
+      - "Explanations teach, not just state right/wrong"
+
+  - id: difficulty_calibration
+    skill: pipelines/mcq_practice/04_difficulty_calibration
+    tools: [claude_generate]
+    artifact_schema: mcq_set.schema.json
+    model_tier: cheap
+    review_focus:
+      - "Difficulty labels match actual cognitive demand"
+      - "Bloom level distribution meets target"
+
+style: default

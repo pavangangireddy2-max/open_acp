@@ -1,0 +1,59 @@
+inherits: _assessment_base
+pipeline_id: final_course_quiz
+content_type: final_course_quiz
+display_name: "Final Course Quiz"
+description: "End-of-course comprehensive quiz, 25-30 questions targeting Analyze/Evaluate Bloom levels"
+
+frequency: end_of_course
+duration_minutes: 90
+question_count: { min: 25, max: 30 }
+bloom_target: [Analyze, Evaluate]
+
+stages:
+  - id: scope_definition
+    skill: pipelines/final_course_quiz/01_scope_definition
+    tools: [claude_generate]
+    artifact_schema: outline.schema.json
+    model_tier: strong
+    review_focus:
+      - "Scope covers the entire course syllabus"
+      - "Weight distribution reflects module importance"
+      - "Cross-cutting themes are identified for integration questions"
+
+  - id: question_generation
+    skill: pipelines/final_course_quiz/02_question_generation
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: strong
+    review_focus:
+      - "Questions target Analyze and Evaluate Bloom levels"
+      - "Evaluate-level questions require judgment and justification"
+      - "Questions test synthesis across multiple modules"
+
+  - id: rubric_design
+    skill: pipelines/final_course_quiz/03_rubric_design
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: strong
+    review_focus:
+      - "Evaluate-level rubrics assess quality of reasoning and justification"
+      - "Model answers show exemplary responses at each score level"
+
+  - id: difficulty_balancing
+    skill: pipelines/final_course_quiz/04_difficulty_balancing
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: cheap
+    review_focus:
+      - "Roughly 50% Analyze, 50% Evaluate distribution"
+      - "Difficulty curve allows early confidence before harder questions"
+
+  - id: review
+    skill: pipelines/final_course_quiz/05_review
+    tools: [claude_generate]
+    artifact_schema: assessment.schema.json
+    model_tier: cheap
+    checkpoint_required: true
+    human_approval_default: true
+
+style: default

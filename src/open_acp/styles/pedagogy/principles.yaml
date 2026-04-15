@@ -1,0 +1,323 @@
+# Universal Pedagogy Principles
+# Extracted from: 12 sample PPTs across Python, C++, DSA, ReactJS, GenAI + Slide Prep Guide
+# These apply to ALL content types and ALL domain stacks
+
+version: 1
+
+# ─── CORE PRINCIPLES ────────────────────────────────────────────────────────────
+
+principles:
+
+  incremental_learning_progression:
+    description: "Build knowledge in small, sequenced steps — never jump cognitive levels"
+    observed_in:
+      - "Python S1: driving analogy → common aspects → differences → conclusion — before touching code"
+      - "C++ S1: same driving analogy reused (bridge from known), then three key areas → syntax last"
+      - "Python S2: recap previous session → agenda → first program → comparison table → operations"
+      - "DSA S1: definition → real-life analogy → examples → applications → benefits → takeaways"
+      - "C++ Loops: For loop flowchart → syntax comparison → iteration trace table → code example — visual before textual before executable"
+      - "C++ Operators: Operators comparison tables → key differences → type conversion → conditionals — each builds on the prior concept"
+    rules:
+      - "Start every concept with what the learner already knows (prior knowledge activation)"
+      - "Introduce ONE new concept per slide/section — never two"
+      - "Build complexity gradually: simple case → general case → edge cases"
+      - "Each session builds on the previous — mandatory recap at start"
+      - "When transitioning to a new language/framework, explicitly bridge from the known one"
+
+  analogy_before_abstraction:
+    description: "Use real-world analogies before formal definitions"
+    observed_in:
+      - "Python S1: 'Driving a car' analogy for learning programming languages (8 slides before code)"
+      - "C++ S1: same car analogy reused — proving it's a deliberate pedagogical pattern"
+      - "DSA S1: 'Bookshelf in a library' for data structures, 'recipe in a cookbook' for algorithms, 'ingredients in containers' for data organization"
+      - "ReactJS: component trees shown as visual diagrams before code"
+    rules:
+      - "Every abstract concept must have a concrete analogy BEFORE the formal definition"
+      - "Analogies should use everyday objects (cars, bookshelves, recipes, containers)"
+      - "Reuse analogies across sessions when introducing related concepts in new languages"
+      - "The analogy must map structurally to the concept — not just be a loose metaphor"
+
+  bridge_from_known_to_unknown:
+    description: "When introducing new concepts, always start from what the learner already knows"
+    observed_in:
+      - "Python S2: JavaScript vs Python comparison table on slide 10 (they know JS)"
+      - "C++ S1: Python vs C++ side-by-side for print, comments, variables, data types — 30+ slides of comparison"
+      - "C++ S1: 'Three key areas to focus' — abstractions (same), problem-solving (same), syntax (different) — minimizing perceived difficulty"
+      - "ReactJS: Regular JS → React JS progression (show vanilla JS first, then React equivalent)"
+      - "C++ Functions: Every function concept shown as C++ vs Python side-by-side (definition, calling, pass by value/reference)"
+      - "C++ Loops: For/While/Do-While each shown as C++ syntax left, Python syntax right, with dashed orange separator"
+      - "C++ Operators: Comparison tables for Logical, Arithmetic, Relational, Assignment operators — Python column vs C++ column"
+    rules:
+      - "When learners know Language A and are learning Language B, ALWAYS show A vs B comparison"
+      - "Use side-by-side code comparison slides (Language A on left, Language B on right)"
+      - "Highlight what's SAME first (reduces anxiety), then what's DIFFERENT (focused learning)"
+      - "Explicitly state transfer: 'The problem-solving approach is the same across all languages'"
+
+  contextual_and_applied_learning:
+    description: "Every concept must connect to real-world application"
+    observed_in:
+      - "DSA S1: search engines, social media, e-commerce, healthcare, finance as DSA applications"
+      - "C++ S1: desktop apps, mobile apps, gaming, big data, cloud, web — with named companies"
+      - "ReactJS: Meta/Facebook, Netflix, Airbnb as companies using React"
+      - "C++ S1: 'F-35 fighter jet uses C++ for avionics', 'NASA uses C++ for flight software'"
+    rules:
+      - "After introducing a concept, immediately show 2-3 real-world applications"
+      - "Use named companies and specific products (not generic 'many companies use X')"
+      - "Include surprising/impressive facts to build motivation ('NASA uses C++ for flight software')"
+      - "Show industry trends and download statistics to validate technology choices"
+
+  cognitive_load_management:
+    description: "Strictly limit information density to prevent overload"
+    observed_in:
+      - "Slide Prep Guide: max 30-40 words per slide, 3-4 lines ideal"
+      - "All PPTs: one concept per slide, progressive reveal (multiple slides for one topic)"
+      - "C++ S1: data type table split across 2 slides instead of cramming into 1"
+      - "Python S3: coding practice walkthrough uses 15+ slides for one question"
+      - "C++ Loops: Do-while loop explained across 5 progressive annotation slides — same code shown 5 times, each highlighting ONE different line with a callout box"
+      - "C++ Operators: Array declaration syntax revealed across 3 slides — first highlights 'type', then 'array_name', then '[array_size]'"
+    rules:
+      - "Maximum 30-40 words per slide — enforced, not suggested"
+      - "One idea per slide — if you need more space, add another slide"
+      - "Progressive reveal: show code in stages (declare → input → output → full program)"
+      - "Break complex topics into multiple slides with clear visual progression"
+      - "Watch time drop at 25 minutes → design for 20-minute attention blocks with breaks"
+      - "Maximum 3-4 new concepts per 15-minute block"
+
+  skill_mastery_through_deliberate_practice:
+    description: "Learning is solidified through structured practice, not passive consumption"
+    observed_in:
+      - "Python S3: entire session dedicated to coding practice walkthrough"
+      - "C++ S1: practice questions section at the end with worked solutions (area of circle, simple interest)"
+      - "All sessions end with Key Takeaways that double as a self-check"
+      - "Difficulty levels (Easy/Medium/Hard) explicitly shown in coding practice"
+      - "C++ Functions: Practice section with 3 graduated problems — Swap Two Numbers → Find Maximum → Sum of Digits → Calculator (increasing complexity)"
+    rules:
+      - "At least 40% of session time must be active practice (not lecture)"
+      - "Practice problems must be progressive: Easy → Medium → Hard"
+      - "Provide worked solutions — but encourage trying BEFORE looking ('Before looking at the Tutorial, make sure you try harder')"
+      - "Each practice problem should map to a specific learning objective"
+      - "Include self-assessment mechanisms (test cases, AI tutor, comparison with solution)"
+
+# ─── LEARNING STRATEGIES ────────────────────────────────────────────────────────
+
+strategies:
+
+  spaced_repetition:
+    description: "Revisit previously learned material at increasing intervals"
+    observed_in:
+      - "Every session starts with a Recap slide reviewing the previous session"
+      - "Key Takeaways at end mirror the Agenda at start (bookend pattern)"
+      - "Feedback slides every 4 sessions — a checkpoint to revisit cumulative learning"
+      - "C++ PPTs constantly reference Python equivalents — reinforcing Python while teaching C++"
+    rules:
+      - "Mandatory Recap slide at start of every session"
+      - "Recap should use bullet points summarizing previous session's key concepts"
+      - "When teaching new language, constantly reference the first language learned (reinforcement)"
+      - "Module quizzes every 4 sessions as spaced repetition checkpoints"
+      - "Key Takeaways must be split into parts (Part 1/2, 2/2) if content is substantial"
+
+  active_recall:
+    description: "Force retrieval from memory rather than passive review"
+    observed_in:
+      - "C++ S1: 'What are the differences between the two cars?' — question BEFORE showing the answer"
+      - "C++ S1: 'Does driving a new car require a different set of fundamental skills?' — Socratic questioning"
+      - "DSA S1: 'But what if we had a big sentence?' — posing a problem before the solution"
+      - "Coding practice: show problem → attempt → fail → debug → succeed"
+      - "C++ Functions/Loops/Operators: 'Quiz Time!' slides after every major concept section — 2-3 per session, not just end-of-session"
+    rules:
+      - "Ask questions BEFORE providing answers (Socratic method)"
+      - "Use 'Think about this...' slides before revealing the solution"
+      - "In coding: show the problem, let them think, THEN show the approach"
+      - "Classroom quizzes every 15-20 minutes to force recall"
+
+  concept_interleaving:
+    description: "Mix related concepts rather than teaching in isolation"
+    observed_in:
+      - "C++ S1: interleaves data types with input/output operations — doesn't teach all types first then all I/O"
+      - "Python S2: interleaves arithmetic operations with print statements"
+      - "ReactJS: interleaves JavaScript fundamentals with React concepts"
+    rules:
+      - "Don't teach all theory first then all practice — interleave them"
+      - "When introducing a new concept, immediately connect it to the previous one"
+      - "Side-by-side comparisons within a session (not 'compare later')"
+      - "Practice problems should combine concepts from current AND previous sessions"
+
+  progressive_code_reveal:
+    description: "Show code building up step by step, not as a complete block"
+    observed_in:
+      - "C++ S1: boilerplate code revealed over 5 slides (#include → main() → code area → return 0 → explained)"
+      - "C++ data types: declare variable → take input → print output — 3 separate slides per data type"
+      - "ReactJS: vanilla JS → add React imports → React.createElement → render — multi-slide progression"
+      - "Python S2: 'Hello World' in JS first, then Python equivalent"
+      - "C++ Loops: Do-while progressive annotation — full code shown but each line highlighted with dashed-arrow callout explaining one aspect per slide"
+      - "C++ Operators: Array syntax 'type array_name[array_size]' revealed in 3 separate slides highlighting each component"
+    rules:
+      - "NEVER show a complete code block on the first slide — build it up"
+      - "Each slide adds 1-2 lines to the previous code, highlighted with blue box"
+      - "Show Input → Code → Output for every code example"
+      - "When showing errors, follow the sequence: write code → run → see error → explain → fix → run again"
+      - "Use git-style formatting (red/green) when replacing lines of code"
+      - "Two variants: (1) build-up — add lines incrementally; (2) annotation — show complete code, highlight one element per slide with callout"
+
+  metacognitive_development:
+    description: "Help learners understand their own learning process"
+    observed_in:
+      - "Python S1: explicitly teaches 'how to learn a new programming language' — meta-skill"
+      - "C++ S1: 'Three key areas to focus: Abstractions, Problem-Solving, Syntax' — framework for learning ANY language"
+      - "Python S3: teaches how to USE the coding platform (timer, save, reset, AI tutor) — learning to learn"
+      - "C++ S1: 'Learning time: ~300 hours for first language, ~10 hours for second' — setting expectations"
+    rules:
+      - "Include sessions that explicitly teach 'how to learn' this subject"
+      - "Provide frameworks for self-directed learning (three key areas, learning roadmaps)"
+      - "Set realistic time expectations ('it takes ~30 days for the first language, ~2 hours for the next')"
+      - "Teach tool usage explicitly (IDE, debugger, AI tutor, practice platform)"
+
+  motivation_through_relevance:
+    description: "Keep learners motivated by showing WHY this matters"
+    observed_in:
+      - "C++ S1: company logos, job market stats, competitive programming stats"
+      - "DSA S1: search engines, social media, healthcare, finance as real applications"
+      - "ReactJS: download trends chart, top companies, career advantages"
+      - "C++ S1: 'F-35 fighter jet relies on C++ for avionics' — impressive facts"
+    rules:
+      - "First 10% of any new topic: WHY should I care? (industry relevance, career impact)"
+      - "Show named companies, real products, job statistics"
+      - "Use facts that create 'wow' moments ('NASA uses C++ for flight software')"
+      - "Address the 'will I actually use this?' question proactively"
+
+  visual_before_textual:
+    description: "Use diagrams, flowcharts, and memory layouts before showing code syntax"
+    observed_in:
+      - "C++ Loops: For loop flowchart (Initialization → Condition → Statements → Increment/Decrement → End) shown BEFORE syntax"
+      - "C++ Loops: Array memory diagram with contiguous addresses (100, 104, 108, 112, 116) and index labels before array syntax"
+      - "C++ Operators: Type conversion hierarchy diagram (int → long long, int → float, int → double) before code examples"
+      - "C++ Operators: Binary representation (16-bit short) diagram to explain data loss in short → char conversion"
+    rules:
+      - "When a concept has a visual model (flowcharts, memory layouts, type hierarchies), show the diagram FIRST"
+      - "Include actual values in diagrams (memory addresses, binary digits, iteration values) — not just abstract shapes"
+      - "Use iteration trace tables (Iteration | Value | Condition | Action | Updated Value) for loop explanations"
+      - "Show data type size tables (Data Type | Bits | Bytes) when teaching type conversion"
+
+  deliberate_error_exposure:
+    description: "Intentionally show incorrect behavior to teach correct usage"
+    observed_in:
+      - "C++ Operators: Switch statement shown WITHOUT break — output is 'A B' instead of just 'A' — then correct version with break"
+      - "C++ Operators: short 300 → char produces ',' (ASCII 44) — shows data loss with binary diagram, then explains why"
+      - "C++ Functions: Pass by value shown first, then pass by reference — contrasting outputs (Main: a=2 vs Main: a=4) to highlight the difference"
+    rules:
+      - "When a construct has a common pitfall, show the pitfall BEFORE the correct usage"
+      - "Compare outputs side-by-side: 'what you expected' vs 'what actually happened'"
+      - "Use the error to motivate WHY the correct approach exists"
+
+# ─── SESSION STRUCTURE PATTERNS ─────────────────────────────────────────────────
+
+session_patterns:
+
+  concept_explainer_flow:
+    description: "Standard flow for explaining a new concept"
+    pattern:
+      - "WELCOME"
+      - "Recap (prior session key points)"
+      - "Agenda (what we'll cover today)"
+      - "Motivation (why this matters — industry context, real-world applications)"
+      - "Analogy (real-world analogy before the concept)"
+      - "Bridge (connect to what they already know — comparison tables)"
+      - "Core concept (definition + explanation, progressive reveal)"
+      - "Code examples (progressive code reveal — build up step by step)"
+      - "Practice (worked examples, then independent practice)"
+      - "Key Takeaways (Part 1/N, mirrors agenda)"
+      - "Next Session (preview what comes next)"
+      - "ALL THE BEST"
+
+  coding_practice_flow:
+    description: "Standard flow for a coding practice walkthrough session"
+    pattern:
+      - "WELCOME"
+      - "Recap"
+      - "Agenda"
+      - "Platform introduction (if first time)"
+      - "Question walkthrough (description → approach → code → test → debug → submit)"
+      - "Feature exploration (AI tutor, save, reset, settings)"
+      - "Key Takeaways"
+      - "Next Session"
+
+  project_building_flow:
+    description: "Standard flow for a project building session"
+    pattern:
+      - "WELCOME"
+      - "Topics overview (what we'll build)"
+      - "Initial setup (IDE, repo, starter code)"
+      - "Architecture overview (MERN stack diagram, component tree)"
+      - "Incremental building (component by component, feature by feature)"
+      - "Testing each increment"
+      - "Key Takeaways"
+
+  new_language_intro_flow:
+    description: "Standard flow when introducing a new programming language"
+    pattern:
+      - "WELCOME"
+      - "Analogy (driving a car)"
+      - "Bridge (common aspects between languages)"
+      - "Differences (what's actually new)"
+      - "Why this language (industry context, companies, facts)"
+      - "Language comparison (known vs new — side by side)"
+      - "First program (Hello World — compare with known language)"
+      - "Progressive syntax introduction (each feature compared with known language)"
+      - "Practice questions (in both languages for comparison)"
+      - "Key Takeaways"
+
+  bridge_course_flow:
+    description: "Standard flow for bridging from a known language to a new one (mid-course sessions)"
+    pattern:
+      - "WELCOME"
+      - "Session title (Language B | Topic)"
+      - "Agenda (3-4 items with visual chevron flow)"
+      - "Section header (Topic: Language A vs Language B with both logos)"
+      - "Definition/Introduction (formal definition with key terms bolded)"
+      - "Syntax comparison (Language A left, Language B right, dashed separator)"
+      - "Code example with Input/Output boxes"
+      - "Sub-concepts (progressive reveal or annotation)"
+      - "Quiz Time! (after each major concept)"
+      - "Comparison table (feature rows, Language A and Language B columns)"
+      - "Key Takeaways (bullet points with green checkmarks)"
+      - "THANK YOU"
+      - "ALL THE BEST"
+      - "Practice Problems (problem statement → side-by-side solutions in both languages)"
+    observed: "C++ Functions, C++ Loops and Arrays, C++ Operators/Type Conversion/Conditionals — all follow this exact structure"
+
+# ─── CROSS-CUTTING PATTERNS ─────────────────────────────────────────────────────
+
+cross_cutting:
+
+  comparison_table_pattern:
+    description: "Use comparison tables whenever contrasting two things"
+    examples:
+      - "Python S2: JavaScript vs Python (output function, semicolons, parentheses, quotes)"
+      - "C++ S1: Compiler vs Interpreter table"
+      - "C++ S1: float vs double (precision, memory, default type)"
+    rules:
+      - "When comparing language A vs B: use a structured table with named aspects"
+      - "When comparing approaches: show pros/cons in visual format"
+      - "Tables should have column headers and at most 5-6 rows per slide"
+
+  error_teaching_pattern:
+    description: "Deliberately show errors to teach debugging"
+    examples:
+      - "C++ S1: show type mismatch error, explain error message line by line"
+      - "Python S3: Test Case - Fail → Difference between Outputs → Correcting Code → Test Case - Pass"
+    rules:
+      - "Show common errors DELIBERATELY — don't just show correct code"
+      - "Walk through the error message (what does each line mean?)"
+      - "Show the fix process: identify error → understand why → fix → verify"
+      - "Frame errors positively ('errors are how you learn')"
+
+  visual_data_structure_pattern:
+    description: "Use visual representations for abstract data structures"
+    examples:
+      - "DSA S1: visual icons for Arrays, Linked Lists, Stacks, Queues, Trees, Graphs"
+      - "ReactJS: component tree diagrams, HTML DOM tree, lifecycle phase diagrams"
+      - "Coding Illustrations: 251 pages of branded visual assets"
+    rules:
+      - "Every data structure must have a visual representation"
+      - "Use branded illustration style (vector, freepik-sourced)"
+      - "Diagrams should build up incrementally (not show the full complex diagram at once)"

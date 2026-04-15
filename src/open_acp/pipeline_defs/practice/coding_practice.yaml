@@ -1,0 +1,41 @@
+inherits: _base
+pipeline_id: coding_practice
+content_type: coding_practice
+display_name: "Coding Practice Set"
+description: "Coding problems with starter code, test cases, and solutions"
+family: practice
+
+stages:
+  - id: topic_selection
+    skill: pipelines/coding_practice/01_topic_selection
+    tools: [claude_generate]
+    artifact_schema: outline.schema.json
+    model_tier: cheap
+
+  - id: question_generation
+    skill: pipelines/coding_practice/02_question_generation
+    tools: [claude_generate]
+    artifact_schema: coding_challenge.schema.json
+    model_tier: strong
+    review_focus:
+      - "Problem statements are clear and unambiguous"
+      - "Constraints are explicitly stated"
+      - "Input/output format is specified"
+
+  - id: solution_design
+    skill: pipelines/coding_practice/03_solution_design
+    tools: [claude_generate]
+    artifact_schema: coding_challenge.schema.json
+    model_tier: strong
+    review_focus:
+      - "Solutions are correct and efficient"
+      - "Test cases cover edge cases"
+      - "Starter code compiles/runs without errors"
+
+  - id: difficulty_calibration
+    skill: pipelines/coding_practice/04_difficulty_calibration
+    tools: [claude_generate]
+    artifact_schema: coding_challenge.schema.json
+    model_tier: cheap
+
+style: default
