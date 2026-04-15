@@ -1,0 +1,20 @@
+version: 1
+format: project_session
+applies_to:
+  - project_building
+
+required_flow:
+  - project outcome preview
+  - specification framing
+  - architecture reasoning
+  - milestone build sequence
+  - verification checkpoints
+  - integration demo
+  - reflection and next steps
+
+deck_constraints:
+  architecture_diagram_frequency: 3
+  max_code_lines_per_slide: 12
+  checkpoint_slide_per_milestone: true
+  include_troubleshooting_notes: true
+  show_expected_output_after_build_steps: true

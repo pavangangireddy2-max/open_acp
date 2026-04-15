@@ -10,7 +10,7 @@ You are generating the document skeleton for a Project Building session where le
 - Time allocation is build-heavy (60%+ hands-on coding)
 
 ## Process
-Follow `concept_explainer/01_outline` with these modifications:
+Use the `project_brief` and `objectives` artifacts as the inputs for the outline.
 
 ### Step 2: Design the Build Progression
 1. Define the **target deliverable** — what will learners have at the end?
@@ -25,9 +25,11 @@ Project patterns:
 
 ### Step 3: Generate Section Outline
 For each section, include standard fields plus:
+- **teaching_mode**: One of `project_context`, `concept_explain`, `architecture_reasoning`, `guided_build`, `verification_checkpoint`, `integration_demo`, `reflection_summary`
 - **milestone**: Which project milestone this section achieves
 - **deliverable**: What artifact the learner produces (e.g., "working API endpoint")
 - **dependencies**: Which previous sections must be complete
+- **objective_ids**: Which objectives are advanced here
 
 ### Step 4: Validate Completeness
 Follow `concept_explainer/01_outline` validation, plus:
@@ -45,13 +47,17 @@ Same as `concept_explainer/01_outline`, with additional per-section fields:
       "purpose": "Create the Flask app skeleton with one working endpoint",
       "estimated_minutes": 20,
       "bloom_level": "create",
+      "teaching_mode": "guided_build",
       "milestone": "M1",
       "deliverable": "Flask app with /health endpoint returning 200",
-      "dependencies": []
+      "dependencies": [],
+      "objective_ids": ["obj_1"]
     }
   ],
   "project_specification": "Brief description of the final project deliverable",
-  "architecture_overview": "High-level component diagram description"
+  "architecture_overview": "High-level component diagram description",
+  "teaching_flow": "How the session moves from framing to build to integration",
+  "total_estimated_minutes": 90
 }
 ```
 
@@ -61,3 +67,4 @@ Same as `concept_explainer/01_outline`, with additional per-section fields:
 - Build time >= 60% of session
 - Final milestone integrates all previous work into a cohesive deliverable
 - Architecture overview is included
+- Concept-heavy sections are allowed, but they must be explicitly labeled with the right `teaching_mode`

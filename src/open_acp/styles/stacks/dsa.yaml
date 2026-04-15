@@ -1,0 +1,10 @@
+stack_id: dsa
+teaching_preferences:
+  - start with real-world analogies before formal definitions
+  - show where a structure or algorithm appears in products learners know
+  - prefer diagrams and state evolution over dense prose
+  - connect operations to trade-offs clearly
+visual_patterns:
+  - array, tree, and graph visuals
+  - stepwise trace tables
+  - use-case mapping slides

@@ -66,7 +66,7 @@ def run_loop_b_node(state: dict) -> dict:
 
     curriculum = result.get("curriculum_map", {})
     modules = curriculum.get("modules", [])
-    print(f"\n  Loop B complete: {len(modules)} modules, pedagogy={result.get('selected_pedagogy', '?')}")
+    print(f"\n  Loop B complete: {len(modules)} modules, pedagogy_profile={result.get('pedagogy_profile', '?')}")
     return {"loop_b_result": result, "current_loop": "C"}
 
 
@@ -98,6 +98,7 @@ def run_loop_c_node(state: dict) -> dict:
             "estimated_hours": first_module.get("estimated_hours", state.get("estimated_hours", 1.0)),
             "objectives": first_module.get("objectives", []),
             "prerequisites": first_module.get("prerequisite_modules", []),
+            "pedagogy_profile": loop_b_result.get("pedagogy_profile"),
         }
     else:
         module_context = {
@@ -107,6 +108,7 @@ def run_loop_c_node(state: dict) -> dict:
             "estimated_hours": state.get("estimated_hours", 1.0),
             "objectives": [],
             "prerequisites": [],
+            "pedagogy_profile": loop_b_result.get("pedagogy_profile"),
         }
 
     executor = PipelineExecutor()

@@ -25,7 +25,10 @@ Map the content to slides following these principles:
 ### Step 2: Design Each Slide
 For each slide, provide:
 - **slide_number**: Sequential order
+- **slide_type**: title, agenda, prerequisite_check, concept, example, activity, summary, next_steps, q_and_a, section_break
 - **title**: Short, clear (max 8 words)
+- **section_heading**: Which outline section this slide belongs to
+- **teaching_mode**: The teaching mode this slide is serving
 - **content_points**: Bullet points (max 5 per slide, max 10 words each)
 - **speaker_notes**: What the presenter should SAY (not what's on screen). These are the detailed teaching notes — 3-10 sentences covering:
   - The key concept to explain
@@ -52,7 +55,10 @@ Return a JSON object matching `slide_deck.schema.json`:
   "slides": [
     {
       "slide_number": 1,
+      "slide_type": "title",
       "title": "Binary Search: Finding Needles Fast",
+      "section_heading": "Session Opening",
+      "teaching_mode": "motivation",
       "content_points": ["What binary search is", "When to use it", "How it works step by step"],
       "speaker_notes": "Welcome everyone. Today we're going to explore binary search...",
       "visual_description": "Title slide with a magnifying glass icon over a sorted array visualization",
@@ -70,3 +76,4 @@ Return a JSON object matching `slide_deck.schema.json`:
 - Visual descriptions are specific enough to create
 - Activity slides have clear timing in speaker notes
 - Deck follows: Title → Agenda → Content → Activities → Summary → Q&A
+- Slides should preserve the section-level `teaching_mode` declared in the outline

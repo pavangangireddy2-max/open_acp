@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Project Session Slide Deck",
+  "type": "object",
+  "required": ["slides", "total_slides", "estimated_duration_minutes"],
+  "properties": {
+    "slides": {
+      "type": "array",
+      "minItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["slide_number", "slide_type", "title", "milestone_id", "teaching_mode", "content_points", "speaker_notes", "visual_description", "layout"],
+        "properties": {
+          "slide_number": {"type": "integer", "minimum": 1},
+          "slide_type": {"type": "string", "enum": ["title", "project_overview", "architecture", "milestone_goal", "code_demo", "checkpoint", "integration", "retrospective", "next_steps", "q_and_a", "section_break"]},
+          "title": {"type": "string", "minLength": 3, "maxLength": 60},
+          "milestone_id": {"type": "string", "minLength": 2},
+          "teaching_mode": {"type": "string", "enum": ["project_context", "concept_explain", "architecture_reasoning", "guided_build", "verification_checkpoint", "integration_demo", "reflection_summary"]},
+          "content_points": {"type": "array", "minItems": 1, "maxItems": 5, "items": {"type": "string", "minLength": 2, "maxLength": 80}},
+          "speaker_notes": {"type": "string", "minLength": 80},
+          "visual_description": {"type": "string", "minLength": 20},
+          "layout": {"type": "string", "enum": ["title", "content", "two_column", "image_left", "image_right", "full_image", "section_break"]}
+        }
+      }
+    },
+    "total_slides": {"type": "integer", "minimum": 10},
+    "estimated_duration_minutes": {"type": "number", "minimum": 20}
+  }
+}

@@ -3,17 +3,18 @@ pipeline_id: project_building
 content_type: project_building
 display_name: "Project Building Session"
 description: "Video session (PPT) guiding learners through spec, architecture, incremental build, and integration"
+strict_execution: true
 
 stages:
-  - id: outline
-    skill: pipelines/project_building/01_outline
+  - id: project_brief
+    skill: pipelines/project_building/00_project_brief
     tools: [claude_generate]
-    artifact_schema: outline.schema.json
+    artifact_schema: project_brief.schema.json
     model_tier: strong
     review_focus:
-      - "Project spec is clearly defined with acceptance criteria"
-      - "Architecture decisions are justified and age-appropriate"
-      - "Build milestones are incremental and testable"
+      - "The final deliverable is clear and realistically scoped"
+      - "Milestones are incremental and testable"
+      - "Architecture overview is understandable to the target learner"
 
   - id: objectives
     skill: pipelines/project_building/02_objectives
@@ -24,20 +25,31 @@ stages:
       - "Objectives map to spec, architecture, build, and integration phases"
       - "Create-level Bloom verbs are present"
 
+  - id: outline
+    skill: pipelines/project_building/01_outline
+    tools: [claude_generate]
+    artifact_schema: project_outline.schema.json
+    model_tier: strong
+    review_focus:
+      - "Sections follow a milestone sequence that matches the project brief"
+      - "Teaching modes are appropriate for each section"
+      - "Dependencies form a valid forward-only build flow"
+
   - id: core_content
     skill: pipelines/project_building/03_core_content
     tools: [claude_generate]
-    artifact_schema: core_content.schema.json
+    artifact_schema: project_core_content.schema.json
     model_tier: strong
     review_focus:
       - "Each build step produces a working intermediate artifact"
+      - "Concept-heavy sections do not pretend to be build-only sections"
       - "Integration points between components are explicit"
       - "Architecture rationale is explained, not just prescribed"
 
   - id: activities
     skill: pipelines/project_building/04_activities
     tools: [claude_generate]
-    artifact_schema: activities.schema.json
+    artifact_schema: project_activities.schema.json
     model_tier: strong
     review_focus:
       - "Activities follow spec -> architecture -> build -> integrate flow"
@@ -53,7 +65,7 @@ stages:
   - id: slide_deck
     skill: pipelines/project_building/06_slide_deck
     tools: [claude_generate]
-    artifact_schema: slide_deck.schema.json
-    model_tier: cheap
+    artifact_schema: project_slide_deck.schema.json
+    model_tier: strong
 
 style: default

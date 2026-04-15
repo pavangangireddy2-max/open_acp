@@ -1,0 +1,14 @@
+profile_id: concept_progression
+description: Build understanding through deliberate conceptual progression.
+signature_moves:
+  - motivation before abstraction
+  - prior knowledge bridge before introducing new vocabulary
+  - concept explanation followed by worked examples
+  - guided practice before reflection
+allowed_teaching_modes:
+  - motivation
+  - prior_knowledge_bridge
+  - concept_explain
+  - worked_example
+  - guided_practice
+  - reflection_summary

@@ -65,7 +65,7 @@ def run(
 
             loop_b = result.get("loop_b_result", {})
             curriculum = loop_b.get("curriculum_map", {})
-            table.add_row("B: Curriculum", f"{len(curriculum.get('modules', []))} modules, pedagogy={loop_b.get('selected_pedagogy', '?')}")
+            table.add_row("B: Curriculum", f"{len(curriculum.get('modules', []))} modules, pedagogy_profile={loop_b.get('pedagogy_profile', '?')}")
 
             loop_c = result.get("loop_c_result", {})
             table.add_row("C: Content", f"{loop_c.get('stages_completed', 0)} stages completed")

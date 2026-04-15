@@ -1,0 +1,15 @@
+version: 1
+
+pedagogy_core:
+  outcomes_first: true
+  prior_knowledge_activation: true
+  one_idea_per_slide_or_section: true
+  max_new_concepts_per_section: 4
+  example_or_application_within_two_sections: true
+  define_terms_on_first_use: true
+  practice_ratio_for_sessions:
+    minimum_percent: 40
+  review_expectations:
+    explanations_must_match_objectives: true
+    structure_must_match_declared_teaching_mode: true
+    progression_must_be_explicit: true

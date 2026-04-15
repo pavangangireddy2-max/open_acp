@@ -45,7 +45,7 @@ class LoopBState(BaseModel):
     domain: str
     skill_graph: Optional[SkillGraph] = None
     learner_model: Optional[LearnerModel] = None
-    selected_pedagogy: Optional[str] = None
+    pedagogy_profile: Optional[str] = None
     curriculum_map: Optional[CurriculumMap] = None
     gate_g2_outcome: Optional[GateOutcome] = None
 

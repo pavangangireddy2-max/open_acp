@@ -1,0 +1,30 @@
+from open_acp.styles.pedagogy_resolver import PedagogyResolver
+
+
+def test_resolve_exact_domain_content_type_match():
+    resolver = PedagogyResolver()
+    resolution = resolver.resolve_with_reason(content_type="project_building", domain="genai")
+
+    assert resolution["profile"] == "project_build_along"
+    assert "exact match" in resolution["reason"]
+
+
+def test_resolve_content_type_default():
+    resolver = PedagogyResolver()
+    resolution = resolver.resolve_with_reason(content_type="platform_walkthrough", domain="unknown-domain")
+
+    assert resolution["profile"] == "guided_tool_walkthrough"
+    assert "content-type default" in resolution["reason"]
+
+
+def test_resolve_global_default_when_type_missing():
+    resolver = PedagogyResolver()
+    resolution = resolver.resolve_with_reason(content_type="nonexistent_pipeline", domain="unknown-domain")
+
+    assert resolution["profile"] == "concept_progression"
+    assert "global default" in resolution["reason"]
+
+
+def test_list_profiles_includes_concept_progression():
+    resolver = PedagogyResolver()
+    assert "concept_progression" in resolver.list_profiles()

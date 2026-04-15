@@ -1,0 +1,12 @@
+profile_id: worked_example_scaffold
+description: Teach through solved examples, then fade support gradually.
+signature_moves:
+  - show an example before asking for independent execution
+  - expose reasoning, not only the final answer
+  - move from fully worked to partially guided to independent
+allowed_teaching_modes:
+  - prior_knowledge_bridge
+  - concept_explain
+  - worked_example
+  - guided_practice
+  - reflection_summary

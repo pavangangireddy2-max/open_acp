@@ -1,0 +1,12 @@
+profile_id: guided_tool_walkthrough
+description: Help learners become operationally fluent inside a tool or platform.
+signature_moves:
+  - orient the learner in the interface before task execution
+  - show exact click or command sequences
+  - anticipate setup confusion and recovery paths
+allowed_teaching_modes:
+  - motivation
+  - prior_knowledge_bridge
+  - concept_explain
+  - guided_practice
+  - reflection_summary

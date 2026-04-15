@@ -83,8 +83,8 @@ def test_curriculum_map():
         version=1,
         program_name="ML Engineering",
         domain="ml-engineering",
-        pedagogy_framework="blooms_taxonomy_mastery",
-        pedagogy_justification="Progressive cognitive levels",
+        pedagogy_profile="concept_progression",
+        pedagogy_rationale="Progressive conceptual sequencing",
         differentiation_strategy={"focus": "hands-on"},
         modules=[],
         total_hours=40.0,
@@ -92,6 +92,7 @@ def test_curriculum_map():
     )
     assert cmap.get_module("nonexistent") is None
     assert cmap.approved_at is None
+    assert cmap.pedagogy_framework == "concept_progression"
 
 
 # ── Signals ────────────────────────────────────────────────────────────────────
@@ -374,7 +375,7 @@ def test_loop_states_instantiate():
     d = LoopDState(cycle_id="c1")
 
     assert a.drift_score == 0.0
-    assert b.selected_pedagogy is None
+    assert b.pedagogy_profile is None
     assert c.content_type == "concept_explainer"
     assert d.fix_routes == []
 
@@ -390,7 +391,7 @@ def test_all_models_serialize_deserialize():
     for ModelClass, kwargs in [
         (CurriculumMap, dict(
             curriculum_id="c1", version=1, program_name="Test", domain="test",
-            pedagogy_framework="blooms", pedagogy_justification="test",
+            pedagogy_profile="concept_progression", pedagogy_rationale="test",
             differentiation_strategy={}, modules=[], total_hours=10,
             created_at=datetime.now(UTC).isoformat(),
         )),

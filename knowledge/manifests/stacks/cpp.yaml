@@ -1,0 +1,39 @@
+version: 1
+domain: cpp
+shared_audience_manifest: ../shared/audience_sources.yaml
+
+raw_style_corpus:
+  exports:
+    - knowledge/raw/brand/sample_cpp_s1.pdf
+    - knowledge/raw/brand/cpp_s2.pdf
+    - knowledge/raw/brand/cpp_s3.pdf
+    - knowledge/raw/brand/cpp_s4.pdf
+    - knowledge/raw/brand/cpp_s5.pdf
+    - knowledge/raw/brand/cpp_s6.pdf
+    - knowledge/raw/brand/cpp_s7.pdf
+    - knowledge/raw/brand/cpp_s8.pdf
+    - knowledge/raw/brand/cpp_s9.pdf
+    - knowledge/raw/brand/cpp_s10.pdf
+
+derived_analysis:
+  - src/open_acp/knowledge/raw/brand/cpp_s2_analysis.md
+  - src/open_acp/knowledge/raw/brand/cpp_s3_stl_analysis.md
+  - src/open_acp/knowledge/raw/brand/cpp_s4_sessions8910_analysis.md
+
+external_slide_sources:
+  - https://docs.google.com/presentation/d/10ffDecBpM41defLEzyElV9KSexTEQOex8iKS1GcWD8k/edit
+  - https://docs.google.com/presentation/d/1R3ZlnhN283ZLbGpsDPeu_pdB0sklY7F7KFcDlIWPthc/edit
+  - https://docs.google.com/presentation/d/13OsPCDeI4C_0kMwSwC3GbtOfFDuVoitny_pQG_QcGTg/edit
+  - https://docs.google.com/presentation/d/1gOFdEty_QMawfYs6zfJjCU8hwlOk-v0uA2xMikMvkZ0/edit
+  - https://docs.google.com/presentation/d/1U_ao4ArNGO3Q09hC1WHZrXWQoju3Hpj6JTqhvqFP3yI/edit
+  - https://docs.google.com/presentation/d/1nLohKBxsFvCDxAqGRJlY6HgpjGAPqxatjEPcoluxmsg/edit
+  - https://docs.google.com/presentation/d/1NG4FQzbKaa5egw6qE2gL2x64osuDth9AM69rPqsltyI/edit
+  - https://docs.google.com/presentation/d/1M2wbVS2IZ7vDMSzRxlot91J-Nk74LYgRxRIiGQgc1pI/edit
+  - https://docs.google.com/presentation/d/1G3qBqFr1Vbtl_yI8sHXF3urhMyVFLu4lNLuDmMgxDco/edit
+  - https://docs.google.com/presentation/d/1AB1JeuKssdyEwyIk63FifRlMLmCfeG-KrS7Qwn164j0/edit
+
+competitor_sources:
+  - src/open_acp/knowledge/raw/competitors/competitor_courses.md
+
+notes:
+  - C++ teaching relies heavily on Python comparison tables, memory diagrams, and deliberate pitfall exposure.

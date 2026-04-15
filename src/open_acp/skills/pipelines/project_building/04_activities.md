@@ -15,6 +15,7 @@ Follow `concept_explainer/04_activities` with these modifications:
 ### Step 2: Design Milestone Activities
 For each project milestone:
 - **Build task**: The core deliverable (required)
+- **Teaching mode**: Preserve the section mode from the outline
 - **Pair programming mode**: Suggest driver/navigator roles and swap points
 - **Verification checklist**: How to confirm the milestone is complete
 - **Stretch goal**: Optional enhancement for fast learners
@@ -41,7 +42,8 @@ Same as `concept_explainer/04_activities`, with additional fields:
       "time_minutes": 20,
       "bloom_level": "create",
       "objective_ids": ["obj_1"],
-      "depends_on": []
+      "depends_on": [],
+      "teaching_mode": "guided_build"
     }
   ]
 }
@@ -53,3 +55,4 @@ Same as `concept_explainer/04_activities`, with additional fields:
 - Pair programming suggestions are specific (not just "work together")
 - At least one stretch goal per milestone
 - Final activity integrates all components
+- Activities should reflect whether the milestone is a concept, architecture, build, or integration checkpoint

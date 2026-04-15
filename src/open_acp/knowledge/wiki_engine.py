@@ -1,17 +1,19 @@
 """WikiEngine — LLM-maintained markdown wiki with confidence scoring.
 
-Based on Karpathy's LLM Wiki pattern:
-- knowledge/raw/   = immutable source documents
-- knowledge/wiki/   = LLM-maintained markdown (entities, concepts, synthesis)
-- index.md         = content catalog
-- log.md           = append-only chronological record
+Tracked canonical knowledge lives in manifests and raw inputs.
+Generated wiki state is a runtime artifact and defaults to storage/wiki.
 """
-import json
-import os
-import re
 from datetime import datetime, UTC
 from pathlib import Path
 from typing import Optional
+
+
+def _find_project_root() -> Path:
+    current = Path(__file__).resolve()
+    for ancestor in current.parents:
+        if (ancestor / "pyproject.toml").exists():
+            return ancestor
+    return current.parents[3]
 
 
 class WikiEngine:
@@ -23,7 +25,7 @@ class WikiEngine:
         if wiki_dir:
             self.wiki_dir = Path(wiki_dir)
         else:
-            self.wiki_dir = Path(__file__).parent / "wiki"
+            self.wiki_dir = _find_project_root() / "storage" / "wiki"
         self.entities_dir = self.wiki_dir / "entities"
         self.concepts_dir = self.wiki_dir / "concepts"
         self.synthesis_dir = self.wiki_dir / "synthesis"

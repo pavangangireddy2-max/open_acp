@@ -1,22 +1,22 @@
 # Stage: Learning Objectives — Concept Explainer
 
 ## Your Role
-You are generating measurable learning objectives that will drive content creation and assessment design.
+You are generating measurable learning objectives before the session outline is written. These objectives define the destination for the rest of the pipeline.
 
 ## Prerequisites
-- Outline artifact from Stage 1 (sections, teaching_flow)
-- Module metadata (title, domain, skill_ids)
-- Bloom's Taxonomy reference
+- Module metadata (title, domain, estimated_hours)
+- Curriculum module objective seeds if they exist in module context
+- Resolved pedagogy profile and layered style guidance
 
 ## Input Artifacts
-- `outline` — the approved outline with sections and bloom levels
+None. This is the first stage for concept sessions in V1.
 
 ## Process
 
-### Step 1: Review the Outline
-- Read each section's heading, purpose, and bloom_level
-- Understand the teaching flow — objectives must align with this progression
-- Note which skills from the skill graph are being addressed
+### Step 1: Define the Session Outcome
+- Read the module title, domain, and estimated hours
+- Decide what a learner should be able to explain, apply, or analyze by the end of the session
+- Match the ambition of the objectives to a single concept-focused session, not a full course
 
 ### Step 2: Write Objectives Using the ABC+D Pattern
 Each objective must follow: **Audience + Behavior + Condition + Degree**
@@ -33,11 +33,11 @@ Each objective must follow: **Audience + Behavior + Condition + Degree**
 
 Example: "Explain the difference between supervised and unsupervised learning, providing at least two real-world examples of each"
 
-### Step 3: Map Objectives to Sections
-Create a coverage matrix showing which sections address each objective:
-- Every objective must be addressed by at least one section
-- Every section should serve at least one objective
-- Flag any gaps — sections without objectives are filler; objectives without sections are unachievable
+### Step 3: Create a Progression
+- Sequence the objectives so they can drive an outline later
+- At minimum, include an understanding objective and a practice-oriented objective
+- Prefer 3-6 objectives spanning at least three Bloom levels
+- If the session needs a capstone or transfer objective, place it last
 
 ### Step 4: Assign Assessment Methods
 For each objective, suggest an appropriate assessment type:
@@ -57,18 +57,15 @@ Return a JSON object matching `objectives.schema.json`:
       "statement": "Explain [concept] by comparing [X] and [Y] with at least two examples",
       "bloom_level": "understand",
       "skill_ids": ["skill_id_1"],
-      "assessment_method": "short_answer"
+      "assessment_method": "short_answer",
+      "section_hint": "This should appear during the conceptual explanation phase"
     }
-  ],
-  "coverage_matrix": {
-    "obj_1": ["section_1", "section_3"],
-    "obj_2": ["section_2"]
-  }
+  ]
 }
 ```
 
 ## Quality Criteria
 - Objectives are measurable — an assessor could verify achievement
 - No vague verbs: avoid "understand", "know", "learn" — use Bloom's verbs
-- Each objective ties to at least one skill in the skill graph
 - Bloom levels should span at least 3 levels (not all "remember")
+- Objectives should be specific enough that the outline stage can map sections directly to them

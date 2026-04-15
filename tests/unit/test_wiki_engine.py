@@ -1,5 +1,6 @@
 """Unit tests for the wiki engine."""
 import tempfile
+from pathlib import Path
 import pytest
 
 from open_acp.knowledge.wiki_engine import WikiEngine
@@ -144,3 +145,8 @@ def test_sources_accumulate_on_update(wiki):
     sources = entity["frontmatter"].get("sources", [])
     assert "source_1" in sources
     assert "source_2" in sources
+
+
+def test_default_wiki_dir_uses_runtime_storage():
+    wiki = WikiEngine()
+    assert str(wiki.wiki_dir).endswith(str(Path("storage") / "wiki"))

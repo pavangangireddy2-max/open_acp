@@ -1,14 +1,7 @@
-"""Loop B nodes — curriculum design using wiki intelligence.
-
-Nodes:
-1. load_wiki_context — read skill graph + learner model from wiki
-2. select_pedagogy — choose pedagogy framework (Bloom's/ADDIE/Merrill's/4C-ID)
-3. generate_curriculum — backward design curriculum map
-4. generate_differentiation — competitor coverage analysis
-5. align_assessments — map objectives to assessment methods
-"""
+"""Loop B nodes — curriculum design using wiki intelligence."""
 import json
 from open_acp.knowledge.wiki_engine import WikiEngine
+from open_acp.styles.pedagogy_resolver import PedagogyResolver
 from open_acp.utils.claude import ClaudeClient
 
 
@@ -48,70 +41,29 @@ def load_wiki_context(state: dict) -> dict:
     }
 
 
-def select_pedagogy(state: dict) -> dict:
-    """Select and justify a pedagogy framework."""
+def resolve_pedagogy_profile(state: dict) -> dict:
+    """Resolve and justify a pedagogy profile from config."""
     domain = state.get("domain", "ml-engineering")
-    skill_context = state.get("skill_graph_context", "")
-    learner_context = state.get("learner_context", "")
+    content_type = state.get("content_type", "concept_explainer")
 
-    claude = ClaudeClient()
-    prompt = f"""For a {domain} curriculum, select the most appropriate pedagogy framework.
+    resolver = PedagogyResolver()
+    resolution = resolver.resolve_with_reason(content_type=content_type, domain=domain)
 
-Options:
-1. **Bloom's Taxonomy Mastery** — progressive cognitive levels (remember -> create)
-2. **ADDIE** — structured phases (Analyze, Design, Develop, Implement, Evaluate)
-3. **Merrill's First Principles** — real-world task-centered instruction
-4. **4C/ID** — complex skill integration with whole-task practice
-
-{skill_context}
-
-{learner_context}
-
-Select ONE framework and justify why it's the best fit for this domain and these learners.
-
-Return JSON:
-{{
-  "framework": "blooms_taxonomy_mastery",
-  "justification": "2-3 sentence justification for why this framework fits",
-  "key_principles": ["principle 1", "principle 2", "principle 3"]
-}}
-
-Return ONLY the JSON object."""
-
-    response = claude.generate(
-        prompt=prompt,
-        system="You are an instructional design expert selecting pedagogy frameworks.",
-        model_tier="strong",
-        max_tokens=2048,
-    )
-
-    try:
-        cleaned = response.strip()
-        if cleaned.startswith("```"):
-            cleaned = cleaned[cleaned.index("\n") + 1:]
-        if cleaned.endswith("```"):
-            cleaned = cleaned[:-3]
-        data = json.loads(cleaned.strip())
-        framework = data.get("framework", "blooms_taxonomy_mastery")
-        justification = data.get("justification", "Default selection")
-    except (json.JSONDecodeError, ValueError):
-        framework = "blooms_taxonomy_mastery"
-        justification = "Default: Bloom's provides clear cognitive progression"
-
-    print(f"  Pedagogy: {framework}")
-    return {"selected_pedagogy": framework, "pedagogy_justification": justification}
+    print(f"  Pedagogy profile: {resolution['profile']}")
+    return {"pedagogy_profile": resolution["profile"], "pedagogy_rationale": resolution["reason"]}
 
 
 def generate_curriculum(state: dict) -> dict:
     """Generate a curriculum map using backward design."""
     domain = state.get("domain", "ml-engineering")
-    pedagogy = state.get("selected_pedagogy", "blooms_taxonomy_mastery")
+    pedagogy_profile = state.get("pedagogy_profile", "concept_progression")
+    pedagogy_rationale = state.get("pedagogy_rationale", "content-type default")
     skill_context = state.get("skill_graph_context", "")
     learner_context = state.get("learner_context", "")
     content_type = state.get("content_type", "concept_explainer")
 
     claude = ClaudeClient()
-    prompt = f"""Design a curriculum for "{domain}" using {pedagogy} framework.
+    prompt = f"""Design a curriculum for "{domain}" using the "{pedagogy_profile}" pedagogy profile.
 
 {skill_context}
 
@@ -128,7 +80,8 @@ Return JSON:
   "curriculum_id": "cur_{domain}",
   "program_name": "ML Engineering Fundamentals",
   "domain": "{domain}",
-  "pedagogy_framework": "{pedagogy}",
+  "pedagogy_profile": "{pedagogy_profile}",
+  "pedagogy_rationale": "{pedagogy_rationale}",
   "modules": [
     {{
       "module_id": "m1",
@@ -162,7 +115,15 @@ Design 4-6 modules. Return ONLY the JSON object."""
             cleaned = cleaned[:-3]
         data = json.loads(cleaned.strip())
     except (json.JSONDecodeError, ValueError):
-        data = {"curriculum_id": f"cur_{domain}", "modules": [], "total_hours": 0}
+        data = {
+            "curriculum_id": f"cur_{domain}",
+            "program_name": f"{domain} Curriculum",
+            "domain": domain,
+            "pedagogy_profile": pedagogy_profile,
+            "pedagogy_rationale": pedagogy_rationale,
+            "modules": [],
+            "total_hours": 0,
+        }
 
     modules = data.get("modules", [])
     print(f"  Curriculum: {len(modules)} modules, {data.get('total_hours', 0)} hours")
@@ -285,3 +246,7 @@ Return ONLY the JSON object."""
 
     print(f"  Assessment alignment: {len(data.get('alignments', []))} objective-assessment pairs")
     return {"assessment_alignment": data}
+
+
+# Compatibility alias for older call sites.
+select_pedagogy = resolve_pedagogy_profile

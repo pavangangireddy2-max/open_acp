@@ -1,0 +1,10 @@
+profile_id: assessment_evidence_check
+description: Prioritize measurable evidence aligned to declared objectives.
+signature_moves:
+  - keep prompts objective-aligned
+  - make rubric evidence explicit
+  - separate content recall from transfer evidence
+allowed_teaching_modes:
+  - concept_explain
+  - guided_practice
+  - reflection_summary

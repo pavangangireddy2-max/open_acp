@@ -1,0 +1,24 @@
+version: 1
+domain: genai
+shared_audience_manifest: ../shared/audience_sources.yaml
+
+raw_style_corpus:
+  exports:
+    - knowledge/raw/brand/sample_genai_project.pdf
+    - knowledge/raw/brand/genai_s2.pdf
+    - knowledge/raw/brand/genai_s3.pdf
+    - knowledge/raw/brand/genai_s4.pdf
+    - knowledge/raw/brand/genai_s5.pdf
+
+external_slide_sources:
+  - https://docs.google.com/presentation/d/1yRHXA-w45eyn8P1t8pVvDD-C9o1M7fCn--nOE0eq6ak/edit
+  - https://docs.google.com/presentation/d/1CXGaJUwv7RkGx0dwi8YzNnyr71MdCiRvyqKXC3B30s8/edit
+  - https://docs.google.com/presentation/d/1miLne283zjhq_UBs372x11EJ41ja1hMqcD6Ww7GRDo4/edit
+  - https://docs.google.com/presentation/d/10qr298PFvuBuDEFORbRPkVoR0ywZQhH7ko_OTQR9Or0/edit
+  - https://docs.google.com/presentation/d/1bIpAmU6KCPv2YKu6qwhgIw9eVLH9Qth6cm596gshFWY/edit
+
+competitor_sources:
+  - src/open_acp/knowledge/raw/competitors/competitor_courses.md
+
+notes:
+  - GenAI sessions should clearly separate landscape framing, model reasoning, system architecture, and applied build checkpoints.

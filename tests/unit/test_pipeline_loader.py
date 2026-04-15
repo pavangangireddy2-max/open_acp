@@ -50,6 +50,7 @@ def test_pipeline_definition_model():
     assert pd.eval_threshold == 3.5
     assert pd.max_iterations == 5
     assert pd.style == "default"
+    assert pd.strict_execution is False
 
 
 def test_stage_definition_model():
@@ -65,11 +66,11 @@ def test_stage_definition_model():
 
 
 def test_pipeline_loader_list_available():
-    """Should at least find _base.yaml (which is skipped) and return an empty list for no concrete pipelines yet."""
+    """Should return a list of concrete pipeline IDs."""
     loader = PipelineLoader()
     available = loader.list_available()
-    # _base.yaml is skipped (starts with _), so no concrete pipelines yet
     assert isinstance(available, list)
+    assert "concept_explainer" in available
 
 
 def test_pipeline_loader_missing_content_type():
@@ -110,6 +111,39 @@ def test_skill_loader_missing_skill():
 
 def test_skill_loader_list_pipeline_skills():
     loader = SkillLoader()
-    # No concept_explainer skills yet (M1), so should return empty
     skills = loader.list_pipeline_skills("concept_explainer")
     assert isinstance(skills, list)
+    assert "01_outline" in skills
+
+
+def test_concept_explainer_v1_stage_order_and_strict_execution():
+    loader = PipelineLoader()
+    pipeline = loader.load("concept_explainer")
+
+    assert pipeline.strict_execution is True
+    assert [stage.id for stage in pipeline.stages] == [
+        "objectives",
+        "outline",
+        "core_content",
+        "activities",
+        "brand_polish",
+        "slide_deck",
+    ]
+    assert pipeline.stages[1].artifact_schema == "concept_outline.schema.json"
+
+
+def test_project_building_v1_stage_order_and_project_brief():
+    loader = PipelineLoader()
+    pipeline = loader.load("project_building")
+
+    assert pipeline.strict_execution is True
+    assert [stage.id for stage in pipeline.stages] == [
+        "project_brief",
+        "objectives",
+        "outline",
+        "core_content",
+        "activities",
+        "brand_polish",
+        "slide_deck",
+    ]
+    assert pipeline.stages[0].artifact_schema == "project_brief.schema.json"

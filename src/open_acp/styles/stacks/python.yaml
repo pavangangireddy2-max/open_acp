@@ -1,0 +1,10 @@
+stack_id: python
+teaching_preferences:
+  - use concise runnable examples early
+  - bridge from familiar scripting or pseudocode if available
+  - favor readability over clever syntax
+  - keep examples grounded in input, output, loops, and functions before abstractions
+visual_patterns:
+  - console output boxes
+  - progressive code reveal
+  - simple comparison tables when bridging from another language

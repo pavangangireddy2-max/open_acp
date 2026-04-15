@@ -3,7 +3,7 @@
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import AliasChoices, BaseModel, ConfigDict, Field
 
 
 class BloomLevel(str, Enum):
@@ -42,12 +42,14 @@ class Module(BaseModel):
 
 
 class CurriculumMap(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
     curriculum_id: str
     version: int
     program_name: str
     domain: str
-    pedagogy_framework: str
-    pedagogy_justification: str
+    pedagogy_profile: str = Field(validation_alias=AliasChoices("pedagogy_profile", "pedagogy_framework"))
+    pedagogy_rationale: str = Field(validation_alias=AliasChoices("pedagogy_rationale", "pedagogy_justification"))
     differentiation_strategy: dict
     modules: list[Module]
     total_hours: float
@@ -60,3 +62,13 @@ class CurriculumMap(BaseModel):
             if module.module_id == module_id:
                 return module
         return None
+
+    @property
+    def pedagogy_framework(self) -> str:
+        """Compatibility alias for older code paths."""
+        return self.pedagogy_profile
+
+    @property
+    def pedagogy_justification(self) -> str:
+        """Compatibility alias for older code paths."""
+        return self.pedagogy_rationale

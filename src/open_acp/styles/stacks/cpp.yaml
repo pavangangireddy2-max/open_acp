@@ -1,0 +1,10 @@
+stack_id: cpp
+teaching_preferences:
+  - bridge from Python or a previously known language before new syntax
+  - use memory diagrams, type tables, and flowcharts before code
+  - show common pitfalls before corrected usage when the contrast teaches the rule
+  - explain why the syntax exists, not only how to write it
+visual_patterns:
+  - Python vs C++ comparison tables
+  - memory layout visuals
+  - iteration trace tables

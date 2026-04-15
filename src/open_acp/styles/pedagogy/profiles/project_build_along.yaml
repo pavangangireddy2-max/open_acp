@@ -1,0 +1,15 @@
+profile_id: project_build_along
+description: Organize the session around a concrete deliverable built in milestones.
+signature_moves:
+  - anchor every section to the final project outcome
+  - alternate concept framing and build execution as needed
+  - verify each milestone before moving forward
+  - integrate components before retrospective wrap-up
+allowed_teaching_modes:
+  - project_context
+  - concept_explain
+  - architecture_reasoning
+  - guided_build
+  - verification_checkpoint
+  - integration_demo
+  - reflection_summary

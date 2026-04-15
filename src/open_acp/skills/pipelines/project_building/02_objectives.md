@@ -10,7 +10,7 @@ You are generating measurable learning objectives for a hands-on project buildin
 - Assessment is the project deliverable itself
 
 ## Process
-Follow `concept_explainer/02_objectives` with these modifications:
+Use the `project_brief` artifact instead of an outline. The brief defines the project scope and milestones before the outline exists.
 
 ### Step 2: Write Objectives — Verb Selection
 Use engineering verbs by Bloom level:
@@ -21,13 +21,18 @@ Use engineering verbs by Bloom level:
 
 Example: "Design and implement a REST API with three endpoints, including error handling and input validation, that passes all provided test cases"
 
+### Step 3: Map to Milestones
+- Each objective must clearly point to a project milestone from the brief
+- It is acceptable for a concept-heavy milestone to use `concept_explain` or `architecture_reasoning`
+- At least one objective should address the final integration or demo
+
 ### Step 4: Assign Assessment Methods
 - Apply → Working code module, configuration file
 - Analyze → Architecture decision explanation, debugging log
 - Create → Complete project deliverable, integration demo
 
 ## Output Format
-Same as `concept_explainer/02_objectives`.
+Same as `concept_explainer/02_objectives`, but each objective should include a `milestone_id` field.
 
 ## Quality Criteria
 - At least 50% of objectives are at Create level

@@ -19,7 +19,7 @@ class PedagogyEvaluator(BaseEvaluator):
 ## Context
 Domain: {context.get('domain', 'unknown')}
 Content Type: {content_type}
-Pedagogy Framework: {context.get('pedagogy_framework', 'not specified')}
+Pedagogy Profile: {context.get('pedagogy_profile', context.get('pedagogy_framework', 'not specified'))}
 
 Return JSON: {{"score": 1-5, "evidence": "specific examples of good/bad pedagogy", "failing_elements": ["list of pedagogical issues"]}}"""
 

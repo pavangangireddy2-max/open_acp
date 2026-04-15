@@ -1,0 +1,22 @@
+version: 1
+domain: reactjs
+shared_audience_manifest: ../shared/audience_sources.yaml
+
+raw_style_corpus:
+  exports:
+    - knowledge/raw/brand/sample_react_project.pdf
+    - knowledge/raw/brand/react_s2.pdf
+    - knowledge/raw/brand/react_s3.pdf
+    - knowledge/raw/brand/react_s4.pdf
+
+external_slide_sources:
+  - https://docs.google.com/presentation/d/11RENV8mwhEydxszWGQnvzYbJPjgS0Tf6kB0MnMgV91U/edit
+  - https://docs.google.com/presentation/d/1GDimS8wR8V9V3nmPc3vB6AejLBQJZs8ehNdXi8xrGqc/edit
+  - https://docs.google.com/presentation/d/1S2vOXYjzgmlHyV3tjYaX3W5EV9BxQgIqib26s-hgxI8/edit
+  - https://docs.google.com/presentation/d/1ZScLU2nyJTG7XTOxCZWuMf3Fx5br8QqazaQHD8Z2Nnc/edit
+
+competitor_sources:
+  - src/open_acp/knowledge/raw/competitors/competitor_courses.md
+
+notes:
+  - React sessions should bridge from JavaScript fundamentals, component trees, and UI state flow before implementation details.

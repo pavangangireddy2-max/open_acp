@@ -30,8 +30,13 @@ Follow `concept_explainer/06_slide_deck` with these modifications:
 - "Expected output" slides show terminal/browser screenshots descriptions
 - Include troubleshooting notes in speaker_notes for common setup issues
 
+For each slide, include:
+- `slide_type`
+- `milestone_id`
+- `teaching_mode`
+
 ## Output Format
-Same as `concept_explainer/06_slide_deck`.
+Return JSON matching `project_slide_deck.schema.json`.
 
 ## Quality Criteria
 - Architecture diagram appears at least 3 times (start, mid, end) with progression
@@ -39,3 +44,4 @@ Same as `concept_explainer/06_slide_deck`.
 - Code slides have max 12 lines with clear file path labels
 - Speaker notes include troubleshooting guidance for live coding
 - Final slide shows the complete working project
+- Slides should respect whether the current section is framing, concept explanation, architecture reasoning, build, checkpoint, or integration

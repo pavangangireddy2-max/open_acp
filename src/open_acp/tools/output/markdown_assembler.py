@@ -7,6 +7,7 @@ from open_acp.tools.base_tool import BaseTool, ToolResult, ToolTier
 
 # Canonical stage ordering for document assembly.
 _STAGE_ORDER = [
+    "project_brief",
     "objectives",
     "outline",
     "core_content",
@@ -81,7 +82,9 @@ def _stage_heading(stage_id: str) -> str:
 
 def _render_artifact(stage_id: str, artifact: dict) -> str:
     """Render a single stage artifact to markdown."""
-    if stage_id == "objectives":
+    if stage_id == "project_brief":
+        return _render_project_brief(artifact)
+    elif stage_id == "objectives":
         return _render_objectives(artifact)
     elif stage_id == "outline":
         return _render_outline(artifact)
@@ -97,6 +100,22 @@ def _render_artifact(stage_id: str, artifact: dict) -> str:
         return _render_generic(artifact)
 
 
+def _render_project_brief(artifact: dict) -> str:
+    lines: list[str] = []
+    if artifact.get("project_title"):
+        lines.append(f"**Project:** {artifact['project_title']}\n")
+    if artifact.get("problem_statement"):
+        lines.append(f"{artifact['problem_statement']}\n")
+    if artifact.get("target_deliverable"):
+        lines.append(f"**Target deliverable:** {artifact['target_deliverable']}\n")
+    if artifact.get("milestones"):
+        lines.append("**Milestones:**")
+        for milestone in artifact["milestones"]:
+            lines.append(f"- {milestone.get('id', 'M?')}: {milestone.get('title', '')}")
+        lines.append("")
+    return "\n".join(lines)
+
+
 def _render_objectives(artifact: dict) -> str:
     lines: list[str] = []
     for obj in artifact.get("objectives", []):
@@ -110,6 +129,10 @@ def _render_outline(artifact: dict) -> str:
     for section in artifact.get("sections", []):
         minutes = section.get("estimated_minutes", "?")
         lines.append(f"### {section.get('heading', 'Untitled')} (~{minutes} min)")
+        if section.get("teaching_mode"):
+            lines.append(f"*Teaching mode:* `{section['teaching_mode']}`")
+        if section.get("objective_ids"):
+            lines.append(f"*Objectives:* {', '.join(section['objective_ids'])}")
         lines.append(f"{section.get('purpose', '')}")
         for sub in section.get("subsections", []):
             lines.append(f"  - {sub}")

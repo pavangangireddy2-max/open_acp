@@ -1,0 +1,24 @@
+version: 1
+domain: python
+shared_audience_manifest: ../shared/audience_sources.yaml
+
+raw_style_corpus:
+  exports:
+    - knowledge/raw/brand/sample_python_s1.pdf
+    - knowledge/raw/brand/sample_python_s2.pdf
+    - knowledge/raw/brand/sample_python_s3.pdf
+    - knowledge/raw/brand/python_s4.pdf
+    - knowledge/raw/brand/python_s5.pdf
+
+external_slide_sources:
+  - https://docs.google.com/presentation/d/19Hf8CxuwO62djHYb2T4iTWCb0Y8O2Iy1pzsO3_TG_mU/edit
+  - https://docs.google.com/presentation/d/1oACV_neDNMbrHBLd9wrT6kr1aI-t6aV1YL0ujOAGfTY/edit
+  - https://docs.google.com/presentation/d/1UZy6kZgA0DYNXxcGbb9f_jO3gvnPVXiBHzFN-953wxY/edit
+  - https://docs.google.com/presentation/d/1hCODT4QrxVvOIT1TTgGHPWxGudW0enWUPH3W31tRaxQ/edit
+  - https://docs.google.com/presentation/d/1jq0YoLpDT4ZlB2yF3mtZ7jkF1YcUD7KjPaHxf0Z6R6M/edit
+
+competitor_sources:
+  - src/open_acp/knowledge/raw/competitors/competitor_courses.md
+
+notes:
+  - Python sessions emphasize progressive code reveal and bridge from previously known syntax when applicable.

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Concept Session Activities",
+  "type": "object",
+  "required": ["activities", "total_activity_time_minutes"],
+  "properties": {
+    "activities": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "title", "instructions", "expected_output", "time_minutes", "bloom_level", "objective_ids", "source_section", "teaching_mode"],
+        "properties": {
+          "type": {"type": "string", "enum": ["exercise", "quiz", "discussion", "project", "case_study", "reflection"]},
+          "title": {"type": "string", "minLength": 3},
+          "instructions": {"type": "string", "minLength": 40},
+          "expected_output": {"type": "string", "minLength": 10},
+          "time_minutes": {"type": "number", "minimum": 3},
+          "bloom_level": {"type": "string", "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]},
+          "objective_ids": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "source_section": {"type": "string", "minLength": 3},
+          "teaching_mode": {"type": "string", "enum": ["motivation", "prior_knowledge_bridge", "concept_explain", "worked_example", "guided_practice", "reflection_summary"]}
+        }
+      }
+    },
+    "total_activity_time_minutes": {"type": "number", "minimum": 10}
+  }
+}

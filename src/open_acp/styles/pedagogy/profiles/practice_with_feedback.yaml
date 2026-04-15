@@ -1,0 +1,11 @@
+profile_id: practice_with_feedback
+description: Emphasize repeated attempts, checks, and corrective guidance.
+signature_moves:
+  - quick formative checks
+  - explicit error diagnosis
+  - immediate feedback before the next attempt
+allowed_teaching_modes:
+  - prior_knowledge_bridge
+  - worked_example
+  - guided_practice
+  - reflection_summary

@@ -29,6 +29,8 @@ Each objective needs at least one activity that tests or reinforces it. Use the 
 For each activity:
 - **Title**: Short, descriptive name
 - **Type**: exercise, quiz, discussion, project, case_study, reflection
+- **Source section**: Which outline section this extends
+- **Teaching mode**: Preserve the teaching move from the source section
 - **Instructions**: Complete enough to follow without additional context. Include:
   - What to do
   - What inputs/resources are provided
@@ -55,7 +57,9 @@ Return a JSON object matching `activities.schema.json`:
       "expected_output": "A working Python function that...",
       "time_minutes": 15,
       "bloom_level": "apply",
-      "objective_ids": ["obj_3"]
+      "objective_ids": ["obj_3"],
+      "source_section": "Binary Search Walkthrough",
+      "teaching_mode": "guided_practice"
     }
   ],
   "total_activity_time_minutes": 30
@@ -68,3 +72,4 @@ Return a JSON object matching `activities.schema.json`:
 - Activities span at least 3 Bloom levels
 - Instructions are self-contained (no "see slide 5" references)
 - At least one formative assessment activity
+- At least one activity should directly extend a `guided_practice` or `worked_example` section

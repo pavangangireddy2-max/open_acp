@@ -1,0 +1,10 @@
+stack_id: genai
+teaching_preferences:
+  - separate landscape framing from model mechanics and system design
+  - explain architecture with clear block diagrams before implementation
+  - show trade-offs among prompting, retrieval, tooling, and evaluation
+  - anchor abstract concepts to working agent or RAG examples
+visual_patterns:
+  - model-context-output diagrams
+  - RAG or agent architecture boxes and arrows
+  - evaluation and feedback loops

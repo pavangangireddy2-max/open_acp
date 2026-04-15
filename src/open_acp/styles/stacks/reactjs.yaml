@@ -1,0 +1,10 @@
+stack_id: reactjs
+teaching_preferences:
+  - bridge from plain JavaScript and DOM manipulation
+  - explain component thinking before framework APIs
+  - show state and prop flow visually before implementation detail
+  - favor small vertical feature slices in project sessions
+visual_patterns:
+  - component trees
+  - before-and-after UI states
+  - file structure snapshots

@@ -5,12 +5,12 @@ You are generating the document skeleton for a Concept Explainer session. This o
 
 ## Prerequisites
 - Module metadata: title, domain, estimated_hours, sequence
-- Learning objectives with Bloom levels (from curriculum map)
+- Learning objectives with Bloom levels
 - Prerequisite modules (what learners already know)
-- Skill graph context (demand scores, related skills) — from wiki if available
+- Resolved pedagogy profile and layered style guidance
 
 ## Input Artifacts
-None (this is the first stage)
+- `objectives` — the approved learning objectives for this session
 
 ## Process
 
@@ -21,15 +21,18 @@ None (this is the first stage)
 - If wiki entities exist for this topic, read them for context
 
 ### Step 2: Design the Teaching Flow
-Use backward design:
-1. Start with the terminal outcome — what should the learner be able to DO after this session?
-2. Identify the prerequisite knowledge needed to reach that outcome
-3. Design the progression: activate prior knowledge → introduce new concept → build understanding → apply
+Use backward design from the approved objectives:
+1. Group related objectives together
+2. Decide the teaching progression needed to achieve them
+3. Sequence the session from activation -> explanation -> example -> practice -> reflection
 
-Choose an appropriate teaching pattern:
-- **Concept-first**: Define → Explain → Illustrate → Practice (good for abstract concepts)
-- **Example-first**: Show concrete case → Extract pattern → Generalize → Apply (good for practical skills)
-- **Problem-first**: Pose a challenge → Explore why it's hard → Introduce the concept as a solution → Practice (good for motivation)
+For each section, assign one `teaching_mode` from this allowed set:
+- `motivation`
+- `prior_knowledge_bridge`
+- `concept_explain`
+- `worked_example`
+- `guided_practice`
+- `reflection_summary`
 
 ### Step 3: Generate Section Outline
 For each section, define:
@@ -37,10 +40,12 @@ For each section, define:
 - **purpose**: What this section achieves in the learning journey
 - **estimated_minutes**: Realistic time allocation
 - **bloom_level**: The cognitive level this section targets
+- **teaching_mode**: What pedagogical move this section is making
+- **objective_ids**: Which objectives this section advances
 - **subsections**: Optional breakdown of key points
 
 ### Step 4: Validate Completeness
-- Every learning objective must map to at least one section
+- Every objective must map to at least one section
 - Bloom levels should progress (don't jump from remember to create)
 - Total estimated_minutes should be within 10% of module.estimated_hours × 60
 - Include time for activities (at least 40% of session should be practice)
@@ -55,6 +60,8 @@ Return a JSON object matching `outline.schema.json`:
       "purpose": "What this section achieves",
       "estimated_minutes": 15,
       "bloom_level": "understand",
+      "teaching_mode": "concept_explain",
+      "objective_ids": ["obj_1"],
       "subsections": ["Key point 1", "Key point 2"]
     }
   ],
@@ -69,3 +76,4 @@ Return a JSON object matching `outline.schema.json`:
 - Cognitive load per section: max 3-4 new concepts
 - Duration estimates must account for discussion/processing time
 - The teaching_flow must explain WHY this progression was chosen, not just list the sections
+- `teaching_mode` choices should create a coherent learner journey, not a random label assortment

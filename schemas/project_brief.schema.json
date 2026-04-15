@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Project Brief",
+  "type": "object",
+  "required": ["project_title", "problem_statement", "target_deliverable", "audience", "architecture_overview", "success_criteria", "milestones"],
+  "properties": {
+    "project_title": {"type": "string", "minLength": 3},
+    "problem_statement": {"type": "string", "minLength": 30},
+    "target_deliverable": {"type": "string", "minLength": 20},
+    "audience": {"type": "string", "minLength": 10},
+    "architecture_overview": {"type": "string", "minLength": 30},
+    "success_criteria": {"type": "array", "minItems": 3, "items": {"type": "string", "minLength": 5}},
+    "milestones": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "goal", "deliverable", "verification", "primary_mode"],
+        "properties": {
+          "id": {"type": "string", "minLength": 2},
+          "title": {"type": "string", "minLength": 3},
+          "goal": {"type": "string", "minLength": 10},
+          "deliverable": {"type": "string", "minLength": 10},
+          "verification": {"type": "string", "minLength": 10},
+          "primary_mode": {"type": "string", "enum": ["project_context", "concept_explain", "architecture_reasoning", "guided_build", "verification_checkpoint", "integration_demo", "reflection_summary"]}
+        }
+      }
+    }
+  }
+}

@@ -39,6 +39,7 @@ class PipelineDefinition(BaseModel):
     gate_blocking: bool = True
     required_dimensions: list[str] = []
     style: str = "default"
+    strict_execution: bool = False
 
 
 def _resolve_path(filename: str, base_dir: Path) -> Path:
@@ -115,6 +116,7 @@ class PipelineLoader:
             gate_blocking=gate.get("blocking", True),
             required_dimensions=resolved.get("required_dimensions", []),
             style=resolved.get("style", "default"),
+            strict_execution=resolved.get("strict_execution", False),
         )
 
     def _find_pipeline_yaml(self, content_type: str) -> Path:

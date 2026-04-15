@@ -1,0 +1,22 @@
+version: 1
+domain: dsa
+shared_audience_manifest: ../shared/audience_sources.yaml
+
+raw_style_corpus:
+  exports:
+    - knowledge/raw/brand/sample_dsa_s1.pdf
+    - knowledge/raw/brand/dsa_s2.pdf
+    - knowledge/raw/brand/dsa_s3.pdf
+    - knowledge/raw/brand/dsa_s4.pdf
+
+external_slide_sources:
+  - https://docs.google.com/presentation/d/1ylwIGFlL1CfopPla6943J1-BeIeSwHitXWC58aUJODY/edit
+  - https://docs.google.com/presentation/d/127w2AAk2xQpyUV-d8sTcBjFG_-1FxKEH5IogtmQZit4/edit
+  - https://docs.google.com/presentation/d/1hlfBQyoWqo_Th_mtLLObsSS8ZLk-wmb8OV_NyH7_0G8/edit
+  - https://docs.google.com/presentation/d/1AePiMEWD_wj37Q0ZDX_aVQ_DGn1M_69KFxwyou1yHkg/edit
+
+competitor_sources:
+  - src/open_acp/knowledge/raw/competitors/competitor_courses.md
+
+notes:
+  - DSA sessions should favor visual models, analogy-first explanations, and application-driven motivation.

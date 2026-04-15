@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Project Session Activities",
+  "type": "object",
+  "required": ["activities", "total_activity_time_minutes"],
+  "properties": {
+    "activities": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "title", "instructions", "time_minutes", "bloom_level", "objective_ids", "depends_on", "verification_checklist", "pair_programming", "stretch_goal", "teaching_mode"],
+        "properties": {
+          "type": {"type": "string", "enum": ["build", "checkpoint", "integration", "reflection"]},
+          "title": {"type": "string", "minLength": 3},
+          "instructions": {"type": "string", "minLength": 40},
+          "time_minutes": {"type": "number", "minimum": 3},
+          "bloom_level": {"type": "string", "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]},
+          "objective_ids": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "depends_on": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "verification_checklist": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 5}},
+          "pair_programming": {"type": "string", "minLength": 10},
+          "stretch_goal": {"type": "string", "minLength": 10},
+          "teaching_mode": {"type": "string", "enum": ["project_context", "concept_explain", "architecture_reasoning", "guided_build", "verification_checkpoint", "integration_demo", "reflection_summary"]}
+        }
+      }
+    },
+    "total_activity_time_minutes": {"type": "number", "minimum": 10}
+  }
+}

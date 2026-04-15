@@ -3,38 +3,40 @@ pipeline_id: concept_explainer
 content_type: concept_explainer
 display_name: "Concept Explainer Session"
 description: "Video session (PPT) explaining a core concept with theory, examples, analogies, and visuals"
+strict_execution: true
 
 stages:
-  - id: outline
-    skill: pipelines/concept_explainer/01_outline
-    tools: [claude_generate]
-    artifact_schema: outline.schema.json
-    model_tier: strong
-    review_focus:
-      - "Every learning objective maps to at least one section"
-      - "Bloom levels progress (remember → understand → apply minimum)"
-      - "Total duration within 10% of module estimated hours"
-    success_criteria:
-      - "Schema-valid outline with at least 3 sections"
-      - "Teaching flow describes pedagogical progression"
-
   - id: objectives
     skill: pipelines/concept_explainer/02_objectives
     tools: [claude_generate]
     artifact_schema: objectives.schema.json
     model_tier: strong
     review_focus:
-      - "Each objective uses measurable verb + condition + criterion"
-      - "Bloom levels match the outline section progression"
-      - "Coverage matrix shows no orphan objectives"
+      - "Each objective uses a measurable verb with a clear performance condition"
+      - "Objectives span at least three Bloom levels with a realistic learning progression"
+      - "Assessment methods fit the objective's Bloom level"
+
+  - id: outline
+    skill: pipelines/concept_explainer/01_outline
+    tools: [claude_generate]
+    artifact_schema: concept_outline.schema.json
+    model_tier: strong
+    review_focus:
+      - "Every objective maps to at least one section"
+      - "Teaching modes create a sensible sequence from introduction to practice"
+      - "Total duration is within 10% of module estimated hours"
+    success_criteria:
+      - "Schema-valid outline with at least 3 sections"
+      - "Teaching flow explains why the sequence fits the objectives"
 
   - id: core_content
     skill: pipelines/concept_explainer/03_core_content
     tools: [claude_generate]
-    artifact_schema: core_content.schema.json
+    artifact_schema: concept_core_content.schema.json
     model_tier: strong
     review_focus:
       - "Content addresses all learning objectives"
+      - "Each section clearly honors its teaching_mode"
       - "Examples are concrete and domain-relevant"
       - "Key terms are defined on first use"
       - "Citations support factual claims"
@@ -45,10 +47,11 @@ stages:
   - id: activities
     skill: pipelines/concept_explainer/04_activities
     tools: [claude_generate]
-    artifact_schema: activities.schema.json
+    artifact_schema: concept_activities.schema.json
     model_tier: strong
     review_focus:
       - "Activities cover all Bloom levels present in objectives"
+      - "Activities preserve the section teaching_mode they extend"
       - "Time estimates are realistic"
       - "Instructions are clear enough to follow without additional context"
 
@@ -65,10 +68,11 @@ stages:
   - id: slide_deck
     skill: pipelines/concept_explainer/06_slide_deck
     tools: [claude_generate]
-    artifact_schema: slide_deck.schema.json
-    model_tier: cheap
+    artifact_schema: concept_slide_deck.schema.json
+    model_tier: strong
     review_focus:
       - "Slides follow one-idea-per-slide principle"
+      - "Opening and closing slides match the session structure"
       - "Speaker notes cover what to say, not just what's on screen"
       - "Visual descriptions are actionable"
     checkpoint_required: true

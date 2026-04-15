@@ -17,6 +17,11 @@ class StageArtifact(BaseModel):
     schema_path: str
     created_at: str
     validated: bool = False
+    attempts: int = 1
+    validation_errors: list[str] = []
+    review_decision: str = "not_run"
+    review_summary: str = ""
+    review_findings: list[dict] = []
 
     def validate_against_schema(self) -> None:
         """Load JSON schema from schemas/{schema_path}, validate self.data.
@@ -24,8 +29,17 @@ class StageArtifact(BaseModel):
         Sets self.validated = True on success; raises jsonschema.ValidationError
         on failure.
         """
-        schema_file = Path("schemas") / self.schema_path
+        schema_file = self._find_schemas_dir() / self.schema_path
         with open(schema_file) as f:
             schema = json.load(f)
         jsonschema.validate(instance=self.data, schema=schema)
         self.validated = True
+
+    @staticmethod
+    def _find_schemas_dir() -> Path:
+        current = Path(__file__).resolve()
+        for ancestor in current.parents:
+            candidate = ancestor / "schemas"
+            if candidate.is_dir():
+                return candidate
+        return Path("schemas")
