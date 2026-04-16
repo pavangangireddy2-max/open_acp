@@ -182,6 +182,8 @@ class LoopReviewRunner:
                     "pattern_detection_note",
                     "product_family",
                     "product_version",
+                    "require_product_context",
+                    "strict_domain_inputs",
                     "product_context",
                     "structure_profile",
                 ):

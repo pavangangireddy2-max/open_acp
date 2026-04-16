@@ -87,6 +87,7 @@ Implementation note:
 - the first product-aware runtime slice now resolves `product_context` and `structure_profile`
   before packaging and pedagogy
 - if no product is selected, the system falls back to a stack-only default context rather than blocking
+- stricter run modes are now available so real product runs can require explicit product context and manifest-backed domain inputs
 
 Recommended next policy:
 

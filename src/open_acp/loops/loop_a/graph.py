@@ -40,6 +40,8 @@ class LoopAGraphState(TypedDict, total=False):
     domain: Annotated[str, _replace]
     product_family: Annotated[Any, _replace]
     product_version: Annotated[Any, _replace]
+    require_product_context: Annotated[Any, _replace]
+    strict_domain_inputs: Annotated[Any, _replace]
     signal_batch: Annotated[Any, _replace]
     detected_patterns: Annotated[list, _replace]
     pattern_detection_status: Annotated[str, _replace]
@@ -82,6 +84,8 @@ def run_loop_a(
     cycle_id: str = "cycle_1",
     product_family: str | None = None,
     product_version: str | None = None,
+    require_product_context: bool = False,
+    strict_domain_inputs: bool = False,
 ) -> dict:
     """Convenience function to compile and run Loop A."""
     graph = build_loop_a_graph()
@@ -92,6 +96,8 @@ def run_loop_a(
         "domain": domain,
         "product_family": product_family,
         "product_version": product_version,
+        "require_product_context": require_product_context,
+        "strict_domain_inputs": strict_domain_inputs,
     }
 
     result = app.invoke(initial_state)

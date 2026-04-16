@@ -221,12 +221,18 @@ def resolve_product_context(state: dict) -> dict:
     existing_context = state.get("product_context", {}) or {}
     product_family = state.get("product_family") or existing_context.get("product_family")
     product_version = state.get("product_version") or existing_context.get("product_version")
+    require_product_context = bool(state.get("require_product_context", False))
 
     context = resolve_product_manifest_context(
         domain=domain,
         product_family=product_family,
         product_version=product_version,
     )
+    if require_product_context and not context.get("is_explicit_product"):
+        raise ValueError(
+            "Explicit product context is required for this run. "
+            "Provide product_family and product_version instead of relying on stack-only defaults."
+        )
 
     print(f"  Product context: {context.get('product_label', 'Stack-only default')}")
     return {

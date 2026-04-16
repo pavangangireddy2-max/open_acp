@@ -1,3 +1,5 @@
+import pytest
+
 from open_acp.loops.loop_a import nodes
 from open_acp.models.signals import ChannelCategory, ChannelType, RawSignal, SignalBatch
 
@@ -132,3 +134,24 @@ def test_update_product_context_creates_runtime_product_summary(monkeypatch):
     assert captured["create_kwargs"]["entity_type"] == "product"
     assert captured["create_kwargs"]["title"] == "NIAT B3 Context"
     assert "Structure profile: niat_university_structure" in captured["create_kwargs"]["content"]
+
+
+def test_ingest_signals_requires_manifest_backed_inputs_when_strict():
+    with pytest.raises(ValueError, match="No stack manifest was found"):
+        nodes.ingest_signals(
+            {
+                "domain": "missing_domain_for_test",
+                "cycle_id": "cycle_strict",
+                "strict_domain_inputs": True,
+            }
+        )
+
+
+def test_update_product_context_requires_explicit_product_when_configured():
+    with pytest.raises(ValueError, match="Explicit product context is required"):
+        nodes.update_product_context(
+            {
+                "domain": "genai",
+                "require_product_context": True,
+            }
+        )

@@ -254,8 +254,21 @@ def ingest_signals(state: dict) -> dict:
     """Load raw sources and convert them into a SignalBatch."""
     domain = state.get("domain", "ml-engineering")
     cycle_id = state.get("cycle_id", "unknown")
+    strict_domain_inputs = bool(state.get("strict_domain_inputs", False))
+
+    stack_manifest = load_stack_manifest(domain)
+    if strict_domain_inputs and not stack_manifest:
+        raise ValueError(
+            f"No stack manifest was found for domain '{domain}'. "
+            "Strict domain-input mode does not allow generic filesystem fallback."
+        )
 
     raw_sources = _load_raw_sources(domain)
+    if strict_domain_inputs and not raw_sources:
+        raise ValueError(
+            f"No canonical source inputs were found for domain '{domain}'. "
+            "Strict domain-input mode requires manifest-backed sources."
+        )
     bootstrap_warnings = _build_bootstrap_warnings(domain, raw_sources)
 
     signals = []
@@ -685,6 +698,7 @@ def update_product_context(state: dict) -> dict:
     domain = state.get("domain", "ml-engineering")
     product_family = state.get("product_family")
     product_version = state.get("product_version")
+    require_product_context = bool(state.get("require_product_context", False))
     detected_patterns = state.get("detected_patterns", []) or []
 
     product_context = resolve_product_manifest_context(
@@ -692,6 +706,11 @@ def update_product_context(state: dict) -> dict:
         product_family=product_family,
         product_version=product_version,
     )
+    if require_product_context and not product_context.get("is_explicit_product"):
+        raise ValueError(
+            "Explicit product context is required for this run. "
+            "Provide product_family and product_version instead of relying on stack-only defaults."
+        )
     structure_profile = resolve_structure_profile_context(product_context)
 
     print(

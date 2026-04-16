@@ -373,6 +373,8 @@ def review_loop(
     cycle_id: str = typer.Option("cycle_1", "--cycle-id", help="Cycle identifier"),
     product_family: str = typer.Option("", "--product-family", help="Optional product family context"),
     product_version: str = typer.Option("", "--product-version", help="Optional product version or batch"),
+    require_product_context: bool = typer.Option(True, "--require-product/--allow-stack-only", help="Require explicit product context for this run"),
+    strict_domain_inputs: bool = typer.Option(True, "--strict-domain-inputs/--allow-domain-fallback", help="Require manifest-backed domain inputs for this run"),
     stage_id: str = typer.Option("", "--stage", help="Optional stage to run explicitly"),
 ):
     """Run exactly one Loop A or Loop B stage, save a checkpoint packet, and stop."""
@@ -389,6 +391,8 @@ def review_loop(
         base_state["product_family"] = product_family
     if product_version:
         base_state["product_version"] = product_version
+    base_state["require_product_context"] = require_product_context
+    base_state["strict_domain_inputs"] = strict_domain_inputs
     if loop_id.strip().lower().replace("-", "_") in {"loop_b", "b", "loopb"}:
         base_state["content_type"] = content_type
 
@@ -448,6 +452,8 @@ def review_domain(
     cycle_id: str = typer.Option("cycle_1", "--cycle-id", help="Cycle identifier"),
     product_family: str = typer.Option("", "--product-family", help="Optional product family context"),
     product_version: str = typer.Option("", "--product-version", help="Optional product version or batch"),
+    require_product_context: bool = typer.Option(True, "--require-product/--allow-stack-only", help="Require explicit product context for this run"),
+    strict_domain_inputs: bool = typer.Option(True, "--strict-domain-inputs/--allow-domain-fallback", help="Require manifest-backed domain inputs for this run"),
 ):
     """Run Loop A and Loop B, save a curriculum review packet, and stop."""
     from open_acp.utils.logger import setup_logging
@@ -474,6 +480,8 @@ def review_domain(
             cycle_id=cycle_id,
             product_family=product_family or None,
             product_version=product_version or None,
+            require_product_context=require_product_context,
+            strict_domain_inputs=strict_domain_inputs,
         )
         loop_b_result = run_loop_b(
             domain=domain,
@@ -481,6 +489,8 @@ def review_domain(
             content_type=content_type,
             product_family=product_family or None,
             product_version=product_version or None,
+            require_product_context=require_product_context,
+            strict_domain_inputs=strict_domain_inputs,
         )
     except Exception as e:
         console.print(f"\n[bold red]Curriculum review failed: {e}[/bold red]")

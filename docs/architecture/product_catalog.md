@@ -453,6 +453,13 @@ These CSVs should be treated as canonical source inputs, not runtime wiki state.
 
 The runtime wiki may later hold synthesized NIAT batch, university, or branch summaries derived from them.
 
+Current staged examples in-repo:
+
+- Batch 3 university program-design/package implementation references
+- Batch 4 grid-template structure references
+- Batch 4 summary pivot references
+- AICTE category-minimum reference data under `knowledge/catalog/regulations/aicte/`
+
 ## Structure Implication For NIAT
 
 NIAT should be treated as requiring a richer curriculum-container hierarchy such as:

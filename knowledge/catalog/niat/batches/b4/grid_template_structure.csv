@@ -1,0 +1,80 @@
+,,,,,,,,,,,161
+Semester - 1,Course Name (as per Crescent),Category (APC),Credits (APC),Course Name (as per NxtWave),Pre-requisites,Category,Mode of Delivery,L,T,P,Credits
+1,New,,,Web Application Development,,ESC,NxtWave,3,0,2,4
+1,Programming for Problem Solving,ESC,2,Computer Programming,,ESC,NxtWave,4,0,0,4
+1,Algebra and Differential Calculus,BSC,4,Mathematics for Computer Science,,BSC,NxtWave,2,0,0,2
+1,New,,,Quantitative Aptitude,,BSC,NxtWave,2,1,0,3
+1,New,,,Communicative English Foundation ,,HSMC,NxtWave,1,0,2,2
+1,,,,Computer Programming Laboratory,,ESC,NxtWave,0,0,4,2
+1,Engineering Design,ESC,2,Introduction to Generative AI,,ESC,NxtWave,1,0,2,2
+,,,,,,,,,,,
+,,,,,,,,,,,
+Semester - 2,Course Name (as per Crescent),Category (APC),Credits (APC),Course Name (as per NxtWave),Pre-requisites,Category,Mode of Delivery,L,T,P,Credits
+2,New,,,Frontend Development,"Web Application Development , Computer Programming",ESC,NxtWave,3,0,2,4
+2,New,,,Database Management Systems,Computer Programming,PCC-CS,NxtWave,3,0,2,4
+2,New,,,Foundations of Data Structures & Algorithms,"Mathematics for Computer Science, Computer Programming",PCC-CS,NxtWave,4,0,0,4
+2,New,,,Foundations of Data Structures & Algorithms Laboratory,"Mathematics for Computer Science, Computer Programming",PCC-CS,NxtWave,0,0,4,2
+2,New,,,Numerical Ability,,BSC,NxtWave,2,1,0,3
+2,Engish For Engineers,HSC,3,Communicative English Advanced,Communicative English Foundation ,HSMC,NxtWave,1,0,2,2
+2,Basic Electrical and Electronics Engineering,ESC,4,Building LLM Applications,,ESC,NxtWave,1,0,2,2
+2,,,,Environmental Science ,,MC,NxtWave,0,0,0,0
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+Semester - 3,Course Name (as per Crescent),Category (APC),Credits (APC),Course Name (as per NxtWave),Pre-requisites,Category,Mode of Delivery,L,T,P,Credits
+3,New,,,Advanced Frontend Development,"Web Application Development 1 , Frontend Development ",PCC-CS,NxtWave,3,0,2,4
+3,New,,,Design and Analysis of Algorithms,"Computer Programming, Foundations of Data Structures & Problem-Solving",PCC-CS,NxtWave,4,0,0,4
+3,Mathematics Elective,BSC,4,Probability and Statistics,,BSC,NxtWave,3,1,0,4
+3,,,,Logical Reasoning,,BSC,NxtWave,1,0,2,2
+3,New,,,Applied Communicative English,Communicative English Advanced,HSMC,NxtWave,1,0,2,2
+3,,,,Design and Analysis of Algorithms Laboratory,"Computer Programming, Foundations of Data Structures & Problem-Solving",PCC-CS,NxtWave,0,0,4,2
+3,Humanities Elective I,HSC,3,Intro to finance,,HSMC,NxtWave,3,0,0,3
+3,Indian Constitution and Human Rights,MC,0,Indian Constitution ,,MC,NxtWave,0,0,0,0
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+Semester - 4,Course Name (as per Crescent),Category (APC),Credits (APC),Course Name (as per NxtWave),Pre-requisites,Category,Mode of Delivery,L,T,P,Credits
+4,New,,,Back End Development ,Database Management Systems,PCC-CS,NxtWave,2,0,2,3
+4,Computer Architecture and Microprocessor,PCC,3,Operating Systems,,PCC-CS,NxtWave,2,1,0,3
+4,Operating Systems,PCC,4,Computer Networks,,PCC-CS,NxtWave,2,1,0,3
+4,New,,,Advanced Algorithms & Optimization,Design and Analysis of Algorithms,PCC-CS,NxtWave,3,0,2,4
+4,Workplace Skills and Aptitude for Engineers,HSC,1,Language Analytics,Applied Communicative English,HSMC,NxtWave,1,0,2,2
+4,,,,Linear Algebra and Calculus,,BSC,NxtWave,2,1,0,3
+4,New,,,Advanced Aptitude,"Numerical Ability, Logical Reasoning, Quantitative Aptitude",BSC,NxtWave,2,0,2,3
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+Semester - 5,Course Name (as per Crescent),Category (APC),Credits (APC),Course Name (as per NxtWave),Pre-requisites,Category,Mode of Delivery,L,T,P,Credits
+5,Artificial Intelligence Techniques,PCC,3,Introduction to Machine Learning,"Linear Algebra and Calculus, Probability and Statistics",PCC-CS,NxtWave,4,0,0,4
+5,Network Security and Cryptography,PCC,4,Practical Software Engineering,"Back End Development, Frontend Development ",PCC-CS,NxtWave,3,0,2,4
+5,Professional Elective Courses,PEC,6,Elective 1,,PEC-CS,NxtWave,3,0,0,3
+5,,,,Introduction to Machine Learning Laboratory,"Linear Algebra and Calculus, Probability and Statistics",PCC-CS,NxtWave,0,0,4,2
+5,Internship I,PROJ,1,Project 1/Internship 1,,PROJ,NxtWave,0,0,8,4
+5,Theory of Computation,PCC,3,Principles of Management / Business Models for Tech Companies [NPTEL],,HSMC,NxtWave,,,,3
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+Semester - 6,Course Name (as per Crescent),Category (APC),Credits (APC),Course Name (as per NxtWave),Pre-requisites,Category,Mode of Delivery,L,T,P,Credits
+6,Big Data and Cloud Computing,PCC,4,Foundations of Cloud Computing,,PCC-CS,NxtWave,3,0,2,4
+6,New,,,Introduction to Deep Learning,Introduction to Machine Learning,PCC-CS,NxtWave,3,0,0,3
+6,Professional Elective Courses,PEC,6,Elective 2,,PEC-CS,NxtWave,3,0,0,3
+6,,,,Introduction to Deep Learning Laboratory,Introduction to Machine Learning,PCC-CS,NxtWave,0,0,4,2
+6,Data Mining and Data Warehousing,PCC,3,Data Visualisation Tools ,,PCC-CS,NxtWave,2,0,2,3
+6,Open Elective I,OEC,3,Open Elective I,,OEC-CS,,,,,4
+6,Humanities Elective II,HSC,2,"Creativity, Innovation & Entrepreneurship",,HSMC,NxtWave,,,,2
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+Semester - 7,Course Name (as per Crescent),Category (APC),Credits (APC),Course Name (as per NxtWave),Pre-requisites,Category,Mode of Delivery,L,T,P,Credits
+7,New,,,Distributed Systems with High-Level System Design,,PCC-CS,NxtWave,3,0,2,4
+7,,,,Elective 3,,PEC-CS,NxtWave,3,0,0,3
+7,Professional Elective Courses,PEC,12,Elective 4,,PEC-CS,NxtWave,3,0,0,3
+7,Internship I,PROJ,1,Project 2/Internship 2,,PROJ,NxtWave,0,0,8,4
+7,Open Elective II,OEC,3,Open Elective II,,OEC-CS,,,,,4
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+Semester - 8,Course Name (as per Crescent),Category (APC),Credits (APC),Course Name (as per NxtWave),Pre-requisites,Category,Mode of Delivery,L,T,P,Credits
+8,New,,,Productionisation of ML systems,Introduction to Machine Learning,PCC-CS,NxtWave,2,0,4,4
+8,Open Elective III,OEC,3,Open Elective III,,OEC-CS,,,,,4
+8,Project Work,PROJ,9,Capstone Project/Internship,,PROJ,NxtWave,0,0,24,12

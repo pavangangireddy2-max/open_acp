@@ -1,3 +1,5 @@
+import pytest
+
 from open_acp.loops.loop_b import nodes
 
 
@@ -93,6 +95,11 @@ def test_resolve_product_and_structure_profile_from_manifest():
     structure_profile = structure_state["structure_profile"]
     assert structure_profile["structure_profile_id"] == "niat_university_structure"
     assert "batch_curriculum_grid_template" in structure_profile["hierarchy"]
+
+
+def test_resolve_product_context_requires_explicit_product_when_configured():
+    with pytest.raises(ValueError, match="Explicit product context is required"):
+        nodes.resolve_product_context({"domain": "genai", "require_product_context": True})
 
 
 def test_resolve_packaging_profile_uses_domain_override():

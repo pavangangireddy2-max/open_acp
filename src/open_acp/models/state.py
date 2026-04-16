@@ -32,6 +32,8 @@ class LoopAState(BaseModel):
     domain: str
     product_family: Optional[str] = None
     product_version: Optional[str] = None
+    require_product_context: bool = False
+    strict_domain_inputs: bool = False
     signal_batch: Optional[SignalBatch] = None
     bootstrap_warnings: list[str] = []
     detected_patterns: list[dict] = []
@@ -52,6 +54,8 @@ class LoopBState(BaseModel):
     domain: str
     product_family: Optional[str] = None
     product_version: Optional[str] = None
+    require_product_context: bool = False
+    strict_domain_inputs: bool = False
     skill_graph: Optional[SkillGraph] = None
     learner_model: Optional[LearnerModel] = None
     curriculum_source_context: str = ""
