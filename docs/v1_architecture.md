@@ -118,6 +118,13 @@ This keeps Git clean while preserving compounding intelligence.
 
 - Loop B no longer asks an LLM to pick the pedagogy framework.
 - Loop B resolves `pedagogy_profile` deterministically.
+- Loop B is moving from a coarse curriculum step into a richer curriculum-design chain:
+  - curriculum generation
+  - curriculum change visibility
+  - packaging resolution
+  - course/module/topic/unit design
+  - practice and learning-assessment design
+  - external skill-assessment alignment
 - Loop C stages follow: generate -> parse -> schema validate -> review -> revise -> persist.
 - First-wave pipelines use `strict_execution`, which blocks on schema or review failures after bounded retries.
 

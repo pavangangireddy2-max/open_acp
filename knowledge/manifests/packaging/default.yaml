@@ -1,0 +1,53 @@
+version: 1
+packaging_profile_id: default_learning_packaging
+
+module_count_per_course:
+  default: 3
+  min: 2
+  max: 5
+  target_hours_per_module: 8
+
+topic_count_per_module:
+  default: 4
+  min: 2
+  max: 6
+
+learning_units_per_topic: 3
+
+allowed_learning_unit_types:
+  - ppt_video_unit
+  - reading_material_unit
+  - mcq_practice_unit
+  - coding_practice_unit
+
+preferred_learning_unit_mix:
+  - ppt_video_unit
+  - reading_material_unit
+  - mcq_practice_unit
+
+module_phase_labels:
+  - Foundations
+  - Core workflow
+  - Practice and integration
+  - Assessment readiness
+
+topic_phase_labels:
+  - Motivation and framing
+  - Core concepts
+  - Worked practice
+  - Checkpoint and recap
+
+classroom_quiz_every_minutes: 20
+module_quiz_required: true
+
+skill_assessment_every_n_topics: 8
+skill_assessment_question_types:
+  - mcq
+  - coding
+  - fib
+  - project
+
+skill_assessment_difficulty_levels:
+  - easy
+  - medium
+  - hard

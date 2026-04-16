@@ -11,7 +11,7 @@ V1 behavior:
 import json
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 import uuid
 
 from open_acp.models.artifacts import StageArtifact
@@ -51,14 +51,11 @@ class PipelineExecutor:
     ) -> dict[str, StageArtifact]:
         """Execute all stages of a pipeline and return artifacts."""
         pipeline_def = self.pipeline_loader.load(content_type)
-        resolved_profile = module_context.get("pedagogy_profile") or self.pedagogy_resolver.resolve(
+        runtime_context = self._build_runtime_context(
             content_type=content_type,
+            module_context=module_context,
             domain=domain,
         )
-
-        runtime_context = module_context.copy()
-        runtime_context.setdefault("domain", domain)
-        runtime_context["pedagogy_profile"] = resolved_profile
 
         artifacts: dict[str, StageArtifact] = {}
 
@@ -84,6 +81,344 @@ class PipelineExecutor:
 
         self._assemble_output(artifacts, content_type, runtime_context)
         return artifacts
+
+    def execute_review_stage(
+        self,
+        content_type: str,
+        module_context: dict,
+        domain: str = "ml-engineering",
+        stage_id: Optional[str] = None,
+        review_notes: str = "",
+    ) -> dict[str, Any]:
+        """Execute exactly one stage, save a review packet, and stop.
+
+        If ``stage_id`` is omitted, the next incomplete stage is executed.
+        If ``stage_id`` is provided, that stage is re-generated using all saved
+        artifacts from prior stages as context.
+        """
+        pipeline_def = self.pipeline_loader.load(content_type)
+        runtime_context = self._build_runtime_context(
+            content_type=content_type,
+            module_context=module_context,
+            domain=domain,
+            review_notes=review_notes,
+        )
+        module_id = runtime_context.get("module_id", "unknown")
+
+        existing_artifacts = self._load_saved_artifacts(
+            content_type=content_type,
+            module_id=module_id,
+            pipeline_def=pipeline_def,
+        )
+        stage = self._select_review_stage(
+            pipeline_def=pipeline_def,
+            existing_artifacts=existing_artifacts,
+            requested_stage_id=stage_id,
+        )
+
+        if stage is None:
+            self._assemble_output(existing_artifacts, content_type, runtime_context)
+            return {
+                "status": "complete",
+                "pipeline_id": pipeline_def.pipeline_id,
+                "module_id": module_id,
+                "artifacts": existing_artifacts,
+                "final_document_path": str(
+                    self.output_dir / content_type / module_id / "final_document.md"
+                ),
+            }
+
+        prior_artifacts = self._collect_prior_artifacts(
+            pipeline_def=pipeline_def,
+            existing_artifacts=existing_artifacts,
+            stage_id=stage.id,
+        )
+
+        artifact = self._execute_stage(
+            stage=stage,
+            pipeline_def=pipeline_def,
+            previous_artifacts=prior_artifacts,
+            module_context=runtime_context,
+            domain=domain,
+        )
+
+        self._save_artifact(artifact, content_type, module_id)
+        next_stage_id = self._next_stage_id(pipeline_def, stage.id)
+        review_packet = self._build_review_packet(
+            stage=stage,
+            pipeline_def=pipeline_def,
+            artifact=artifact,
+            module_context=runtime_context,
+            next_stage_id=next_stage_id,
+        )
+        review_packet_paths = self._save_review_packet(
+            packet=review_packet,
+            content_type=content_type,
+            module_id=module_id,
+            stage_id=stage.id,
+        )
+
+        artifacts_with_current = prior_artifacts.copy()
+        artifacts_with_current[stage.id] = artifact
+
+        if next_stage_id is None:
+            self._assemble_output(artifacts_with_current, content_type, runtime_context)
+
+        return {
+            "status": "awaiting_review",
+            "pipeline_id": pipeline_def.pipeline_id,
+            "module_id": module_id,
+            "stage_id": stage.id,
+            "artifact": artifact,
+            "review_packet": review_packet,
+            "review_packet_paths": review_packet_paths,
+            "next_stage_id": next_stage_id,
+            "final_document_path": (
+                str(self.output_dir / content_type / module_id / "final_document.md")
+                if next_stage_id is None
+                else None
+            ),
+        }
+
+    def _build_runtime_context(
+        self,
+        content_type: str,
+        module_context: dict,
+        domain: str,
+        review_notes: str = "",
+    ) -> dict:
+        """Build the runtime context shared by full and review-mode execution."""
+        resolved_profile = module_context.get("pedagogy_profile") or self.pedagogy_resolver.resolve(
+            content_type=content_type,
+            domain=domain,
+        )
+
+        runtime_context = module_context.copy()
+        runtime_context.setdefault("domain", domain)
+        runtime_context["pedagogy_profile"] = resolved_profile
+        if review_notes:
+            runtime_context["manual_review_notes"] = review_notes
+        return runtime_context
+
+    def _load_saved_artifacts(
+        self,
+        content_type: str,
+        module_id: str,
+        pipeline_def: PipelineDefinition,
+    ) -> dict[str, StageArtifact]:
+        """Load previously saved stage artifacts for a module."""
+        output_path = self.output_dir / content_type / module_id
+        loaded: dict[str, StageArtifact] = {}
+        if not output_path.exists():
+            return loaded
+
+        for stage in pipeline_def.stages:
+            artifact_file = output_path / f"{stage.id}.json"
+            if not artifact_file.exists():
+                continue
+            with open(artifact_file, encoding="utf-8") as f:
+                loaded[stage.id] = StageArtifact.model_validate(json.load(f))
+        return loaded
+
+    @staticmethod
+    def _select_review_stage(
+        pipeline_def: PipelineDefinition,
+        existing_artifacts: dict[str, StageArtifact],
+        requested_stage_id: Optional[str],
+    ) -> Optional[StageDefinition]:
+        """Choose which stage to execute in review mode."""
+        if requested_stage_id:
+            for stage in pipeline_def.stages:
+                if stage.id == requested_stage_id:
+                    return stage
+            raise ValueError(f"Unknown stage_id='{requested_stage_id}' for pipeline '{pipeline_def.pipeline_id}'.")
+
+        for stage in pipeline_def.stages:
+            if stage.id not in existing_artifacts:
+                return stage
+        return None
+
+    @staticmethod
+    def _collect_prior_artifacts(
+        pipeline_def: PipelineDefinition,
+        existing_artifacts: dict[str, StageArtifact],
+        stage_id: str,
+    ) -> dict[str, StageArtifact]:
+        """Collect artifacts from stages before ``stage_id`` in pipeline order."""
+        prior: dict[str, StageArtifact] = {}
+        for stage in pipeline_def.stages:
+            if stage.id == stage_id:
+                return prior
+            if stage.id not in existing_artifacts:
+                raise RuntimeError(
+                    f"Cannot execute stage '{stage_id}' because prior stage '{stage.id}' has no saved artifact."
+                )
+            prior[stage.id] = existing_artifacts[stage.id]
+        raise ValueError(f"Stage '{stage_id}' not found in pipeline '{pipeline_def.pipeline_id}'.")
+
+    @staticmethod
+    def _next_stage_id(pipeline_def: PipelineDefinition, stage_id: str) -> Optional[str]:
+        """Return the stage that follows ``stage_id`` in the pipeline."""
+        for index, stage in enumerate(pipeline_def.stages):
+            if stage.id != stage_id:
+                continue
+            if index + 1 < len(pipeline_def.stages):
+                return pipeline_def.stages[index + 1].id
+            return None
+        raise ValueError(f"Stage '{stage_id}' not found in pipeline '{pipeline_def.pipeline_id}'.")
+
+    def _build_review_packet(
+        self,
+        stage: StageDefinition,
+        pipeline_def: PipelineDefinition,
+        artifact: StageArtifact,
+        module_context: dict,
+        next_stage_id: Optional[str],
+    ) -> dict[str, Any]:
+        """Create a concise human review packet for a completed stage."""
+        return {
+            "pipeline_id": pipeline_def.pipeline_id,
+            "content_type": pipeline_def.content_type,
+            "display_name": pipeline_def.display_name,
+            "stage_id": stage.id,
+            "module_id": module_context.get("module_id", "unknown"),
+            "module_title": module_context.get("title", "Untitled"),
+            "checkpoint_required": stage.checkpoint_required,
+            "human_approval_default": stage.human_approval_default,
+            "validated": artifact.validated,
+            "review_decision": artifact.review_decision,
+            "review_summary": artifact.review_summary,
+            "review_findings": artifact.review_findings,
+            "attempts": artifact.attempts,
+            "schema_path": artifact.schema_path,
+            "key_decisions": self._extract_key_decisions(stage.id, artifact.data),
+            "next_stage_id": next_stage_id,
+            "generated_at": artifact.created_at,
+        }
+
+    def _extract_key_decisions(self, stage_id: str, data: dict) -> list[str]:
+        """Summarize the most important human-review decisions for a stage."""
+        if stage_id == "objectives":
+            objectives = data.get("objectives", [])
+            bloom_levels = sorted({obj.get("bloom_level", "?") for obj in objectives})
+            assessment_methods = sorted({obj.get("assessment_method", "?") for obj in objectives})
+            return [
+                f"{len(objectives)} learning objectives were generated.",
+                f"Bloom coverage: {', '.join(bloom_levels) if bloom_levels else 'none'}.",
+                f"Assessment methods proposed: {', '.join(assessment_methods) if assessment_methods else 'none'}.",
+            ]
+
+        if stage_id == "outline":
+            sections = data.get("sections", [])
+            teaching_modes = [section.get("teaching_mode", "?") for section in sections]
+            headings = [section.get("heading", "Untitled") for section in sections[:6]]
+            return [
+                f"{len(sections)} sections were sequenced for roughly {data.get('total_estimated_minutes', '?')} minutes.",
+                f"Teaching modes used: {', '.join(teaching_modes) if teaching_modes else 'none'}.",
+                f"Section flow: {' | '.join(headings) if headings else 'none'}.",
+            ]
+
+        if stage_id == "core_content":
+            sections = data.get("sections", [])
+            examples = sum(len(section.get("examples", [])) for section in sections)
+            citations = sum(len(section.get("citations", [])) for section in sections)
+            return [
+                f"{len(sections)} content sections were generated with reported word count {data.get('word_count', '?')}.",
+                f"Total examples included: {examples}.",
+                f"Total citation entries included: {citations}.",
+            ]
+
+        if stage_id == "activities":
+            activities = data.get("activities", [])
+            activity_types = sorted({activity.get("type", "?") for activity in activities})
+            total_minutes = sum(int(activity.get("time_minutes", 0)) for activity in activities)
+            return [
+                f"{len(activities)} activities were generated.",
+                f"Activity types: {', '.join(activity_types) if activity_types else 'none'}.",
+                f"Estimated practice time: {total_minutes} minutes.",
+            ]
+
+        if stage_id == "brand_polish":
+            change_log = data.get("change_log", [])
+            score = data.get("style_compliance_score")
+            score_text = f"{score:.0%}" if isinstance(score, (int, float)) else "not reported"
+            return [
+                f"Style compliance score: {score_text}.",
+                f"Change log entries: {len(change_log)}.",
+                "Polished content is ready for final presentation packaging.",
+            ]
+
+        if stage_id == "slide_deck":
+            slides = data.get("slides", [])
+            notes_count = sum(1 for slide in slides if slide.get("speaker_notes"))
+            visuals_count = sum(1 for slide in slides if slide.get("visual_description"))
+            return [
+                f"{len(slides)} slides were generated.",
+                f"Slides with speaker notes: {notes_count}.",
+                f"Slides with visual directions: {visuals_count}.",
+            ]
+
+        return [f"Artifact keys: {', '.join(sorted(data.keys()))}."]
+
+    def _save_review_packet(
+        self,
+        packet: dict[str, Any],
+        content_type: str,
+        module_id: str,
+        stage_id: str,
+    ) -> dict[str, str]:
+        """Persist review packet as JSON and Markdown."""
+        review_dir = self.output_dir / content_type / module_id / "review_packets"
+        review_dir.mkdir(parents=True, exist_ok=True)
+
+        json_path = review_dir / f"{stage_id}.json"
+        md_path = review_dir / f"{stage_id}.md"
+
+        with open(json_path, "w", encoding="utf-8") as f:
+            json.dump(packet, f, indent=2)
+
+        with open(md_path, "w", encoding="utf-8") as f:
+            f.write(self._render_review_packet_markdown(packet))
+
+        return {"json": str(json_path), "markdown": str(md_path)}
+
+    @staticmethod
+    def _render_review_packet_markdown(packet: dict[str, Any]) -> str:
+        """Render a review packet into a human-readable checkpoint note."""
+        lines = [
+            f"# Review Packet: {packet['stage_id']}",
+            "",
+            f"- Pipeline: `{packet['pipeline_id']}`",
+            f"- Content Type: `{packet['content_type']}`",
+            f"- Module: `{packet['module_id']}` — {packet['module_title']}",
+            f"- Checkpoint Required: `{packet['checkpoint_required']}`",
+            f"- Human Approval Default: `{packet['human_approval_default']}`",
+            f"- Validated: `{packet['validated']}`",
+            f"- Review Decision: `{packet['review_decision']}`",
+            f"- Attempts: `{packet['attempts']}`",
+            f"- Next Stage: `{packet['next_stage_id'] or 'complete'}`",
+            "",
+            "## Review Summary",
+            packet.get("review_summary", "") or "No summary provided.",
+            "",
+            "## Key Decisions",
+        ]
+
+        for item in packet.get("key_decisions", []):
+            lines.append(f"- {item}")
+
+        lines.extend(["", "## Findings"])
+        findings = packet.get("review_findings", [])
+        if not findings:
+            lines.append("- No explicit findings.")
+        else:
+            for finding in findings:
+                lines.append(
+                    f"- [{finding.get('status', 'WARNING')}] {finding.get('criterion', 'criterion')}: "
+                    f"{finding.get('detail', '')}"
+                )
+
+        return "\n".join(lines) + "\n"
 
     def _execute_stage(
         self,

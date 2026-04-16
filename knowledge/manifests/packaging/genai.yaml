@@ -1,0 +1,34 @@
+version: 1
+packaging_profile_id: genai_stack_packaging
+
+module_count_per_course:
+  default: 3
+  min: 2
+  max: 4
+  target_hours_per_module: 8
+
+topic_count_per_module:
+  default: 4
+  min: 3
+  max: 5
+
+preferred_learning_unit_mix:
+  - ppt_video_unit
+  - reading_material_unit
+  - coding_practice_unit
+
+topic_phase_labels:
+  - Problem framing
+  - Architecture and concepts
+  - Guided build
+  - Checkpoint and quiz
+
+skill_assessment_question_types:
+  - mcq
+  - coding
+  - fib
+  - project
+
+notes:
+  - GenAI delivery should retain concept framing, architecture reasoning, and build checkpoints in the same course flow.
+  - External skill assessments for GenAI should expect project and coding evidence alongside conceptual checks.

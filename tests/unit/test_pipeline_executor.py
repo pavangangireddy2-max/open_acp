@@ -1,7 +1,9 @@
 import json
+from pathlib import Path
 
 import pytest
 
+from open_acp.models.artifacts import StageArtifact
 from open_acp.pipeline_defs.pipeline_loader import PipelineDefinition, StageDefinition
 
 
@@ -219,3 +221,82 @@ def test_executor_injects_pedagogy_and_style_context_into_prompt(monkeypatch, tm
     assert "## Brand Guidelines" in prompt
     assert "## Format Guidelines" in prompt
     assert "## Domain Guidelines" in prompt
+
+
+def test_execute_review_stage_writes_review_packet(monkeypatch, tmp_path):
+    executor, _ = _make_executor(
+        monkeypatch,
+        tmp_path,
+        responses=[
+            json.dumps(_valid_objectives()),
+            json.dumps(_review_pass()),
+        ],
+    )
+    pipeline = _make_pipeline()
+    pipeline.stages = [_make_stage()]
+    monkeypatch.setattr(executor.pipeline_loader, "load", lambda _: pipeline)
+
+    result = executor.execute_review_stage(
+        content_type="concept_explainer",
+        module_context=_module_context(),
+        domain="genai",
+    )
+
+    assert result["status"] == "awaiting_review"
+    assert result["stage_id"] == "objectives"
+    assert result["next_stage_id"] is None
+
+    review_md = Path(result["review_packet_paths"]["markdown"])
+    review_json = Path(result["review_packet_paths"]["json"])
+    assert review_md.exists()
+    assert review_json.exists()
+    assert "Key Decisions" in review_md.read_text(encoding="utf-8")
+
+
+def test_execute_review_stage_resumes_after_saved_artifact(monkeypatch, tmp_path):
+    executor, _ = _make_executor(
+        monkeypatch,
+        tmp_path,
+        responses=[
+            json.dumps(_valid_objectives()),
+            json.dumps(_review_pass()),
+        ],
+    )
+
+    first_stage = _make_stage()
+    second_stage = StageDefinition(
+        id="outline",
+        skill=first_stage.skill,
+        tools=first_stage.tools,
+        artifact_schema=first_stage.artifact_schema,
+        review_focus=first_stage.review_focus,
+        success_criteria=first_stage.success_criteria,
+        model_tier=first_stage.model_tier,
+    )
+    pipeline = _make_pipeline()
+    pipeline.stages = [first_stage, second_stage]
+    monkeypatch.setattr(executor.pipeline_loader, "load", lambda _: pipeline)
+
+    saved = StageArtifact(
+        artifact_id="art_existing",
+        stage_id="objectives",
+        pipeline_id="concept_explainer",
+        content_type="concept_explainer",
+        data=_valid_objectives(),
+        schema_path="objectives.schema.json",
+        created_at="2026-04-16T00:00:00+00:00",
+        validated=True,
+        review_decision="PASS",
+        review_summary="Looks good.",
+        review_findings=[],
+    )
+    executor._save_artifact(saved, "concept_explainer", "m1")
+
+    result = executor.execute_review_stage(
+        content_type="concept_explainer",
+        module_context=_module_context(),
+        domain="genai",
+    )
+
+    assert result["stage_id"] == "outline"
+    assert result["next_stage_id"] is None

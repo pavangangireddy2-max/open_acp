@@ -22,6 +22,13 @@ Evaluators should do three things:
 
 If an evaluator only gives a number, it is not yet useful enough for a closed-loop system.
 
+This becomes especially important once the system distinguishes:
+
+- content quality
+- curriculum quality
+- learning-assessment quality
+- external skill-assessment alignment quality
+
 ## DSPy Direction
 
 DSPy-backed evaluators are a natural future step for this system because they can support:
@@ -45,6 +52,57 @@ The longer-term learning loop should include:
 - upgrading retrieval and knowledge quality
 - decaying stale confidence in old intelligence
 - improving evaluation reliability over time
+
+## Learning Assessments vs Skill Assessments
+
+The architecture should treat these as different things.
+
+### Learning Assessments
+
+These belong inside Open ACP and support learning progression:
+
+- classroom quizzes
+- module quizzes
+- assignments
+- guided practice checks
+
+### Skill Assessments
+
+These belong to an external team or repo and support product or placement eligibility.
+
+Loop B should align internal learning design to those external requirements rather than own the external assessment bank itself.
+
+## Alignment Dimensions
+
+When comparing learning design to external skill assessments, the system should evaluate:
+
+- question type alignment
+- difficulty alignment
+- concept coverage alignment
+- pattern alignment against industry signals
+- cadence alignment
+
+This is already becoming a first-class architectural concern in Loop B.
+
+## Future Extension: Practice And Testing Strategy
+
+Practice design and learning-assessment design may need their own design contracts over time.
+
+Useful future concepts include:
+
+- `practice_profile`
+  - examples: retrieval, guided build, debugging, reflection
+- `assessment_mode`
+  - examples: classroom quiz, module quiz, project evidence, placement readiness
+
+Those contracts may vary by:
+
+- stack
+- packaging
+- future product constraints
+- external assessment expectations
+
+This is a natural next step once the current Loop B structural refactor stabilizes.
 
 ## Interface Growth
 

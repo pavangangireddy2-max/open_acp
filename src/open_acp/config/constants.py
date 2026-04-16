@@ -1,8 +1,12 @@
 """Constants — model tiers, thresholds, paths."""
 
 # Model tiers
-STRONG_MODEL = "claude-opus-4-6"
-CHEAP_MODEL = "claude-haiku-4-5-20251001"
+ANTHROPIC_STRONG_MODEL = "claude-opus-4-6"
+ANTHROPIC_CHEAP_MODEL = "claude-haiku-4-5-20251001"
+
+# Backward-compatible aliases for older call sites.
+STRONG_MODEL = ANTHROPIC_STRONG_MODEL
+CHEAP_MODEL = ANTHROPIC_CHEAP_MODEL
 
 # Evaluation
 CONTENT_PASS_THRESHOLD = 3.5

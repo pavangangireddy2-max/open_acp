@@ -31,7 +31,10 @@ class LoopAState(BaseModel):
     cycle_id: str
     domain: str
     signal_batch: Optional[SignalBatch] = None
+    bootstrap_warnings: list[str] = []
     detected_patterns: list[dict] = []
+    pattern_detection_status: str = "not_started"
+    pattern_detection_note: Optional[str] = None
     drift_score: float = 0.0
     wiki_entries_created: list[str] = []
     wiki_entries_updated: list[str] = []
@@ -45,8 +48,23 @@ class LoopBState(BaseModel):
     domain: str
     skill_graph: Optional[SkillGraph] = None
     learner_model: Optional[LearnerModel] = None
+    curriculum_source_context: str = ""
     pedagogy_profile: Optional[str] = None
+    curriculum_generation_status: str = "not_started"
+    curriculum_generation_note: Optional[str] = None
+    curriculum_generation_raw_response: Optional[str] = None
+    previous_curriculum_map: Optional[dict] = None
     curriculum_map: Optional[CurriculumMap] = None
+    curriculum_change_report: Optional[dict] = None
+    packaging_profile: Optional[dict] = None
+    course_design: Optional[dict] = None
+    module_design: Optional[dict] = None
+    topic_design: Optional[dict] = None
+    learning_unit_plan: Optional[dict] = None
+    practice_design: Optional[dict] = None
+    learning_assessment_plan: Optional[dict] = None
+    skill_assessment_requirements: Optional[dict] = None
+    assessment_alignment_report: Optional[dict] = None
     gate_g2_outcome: Optional[GateOutcome] = None
 
 

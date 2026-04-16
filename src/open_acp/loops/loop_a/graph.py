@@ -38,6 +38,8 @@ class LoopAGraphState(TypedDict, total=False):
     domain: Annotated[str, _replace]
     signal_batch: Annotated[Any, _replace]
     detected_patterns: Annotated[list, _replace]
+    pattern_detection_status: Annotated[str, _replace]
+    pattern_detection_note: Annotated[Any, _replace]
     drift_score: Annotated[float, _replace]
     wiki_entries_created: Annotated[list, _merge_list]
     wiki_entries_updated: Annotated[list, _merge_list]

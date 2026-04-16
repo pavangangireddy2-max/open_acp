@@ -1,6 +1,11 @@
 version: 1
 domain: genai
 shared_audience_manifest: ../shared/audience_sources.yaml
+domain_pedagogy_profile: project_build_along
+domain_pedagogy_rationale: >
+  The GenAI stack curriculum is milestone- and project-centered overall.
+  Concept sessions should support build milestones, architecture choices, and
+  deployable outcomes rather than acting as isolated theory modules.
 
 raw_style_corpus:
   exports:
@@ -19,6 +24,9 @@ external_slide_sources:
 
 competitor_sources:
   - src/open_acp/knowledge/raw/competitors/competitor_courses.md
+curriculum_sources:
+  - src/open_acp/knowledge/raw/sources/genai_120hr_curriculum.md
 
 notes:
   - GenAI sessions should clearly separate landscape framing, model reasoning, system architecture, and applied build checkpoints.
+  - Treat project-based progression as the domain-level default even when individual sections temporarily switch into concept explanation or architecture reasoning.

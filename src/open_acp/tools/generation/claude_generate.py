@@ -1,13 +1,13 @@
 """ClaudeGenerate tool — wraps ClaudeClient for text generation."""
-import os
 import time
 
+from open_acp.config.settings import get_settings
 from open_acp.tools.base_tool import BaseTool, ToolResult, ToolStatus, ToolTier
 from open_acp.utils.claude import ClaudeClient
 
 
 class ClaudeGenerate(BaseTool):
-    """Generate text content using the Claude API."""
+    """Generate text content using the configured model provider."""
 
     name = "claude_generate"
     capability = "generation"
@@ -55,7 +55,8 @@ class ClaudeGenerate(BaseTool):
             return ToolResult(success=False, error=str(e))
 
     def get_status(self) -> ToolStatus:
-        """Check whether ANTHROPIC_API_KEY is set."""
-        if os.environ.get("ANTHROPIC_API_KEY"):
+        """Check whether any supported model provider key is set."""
+        settings = get_settings()
+        if settings.anthropic_api_key or settings.openai_api_key:
             return ToolStatus.AVAILABLE
         return ToolStatus.UNAVAILABLE

@@ -14,6 +14,8 @@ from datetime import datetime, UTC
 from pathlib import Path
 from typing import Any
 
+import yaml
+
 from open_acp.models.state import LoopAState
 from open_acp.models.signals import RawSignal, SignalBatch, ChannelCategory, ChannelType
 from open_acp.knowledge.wiki_engine import WikiEngine
@@ -26,8 +28,157 @@ def _get_raw_sources_dir() -> Path:
     return Path(__file__).parent.parent.parent / "knowledge" / "raw"
 
 
+def _get_project_root() -> Path:
+    current = Path(__file__).resolve()
+    for ancestor in current.parents:
+        if (ancestor / "pyproject.toml").exists():
+            return ancestor
+    return current.parents[4]
+
+
+def _infer_category(path: Path) -> str:
+    if "competitors" in path.parts:
+        return "competitors"
+    if "learner" in path.parts:
+        return "learner"
+    if "job_postings" in path.parts:
+        return "job_postings"
+    return "sources"
+
+
+def _normalize_token(value: str) -> str:
+    return value.lower().replace("-", "").replace("_", "").replace(" ", "")
+
+
+def _describe_source(source: dict) -> str:
+    filename = source.get("filename", "unknown")
+    category = source.get("category", "sources")
+    origin = source.get("source_origin", "unknown")
+    return f"{filename} ({category}, {origin})"
+
+
+def _select_relevant_patterns(patterns: list[dict], area: str, limit: int = 4) -> list[dict]:
+    relevant = [
+        pattern for pattern in patterns
+        if area in (pattern.get("affected_areas", []) or [])
+    ]
+    if relevant:
+        return relevant[:limit]
+    return patterns[:limit]
+
+
+def _extract_signal_source_refs(
+    signal_batch: SignalBatch | None,
+    allowed_channels: tuple[str, ...] | None = None,
+) -> list[str]:
+    if not signal_batch:
+        return []
+
+    refs: list[str] = []
+    for signal in signal_batch.signals:
+        if allowed_channels and signal.channel_name not in allowed_channels:
+            continue
+        filename = signal.metadata.get("filename")
+        if filename and filename not in refs:
+            refs.append(filename)
+    return refs
+
+
+def _is_obviously_domain_specific(domain: str, source: dict) -> bool:
+    domain_token = _normalize_token(domain)
+    if not domain_token:
+        return False
+
+    path_bits = [
+        str(source.get("path", "")),
+        source.get("filename", ""),
+    ]
+    return any(domain_token in _normalize_token(bit) for bit in path_bits if bit)
+
+
+def _build_bootstrap_warnings(domain: str, raw_sources: list[dict]) -> list[str]:
+    if not raw_sources:
+        return [
+            f"No raw sources were found for domain '{domain}'. "
+            "Loop A will continue in bootstrap mode with an empty signal batch."
+        ]
+
+    warnings: list[str] = []
+    categories_present = {src.get("category", "sources") for src in raw_sources}
+
+    for required in ("job_postings", "competitors"):
+        if required not in categories_present:
+            warnings.append(
+                f"No {required.replace('_', ' ')} sources were found for domain '{domain}'. "
+                "Loop A will continue in bootstrap mode, but wiki updates will be thin for that area."
+            )
+
+    for category in ("job_postings", "competitors"):
+        category_sources = [src for src in raw_sources if src.get("category") == category]
+        if category_sources and not any(_is_obviously_domain_specific(domain, src) for src in category_sources):
+            filenames = ", ".join(src.get("filename", "unknown") for src in category_sources[:3])
+            warnings.append(
+                f"No obviously {domain}-specific {category.replace('_', ' ')} sources were found. "
+                f"Bootstrap mode will use shared or generic inputs for now ({filenames})."
+            )
+
+    return warnings
+
+
+def _load_manifest_sources(domain: str) -> list[dict]:
+    """Load raw inputs from stack and shared manifests when available."""
+    project_root = _get_project_root()
+    manifest_path = project_root / "knowledge" / "manifests" / "stacks" / f"{domain}.yaml"
+    if not manifest_path.exists():
+        return []
+
+    with open(manifest_path, encoding="utf-8") as f:
+        manifest = yaml.safe_load(f) or {}
+
+    resolved_paths: list[Path] = []
+
+    shared_manifest = manifest.get("shared_audience_manifest")
+    if shared_manifest:
+        shared_manifest_path = (manifest_path.parent / shared_manifest).resolve()
+        if shared_manifest_path.exists():
+            with open(shared_manifest_path, encoding="utf-8") as f:
+                shared = yaml.safe_load(f) or {}
+            for paths in (shared.get("seed_inputs", {}) or {}).values():
+                for path_str in paths or []:
+                    resolved_paths.append((project_root / path_str).resolve())
+
+    for key in ["curriculum_sources", "competitor_sources"]:
+        for path_str in manifest.get(key, []) or []:
+            resolved_paths.append((project_root / path_str).resolve())
+
+    seen: set[Path] = set()
+    sources: list[dict] = []
+    for path in resolved_paths:
+        if path in seen or not path.exists():
+            continue
+        seen.add(path)
+        sources.append(
+            {
+                "filename": path.name,
+                "category": _infer_category(path),
+                "content": path.read_text(encoding="utf-8"),
+                "path": str(path),
+                "source_origin": "manifest",
+            }
+        )
+
+    return sources
+
+
 def _load_raw_sources(domain: str) -> list[dict]:
-    """Load all markdown files from knowledge/raw/ subdirectories."""
+    """Load all markdown files from knowledge/raw/ subdirectories.
+
+    Prefer manifest-driven source selection when a stack/domain manifest exists.
+    """
+    manifest_sources = _load_manifest_sources(domain)
+    if manifest_sources:
+        return manifest_sources
+
     raw_dir = _get_raw_sources_dir()
     sources = []
     for subdir in ["sources", "job_postings", "competitors", "learner"]:
@@ -38,6 +189,8 @@ def _load_raw_sources(domain: str) -> list[dict]:
                     "filename": f.name,
                     "category": subdir,
                     "content": f.read_text(encoding="utf-8"),
+                    "path": str(f),
+                    "source_origin": "filesystem_fallback",
                 })
     return sources
 
@@ -48,6 +201,7 @@ def ingest_signals(state: dict) -> dict:
     cycle_id = state.get("cycle_id", "unknown")
 
     raw_sources = _load_raw_sources(domain)
+    bootstrap_warnings = _build_bootstrap_warnings(domain, raw_sources)
 
     signals = []
     category_map = {
@@ -65,7 +219,11 @@ def ingest_signals(state: dict) -> dict:
             content=src["content"],
             timestamp=datetime.now(UTC).isoformat(),
             signal_type=ChannelType.PROACTIVE,
-            metadata={"filename": src["filename"]},
+            metadata={
+                "filename": src["filename"],
+                "source_origin": src.get("source_origin", "unknown"),
+                "source_path": src.get("path", ""),
+            },
         ))
 
     batch = SignalBatch(
@@ -76,7 +234,14 @@ def ingest_signals(state: dict) -> dict:
     )
 
     print(f"  Ingested {len(signals)} signals from {len(raw_sources)} sources")
-    return {"signal_batch": batch}
+    for source in raw_sources[:6]:
+        print(f"  Signal source: {_describe_source(source)}")
+    if len(raw_sources) > 6:
+        print(f"  Signal source: ... and {len(raw_sources) - 6} more")
+    for warning in bootstrap_warnings:
+        print(f"  Bootstrap warning: {warning}")
+
+    return {"signal_batch": batch, "bootstrap_warnings": bootstrap_warnings}
 
 
 def detect_patterns(state: dict) -> dict:
@@ -85,7 +250,12 @@ def detect_patterns(state: dict) -> dict:
     domain = state.get("domain", "ml-engineering")
 
     if not signal_batch or not signal_batch.signals:
-        return {"detected_patterns": [], "drift_score": 0.0}
+        return {
+            "detected_patterns": [],
+            "pattern_detection_status": "no_signals",
+            "pattern_detection_note": "No signals were available for pattern detection.",
+            "drift_score": 0.0,
+        }
 
     # Gather existing wiki knowledge for context
     wiki = WikiEngine()
@@ -137,6 +307,8 @@ Return ONLY the JSON object."""
     )
 
     # Parse response
+    pattern_detection_status = "parsed"
+    pattern_detection_note = None
     try:
         # Strip code fences
         cleaned = response.strip()
@@ -150,11 +322,31 @@ Return ONLY the JSON object."""
         patterns = data.get("patterns", [])
         drift_score = float(data.get("drift_score", 0.5))
     except (json.JSONDecodeError, ValueError):
+        pattern_detection_status = "fallback_non_json"
+        pattern_detection_note = (
+            "Pattern detection response could not be parsed as JSON. "
+            "Using a fallback placeholder pattern and default drift score 0.50."
+        )
         patterns = [{"pattern_id": "p_raw", "description": "Pattern detection returned non-JSON", "evidence": response[:500], "affected_areas": [], "confidence": 0.3, "is_new": True}]
         drift_score = 0.5
 
-    print(f"  Detected {len(patterns)} patterns, drift_score={drift_score:.2f}")
-    return {"detected_patterns": patterns, "drift_score": drift_score}
+    if pattern_detection_status == "fallback_non_json":
+        print(
+            f"  Pattern detection parse failed; using fallback placeholder and default drift score {drift_score:.2f}."
+        )
+    elif pattern_detection_status == "no_signals":
+        print("  Pattern detection skipped because no signals were available.")
+    else:
+        print(f"  Detected {len(patterns)} patterns, drift_score={drift_score:.2f}")
+    for pattern in patterns[:3]:
+        affected_areas = ", ".join(pattern.get("affected_areas", []) or []) or "unspecified"
+        print(f"  Detected pattern: {pattern.get('description', 'unknown pattern')} [{affected_areas}]")
+    return {
+        "detected_patterns": patterns,
+        "pattern_detection_status": pattern_detection_status,
+        "pattern_detection_note": pattern_detection_note,
+        "drift_score": drift_score,
+    }
 
 
 def update_skill_graph(state: dict) -> dict:
@@ -177,8 +369,31 @@ def update_skill_graph(state: dict) -> dict:
     if not signal_content:
         return {"wiki_entries_created": [], "wiki_entries_updated": []}
 
+    relevant_patterns = _select_relevant_patterns(patterns, "skill_graph")
+    pattern_context = ""
+    if relevant_patterns:
+        pattern_context = "## Detected Patterns To Honor\n"
+        for pattern in relevant_patterns:
+            affected_areas = ", ".join(pattern.get("affected_areas", []) or []) or "unspecified"
+            pattern_context += (
+                f"- {pattern.get('description', 'unknown pattern')} "
+                f"(areas: {affected_areas}; evidence: {pattern.get('evidence', 'not provided')})\n"
+            )
+
+    existing_skills = wiki.list_entities(entity_type="skill")
+    existing_skill_context = ""
+    if existing_skills:
+        existing_skill_context = "## Existing Canonical Skill IDs\n"
+        for skill in existing_skills[:20]:
+            existing_skill_context += f"- {skill['entity_id']}: {skill['title']}\n"
+
+    signal_sources = _extract_signal_source_refs(signal_batch, allowed_channels=("sources", "job_postings"))
+
     claude = ClaudeClient()
     prompt = f"""From these signals about "{domain}", extract a list of technical skills with demand scores.
+
+{pattern_context}
+{existing_skill_context}
 
 {signal_content[:6000]}
 
@@ -195,6 +410,9 @@ Return a JSON array of skills:
   }}
 ]
 
+Use the detected patterns to prioritize extraction.
+Reuse existing canonical skill IDs when a near-duplicate already exists.
+If multiple names refer to the same skill, choose one canonical skill_id instead of creating duplicates.
 Extract the top 8-12 most important skills. Return ONLY the JSON array."""
 
     response = claude.generate(prompt=prompt, system="You are a skills analyst. Extract concrete, specific skills with accurate demand scores.", model_tier="cheap", max_tokens=4096)
@@ -222,6 +440,7 @@ Extract the top 8-12 most important skills. Return ONLY the JSON array."""
                 content_delta=f"Demand score updated to {skill.get('demand_score', 0.5)}. {skill.get('description', '')}",
                 reason="Signal ingestion update",
                 new_confidence=skill.get("demand_score", 0.5),
+                new_sources=signal_sources,
             )
             updated.append(f"skill_{skill_id}")
         else:
@@ -233,11 +452,16 @@ Extract the top 8-12 most important skills. Return ONLY the JSON array."""
                 content=f"# {skill.get('name', skill_id)}\n\n{skill.get('description', '')}\n\n**Prerequisites:** {', '.join(skill.get('prerequisites', []))}\n\n**Demand Score:** {skill.get('demand_score', 0.5)}",
                 confidence=skill.get("demand_score", 0.5),
                 durability=skill.get("durability", "unknown"),
+                sources=signal_sources,
                 cross_references=cross_refs,
             )
             created.append(f"skill_{skill_id}")
 
-    print(f"  Skills — created: {len(created) - len(state.get('wiki_entries_created', []))}, updated: {len(updated) - len(state.get('wiki_entries_updated', []))}")
+    if relevant_patterns:
+        print("  Skill graph grounded in detected patterns:")
+        for pattern in relevant_patterns[:3]:
+            print(f"    - {pattern.get('description', 'unknown pattern')}")
+    print(f"  Skills — created: {len(created)}, updated: {len(updated)}")
     return {"wiki_entries_created": created, "wiki_entries_updated": updated}
 
 
@@ -317,7 +541,7 @@ Return ONLY the JSON array."""
             )
             created.append(f"audience_segment_{seg_id}")
 
-    print(f"  Learner segments — created: {len(created) - len(state.get('wiki_entries_created', []))}, updated: {len(updated) - len(state.get('wiki_entries_updated', []))}")
+    print(f"  Learner segments — created: {len(created)}, updated: {len(updated)}")
     return {"wiki_entries_created": created, "wiki_entries_updated": updated}
 
 
@@ -397,7 +621,7 @@ Return ONLY the JSON array."""
             )
             created.append(f"competitor_{comp_id}")
 
-    print(f"  Competitors — created: {len(created) - len(state.get('wiki_entries_created', []))}, updated: {len(updated) - len(state.get('wiki_entries_updated', []))}")
+    print(f"  Competitors — created: {len(created)}, updated: {len(updated)}")
     return {"wiki_entries_created": created, "wiki_entries_updated": updated}
 
 

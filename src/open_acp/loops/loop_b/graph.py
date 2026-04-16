@@ -12,13 +12,29 @@ class LoopBGraphState(TypedDict, total=False):
     cycle_id: Annotated[str, _replace]
     domain: Annotated[str, _replace]
     content_type: Annotated[str, _replace]
+    detected_patterns: Annotated[Any, _replace]
+    drift_score: Annotated[Any, _replace]
     skill_graph_context: Annotated[str, _replace]
     learner_context: Annotated[str, _replace]
+    curriculum_source_context: Annotated[str, _replace]
+    program_context: Annotated[str, _replace]
     pedagogy_profile: Annotated[str, _replace]
     pedagogy_rationale: Annotated[str, _replace]
+    curriculum_generation_status: Annotated[str, _replace]
+    curriculum_generation_note: Annotated[Any, _replace]
+    curriculum_generation_raw_response: Annotated[Any, _replace]
+    previous_curriculum_map: Annotated[Any, _replace]
     curriculum_map: Annotated[Any, _replace]
-    differentiation_matrix: Annotated[Any, _replace]
-    assessment_alignment: Annotated[Any, _replace]
+    curriculum_change_report: Annotated[Any, _replace]
+    packaging_profile: Annotated[Any, _replace]
+    course_design: Annotated[Any, _replace]
+    module_design: Annotated[Any, _replace]
+    topic_design: Annotated[Any, _replace]
+    learning_unit_plan: Annotated[Any, _replace]
+    practice_design: Annotated[Any, _replace]
+    learning_assessment_plan: Annotated[Any, _replace]
+    skill_assessment_requirements: Annotated[Any, _replace]
+    assessment_alignment_report: Annotated[Any, _replace]
     gate_g2_outcome: Annotated[Any, _replace]
 
 
@@ -27,23 +43,47 @@ def build_loop_b_graph() -> StateGraph:
         load_wiki_context,
         resolve_pedagogy_profile,
         generate_curriculum,
-        generate_differentiation,
-        align_assessments,
+        compare_curriculum_changes,
+        resolve_packaging_profile,
+        design_courses,
+        design_modules,
+        design_topics,
+        design_learning_units,
+        design_practice,
+        design_learning_assessments,
+        resolve_skill_assessment_requirements,
+        align_learning_with_skill_assessments,
     )
 
     graph = StateGraph(LoopBGraphState)
     graph.add_node("load_wiki_context", load_wiki_context)
     graph.add_node("resolve_pedagogy_profile", resolve_pedagogy_profile)
     graph.add_node("generate_curriculum", generate_curriculum)
-    graph.add_node("generate_differentiation", generate_differentiation)
-    graph.add_node("align_assessments", align_assessments)
+    graph.add_node("compare_curriculum_changes", compare_curriculum_changes)
+    graph.add_node("resolve_packaging_profile", resolve_packaging_profile)
+    graph.add_node("design_courses", design_courses)
+    graph.add_node("design_modules", design_modules)
+    graph.add_node("design_topics", design_topics)
+    graph.add_node("design_learning_units", design_learning_units)
+    graph.add_node("design_practice", design_practice)
+    graph.add_node("design_learning_assessments", design_learning_assessments)
+    graph.add_node("resolve_skill_assessment_requirements", resolve_skill_assessment_requirements)
+    graph.add_node("align_learning_with_skill_assessments", align_learning_with_skill_assessments)
 
     graph.set_entry_point("load_wiki_context")
     graph.add_edge("load_wiki_context", "resolve_pedagogy_profile")
     graph.add_edge("resolve_pedagogy_profile", "generate_curriculum")
-    graph.add_edge("generate_curriculum", "generate_differentiation")
-    graph.add_edge("generate_differentiation", "align_assessments")
-    graph.add_edge("align_assessments", END)
+    graph.add_edge("generate_curriculum", "compare_curriculum_changes")
+    graph.add_edge("compare_curriculum_changes", "resolve_packaging_profile")
+    graph.add_edge("resolve_packaging_profile", "design_courses")
+    graph.add_edge("design_courses", "design_modules")
+    graph.add_edge("design_modules", "design_topics")
+    graph.add_edge("design_topics", "design_learning_units")
+    graph.add_edge("design_learning_units", "design_practice")
+    graph.add_edge("design_practice", "design_learning_assessments")
+    graph.add_edge("design_learning_assessments", "resolve_skill_assessment_requirements")
+    graph.add_edge("resolve_skill_assessment_requirements", "align_learning_with_skill_assessments")
+    graph.add_edge("align_learning_with_skill_assessments", END)
 
     return graph
 

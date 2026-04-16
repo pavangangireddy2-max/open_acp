@@ -1,4 +1,7 @@
 """open_acp CLI — Typer-based command-line interface."""
+import json
+from pathlib import Path
+
 import typer
 from rich.console import Console
 from rich.panel import Panel
@@ -10,6 +13,159 @@ app = typer.Typer(
     no_args_is_help=True,
 )
 console = Console()
+
+
+def _build_module_context(
+    content_type: str,
+    module_id: str,
+    module_title: str,
+    domain: str,
+    estimated_hours: float,
+) -> dict:
+    """Build the initial Loop C module context.
+
+    First-wave pipelines generate objectives inside the pipeline, so they should
+    not receive placeholder objectives up front.
+    """
+    context = {
+        "module_id": module_id,
+        "title": module_title,
+        "domain": domain,
+        "estimated_hours": estimated_hours,
+        "prerequisites": [],
+    }
+
+    if content_type not in {"concept_explainer", "project_building"}:
+        context["objectives"] = [
+            {"id": "obj_1", "statement": f"Understand core concepts of {module_title}", "bloom_level": "understand"},
+            {"id": "obj_2", "statement": f"Apply {module_title} concepts to solve problems", "bloom_level": "apply"},
+            {"id": "obj_3", "statement": f"Analyze trade-offs in {module_title} approaches", "bloom_level": "analyze"},
+        ]
+
+    return context
+
+
+def _outputs_root() -> Path:
+    return Path(__file__).resolve().parents[3] / "outputs"
+
+
+def _build_domain_review_packet(
+    domain: str,
+    content_type: str,
+    cycle_id: str,
+    loop_a_result: dict,
+    loop_b_result: dict,
+) -> dict:
+    curriculum = loop_b_result.get("curriculum_map", {})
+    course_design = loop_b_result.get("course_design", {}) or {}
+    courses = course_design.get("courses", []) or curriculum.get("modules", [])
+    module_design = loop_b_result.get("module_design", {}) or {}
+    topic_design = loop_b_result.get("topic_design", {}) or {}
+    learning_unit_plan = loop_b_result.get("learning_unit_plan", {}) or {}
+    packaging_profile = loop_b_result.get("packaging_profile", {}) or {}
+    alignment_report = loop_b_result.get("assessment_alignment_report", {}) or {}
+    return {
+        "domain": domain,
+        "content_type": content_type,
+        "cycle_id": cycle_id,
+        "loop_a": {
+            "created_count": len(loop_a_result.get("wiki_entries_created", [])),
+            "updated_count": len(loop_a_result.get("wiki_entries_updated", [])),
+            "drift_score": loop_a_result.get("drift_score", 0.0),
+        },
+        "loop_b": {
+            "pedagogy_profile": loop_b_result.get("pedagogy_profile", "unknown"),
+            "pedagogy_rationale": loop_b_result.get("pedagogy_rationale", "unknown"),
+            "curriculum_label": curriculum.get("program_name", f"{domain} Curriculum"),
+            "total_hours": curriculum.get("total_hours", 0),
+            "course_count": len(courses),
+            "courses": [
+                {
+                    "course_id": course.get("course_id", course.get("module_id", f"course_{index+1}")),
+                    "title": course.get("title", "Untitled"),
+                    "sequence": course.get("sequence", index + 1),
+                    "estimated_hours": course.get("estimated_hours", 0),
+                    "content_types": course.get("content_types", []),
+                    "objective_count": len(course.get("objective_ids", course.get("objectives", []))),
+                }
+                for index, course in enumerate(courses)
+            ],
+            "packaging_profile_id": packaging_profile.get("packaging_profile_id", "default"),
+            "module_count": module_design.get("total_module_count", 0),
+            "topic_count": topic_design.get("total_topic_count", 0),
+            "learning_unit_count": learning_unit_plan.get("total_learning_unit_count", 0),
+            "question_types_covered": loop_b_result.get("learning_assessment_plan", {}).get("question_types_covered", []),
+            "alignment_status": alignment_report.get("overall_status", "unknown"),
+            "assessment_schedule": loop_b_result.get("learning_assessment_plan", {}).get("assessment_schedule", {}),
+        },
+    }
+
+
+def _render_domain_review_packet_markdown(packet: dict) -> str:
+    loop_a = packet["loop_a"]
+    loop_b = packet["loop_b"]
+    lines = [
+        f"# Domain Review Packet: {packet['domain']}",
+        "",
+        f"- Content Type Seed: `{packet['content_type']}`",
+        f"- Cycle ID: `{packet['cycle_id']}`",
+        "",
+        "## Loop A Summary",
+        f"- Wiki entries created: {loop_a['created_count']}",
+        f"- Wiki entries updated: {loop_a['updated_count']}",
+        f"- Drift score: {loop_a['drift_score']}",
+        "",
+        "## Loop B Summary",
+        f"- Curriculum: {loop_b['curriculum_label']}",
+        f"- Pedagogy Profile: `{loop_b['pedagogy_profile']}`",
+        f"- Pedagogy Rationale: {loop_b['pedagogy_rationale']}",
+        f"- Total Hours: {loop_b['total_hours']}",
+        f"- Course Count: {loop_b['course_count']}",
+        f"- Packaging Profile: `{loop_b['packaging_profile_id']}`",
+        f"- Module Count: {loop_b['module_count']}",
+        f"- Topic Count: {loop_b['topic_count']}",
+        f"- Learning Unit Count: {loop_b['learning_unit_count']}",
+        f"- Skill Assessment Alignment: `{loop_b['alignment_status']}`",
+        "",
+        "## Proposed Courses",
+    ]
+
+    for course in loop_b["courses"]:
+        content_types = ", ".join(course.get("content_types", [])) or "not specified"
+        lines.append(
+            f"- C{course['sequence']}: `{course['course_id']}` — {course['title']} "
+            f"({course['estimated_hours']}h, objectives={course['objective_count']}, content_types={content_types})"
+        )
+
+    if loop_b.get("question_types_covered"):
+        lines.extend(
+            [
+                "",
+                "## Learning Assessment Coverage",
+                f"- Question Types Covered: {', '.join(loop_b['question_types_covered'])}",
+            ]
+        )
+
+    schedule = loop_b.get("assessment_schedule", {})
+    if schedule:
+        lines.extend(["", "## Assessment Schedule"])
+        for key, value in schedule.items():
+            lines.append(f"- {key}: {value}")
+
+    return "\n".join(lines) + "\n"
+
+
+def _save_domain_review_packet(packet: dict) -> dict[str, str]:
+    review_dir = _outputs_root() / "domain_reviews" / packet["domain"] / packet["cycle_id"]
+    review_dir.mkdir(parents=True, exist_ok=True)
+
+    json_path = review_dir / "curriculum_review.json"
+    md_path = review_dir / "curriculum_review.md"
+
+    json_path.write_text(json.dumps(packet, indent=2), encoding="utf-8")
+    md_path.write_text(_render_domain_review_packet_markdown(packet), encoding="utf-8")
+
+    return {"json": str(json_path), "markdown": str(md_path)}
 
 
 @app.command()
@@ -86,18 +242,13 @@ def run(
 
         console.print(f"\n[dim]Tools: {len(registry.get_available())} available[/dim]")
 
-        module_context = {
-            "module_id": module_id,
-            "title": module_title,
-            "domain": domain,
-            "estimated_hours": estimated_hours,
-            "objectives": [
-                {"id": "obj_1", "statement": f"Understand core concepts of {module_title}", "bloom_level": "understand"},
-                {"id": "obj_2", "statement": f"Apply {module_title} concepts to solve problems", "bloom_level": "apply"},
-                {"id": "obj_3", "statement": f"Analyze trade-offs in {module_title} approaches", "bloom_level": "analyze"},
-            ],
-            "prerequisites": [],
-        }
+        module_context = _build_module_context(
+            content_type=content_type,
+            module_id=module_id,
+            module_title=module_title,
+            domain=domain,
+            estimated_hours=estimated_hours,
+        )
 
         from open_acp.loops.loop_c.pipeline_executor import PipelineExecutor
         executor = PipelineExecutor()
@@ -112,6 +263,238 @@ def run(
         except Exception as e:
             console.print(f"\n[bold red]Pipeline failed: {e}[/bold red]")
             raise typer.Exit(code=1)
+
+
+@app.command()
+def review(
+    content_type: str = typer.Option("concept_explainer", "--content-type", "-t", help="Content type to produce"),
+    domain: str = typer.Option("ml-engineering", "--domain", "-d", help="Domain context"),
+    module_title: str = typer.Option("Introduction to the Topic", "--title", help="Module title"),
+    module_id: str = typer.Option("m1", "--module-id", help="Module identifier"),
+    estimated_hours: float = typer.Option(1.0, "--hours", help="Estimated session hours"),
+    stage_id: str = typer.Option("", "--stage", help="Optional stage to regenerate explicitly"),
+    review_notes: str = typer.Option("", "--review-notes", help="Optional reviewer guidance to inject into this stage"),
+):
+    """Run exactly one Loop C stage, save a checkpoint packet, and stop for review."""
+    from open_acp.utils.logger import setup_logging
+    setup_logging()
+
+    from open_acp.tools.tool_registry import registry
+    registry.discover()
+
+    module_context = _build_module_context(
+        content_type=content_type,
+        module_id=module_id,
+        module_title=module_title,
+        domain=domain,
+        estimated_hours=estimated_hours,
+    )
+
+    from open_acp.loops.loop_c.pipeline_executor import PipelineExecutor
+    executor = PipelineExecutor()
+
+    try:
+        result = executor.execute_review_stage(
+            content_type=content_type,
+            module_context=module_context,
+            domain=domain,
+            stage_id=stage_id or None,
+            review_notes=review_notes,
+        )
+    except Exception as e:
+        console.print(f"\n[bold red]Review-stage run failed: {e}[/bold red]")
+        raise typer.Exit(code=1)
+
+    if result["status"] == "complete":
+        console.print(
+            Panel(
+                f"[bold green]Pipeline already complete[/bold green]\n"
+                f"Final document: [cyan]{result['final_document_path']}[/cyan]",
+                title="Review Mode",
+                border_style="green",
+            )
+        )
+        return
+
+    packet = result["review_packet"]
+    console.print(
+        Panel(
+            f"[bold]Stage[/bold]: [cyan]{result['stage_id']}[/cyan]\n"
+            f"[bold]Decision[/bold]: [green]{packet['review_decision']}[/green]\n"
+            f"[bold]Validated[/bold]: [yellow]{packet['validated']}[/yellow]\n"
+            f"[bold]Next Stage[/bold]: [magenta]{result['next_stage_id'] or 'complete'}[/magenta]\n"
+            f"[bold]Review Packet[/bold]: [blue]{result['review_packet_paths']['markdown']}[/blue]",
+            title="Stage Complete — Awaiting Review",
+            border_style="blue",
+        )
+    )
+
+    table = Table(title="Key Decisions")
+    table.add_column("#", style="cyan", width=4)
+    table.add_column("Decision", style="white")
+    for idx, item in enumerate(packet.get("key_decisions", []), start=1):
+        table.add_row(str(idx), item)
+    console.print(table)
+
+    findings = packet.get("review_findings", [])
+    if findings:
+        findings_table = Table(title="Reviewer Findings")
+        findings_table.add_column("Status", style="magenta", width=10)
+        findings_table.add_column("Criterion", style="cyan")
+        findings_table.add_column("Detail", style="white")
+        for finding in findings:
+            findings_table.add_row(
+                finding.get("status", "WARNING"),
+                finding.get("criterion", "criterion"),
+                finding.get("detail", ""),
+            )
+        console.print(findings_table)
+
+    console.print(
+        "\n[dim]To proceed, run the same command again without --stage to execute the next pending stage.[/dim]"
+    )
+
+
+@app.command("review-loop")
+def review_loop(
+    loop_id: str = typer.Argument(..., help="Loop to review: loop_a or loop_b"),
+    domain: str = typer.Option("ml-engineering", "--domain", "-d", help="Domain or stack context"),
+    content_type: str = typer.Option("concept_explainer", "--content-type", "-t", help="Content type seed used by Loop B"),
+    cycle_id: str = typer.Option("cycle_1", "--cycle-id", help="Cycle identifier"),
+    stage_id: str = typer.Option("", "--stage", help="Optional stage to run explicitly"),
+):
+    """Run exactly one Loop A or Loop B stage, save a checkpoint packet, and stop."""
+    from open_acp.utils.logger import setup_logging
+    setup_logging()
+
+    from open_acp.orchestrator.loop_review import LoopReviewRunner
+
+    base_state = {
+        "domain": domain,
+        "cycle_id": cycle_id,
+    }
+    if loop_id.strip().lower().replace("-", "_") in {"loop_b", "b", "loopb"}:
+        base_state["content_type"] = content_type
+
+    runner = LoopReviewRunner()
+
+    try:
+        result = runner.execute_review_stage(
+            loop_id=loop_id,
+            base_state=base_state,
+            stage_id=stage_id or None,
+        )
+    except Exception as e:
+        console.print(f"\n[bold red]Loop review failed: {e}[/bold red]")
+        raise typer.Exit(code=1)
+
+    if result["status"] == "complete":
+        console.print(
+            Panel(
+                f"[bold green]Loop already complete[/bold green]\n"
+                f"State file: [cyan]{result['state_path']}[/cyan]",
+                title="Loop Review",
+                border_style="green",
+            )
+        )
+        return
+
+    packet = result["review_packet"]
+    console.print(
+        Panel(
+            f"[bold]Loop[/bold]: [cyan]{result['loop_id']}[/cyan]\n"
+            f"[bold]Stage[/bold]: [cyan]{result['stage_id']}[/cyan]\n"
+            f"[bold]Next Stage[/bold]: [magenta]{result['next_stage_id'] or 'complete'}[/magenta]\n"
+            f"[bold]Review Packet[/bold]: [blue]{result['review_packet_paths']['markdown']}[/blue]",
+            title="Loop Stage Complete — Awaiting Review",
+            border_style="blue",
+        )
+    )
+
+    console.print(packet.get("summary", "Stage complete."))
+
+    table = Table(title="Key Decisions")
+    table.add_column("#", style="cyan", width=4)
+    table.add_column("Decision", style="white")
+    for idx, item in enumerate(packet.get("key_decisions", []), start=1):
+        table.add_row(str(idx), item)
+    console.print(table)
+
+    console.print(
+        "\n[dim]To continue, rerun this command without --stage to execute the next pending stage in the same loop.[/dim]"
+    )
+
+
+@app.command("review-domain")
+def review_domain(
+    domain: str = typer.Option("ml-engineering", "--domain", "-d", help="Domain context"),
+    content_type: str = typer.Option("concept_explainer", "--content-type", "-t", help="Content type seed used for curriculum shaping"),
+    cycle_id: str = typer.Option("cycle_1", "--cycle-id", help="Cycle identifier"),
+):
+    """Run Loop A and Loop B, save a curriculum review packet, and stop."""
+    from open_acp.utils.logger import setup_logging
+    setup_logging()
+
+    console.print(
+        Panel(
+            f"[bold]Curriculum Review[/bold]\n"
+            f"Domain: [green]{domain}[/green]\n"
+            f"Content Type Seed: [cyan]{content_type}[/cyan]\n"
+            f"Mode: [magenta]Loop A → Loop B only[/magenta]",
+            title="open_acp",
+            border_style="blue",
+        )
+    )
+
+    from open_acp.loops.loop_a.graph import run_loop_a
+    from open_acp.loops.loop_b.graph import run_loop_b
+
+    try:
+        loop_a_result = run_loop_a(domain=domain, cycle_id=cycle_id)
+        loop_b_result = run_loop_b(domain=domain, cycle_id=cycle_id, content_type=content_type)
+    except Exception as e:
+        console.print(f"\n[bold red]Curriculum review failed: {e}[/bold red]")
+        raise typer.Exit(code=1)
+
+    packet = _build_domain_review_packet(
+        domain=domain,
+        content_type=content_type,
+        cycle_id=cycle_id,
+        loop_a_result=loop_a_result,
+        loop_b_result=loop_b_result,
+    )
+    paths = _save_domain_review_packet(packet)
+
+    loop_b = packet["loop_b"]
+    console.print(
+        Panel(
+            f"[bold]Pedagogy Profile[/bold]: [cyan]{loop_b['pedagogy_profile']}[/cyan]\n"
+            f"[bold]Rationale[/bold]: [white]{loop_b['pedagogy_rationale']}[/white]\n"
+            f"[bold]Courses[/bold]: [yellow]{loop_b['course_count']}[/yellow]\n"
+            f"[bold]Packaging[/bold]: [magenta]{loop_b['packaging_profile_id']}[/magenta]\n"
+            f"[bold]Review Packet[/bold]: [blue]{paths['markdown']}[/blue]",
+            title="Curriculum Checkpoint — Awaiting Review",
+            border_style="blue",
+        )
+    )
+
+    modules_table = Table(title="Proposed Curriculum Courses")
+    modules_table.add_column("Seq", style="cyan", width=5)
+    modules_table.add_column("Course", style="white")
+    modules_table.add_column("Hours", style="green", width=8)
+    modules_table.add_column("Content Types", style="magenta")
+    for course in loop_b["courses"]:
+        modules_table.add_row(
+            str(course["sequence"]),
+            course["title"],
+            str(course["estimated_hours"]),
+            ", ".join(course.get("content_types", [])) or "n/a",
+        )
+    console.print(modules_table)
+
+    console.print(
+        "\n[dim]Review the curriculum packet first. Once approved, pick a course seed or a downstream module/topic design stage before continuing into Loop C.[/dim]"
+    )
 
 
 @app.command()

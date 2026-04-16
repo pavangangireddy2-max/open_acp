@@ -26,6 +26,11 @@ These are generated and should not be treated as canonical tracked source files:
 
 These should live under `storage/wiki` or another runtime-owned location.
 
+This runtime layer should eventually support both:
+
+- canonical shared entities
+- stack-specific graph or profile views
+
 ## 3. Execution Outputs
 
 These are generated artifacts from pipeline runs:
@@ -54,6 +59,28 @@ Today some of this is file-backed. Over time, this can mature into more durable 
 - PostgreSQL for episodic and feedback records
 - vector or hybrid retrieval stores for semantic memory
 - richer graph-like structures for wiki relationships
+
+## Skill Graph Storage Direction
+
+The recommended direction is:
+
+1. shared canonical entities
+2. stack-specific skill profiles
+3. stack-specific relationship edges
+
+This means the system should not duplicate the whole wiki per stack.
+
+Instead, it should support:
+
+- one shared `skill_python` entity
+- separate stack-aware interpretations of that skill for `genai`, `dsa`, and other stacks
+
+Conceptually, that suggests future storage shapes such as:
+
+- entity records
+- stack profile records
+- relationship or edge records
+- runtime search and indexing views
 
 ## Storage Design Rule
 

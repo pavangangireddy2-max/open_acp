@@ -28,3 +28,12 @@ def test_resolve_global_default_when_type_missing():
 def test_list_profiles_includes_concept_progression():
     resolver = PedagogyResolver()
     assert "concept_progression" in resolver.list_profiles()
+
+
+def test_resolve_domain_profile_prefers_stack_manifest_override():
+    resolver = PedagogyResolver()
+    resolution = resolver.resolve_domain_profile(domain="genai", content_type="concept_explainer")
+
+    assert resolution["profile"] == "project_build_along"
+    assert "stack manifest override" in resolution["reason"]
+    assert "project-centered" in resolution["rationale"]

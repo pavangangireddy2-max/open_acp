@@ -1,6 +1,6 @@
 """MCQ generator tool — generates multiple choice questions via Claude."""
+from open_acp.config.settings import get_settings
 from open_acp.tools.base_tool import BaseTool, ToolResult, ToolTier, ToolStatus
-import os
 
 
 class MCQGenerator(BaseTool):
@@ -27,4 +27,7 @@ class MCQGenerator(BaseTool):
             return ToolResult(success=False, error=str(e))
 
     def get_status(self) -> ToolStatus:
-        return ToolStatus.AVAILABLE if os.environ.get("ANTHROPIC_API_KEY") else ToolStatus.UNAVAILABLE
+        settings = get_settings()
+        if settings.anthropic_api_key or settings.openai_api_key:
+            return ToolStatus.AVAILABLE
+        return ToolStatus.UNAVAILABLE
