@@ -19,7 +19,7 @@ These belong in Git because they are canonical inputs:
 
 These are generated and should not be treated as canonical tracked source files:
 
-- runtime wiki entities
+- runtime knowledge-store entities
 - wiki indexes
 - wiki logs
 - crystallized runtime knowledge artifacts
@@ -38,7 +38,7 @@ Current implementation note:
 - product summaries are derived runtime entities, not canonical catalogs
 
 For controlled reruns or clean simulations, it should be acceptable to wipe `storage/wiki`
-and rebuild runtime knowledge from canonical manifests and source inputs.
+and rebuild the runtime knowledge store from canonical manifests and source inputs.
 
 ## 3. Execution Outputs
 

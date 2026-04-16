@@ -12,6 +12,16 @@ The goal is to keep:
 
 clearly separated as the system becomes more product-aware and structure-aware.
 
+Important distinction:
+
+- prompts are not the same thing as runtime guidance playbooks
+- prompts belong in `skills/...` and later `loops/.../prompts/`
+- guidance belongs in the non-code knowledge layer and should eventually live under `knowledge/guidance/...`
+
+See also:
+
+- [Source And Guidance Model](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/source_and_guidance_model.md)
+
 ## Current State
 
 Today the repo mostly uses:

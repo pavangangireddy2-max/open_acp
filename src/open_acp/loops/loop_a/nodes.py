@@ -29,9 +29,9 @@ from open_acp.config.curriculum_context import (
 )
 
 
-def _get_raw_sources_dir() -> Path:
-    """Get the knowledge/raw/ directory path."""
-    return Path(__file__).parent.parent.parent / "knowledge" / "raw"
+def _get_sources_root() -> Path:
+    """Get the canonical knowledge/sources/ directory path."""
+    return _get_project_root() / "knowledge" / "sources"
 
 
 def _get_project_root() -> Path:
@@ -43,8 +43,10 @@ def _infer_category(path: Path) -> str:
         return "competitors"
     if "learner" in path.parts:
         return "learner"
-    if "job_postings" in path.parts:
+    if "job_postings" in path.parts or "hiring" in path.parts:
         return "job_postings"
+    if "market" in path.parts:
+        return "sources"
     return "sources"
 
 
@@ -284,7 +286,7 @@ def _build_product_context_markdown(
 
 
 def _load_raw_sources(domain: str) -> list[dict]:
-    """Load all markdown files from knowledge/raw/ subdirectories.
+    """Load all markdown files from canonical knowledge/sources directories.
 
     Prefer manifest-driven source selection when a stack/domain manifest exists.
     """
@@ -292,19 +294,37 @@ def _load_raw_sources(domain: str) -> list[dict]:
     if manifest_sources:
         return manifest_sources
 
-    raw_dir = _get_raw_sources_dir()
+    sources_root = _get_sources_root()
     sources = []
-    for subdir in ["sources", "job_postings", "competitors", "learner"]:
-        src_dir = raw_dir / subdir
-        if src_dir.exists():
-            for f in sorted(src_dir.glob("*.md")):
-                sources.append({
-                    "filename": f.name,
-                    "category": subdir,
-                    "content": f.read_text(encoding="utf-8"),
-                    "path": str(f),
-                    "source_origin": "filesystem_fallback",
-                })
+    fallback_dirs: list[tuple[Path, str]] = []
+
+    if sources_root.exists():
+        domain_root = sources_root / "domains" / domain
+        fallback_dirs.extend(
+            [
+                (sources_root / "shared" / "learner", "learner"),
+                (sources_root / "shared" / "hiring", "job_postings"),
+                (sources_root / "shared" / "competitors", "competitors"),
+                (sources_root / "shared" / "market", "sources"),
+                (domain_root, "sources"),
+            ]
+        )
+
+    seen_paths: set[Path] = set()
+    for src_dir, category in fallback_dirs:
+        if not src_dir.exists():
+            continue
+        for f in sorted(src_dir.rglob("*.md")):
+            if f in seen_paths:
+                continue
+            seen_paths.add(f)
+            sources.append({
+                "filename": f.name,
+                "category": category,
+                "content": f.read_text(encoding="utf-8"),
+                "path": str(f),
+                "source_origin": "filesystem_fallback",
+            })
     return sources
 
 

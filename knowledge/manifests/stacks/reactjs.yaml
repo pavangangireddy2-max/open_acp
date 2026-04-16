@@ -16,7 +16,7 @@ external_slide_sources:
   - https://docs.google.com/presentation/d/1ZScLU2nyJTG7XTOxCZWuMf3Fx5br8QqazaQHD8Z2Nnc/edit
 
 competitor_sources:
-  - src/open_acp/knowledge/raw/competitors/competitor_courses.md
+  - knowledge/sources/shared/competitors/competitor_courses.md
 
 notes:
   - React sessions should bridge from JavaScript fundamentals, component trees, and UI state flow before implementation details.

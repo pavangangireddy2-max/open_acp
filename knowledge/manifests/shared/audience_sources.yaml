@@ -4,11 +4,11 @@ description: Shared learner and audience inputs used across domains unless overr
 
 seed_inputs:
   learner_persona:
-    - src/open_acp/knowledge/raw/learner/target_persona.md
+    - knowledge/sources/shared/learner/target_persona.md
 
   shared_market_signals:
-    - src/open_acp/knowledge/raw/job_postings/ml_engineer_requirements.md
-    - src/open_acp/knowledge/raw/sources/ml_engineering_trends_2026.md
+    - knowledge/sources/shared/hiring/ml_engineer_requirements.md
+    - knowledge/sources/shared/market/ml_engineering_trends_2026.md
 
 notes:
   - Keep audience seed inputs global by default in V1.

@@ -49,6 +49,59 @@ def _outputs_root() -> Path:
     return Path(__file__).resolve().parents[3] / "outputs"
 
 
+def _render_operator_guide() -> None:
+    console.print(
+        Panel(
+            "[bold]Recommended Operating Mode[/bold]\n"
+            "Use Open ACP in staged review mode for real curriculum and content work.\n"
+            "Prefer [cyan]review-loop[/cyan], [cyan]review-domain[/cyan], and [cyan]review[/cyan]\n"
+            "instead of jumping straight to [magenta]run[/magenta].",
+            title="Operator Guide",
+            border_style="blue",
+        )
+    )
+
+    table = Table(title="Recommended Command Flow")
+    table.add_column("Goal", style="cyan")
+    table.add_column("Command", style="white")
+    table.add_row(
+        "Loop A one node at a time",
+        "oacp review-loop loop_a --domain genai --cycle-id genai_niat_b3_v1 --product-family NIAT --product-version B3",
+    )
+    table.add_row(
+        "Loop B one node at a time",
+        "oacp review-loop loop_b --domain genai --content-type concept_explainer --cycle-id genai_niat_b3_v1 --product-family NIAT --product-version B3",
+    )
+    table.add_row(
+        "Loop A + Loop B checkpoint",
+        "oacp review-domain --domain genai --content-type concept_explainer --cycle-id genai_niat_b3_v1 --product-family NIAT --product-version B3",
+    )
+    table.add_row(
+        "Loop C one stage at a time",
+        "oacp review --content-type concept_explainer --domain genai --title \"How Retrieval-Augmented Generation Works\" --module-id rag_intro --hours 1.0",
+    )
+    table.add_row(
+        "Batch/full execution only after approval",
+        "oacp run --full --content-type concept_explainer --domain genai --title \"How Retrieval-Augmented Generation Works\" --module-id rag_intro --hours 1.0",
+    )
+    console.print(table)
+
+    prompts = Table(title="Example Prompts To Ask Codex")
+    prompts.add_column("#", style="cyan", width=4)
+    prompts.add_column("Prompt", style="white")
+    prompts.add_row("1", "Start a fresh genai + NIAT B3 run from Loop A in strict mode, one node at a time.")
+    prompts.add_row("2", "Run only the next pending Loop B node for this cycle and stop for review.")
+    prompts.add_row("3", "Start concept_explainer in review mode and stop after each stage.")
+    prompts.add_row("4", "Wipe runtime wiki, restart the cycle, and show me the ingest_signals checkpoint first.")
+    prompts.add_row("5", "Explain this review packet before moving to the next node.")
+    console.print(prompts)
+
+    console.print(
+        "\n[dim]Operational rule of thumb: use staged review commands for real work, "
+        "and use full run modes only after curriculum and product context are reviewed.[/dim]"
+    )
+
+
 def _build_domain_review_packet(
     domain: str,
     content_type: str,
@@ -273,6 +326,12 @@ def run(
         except Exception as e:
             console.print(f"\n[bold red]Pipeline failed: {e}[/bold red]")
             raise typer.Exit(code=1)
+
+
+@app.command()
+def guide():
+    """Show the recommended agentic, stage-by-stage operating flow."""
+    _render_operator_guide()
 
 
 @app.command()

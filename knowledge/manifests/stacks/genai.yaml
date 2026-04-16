@@ -23,9 +23,9 @@ external_slide_sources:
   - https://docs.google.com/presentation/d/1bIpAmU6KCPv2YKu6qwhgIw9eVLH9Qth6cm596gshFWY/edit
 
 competitor_sources:
-  - src/open_acp/knowledge/raw/competitors/competitor_courses.md
+  - knowledge/sources/shared/competitors/competitor_courses.md
 curriculum_sources:
-  - src/open_acp/knowledge/raw/sources/genai_120hr_curriculum.md
+  - knowledge/sources/domains/genai/curriculum_refs/genai_120hr_curriculum.md
 
 notes:
   - GenAI sessions should clearly separate landscape framing, model reasoning, system architecture, and applied build checkpoints.

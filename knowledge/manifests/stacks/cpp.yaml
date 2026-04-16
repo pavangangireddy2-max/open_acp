@@ -16,9 +16,9 @@ raw_style_corpus:
     - knowledge/raw/brand/cpp_s10.pdf
 
 derived_analysis:
-  - src/open_acp/knowledge/raw/brand/cpp_s2_analysis.md
-  - src/open_acp/knowledge/raw/brand/cpp_s3_stl_analysis.md
-  - src/open_acp/knowledge/raw/brand/cpp_s4_sessions8910_analysis.md
+  - knowledge/analyses/style/cpp/cpp_s2_analysis.md
+  - knowledge/analyses/style/cpp/cpp_s3_stl_analysis.md
+  - knowledge/analyses/style/cpp/cpp_s4_sessions8910_analysis.md
 
 external_slide_sources:
   - https://docs.google.com/presentation/d/10ffDecBpM41defLEzyElV9KSexTEQOex8iKS1GcWD8k/edit
@@ -33,7 +33,7 @@ external_slide_sources:
   - https://docs.google.com/presentation/d/1AB1JeuKssdyEwyIk63FifRlMLmCfeG-KrS7Qwn164j0/edit
 
 competitor_sources:
-  - src/open_acp/knowledge/raw/competitors/competitor_courses.md
+  - knowledge/sources/shared/competitors/competitor_courses.md
 
 notes:
   - C++ teaching relies heavily on Python comparison tables, memory diagrams, and deliberate pitfall exposure.

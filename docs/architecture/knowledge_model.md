@@ -18,6 +18,31 @@ The short version is:
 - yes, the skill graph should be stack-specific
 - no, the underlying wiki should not be fully duplicated per stack
 
+## Canonical Inputs vs Runtime Knowledge
+
+The wiki is not the canonical home for every kind of knowledge.
+
+The intended rule is:
+
+- manifests and catalogs stay canonical for designed inputs and structured references
+- seeded source files stay canonical for runtime-ingested text evidence
+- the runtime knowledge store (`storage/wiki`) stores synthesized operating knowledge
+
+So for example:
+
+- product definitions belong in manifests
+- NIAT CSVs belong in catalogs
+- learner, hiring, competitor, and curriculum reference markdown belongs in sources
+- runtime skill entities and stack overlays belong in the wiki
+
+And importantly:
+
+- those canonical source files should not live under `src/`
+
+See also:
+
+- [Source And Guidance Model](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/source_and_guidance_model.md)
+
 ## Why This Matters
 
 Some skills are reusable across many stacks:

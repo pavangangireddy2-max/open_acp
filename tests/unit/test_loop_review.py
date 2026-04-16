@@ -214,10 +214,12 @@ def test_loop_review_runner_generate_curriculum_fallback_wording(monkeypatch, tm
 def test_load_raw_sources_prefers_manifest_for_genai():
     sources = _load_raw_sources("genai")
     filenames = sorted(source["filename"] for source in sources)
+    paths = [source["path"] for source in sources]
 
     assert "genai_120hr_curriculum.md" in filenames
     assert "target_persona.md" in filenames
     assert "competitor_courses.md" in filenames
+    assert all("knowledge/sources/" in path for path in paths)
 
 
 def test_build_bootstrap_warnings_flags_generic_domain_coverage():

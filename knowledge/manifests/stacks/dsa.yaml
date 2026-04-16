@@ -16,7 +16,7 @@ external_slide_sources:
   - https://docs.google.com/presentation/d/1AePiMEWD_wj37Q0ZDX_aVQ_DGn1M_69KFxwyou1yHkg/edit
 
 competitor_sources:
-  - src/open_acp/knowledge/raw/competitors/competitor_courses.md
+  - knowledge/sources/shared/competitors/competitor_courses.md
 
 notes:
   - DSA sessions should favor visual models, analogy-first explanations, and application-driven motivation.

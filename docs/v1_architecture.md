@@ -108,7 +108,7 @@ This style context is injected during generation and review, not only during `br
 
 The wiki follows a Karpathy/Wiki-V2-inspired split:
 
-- tracked source inputs live under `knowledge/` and `src/open_acp/knowledge/raw/`
+- tracked source inputs live under `knowledge/`
 - runtime wiki state lives under `storage/wiki`
 - generated entities, logs, and indexes are rebuildable artifacts
 

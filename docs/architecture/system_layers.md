@@ -45,25 +45,29 @@ As Loop B becomes richer, this layer should eventually consume more explicit cur
 - practice intent
 - assessment context
 
-## 3. Knowledge and Style Layer
+## 3. Knowledge and Guidance Layer
 
 This layer provides the reusable inputs that shape the system:
 
-- raw source documents
 - source manifests
-- learner and competitor seeds
-- style corpus exports and analyses
-- brand, format, stack, and pedagogy configs
+- structured catalogs
+- seeded source documents
+- exemplar corpus assets and derived analyses
+- runtime guidance playbooks for brand, pedagogy, domains, and delivery behavior
 
 The key design rule is that not all knowledge is equally canonical:
 
-- raw inputs and manifests are tracked source material
+- manifests, catalogs, sources, corpus assets, and guidance playbooks are tracked source material
 - generated wiki pages and indexes are runtime state
 
 Another important rule is:
 
 - the wiki stays shared
 - stack-specific graph behavior sits inside that shared wiki model rather than forcing separate wikis per stack
+
+See also:
+
+- [Source And Guidance Model](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/source_and_guidance_model.md)
 
 ## 4. Evaluation and Learning Layer
 

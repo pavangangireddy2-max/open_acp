@@ -18,7 +18,7 @@ external_slide_sources:
   - https://docs.google.com/presentation/d/1jq0YoLpDT4ZlB2yF3mtZ7jkF1YcUD7KjPaHxf0Z6R6M/edit
 
 competitor_sources:
-  - src/open_acp/knowledge/raw/competitors/competitor_courses.md
+  - knowledge/sources/shared/competitors/competitor_courses.md
 
 notes:
   - Python sessions emphasize progressive code reveal and bridge from previously known syntax when applicable.
