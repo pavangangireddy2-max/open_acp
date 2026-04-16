@@ -70,14 +70,21 @@ Examples:
 - `stack_skill_profile(dsa, python)`
 - `stack_skill_profile(genai, rag)`
 
+Important implementation rule:
+
+- this should be stored as a **stack-scoped overlay**, not as a normal canonical wiki entity
+- in other words, `skill_python` remains the shared entity
+- `python in genai` is an overlay profile of that same skill, not a second independent skill entity
+
 Useful fields include:
 
-- demand score for that stack
-- importance weight
-- readiness expectation
+- relevance score for that stack
+- role in the stack
 - prerequisite depth
-- common misconceptions in that stack
-- recommended pedagogy notes
+- prerequisite skills
+- downstream skills
+- pedagogy notes
+- assessment implications
 
 ### 3. Stack-Specific Relationship Layer
 
@@ -114,6 +121,30 @@ This is where the skill graph becomes truly stack-specific.
 - role in the curriculum
 - assessment implications
 - pedagogy notes
+
+## Runtime Implementation Shape
+
+The current intended runtime storage shape is:
+
+```text
+storage/wiki/
+  entities/
+    skill_python.md
+    skill_rag.md
+  stack_profiles/
+    genai/
+      skill_python.md
+      skill_rag.md
+    dsa/
+      skill_python.md
+```
+
+So:
+
+- `entities/` stores canonical reusable entities
+- `stack_profiles/` stores stack-scoped overlays for those entities
+
+This keeps the canonical/shared layer and the contextual/stack-specific layer separate.
 
 ## How Loop A Should Use This
 
@@ -207,7 +238,14 @@ Today, the repo is still closer to:
 - shared runtime entities
 - light stack-aware behavior through manifests and prompts
 
-The architecture direction above is the next clean step, not a fully finished implementation.
+The first runtime slice of stack overlays is now present:
+
+- canonical entities still live in `storage/wiki/entities/`
+- stack-scoped skill overlays now live in `storage/wiki/stack_profiles/<stack>/`
+- Loop A writes these overlays during skill-graph updates
+- Loop B can now read stack-profile summaries from the runtime wiki context
+
+The full graph-overlay and retrieval story is still future work, but the canonical-vs-overlay boundary is now explicit in the runtime layer.
 
 ## Why This Is Better Than Separate Wikis
 

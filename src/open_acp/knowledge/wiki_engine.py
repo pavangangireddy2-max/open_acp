@@ -27,11 +27,12 @@ class WikiEngine:
         else:
             self.wiki_dir = _find_project_root() / "storage" / "wiki"
         self.entities_dir = self.wiki_dir / "entities"
+        self.stack_profiles_dir = self.wiki_dir / "stack_profiles"
         self.concepts_dir = self.wiki_dir / "concepts"
         self.synthesis_dir = self.wiki_dir / "synthesis"
 
         # Ensure directories exist
-        for d in [self.entities_dir, self.concepts_dir, self.synthesis_dir]:
+        for d in [self.entities_dir, self.stack_profiles_dir, self.concepts_dir, self.synthesis_dir]:
             d.mkdir(parents=True, exist_ok=True)
 
     # ── CRUD Operations ────────────────────────────────────────────────
@@ -163,6 +164,96 @@ class WikiEngine:
             })
         return entities
 
+    # ── Stack Profiles ──────────────────────────────────────────────────
+
+    def write_stack_profile(
+        self,
+        stack_id: str,
+        entity_type: str,
+        entity_id: str,
+        title: str,
+        summary: str,
+        relevance_score: float = 0.5,
+        role_in_stack: str = "unknown",
+        prerequisite_skills: list[str] | None = None,
+        downstream_skills: list[str] | None = None,
+        pedagogy_notes: list[str] | None = None,
+        assessment_implications: list[str] | None = None,
+        sources: list[str] | None = None,
+    ) -> str:
+        """Create or replace a stack-scoped overlay profile for a canonical entity."""
+        filepath = self._stack_profile_path(stack_id=stack_id, entity_type=entity_type, entity_id=entity_id)
+        existed = filepath.exists()
+        created_at = datetime.now(UTC).isoformat()
+        if existed:
+            existing_text = filepath.read_text(encoding="utf-8")
+            existing_frontmatter, _ = self._parse_entity_page(existing_text)
+            created_at = existing_frontmatter.get("created_at", created_at)
+
+        frontmatter = {
+            "stack_id": stack_id,
+            "canonical_entity_type": entity_type,
+            "canonical_entity_id": entity_id,
+            "title": title,
+            "relevance_score": relevance_score,
+            "role_in_stack": role_in_stack,
+            "prerequisite_skills": prerequisite_skills or [],
+            "downstream_skills": downstream_skills or [],
+            "pedagogy_notes": pedagogy_notes or [],
+            "assessment_implications": assessment_implications or [],
+            "sources": sources or [],
+            "created_at": created_at,
+            "updated_at": datetime.now(UTC).isoformat(),
+        }
+        body = summary.strip()
+        filepath.parent.mkdir(parents=True, exist_ok=True)
+        filepath.write_text(self._format_entity_page(frontmatter, body), encoding="utf-8")
+
+        action = "update_stack_profile" if existed else "create_stack_profile"
+        self._append_log(
+            f"{action} | {stack_id}/{entity_type}/{entity_id} | {title} | relevance={relevance_score}"
+        )
+        return str(filepath)
+
+    def get_stack_profile(self, stack_id: str, entity_type: str, entity_id: str) -> Optional[dict]:
+        """Read a stack-scoped overlay profile."""
+        filepath = self._stack_profile_path(stack_id=stack_id, entity_type=entity_type, entity_id=entity_id)
+        if not filepath.exists():
+            return None
+
+        text = filepath.read_text(encoding="utf-8")
+        frontmatter, body = self._parse_entity_page(text)
+        return {"frontmatter": frontmatter, "content": body, "path": str(filepath)}
+
+    def list_stack_profiles(
+        self,
+        stack_id: Optional[str] = None,
+        entity_type: Optional[str] = None,
+    ) -> list[dict]:
+        """List stack-scoped overlay profiles."""
+        profiles = []
+        root = self.stack_profiles_dir / stack_id if stack_id else self.stack_profiles_dir
+        if not root.exists():
+            return profiles
+
+        for filepath in sorted(root.glob("**/*.md")):
+            text = filepath.read_text(encoding="utf-8")
+            frontmatter, _ = self._parse_entity_page(text)
+            if entity_type and frontmatter.get("canonical_entity_type") != entity_type:
+                continue
+            profiles.append(
+                {
+                    "stack_id": frontmatter.get("stack_id", stack_id or "unknown"),
+                    "canonical_entity_type": frontmatter.get("canonical_entity_type", "unknown"),
+                    "canonical_entity_id": frontmatter.get("canonical_entity_id", filepath.stem),
+                    "title": frontmatter.get("title", filepath.stem),
+                    "relevance_score": frontmatter.get("relevance_score", 0.0),
+                    "role_in_stack": frontmatter.get("role_in_stack", "unknown"),
+                    "path": str(filepath),
+                }
+            )
+        return profiles
+
     # ── Search ─────────────────────────────────────────────────────────
 
     def search(self, query: str, entity_type: Optional[str] = None) -> list[dict]:
@@ -198,10 +289,12 @@ class WikiEngine:
     def rebuild_index(self) -> str:
         """Regenerate index.md from all entities."""
         entities = self.list_entities()
+        stack_profiles = self.list_stack_profiles()
 
         lines = ["# Wiki Index\n"]
         lines.append(f"*Last rebuilt: {datetime.now(UTC).strftime('%Y-%m-%d %H:%M UTC')}*\n")
         lines.append(f"**Total entities: {len(entities)}**\n")
+        lines.append(f"**Total stack profiles: {len(stack_profiles)}**\n")
 
         # Group by type
         by_type: dict[str, list] = {}
@@ -214,6 +307,22 @@ class WikiEngine:
                 conf = e.get("confidence", 0)
                 durability = e.get("durability", "?")
                 lines.append(f"- [{e['title']}](entities/{e['entity_type']}_{e['entity_id']}.md) — confidence: {conf:.2f}, durability: {durability}")
+
+        if stack_profiles:
+            lines.append("\n## Stack Profiles\n")
+            by_stack: dict[str, list] = {}
+            for profile in stack_profiles:
+                by_stack.setdefault(profile["stack_id"], []).append(profile)
+
+            for stack_id, profiles in sorted(by_stack.items()):
+                lines.append(f"\n### {stack_id} ({len(profiles)})\n")
+                for profile in sorted(profiles, key=lambda x: x.get("relevance_score", 0), reverse=True):
+                    relative_path = Path(profile["path"]).relative_to(self.wiki_dir)
+                    lines.append(
+                        f"- [{profile['title']}]({relative_path.as_posix()}) — "
+                        f"relevance: {profile.get('relevance_score', 0.0):.2f}, "
+                        f"role: {profile.get('role_in_stack', 'unknown')}"
+                    )
 
         index_content = "\n".join(lines) + "\n"
         index_path = self.wiki_dir / "index.md"
@@ -340,6 +449,10 @@ class WikiEngine:
 
         with open(log_path, "a", encoding="utf-8") as f:
             f.write(f"[{timestamp}] {entry}\n")
+
+    def _stack_profile_path(self, stack_id: str, entity_type: str, entity_id: str) -> Path:
+        normalized_stack = stack_id.strip().lower().replace(" ", "_").replace("-", "_")
+        return self.stack_profiles_dir / normalized_stack / f"{entity_type}_{entity_id}.md"
 
     def _format_entity_page(self, frontmatter: dict, body: str) -> str:
         """Format an entity page with YAML-like frontmatter."""

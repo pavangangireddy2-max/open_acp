@@ -31,6 +31,12 @@ This runtime layer should eventually support both:
 - canonical shared entities
 - stack-specific graph or profile views
 
+Current implementation note:
+
+- canonical entities live under `storage/wiki/entities/`
+- stack-scoped skill overlays live under `storage/wiki/stack_profiles/<stack>/`
+- product summaries are derived runtime entities, not canonical catalogs
+
 For controlled reruns or clean simulations, it should be acceptable to wipe `storage/wiki`
 and rebuild runtime knowledge from canonical manifests and source inputs.
 
@@ -77,6 +83,14 @@ Instead, it should support:
 
 - one shared `skill_python` entity
 - separate stack-aware interpretations of that skill for `genai`, `dsa`, and other stacks
+
+Current runtime example:
+
+```text
+entities/skill_python.md
+stack_profiles/genai/skill_python.md
+stack_profiles/dsa/skill_python.md
+```
 
 Conceptually, that suggests future storage shapes such as:
 

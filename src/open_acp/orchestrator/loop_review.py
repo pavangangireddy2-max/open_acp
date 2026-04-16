@@ -204,7 +204,12 @@ class LoopReviewRunner:
         merged = state.copy()
         list_merge_keys = set()
         if loop_id == "loop_a":
-            list_merge_keys = {"wiki_entries_created", "wiki_entries_updated"}
+            list_merge_keys = {
+                "wiki_entries_created",
+                "wiki_entries_updated",
+                "stack_profiles_created",
+                "stack_profiles_updated",
+            }
 
         for key, value in updates.items():
             if key in list_merge_keys:
@@ -333,6 +338,8 @@ class LoopReviewRunner:
         if stage_id == "update_skill_graph":
             created = [item for item in updates.get("wiki_entries_created", []) if item.startswith("skill_")]
             updated = [item for item in updates.get("wiki_entries_updated", []) if item.startswith("skill_")]
+            stack_profiles_created = updates.get("stack_profiles_created", []) or []
+            stack_profiles_updated = updates.get("stack_profiles_updated", []) or []
             patterns = state.get("detected_patterns", []) or []
             skill_patterns = [
                 pattern.get("description", "pattern")
@@ -345,12 +352,16 @@ class LoopReviewRunner:
             )
             if status == "fallback_non_json":
                 pattern_guidance = (
-                    "Pattern guidance was limited because detect_patterns fell back after a non-JSON response."
-                )
+                "Pattern guidance was limited because detect_patterns fell back after a non-JSON response."
+            )
             return (
                 f"Skill graph updates complete: {len(created)} created, {len(updated)} updated.",
                 [
                     f"Skill entities touched: {', '.join((created + updated)[:6]) or 'none'}.",
+                    (
+                        f"Stack skill profiles touched: "
+                        f"{', '.join((stack_profiles_created + stack_profiles_updated)[:6]) or 'none'}."
+                    ),
                     pattern_guidance,
                 ],
             )
@@ -391,6 +402,8 @@ class LoopReviewRunner:
                 [
                     f"Total created entries this cycle so far: {len(state.get('wiki_entries_created', []))}.",
                     f"Total updated entries this cycle so far: {len(state.get('wiki_entries_updated', []))}.",
+                    f"Total stack profiles created this cycle so far: {len(state.get('stack_profiles_created', []))}.",
+                    f"Total stack profiles updated this cycle so far: {len(state.get('stack_profiles_updated', []))}.",
                 ],
             )
 

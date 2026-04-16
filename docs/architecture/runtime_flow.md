@@ -25,6 +25,12 @@ Product note:
 - stack-only runs skip product wiki writes and keep moving
 - for clean simulations, it is valid to reset `storage/wiki` and rebuild runtime knowledge from scratch
 
+Knowledge-model note:
+
+- Loop A now updates both canonical skill entities and stack-scoped skill overlay profiles
+- the canonical entity answers “what is this skill in general?”
+- the stack overlay answers “what role does this skill play in this stack?”
+
 Typical outputs:
 
 - wiki entries
@@ -100,6 +106,11 @@ But as Loop B becomes richer, Loop C should increasingly consume:
 - learning-assessment context
 
 So the effect on Loop C is architectural now, even where the repo has not fully migrated every content pipeline to those richer inputs yet.
+
+Loop B knowledge note:
+
+- Loop B can now consume both canonical skill context and stack-profile summaries from the runtime wiki
+- this is still a lightweight context feed, not yet a full stack-graph retrieval system
 
 ## Loop D: Evaluation and Backpropagation
 

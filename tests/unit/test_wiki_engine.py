@@ -150,3 +150,75 @@ def test_sources_accumulate_on_update(wiki):
 def test_default_wiki_dir_uses_runtime_storage():
     wiki = WikiEngine()
     assert str(wiki.wiki_dir).endswith(str(Path("storage") / "wiki"))
+
+
+def test_write_and_get_stack_profile(wiki):
+    path = wiki.write_stack_profile(
+        stack_id="genai",
+        entity_type="skill",
+        entity_id="python",
+        title="Python Programming (genai)",
+        summary="Python is foundational for GenAI workflows.",
+        relevance_score=0.95,
+        role_in_stack="foundational",
+        prerequisite_skills=["programming_basics"],
+        downstream_skills=["rag", "pytorch"],
+        pedagogy_notes=["Teach early and revisit through build checkpoints."],
+        assessment_implications=["Assess before project usage."],
+        sources=["genai_120hr_curriculum.md"],
+    )
+
+    assert "stack_profiles/genai/skill_python.md" in path
+
+    profile = wiki.get_stack_profile("genai", "skill", "python")
+    assert profile is not None
+    assert profile["frontmatter"]["stack_id"] == "genai"
+    assert profile["frontmatter"]["relevance_score"] == 0.95
+    assert profile["frontmatter"]["role_in_stack"] == "foundational"
+    assert "Python is foundational" in profile["content"]
+
+
+def test_list_stack_profiles(wiki):
+    wiki.write_stack_profile(
+        stack_id="genai",
+        entity_type="skill",
+        entity_id="python",
+        title="Python Programming (genai)",
+        summary="Foundational skill for GenAI.",
+        relevance_score=0.95,
+        role_in_stack="foundational",
+    )
+    wiki.write_stack_profile(
+        stack_id="dsa",
+        entity_type="skill",
+        entity_id="python",
+        title="Python Programming (dsa)",
+        summary="Implementation language for DSA.",
+        relevance_score=0.7,
+        role_in_stack="core",
+    )
+
+    profiles = wiki.list_stack_profiles()
+    assert len(profiles) == 2
+
+    genai_profiles = wiki.list_stack_profiles(stack_id="genai", entity_type="skill")
+    assert len(genai_profiles) == 1
+    assert genai_profiles[0]["canonical_entity_id"] == "python"
+
+
+def test_rebuild_index_includes_stack_profiles(wiki):
+    wiki.create_entity("skill", "python", "Python", "Language", confidence=0.9)
+    wiki.write_stack_profile(
+        stack_id="genai",
+        entity_type="skill",
+        entity_id="python",
+        title="Python Programming (genai)",
+        summary="Foundational skill for GenAI.",
+        relevance_score=0.95,
+        role_in_stack="foundational",
+    )
+
+    index = wiki.rebuild_index()
+    assert "Total stack profiles: 1" in index
+    assert "Stack Profiles" in index
+    assert "Python Programming (genai)" in index

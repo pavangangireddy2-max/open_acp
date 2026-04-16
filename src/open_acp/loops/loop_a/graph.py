@@ -51,6 +51,8 @@ class LoopAGraphState(TypedDict, total=False):
     structure_profile: Annotated[Any, _replace]
     wiki_entries_created: Annotated[list, _merge_list]
     wiki_entries_updated: Annotated[list, _merge_list]
+    stack_profiles_created: Annotated[list, _merge_list]
+    stack_profiles_updated: Annotated[list, _merge_list]
     gate_g1_outcome: Annotated[Any, _replace]
 
 

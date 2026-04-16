@@ -44,6 +44,8 @@ class LoopAState(BaseModel):
     structure_profile: Optional[dict] = None
     wiki_entries_created: list[str] = []
     wiki_entries_updated: list[str] = []
+    stack_profiles_created: list[str] = []
+    stack_profiles_updated: list[str] = []
     gate_g1_outcome: Optional[GateOutcome] = None
 
 

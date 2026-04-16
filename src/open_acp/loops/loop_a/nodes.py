@@ -59,6 +59,64 @@ def _describe_source(source: dict) -> str:
     return f"{filename} ({category}, {origin})"
 
 
+def _infer_role_in_stack(skill: dict) -> str:
+    explicit = (skill.get("role_in_stack") or "").strip().lower().replace(" ", "_")
+    if explicit:
+        return explicit
+
+    demand_score = float(skill.get("demand_score", 0.5) or 0.5)
+    if demand_score >= 0.85:
+        return "foundational"
+    if demand_score >= 0.7:
+        return "core"
+    return "supporting"
+
+
+def _default_pedagogy_notes(skill: dict, role_in_stack: str) -> list[str]:
+    notes = skill.get("pedagogy_notes", []) or []
+    if notes:
+        return notes
+    if role_in_stack == "foundational":
+        return ["Teach early, revisit often, and connect the skill to downstream build work."]
+    if role_in_stack == "core":
+        return ["Use worked practice and checkpoint questions to reinforce the skill in context."]
+    return ["Treat as supporting knowledge and connect it to its primary upstream or downstream skills."]
+
+
+def _default_assessment_implications(skill: dict, role_in_stack: str) -> list[str]:
+    implications = skill.get("assessment_implications", []) or []
+    if implications:
+        return implications
+
+    related = ", ".join(skill.get("related_skills", [])[:3]) or "downstream work"
+    if role_in_stack == "foundational":
+        return [f"Expect repeated checks before learners use this in {related}."]
+    if role_in_stack == "core":
+        return [f"Assess learners on applying this skill during {related} tasks."]
+    return [f"Use lightweight checks and tie the skill to {related} when relevant."]
+
+
+def _build_stack_profile_summary(domain: str, skill: dict, role_in_stack: str) -> str:
+    name = skill.get("name", skill.get("skill_id", "Unknown Skill"))
+    description = skill.get("description", "")
+    prerequisites = ", ".join(skill.get("prerequisites", []) or []) or "none"
+    downstream = ", ".join(skill.get("related_skills", []) or []) or "none"
+    pedagogy_notes = "\n".join(f"- {note}" for note in _default_pedagogy_notes(skill, role_in_stack))
+    assessment_notes = "\n".join(
+        f"- {note}" for note in _default_assessment_implications(skill, role_in_stack)
+    )
+
+    return (
+        f"# {name} in {domain}\n\n"
+        f"{description}\n\n"
+        f"**Role in stack:** {role_in_stack}\n\n"
+        f"**Prerequisite skills:** {prerequisites}\n\n"
+        f"**Downstream skills:** {downstream}\n\n"
+        f"## Pedagogy Notes\n{pedagogy_notes}\n\n"
+        f"## Assessment Implications\n{assessment_notes}\n"
+    )
+
+
 def _select_relevant_patterns(patterns: list[dict], area: str, limit: int = 4) -> list[dict]:
     relevant = [
         pattern for pattern in patterns
@@ -426,6 +484,8 @@ def update_skill_graph(state: dict) -> dict:
     wiki = WikiEngine()
     created = []  # Only NEW entries this node creates (reducer will merge)
     updated = []
+    stack_profiles_created = []
+    stack_profiles_updated = []
 
     # Ask Claude to extract skills from signals
     signal_content = ""
@@ -474,7 +534,10 @@ Return a JSON array of skills:
     "durability": "durable",
     "description": "Brief description of the skill and its relevance",
     "prerequisites": ["programming_basics"],
-    "related_skills": ["pytorch", "pandas"]
+    "related_skills": ["pytorch", "pandas"],
+    "role_in_stack": "foundational",
+    "pedagogy_notes": ["Teach early and revisit through build checkpoints."],
+    "assessment_implications": ["Expect repeated checks before project-based usage."]
   }}
 ]
 
@@ -525,12 +588,42 @@ Extract the top 8-12 most important skills. Return ONLY the JSON array."""
             )
             created.append(f"skill_{skill_id}")
 
+        stack_profile_existed = wiki.get_stack_profile(stack_id=domain, entity_type="skill", entity_id=skill_id)
+        role_in_stack = _infer_role_in_stack(skill)
+        wiki.write_stack_profile(
+            stack_id=domain,
+            entity_type="skill",
+            entity_id=skill_id,
+            title=f"{skill.get('name', skill_id)} ({domain})",
+            summary=_build_stack_profile_summary(domain=domain, skill=skill, role_in_stack=role_in_stack),
+            relevance_score=float(skill.get("demand_score", 0.5) or 0.5),
+            role_in_stack=role_in_stack,
+            prerequisite_skills=skill.get("prerequisites", []) or [],
+            downstream_skills=skill.get("related_skills", []) or [],
+            pedagogy_notes=_default_pedagogy_notes(skill, role_in_stack),
+            assessment_implications=_default_assessment_implications(skill, role_in_stack),
+            sources=signal_sources,
+        )
+        if stack_profile_existed:
+            stack_profiles_updated.append(f"{domain}/skill_{skill_id}")
+        else:
+            stack_profiles_created.append(f"{domain}/skill_{skill_id}")
+
     if relevant_patterns:
         print("  Skill graph grounded in detected patterns:")
         for pattern in relevant_patterns[:3]:
             print(f"    - {pattern.get('description', 'unknown pattern')}")
     print(f"  Skills — created: {len(created)}, updated: {len(updated)}")
-    return {"wiki_entries_created": created, "wiki_entries_updated": updated}
+    print(
+        "  Stack skill profiles — created: "
+        f"{len(stack_profiles_created)}, updated: {len(stack_profiles_updated)}"
+    )
+    return {
+        "wiki_entries_created": created,
+        "wiki_entries_updated": updated,
+        "stack_profiles_created": stack_profiles_created,
+        "stack_profiles_updated": stack_profiles_updated,
+    }
 
 
 def update_learner_model(state: dict) -> dict:

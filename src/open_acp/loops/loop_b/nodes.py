@@ -189,6 +189,16 @@ def load_wiki_context(state: dict) -> dict:
         if entity:
             skill_context += f"- **{s['title']}** (confidence={s['confidence']:.2f}, durability={s.get('durability', '?')})\n"
 
+    stack_skill_profiles = wiki.list_stack_profiles(stack_id=domain, entity_type="skill")
+    if stack_skill_profiles:
+        skill_context += "\n## Stack Skill Profiles\n"
+        for profile in stack_skill_profiles[:20]:
+            skill_context += (
+                f"- **{profile['title']}** "
+                f"(relevance={profile.get('relevance_score', 0.0):.2f}, "
+                f"role={profile.get('role_in_stack', 'unknown')})\n"
+            )
+
     # Gather learner entities
     learners = wiki.list_entities(entity_type="audience_segment")
     learner_context = "## Learner Segments\n"

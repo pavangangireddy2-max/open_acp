@@ -69,6 +69,13 @@ def test_update_skill_graph_uses_detected_patterns_and_existing_skill_ids(monkey
             captured["update_kwargs"] = kwargs
             return True
 
+        def get_stack_profile(self, stack_id, entity_type, entity_id):
+            return None
+
+        def write_stack_profile(self, **kwargs):
+            captured["stack_profile_kwargs"] = kwargs
+            return "storage/wiki/stack_profiles/genai/skill_python.md"
+
     monkeypatch.setattr(nodes, "ClaudeClient", FakeClaudeClient)
     monkeypatch.setattr(nodes, "WikiEngine", lambda: FakeWiki())
 
@@ -98,6 +105,10 @@ def test_update_skill_graph_uses_detected_patterns_and_existing_skill_ids(monkey
         "genai_120hr_curriculum.md",
         "ml_engineer_requirements.md",
     ]
+    assert result["stack_profiles_created"] == ["genai/skill_python"]
+    assert captured["stack_profile_kwargs"]["stack_id"] == "genai"
+    assert captured["stack_profile_kwargs"]["entity_id"] == "python"
+    assert captured["stack_profile_kwargs"]["role_in_stack"] == "foundational"
 
 
 def test_update_product_context_creates_runtime_product_summary(monkeypatch):
