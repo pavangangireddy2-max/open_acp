@@ -21,6 +21,12 @@ from open_acp.models.signals import RawSignal, SignalBatch, ChannelCategory, Cha
 from open_acp.knowledge.wiki_engine import WikiEngine
 from open_acp.utils.claude import ClaudeClient
 from open_acp.config.constants import STRONG_MODEL, CHEAP_MODEL, DRIFT_THRESHOLD
+from open_acp.config.curriculum_context import (
+    find_project_root,
+    load_stack_manifest,
+    resolve_product_context as resolve_product_manifest_context,
+    resolve_structure_profile as resolve_structure_profile_context,
+)
 
 
 def _get_raw_sources_dir() -> Path:
@@ -29,11 +35,7 @@ def _get_raw_sources_dir() -> Path:
 
 
 def _get_project_root() -> Path:
-    current = Path(__file__).resolve()
-    for ancestor in current.parents:
-        if (ancestor / "pyproject.toml").exists():
-            return ancestor
-    return current.parents[4]
+    return find_project_root()
 
 
 def _infer_category(path: Path) -> str:
@@ -128,12 +130,11 @@ def _build_bootstrap_warnings(domain: str, raw_sources: list[dict]) -> list[str]
 def _load_manifest_sources(domain: str) -> list[dict]:
     """Load raw inputs from stack and shared manifests when available."""
     project_root = _get_project_root()
-    manifest_path = project_root / "knowledge" / "manifests" / "stacks" / f"{domain}.yaml"
-    if not manifest_path.exists():
+    manifest = load_stack_manifest(domain)
+    manifest_path_str = manifest.get("_manifest_path")
+    if not manifest_path_str:
         return []
-
-    with open(manifest_path, encoding="utf-8") as f:
-        manifest = yaml.safe_load(f) or {}
+    manifest_path = Path(manifest_path_str)
 
     resolved_paths: list[Path] = []
 
@@ -168,6 +169,60 @@ def _load_manifest_sources(domain: str) -> list[dict]:
         )
 
     return sources
+
+
+def _product_entity_id(product_context: dict) -> str:
+    family = _normalize_token(product_context.get("product_family") or "default")
+    version = _normalize_token(product_context.get("product_version") or "")
+    return f"{family}_{version}" if version else family
+
+
+def _build_product_context_markdown(
+    domain: str,
+    product_context: dict,
+    structure_profile: dict,
+    detected_patterns: list[dict],
+) -> str:
+    feature_flags = product_context.get("feature_flags", {}) or {}
+    notes = product_context.get("notes", []) or []
+    lines = [
+        f"## Domain",
+        f"- `{domain}`",
+        "",
+        "## Product Context",
+        f"- Product label: {product_context.get('product_label', 'unknown')}",
+        f"- Product category: {product_context.get('product_category', 'unknown')}",
+        f"- Curriculum container kind: {product_context.get('curriculum_container_kind', 'unknown')}",
+        f"- Delivery mode: {product_context.get('delivery_mode', 'unspecified')}",
+        f"- Focus priority: {product_context.get('focus_priority', 'default')}",
+        "",
+        "## Structure Profile",
+        f"- Structure profile: {structure_profile.get('structure_profile_id', 'unknown')}",
+        f"- Hierarchy: {' -> '.join(structure_profile.get('hierarchy', [])) or 'unknown'}",
+        "",
+        "## Feature Flags",
+    ]
+    if feature_flags:
+        for key, value in sorted(feature_flags.items()):
+            lines.append(f"- {key}: {value}")
+    else:
+        lines.append("- none")
+
+    lines.append("")
+    lines.append("## Signal-Aware Notes")
+    if detected_patterns:
+        for pattern in detected_patterns[:3]:
+            lines.append(f"- {pattern.get('description', 'pattern')}")
+    else:
+        lines.append("- No explicit Loop A patterns were available.")
+
+    if notes:
+        lines.append("")
+        lines.append("## Manifest Notes")
+        for note in notes[:5]:
+            lines.append(f"- {note}")
+
+    return "\n".join(lines)
 
 
 def _load_raw_sources(domain: str) -> list[dict]:
@@ -623,6 +678,84 @@ Return ONLY the JSON array."""
 
     print(f"  Competitors — created: {len(created)}, updated: {len(updated)}")
     return {"wiki_entries_created": created, "wiki_entries_updated": updated}
+
+
+def update_product_context(state: dict) -> dict:
+    """Resolve product and structure context and persist a derived runtime summary."""
+    domain = state.get("domain", "ml-engineering")
+    product_family = state.get("product_family")
+    product_version = state.get("product_version")
+    detected_patterns = state.get("detected_patterns", []) or []
+
+    product_context = resolve_product_manifest_context(
+        domain=domain,
+        product_family=product_family,
+        product_version=product_version,
+    )
+    structure_profile = resolve_structure_profile_context(product_context)
+
+    print(
+        "  Product context: "
+        f"{product_context.get('product_label', 'Stack-only default')} -> "
+        f"{structure_profile.get('structure_profile_id', 'standard_product_structure')}"
+    )
+
+    if not product_context.get("is_explicit_product"):
+        return {
+            "product_context": product_context,
+            "structure_profile": structure_profile,
+        }
+
+    stack_manifest = load_stack_manifest(domain)
+    sources = [
+        product_context.get("manifest_path", ""),
+        stack_manifest.get("_manifest_path", ""),
+    ]
+    sources = [source for source in sources if source]
+
+    content = _build_product_context_markdown(
+        domain=domain,
+        product_context=product_context,
+        structure_profile=structure_profile,
+        detected_patterns=detected_patterns,
+    )
+    entity_id = _product_entity_id(product_context)
+    entity_key = f"product_{entity_id}"
+    title = f"{product_context.get('product_label', 'Product')} Context"
+
+    wiki = WikiEngine()
+    existing = wiki.get_entity("product", entity_id)
+    created: list[str] = []
+    updated: list[str] = []
+
+    if existing:
+        wiki.update_entity(
+            entity_id=entity_id,
+            entity_type="product",
+            content_delta=content,
+            reason="Loop A product context refresh",
+            new_confidence=0.9,
+            new_sources=sources,
+        )
+        updated.append(entity_key)
+    else:
+        wiki.create_entity(
+            entity_type="product",
+            entity_id=entity_id,
+            title=title,
+            content=content,
+            confidence=0.9,
+            sources=sources,
+            durability="versioned",
+        )
+        created.append(entity_key)
+
+    return {
+        "product_context": product_context,
+        "structure_profile": structure_profile,
+        "wiki_entries_created": created,
+        "wiki_entries_updated": updated,
+    }
 
 
 def update_wiki_index(state: dict) -> dict:

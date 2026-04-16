@@ -68,6 +68,13 @@ def _build_domain_review_packet(
         "domain": domain,
         "content_type": content_type,
         "cycle_id": cycle_id,
+        "product_context": {
+            "product_label": (loop_b_result.get("product_context", {}) or {}).get("product_label", "Stack-only default"),
+            "structure_profile_id": (loop_b_result.get("structure_profile", {}) or {}).get(
+                "structure_profile_id",
+                "standard_product_structure",
+            ),
+        },
         "loop_a": {
             "created_count": len(loop_a_result.get("wiki_entries_created", [])),
             "updated_count": len(loop_a_result.get("wiki_entries_updated", [])),
@@ -102,6 +109,7 @@ def _build_domain_review_packet(
 
 
 def _render_domain_review_packet_markdown(packet: dict) -> str:
+    product_context = packet["product_context"]
     loop_a = packet["loop_a"]
     loop_b = packet["loop_b"]
     lines = [
@@ -109,6 +117,8 @@ def _render_domain_review_packet_markdown(packet: dict) -> str:
         "",
         f"- Content Type Seed: `{packet['content_type']}`",
         f"- Cycle ID: `{packet['cycle_id']}`",
+        f"- Product Context: `{product_context['product_label']}`",
+        f"- Structure Profile: `{product_context['structure_profile_id']}`",
         "",
         "## Loop A Summary",
         f"- Wiki entries created: {loop_a['created_count']}",
@@ -361,6 +371,8 @@ def review_loop(
     domain: str = typer.Option("ml-engineering", "--domain", "-d", help="Domain or stack context"),
     content_type: str = typer.Option("concept_explainer", "--content-type", "-t", help="Content type seed used by Loop B"),
     cycle_id: str = typer.Option("cycle_1", "--cycle-id", help="Cycle identifier"),
+    product_family: str = typer.Option("", "--product-family", help="Optional product family context"),
+    product_version: str = typer.Option("", "--product-version", help="Optional product version or batch"),
     stage_id: str = typer.Option("", "--stage", help="Optional stage to run explicitly"),
 ):
     """Run exactly one Loop A or Loop B stage, save a checkpoint packet, and stop."""
@@ -373,6 +385,10 @@ def review_loop(
         "domain": domain,
         "cycle_id": cycle_id,
     }
+    if product_family:
+        base_state["product_family"] = product_family
+    if product_version:
+        base_state["product_version"] = product_version
     if loop_id.strip().lower().replace("-", "_") in {"loop_b", "b", "loopb"}:
         base_state["content_type"] = content_type
 
@@ -430,6 +446,8 @@ def review_domain(
     domain: str = typer.Option("ml-engineering", "--domain", "-d", help="Domain context"),
     content_type: str = typer.Option("concept_explainer", "--content-type", "-t", help="Content type seed used for curriculum shaping"),
     cycle_id: str = typer.Option("cycle_1", "--cycle-id", help="Cycle identifier"),
+    product_family: str = typer.Option("", "--product-family", help="Optional product family context"),
+    product_version: str = typer.Option("", "--product-version", help="Optional product version or batch"),
 ):
     """Run Loop A and Loop B, save a curriculum review packet, and stop."""
     from open_acp.utils.logger import setup_logging
@@ -440,6 +458,7 @@ def review_domain(
             f"[bold]Curriculum Review[/bold]\n"
             f"Domain: [green]{domain}[/green]\n"
             f"Content Type Seed: [cyan]{content_type}[/cyan]\n"
+            f"Product: [yellow]{product_family or 'stack-only default'}[/yellow]\n"
             f"Mode: [magenta]Loop A → Loop B only[/magenta]",
             title="open_acp",
             border_style="blue",
@@ -450,8 +469,19 @@ def review_domain(
     from open_acp.loops.loop_b.graph import run_loop_b
 
     try:
-        loop_a_result = run_loop_a(domain=domain, cycle_id=cycle_id)
-        loop_b_result = run_loop_b(domain=domain, cycle_id=cycle_id, content_type=content_type)
+        loop_a_result = run_loop_a(
+            domain=domain,
+            cycle_id=cycle_id,
+            product_family=product_family or None,
+            product_version=product_version or None,
+        )
+        loop_b_result = run_loop_b(
+            domain=domain,
+            cycle_id=cycle_id,
+            content_type=content_type,
+            product_family=product_family or None,
+            product_version=product_version or None,
+        )
     except Exception as e:
         console.print(f"\n[bold red]Curriculum review failed: {e}[/bold red]")
         raise typer.Exit(code=1)

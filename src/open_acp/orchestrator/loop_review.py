@@ -19,14 +19,17 @@ _LOOP_STAGE_ORDER = {
         "update_skill_graph",
         "update_learner_model",
         "update_competitor_map",
+        "update_product_context",
         "update_wiki_index",
     ],
     "loop_b": [
         "load_wiki_context",
+        "resolve_product_context",
+        "resolve_structure_profile",
+        "resolve_packaging_profile",
         "resolve_pedagogy_profile",
         "generate_curriculum",
         "compare_curriculum_changes",
-        "resolve_packaging_profile",
         "design_courses",
         "design_modules",
         "design_topics",
@@ -172,7 +175,16 @@ class LoopReviewRunner:
             loop_a_path = self._state_path("loop_a", state)
             if loop_a_path.exists():
                 loop_a_state = json.loads(loop_a_path.read_text(encoding="utf-8"))
-                for key in ("detected_patterns", "drift_score", "pattern_detection_status", "pattern_detection_note"):
+                for key in (
+                    "detected_patterns",
+                    "drift_score",
+                    "pattern_detection_status",
+                    "pattern_detection_note",
+                    "product_family",
+                    "product_version",
+                    "product_context",
+                    "structure_profile",
+                ):
                     state.setdefault(key, loop_a_state.get(key))
         return state
 
@@ -357,6 +369,20 @@ class LoopReviewRunner:
                 [f"Competitor entities touched: {', '.join((created + updated)[:6]) or 'none'}."],
             )
 
+        if stage_id == "update_product_context":
+            product_context = state.get("product_context", {}) or {}
+            structure_profile = state.get("structure_profile", {}) or {}
+            created = [item for item in updates.get("wiki_entries_created", []) if item.startswith("product_")]
+            updated = [item for item in updates.get("wiki_entries_updated", []) if item.startswith("product_")]
+            return (
+                f"Resolved product context: {product_context.get('product_label', 'Stack-only default')}.",
+                [
+                    f"Structure profile: {structure_profile.get('structure_profile_id', 'standard_product_structure')}.",
+                    f"Product wiki entities touched: {', '.join((created + updated)[:4]) or 'none'}.",
+                    f"Resolution reason: {product_context.get('resolution_reason', 'not provided')}.",
+                ],
+            )
+
         if stage_id == "update_wiki_index":
             return (
                 "Wiki index rebuilt after Loop A updates.",
@@ -384,6 +410,38 @@ class LoopReviewRunner:
                     f"Skill and competitor bullets loaded: {skill_lines}.",
                     f"Learner segment bullets loaded: {learner_lines}.",
                     f"Loop A patterns available to this stage: {pattern_count}.",
+                ],
+            )
+
+        if stage_id == "resolve_product_context":
+            product_context = state.get("product_context", {}) or {}
+            return (
+                f"Resolved product context: {product_context.get('product_label', 'Stack-only default')}.",
+                [
+                    f"Product category: {product_context.get('product_category', 'standard_product')}.",
+                    f"Curriculum container kind: {product_context.get('curriculum_container_kind', 'standard_curriculum')}.",
+                    f"Resolution reason: {product_context.get('resolution_reason', 'not provided')}.",
+                ],
+            )
+
+        if stage_id == "resolve_structure_profile":
+            structure_profile = state.get("structure_profile", {}) or {}
+            return (
+                f"Resolved structure profile: {structure_profile.get('structure_profile_id', 'standard_product_structure')}.",
+                [
+                    f"Curriculum container kind: {structure_profile.get('curriculum_container_kind', 'standard_curriculum')}.",
+                    f"Hierarchy: {' | '.join(structure_profile.get('hierarchy', [])) or 'none'}.",
+                ],
+            )
+
+        if stage_id == "resolve_packaging_profile":
+            packaging = state.get("packaging_profile", {}) or {}
+            return (
+                f"Resolved packaging profile: {packaging.get('packaging_profile_id', 'default')}.",
+                [
+                    f"Modules per course default: {packaging.get('module_count_per_course', {}).get('default', 'unknown')}.",
+                    f"Topics per module default: {packaging.get('topic_count_per_module', {}).get('default', 'unknown')}.",
+                    f"Allowed learning unit types: {', '.join(packaging.get('allowed_learning_unit_types', [])) or 'none'}.",
                 ],
             )
 
@@ -428,17 +486,6 @@ class LoopReviewRunner:
                     f"Added courses: {', '.join(report.get('added_courses', [])) or 'none'}.",
                     f"Removed courses: {', '.join(report.get('removed_courses', [])) or 'none'}.",
                     f"Hours change: {report.get('hours_change', 0)}.",
-                ],
-            )
-
-        if stage_id == "resolve_packaging_profile":
-            packaging = state.get("packaging_profile", {}) or {}
-            return (
-                f"Resolved packaging profile: {packaging.get('packaging_profile_id', 'default')}.",
-                [
-                    f"Modules per course default: {packaging.get('module_count_per_course', {}).get('default', 'unknown')}.",
-                    f"Topics per module default: {packaging.get('topic_count_per_module', {}).get('default', 'unknown')}.",
-                    f"Allowed learning unit types: {', '.join(packaging.get('allowed_learning_unit_types', [])) or 'none'}.",
                 ],
             )
 

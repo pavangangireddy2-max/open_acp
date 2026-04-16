@@ -27,6 +27,8 @@ Open ACP is an agentic educational content production system. It combines:
 - [System Layers](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/system_layers.md)
 - [Runtime Flow](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/runtime_flow.md)
 - [Curriculum Design](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/curriculum_design.md)
+- [Design Priorities](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/design_priorities.md)
+- [Prompt Organization](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/prompt_organization.md)
 - [Product Catalog](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/product_catalog.md)
 - [Knowledge Model](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/knowledge_model.md)
 - [Storage And Memory](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/storage_and_memory.md)
@@ -47,6 +49,7 @@ The system should feel like:
 The main near-term direction is to keep the architecture legible while expanding:
 
 - first-wave migrated pipelines
+- product-aware Loop A and Loop B resolution
 - storage and memory maturity
 - curriculum design depth
 - packaging-aware delivery design
@@ -58,3 +61,4 @@ TODO:
 
 - introduce a product layer above packaging without collapsing stack/domain curriculum design into product design
 - keep course-end outputs such as `summary_cheatsheet` product-configurable rather than universally required
+- continue documenting other products in the same style as NIAT as product context is collected

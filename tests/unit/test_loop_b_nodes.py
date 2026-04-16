@@ -75,6 +75,26 @@ def test_generate_curriculum_reports_probable_truncation(monkeypatch):
     assert "appears to have been cut off mid-output" in result["curriculum_generation_note"]
 
 
+def test_resolve_product_and_structure_profile_from_manifest():
+    product_state = nodes.resolve_product_context(
+        {
+            "domain": "genai",
+            "product_family": "NIAT",
+            "product_version": "B3",
+        }
+    )
+
+    product_context = product_state["product_context"]
+    assert product_context["product_family"] == "NIAT"
+    assert product_context["product_version"] == "B3"
+    assert product_context["structure_profile_id"] == "niat_university_structure"
+
+    structure_state = nodes.resolve_structure_profile(product_state)
+    structure_profile = structure_state["structure_profile"]
+    assert structure_profile["structure_profile_id"] == "niat_university_structure"
+    assert "batch_curriculum_grid_template" in structure_profile["hierarchy"]
+
+
 def test_resolve_packaging_profile_uses_domain_override():
     result = nodes.resolve_packaging_profile({"domain": "genai", "content_type": "concept_explainer"})
 
@@ -83,6 +103,28 @@ def test_resolve_packaging_profile_uses_domain_override():
     assert profile["packaging_profile_id"] == "genai_stack_packaging"
     assert profile["module_count_per_course"]["default"] == 3
     assert "coding_practice_unit" in profile["preferred_learning_unit_mix"]
+
+
+def test_resolve_packaging_profile_carries_product_feature_flags():
+    product_state = nodes.resolve_product_context(
+        {
+            "domain": "genai",
+            "product_family": "Academy",
+            "product_version": "1.5",
+        }
+    )
+
+    result = nodes.resolve_packaging_profile(
+        {
+            "domain": "genai",
+            "content_type": "concept_explainer",
+            "product_context": product_state["product_context"],
+        }
+    )
+
+    profile = result["packaging_profile"]
+    assert profile["product_feature_flags"]["recorded_videos_included"] is True
+    assert profile["product_feature_flags"]["live_sessions_included"] is True
 
 
 def test_design_and_alignment_pipeline_exposes_external_skill_gaps():

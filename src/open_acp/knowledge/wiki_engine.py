@@ -19,7 +19,7 @@ def _find_project_root() -> Path:
 class WikiEngine:
     """Manages a persistent, LLM-curated intelligence wiki."""
 
-    ENTITY_TYPES = ["skill", "competitor", "audience_segment", "concept", "domain"]
+    ENTITY_TYPES = ["skill", "competitor", "audience_segment", "concept", "domain", "product"]
 
     def __init__(self, wiki_dir: Optional[str] = None):
         if wiki_dir:

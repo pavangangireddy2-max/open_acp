@@ -1,0 +1,29 @@
+version: 1
+structure_profile_id: niat_university_structure
+label: NIAT University Structure
+curriculum_container_kind: academic_degree_curriculum
+
+hierarchy:
+  - batch_curriculum_grid_template
+  - university
+  - branch
+  - bos_curriculum_reference
+  - implementation_curriculum
+  - courses
+  - modules
+  - topics
+  - learning_units
+
+design_priority_dimensions:
+  - regulatory_compliance
+  - university_policy_and_infra_constraints
+  - degree_and_higher_ed_outcomes
+  - job_placement_outcomes
+  - student_learning_outcomes
+  - operational_efficiency
+  - cross_product_alignment
+  - internal_expertise
+
+notes:
+  - Supports batch, university, and branch overlays above the implementation curriculum.
+  - BOS alignment and implementation drift should remain visible during curriculum design.

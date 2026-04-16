@@ -48,23 +48,71 @@ For now:
 
 This keeps the curriculum model clean without introducing full product complexity too early.
 
+## Core Terminology
+
+### Packaging Profile
+
+`packaging_profile` means the delivery-constraint layer that shapes how a curriculum container
+is delivered.
+
+It can decide things such as:
+
+- hours
+- module counts
+- topic counts
+- learning-unit mix
+- assessment cadence
+- feature flags
+- course-end outputs such as `summary_cheatsheet`
+
+Important rule:
+
+- `packaging_profile` does **not** define the academic spine by itself
+- it sits below the base curriculum and structure profile
+- it sits below product overlays
+- it helps shape the final implementation curriculum
+
+So the intended layering is:
+
+```text
+base curriculum
+  + structure profile
+  + product overlay
+  + packaging profile
+  = implementation curriculum
+```
+
+Implementation note:
+
+- the first product-aware runtime slice now resolves `product_context` and `structure_profile`
+  before packaging and pedagogy
+- if no product is selected, the system falls back to a stack-only default context rather than blocking
+
+Recommended next policy:
+
+- product-governed curriculum runs should eventually fail fast when no explicit product context is supplied
+- the stack-only default should remain only for tests, legacy compatibility, and generic exploration
+- academic products such as NIAT should not rely on the stack-only default for real curriculum design
+
 ## Current Loop B Design
 
 The current Loop B flow is:
 
 1. `load_wiki_context`
-2. `resolve_pedagogy_profile`
-3. `generate_curriculum`
-4. `compare_curriculum_changes`
-5. `resolve_packaging_profile`
-6. `design_courses`
-7. `design_modules`
-8. `design_topics`
-9. `design_learning_units`
-10. `design_practice`
-11. `design_learning_assessments`
-12. `resolve_skill_assessment_requirements`
-13. `align_learning_with_skill_assessments`
+2. `resolve_product_context`
+3. `resolve_structure_profile`
+4. `resolve_packaging_profile`
+5. `resolve_pedagogy_profile`
+6. `generate_curriculum`
+7. `compare_curriculum_changes`
+8. `design_courses`
+9. `design_modules`
+10. `design_topics`
+11. `design_learning_units`
+12. `design_practice`
+13. `design_learning_assessments`
+14. `resolve_skill_assessment_requirements`
+15. `align_learning_with_skill_assessments`
 
 `generate_differentiation` is intentionally removed from the core learning-design path.
 
@@ -100,9 +148,22 @@ The packaging layer controls things such as:
 
 This is represented through a `packaging_profile`.
 
+Source-of-truth note:
+
+- product definitions live under `knowledge/manifests/products/`
+- structure definitions live under `knowledge/manifests/structure_profiles/`
+- packaging manifests remain under `knowledge/manifests/packaging/`
+- Loop A may write a derived product summary into the runtime wiki, but the manifests remain canonical
+
+Strict-source note:
+
+- if a requested domain has no explicit manifest-backed or domain-backed source inputs, the system should eventually stop rather than silently borrowing unrelated defaults
+- cross-domain fallback such as using unrelated `ml_engineering` material should be avoided for real runs
+
 See also:
 
 - [Product Catalog](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/product_catalog.md)
+- [Design Priorities](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/design_priorities.md)
 
 TODO:
 
@@ -110,6 +171,8 @@ TODO:
 - let product configuration decide whether `summary_cheatsheet` appears as a course-end deliverable
 - let product configuration override module counts, unit mix, assessment cadence, and skill-assessment cadence
 - let product configuration decide when course-end units such as cheat sheets, revision packs, or recap assets are required
+- let product configuration carry enablement flags such as `ai_tutor_enabled` and whether that support applies to all courses or selected courses only
+- later add product-specific content-development constraints that Loop C must honor during execution
 
 Examples of packaging-sensitive behavior:
 
@@ -181,6 +244,19 @@ It should surface:
 
 This is important because curriculum design needs to be reviewable, not silently regenerated.
 
+## Loop A Product Context
+
+Loop A now has a product-context synthesis stage before wiki index rebuild.
+
+The intended behavior is:
+
+- manifests remain the source of truth for product and structure definitions
+- Loop A resolves those manifests for the current run
+- Loop A writes a derived runtime summary for explicit products into the wiki
+- Loop B then reuses that product context while remaining deterministic
+
+This keeps product knowledge visible in runtime memory without turning the wiki into the canonical product catalog.
+
 ## Practice Design
 
 Practice design is intentionally separated from basic content structure.
@@ -229,6 +305,11 @@ This is especially useful because practice and assessment behavior can vary by:
 - future product constraints
 - external skill-assessment contracts
 
+TODO:
+
+- learner personas should later become product-aware
+- for academic products such as NIAT, learner personas may also become batch-aware, university-aware, or branch-aware
+
 ## Loop C Impact
 
 Loop C is not broken by this design, but it is now underfed if it only consumes the old module-level contract.
@@ -265,6 +346,7 @@ TODO:
 
 - distinguish clearly between `module_creation` and `module_update` in Loop C review and execution flows
 - support video sessions that do not require a PPT-backed format
+- add product-specific content-development constraints to the Loop C work plan as product overlays mature
 
 So the migration is underway, but not yet complete.
 

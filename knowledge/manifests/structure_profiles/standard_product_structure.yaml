@@ -1,0 +1,21 @@
+version: 1
+structure_profile_id: standard_product_structure
+label: Standard Product Structure
+curriculum_container_kind: standard_curriculum
+
+hierarchy:
+  - curriculum_container
+  - courses
+  - modules
+  - topics
+  - learning_units
+
+design_priority_dimensions:
+  - job_placement_outcomes
+  - student_learning_outcomes
+  - cross_product_alignment
+  - market_and_community_signals
+  - internal_expertise
+
+notes:
+  - Default structure for standard upskilling and product-led curriculum containers.

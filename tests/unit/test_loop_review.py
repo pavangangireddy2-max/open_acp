@@ -151,6 +151,32 @@ def test_loop_review_runner_generate_curriculum_fallback_wording(monkeypatch, tm
                 "learner_context": "## Learner Segments\n- **Career Switcher**",
                 "curriculum_source_context": "### Source: stack curriculum seed",
             }
+        if stage_id == "resolve_product_context":
+            return lambda state: {
+                "product_context": {
+                    "product_label": "NIAT B3",
+                    "product_category": "degree_program_product",
+                    "curriculum_container_kind": "academic_degree_curriculum",
+                    "resolution_reason": "explicit product selection: NIAT/B3",
+                }
+            }
+        if stage_id == "resolve_structure_profile":
+            return lambda state: {
+                "structure_profile": {
+                    "structure_profile_id": "niat_university_structure",
+                    "curriculum_container_kind": "academic_degree_curriculum",
+                    "hierarchy": ["batch_curriculum_grid_template", "university", "branch"],
+                }
+            }
+        if stage_id == "resolve_packaging_profile":
+            return lambda state: {
+                "packaging_profile": {
+                    "packaging_profile_id": "genai_stack_packaging",
+                    "module_count_per_course": {"default": 3},
+                    "topic_count_per_module": {"default": 4},
+                    "allowed_learning_unit_types": ["video_session_unit", "reading_material_unit"],
+                }
+            }
         if stage_id == "resolve_pedagogy_profile":
             return lambda state: {
                 "pedagogy_profile": "project_build_along",
@@ -171,17 +197,12 @@ def test_loop_review_runner_generate_curriculum_fallback_wording(monkeypatch, tm
 
     monkeypatch.setattr(runner, "_load_stage_callable", fake_callable)
 
-    runner.execute_review_stage(
-        loop_id="loop_b",
-        base_state={"domain": "genai", "cycle_id": "cycle_curriculum", "content_type": "concept_explainer"},
-    )
-    runner.execute_review_stage(
-        loop_id="loop_b",
-        base_state={"domain": "genai", "cycle_id": "cycle_curriculum", "content_type": "concept_explainer"},
-    )
+    base_state = {"domain": "genai", "cycle_id": "cycle_curriculum", "content_type": "concept_explainer"}
+    for _ in range(5):
+        runner.execute_review_stage(loop_id="loop_b", base_state=base_state)
     result = runner.execute_review_stage(
         loop_id="loop_b",
-        base_state={"domain": "genai", "cycle_id": "cycle_curriculum", "content_type": "concept_explainer"},
+        base_state=base_state,
     )
 
     assert result["stage_id"] == "generate_curriculum"

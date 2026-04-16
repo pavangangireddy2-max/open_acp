@@ -1,0 +1,18 @@
+version: 1
+product_family: Launchpad
+product_category: certification_or_upskilling_product
+default_structure_profile: standard_product_structure
+curriculum_container_kind: standard_curriculum
+default_packaging_profile_id: default_learning_packaging
+focus_priority: deferred
+variant_strategy: audience_specific_course_variants
+
+feature_flags:
+  recorded_videos_included: true
+  live_sessions_included: true
+  ai_tutor_enabled: false
+  summary_cheatsheet_required: true
+
+notes:
+  - Launchpad is intentionally deferred from the first implementation slice.
+  - Some courses may require true product-specific course variants, not just packaging changes.

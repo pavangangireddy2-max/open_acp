@@ -1,0 +1,24 @@
+version: 1
+structure_profile_id: academy_certification_structure
+label: Academy Certification Structure
+curriculum_container_kind: certification_curriculum
+
+hierarchy:
+  - certification_curriculum
+  - course_requirements
+  - course_package_parts
+  - modules
+  - topics
+  - learning_units
+
+design_priority_dimensions:
+  - job_placement_outcomes
+  - student_learning_outcomes
+  - cross_product_alignment
+  - industry_partnerships_and_certifications
+  - customer_and_sales_intelligence
+  - internal_expertise
+
+notes:
+  - Supports mandatory and optional course requirements inside certification-linked curricula.
+  - Course completion and certification attempt should remain separate policies.

@@ -1,0 +1,18 @@
+version: 1
+product_family: default
+product_category: standard_product
+default_structure_profile: standard_product_structure
+curriculum_container_kind: standard_curriculum
+default_packaging_profile_id: default_learning_packaging
+focus_priority: default
+
+feature_flags:
+  recorded_videos_included: false
+  live_sessions_included: false
+  ai_tutor_enabled: false
+  summary_cheatsheet_required: false
+
+packaging_overrides: {}
+
+notes:
+  - This is the stack-only fallback product context when no explicit product is selected.

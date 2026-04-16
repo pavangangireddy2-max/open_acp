@@ -8,6 +8,23 @@ Bootstrap mode is allowed in Loop A: if stack-specific raw inputs are thin or mi
 
 Within Loop A, the intended chain is: signals -> detected patterns -> wiki entity updates. Pattern detection should actively guide later skill, learner, and competitor extraction instead of being treated as a disconnected side report.
 
+The current intended Loop A flow is:
+
+1. ingest signals
+2. detect patterns
+3. update skill graph
+4. update learner model
+5. update competitor map
+6. update product context
+7. update wiki index
+
+Product note:
+
+- product and structure manifests are canonical
+- Loop A writes only a derived runtime summary for explicit products
+- stack-only runs skip product wiki writes and keep moving
+- for clean simulations, it is valid to reset `storage/wiki` and rebuild runtime knowledge from scratch
+
 Typical outputs:
 
 - wiki entries
@@ -34,20 +51,27 @@ This layer should decide the educational shape of the output before content gene
 The current intended Loop B flow is:
 
 1. load wiki context
-2. resolve pedagogy profile
-3. generate curriculum
-4. compare curriculum changes
-5. resolve packaging profile
-6. design courses
-7. design modules
-8. design topics
-9. design learning units
-10. design practice
-11. design learning assessments
-12. resolve skill-assessment requirements
-13. align learning with skill assessments
+2. resolve product context
+3. resolve structure profile
+4. resolve packaging profile
+5. resolve pedagogy profile
+6. generate curriculum
+7. compare curriculum changes
+8. design courses
+9. design modules
+10. design topics
+11. design learning units
+12. design practice
+13. design learning assessments
+14. resolve skill-assessment requirements
+15. align learning with skill assessments
 
 `generate_differentiation` is no longer part of the core learning-design path.
+
+Runtime policy note:
+
+- for real product-driven runs, Loop B should eventually stop if product context is missing
+- for real domain runs, Loop A and Loop B should eventually stop if domain-specific canonical inputs are missing instead of borrowing unrelated defaults
 
 ## Loop C: Content Production
 

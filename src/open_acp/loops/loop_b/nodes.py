@@ -8,14 +8,17 @@ import yaml
 from open_acp.knowledge.wiki_engine import WikiEngine
 from open_acp.styles.pedagogy_resolver import PedagogyResolver
 from open_acp.utils.claude import ClaudeClient
+from open_acp.config.curriculum_context import (
+    find_project_root,
+    load_yaml,
+    resolve_packaging_profile as resolve_packaging_manifest_profile,
+    resolve_product_context as resolve_product_manifest_context,
+    resolve_structure_profile as resolve_structure_profile_context,
+)
 
 
 def _find_project_root() -> Path:
-    current = Path(__file__).resolve()
-    for ancestor in current.parents:
-        if (ancestor / "pyproject.toml").exists():
-            return ancestor
-    return current.parents[4]
+    return find_project_root()
 
 
 def _parse_json_object_response(response: str) -> dict:
@@ -69,53 +72,6 @@ def _load_curriculum_sources(domain: str) -> str:
         parts.append(f"### Source: {source_path}\n{resolved.read_text(encoding='utf-8')[:12000]}")
 
     return "\n\n".join(parts)
-
-
-def _load_yaml(path: Path) -> dict:
-    if not path.exists():
-        return {}
-    with open(path, encoding="utf-8") as f:
-        return yaml.safe_load(f) or {}
-
-
-def _deep_merge(base: dict, override: dict) -> dict:
-    merged = dict(base)
-    for key, value in override.items():
-        if isinstance(merged.get(key), dict) and isinstance(value, dict):
-            merged[key] = _deep_merge(merged[key], value)
-        else:
-            merged[key] = value
-    return merged
-
-
-def _load_packaging_profile(domain: str) -> dict:
-    """Load packaging defaults plus any stack-specific override."""
-    project_root = _find_project_root()
-    packaging_root = project_root / "knowledge" / "manifests" / "packaging"
-    default_profile = _load_yaml(packaging_root / "default.yaml")
-    domain_override = _load_yaml(packaging_root / f"{domain}.yaml")
-    profile = _deep_merge(default_profile, domain_override)
-    profile.setdefault("version", 1)
-    profile.setdefault("packaging_profile_id", f"{domain}_default")
-    profile.setdefault("allowed_learning_unit_types", ["video_session_unit", "reading_material_unit", "mcq_practice_unit"])
-    profile.setdefault("preferred_learning_unit_mix", profile["allowed_learning_unit_types"][:3])
-    profile.setdefault("module_count_per_course", {"default": 3, "min": 2, "max": 5, "target_hours_per_module": 8})
-    profile.setdefault("topic_count_per_module", {"default": 4, "min": 2, "max": 6})
-    profile.setdefault("learning_units_per_topic", 3)
-    profile.setdefault("classroom_quiz_every_minutes", 20)
-    profile.setdefault("module_quiz_required", True)
-    profile.setdefault("skill_assessment_every_n_topics", 8)
-    profile.setdefault("skill_assessment_question_types", ["mcq", "coding", "fib", "project"])
-    profile.setdefault("skill_assessment_difficulty_levels", ["easy", "medium", "hard"])
-    profile["allowed_learning_unit_types"] = [
-        "video_session_unit" if item == "ppt_video_unit" else item
-        for item in profile.get("allowed_learning_unit_types", [])
-    ]
-    profile["preferred_learning_unit_mix"] = [
-        "video_session_unit" if item == "ppt_video_unit" else item
-        for item in profile.get("preferred_learning_unit_mix", [])
-    ]
-    return profile
 
 
 def _slugify(value: str) -> str:
@@ -259,6 +215,40 @@ def load_wiki_context(state: dict) -> dict:
     }
 
 
+def resolve_product_context(state: dict) -> dict:
+    """Resolve explicit product context or fall back to stack-only defaults."""
+    domain = state.get("domain", "ml-engineering")
+    existing_context = state.get("product_context", {}) or {}
+    product_family = state.get("product_family") or existing_context.get("product_family")
+    product_version = state.get("product_version") or existing_context.get("product_version")
+
+    context = resolve_product_manifest_context(
+        domain=domain,
+        product_family=product_family,
+        product_version=product_version,
+    )
+
+    print(f"  Product context: {context.get('product_label', 'Stack-only default')}")
+    return {
+        "product_family": context.get("product_family"),
+        "product_version": context.get("product_version"),
+        "product_context": context,
+    }
+
+
+def resolve_structure_profile(state: dict) -> dict:
+    """Resolve the structure profile that should shape curriculum containers."""
+    context = state.get("product_context") or resolve_product_manifest_context(
+        domain=state.get("domain", "ml-engineering"),
+        product_family=state.get("product_family"),
+        product_version=state.get("product_version"),
+    )
+    profile = resolve_structure_profile_context(context)
+
+    print(f"  Structure profile: {profile.get('structure_profile_id', 'standard_product_structure')}")
+    return {"structure_profile": profile}
+
+
 def resolve_pedagogy_profile(state: dict) -> dict:
     """Resolve and justify a pedagogy profile from config."""
     domain = state.get("domain", "ml-engineering")
@@ -283,12 +273,49 @@ def generate_curriculum(state: dict) -> dict:
     learner_context = state.get("learner_context", "")
     curriculum_source_context = state.get("curriculum_source_context") or state.get("program_context", "")
     content_type = state.get("content_type", "concept_explainer")
+    product_context = state.get("product_context", {}) or {}
+    structure_profile = state.get("structure_profile", {}) or {}
+    packaging_profile = state.get("packaging_profile", {}) or {}
+
+    product_summary = "\n".join(
+        [
+            f"- Product label: {product_context.get('product_label', 'Stack-only default')}",
+            f"- Product category: {product_context.get('product_category', 'standard_product')}",
+            f"- Curriculum container kind: {product_context.get('curriculum_container_kind', 'standard_curriculum')}",
+            f"- Delivery mode: {product_context.get('delivery_mode', 'unspecified')}",
+            f"- Focus priority: {product_context.get('focus_priority', 'default')}",
+        ]
+    )
+    structure_summary = "\n".join(
+        [
+            f"- Structure profile: {structure_profile.get('structure_profile_id', 'standard_product_structure')}",
+            f"- Hierarchy: {' -> '.join(structure_profile.get('hierarchy', [])) or 'curriculum_container -> courses -> modules -> topics -> learning_units'}",
+            f"- Design priorities: {', '.join(structure_profile.get('design_priority_dimensions', [])) or 'default'}",
+        ]
+    )
+    packaging_summary = "\n".join(
+        [
+            f"- Packaging profile: {packaging_profile.get('packaging_profile_id', 'default_learning_packaging')}",
+            f"- Modules per course default: {packaging_profile.get('module_count_per_course', {}).get('default', 'unknown')}",
+            f"- Topics per module default: {packaging_profile.get('topic_count_per_module', {}).get('default', 'unknown')}",
+            f"- Learning unit types: {', '.join(packaging_profile.get('allowed_learning_unit_types', [])) or 'none'}",
+        ]
+    )
 
     claude = ClaudeClient()
     prompt = f"""Design a curriculum for "{domain}" using the "{pedagogy_profile}" pedagogy profile.
 
 ## Curriculum Source Context
 {curriculum_source_context or "No explicit curriculum source provided."}
+
+## Product Context
+{product_summary}
+
+## Structure Profile
+{structure_summary}
+
+## Packaging Context
+{packaging_summary}
 
 {skill_context}
 
@@ -435,11 +462,11 @@ def compare_curriculum_changes(state: dict) -> dict:
 def resolve_packaging_profile(state: dict) -> dict:
     """Resolve packaging defaults that shape courses, modules, topics, and learning units."""
     domain = state.get("domain", "ml-engineering")
-    profile = _load_packaging_profile(domain)
-    profile["resolved_for"] = {
-        "domain": domain,
-        "content_type": state.get("content_type", "concept_explainer"),
-    }
+    profile = resolve_packaging_manifest_profile(
+        domain=domain,
+        content_type=state.get("content_type", "concept_explainer"),
+        product_context=state.get("product_context", {}) or {},
+    )
 
     print(
         "  Packaging profile: "

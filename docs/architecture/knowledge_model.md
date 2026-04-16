@@ -123,11 +123,13 @@ It should then:
 
 1. update canonical entities when the skill itself is new or generally revised
 2. update stack-specific profiles and edges when the change is really stack-local
+3. write product-aware runtime summaries only as derived wiki knowledge, not as canonical product definitions
 
 That means signals can influence both:
 
 - the shared wiki entity
 - the stack-scoped graph view
+- the runtime product summary layer
 
 without requiring a brand-new wiki per stack.
 
@@ -174,6 +176,7 @@ TODO:
 - introduce stack-scoped relationship overlays without duplicating the whole wiki
 - add retrieval views that can answer stack-aware curriculum questions from the shared wiki
 - later add product-aware retrieval overlays without turning products into separate wikis
+- keep product manifests and structure profiles canonical while allowing Loop A to write derived `product` summaries into the runtime wiki
 - keep runtime wiki state in `storage/wiki` while treating manifests and curated sources as canonical inputs
 
 ## Example Conceptual Shape

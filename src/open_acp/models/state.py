@@ -30,12 +30,16 @@ class LoopAState(BaseModel):
 
     cycle_id: str
     domain: str
+    product_family: Optional[str] = None
+    product_version: Optional[str] = None
     signal_batch: Optional[SignalBatch] = None
     bootstrap_warnings: list[str] = []
     detected_patterns: list[dict] = []
     pattern_detection_status: str = "not_started"
     pattern_detection_note: Optional[str] = None
     drift_score: float = 0.0
+    product_context: Optional[dict] = None
+    structure_profile: Optional[dict] = None
     wiki_entries_created: list[str] = []
     wiki_entries_updated: list[str] = []
     gate_g1_outcome: Optional[GateOutcome] = None
@@ -46,9 +50,13 @@ class LoopBState(BaseModel):
 
     cycle_id: str
     domain: str
+    product_family: Optional[str] = None
+    product_version: Optional[str] = None
     skill_graph: Optional[SkillGraph] = None
     learner_model: Optional[LearnerModel] = None
     curriculum_source_context: str = ""
+    product_context: Optional[dict] = None
+    structure_profile: Optional[dict] = None
     pedagogy_profile: Optional[str] = None
     curriculum_generation_status: str = "not_started"
     curriculum_generation_note: Optional[str] = None

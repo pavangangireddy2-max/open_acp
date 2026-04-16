@@ -1,0 +1,45 @@
+version: 1
+product_family: NIAT
+product_category: degree_program_product
+default_structure_profile: niat_university_structure
+curriculum_container_kind: academic_degree_curriculum
+default_packaging_profile_id: default_learning_packaging
+default_version: B3
+focus_priority: active
+
+feature_flags:
+  recorded_videos_included: true
+  live_sessions_included: false
+  ai_tutor_enabled: false
+  summary_cheatsheet_required: false
+  offline_delivery_required: true
+
+notes:
+  - NIAT is a university collaboration product with batch, university, branch, BOS, and implementation layers.
+  - Architecture focus is on B2, B3, and B4.
+  - Product context should support offline campus delivery with a learning portal for recorded assets.
+
+versions:
+  B1:
+    focus_priority: legacy
+    delivery_mode: hybrid_delivery
+    notes:
+      - Low-volume legacy batch.
+  B2:
+    focus_priority: active
+    delivery_mode: hybrid_delivery
+    notes:
+      - Includes BITS BSc Program and Chaitanya Deemed University BTech Program.
+  B3:
+    focus_priority: active
+    delivery_mode: mixed_partner_delivery
+    notes:
+      - Batch with broad partner-university expansion.
+  B4:
+    focus_priority: active
+    delivery_mode: mixed_partner_delivery
+    notes:
+      - Ongoing expansion batch.
+  B5:
+    focus_priority: future
+    delivery_mode: mixed_partner_delivery

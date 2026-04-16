@@ -96,3 +96,39 @@ def test_update_skill_graph_uses_detected_patterns_and_existing_skill_ids(monkey
         "genai_120hr_curriculum.md",
         "ml_engineer_requirements.md",
     ]
+
+
+def test_update_product_context_creates_runtime_product_summary(monkeypatch):
+    captured: dict = {}
+
+    class FakeWiki:
+        def get_entity(self, entity_type, entity_id):
+            return None
+
+        def create_entity(self, **kwargs):
+            captured["create_kwargs"] = kwargs
+            return "storage/wiki/entities/product_niat_b3.md"
+
+    monkeypatch.setattr(nodes, "WikiEngine", lambda: FakeWiki())
+
+    result = nodes.update_product_context(
+        {
+            "domain": "genai",
+            "product_family": "NIAT",
+            "product_version": "B3",
+            "detected_patterns": [
+                {
+                    "description": "Industry-facing GenAI delivery needs project-heavy progression.",
+                    "affected_areas": ["skill_graph", "learner_model"],
+                }
+            ],
+        }
+    )
+
+    assert result["product_context"]["product_family"] == "NIAT"
+    assert result["product_context"]["product_version"] == "B3"
+    assert result["structure_profile"]["structure_profile_id"] == "niat_university_structure"
+    assert result["wiki_entries_created"] == ["product_niat_b3"]
+    assert captured["create_kwargs"]["entity_type"] == "product"
+    assert captured["create_kwargs"]["title"] == "NIAT B3 Context"
+    assert "Structure profile: niat_university_structure" in captured["create_kwargs"]["content"]

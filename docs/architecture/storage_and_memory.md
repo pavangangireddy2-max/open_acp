@@ -31,6 +31,9 @@ This runtime layer should eventually support both:
 - canonical shared entities
 - stack-specific graph or profile views
 
+For controlled reruns or clean simulations, it should be acceptable to wipe `storage/wiki`
+and rebuild runtime knowledge from canonical manifests and source inputs.
+
 ## 3. Execution Outputs
 
 These are generated artifacts from pipeline runs:
