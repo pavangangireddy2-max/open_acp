@@ -102,7 +102,7 @@ def test_resolve_product_context_requires_explicit_product_when_configured():
         nodes.resolve_product_context({"domain": "genai", "require_product_context": True})
 
 
-def test_resolve_packaging_profile_uses_domain_override():
+def test_resolve_packaging_profile_uses_domain_override_without_product():
     result = nodes.resolve_packaging_profile({"domain": "genai", "content_type": "concept_explainer"})
 
     profile = result["packaging_profile"]
@@ -110,6 +110,38 @@ def test_resolve_packaging_profile_uses_domain_override():
     assert profile["packaging_profile_id"] == "genai_stack_packaging"
     assert profile["module_count_per_course"]["default"] == 3
     assert "coding_practice_unit" in profile["preferred_learning_unit_mix"]
+    assert profile["field_provenance"]["module_count_per_course.default"] == "stack_fallback:genai"
+
+
+def test_resolve_packaging_profile_prefers_product_layers_and_records_provenance():
+    product_state = nodes.resolve_product_context(
+        {
+            "domain": "genai",
+            "product_family": "NIAT",
+            "product_version": "B3",
+        }
+    )
+
+    result = nodes.resolve_packaging_profile(
+        {
+            "domain": "genai",
+            "content_type": "concept_explainer",
+            "product_context": product_state["product_context"],
+        }
+    )
+
+    profile = result["packaging_profile"]
+
+    assert profile["packaging_profile_id"] == "niat_b3_genai_packaging"
+    assert profile["module_count_per_course"]["default"] == 3
+    assert profile["topic_count_per_module"]["default"] == 4
+    assert "coding_practice_unit" in profile["allowed_learning_unit_types"]
+    assert profile["field_provenance"]["module_count_per_course.default"] == "product_version_domain:NIAT:B3:genai"
+    assert profile["field_provenance"]["topic_count_per_module.default"] == "product_version_domain:NIAT:B3:genai"
+    assert profile["field_provenance"]["allowed_learning_unit_types"] == "product_default:NIAT"
+    assert profile["field_provenance"]["preferred_learning_unit_mix"] == "product_domain:NIAT:genai"
+    assert "product_default:NIAT B3" in profile["resolution_layers"]
+    assert "product_version_domain:NIAT B3:genai" in profile["resolution_layers"]
 
 
 def test_resolve_packaging_profile_carries_product_feature_flags():
@@ -132,6 +164,28 @@ def test_resolve_packaging_profile_carries_product_feature_flags():
     profile = result["packaging_profile"]
     assert profile["product_feature_flags"]["recorded_videos_included"] is True
     assert profile["product_feature_flags"]["live_sessions_included"] is True
+
+
+def test_resolve_packaging_profile_refreshes_stale_product_context():
+    result = nodes.resolve_packaging_profile(
+        {
+            "domain": "genai",
+            "content_type": "concept_explainer",
+            "product_family": "NIAT",
+            "product_version": "B3",
+            "product_context": {
+                "product_family": "NIAT",
+                "product_version": "B3",
+                "product_label": "NIAT B3",
+                "feature_flags": {"recorded_videos_included": True},
+            },
+        }
+    )
+
+    profile = result["packaging_profile"]
+    refreshed_context = result["product_context"]
+    assert refreshed_context["packaging_layers"]["product_version_domain"]["packaging_profile_id"] == "niat_b3_genai_packaging"
+    assert profile["packaging_profile_id"] == "niat_b3_genai_packaging"
 
 
 def test_design_and_alignment_pipeline_exposes_external_skill_gaps():

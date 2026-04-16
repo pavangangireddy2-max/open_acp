@@ -41,13 +41,27 @@ def _get_project_root() -> Path:
 def _infer_category(path: Path) -> str:
     if "competitors" in path.parts:
         return "competitors"
-    if "learner" in path.parts:
+    if "learner" in path.parts or "target_audience" in path.parts:
         return "learner"
     if "job_postings" in path.parts or "hiring" in path.parts:
         return "job_postings"
     if "market" in path.parts:
         return "sources"
     return "sources"
+
+
+def _signal_counts_as_learner(signal: RawSignal) -> bool:
+    if signal.channel_name == "learner":
+        return True
+
+    source_path = signal.metadata.get("source_path")
+    if source_path:
+        try:
+            return _infer_category(Path(source_path)) == "learner"
+        except (TypeError, ValueError):
+            return False
+
+    return False
 
 
 def _normalize_token(value: str) -> str:
@@ -687,7 +701,7 @@ def update_learner_model(state: dict) -> dict:
     learner_content = ""
     if signal_batch:
         for sig in signal_batch.signals:
-            if sig.channel_name == "learner":
+            if _signal_counts_as_learner(sig):
                 learner_content += sig.content[:2000] + "\n\n"
 
     if not learner_content:

@@ -230,6 +230,7 @@ TODO:
 
 - introduce explicit stack-scoped skill profiles alongside shared canonical entities
 - introduce stack-scoped relationship overlays without duplicating the whole wiki
+- add canonical guidance inputs for stack-profile creation so Loop A can shape stack-specific skill roles, pedagogy notes, and assessment implications from designed sources instead of relying only on signal extraction
 - add retrieval views that can answer stack-aware curriculum questions from the shared wiki
 - later add product-aware retrieval overlays without turning products into separate wikis
 - keep product manifests and structure profiles canonical while allowing Loop A to write derived `product` summaries into the runtime wiki

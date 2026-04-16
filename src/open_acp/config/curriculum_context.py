@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from copy import deepcopy
 from pathlib import Path
 from typing import Any, Optional
 
@@ -45,6 +46,27 @@ def _unique(values: list[str]) -> list[str]:
             seen.add(value)
             ordered.append(value)
     return ordered
+
+
+def _merge_packaging_layer(
+    base: dict[str, Any],
+    override: dict[str, Any],
+    provenance: dict[str, str],
+    source_label: str,
+    path: tuple[str, ...] = (),
+) -> dict[str, Any]:
+    for key, value in (override or {}).items():
+        current_path = path + (key,)
+        if isinstance(value, dict):
+            existing = base.get(key)
+            if not isinstance(existing, dict):
+                existing = {}
+            base[key] = existing
+            _merge_packaging_layer(existing, value, provenance, source_label, current_path)
+        else:
+            base[key] = deepcopy(value)
+            provenance[".".join(current_path)] = source_label
+    return base
 
 
 def load_stack_manifest(domain: Optional[str]) -> dict[str, Any]:
@@ -94,6 +116,15 @@ def resolve_product_context(
 
     feature_flags = resolved.get("feature_flags", {}) or {}
     packaging_overrides = resolved.get("packaging_overrides", {}) or {}
+    packaging_manifest = manifest.get("packaging", {}) or {}
+    domain_key = _normalize_token(domain)
+    version_packaging = (packaging_manifest.get("versions", {}) or {}).get(resolved_version, {}) if resolved_version else {}
+    version_domain_packaging = (
+        ((packaging_manifest.get("version_domains", {}) or {}).get(resolved_version, {}) or {}).get(domain_key, {})
+        if resolved_version
+        else {}
+    )
+    domain_packaging = (packaging_manifest.get("domains", {}) or {}).get(domain_key, {})
     notes = _unique(list(manifest.get("notes", []) or []) + list(version_override.get("notes", []) or []))
 
     if explicit_product:
@@ -122,6 +153,13 @@ def resolve_product_context(
         ),
         "supported_domains": resolved.get("supported_domains", []),
         "variant_strategy": resolved.get("variant_strategy"),
+        "packaging_layers": {
+            "product_default": packaging_manifest.get("default", {}) or {},
+            "product_domain": domain_packaging or {},
+            "product_version": version_packaging or {},
+            "product_version_domain": version_domain_packaging or {},
+            "legacy_overrides": packaging_overrides,
+        },
         "notes": notes,
         "is_explicit_product": explicit_product,
         "resolution_reason": reason,
@@ -191,13 +229,69 @@ def resolve_packaging_profile(
 
     default_profile = load_yaml(packaging_root / "default.yaml")
     domain_override = load_yaml(packaging_root / f"{_normalize_token(domain)}.yaml")
-    product_override = product_context.get("packaging_overrides", {}) or {}
+    product_layers = product_context.get("packaging_layers", {}) or {}
+    provenance: dict[str, str] = {}
+    resolution_layers: list[str] = []
 
-    profile = deep_merge(default_profile, domain_override)
-    profile = deep_merge(profile, product_override)
+    profile: dict[str, Any] = {}
+    if default_profile:
+        resolution_layers.append("global_default")
+        _merge_packaging_layer(profile, default_profile, provenance, "global_default")
+    if domain_override:
+        resolution_layers.append(f"stack_fallback:{domain}")
+        _merge_packaging_layer(profile, domain_override, provenance, f"stack_fallback:{domain}")
+
+    product_label = product_context.get("product_label", "default")
+    product_family = product_context.get("product_family") or "default"
+    product_version = product_context.get("product_version")
+    if product_layers.get("product_default"):
+        resolution_layers.append(f"product_default:{product_label}")
+        _merge_packaging_layer(
+            profile,
+            product_layers["product_default"],
+            provenance,
+            f"product_default:{product_family}",
+        )
+    if product_layers.get("product_domain"):
+        resolution_layers.append(f"product_domain:{product_label}:{domain}")
+        _merge_packaging_layer(
+            profile,
+            product_layers["product_domain"],
+            provenance,
+            f"product_domain:{product_family}:{domain}",
+        )
+    if product_layers.get("product_version"):
+        version_label = product_version or "default_version"
+        resolution_layers.append(f"product_version:{product_label}")
+        _merge_packaging_layer(
+            profile,
+            product_layers["product_version"],
+            provenance,
+            f"product_version:{product_family}:{version_label}",
+        )
+    if product_layers.get("product_version_domain"):
+        version_label = product_version or "default_version"
+        resolution_layers.append(f"product_version_domain:{product_label}:{domain}")
+        _merge_packaging_layer(
+            profile,
+            product_layers["product_version_domain"],
+            provenance,
+            f"product_version_domain:{product_family}:{version_label}:{domain}",
+        )
+    if product_layers.get("legacy_overrides"):
+        resolution_layers.append(f"legacy_product_overrides:{product_label}")
+        _merge_packaging_layer(
+            profile,
+            product_layers["legacy_overrides"],
+            provenance,
+            f"legacy_product_overrides:{product_family}",
+        )
 
     profile.setdefault("version", 1)
-    profile.setdefault("packaging_profile_id", f"{_normalize_token(domain)}_default")
+    profile.setdefault(
+        "packaging_profile_id",
+        product_context.get("default_packaging_profile_id") or f"{_normalize_token(domain)}_default",
+    )
     profile.setdefault(
         "allowed_learning_unit_types",
         ["video_session_unit", "reading_material_unit", "mcq_practice_unit"],
@@ -229,4 +323,6 @@ def resolve_packaging_profile(
         "product_version": product_context.get("product_version"),
     }
     profile["product_feature_flags"] = product_context.get("feature_flags", {})
+    profile["field_provenance"] = provenance
+    profile["resolution_layers"] = resolution_layers
     return profile

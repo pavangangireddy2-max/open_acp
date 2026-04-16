@@ -1,4 +1,5 @@
 import pytest
+from pathlib import Path
 
 from open_acp.loops.loop_a import nodes
 from open_acp.models.signals import ChannelCategory, ChannelType, RawSignal, SignalBatch
@@ -178,3 +179,26 @@ def test_update_learner_model_requires_product_specific_inputs_for_explicit_prod
                 "signal_batch": _build_signal_batch(),
             }
         )
+
+
+def test_infer_category_treats_target_audience_paths_as_learner():
+    path = Path("knowledge/sources/products/niat/target_audience/niat_target_audience_profile.md")
+
+    assert nodes._infer_category(path) == "learner"
+
+
+def test_signal_counts_as_learner_for_target_audience_source_path():
+    signal = RawSignal(
+        signal_id="sig_target_audience",
+        channel_category=ChannelCategory.INDUSTRY_MARKET,
+        channel_name="sources",
+        content="NIAT target audience profile content",
+        timestamp="2026-04-16T00:00:00+00:00",
+        signal_type=ChannelType.PROACTIVE,
+        metadata={
+            "filename": "niat_target_audience_profile.md",
+            "source_path": "knowledge/sources/products/niat/target_audience/niat_target_audience_profile.md",
+        },
+    )
+
+    assert nodes._signal_counts_as_learner(signal) is True

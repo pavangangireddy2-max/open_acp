@@ -451,12 +451,22 @@ class LoopReviewRunner:
 
         if stage_id == "resolve_packaging_profile":
             packaging = state.get("packaging_profile", {}) or {}
+            provenance = packaging.get("field_provenance", {}) or {}
             return (
                 f"Resolved packaging profile: {packaging.get('packaging_profile_id', 'default')}.",
                 [
-                    f"Modules per course default: {packaging.get('module_count_per_course', {}).get('default', 'unknown')}.",
-                    f"Topics per module default: {packaging.get('topic_count_per_module', {}).get('default', 'unknown')}.",
-                    f"Allowed learning unit types: {', '.join(packaging.get('allowed_learning_unit_types', [])) or 'none'}.",
+                    (
+                        f"Modules per course default: {packaging.get('module_count_per_course', {}).get('default', 'unknown')}"
+                        f" (source: {provenance.get('module_count_per_course.default', 'unknown')})."
+                    ),
+                    (
+                        f"Topics per module default: {packaging.get('topic_count_per_module', {}).get('default', 'unknown')}"
+                        f" (source: {provenance.get('topic_count_per_module.default', 'unknown')})."
+                    ),
+                    (
+                        f"Allowed learning unit types: {', '.join(packaging.get('allowed_learning_unit_types', [])) or 'none'}"
+                        f" (source: {provenance.get('allowed_learning_unit_types', 'unknown')})."
+                    ),
                 ],
             )
 

@@ -3,7 +3,7 @@ product_family: NIAT
 product_category: degree_program_product
 default_structure_profile: niat_university_structure
 curriculum_container_kind: academic_degree_curriculum
-default_packaging_profile_id: default_learning_packaging
+default_packaging_profile_id: niat_default_packaging
 default_version: B3
 focus_priority: active
 
@@ -13,6 +13,69 @@ feature_flags:
   ai_tutor_enabled: false
   summary_cheatsheet_required: false
   offline_delivery_required: true
+
+packaging:
+  default:
+    packaging_profile_id: niat_default_packaging
+    module_count_per_course:
+      default: 3
+      min: 2
+      max: 5
+      target_hours_per_module: 8
+    topic_count_per_module:
+      default: 4
+      min: 2
+      max: 6
+    learning_units_per_topic: 3
+    allowed_learning_unit_types:
+      - video_session_unit
+      - reading_material_unit
+      - mcq_practice_unit
+      - coding_practice_unit
+    preferred_learning_unit_mix:
+      - video_session_unit
+      - reading_material_unit
+      - mcq_practice_unit
+    classroom_quiz_every_minutes: 20
+    module_quiz_required: true
+    skill_assessment_every_n_topics: 8
+    skill_assessment_question_types:
+      - mcq
+      - coding
+      - fib
+      - project
+    skill_assessment_difficulty_levels:
+      - easy
+      - medium
+      - hard
+  domains:
+    genai:
+      packaging_profile_id: niat_genai_packaging
+      preferred_learning_unit_mix:
+        - video_session_unit
+        - reading_material_unit
+        - coding_practice_unit
+      topic_phase_labels:
+        - Problem framing
+        - Architecture and concepts
+        - Guided build
+        - Checkpoint and quiz
+  versions:
+    B3:
+      packaging_profile_id: niat_b3_packaging
+  version_domains:
+    B3:
+      genai:
+        packaging_profile_id: niat_b3_genai_packaging
+        module_count_per_course:
+          default: 3
+          min: 2
+          max: 4
+          target_hours_per_module: 8
+        topic_count_per_module:
+          default: 4
+          min: 3
+          max: 5
 
 target_audience_sources:
   - knowledge/sources/products/niat/target_audience/niat_target_audience_profile.md

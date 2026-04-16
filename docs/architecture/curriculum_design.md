@@ -184,6 +184,21 @@ Source-of-truth note:
 - packaging manifests remain under `knowledge/manifests/packaging/`
 - Loop A may write a derived product summary into the runtime wiki, but the manifests remain canonical
 
+Packaging resolution note:
+
+- packaging should resolve from canonical manifests only
+- product-aware packaging should be resolved before stack fallback values are accepted
+- the intended precedence is:
+  - global default packaging
+  - stack fallback packaging
+  - product default packaging
+  - product + domain packaging
+  - product + version packaging
+  - product + version + domain packaging
+  - later course-level packaging overrides
+- stack manifests should fill gaps, not silently override explicit product packaging choices
+- the resolved packaging profile should carry per-field provenance so review packets can explain where module counts, topic counts, and learning-unit constraints came from
+
 Strict-source note:
 
 - if a requested domain has no explicit manifest-backed or domain-backed source inputs, the system should eventually stop rather than silently borrowing unrelated defaults

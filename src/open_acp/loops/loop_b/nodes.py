@@ -478,10 +478,17 @@ def compare_curriculum_changes(state: dict) -> dict:
 def resolve_packaging_profile(state: dict) -> dict:
     """Resolve packaging defaults that shape courses, modules, topics, and learning units."""
     domain = state.get("domain", "ml-engineering")
+    product_context = state.get("product_context", {}) or {}
+    if state.get("product_family") and not product_context.get("packaging_layers"):
+        product_context = resolve_product_manifest_context(
+            domain=domain,
+            product_family=state.get("product_family"),
+            product_version=state.get("product_version"),
+        )
     profile = resolve_packaging_manifest_profile(
         domain=domain,
         content_type=state.get("content_type", "concept_explainer"),
-        product_context=state.get("product_context", {}) or {},
+        product_context=product_context,
     )
 
     print(
@@ -489,7 +496,7 @@ def resolve_packaging_profile(state: dict) -> dict:
         f"{profile.get('packaging_profile_id', 'default')} "
         f"({len(profile.get('allowed_learning_unit_types', []))} unit types)"
     )
-    return {"packaging_profile": profile}
+    return {"product_context": product_context, "packaging_profile": profile}
 
 
 def design_courses(state: dict) -> dict:
