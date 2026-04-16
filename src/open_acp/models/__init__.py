@@ -8,6 +8,18 @@ from open_acp.models.curriculum import (
     LearningObjective,
     Module,
 )
+from open_acp.models.delivery import (
+    AssessmentNature,
+    AssessmentSystem,
+    InstructionalPattern,
+    LearningUnitType,
+    ModuleChangeType,
+    ModuleWorkPlan,
+    PlacementEligibilityRole,
+    ProductionTarget,
+    QuestionFormat,
+    TopicDeliveryPlan,
+)
 from open_acp.models.signals import (
     ChannelCategory,
     ChannelType,
@@ -61,6 +73,17 @@ __all__ = [
     "CurriculumMap",
     "LearningObjective",
     "Module",
+    # delivery
+    "AssessmentNature",
+    "AssessmentSystem",
+    "InstructionalPattern",
+    "LearningUnitType",
+    "ModuleChangeType",
+    "ModuleWorkPlan",
+    "PlacementEligibilityRole",
+    "ProductionTarget",
+    "QuestionFormat",
+    "TopicDeliveryPlan",
     # signals
     "ChannelCategory",
     "ChannelType",

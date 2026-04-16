@@ -164,6 +164,18 @@ Later, it could become:
 - graph-oriented or structured relationship storage for stack edges
 - retrieval views for fast stack-aware curriculum design
 
+## TODO: Wiki Knowledge Model Implementation
+
+The target architecture is clear, but the repo is not fully there yet.
+
+TODO:
+
+- introduce explicit stack-scoped skill profiles alongside shared canonical entities
+- introduce stack-scoped relationship overlays without duplicating the whole wiki
+- add retrieval views that can answer stack-aware curriculum questions from the shared wiki
+- later add product-aware retrieval overlays without turning products into separate wikis
+- keep runtime wiki state in `storage/wiki` while treating manifests and curated sources as canonical inputs
+
 ## Example Conceptual Shape
 
 One way to think about it is:

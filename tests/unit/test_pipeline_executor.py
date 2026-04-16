@@ -103,6 +103,75 @@ def _module_context() -> dict:
     }
 
 
+def _rich_execution_context() -> dict:
+    return {
+        "execution_scope": "module",
+        "execution_id": "course_l1_m1",
+        "execution_title": "Level 1 — Foundations — Core workflow",
+        "module_id": "course_l1_m1",
+        "title": "Level 1 — Foundations — Core workflow",
+        "estimated_hours": 1.5,
+        "pedagogy_profile": "project_build_along",
+        "instructional_pattern": "concept_explainer",
+        "curriculum_title": "GenAI Stack Curriculum",
+        "course_title": "Level 1 — Foundations",
+        "curriculum_module_title": "Level 1 — Foundations — Core workflow",
+        "packaging_profile_id": "genai_stack_packaging",
+        "module_topic_count": 1,
+        "module_learning_unit_count": 2,
+        "module_learning_unit_types": ["reading_material_unit", "video_session_unit"],
+        "module_practice_types": ["guided_reflection"],
+        "module_assessment_question_types": ["mcq", "fib", "coding"],
+        "module_work_plan": {
+            "module_id": "course_l1_m1",
+            "module_title": "Level 1 — Foundations — Core workflow",
+            "module_change_type": "module_creation",
+            "instructional_pattern": "concept_explainer",
+            "topic_count": 1,
+            "learning_unit_count": 2,
+            "learning_unit_types": ["reading_material_unit", "video_session_unit"],
+            "practice_types": ["guided_reflection"],
+            "topics": [
+                {
+                    "topic_id": "course_l1_m1_t1",
+                    "title": "Level 1 — Problem Framing",
+                    "sequence_within_module": 1,
+                    "estimated_minutes": 30,
+                    "learning_units": [
+                        {
+                            "learning_unit_id": "course_l1_m1_t1_u1",
+                            "unit_type": "reading_material_unit",
+                            "title": "Level 1 — Problem Framing — Reading material",
+                        },
+                        {
+                            "learning_unit_id": "course_l1_m1_t1_u2",
+                            "unit_type": "video_session_unit",
+                            "title": "Level 1 — Problem Framing — Instructor-led PPT session",
+                        },
+                    ],
+                    "practice_item": {"practice_type": "guided_reflection", "goal": "Reinforce framing"},
+                    "classroom_quiz": {"question_types": ["mcq", "fib"], "difficulty": "easy"},
+                }
+            ],
+            "module_quiz": {"question_types": ["mcq", "coding"], "difficulty": "medium"},
+            "skill_assessment_alignment": {
+                "overall_status": "needs_review",
+                "question_type_alignment": {"status": "gap", "missing": ["project"]},
+            },
+            "production_targets": [
+                {"target_scope": "learning_unit", "target_id": "course_l1_m1_t1_u1"},
+                {"target_scope": "learning_unit", "target_id": "course_l1_m1_t1_u2"},
+                {"target_scope": "assessment_unit", "target_id": "course_l1_m1_t1_classroom_quiz"},
+                {"target_scope": "assessment_unit", "target_id": "course_l1_m1_module_quiz"},
+            ],
+        },
+        "skill_assessment_alignment": {
+            "overall_status": "needs_review",
+            "question_type_alignment": {"status": "gap", "missing": ["project"]},
+        },
+    }
+
+
 def test_executor_retries_after_invalid_json(monkeypatch, tmp_path):
     executor, _ = _make_executor(
         monkeypatch,
@@ -223,6 +292,34 @@ def test_executor_injects_pedagogy_and_style_context_into_prompt(monkeypatch, tm
     assert "## Domain Guidelines" in prompt
 
 
+def test_executor_injects_richer_execution_context_into_prompt(monkeypatch, tmp_path):
+    executor, fake_claude = _make_executor(
+        monkeypatch,
+        tmp_path,
+        responses=[
+            json.dumps(_valid_objectives()),
+            json.dumps(_review_pass()),
+        ],
+    )
+
+    executor._execute_stage(
+        stage=_make_stage(),
+        pipeline_def=_make_pipeline(),
+        previous_artifacts={},
+        module_context=_rich_execution_context(),
+        domain="genai",
+    )
+
+    prompt = fake_claude.calls[0]["prompt"]
+    assert "## Execution Scope" in prompt
+    assert "Execution Scope: module" in prompt
+    assert "Instructional Pattern: concept_explainer" in prompt
+    assert "Course: Level 1 — Foundations" in prompt
+    assert "Planned Topics: 1" in prompt
+    assert "Planned Learning Units: 2" in prompt
+    assert '"production_targets": [' in prompt
+
+
 def test_execute_review_stage_writes_review_packet(monkeypatch, tmp_path):
     executor, _ = _make_executor(
         monkeypatch,
@@ -300,3 +397,30 @@ def test_execute_review_stage_resumes_after_saved_artifact(monkeypatch, tmp_path
 
     assert result["stage_id"] == "outline"
     assert result["next_stage_id"] is None
+
+
+def test_review_packet_includes_execution_scope_context(monkeypatch, tmp_path):
+    executor, _ = _make_executor(
+        monkeypatch,
+        tmp_path,
+        responses=[
+            json.dumps(_valid_objectives()),
+            json.dumps(_review_pass()),
+        ],
+    )
+    pipeline = _make_pipeline()
+    pipeline.stages = [_make_stage()]
+    monkeypatch.setattr(executor.pipeline_loader, "load", lambda _: pipeline)
+
+    result = executor.execute_review_stage(
+        content_type="concept_explainer",
+        module_context=_rich_execution_context(),
+        domain="genai",
+    )
+
+    review_md = Path(result["review_packet_paths"]["markdown"]).read_text(encoding="utf-8")
+    assert "Execution Scope" in review_md
+    assert "Course: Level 1 — Foundations" in review_md
+    assert "Instructional Pattern: `concept_explainer`" in review_md
+    assert "Topics Planned: 1" in review_md
+    assert "Learning Units Planned: 2" in review_md

@@ -196,9 +196,22 @@ class PipelineExecutor:
         runtime_context = module_context.copy()
         runtime_context.setdefault("domain", domain)
         runtime_context["pedagogy_profile"] = resolved_profile
+        runtime_context.setdefault("execution_scope", "module")
+        runtime_context.setdefault("execution_id", runtime_context.get("module_id", "unknown"))
+        runtime_context.setdefault("execution_title", runtime_context.get("title", "Untitled"))
+        runtime_context.setdefault("module_id", runtime_context["execution_id"])
+        runtime_context.setdefault("title", runtime_context["execution_title"])
         if review_notes:
             runtime_context["manual_review_notes"] = review_notes
         return runtime_context
+
+    @staticmethod
+    def _context_id(module_context: dict) -> str:
+        return module_context.get("execution_id", module_context.get("module_id", "unknown"))
+
+    @staticmethod
+    def _context_title(module_context: dict) -> str:
+        return module_context.get("execution_title", module_context.get("title", "Untitled"))
 
     def _load_saved_artifacts(
         self,
@@ -281,8 +294,19 @@ class PipelineExecutor:
             "content_type": pipeline_def.content_type,
             "display_name": pipeline_def.display_name,
             "stage_id": stage.id,
+            "execution_scope": module_context.get("execution_scope", "module"),
+            "execution_id": self._context_id(module_context),
+            "execution_title": self._context_title(module_context),
             "module_id": module_context.get("module_id", "unknown"),
             "module_title": module_context.get("title", "Untitled"),
+            "instructional_pattern": module_context.get("instructional_pattern"),
+            "course_title": module_context.get("course_title"),
+            "curriculum_module_title": module_context.get("curriculum_module_title"),
+            "module_topic_count": module_context.get("module_topic_count"),
+            "module_learning_unit_count": module_context.get("module_learning_unit_count"),
+            "module_learning_unit_types": module_context.get("module_learning_unit_types"),
+            "module_practice_types": module_context.get("module_practice_types"),
+            "module_assessment_question_types": module_context.get("module_assessment_question_types"),
             "checkpoint_required": stage.checkpoint_required,
             "human_approval_default": stage.human_approval_default,
             "validated": artifact.validated,
@@ -390,7 +414,8 @@ class PipelineExecutor:
             "",
             f"- Pipeline: `{packet['pipeline_id']}`",
             f"- Content Type: `{packet['content_type']}`",
-            f"- Module: `{packet['module_id']}` — {packet['module_title']}",
+            f"- Execution Scope: `{packet.get('execution_scope', 'module')}`",
+            f"- Execution Target: `{packet.get('execution_id', packet['module_id'])}` — {packet.get('execution_title', packet['module_title'])}",
             f"- Checkpoint Required: `{packet['checkpoint_required']}`",
             f"- Human Approval Default: `{packet['human_approval_default']}`",
             f"- Validated: `{packet['validated']}`",
@@ -398,11 +423,38 @@ class PipelineExecutor:
             f"- Attempts: `{packet['attempts']}`",
             f"- Next Stage: `{packet['next_stage_id'] or 'complete'}`",
             "",
+            "## Context",
+        ]
+
+        if packet.get("course_title"):
+            lines.append(f"- Course: {packet['course_title']}")
+        if packet.get("curriculum_module_title"):
+            lines.append(f"- Module: {packet['curriculum_module_title']}")
+        if packet.get("instructional_pattern"):
+            lines.append(f"- Instructional Pattern: `{packet['instructional_pattern']}`")
+        if packet.get("module_topic_count") is not None:
+            lines.append(f"- Topics Planned: {packet['module_topic_count']}")
+        if packet.get("module_learning_unit_count") is not None:
+            lines.append(f"- Learning Units Planned: {packet['module_learning_unit_count']}")
+        if packet.get("module_learning_unit_types"):
+            rendered = ", ".join(f"`{item}`" for item in packet["module_learning_unit_types"])
+            lines.append(f"- Learning Unit Types: {rendered}")
+        if packet.get("module_practice_types"):
+            lines.append(f"- Practice Types: {', '.join(packet['module_practice_types'])}")
+        if packet.get("module_assessment_question_types"):
+            lines.append(
+                f"- Assessment Question Types: {', '.join(packet['module_assessment_question_types'])}"
+            )
+
+        lines.extend(
+            [
+                "",
             "## Review Summary",
             packet.get("review_summary", "") or "No summary provided.",
             "",
             "## Key Decisions",
-        ]
+            ]
+        )
 
         for item in packet.get("key_decisions", []):
             lines.append(f"- {item}")
@@ -558,8 +610,48 @@ class PipelineExecutor:
             f"- Pedagogy Profile: {module_context.get('pedagogy_profile', 'unknown')}",
         ]
 
-        parts.append("\n## Module Context")
+        parts.append("\n## Execution Scope")
+        scope_keys = [
+            ("Execution Scope", "execution_scope"),
+            ("Execution ID", "execution_id"),
+            ("Execution Title", "execution_title"),
+            ("Instructional Pattern", "instructional_pattern"),
+            ("Curriculum", "curriculum_title"),
+            ("Course", "course_title"),
+            ("Module", "curriculum_module_title"),
+            ("Planned Topics", "module_topic_count"),
+            ("Planned Learning Units", "module_learning_unit_count"),
+            ("Learning Unit Types", "module_learning_unit_types"),
+            ("Practice Types", "module_practice_types"),
+            ("Assessment Question Types", "module_assessment_question_types"),
+            ("Estimated Hours", "estimated_hours"),
+            ("Packaging Profile", "packaging_profile_id"),
+        ]
+        for label, key in scope_keys:
+            value = module_context.get(key)
+            if value not in (None, "", [], {}):
+                parts.append(f"- {label}: {value}")
+
+        parts.append("\n## Runtime Context")
+        skip_keys = {
+            "execution_scope",
+            "execution_id",
+            "execution_title",
+            "instructional_pattern",
+            "curriculum_title",
+            "course_title",
+            "curriculum_module_title",
+            "module_topic_count",
+            "module_learning_unit_count",
+            "module_learning_unit_types",
+            "module_practice_types",
+            "module_assessment_question_types",
+            "estimated_hours",
+            "packaging_profile_id",
+        }
         for key, value in module_context.items():
+            if key in skip_keys:
+                continue
             if isinstance(value, (list, dict)):
                 rendered = json.dumps(value, indent=2)
                 parts.append(f"- {key}: {rendered}")

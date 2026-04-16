@@ -15,13 +15,13 @@ topic_count_per_module:
 learning_units_per_topic: 3
 
 allowed_learning_unit_types:
-  - ppt_video_unit
+  - video_session_unit
   - reading_material_unit
   - mcq_practice_unit
   - coding_practice_unit
 
 preferred_learning_unit_mix:
-  - ppt_video_unit
+  - video_session_unit
   - reading_material_unit
   - mcq_practice_unit
 

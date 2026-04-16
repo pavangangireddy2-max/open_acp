@@ -27,6 +27,7 @@ Open ACP is an agentic educational content production system. It combines:
 - [System Layers](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/system_layers.md)
 - [Runtime Flow](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/runtime_flow.md)
 - [Curriculum Design](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/curriculum_design.md)
+- [Product Catalog](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/product_catalog.md)
 - [Knowledge Model](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/knowledge_model.md)
 - [Storage And Memory](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/storage_and_memory.md)
 - [Evaluation And Learning](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/evaluation_and_learning.md)
@@ -52,3 +53,8 @@ The main near-term direction is to keep the architecture legible while expanding
 - evaluator rigor
 - wiki intelligence quality
 - system interfaces such as APIs or batch execution
+
+TODO:
+
+- introduce a product layer above packaging without collapsing stack/domain curriculum design into product design
+- keep course-end outputs such as `summary_cheatsheet` product-configurable rather than universally required

@@ -100,10 +100,21 @@ The packaging layer controls things such as:
 
 This is represented through a `packaging_profile`.
 
+See also:
+
+- [Product Catalog](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/product_catalog.md)
+
+TODO:
+
+- introduce an explicit product layer above packaging
+- let product configuration decide whether `summary_cheatsheet` appears as a course-end deliverable
+- let product configuration override module counts, unit mix, assessment cadence, and skill-assessment cadence
+- let product configuration decide when course-end units such as cheat sheets, revision packs, or recap assets are required
+
 Examples of packaging-sensitive behavior:
 
 - one course may have 2 modules in a light packaging and 4 modules in a deeper packaging
-- one topic may use only PPT + MCQ in one packaging and PPT + reading + coding in another
+- one topic may use only video + MCQ in one packaging and video + reading + coding in another
 - one stack may expect classroom checks every 15 minutes while another uses 20-minute cadence
 
 ## Assessments: Internal vs External
@@ -188,6 +199,11 @@ This matters because not every topic should practice in the same way, even insid
 
 This is not fully implemented yet, but it should become a first-class extension.
 
+TODO:
+
+- introduce `practice_profile` as an explicit contract
+- introduce `assessment_mode` as an explicit contract
+
 Two useful next concepts are:
 
 - `practice_profile`
@@ -220,15 +236,37 @@ Loop C is not broken by this design, but it is now underfed if it only consumes 
 The long-term direction is:
 
 - Loop C should receive richer inputs from Loop B
-- content generation should eventually be aware of:
+- Loop C should enter at **module scope**
+- each module handoff should carry a nested `module_work_plan`
+- the work plan should make the following explicit:
   - selected course
-  - module
-  - topic
-  - learning unit type
+  - selected module
+  - whether the module is being created or updated
+  - planned topics
+  - planned learning units
   - practice intent
-  - assessment context
+  - learning assessment context
+  - skill assessment alignment context
 
 Until that migration happens, Loop C still works through the compatibility layer.
+
+Current implementation note:
+
+- Loop C now prefers a module-first execution target when Loop B exposes:
+  - course design
+  - module design
+  - topic design
+  - learning-unit planning
+- the selected module is passed forward together with a nested `module_work_plan`
+- the work plan contains nested learning-unit and assessment production targets
+- it still falls back to the older module-level contract when those richer artifacts are absent
+
+TODO:
+
+- distinguish clearly between `module_creation` and `module_update` in Loop C review and execution flows
+- support video sessions that do not require a PPT-backed format
+
+So the migration is underway, but not yet complete.
 
 ## Loop D Impact
 

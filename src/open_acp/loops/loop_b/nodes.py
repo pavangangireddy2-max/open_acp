@@ -97,7 +97,7 @@ def _load_packaging_profile(domain: str) -> dict:
     profile = _deep_merge(default_profile, domain_override)
     profile.setdefault("version", 1)
     profile.setdefault("packaging_profile_id", f"{domain}_default")
-    profile.setdefault("allowed_learning_unit_types", ["ppt_video_unit", "reading_material_unit", "mcq_practice_unit"])
+    profile.setdefault("allowed_learning_unit_types", ["video_session_unit", "reading_material_unit", "mcq_practice_unit"])
     profile.setdefault("preferred_learning_unit_mix", profile["allowed_learning_unit_types"][:3])
     profile.setdefault("module_count_per_course", {"default": 3, "min": 2, "max": 5, "target_hours_per_module": 8})
     profile.setdefault("topic_count_per_module", {"default": 4, "min": 2, "max": 6})
@@ -107,6 +107,14 @@ def _load_packaging_profile(domain: str) -> dict:
     profile.setdefault("skill_assessment_every_n_topics", 8)
     profile.setdefault("skill_assessment_question_types", ["mcq", "coding", "fib", "project"])
     profile.setdefault("skill_assessment_difficulty_levels", ["easy", "medium", "hard"])
+    profile["allowed_learning_unit_types"] = [
+        "video_session_unit" if item == "ppt_video_unit" else item
+        for item in profile.get("allowed_learning_unit_types", [])
+    ]
+    profile["preferred_learning_unit_mix"] = [
+        "video_session_unit" if item == "ppt_video_unit" else item
+        for item in profile.get("preferred_learning_unit_mix", [])
+    ]
     return profile
 
 
@@ -176,7 +184,7 @@ def _topic_phase_labels(packaging_profile: dict, pedagogy_profile: str) -> list[
 
 def _learning_unit_label(unit_type: str) -> str:
     mapping = {
-        "ppt_video_unit": "Instructor-led PPT session",
+        "video_session_unit": "Video session",
         "reading_material_unit": "Reading material",
         "mcq_practice_unit": "MCQ practice",
         "coding_practice_unit": "Coding practice",

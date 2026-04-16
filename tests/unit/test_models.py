@@ -22,6 +22,72 @@ def test_pipeline_family_enum():
     assert len(PipelineFamily) == 4
 
 
+def test_delivery_taxonomy_enums():
+    from open_acp.models.delivery import (
+        AssessmentNature,
+        AssessmentSystem,
+        InstructionalPattern,
+        LearningUnitType,
+        ModuleChangeType,
+        PlacementEligibilityRole,
+        QuestionFormat,
+    )
+
+    assert LearningUnitType.VIDEO_SESSION_UNIT.value == "video_session_unit"
+    assert InstructionalPattern.CONCEPT_EXPLAINER.value == "concept_explainer"
+    assert AssessmentSystem.SKILL.value == "skill"
+    assert AssessmentNature.SUMMATIVE.value == "summative"
+    assert ModuleChangeType.MODULE_UPDATE.value == "module_update"
+    assert PlacementEligibilityRole.GATING_SIGNAL.value == "gating_signal"
+    assert QuestionFormat.MULTI_ANSWER_MCQ.value == "multi_answer_mcq"
+
+
+def test_module_work_plan():
+    from open_acp.models.delivery import ModuleWorkPlan, ProductionTarget, TopicDeliveryPlan
+
+    plan = ModuleWorkPlan(
+        curriculum_id="cur_1",
+        curriculum_title="GenAI Stack Curriculum",
+        course_id="course_1",
+        course_title="Foundations",
+        module_id="module_1",
+        module_title="Foundations — Core workflow",
+        module_change_type="module_creation",
+        instructional_pattern="concept_explainer",
+        topic_count=1,
+        learning_unit_count=2,
+        learning_unit_types=["reading_material_unit", "video_session_unit"],
+        assessment_question_types=["mcq", "fib"],
+        topics=[
+            TopicDeliveryPlan(
+                topic_id="topic_1",
+                title="Problem Framing",
+                sequence_within_module=1,
+                estimated_minutes=30,
+                learning_units=[
+                    {"learning_unit_id": "topic_1_u1", "unit_type": "reading_material_unit"},
+                    {"learning_unit_id": "topic_1_u2", "unit_type": "video_session_unit"},
+                ],
+                classroom_quiz={"question_types": ["mcq", "fib"]},
+            )
+        ],
+        production_targets=[
+            ProductionTarget(
+                target_scope="learning_unit",
+                target_id="topic_1_u2",
+                title="Problem Framing — Instructor-led PPT session",
+                learning_unit_type="video_session_unit",
+                instructional_pattern="concept_explainer",
+            )
+        ],
+    )
+
+    dumped = plan.model_dump()
+    assert dumped["module_title"] == "Foundations — Core workflow"
+    assert dumped["topics"][0]["learning_units"][1]["unit_type"] == "video_session_unit"
+    assert dumped["production_targets"][0]["instructional_pattern"] == "concept_explainer"
+
+
 # ── Curriculum ─────────────────────────────────────────────────────────────────
 
 def test_bloom_level():

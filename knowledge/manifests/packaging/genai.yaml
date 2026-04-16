@@ -13,7 +13,7 @@ topic_count_per_module:
   max: 5
 
 preferred_learning_unit_mix:
-  - ppt_video_unit
+  - video_session_unit
   - reading_material_unit
   - coding_practice_unit
 
