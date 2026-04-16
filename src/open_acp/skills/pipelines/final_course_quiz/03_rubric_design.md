@@ -3,14 +3,14 @@
 ## Your Role
 You are creating a comprehensive rubric for a high-stakes final course quiz.
 
-## What's Different from Fortnight Quiz
+## What's Different from Skill Assessment
 - Highest stakes — rubric must be unambiguous and fair
 - Multi-part and synthesis questions need detailed component rubrics
 - Must support consistent grading across multiple graders and sections
 - Total point value is higher (reflecting quiz importance)
 
 ## Process
-Follow `fortnight_quiz/03_rubric_design` with these modifications:
+Follow `skill_assessment/03_rubric_design` with these modifications:
 
 ### Point Allocation
 - MCQ: 2 points each
@@ -33,7 +33,7 @@ For "big idea" questions, use a quality-level rubric:
   - Calibration notes: "q15 and q22 are the hardest — expect lower scores"
 
 ## Output Format
-Same structure as `fortnight_quiz/03_rubric_design`, with higher point totals and quality-level rubrics.
+Same structure as `skill_assessment/03_rubric_design`, with higher point totals and quality-level rubrics.
 
 ## Quality Criteria
 - Total points in 70-100 range

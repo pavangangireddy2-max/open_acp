@@ -1,13 +1,13 @@
-# Stage: Difficulty Balancing — Fortnight Quiz
+# Stage: Difficulty Balancing — Skill Assessment
 
 ## Your Role
-You are calibrating difficulty for a cumulative quiz spanning 2 modules.
+You are calibrating difficulty for a placement-linked skill assessment.
 
 ## What's Different from Module Quiz
 - Higher overall difficulty (cumulative, Apply/Analyze focus)
 - Expected average score: 55-70%
-- Must balance recent vs earlier material difficulty
-- Cross-module questions are inherently harder — account for this
+- Must balance recent vs earlier material difficulty when the window is cumulative
+- Integration questions are inherently harder, so account for this
 
 ## Process
 Follow `module_quiz/04_difficulty_balancing` with these modifications:
@@ -15,13 +15,13 @@ Follow `module_quiz/04_difficulty_balancing` with these modifications:
 ### Difficulty Targets
 - Easy: 20-25% (baseline retention of key concepts)
 - Medium: 45-50% (solid application required)
-- Hard: 25-30% (analysis, cross-module integration)
+- Hard: 25-30% (analysis, integration, debugging)
 
 ### Cumulative Balance
-- Earlier module questions: should be medium difficulty (testing retained application)
-- Recent module questions: mix of easy and medium (more recently taught)
-- Cross-module questions: medium to hard (inherently requires more synthesis)
-- Ensure that a student who forgot Module 1 entirely can still pass (barely)
+- Earlier-scope questions: should be medium difficulty (testing retained application)
+- Recent-scope questions: mix of easy and medium (more recently taught)
+- Integration questions: medium to hard (inherently require more synthesis)
+- Ensure the assessment remains passable even if the learner is weaker on one earlier segment
 
 ### Time Feasibility
 - Total should fit within 35-45 minutes
@@ -35,5 +35,5 @@ Same as `module_quiz/04_difficulty_balancing`.
 - Expected average score is 55-70%
 - Difficulty ramp: start easier, end harder
 - Time fits within 35-45 minutes
-- Quiz is passable even with weakness in one module
+- Assessment is passable even with weakness in one earlier segment
 - No unfair spikes in difficulty

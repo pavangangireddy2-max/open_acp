@@ -3,14 +3,14 @@
 ## Your Role
 You are calibrating the difficulty of a comprehensive final course quiz.
 
-## What's Different from Fortnight Quiz
+## What's Different from Skill Assessment
 - Hardest quiz in the course — difficulty ceiling is higher
 - Must still be fair (no impossible questions)
 - Broader range of difficulty needed (easy recall to hard synthesis)
 - Expected score distribution: wider spread than module quizzes
 
 ## Process
-Follow `fortnight_quiz/04_difficulty_balancing` with these modifications:
+Follow `skill_assessment/04_difficulty_balancing` with these modifications:
 
 ### Difficulty Targets
 - Easy: 15-20% (4-5 questions: baseline recall, confidence builders)
@@ -39,7 +39,7 @@ Follow `fortnight_quiz/04_difficulty_balancing` with these modifications:
 - Total: 60-75 minutes
 
 ## Output Format
-Same as `fortnight_quiz/04_difficulty_balancing`, with very_hard tier added.
+Same as `skill_assessment/04_difficulty_balancing`, with very_hard tier added.
 
 ## Quality Criteria
 - Difficulty spans easy to very hard

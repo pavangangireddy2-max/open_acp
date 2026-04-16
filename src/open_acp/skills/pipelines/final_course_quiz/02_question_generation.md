@@ -3,14 +3,14 @@
 ## Your Role
 You are writing 25-30 comprehensive questions that evaluate full-course mastery.
 
-## What's Different from Fortnight Quiz
+## What's Different from Skill Assessment
 - Much larger scope (entire course, not 2 modules)
 - Higher Bloom levels (Analyze/Evaluate, not just Apply)
 - "Big idea" synthesis questions that test holistic understanding
 - More diverse question formats
 
 ## Process
-Follow `fortnight_quiz/02_question_generation` with these modifications:
+Follow `skill_assessment/02_question_generation` with these modifications:
 
 ### Format Mix
 - 12-15 MCQ questions (higher difficulty than module quizzes)
@@ -37,7 +37,7 @@ Multi-part questions around a realistic scenario:
 - Include 3-5 truly challenging questions (Analyze/Evaluate)
 
 ## Output Format
-Same as `fortnight_quiz/02_question_generation`, with additional multi-part questions.
+Same as `skill_assessment/02_question_generation`, with additional multi-part questions.
 
 ## Quality Criteria
 - 25-30 questions covering all modules

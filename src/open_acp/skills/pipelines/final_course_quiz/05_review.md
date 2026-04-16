@@ -3,14 +3,14 @@
 ## Your Role
 You are the final quality gate for the highest-stakes quiz in the course. This review must be thorough.
 
-## What's Different from Fortnight Quiz
+## What's Different from Skill Assessment
 - Highest stakes — any error undermines student trust and grading fairness
 - Full course scope requires verifying EVERY question against taught material
 - Synthesis questions need review for fairness (are they answerable?)
 - Rubric review is critical for grading consistency
 
 ## Process
-Follow `fortnight_quiz/05_review` with these additions:
+Follow `skill_assessment/05_review` with these additions:
 
 ### Comprehensive Checks
 1. **Full curriculum audit**: Map every question to the module/session where it was taught
@@ -30,7 +30,7 @@ Follow `fortnight_quiz/05_review` with these additions:
 - Missing answer options in MCQs
 
 ## Output Format
-Same as `fortnight_quiz/05_review`, with additional fields:
+Same as `skill_assessment/05_review`, with additional fields:
 ```json
 {
   "review_report": {

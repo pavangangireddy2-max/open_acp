@@ -1,26 +1,26 @@
 inherits: _assessment_base
 pipeline_id: skill_assessment
 content_type: skill_assessment
-display_name: "Fortnight Quiz"
-description: "Biweekly assessment, 15-20 questions targeting Apply/Analyze Bloom levels"
+display_name: "Skill Assessment"
+description: "Placement-linked skill assessment with configurable scope, cadence, and difficulty"
 
-frequency: biweekly
+frequency: configurable
 duration_minutes: 45
 question_count: { min: 15, max: 20 }
 bloom_target: [Apply, Analyze]
 
 stages:
   - id: scope_definition
-    skill: pipelines/fortnight_quiz/01_scope_definition
+    skill: pipelines/skill_assessment/01_scope_definition
     tools: [claude_generate]
     artifact_schema: outline.schema.json
     model_tier: strong
     review_focus:
-      - "Scope covers two weeks of content"
-      - "Integration across topics is tested, not just recall"
+      - "Scope covers the configured assessment window"
+      - "Integration across relevant topics is tested, not just recall"
 
   - id: question_generation
-    skill: pipelines/fortnight_quiz/02_question_generation
+    skill: pipelines/skill_assessment/02_question_generation
     tools: [claude_generate]
     artifact_schema: assessment.schema.json
     model_tier: strong
@@ -30,7 +30,7 @@ stages:
       - "Scenarios are realistic and domain-relevant"
 
   - id: rubric_design
-    skill: pipelines/fortnight_quiz/03_rubric_design
+    skill: pipelines/skill_assessment/03_rubric_design
     tools: [claude_generate]
     artifact_schema: assessment.schema.json
     model_tier: strong
@@ -39,7 +39,7 @@ stages:
       - "Partial credit rewards correct methodology even with wrong final answer"
 
   - id: difficulty_balancing
-    skill: pipelines/fortnight_quiz/04_difficulty_balancing
+    skill: pipelines/skill_assessment/04_difficulty_balancing
     tools: [claude_generate]
     artifact_schema: assessment.schema.json
     model_tier: cheap
@@ -48,7 +48,7 @@ stages:
       - "No questions below Apply level"
 
   - id: review
-    skill: pipelines/fortnight_quiz/05_review
+    skill: pipelines/skill_assessment/05_review
     tools: [claude_generate]
     artifact_schema: assessment.schema.json
     model_tier: cheap

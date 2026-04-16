@@ -63,6 +63,23 @@ domain guidance -> contextual emphasis
 
 This is intentionally clearer than the older single `format` bucket.
 
+### Learning Support Note
+
+`learning_support` should not be treated as a normal slide-backed teaching
+session by default.
+
+Current intended meaning:
+
+- on-demand support delivery
+- revision-oriented or doubt-resolution oriented
+- often triggered by learner need rather than fixed curriculum sequence
+- may not require PPTs or a slide-backed presentation surface
+
+This remains a pending taxonomy cleanup item. The current runtime name stays
+`learning_support` for compatibility, but future guidance and pipeline design
+should treat it more like a support or intervention pattern than a standard
+session pattern.
+
 ### Pedagogy Resolution Rule
 
 Pedagogy should not be treated as stack-only in real product runs.
@@ -292,8 +309,8 @@ Canonical runtime assessment names should use:
 product contexts like NIAT, where mid-semester and end-semester exams are
 distinct from placement-linked skill assessments.
 
-Legacy pipeline/file names such as `fortnight_quiz` may still appear in
-compatibility paths, but they should not be treated as the canonical taxonomy
+Legacy user inputs such as `fortnight_quiz` may still be normalized for
+compatibility, but they should not be treated as the canonical taxonomy
 moving forward.
 
 The important rule is:

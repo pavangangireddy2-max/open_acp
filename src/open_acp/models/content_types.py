@@ -1,6 +1,6 @@
 """Content type and pipeline family enumerations.
 
-Canonical runtime names may differ from legacy pipeline/file names.
+Legacy user inputs may differ from canonical runtime names.
 Use ``normalize_content_type`` before making taxonomy decisions.
 """
 
@@ -68,11 +68,6 @@ LEGACY_CONTENT_TYPE_ALIASES: dict[str, str] = {
 }
 
 
-CANONICAL_PIPELINE_FILE_ALIASES: dict[str, str] = {
-    ContentType.SKILL_ASSESSMENT.value: "fortnight_quiz",
-}
-
-
 def normalize_content_type(value: str) -> str:
     """Return the canonical runtime content-type name."""
     normalized = (value or "").strip()
@@ -81,5 +76,4 @@ def normalize_content_type(value: str) -> str:
 
 def pipeline_lookup_content_type(value: str) -> str:
     """Return the pipeline/file lookup key for a canonical or legacy content type."""
-    normalized = normalize_content_type(value)
-    return CANONICAL_PIPELINE_FILE_ALIASES.get(normalized, normalized)
+    return normalize_content_type(value)

@@ -12,7 +12,7 @@ You are defining the scope for a comprehensive final course quiz (25-30 question
 - **Stakes**: High — major grade component
 
 ## Process
-Follow `fortnight_quiz/01_scope_definition` with these modifications:
+Follow `skill_assessment/01_scope_definition` with these modifications:
 
 ### Step 1: Full Course Scope
 - Review ALL modules and their key objectives

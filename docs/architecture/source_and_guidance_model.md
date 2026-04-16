@@ -308,7 +308,7 @@ Important rule:
 - rich analytical files like `universal_principles.yaml` should not be treated as runtime guidance automatically
 - they belong closer to `knowledge/analyses/pedagogy/` unless a distilled runtime subset is intentionally created
 
-#### `knowledge/guidance/domains/`
+#### `knowledge/guidance/stacks/`
 
 This should hold domain or stack playbooks.
 
@@ -321,7 +321,7 @@ Examples:
 
 Current likely source:
 
-- `knowledge/guidance/domains/...`
+- `knowledge/guidance/stacks/...`
 
 These answer:
 
@@ -465,7 +465,7 @@ So the target split is:
   - emergency-only defaults, not a canonical source layer
 - `knowledge/guidance/pedagogy/profiles/...`
   - runtime pedagogy profiles
-- `knowledge/guidance/domains/...`
+- `knowledge/guidance/stacks/...`
   - domain playbooks
 - `knowledge/guidance/presentation_surfaces/slide_backed_session.yaml`
   - the canonical runtime playbook for slide-backed session delivery

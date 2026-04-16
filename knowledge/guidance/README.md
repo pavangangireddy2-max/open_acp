@@ -25,8 +25,8 @@ Current categories:
   - playbooks for the surface or medium through which the unit is experienced
 - `instructional_patterns/`
   - playbooks for session or teaching patterns such as concept explainer or project building
-- `domains/`
-  - stack/domain-specific teaching guidance
+- `stacks/`
+  - stack-specific teaching guidance
 
 Architecture note:
 

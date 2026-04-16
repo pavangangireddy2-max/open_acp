@@ -10,7 +10,7 @@ from open_acp.config.curriculum_context import find_project_root
 
 
 class StyleLoader:
-    """Load and compose pedagogy, delivery, domain, and brand guidance."""
+    """Load and compose pedagogy, delivery, stack, and brand guidance."""
 
     def __init__(self, styles_dir: Optional[str] = None):
         if styles_dir:
@@ -61,7 +61,7 @@ class StyleLoader:
 
         Returns layered guidance with keys such as pedagogy_core, pedagogy_profile,
         learning_unit_type, presentation_surface, instructional_pattern, teaching_mode_contract,
-        domain, and brand when available.
+        stack, and brand when available.
         """
         content_type = normalize_content_type(content_type)
         result = {}
@@ -118,11 +118,11 @@ class StyleLoader:
         if teaching_mode_contract:
             result["teaching_mode_contract"] = teaching_mode_contract
 
-        # Tier 6: Domain-specific guidance
+        # Tier 6: Stack-specific guidance
         if stack_key:
-            domain_path = self.base_dir / "domains" / f"{stack_key}.yaml"
-            if domain_path.exists():
-                result["domain"] = self._load_yaml(domain_path)
+            stack_path = self.base_dir / "stacks" / f"{stack_key}.yaml"
+            if stack_path.exists():
+                result["stack"] = self._load_yaml(stack_path)
 
         # Tier 7: Brand/visual guidelines
         brand_path = self.base_dir / "brand" / "default.yaml"
@@ -194,9 +194,9 @@ class StyleLoader:
             parts.append("\n## Instructional Pattern Guidance\n")
             parts.append(yaml.dump(composed["instructional_pattern"], default_flow_style=False)[:1800])
 
-        if "domain" in composed:
-            parts.append("\n## Domain Guidelines\n")
-            parts.append(yaml.dump(composed["domain"], default_flow_style=False)[:1800])
+        if "stack" in composed:
+            parts.append("\n## Stack Guidance\n")
+            parts.append(yaml.dump(composed["stack"], default_flow_style=False)[:1800])
 
         if "brand" in composed:
             parts.append("\n## Brand Guidelines\n")
@@ -215,7 +215,7 @@ class StyleLoader:
             "learning_unit_types": [f.stem for f in (self.base_dir / "learning_unit_types").glob("*.yaml")] if (self.base_dir / "learning_unit_types").exists() else [],
             "presentation_surfaces": [f.stem for f in (self.base_dir / "presentation_surfaces").glob("*.yaml")] if (self.base_dir / "presentation_surfaces").exists() else [],
             "instructional_patterns": [f.stem for f in (self.base_dir / "instructional_patterns").glob("*.yaml")] if (self.base_dir / "instructional_patterns").exists() else [],
-            "domains": [f.stem for f in (self.base_dir / "domains").glob("*.yaml")] if (self.base_dir / "domains").exists() else [],
+            "stacks": [f.stem for f in (self.base_dir / "stacks").glob("*.yaml")] if (self.base_dir / "stacks").exists() else [],
         }
         return result
 
@@ -251,7 +251,7 @@ class StyleLoader:
             "learning_unit_types",
             "presentation_surfaces",
             "instructional_patterns",
-            "domains",
+            "stacks",
         ]
 
     @staticmethod

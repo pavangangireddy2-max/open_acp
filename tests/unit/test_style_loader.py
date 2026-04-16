@@ -19,7 +19,7 @@ def test_style_loader_composes_first_wave_layers():
     assert "instructional_pattern" in composed
     assert "teaching_mode_contract" in composed
     assert "brand" in composed
-    assert "domain" in composed
+    assert "stack" in composed
     assert composed["pedagogy_profile"]["profile_id"] == "worked_example_scaffold"
     assert composed["guidance_contract"]["learning_unit_type"] == "video_session_unit"
     assert composed["guidance_contract"]["presentation_surface"] == "slide_backed_session"
@@ -74,4 +74,5 @@ def test_style_loader_text_includes_profile_and_brand_sections():
     assert "Learning Unit Type Guidance" in text
     assert "Presentation Surface Guidance" in text
     assert "Instructional Pattern Guidance" in text
+    assert "Stack Guidance" in text
     assert "Brand Guidelines" in text

@@ -293,7 +293,7 @@ def test_executor_injects_pedagogy_and_style_context_into_prompt(monkeypatch, tm
     assert "## Presentation Surface Guidance" in prompt
     assert "## Instructional Pattern Guidance" in prompt
     assert "## Brand Guidelines" in prompt
-    assert "## Domain Guidelines" in prompt
+    assert "## Stack Guidance" in prompt
 
 
 def test_executor_injects_richer_execution_context_into_prompt(monkeypatch, tmp_path):
