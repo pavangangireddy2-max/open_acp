@@ -35,6 +35,34 @@ Definitions:
     - MCQ practice unit
     - coding practice unit
 
+## Guidance Connection
+
+At runtime, Loop C should not treat all "content types" as one flat axis.
+
+The current guidance model now separates:
+
+- **pedagogy profile**
+  - defines the allowed teaching modes
+- **instructional pattern**
+  - defines the preferred teaching-mode sequence
+- **learning unit type**
+  - defines what kind of unit is being produced
+- **presentation surface**
+  - defines the medium through which the learner experiences the unit
+- **domain guidance**
+  - shapes examples, diagrams, and emphasis
+
+So the connection is:
+
+```text
+pedagogy profile -> allowed teaching modes
+instructional pattern -> preferred teaching-mode sequence
+learning unit type + presentation surface -> delivery constraints
+domain guidance -> contextual emphasis
+```
+
+This is intentionally clearer than the older single `format` bucket.
+
 ## Important Terminology Rule
 
 Stacks or domains such as `genai`, `python`, `cpp`, `dsa`, or `reactjs` are not
@@ -308,8 +336,8 @@ This is especially useful because practice and assessment behavior can vary by:
 
 TODO:
 
-- learner personas should later become product-aware
-- for academic products such as NIAT, learner personas may also become batch-aware, university-aware, or branch-aware
+- target-audience profiles should be product-aware as canonical source inputs
+- for academic products such as NIAT, target-audience profiles may also become batch-aware, university-aware, or branch-aware
 
 ## Loop C Impact
 

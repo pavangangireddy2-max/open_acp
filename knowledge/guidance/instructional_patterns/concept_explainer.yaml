@@ -1,0 +1,13 @@
+instructional_pattern: concept_explainer
+preferred_learning_unit_type: video_session_unit
+preferred_presentation_surface: slide_backed_session
+common_teaching_mode_sequence:
+  - motivation
+  - prior_knowledge_bridge
+  - concept_explain
+  - worked_example
+  - guided_practice
+  - reflection_summary
+pattern_rules:
+  - "Move from why this matters to what it is, then to how it behaves in examples."
+  - "Use examples and analogies before deep detail when the concept is abstract."

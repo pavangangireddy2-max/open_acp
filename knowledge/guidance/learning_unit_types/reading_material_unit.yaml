@@ -1,0 +1,7 @@
+unit_type: reading_material_unit
+description: Self-paced textual learning unit.
+guidance:
+  - Structure the unit with clear headings, short sections, and scannable callouts.
+  - Use examples and diagrams to break up conceptual density.
+  - End each major section with a quick recap or self-check prompt.
+  - Prefer precise prose over transcript-like narration.

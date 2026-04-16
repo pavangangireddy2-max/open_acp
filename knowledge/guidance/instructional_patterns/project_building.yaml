@@ -1,8 +1,14 @@
-version: 1
-format: project_session
-applies_to:
-  - project_building
-
+instructional_pattern: project_building
+preferred_learning_unit_type: video_session_unit
+preferred_presentation_surface: slide_backed_session
+common_teaching_mode_sequence:
+  - project_context
+  - concept_explain
+  - architecture_reasoning
+  - guided_build
+  - verification_checkpoint
+  - integration_demo
+  - reflection_summary
 required_flow:
   - project outcome preview
   - specification framing
@@ -11,7 +17,6 @@ required_flow:
   - verification checkpoints
   - integration demo
   - reflection and next steps
-
 deck_constraints:
   architecture_diagram_frequency: 3
   max_code_lines_per_slide: 12

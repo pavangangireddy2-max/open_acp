@@ -1,17 +1,16 @@
-# Format Guidelines: PPT Session (Concept Explainer / Problem Solving / Project Building)
-# Extracted from: Slide Prep Guide + 9 sample PPTs across Python, C++, DSA, ReactJS
+# Presentation Surface Guidance: Slide-Backed Session
+# Extracted from: Slide Prep Guide + sample PPTs across Python, C++, DSA, ReactJS
 
 version: 1
-format: ppt_session
-applies_to:
+presentation_surface: slide_backed_session
+applies_to_learning_unit_types:
+  - video_session_unit
+supports_instructional_patterns:
   - concept_explainer
   - problem_solving
   - project_building
   - learning_support
-  - platform_walkthrough
   - induction
-
-# ─── SLIDE STRUCTURE ────────────────────────────────────────────────────────────
 
 required_slides:
   opening:
@@ -41,10 +40,7 @@ required_slides:
       frequency: "After every 4 sessions"
       content: "Feed Us With Your Feedback, We are Very Hungry to Serve You Better"
 
-# ─── CONTENT SLIDE PATTERNS ─────────────────────────────────────────────────────
-
 content_patterns:
-
   concept_introduction:
     description: "Pattern for introducing a new concept"
     slide_sequence:
@@ -53,7 +49,6 @@ content_patterns:
       - "Real-life analogy slide (everyday analogy with illustration)"
       - "Examples slide (programming examples — visual list)"
       - "Detail slides (progressive explanation, one aspect per slide)"
-    observed: "DSA S1: 'What is a Data Structure?' → Definition → Bookshelf analogy → Examples list"
 
   code_demonstration:
     description: "Pattern for showing code"
@@ -64,7 +59,6 @@ content_patterns:
       - "Input/Output slide (show Input box, Code box, Output box)"
       - "Error demonstration slide (show what goes wrong, explain error message)"
       - "Fixed code slide (show the corrected version)"
-    observed: "C++ data types: 5-6 slides per data type following this exact pattern"
     rules:
       - "Always show Input → Code → Output on every code example"
       - "Blue box (#006daf) highlights newly added lines"
@@ -78,64 +72,45 @@ content_patterns:
       - "Title slide ('X vs Y')"
       - "Comparison table (aspects as rows, X and Y as columns)"
       - "Key difference callout (1-2 most important differences)"
-    observed: "C++ S1: compiler vs interpreter, cin vs input(), float vs double"
 
   practice_section:
     description: "Pattern for practice problems in a session"
     slide_sequence:
       - "Section break ('Practice Questions')"
       - "Problem statement slide (visual representation of the problem)"
-      - "Solution slide (code in both languages if applicable, with Input/Output)"
-    observed: "C++ S1: 'Calculate Area of Circle' and 'Simple Interest' at end of session"
-
-# ─── SLIDE DENSITY RULES ────────────────────────────────────────────────────────
+      - "Solution slide (code with Input/Output or expected behavior)"
 
 density:
   words_per_slide:
     max: 40
     ideal: 20-30
     rule: "Never add more than 30-40 words in a single slide"
-
   lines_per_slide:
     ideal: 3
     max: 5
     rule: "Try to adjust the content in 4 lines. Best case is 3. Max 5."
-
   concepts_per_slide: 1
   rule: "One idea per slide — if you need more, add another slide"
-
   code_lines_per_slide:
     max: 15
     rule: "If code exceeds 15 lines, split across slides with progressive reveal"
-
   bullet_points_per_slide:
     max: 6
     rule: "Maximum 6 bullet points — prefer 3-4 with sub-bullets"
 
-# ─── PROGRESSIVE REVEAL PATTERN ─────────────────────────────────────────────────
-
 progressive_reveal:
   description: "Multi-slide build-up of complex content"
   rules:
-    - "Start with the skeleton (e.g., boilerplate code without the logic)"
-    - "Each subsequent slide adds ONE new element (highlighted with blue box)"
-    - "Show the output change at each step"
-    - "End with the complete version"
-  observed:
-    - "C++ boilerplate: 5 slides to reveal #include, main(), code area, return 0"
-    - "C++ data type input: 4 slides to show declare → cin → cout → output"
-    - "ReactJS: vanilla JS → add imports → createElement → render"
-
-# ─── SPEAKER NOTES GUIDELINES ───────────────────────────────────────────────────
+    - "Start with the skeleton and add one new element per slide."
+    - "Highlight the new addition visually."
+    - "Show how the output or interpretation changes at each step."
+    - "End with the complete version."
 
 speaker_notes:
   required: true
   content_type: "presenter triggers"
   rules:
-    - "Every slide MUST have speaker notes"
-    - "Notes should tell the presenter WHAT TO SAY, not just repeat what's on screen"
-    - "Include talking points, transition phrases, expected questions"
-    - "For code slides: explain the logic verbally (the 'why', not just the 'what')"
-    - "For comparison slides: highlight the key takeaway to emphasize"
-    - "Update notes when duplicating slides — don't leave stale notes"
-    - "Put long URLs and image URLs in speaker notes (not on slide)"
+    - "Every slide MUST have speaker notes."
+    - "Notes should tell the presenter WHAT TO SAY, not just repeat what's on screen."
+    - "Include talking points, transition phrases, and expected questions."
+    - "For code slides: explain the logic verbally (the why, not just the what)."

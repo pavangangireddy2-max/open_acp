@@ -6,7 +6,7 @@ You are applying brand voice, formatting, and terminology guidelines to the asse
 ## Prerequisites
 - Core content artifact (the raw instructional material)
 - Activities artifact (the learning activities)
-- Brand playbook (styles/default.yaml) — if available
+- Brand playbook (`knowledge/guidance/brand/default.yaml`) — if available
 
 ## Input Artifacts
 - `core_content` — instructional material
@@ -15,7 +15,7 @@ You are applying brand voice, formatting, and terminology guidelines to the asse
 ## Process
 
 ### Step 1: Load Brand Guidelines
-If a brand playbook exists (styles/default.yaml), load it. Key sections to apply:
+If a brand playbook exists (`knowledge/guidance/brand/default.yaml`), load it. Key sections to apply:
 - **Voice**: tone, perspective, formality, personality traits
 - **Formatting**: heading style, code blocks, lists, emphasis
 - **Terminology**: preferred terms, terms to avoid, domain glossary

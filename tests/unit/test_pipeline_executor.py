@@ -286,9 +286,13 @@ def test_executor_injects_pedagogy_and_style_context_into_prompt(monkeypatch, tm
 
     prompt = fake_claude.calls[0]["prompt"]
     assert "Pedagogy Profile: concept_progression" in prompt
+    assert "## Guidance Contract" in prompt
     assert "## Pedagogy Core" in prompt
+    assert "## Teaching Mode Contract" in prompt
+    assert "## Learning Unit Type Guidance" in prompt
+    assert "## Presentation Surface Guidance" in prompt
+    assert "## Instructional Pattern Guidance" in prompt
     assert "## Brand Guidelines" in prompt
-    assert "## Format Guidelines" in prompt
     assert "## Domain Guidelines" in prompt
 
 

@@ -52,6 +52,7 @@ The main near-term direction is to keep the architecture legible while expanding
 - first-wave migrated pipelines
 - product-aware Loop A and Loop B resolution
 - purpose-based cleanup of sources, corpus, analyses, and guidance playbooks
+- moving non-code runtime playbooks out of `src/` into `knowledge/guidance/`
 - storage and memory maturity
 - curriculum design depth
 - packaging-aware delivery design

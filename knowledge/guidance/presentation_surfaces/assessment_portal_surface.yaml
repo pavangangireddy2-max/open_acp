@@ -1,0 +1,12 @@
+version: 1
+presentation_surface: assessment_portal_surface
+applies_to_learning_unit_types:
+  - mcq_practice_unit
+  - classroom_quiz_unit
+  - module_quiz_unit
+  - final_course_quiz_unit
+  - skill_assessment_unit
+guidance:
+  - Keep the item flow and navigation predictable.
+  - Make timing, scoring, and answer-submission rules explicit.
+  - Separate learner feedback from scoring rules depending on formative vs summative use.

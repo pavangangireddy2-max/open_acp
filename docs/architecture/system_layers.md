@@ -53,7 +53,8 @@ This layer provides the reusable inputs that shape the system:
 - structured catalogs
 - seeded source documents
 - exemplar corpus assets and derived analyses
-- runtime guidance playbooks for brand, pedagogy, domains, and delivery behavior
+- runtime guidance playbooks for brand, pedagogy, domains, learning-unit types,
+  presentation surfaces, and instructional patterns
 
 The key design rule is that not all knowledge is equally canonical:
 

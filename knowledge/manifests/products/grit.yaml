@@ -12,5 +12,7 @@ feature_flags:
   ai_tutor_enabled: false
   summary_cheatsheet_required: false
 
+target_audience_sources: []
+
 notes:
   - GRIT is a known product family, but detailed versioning and delivery metadata are still pending.

@@ -166,3 +166,15 @@ def test_update_product_context_requires_explicit_product_when_configured():
                 "require_product_context": True,
             }
         )
+
+
+def test_update_learner_model_requires_product_specific_inputs_for_explicit_product_run():
+    with pytest.raises(ValueError, match="missing product-specific target-audience inputs"):
+        nodes.update_learner_model(
+            {
+                "domain": "genai",
+                "product_family": "NIAT",
+                "product_version": "B3",
+                "signal_batch": _build_signal_batch(),
+            }
+        )

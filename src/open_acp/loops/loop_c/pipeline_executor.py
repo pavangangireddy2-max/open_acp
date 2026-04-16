@@ -490,6 +490,7 @@ class PipelineExecutor:
             content_type=pipeline_def.content_type,
             domain=domain,
             pedagogy_profile=module_context.get("pedagogy_profile"),
+            instructional_pattern=module_context.get("instructional_pattern"),
         )
 
         max_attempts = 1 + pipeline_def.review_max_rounds if pipeline_def.strict_execution else 1

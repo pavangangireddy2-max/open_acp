@@ -1,0 +1,12 @@
+instructional_pattern: platform_walkthrough
+preferred_learning_unit_type: video_session_unit
+preferred_presentation_surface: screen_demo_session
+common_teaching_mode_sequence:
+  - motivation
+  - prior_knowledge_bridge
+  - concept_explain
+  - guided_practice
+  - reflection_summary
+pattern_rules:
+  - "Orient the learner inside the interface before task execution."
+  - "Keep the walkthrough operational and recovery-oriented, not theory-heavy."

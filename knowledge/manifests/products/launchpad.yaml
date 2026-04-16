@@ -13,6 +13,8 @@ feature_flags:
   ai_tutor_enabled: false
   summary_cheatsheet_required: true
 
+target_audience_sources: []
+
 notes:
   - Launchpad is intentionally deferred from the first implementation slice.
   - Some courses may require true product-specific course variants, not just packaging changes.

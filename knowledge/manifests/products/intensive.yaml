@@ -13,6 +13,8 @@ feature_flags:
   ai_tutor_enabled: false
   summary_cheatsheet_required: true
 
+target_audience_sources: []
+
 notes:
   - Intensive Offline is the primary current design focus.
   - The structure should continue to support earlier online versions.

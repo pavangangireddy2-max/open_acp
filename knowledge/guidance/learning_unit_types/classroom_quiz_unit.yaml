@@ -1,0 +1,6 @@
+unit_type: classroom_quiz_unit
+description: In-session formative assessment unit.
+guidance:
+  - Keep the quiz short enough to preserve teaching flow.
+  - Target the concept just taught rather than the entire module.
+  - Use immediate feedback and correction to recover misconceptions quickly.

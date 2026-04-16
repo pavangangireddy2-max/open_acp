@@ -116,6 +116,10 @@ def resolve_product_context(
         "delivery_mode": resolved.get("delivery_mode"),
         "feature_flags": feature_flags,
         "packaging_overrides": packaging_overrides,
+        "target_audience_sources": resolved.get(
+            "target_audience_sources",
+            resolved.get("learner_sources", []),
+        ),
         "supported_domains": resolved.get("supported_domains", []),
         "variant_strategy": resolved.get("variant_strategy"),
         "notes": notes,

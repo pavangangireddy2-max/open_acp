@@ -217,8 +217,8 @@ def test_load_raw_sources_prefers_manifest_for_genai():
     paths = [source["path"] for source in sources]
 
     assert "genai_120hr_curriculum.md" in filenames
-    assert "target_persona.md" in filenames
     assert "competitor_courses.md" in filenames
+    assert "ml_engineer_requirements.md" in filenames
     assert all("knowledge/sources/" in path for path in paths)
 
 
@@ -227,10 +227,10 @@ def test_build_bootstrap_warnings_flags_generic_domain_coverage():
         "genai",
         [
             {
-                "filename": "target_persona.md",
+                "filename": "niat_b3_learner_profile.md",
                 "category": "learner",
                 "content": "persona",
-                "path": "/tmp/target_persona.md",
+                "path": "/tmp/niat_b3_learner_profile.md",
             },
             {
                 "filename": "ml_engineer_requirements.md",

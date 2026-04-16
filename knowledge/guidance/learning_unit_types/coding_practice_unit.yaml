@@ -1,0 +1,7 @@
+unit_type: coding_practice_unit
+description: Hands-on coding problem unit.
+guidance:
+  - Keep the problem statement, constraints, hints, and solutions clearly separated.
+  - Provide guiding questions before revealing the full solution path.
+  - Where relevant, include multiple solutions and compare trade-offs.
+  - For DSA-style tasks, surface complexity reasoning, not only final code.

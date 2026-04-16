@@ -14,6 +14,9 @@ feature_flags:
   summary_cheatsheet_required: false
   offline_delivery_required: true
 
+target_audience_sources:
+  - knowledge/sources/products/niat/target_audience/niat_target_audience_profile.md
+
 notes:
   - NIAT is a university collaboration product with batch, university, branch, BOS, and implementation layers.
   - Architecture focus is on B2, B3, and B4.

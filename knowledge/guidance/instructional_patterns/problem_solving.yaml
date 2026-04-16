@@ -1,0 +1,12 @@
+instructional_pattern: problem_solving
+preferred_learning_unit_type: video_session_unit
+preferred_presentation_surface: slide_backed_session
+common_teaching_mode_sequence:
+  - prior_knowledge_bridge
+  - concept_explain
+  - worked_example
+  - guided_practice
+  - reflection_summary
+pattern_rules:
+  - "Frame the problem before teaching the method."
+  - "Move from solved example to guided attempt to independent reasoning."

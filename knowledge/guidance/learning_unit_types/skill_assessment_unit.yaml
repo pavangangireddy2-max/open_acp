@@ -1,0 +1,6 @@
+unit_type: skill_assessment_unit
+description: External or placement-linked skill assessment unit.
+guidance:
+  - Align question types, difficulty, and concept coverage with the target assessment contract.
+  - Keep evidence requirements explicit because these units influence readiness or eligibility.
+  - Separate learning support hints from scoring logic when the assessment is summative.

@@ -1,0 +1,14 @@
+unit_type: video_session_unit
+description: Instructor-led or recorded audiovisual learning unit.
+supports_instructional_patterns:
+  - concept_explainer
+  - problem_solving
+  - project_building
+  - platform_walkthrough
+  - induction
+  - learning_support
+guidance:
+  - Choose presentation surface based on the pattern: slide-backed for conceptual sessions, screen-demo for walkthroughs.
+  - Break the unit into short visual beats instead of long uninterrupted narration.
+  - Show concrete examples, outputs, or demonstrations regularly so explanation stays anchored.
+  - When slide-backed, speaker notes should guide what to say, not just repeat on-screen text.

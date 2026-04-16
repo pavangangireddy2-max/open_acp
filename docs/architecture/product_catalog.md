@@ -290,13 +290,13 @@ Examples already identified:
 These should eventually be treated as product or product-version overlay parameters rather
 than stack or curriculum parameters.
 
-## Learner Persona TODO
+## Target Audience TODO
 
 TODO:
 
-- learner personas should later become product-aware
+- target-audience profiles should be product-aware as canonical source inputs, not shared global seeds
 - some products may require audience-specific course variants
-- NIAT may later need batch-aware, university-aware, and branch-aware persona overlays
+- NIAT may later need batch-aware, university-aware, and branch-aware target-audience overlays
 
 ## NIAT Product Notes
 

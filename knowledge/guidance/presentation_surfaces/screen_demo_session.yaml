@@ -1,0 +1,12 @@
+version: 1
+presentation_surface: screen_demo_session
+applies_to_learning_unit_types:
+  - video_session_unit
+supports_instructional_patterns:
+  - platform_walkthrough
+  - project_building
+guidance:
+  - Keep the live interface or terminal visible for most of the unit.
+  - Narrate exact click paths, commands, and expected intermediate states.
+  - Call out setup pitfalls, recovery paths, and shortcut habits.
+  - Use brief recap slides only when the demo needs a structural pause.

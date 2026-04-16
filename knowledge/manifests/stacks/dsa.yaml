@@ -1,6 +1,6 @@
 version: 1
 domain: dsa
-shared_audience_manifest: ../shared/audience_sources.yaml
+shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
 
 raw_style_corpus:
   exports:

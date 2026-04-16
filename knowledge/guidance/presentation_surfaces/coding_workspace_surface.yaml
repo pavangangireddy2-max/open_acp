@@ -1,0 +1,8 @@
+version: 1
+presentation_surface: coding_workspace_surface
+applies_to_learning_unit_types:
+  - coding_practice_unit
+guidance:
+  - Keep the problem statement, starter code, tests, hints, and solutions clearly separated.
+  - Show expected outputs and edge cases close to the coding workspace.
+  - Support multiple-solution comparison when the task benefits from it.

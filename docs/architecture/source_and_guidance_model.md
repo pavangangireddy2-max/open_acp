@@ -11,7 +11,7 @@ This document defines the cleaned-up, purpose-based model for:
 - runtime guidance playbooks
 - generated runtime knowledge
 
-It exists because the current repo layout mixes:
+It exists because the historical repo layout mixed:
 
 - code under `src/`
 - exemplar PDFs under `knowledge/raw/brand/`
@@ -35,6 +35,15 @@ So the repo is now in a clearer state:
 - `knowledge/sources/` is the canonical home for seeded text inputs
 - `src/` should not carry non-code knowledge inputs
 
+The first guidance cleanup slice is also now in place:
+
+- runtime guidance YAMLs live under `knowledge/guidance/`
+- `src/open_acp/styles/` now holds loader and resolver code only
+- the first semantic split is now in place:
+  - `learning_unit_types/`
+  - `presentation_surfaces/`
+  - `instructional_patterns/`
+
 ## Core Rule
 
 The simplest rule is:
@@ -54,8 +63,9 @@ Today, there are two different non-code knowledge concepts in practice:
 
 There is also a third, separate concern:
 
-3. `src/open_acp/styles/...`
-   - runtime brand, pedagogy, and domain guidance YAMLs plus loader code
+3. `knowledge/guidance/...` plus `src/open_acp/styles/...`
+  - runtime playbooks under `knowledge/guidance/`
+  - loader and resolver code under `src/open_acp/styles/`
 
 These are not the same thing, but the folder names make them look similar.
 
@@ -177,7 +187,7 @@ It should hold markdown or text that Loop A and Loop B ingest directly.
 
 Examples:
 
-- target learner persona
+- target-audience profile
 - hiring and interview requirement summaries
 - competitor summaries
 - stack curriculum seeds
@@ -222,7 +232,7 @@ This is the distilled runtime playbook layer.
 
 It should contain only guidance that the system actively composes into prompts or execution context.
 
-This is the future home for what is currently under `src/open_acp/styles/`.
+This is now the canonical home for runtime playbooks.
 
 ### 7. `storage/`
 
@@ -267,7 +277,7 @@ Examples:
 
 Current likely source:
 
-- `src/open_acp/styles/default.yaml`
+- `knowledge/guidance/brand/default.yaml`
 
 #### `knowledge/guidance/pedagogy/`
 
@@ -285,13 +295,13 @@ This should contain:
 
 Current likely sources:
 
-- `src/open_acp/styles/pedagogy/core.yaml`
-- `src/open_acp/styles/pedagogy/profile_matrix.yaml`
-- `src/open_acp/styles/pedagogy/profiles/...`
+- `knowledge/guidance/pedagogy/core.yaml`
+- `knowledge/guidance/pedagogy/profile_matrix.yaml`
+- `knowledge/guidance/pedagogy/profiles/...`
 
 Important rule:
 
-- rich analytical files like `principles.yaml` should not be treated as runtime guidance automatically
+- rich analytical files like `universal_principles.yaml` should not be treated as runtime guidance automatically
 - they belong closer to `knowledge/analyses/pedagogy/` unless a distilled runtime subset is intentionally created
 
 #### `knowledge/guidance/domains/`
@@ -307,7 +317,7 @@ Examples:
 
 Current likely source:
 
-- `src/open_acp/styles/stacks/...`
+- `knowledge/guidance/domains/...`
 
 These answer:
 
@@ -326,7 +336,7 @@ Examples:
 - `coding_practice_unit.yaml`
 - `mcq_practice_unit.yaml`
 
-This is more accurate than calling everything “format.”
+This split is now the canonical runtime direction.
 
 #### `knowledge/guidance/presentation_surfaces/`
 
@@ -338,7 +348,7 @@ Examples:
 - `screen_demo_session.yaml`
 - `portal_reading_surface.yaml`
 
-This is where a current `ppt_session` concept belongs.
+This is where the old `ppt_session` concept has been reclassified.
 
 Important rule:
 
@@ -359,6 +369,23 @@ Examples:
 
 These are not “content types” in the old overloaded sense.
 They are instructional-pattern playbooks.
+
+### Teaching Mode Contract
+
+The runtime guidance loader now resolves a teaching-mode contract explicitly.
+
+The contract comes from combining:
+
+- the pedagogy profile's `allowed_teaching_modes`
+- the instructional pattern's `common_teaching_mode_sequence`
+
+So the logic becomes:
+
+- pedagogy profile says which teaching modes are allowed
+- instructional pattern says how those modes should typically be sequenced
+- the loader computes the resolved intersection used at runtime
+
+This is the main place where pedagogy profiles, teaching modes, and instructional patterns now connect.
 
 #### `knowledge/guidance/product_overlays/`
 
@@ -412,8 +439,8 @@ So the target split is:
   - future: `knowledge/sources/shared/hiring/...`
 - `knowledge/sources/shared/competitors/...`
   - future: `knowledge/sources/shared/competitors/...`
-- `knowledge/sources/shared/learner/...`
-  - future: `knowledge/sources/shared/learner/...`
+- `knowledge/sources/products/...`
+  - canonical home for product-specific target-audience inputs and other product-scoped evidence
 
 ### Corpus And Analyses
 
@@ -426,27 +453,27 @@ So the target split is:
 
 ### Runtime Guidance
 
-- `src/open_acp/styles/default.yaml`
-  - future: `knowledge/guidance/brand/forgeai_default.yaml`
-- `src/open_acp/styles/pedagogy/core.yaml`
-  - future: `knowledge/guidance/pedagogy/runtime_core.yaml`
-- `src/open_acp/styles/pedagogy/profile_matrix.yaml`
-  - future: `knowledge/guidance/pedagogy/resolution_rules.yaml`
-- `src/open_acp/styles/pedagogy/profiles/...`
-  - future: `knowledge/guidance/pedagogy/profiles/...`
-- `src/open_acp/styles/stacks/...`
-  - future: `knowledge/guidance/domains/...`
-- `src/open_acp/styles/formats/ppt_session.yaml`
-  - future: `knowledge/guidance/presentation_surfaces/slide_backed_session.yaml`
-- `src/open_acp/styles/formats/project_session.yaml`
-  - likely future: `knowledge/guidance/instructional_patterns/project_building_session.yaml`
+- `knowledge/guidance/brand/default.yaml`
+  - later may be renamed to a more explicit brand-playbook id
+- `knowledge/guidance/pedagogy/core.yaml`
+  - later may be renamed to `runtime_core.yaml`
+- `knowledge/guidance/pedagogy/profile_matrix.yaml`
+  - later may be renamed to `resolution_rules.yaml`
+- `knowledge/guidance/pedagogy/profiles/...`
+  - runtime pedagogy profiles
+- `knowledge/guidance/domains/...`
+  - domain playbooks
+- `knowledge/guidance/presentation_surfaces/slide_backed_session.yaml`
+  - the canonical runtime playbook for slide-backed session delivery
+- `knowledge/guidance/instructional_patterns/project_building.yaml`
+  - the canonical runtime playbook for project-building sequencing
 
 ## What Is Not Needed Yet
 
 The following changes are **not** required in the first migration slice:
 
 1. renaming the Python code package from `styles` to `guidance`
-   - the loader code can keep working while the data moves first
+   - the loader code can stay under `src/open_acp/styles` for now
 2. migrating every prompt file
    - prompt refactoring is separate
 3. turning all analyses into YAML playbooks
@@ -486,17 +513,35 @@ Goal:
 
 ### Phase 3: Move Runtime Guidance YAMLs Out Of `src`
 
-Then:
+Status: complete for the first guidance move slice.
 
-- create `knowledge/guidance/...`
-- copy current runtime YAMLs there
-- update the loader to read `knowledge/guidance` first
-- keep temporary compatibility with `src/open_acp/styles` during migration
+What happened:
+
+- `knowledge/guidance/...` now holds the runtime YAML playbooks
+- `src/open_acp/styles/` keeps the loader and resolver code
+- prompt and runtime references are being updated to point at `knowledge/guidance/...`
 
 Goal:
 
 - `src/` holds code
 - `knowledge/` holds runtime playbooks
+
+### Phase 3.1: Split Guidance By Purpose
+
+Status: complete for the first semantic split.
+
+What happened:
+
+- retired the broad `formats/` bucket
+- created explicit runtime categories for:
+  - `learning_unit_types/`
+  - `presentation_surfaces/`
+  - `instructional_patterns/`
+- updated the loader so it resolves a guidance contract and teaching-mode contract
+
+Goal:
+
+- guidance is composed by purpose rather than by an overloaded “format” concept
 
 ### Phase 4: Reclassify Corpus And Analyses
 

@@ -4,6 +4,8 @@ from typing import Optional
 
 import yaml
 
+from open_acp.config.curriculum_context import find_project_root
+
 
 class PedagogyResolver:
     """Resolve the effective pedagogy profile for a domain/content_type pair."""
@@ -12,7 +14,7 @@ class PedagogyResolver:
         if styles_dir:
             self.base_dir = Path(styles_dir)
         else:
-            self.base_dir = Path(__file__).parent
+            self.base_dir = find_project_root() / "knowledge" / "guidance"
         self.matrix_path = self.base_dir / "pedagogy" / "profile_matrix.yaml"
         self.stack_manifest_dir = self._find_stack_manifest_dir()
 
@@ -89,7 +91,7 @@ class PedagogyResolver:
         return self.resolve_domain_profile(domain=domain, content_type=content_type)
 
     def list_profiles(self) -> list[str]:
-        """List profile files available under styles/pedagogy/profiles."""
+        """List profile files available under guidance/pedagogy/profiles."""
         profiles_dir = self.base_dir / "pedagogy" / "profiles"
         if not profiles_dir.exists():
             return []

@@ -17,7 +17,7 @@ In practice, it is used for:
 - `competitors/`
   - competitor and market comparison inputs
 - `learner/`
-  - target persona or learner-context seed inputs
+  - product-specific or product-aware target-audience inputs
 
 Loop A consumes these inputs primarily through stack manifests, not by blindly scanning the filesystem first.
 That means the manifest decides which raw files are canonical for a run, and strict mode can reject runs
@@ -49,9 +49,22 @@ See also:
 
 - [Source And Guidance Model](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/source_and_guidance_model.md)
 
-Bootstrap mode is allowed in Loop A: if stack-specific raw inputs are thin or missing, the loop should continue with shared and generic seed sources, surface explicit coverage warnings, and let the runtime knowledge store compound from those inputs instead of blocking execution.
+Bootstrap mode is allowed in Loop A for market, hiring, and competitor signals: if stack-specific inputs are thin or missing, the loop can continue with shared and generic seed sources, surface explicit coverage warnings, and let the runtime knowledge store compound from those inputs instead of blocking execution.
+
+Important exception:
+
+- explicit product runs should not bootstrap learner context from a shared persona seed
+- explicit product runs should not bootstrap target-audience context from a shared persona seed
+- `update_learner_model` should fail when a product run has no product-specific canonical learner inputs
+  and no canonical product-specific target-audience sources
 
 Within Loop A, the intended chain is: signals -> detected patterns -> wiki entity updates. Pattern detection should actively guide later skill, learner, and competitor extraction instead of being treated as a disconnected side report.
+
+TODO:
+
+- add an explicit human review capture step for detected-pattern quality and correctness
+- persist that operator feedback into runtime storage so later runs can learn from accepted, corrected, or rejected patterns
+- connect that feedback into the longer-term feedback store rather than keeping it only inside review packets
 
 The current intended Loop A flow is:
 
@@ -69,6 +82,8 @@ Product note:
 - Loop A writes only a derived runtime summary into the runtime knowledge store for explicit products
 - stack-only runs skip product wiki writes and keep moving
 - for clean simulations, it is valid to reset `storage/wiki` and rebuild runtime knowledge from scratch
+- explicit product runs should carry product-specific learner inputs instead of relying on any shared learner seed
+- explicit product runs should carry product-specific target-audience inputs instead of relying on any shared learner seed
 
 Knowledge-model note:
 
@@ -82,6 +97,12 @@ Typical outputs:
 - drift observations
 - skill or market updates
 - learner or competitor signals
+
+Learner-model note:
+
+- `update_learner_model` is a runtime materialization step, not the canonical source of target-audience profiles
+- canonical target-audience inputs should come from product-aware sources and manifests
+- the runtime knowledge store should hold the derived audience summary or overlay, not invent the base learner definition from a generic shared seed
 
 ## Loop B: Curriculum
 
@@ -159,9 +180,18 @@ Loop B knowledge note:
 
 Guidance note:
 
-- Loop C currently loads runtime playbooks from `src/open_acp/styles/`
-- that path is also transitional
-- the target direction is to treat those files as `guidance`, not merely `styles`, and move the non-code YAML layer under root `knowledge/`
+- Loop C now loads runtime playbooks from `knowledge/guidance/` through the loader code in `src/open_acp/styles/`
+- the data path is no longer inside `src/`
+- the current runtime guidance contract is composed from:
+  - pedagogy core
+  - pedagogy profile
+  - teaching-mode contract
+  - learning unit type guidance
+  - presentation surface guidance
+  - instructional pattern guidance
+  - domain guidance
+  - brand guidance
+- product and packaging overlays are still later work
 
 ## Loop D: Evaluation and Backpropagation
 

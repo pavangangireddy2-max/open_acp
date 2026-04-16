@@ -12,6 +12,8 @@ feature_flags:
   ai_tutor_enabled: false
   summary_cheatsheet_required: false
 
+target_audience_sources: []
+
 packaging_overrides: {}
 
 notes:

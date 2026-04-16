@@ -13,6 +13,8 @@ feature_flags:
   ai_tutor_enabled: false
   summary_cheatsheet_required: true
 
+target_audience_sources: []
+
 notes:
   - Architecture focus is on Academy 1.5 and 2.0.
   - Academy 1.0 remains legacy-supported but is not the primary design center.

@@ -16,7 +16,7 @@ Important distinction:
 
 - prompts are not the same thing as runtime guidance playbooks
 - prompts belong in `skills/...` and later `loops/.../prompts/`
-- guidance belongs in the non-code knowledge layer and should eventually live under `knowledge/guidance/...`
+- guidance belongs in the non-code knowledge layer and now lives under `knowledge/guidance/...`
 
 See also:
 

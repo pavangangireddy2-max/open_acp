@@ -1,0 +1,8 @@
+version: 1
+presentation_surface: portal_reading_surface
+applies_to_learning_unit_types:
+  - reading_material_unit
+guidance:
+  - Design for skim-first reading: headings, callouts, recap boxes, and examples.
+  - Keep paragraphs short and break complex ideas into sections.
+  - Use diagrams, screenshots, or code snippets where they lower reading friction.

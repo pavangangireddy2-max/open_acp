@@ -16,7 +16,7 @@ After processing new signals:
 ### Entity Types
 - **skill**: A technical skill with demand_score and durability rating
 - **competitor**: A competing training provider or course
-- **audience_segment**: A learner persona or target audience
+- **audience_segment**: A runtime-derived target-audience segment
 - **concept**: A domain concept that spans multiple skills
 - **domain**: A broad domain area (e.g., "machine-learning", "web-development")
 

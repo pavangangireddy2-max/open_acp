@@ -187,8 +187,12 @@ def _build_bootstrap_warnings(domain: str, raw_sources: list[dict]) -> list[str]
     return warnings
 
 
-def _load_manifest_sources(domain: str) -> list[dict]:
-    """Load raw inputs from stack and shared manifests when available."""
+def _load_manifest_sources(
+    domain: str,
+    product_family: str | None = None,
+    product_version: str | None = None,
+) -> list[dict]:
+    """Load raw inputs from stack, shared signal, and product manifests when available."""
     project_root = _get_project_root()
     manifest = load_stack_manifest(domain)
     manifest_path_str = manifest.get("_manifest_path")
@@ -198,9 +202,9 @@ def _load_manifest_sources(domain: str) -> list[dict]:
 
     resolved_paths: list[Path] = []
 
-    shared_manifest = manifest.get("shared_audience_manifest")
-    if shared_manifest:
-        shared_manifest_path = (manifest_path.parent / shared_manifest).resolve()
+    shared_signal_manifest = manifest.get("shared_signal_manifest")
+    if shared_signal_manifest:
+        shared_manifest_path = (manifest_path.parent / shared_signal_manifest).resolve()
         if shared_manifest_path.exists():
             with open(shared_manifest_path, encoding="utf-8") as f:
                 shared = yaml.safe_load(f) or {}
@@ -211,6 +215,14 @@ def _load_manifest_sources(domain: str) -> list[dict]:
     for key in ["curriculum_sources", "competitor_sources"]:
         for path_str in manifest.get(key, []) or []:
             resolved_paths.append((project_root / path_str).resolve())
+
+    product_context = resolve_product_manifest_context(
+        domain=domain,
+        product_family=product_family,
+        product_version=product_version,
+    )
+    for path_str in product_context.get("target_audience_sources", []) or []:
+        resolved_paths.append((project_root / path_str).resolve())
 
     seen: set[Path] = set()
     sources: list[dict] = []
@@ -285,12 +297,20 @@ def _build_product_context_markdown(
     return "\n".join(lines)
 
 
-def _load_raw_sources(domain: str) -> list[dict]:
+def _load_raw_sources(
+    domain: str,
+    product_family: str | None = None,
+    product_version: str | None = None,
+) -> list[dict]:
     """Load all markdown files from canonical knowledge/sources directories.
 
     Prefer manifest-driven source selection when a stack/domain manifest exists.
     """
-    manifest_sources = _load_manifest_sources(domain)
+    manifest_sources = _load_manifest_sources(
+        domain,
+        product_family=product_family,
+        product_version=product_version,
+    )
     if manifest_sources:
         return manifest_sources
 
@@ -333,6 +353,8 @@ def ingest_signals(state: dict) -> dict:
     domain = state.get("domain", "ml-engineering")
     cycle_id = state.get("cycle_id", "unknown")
     strict_domain_inputs = bool(state.get("strict_domain_inputs", False))
+    product_family = state.get("product_family")
+    product_version = state.get("product_version")
 
     stack_manifest = load_stack_manifest(domain)
     if strict_domain_inputs and not stack_manifest:
@@ -341,7 +363,11 @@ def ingest_signals(state: dict) -> dict:
             "Strict domain-input mode does not allow generic filesystem fallback."
         )
 
-    raw_sources = _load_raw_sources(domain)
+    raw_sources = _load_raw_sources(
+        domain,
+        product_family=product_family,
+        product_version=product_version,
+    )
     if strict_domain_inputs and not raw_sources:
         raise ValueError(
             f"No canonical source inputs were found for domain '{domain}'. "
@@ -647,9 +673,11 @@ Extract the top 8-12 most important skills. Return ONLY the JSON array."""
 
 
 def update_learner_model(state: dict) -> dict:
-    """Create or update audience segment entities in the wiki."""
+    """Materialize target-audience context into runtime audience-segment entities."""
     signal_batch: SignalBatch = state.get("signal_batch")
     domain = state.get("domain", "ml-engineering")
+    product_family = state.get("product_family")
+    product_version = state.get("product_version")
 
     wiki = WikiEngine()
     created = []  # Only NEW entries this node creates (reducer will merge)
@@ -663,6 +691,12 @@ def update_learner_model(state: dict) -> dict:
                 learner_content += sig.content[:2000] + "\n\n"
 
     if not learner_content:
+        if product_family:
+            version_suffix = f" {product_version}" if product_version else ""
+            raise ValueError(
+                f"Explicit product run '{product_family}{version_suffix}' is missing product-specific target-audience inputs. "
+                "Add canonical target_audience_sources to the product manifest before running update_learner_model."
+            )
         return {"wiki_entries_created": created, "wiki_entries_updated": updated}
 
     claude = ClaudeClient()

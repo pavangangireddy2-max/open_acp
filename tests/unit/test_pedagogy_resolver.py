@@ -1,6 +1,12 @@
 from open_acp.styles.pedagogy_resolver import PedagogyResolver
 
 
+def test_resolver_defaults_to_root_guidance_dir():
+    resolver = PedagogyResolver()
+    assert resolver.base_dir.name == "guidance"
+    assert resolver.base_dir.exists()
+
+
 def test_resolve_exact_domain_content_type_match():
     resolver = PedagogyResolver()
     resolution = resolver.resolve_with_reason(content_type="project_building", domain="genai")
