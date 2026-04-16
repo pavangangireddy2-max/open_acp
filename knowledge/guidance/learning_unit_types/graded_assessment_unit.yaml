@@ -1,0 +1,11 @@
+learning_unit_type: graded_assessment_unit
+purpose:
+  - conduct academically scoped graded assessments such as mid-semester or end-semester exams
+  - support formal evaluation inside degree-program products like NIAT
+constraints:
+  - maintain explicit marking logic and fair question distribution
+  - treat timing, difficulty spread, and rubric transparency as hard requirements
+outputs:
+  - assessment_blueprint
+  - graded_question_bank
+  - marking_scheme

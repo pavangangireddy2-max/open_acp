@@ -2,6 +2,19 @@ version: 1
 domain: cpp
 shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
 
+pedagogy:
+  default:
+    pedagogy_profile: worked_example_scaffold
+    pedagogy_rationale: >
+      C++ should usually teach through worked examples, careful misconception
+      handling, and explicit comparisons that surface memory and syntax pitfalls.
+  content_types:
+    project_building:
+      pedagogy_profile: project_build_along
+      pedagogy_rationale: >
+        C++ project work should still move through build checkpoints and practical
+        implementation milestones once the worked-example foundation is in place.
+
 raw_style_corpus:
   exports:
     - knowledge/raw/brand/sample_cpp_s1.pdf

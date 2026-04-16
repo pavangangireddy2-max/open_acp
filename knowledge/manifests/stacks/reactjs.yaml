@@ -1,6 +1,25 @@
 version: 1
 domain: reactjs
+parent_stack: fullstack
+catalog_track: FullStack MERN
+catalog_reference: knowledge/catalog/courses/base_course_abstract.csv
+canonical_course_titles:
+  - Frontend Development Using React
 shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
+
+pedagogy:
+  default:
+    pedagogy_profile: project_build_along
+    pedagogy_rationale: >
+      ReactJS should usually be taught through feature builds and integration
+      milestones so learners see component thinking, state flow, and UI behavior
+      inside working product slices instead of only isolated concepts.
+  content_types:
+    project_building:
+      pedagogy_profile: project_build_along
+      pedagogy_rationale: >
+        React project flows should move through milestone builds and integration
+        checkpoints once the core UI concepts are established.
 
 raw_style_corpus:
   exports:

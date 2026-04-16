@@ -1,0 +1,20 @@
+version: 1
+domain: fullstack
+catalog_label: FullStack
+catalog_reference: knowledge/catalog/courses/base_course_abstract.csv
+tracks:
+  - FullStack MERN
+  - FullStack Python Django
+  - FullStack Java SpringBoot
+canonical_course_titles:
+  - Web Application Development
+  - Frontend Development Using React
+  - Backend Development Using Node, MongoDB
+  - Django Backend Development
+  - SpringBoot Backend Development
+  - AI FullStack Projects
+shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
+notes:
+  - Top-level fullstack stack from the base course abstract.
+  - Track-specific packaging and pedagogy can be layered later.
+

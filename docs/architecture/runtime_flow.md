@@ -144,6 +144,7 @@ Runtime policy note:
 
 - for real product-driven runs, Loop B should eventually stop if product context is missing
 - for real domain runs, Loop A and Loop B should eventually stop if domain-specific canonical inputs are missing instead of borrowing unrelated defaults
+- for explicit product runs, pedagogy resolution should prefer canonical product pedagogy overrides before falling back to stack-level pedagogy defaults
 
 ## Loop C: Content Production
 

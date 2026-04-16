@@ -15,6 +15,7 @@ class LearningUnitType(str, Enum):
     MODULE_QUIZ_UNIT = "module_quiz_unit"
     FINAL_COURSE_QUIZ_UNIT = "final_course_quiz_unit"
     SKILL_ASSESSMENT_UNIT = "skill_assessment_unit"
+    GRADED_ASSESSMENT_UNIT = "graded_assessment_unit"
 
 
 class InstructionalPattern(str, Enum):

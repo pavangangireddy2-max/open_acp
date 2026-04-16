@@ -4,6 +4,7 @@ from typing import Optional
 
 import yaml
 
+from open_acp.models.content_types import normalize_content_type
 from open_acp.styles.pedagogy_resolver import PedagogyResolver
 from open_acp.config.curriculum_context import find_project_root
 
@@ -62,6 +63,7 @@ class StyleLoader:
         learning_unit_type, presentation_surface, instructional_pattern, teaching_mode_contract,
         domain, and brand when available.
         """
+        content_type = normalize_content_type(content_type)
         result = {}
         stack_key = stack or domain
         resolved_profile = pedagogy_profile or self.pedagogy_resolver.resolve(content_type, domain=stack_key)
@@ -140,6 +142,7 @@ class StyleLoader:
         instructional_pattern: Optional[str] = None,
     ) -> str:
         """Load composed guidelines as a single text block for prompt injection."""
+        content_type = normalize_content_type(content_type)
         stack_key = stack or domain
         resolved_profile = pedagogy_profile or self.pedagogy_resolver.resolve(content_type, domain=stack_key)
         composed = self.load_for_pipeline(
@@ -224,6 +227,7 @@ class StyleLoader:
         instructional_pattern: Optional[str] = None,
     ) -> dict:
         """Resolve the non-pedagogy guidance contract for a pipeline content type."""
+        content_type = normalize_content_type(content_type)
         resolved_unit_type = learning_unit_type or self._content_type_to_learning_unit_type(content_type)
         resolved_pattern = instructional_pattern or self._content_type_to_instructional_pattern(content_type)
         resolved_surface = presentation_surface or self._resolve_presentation_surface(
@@ -274,8 +278,10 @@ class StyleLoader:
             return "module_quiz_unit"
         if content_type == "final_course_quiz":
             return "final_course_quiz_unit"
-        if content_type in {"fortnight_quiz", "graded_assessment"}:
+        if content_type == "skill_assessment":
             return "skill_assessment_unit"
+        if content_type == "graded_assessment":
+            return "graded_assessment_unit"
         return None
 
     @staticmethod
@@ -304,7 +310,14 @@ class StyleLoader:
             return "slide_backed_session"
         if learning_unit_type == "reading_material_unit":
             return "portal_reading_surface"
-        if learning_unit_type in {"mcq_practice_unit", "classroom_quiz_unit", "module_quiz_unit", "final_course_quiz_unit", "skill_assessment_unit"}:
+        if learning_unit_type in {
+            "mcq_practice_unit",
+            "classroom_quiz_unit",
+            "module_quiz_unit",
+            "final_course_quiz_unit",
+            "skill_assessment_unit",
+            "graded_assessment_unit",
+        }:
             return "assessment_portal_surface"
         if learning_unit_type == "coding_practice_unit":
             return "coding_workspace_surface"

@@ -4,7 +4,18 @@
   "type": "object",
   "required": ["assessment_type", "questions"],
   "properties": {
-    "assessment_type": {"type": "string", "enum": ["classroom_quiz", "module_quiz", "fortnight_quiz", "final_course_quiz", "final_course_project", "graded_assessment"]},
+    "assessment_type": {
+      "type": "string",
+      "enum": [
+        "classroom_quiz",
+        "module_quiz",
+        "skill_assessment",
+        "final_course_quiz",
+        "final_course_project",
+        "graded_assessment",
+        "fortnight_quiz"
+      ]
+    },
     "time_limit_minutes": {"type": "integer", "minimum": 5},
     "total_marks": {"type": "integer"},
     "passing_score_percent": {"type": "number", "minimum": 0, "maximum": 100},

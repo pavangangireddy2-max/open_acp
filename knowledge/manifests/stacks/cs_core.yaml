@@ -1,0 +1,19 @@
+version: 1
+domain: cs_core
+catalog_label: CS Core
+catalog_reference: knowledge/catalog/courses/base_course_abstract.csv
+tracks:
+  - Developer Foundations
+  - BTP (BTech Projects)
+canonical_course_titles:
+  - Database Management Systems
+  - Operating Systems
+  - Computer Networks
+  - Github & Linux 101
+  - React Projects
+  - MERN Projects
+shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
+notes:
+  - Top-level CS Core stack from the base course abstract.
+  - This stack mixes theory-heavy foundations with project-oriented BTP tracks.
+

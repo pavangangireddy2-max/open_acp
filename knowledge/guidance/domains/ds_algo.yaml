@@ -1,0 +1,15 @@
+stack_id: ds_algo
+legacy_aliases:
+  - dsa
+representative_courses:
+  - Data Structures and Algorithms
+  - Advanced Data Structures and Algorithms
+  - Problem Solving Techniques
+teaching_preferences:
+  - use worked examples before abstract pattern generalization
+  - separate problem recognition, approach selection, and optimization reasoning
+  - keep time-space trade-offs visible throughout explanation
+visual_patterns:
+  - pointer or memory movement traces
+  - recursion trees
+  - data-structure state diagrams

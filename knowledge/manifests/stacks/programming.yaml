@@ -1,0 +1,13 @@
+version: 1
+domain: programming
+catalog_label: Programming
+catalog_reference: knowledge/catalog/courses/base_course_abstract.csv
+canonical_course_titles:
+  - Computer Programming using Python
+  - Computer Programming using JS
+  - Computer Programming using Java
+shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
+notes:
+  - Top-level programming stack from the base course abstract.
+  - Language-specific pedagogy defaults can be added later through sub-stack or course manifests.
+

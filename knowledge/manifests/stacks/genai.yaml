@@ -1,11 +1,27 @@
 version: 1
 domain: genai
+catalog_label: GenAI
+catalog_reference: knowledge/catalog/courses/base_course_abstract.csv
+tracks:
+  - Math for ML
+  - Tech Workshops
+canonical_course_titles:
+  - Introduction to GenAI
+  - Building LLM Applications
+  - Practical Software Engineering
+  - AI For Finance
+  - AI For Sales
+  - AI For HR
+  - Base 44 Mastery
+  - OpenAI Workshop
 shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
-domain_pedagogy_profile: project_build_along
-domain_pedagogy_rationale: >
-  The GenAI stack curriculum is milestone- and project-centered overall.
-  Concept sessions should support build milestones, architecture choices, and
-  deployable outcomes rather than acting as isolated theory modules.
+pedagogy:
+  default:
+    pedagogy_profile: project_build_along
+    pedagogy_rationale: >
+      The GenAI stack curriculum is milestone- and project-centered overall.
+      Concept sessions should support build milestones, architecture choices, and
+      deployable outcomes rather than acting as isolated theory modules.
 
 raw_style_corpus:
   exports:

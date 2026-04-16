@@ -269,14 +269,32 @@ def resolve_pedagogy_profile(state: dict) -> dict:
     """Resolve and justify a pedagogy profile from config."""
     domain = state.get("domain", "ml-engineering")
     content_type = state.get("content_type", "concept_explainer")
+    product_context = state.get("product_context", {}) or {}
+    if state.get("product_family") and not product_context.get("pedagogy_layers"):
+        product_context = resolve_product_manifest_context(
+            domain=domain,
+            product_family=state.get("product_family"),
+            product_version=state.get("product_version"),
+        )
 
     resolver = PedagogyResolver()
-    resolution = resolver.resolve_domain_profile(domain=domain, content_type=content_type)
+    resolution = resolver.resolve_domain_profile(
+        domain=domain,
+        content_type=content_type,
+        product_context=product_context,
+    )
 
-    print(f"  Pedagogy profile: {resolution['profile']}")
+    print(
+        "  Pedagogy profile: "
+        f"{resolution['profile']} "
+        f"(source: {resolution.get('source', resolution.get('reason', 'unknown'))})"
+    )
     return {
+        "product_context": product_context,
         "pedagogy_profile": resolution["profile"],
         "pedagogy_rationale": resolution.get("rationale", resolution["reason"]),
+        "pedagogy_source": resolution.get("source", resolution["reason"]),
+        "pedagogy_resolution_layers": resolution.get("resolution_layers", []),
     }
 
 

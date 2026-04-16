@@ -1,0 +1,15 @@
+stack_id: devops_testing
+tracks:
+  - Tech Workshops
+representative_courses:
+  - Cloud Computing Foundations
+  - Testing With Selenium
+teaching_preferences:
+  - connect tooling to release confidence and reliability outcomes
+  - show environment setup, automation flow, and debugging checkpoints clearly
+  - use hands-on execution paths rather than tool-definition-heavy exposition
+visual_patterns:
+  - CI/CD pipeline diagrams
+  - environment topology sketches
+  - test flow maps
+

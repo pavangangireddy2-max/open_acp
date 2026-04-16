@@ -79,6 +79,18 @@ def test_pipeline_loader_missing_content_type():
         loader.load("nonexistent_pipeline")
 
 
+def test_pipeline_loader_supports_canonical_assessment_aliases():
+    loader = PipelineLoader()
+
+    skill = loader.load("skill_assessment")
+    graded = loader.load("graded_assessment")
+
+    assert skill.content_type == "skill_assessment"
+    assert skill.pipeline_id == "skill_assessment"
+    assert graded.content_type == "graded_assessment"
+    assert graded.pipeline_id == "graded_assessment"
+
+
 # ── Skill Loader ───────────────────────────────────────────────────────────────
 
 def test_skill_loader_loads_reviewer():

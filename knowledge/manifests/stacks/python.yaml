@@ -2,6 +2,19 @@ version: 1
 domain: python
 shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
 
+pedagogy:
+  default:
+    pedagogy_profile: concept_progression
+    pedagogy_rationale: >
+      Python should usually teach ideas through progressive examples, gentle syntax
+      layering, and steady concept buildup for early-stage learners.
+  content_types:
+    project_building:
+      pedagogy_profile: project_build_along
+      pedagogy_rationale: >
+        Python project flows should move through build checkpoints and practical
+        implementation milestones once the foundational concepts are introduced.
+
 raw_style_corpus:
   exports:
     - knowledge/raw/brand/sample_python_s1.pdf

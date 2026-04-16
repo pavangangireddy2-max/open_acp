@@ -1,4 +1,5 @@
 """Content-type-specific rubric adjustments for evaluators."""
+from open_acp.models.content_types import normalize_content_type
 from open_acp.models.evaluation import EvalDimension
 
 
@@ -23,6 +24,10 @@ RUBRIC_ADJUSTMENTS: dict[str, dict[EvalDimension, str]] = {
     "classroom_quiz": {
         EvalDimension.PEDAGOGY: "Focus on Remember/Understand. Quick formative check, not summative.",
     },
+    "skill_assessment": {
+        EvalDimension.ACCURACY: "Questions should reflect external readiness checks and avoid ambiguous skill signals.",
+        EvalDimension.PEDAGOGY: "Difficulty should reflect intended placement-readiness checkpoints and declared skill outcomes.",
+    },
     "graded_assessment": {
         EvalDimension.ACCURACY: "University-grade rigor. No ambiguous questions. Partial credit criteria clear.",
         EvalDimension.PEDAGOGY: "Full Bloom range. Fair difficulty distribution. Time-appropriate.",
@@ -32,4 +37,5 @@ RUBRIC_ADJUSTMENTS: dict[str, dict[EvalDimension, str]] = {
 
 def get_rubric_adjustment(content_type: str, dimension: EvalDimension) -> str:
     """Get content-type-specific rubric text for a dimension."""
-    return RUBRIC_ADJUSTMENTS.get(content_type, {}).get(dimension, "")
+    normalized = normalize_content_type(content_type)
+    return RUBRIC_ADJUSTMENTS.get(normalized, {}).get(dimension, "")

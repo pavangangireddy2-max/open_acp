@@ -1,6 +1,6 @@
 inherits: _assessment_base
-pipeline_id: fortnight_quiz
-content_type: fortnight_quiz
+pipeline_id: skill_assessment
+content_type: skill_assessment
 display_name: "Fortnight Quiz"
 description: "Biweekly assessment, 15-20 questions targeting Apply/Analyze Bloom levels"
 

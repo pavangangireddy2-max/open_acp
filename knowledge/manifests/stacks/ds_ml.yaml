@@ -1,0 +1,20 @@
+version: 1
+domain: ds_ml
+catalog_label: DS/ML
+catalog_reference: knowledge/catalog/courses/base_course_abstract.csv
+tracks:
+  - Math for ML
+canonical_course_titles:
+  - Probability and Statistics
+  - Linear Algebra and Calculus
+  - DataScience Foundations
+  - Data Visualisation Tools
+  - Introduction to Machine Learning
+  - UnSupervised Learning
+  - Introduction to Deep Learning
+  - Deep Learning for Computer Vision
+shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
+notes:
+  - Top-level DS/ML stack from the base course abstract.
+  - Math-heavy sequencing and model-building pedagogy defaults can be added later.
+

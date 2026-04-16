@@ -1,0 +1,20 @@
+stack_id: fullstack
+tracks:
+  - FullStack MERN
+  - FullStack Python Django
+  - FullStack Java SpringBoot
+representative_courses:
+  - Web Application Development
+  - Frontend Development Using React
+  - Backend Development Using Node, MongoDB
+  - Django Backend Development
+  - SpringBoot Backend Development
+teaching_preferences:
+  - connect frontend, backend, and data flow as one working product slice
+  - favor end-to-end features over isolated API or UI fragments
+  - use deployment and integration checkpoints to reinforce system thinking
+visual_patterns:
+  - request-response flow diagrams
+  - UI to API to database architecture views
+  - project file-structure snapshots
+

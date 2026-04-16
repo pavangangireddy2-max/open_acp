@@ -1,0 +1,13 @@
+version: 1
+domain: system_design
+catalog_label: System Design
+catalog_reference: knowledge/catalog/courses/base_course_abstract.csv
+tracks:
+  - Tech Workshops
+canonical_course_titles:
+  - High-Level System Design
+  - Low Level System Design
+shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
+notes:
+  - Top-level system design stack from the base course abstract.
+

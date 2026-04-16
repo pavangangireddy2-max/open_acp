@@ -63,6 +63,27 @@ domain guidance -> contextual emphasis
 
 This is intentionally clearer than the older single `format` bucket.
 
+### Pedagogy Resolution Rule
+
+Pedagogy should not be treated as stack-only in real product runs.
+
+The intended rule is:
+
+- packaging is **product-first**
+- pedagogy is **product-aware and stack-grounded**
+
+So the effective pedagogy profile should resolve from canonical manifests in this order:
+
+- product default pedagogy
+- product + domain pedagogy
+- product + version pedagogy
+- product + version + domain pedagogy
+- stack/domain pedagogy baseline
+- profile-matrix fallback
+
+This keeps product-specific academic or delivery realities visible without losing the stack's
+baseline instructional logic.
+
 ## Important Terminology Rule
 
 Stacks or domains such as `genai`, `python`, `cpp`, `dsa`, or `reactjs` are not
@@ -199,6 +220,13 @@ Packaging resolution note:
 - stack manifests should fill gaps, not silently override explicit product packaging choices
 - the resolved packaging profile should carry per-field provenance so review packets can explain where module counts, topic counts, and learning-unit constraints came from
 
+Pedagogy resolution note:
+
+- pedagogy should also resolve from canonical manifests only
+- explicit product pedagogy should be allowed to override the stack baseline
+- stack/domain pedagogy should remain the baseline when product manifests do not define a pedagogy choice
+- the resolved pedagogy profile should carry source metadata so review packets can explain whether the decision came from product, stack, or global fallback
+
 Strict-source note:
 
 - if a requested domain has no explicit manifest-backed or domain-backed source inputs, the system should eventually stop rather than silently borrowing unrelated defaults
@@ -236,6 +264,7 @@ Examples:
 
 - classroom quizzes
 - module quizzes
+- final course quizzes
 - assignments
 - guided practice checks
 
@@ -245,9 +274,27 @@ These belong to an external team or repo and support product or placement eligib
 
 Examples:
 
+- periodic skill assessments
+- summative skill assessments
 - placement-readiness checks
 - external coding rounds
 - product-specific assessment contracts
+
+Canonical runtime assessment names should use:
+
+- `skill_assessment`
+- `graded_assessment`
+
+`skill_assessment` is the fresh runtime replacement for older names such as
+`fortnight_quiz`.
+
+`graded_assessment` remains a separate academic-assessment content type for
+product contexts like NIAT, where mid-semester and end-semester exams are
+distinct from placement-linked skill assessments.
+
+Legacy pipeline/file names such as `fortnight_quiz` may still appear in
+compatibility paths, but they should not be treated as the canonical taxonomy
+moving forward.
 
 The important rule is:
 

@@ -117,6 +117,7 @@ def resolve_product_context(
     feature_flags = resolved.get("feature_flags", {}) or {}
     packaging_overrides = resolved.get("packaging_overrides", {}) or {}
     packaging_manifest = manifest.get("packaging", {}) or {}
+    pedagogy_manifest = manifest.get("pedagogy", {}) or {}
     domain_key = _normalize_token(domain)
     version_packaging = (packaging_manifest.get("versions", {}) or {}).get(resolved_version, {}) if resolved_version else {}
     version_domain_packaging = (
@@ -125,6 +126,13 @@ def resolve_product_context(
         else {}
     )
     domain_packaging = (packaging_manifest.get("domains", {}) or {}).get(domain_key, {})
+    version_pedagogy = (pedagogy_manifest.get("versions", {}) or {}).get(resolved_version, {}) if resolved_version else {}
+    version_domain_pedagogy = (
+        ((pedagogy_manifest.get("version_domains", {}) or {}).get(resolved_version, {}) or {}).get(domain_key, {})
+        if resolved_version
+        else {}
+    )
+    domain_pedagogy = (pedagogy_manifest.get("domains", {}) or {}).get(domain_key, {})
     notes = _unique(list(manifest.get("notes", []) or []) + list(version_override.get("notes", []) or []))
 
     if explicit_product:
@@ -159,6 +167,12 @@ def resolve_product_context(
             "product_version": version_packaging or {},
             "product_version_domain": version_domain_packaging or {},
             "legacy_overrides": packaging_overrides,
+        },
+        "pedagogy_layers": {
+            "product_default": pedagogy_manifest.get("default", {}) or {},
+            "product_domain": domain_pedagogy or {},
+            "product_version": version_pedagogy or {},
+            "product_version_domain": version_domain_pedagogy or {},
         },
         "notes": notes,
         "is_explicit_product": explicit_product,

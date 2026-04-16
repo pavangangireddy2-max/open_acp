@@ -1,6 +1,19 @@
 version: 1
 domain: dsa
+catalog_label: DS&Algo
+catalog_reference: knowledge/catalog/courses/base_course_abstract.csv
+canonical_course_titles:
+  - Data Structures and Algorithms
+  - Advanced Data Structures and Algorithms
+  - Problem Solving Techniques
 shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
+
+pedagogy:
+  default:
+    pedagogy_profile: worked_example_scaffold
+    pedagogy_rationale: >
+      DSA should favor worked examples, visual reasoning, and scaffolded pattern
+      recognition before independent problem solving.
 
 raw_style_corpus:
   exports:

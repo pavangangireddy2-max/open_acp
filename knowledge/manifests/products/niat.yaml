@@ -14,6 +14,33 @@ feature_flags:
   summary_cheatsheet_required: false
   offline_delivery_required: true
 
+pedagogy:
+  default:
+    pedagogy_rationale: >
+      NIAT should bias toward industry-aligned, project-based learning while still
+      respecting academic sequencing, campus delivery, and degree-program constraints.
+  domains:
+    genai:
+      pedagogy_profile: project_build_along
+      pedagogy_rationale: >
+        NIAT GenAI should stay project-centered so learners repeatedly connect
+        models, system architecture, and deployable workflows instead of treating
+        GenAI as isolated theory.
+  versions:
+    B3:
+      pedagogy_rationale: >
+        NIAT B3 needs a pedagogy that scales across many partner universities while
+        keeping milestone-based implementation, assessment checkpoints, and
+        placement-oriented outcomes consistent.
+  version_domains:
+    B3:
+      genai:
+        pedagogy_profile: project_build_along
+        pedagogy_rationale: >
+          NIAT B3 GenAI should use a project-build-along baseline because learners
+          need academic progression, industry-facing implementation practice, and
+          checkpointed readiness for IRC and placement pathways at the same time.
+
 packaging:
   default:
     packaging_profile_id: niat_default_packaging

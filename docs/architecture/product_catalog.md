@@ -220,6 +220,7 @@ That means product configuration may later influence:
 - which courses or modules are included
 - number of modules per course
 - number of topics per module
+- pedagogy profiles and design-priority emphasis
 - allowed learning unit types
 - whether recorded videos are bundled
 - whether live delivery is expected

@@ -1,0 +1,15 @@
+version: 1
+domain: ds_algo
+catalog_label: DS&Algo
+catalog_reference: knowledge/catalog/courses/base_course_abstract.csv
+legacy_aliases:
+  - dsa
+canonical_course_titles:
+  - Data Structures and Algorithms
+  - Advanced Data Structures and Algorithms
+  - Problem Solving Techniques
+shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
+notes:
+  - Canonical top-level stack id derived from the base course abstract.
+  - `dsa` remains available as a compatibility alias.
+

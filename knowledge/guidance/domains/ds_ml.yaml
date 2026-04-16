@@ -1,0 +1,17 @@
+stack_id: ds_ml
+tracks:
+  - Math for ML
+representative_courses:
+  - Probability and Statistics
+  - Linear Algebra and Calculus
+  - Introduction to Machine Learning
+  - Introduction to Deep Learning
+teaching_preferences:
+  - move from intuition to equations to model behavior
+  - keep mathematical prerequisites visible while showing applied ML outcomes
+  - use concrete datasets and evaluation examples to ground abstractions
+visual_patterns:
+  - plots and data distributions
+  - matrix or vector intuition diagrams
+  - model pipeline blocks
+

@@ -1,0 +1,18 @@
+stack_id: cs_core
+tracks:
+  - Developer Foundations
+  - BTP (BTech Projects)
+representative_courses:
+  - Database Management Systems
+  - Operating Systems
+  - Computer Networks
+  - Github & Linux 101
+teaching_preferences:
+  - connect theory-heavy systems concepts to practical developer workflows
+  - separate foundational mental models from exam-style detail memorization
+  - use implementation examples where possible to reduce abstraction overload
+visual_patterns:
+  - layered system diagrams
+  - process and memory flow charts
+  - networking and storage architecture sketches
+

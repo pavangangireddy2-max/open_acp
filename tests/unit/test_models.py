@@ -6,14 +6,17 @@ from datetime import datetime, UTC
 # ── Content Types ──────────────────────────────────────────────────────────────
 
 def test_content_type_enum():
-    from open_acp.models.content_types import ContentType, PipelineFamily
+    from open_acp.models.content_types import ContentType, PipelineFamily, normalize_content_type
 
     assert len(ContentType) == 16
     assert ContentType.CONCEPT_EXPLAINER.family == PipelineFamily.SESSION
     assert ContentType.READING_MATERIAL.family == PipelineFamily.WRITTEN
     assert ContentType.MCQ_PRACTICE.family == PipelineFamily.PRACTICE
     assert ContentType.CLASSROOM_QUIZ.family == PipelineFamily.ASSESSMENT
+    assert ContentType.SKILL_ASSESSMENT.family == PipelineFamily.ASSESSMENT
     assert ContentType.GRADED_ASSESSMENT.family == PipelineFamily.ASSESSMENT
+    assert normalize_content_type("fortnight_quiz") == "skill_assessment"
+    assert normalize_content_type("graded_assessment") == "graded_assessment"
 
 
 def test_pipeline_family_enum():
@@ -34,6 +37,7 @@ def test_delivery_taxonomy_enums():
     )
 
     assert LearningUnitType.VIDEO_SESSION_UNIT.value == "video_session_unit"
+    assert LearningUnitType.GRADED_ASSESSMENT_UNIT.value == "graded_assessment_unit"
     assert InstructionalPattern.CONCEPT_EXPLAINER.value == "concept_explainer"
     assert AssessmentSystem.SKILL.value == "skill"
     assert AssessmentNature.SUMMATIVE.value == "summative"

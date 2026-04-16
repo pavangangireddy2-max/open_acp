@@ -1,0 +1,15 @@
+stack_id: physical_ai
+tracks:
+  - Tech Workshops
+representative_courses:
+  - Course 1 (Yet to Confirm Names)
+  - Course 2  (Yet to Confirm Names)
+  - Course 3  (Yet to Confirm Names)
+teaching_preferences:
+  - connect embodied systems thinking to sensing, control, and deployment constraints
+  - use hardware-software integration examples to reduce abstraction gaps
+  - keep safety and systems behavior visible in explanations
+visual_patterns:
+  - control-loop diagrams
+  - sensing-to-action pipelines
+  - hardware-software component maps

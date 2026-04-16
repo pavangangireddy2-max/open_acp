@@ -1,4 +1,7 @@
 stack_id: reactjs
+parent_stack: fullstack
+representative_courses:
+  - Frontend Development Using React
 teaching_preferences:
   - bridge from plain JavaScript and DOM manipulation
   - explain component thinking before framework APIs

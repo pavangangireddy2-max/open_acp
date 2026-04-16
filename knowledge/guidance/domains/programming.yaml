@@ -1,0 +1,15 @@
+stack_id: programming
+tracks: []
+representative_courses:
+  - Computer Programming using Python
+  - Computer Programming using JS
+  - Computer Programming using Java
+teaching_preferences:
+  - start with logic building and executable examples before abstraction
+  - bridge syntax to problem solving and debugging habits early
+  - keep progression language-agnostic until a specific language course takes over
+visual_patterns:
+  - flowcharts
+  - console I/O examples
+  - stepwise execution traces
+

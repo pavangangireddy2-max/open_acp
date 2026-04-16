@@ -6,6 +6,8 @@ from typing import Any, Optional
 import yaml
 from pydantic import BaseModel
 
+from open_acp.models.content_types import normalize_content_type, pipeline_lookup_content_type
+
 
 class StageDefinition(BaseModel):
     id: str
@@ -83,8 +85,9 @@ class PipelineLoader:
 
     def load(self, content_type: str) -> PipelineDefinition:
         """Load a pipeline definition by content type, resolving inheritance."""
+        canonical_content_type = normalize_content_type(content_type)
         # Search for the YAML file across subdirectories
-        yaml_path = self._find_pipeline_yaml(content_type)
+        yaml_path = self._find_pipeline_yaml(canonical_content_type)
         raw = _load_yaml(yaml_path)
 
         # Resolve inheritance chain
@@ -101,9 +104,9 @@ class PipelineLoader:
         gate = defaults.get("gate", {})
 
         return PipelineDefinition(
-            pipeline_id=resolved.get("pipeline_id", content_type),
-            content_type=resolved.get("content_type", content_type),
-            display_name=resolved.get("display_name", content_type.replace("_", " ").title()),
+            pipeline_id=normalize_content_type(resolved.get("pipeline_id", canonical_content_type)),
+            content_type=normalize_content_type(resolved.get("content_type", canonical_content_type)),
+            display_name=resolved.get("display_name", canonical_content_type.replace("_", " ").title()),
             description=resolved.get("description", ""),
             version=resolved.get("version", "1.0"),
             family=resolved.get("family", ""),
@@ -121,8 +124,9 @@ class PipelineLoader:
 
     def _find_pipeline_yaml(self, content_type: str) -> Path:
         """Search subdirectories for a pipeline YAML matching content_type."""
+        lookup_key = pipeline_lookup_content_type(content_type)
         for subdir in ["academics", "practice", "assessments", ""]:
-            candidate = self.base_dir / subdir / f"{content_type}.yaml"
+            candidate = self.base_dir / subdir / f"{lookup_key}.yaml"
             if candidate.exists():
                 return candidate
         raise FileNotFoundError(
@@ -156,5 +160,5 @@ class PipelineLoader:
         for yaml_file in self.base_dir.rglob("*.yaml"):
             if yaml_file.name.startswith("_"):
                 continue
-            types.append(yaml_file.stem)
-        return sorted(types)
+            types.append(normalize_content_type(yaml_file.stem))
+        return sorted(set(types))

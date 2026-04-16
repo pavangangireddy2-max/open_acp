@@ -9,6 +9,14 @@ Examples:
 - NIAT batch BOS references
 - NIAT grid-template references
 
+Current canonical examples in this repo:
+
+- `courses/base_course_abstract.csv`
+  - top-level stack/domain inventory
+  - tracks
+  - internal course titles
+  - nominal content hours
+
 Rule:
 
 - files here are tracked canonical inputs

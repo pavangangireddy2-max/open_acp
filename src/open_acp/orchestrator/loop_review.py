@@ -473,7 +473,10 @@ class LoopReviewRunner:
         if stage_id == "resolve_pedagogy_profile":
             return (
                 f"Resolved domain pedagogy profile: {state.get('pedagogy_profile', 'unknown')}.",
-                [f"Rationale: {state.get('pedagogy_rationale', 'not provided')}"],
+                [
+                    f"Source: {state.get('pedagogy_source', 'unknown')}.",
+                    f"Rationale: {state.get('pedagogy_rationale', 'not provided')}",
+                ],
             )
 
         if stage_id == "generate_curriculum":

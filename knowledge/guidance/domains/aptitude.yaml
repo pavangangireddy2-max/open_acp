@@ -1,0 +1,16 @@
+stack_id: aptitude
+tracks:
+  - Tech Workshops
+representative_courses:
+  - Quantitative Aptitude
+  - Numerical Ability
+  - Logical Reasoning
+teaching_preferences:
+  - focus on pattern recognition, time management, and elimination strategies
+  - teach shortcut methods only after conceptual correctness is secure
+  - use repeated timed checkpoints for fluency
+visual_patterns:
+  - step-by-step solution breakdowns
+  - reasoning pattern tables
+  - timed practice scoreboards
+

@@ -88,6 +88,11 @@ The cleaned-up naming model should be:
 - `storage`
   - generated runtime state
 
+At the moment, the canonical top-level stack/domain inventory should be seeded
+from:
+
+- `knowledge/catalog/courses/base_course_abstract.csv`
+
 ## Target Repository Shape
 
 ```text
@@ -285,8 +290,8 @@ This should contain:
 
 - `runtime_core.yaml`
   - distilled always-on runtime pedagogy constraints
-- `resolution_rules.yaml`
-  - the deterministic profile-resolution matrix
+- code-level fallback defaults
+  - only used when neither product manifests nor stack manifests provide a pedagogy decision
 - `profiles/`
   - `concept_progression`
   - `project_build_along`
@@ -296,7 +301,6 @@ This should contain:
 Current likely sources:
 
 - `knowledge/guidance/pedagogy/core.yaml`
-- `knowledge/guidance/pedagogy/profile_matrix.yaml`
 - `knowledge/guidance/pedagogy/profiles/...`
 
 Important rule:
@@ -457,8 +461,8 @@ So the target split is:
   - later may be renamed to a more explicit brand-playbook id
 - `knowledge/guidance/pedagogy/core.yaml`
   - later may be renamed to `runtime_core.yaml`
-- `knowledge/guidance/pedagogy/profile_matrix.yaml`
-  - later may be renamed to `resolution_rules.yaml`
+- code-level fallback defaults in `pedagogy_resolver.py`
+  - emergency-only defaults, not a canonical source layer
 - `knowledge/guidance/pedagogy/profiles/...`
   - runtime pedagogy profiles
 - `knowledge/guidance/domains/...`

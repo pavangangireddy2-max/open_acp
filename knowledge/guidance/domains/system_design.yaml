@@ -1,0 +1,15 @@
+stack_id: system_design
+tracks:
+  - Tech Workshops
+representative_courses:
+  - High-Level System Design
+  - Low Level System Design
+teaching_preferences:
+  - frame trade-offs before diving into component details
+  - compare alternative architectures explicitly
+  - reinforce reliability, scalability, and maintainability reasoning
+visual_patterns:
+  - component architecture diagrams
+  - sequence flows
+  - trade-off comparison tables
+

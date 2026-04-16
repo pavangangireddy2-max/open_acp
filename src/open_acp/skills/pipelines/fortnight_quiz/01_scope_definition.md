@@ -37,7 +37,7 @@ Same structure as `module_quiz/01_scope_definition`, with:
 ```json
 {
   "assessment_profile": {
-    "type": "fortnight_quiz",
+    "type": "skill_assessment",
     "purpose": "cumulative_check",
     "duration_minutes": 40,
     "question_count": 18,

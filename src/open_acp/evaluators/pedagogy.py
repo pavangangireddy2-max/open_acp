@@ -1,6 +1,7 @@
 """Pedagogy evaluator — checks alignment with learning science principles."""
 from open_acp.evaluators.base import BaseEvaluator
 from open_acp.models.evaluation import EvalDimension, EvalScore
+from open_acp.models.content_types import normalize_content_type
 
 
 class PedagogyEvaluator(BaseEvaluator):
@@ -27,8 +28,15 @@ Return JSON: {{"score": 1-5, "evidence": "specific examples of good/bad pedagogy
         return self._parse_score(response, self.dimension)
 
     def _get_rubric(self, content_type: str) -> str:
+        content_type = normalize_content_type(content_type)
         base = "1=No alignment with learning objectives, 2=Weak structure, 3=Adequate coverage, 4=Strong pedagogical design, 5=Exemplary transfer-enabling instruction"
-        if content_type in ("classroom_quiz", "module_quiz", "fortnight_quiz", "final_course_quiz", "graded_assessment"):
+        if content_type in (
+            "classroom_quiz",
+            "module_quiz",
+            "skill_assessment",
+            "final_course_quiz",
+            "graded_assessment",
+        ):
             return base + "\nFor assessments: verify Bloom level distribution matches targets, questions test declared objectives, rubric criteria are clear."
         if content_type == "problem_solving":
             return base + "\nFor problem solving: verify difficulty progression, scaffolding quality, and that solutions explain reasoning not just answers."

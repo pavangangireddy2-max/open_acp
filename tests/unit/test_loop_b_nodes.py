@@ -188,6 +188,48 @@ def test_resolve_packaging_profile_refreshes_stale_product_context():
     assert profile["packaging_profile_id"] == "niat_b3_genai_packaging"
 
 
+def test_resolve_pedagogy_profile_prefers_product_layers_and_records_source():
+    product_state = nodes.resolve_product_context(
+        {
+            "domain": "genai",
+            "product_family": "NIAT",
+            "product_version": "B3",
+            "content_type": "concept_explainer",
+        }
+    )
+
+    result = nodes.resolve_pedagogy_profile(
+        {
+            "domain": "genai",
+            "content_type": "concept_explainer",
+            "product_context": product_state["product_context"],
+        }
+    )
+
+    assert result["pedagogy_profile"] == "project_build_along"
+    assert result["pedagogy_source"] == "product_version_domain:NIAT:B3:genai"
+    assert "NIAT B3 GenAI" in result["pedagogy_rationale"]
+
+
+def test_resolve_pedagogy_profile_refreshes_stale_product_context():
+    result = nodes.resolve_pedagogy_profile(
+        {
+            "domain": "genai",
+            "content_type": "concept_explainer",
+            "product_family": "NIAT",
+            "product_version": "B3",
+            "product_context": {
+                "product_family": "NIAT",
+                "product_version": "B3",
+                "product_label": "NIAT B3",
+            },
+        }
+    )
+
+    assert result["pedagogy_profile"] == "project_build_along"
+    assert result["pedagogy_source"] == "product_version_domain:NIAT:B3:genai"
+
+
 def test_design_and_alignment_pipeline_exposes_external_skill_gaps():
     state = {
         "domain": "genai",
