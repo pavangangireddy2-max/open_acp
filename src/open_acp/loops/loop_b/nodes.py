@@ -690,7 +690,7 @@ def resolve_pedagogy_profile(state: dict) -> dict:
 
 
 def generate_curriculum(state: dict) -> dict:
-    """Generate a curriculum structure from the approved brief and source curriculum."""
+    """Generate packaged course structure from the approved brief and source curriculum."""
     domain = state.get("domain", "ml-engineering")
     brief = state.get("brief", {}) or {}
     curriculum_source_context = state.get("curriculum_source_context") or state.get("program_context", "")
@@ -722,12 +722,17 @@ def generate_curriculum(state: dict) -> dict:
 
 Use backward design and keep this stage structural:
 1. Start with terminal outcomes (what can learners DO after?)
-2. Map prerequisites per outcome
-3. Sequence modules respecting prerequisite chains
-4. Estimate duration per module
-5. If the source already defines levels, phases, or tracks, preserve that structure as faithfully as possible in the module list.
-6. Use the packaging profile only to decide how coarse or fine the module boundaries should be.
-7. Keep this stage structural and compact rather than fully expanded.
+2. Select which packaged courses belong in this curriculum based on:
+   - time budget
+   - priority skill requirements
+   - product-linked skill-assessment expectations
+3. Map prerequisites between packaged courses.
+4. Estimate duration per course.
+5. Use source-defined levels, phases, or tracks only as ordering cues or title hints; do not emit explicit level output at this stage.
+6. Use the packaging profile to decide how coarse or fine the packaged course boundaries should be.
+7. If breadth/depth packaging scope is known, reflect it in course scope or course title rather than inventing a separate level object.
+8. Do not decide topic allocation here. Topic-to-course assignment belongs to later design stages and should eventually be informed by channel-analysis inputs.
+9. Keep this stage structural and compact rather than fully expanded.
 
 Return JSON:
 {{
@@ -755,13 +760,14 @@ Return JSON:
 
 Important constraints:
 - Respect the total hours from the brief unless the source curriculum clearly forces a different total.
-- Preserve source-defined level or pathway progression when it exists.
-- Represent each major level, phase, or specialization as its own module in this schema when needed.
-- Do not collapse a detailed long-form curriculum into 4-6 generic modules unless the source clearly justifies it.
+- Preserve source-defined progression when it exists, but encode it through course sequence and course scope rather than explicit level output.
+- Represent each major phase or specialization as its own packaged course only when time budget and product requirements justify it.
+- Do not collapse a detailed long-form curriculum into 4-6 generic courses unless the source clearly justifies it.
 - Limit to 2-3 concise objectives per module.
 - Keep each objective statement under 18 words.
 - Use stable snake_case wiki skill IDs when referencing skills, not display titles.
-- Prefer 5-8 modules total for this stage unless the source clearly requires more.
+- Prefer 4-8 packaged courses total for this stage unless the source clearly requires more.
+- Treat current `modules` in the JSON schema as packaged course outputs for compatibility with the existing repo.
 
 Return ONLY the JSON object."""
 

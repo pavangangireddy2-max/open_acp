@@ -346,6 +346,8 @@ def test_generate_curriculum_uses_brief_artifact_and_reports_fallback(monkeypatc
     assert "## Brief Artifact" in captured["prompt"]
     assert '"brief_id": "brief_genai_niat_b3"' in captured["prompt"]
     assert "Respect the total hours from the brief" in captured["prompt"]
+    assert "do not emit explicit level output" in captured["prompt"]
+    assert "Do not decide topic allocation here" in captured["prompt"]
     assert result["curriculum_generation_status"] == "fallback_non_json"
     assert "empty fallback curriculum draft" in result["curriculum_generation_note"]
     assert result["curriculum_generation_raw_response"] == "This is not valid JSON."

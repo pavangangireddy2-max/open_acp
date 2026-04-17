@@ -200,6 +200,19 @@ So today:
 
 Later, the compatibility layer can be removed and the upstream artifact can become course-native.
 
+Clarification:
+
+- `generate_curriculum` should not emit a separate `levels` structure just because a source document uses levels or phases
+- source-defined levels, phases, or tracks should mainly shape:
+  - course ordering
+  - course titles
+  - packaged course scope
+- explicit course selection should be driven by:
+  - time-budget constraints
+  - priority skill requirements
+  - product-linked skill-assessment expectations
+- topic allocation belongs to later design stages, not to `generate_curriculum`
+
 ## Brief-First Transition
 
 Loop B is moving toward a stricter artifact chain:
@@ -222,6 +235,11 @@ This is intentionally closer to the longer-term stage discipline rule:
 
 - each stage owns a fixed decision set
 - later stages read upstream artifacts, not the full raw-source pile
+
+TODO:
+
+- make topic-to-course assignment explicitly consume channel-analysis inputs rather than relying only on source-curriculum prose
+- when canonical packaging carries breadth/depth scope such as `C1/C2/C3` and `L1/L2/L3`, let packaged course scope or course title reflect that directly
 
 ## Packaging Layer
 
