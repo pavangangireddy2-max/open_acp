@@ -111,7 +111,7 @@ def _build_domain_review_packet(
 ) -> dict:
     curriculum = loop_b_result.get("curriculum_map", {})
     course_design = loop_b_result.get("course_design", {}) or {}
-    courses = course_design.get("courses", []) or curriculum.get("modules", [])
+    courses = course_design.get("courses", []) or curriculum.get("courses", [])
     module_design = loop_b_result.get("module_design", {}) or {}
     topic_design = loop_b_result.get("topic_design", {}) or {}
     learning_unit_plan = loop_b_result.get("learning_unit_plan", {}) or {}
@@ -141,7 +141,7 @@ def _build_domain_review_packet(
             "course_count": len(courses),
             "courses": [
                 {
-                    "course_id": course.get("course_id", course.get("module_id", f"course_{index+1}")),
+                    "course_id": course.get("course_id", f"course_{index+1}"),
                     "title": course.get("title", "Untitled"),
                     "sequence": course.get("sequence", index + 1),
                     "estimated_hours": course.get("estimated_hours", 0),
@@ -284,7 +284,7 @@ def run(
 
             loop_b = result.get("loop_b_result", {})
             curriculum = loop_b.get("curriculum_map", {})
-            table.add_row("B: Curriculum", f"{len(curriculum.get('modules', []))} modules, pedagogy_profile={loop_b.get('pedagogy_profile', '?')}")
+            table.add_row("B: Curriculum", f"{len(curriculum.get('courses', []))} courses, pedagogy_profile={loop_b.get('pedagogy_profile', '?')}")
 
             loop_c = result.get("loop_c_result", {})
             table.add_row("C: Content", f"{loop_c.get('stages_completed', 0)} stages completed")

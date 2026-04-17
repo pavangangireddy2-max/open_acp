@@ -49,7 +49,9 @@ class PipelineRunner:
             "completed_at": end_time.isoformat(),
             "duration_seconds": duration,
             "loop_a_entries_created": len(result.get("loop_a_result", {}).get("wiki_entries_created", [])),
-            "loop_b_modules": len(result.get("loop_b_result", {}).get("curriculum_map", {}).get("modules", [])),
+            "loop_b_courses": len(
+                result.get("loop_b_result", {}).get("curriculum_map", {}).get("courses", [])
+            ),
             "loop_c_stages": result.get("loop_c_result", {}).get("stages_completed", 0),
             "loop_d_insights": result.get("loop_d_result", {}).get("health_report", {}).get("insights_count", 0),
         }

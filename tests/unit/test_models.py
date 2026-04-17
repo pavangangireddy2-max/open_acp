@@ -114,11 +114,11 @@ def test_learning_objective():
     assert obj.model_dump()["objective_id"] == "obj_1"
 
 
-def test_module():
-    from open_acp.models.curriculum import Module, LearningObjective, Assessment, BloomLevel
+def test_course():
+    from open_acp.models.curriculum import Course, LearningObjective, BloomLevel
 
-    module = Module(
-        module_id="m1",
+    course = Course(
+        course_id="c1",
         title="Introduction to Algorithms",
         sequence=1,
         objectives=[
@@ -129,24 +129,18 @@ def test_module():
                 skill_ids=["skill_tc"],
             )
         ],
-        assessments=[
-            Assessment(
-                assessment_id="a1",
-                type="quiz",
-                objectives_assessed=["obj_1"],
-                rubric={"criteria": "correct"},
-            )
-        ],
         estimated_hours=4.0,
-        prerequisite_modules=[],
+        prerequisite_courses=[],
+        content_types=["concept_explainer"],
+        skill_ids=["skill_tc"],
     )
-    assert module.sequence == 1
-    dumped = module.model_dump()
+    assert course.sequence == 1
+    dumped = course.model_dump()
     assert dumped["title"] == "Introduction to Algorithms"
 
 
 def test_curriculum_map():
-    from open_acp.models.curriculum import CurriculumMap, Module
+    from open_acp.models.curriculum import Course, CurriculumMap
 
     cmap = CurriculumMap(
         curriculum_id="cur_1",
@@ -156,13 +150,25 @@ def test_curriculum_map():
         pedagogy_profile="concept_progression",
         pedagogy_rationale="Progressive conceptual sequencing",
         differentiation_strategy={"focus": "hands-on"},
-        modules=[],
+        courses=[
+            Course(
+                course_id="c1",
+                title="Programming Foundations",
+                sequence=1,
+                objectives=[],
+                estimated_hours=20.0,
+                prerequisite_courses=[],
+                content_types=["concept_explainer"],
+                skill_ids=["python"],
+            )
+        ],
         total_hours=40.0,
         created_at=datetime.now(UTC).isoformat(),
     )
-    assert cmap.get_module("nonexistent") is None
+    assert cmap.get_course("c1") is not None
     assert cmap.approved_at is None
-    assert cmap.pedagogy_framework == "concept_progression"
+    assert cmap.pedagogy_profile == "concept_progression"
+    assert cmap.courses[0].course_id == "c1"
 
 
 # ── Signals ────────────────────────────────────────────────────────────────────
@@ -462,7 +468,7 @@ def test_all_models_serialize_deserialize():
         (CurriculumMap, dict(
             curriculum_id="c1", version=1, program_name="Test", domain="test",
             pedagogy_profile="concept_progression", pedagogy_rationale="test",
-            differentiation_strategy={}, modules=[], total_hours=10,
+            differentiation_strategy={}, courses=[], total_hours=10,
             created_at=datetime.now(UTC).isoformat(),
         )),
         (SkillGraph, dict(

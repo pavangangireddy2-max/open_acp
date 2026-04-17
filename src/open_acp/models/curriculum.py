@@ -1,9 +1,9 @@
-"""Curriculum domain models: objectives, assessments, modules, and curriculum maps."""
+"""Curriculum domain models: objectives, assessments, courses, and curriculum maps."""
 
 from enum import Enum
 from typing import Optional
 
-from pydantic import AliasChoices, BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class BloomLevel(str, Enum):
@@ -30,45 +30,36 @@ class Assessment(BaseModel):
     time_limit_minutes: Optional[int] = None
 
 
-class Module(BaseModel):
-    module_id: str
+class Course(BaseModel):
+    course_id: str
     title: str
     sequence: int
     objectives: list[LearningObjective]
-    assessments: list[Assessment]
     estimated_hours: float
-    prerequisite_modules: list[str]
-    content_types: list[str] = []  # Which ContentTypes this module needs
+    prerequisite_courses: list[str] = Field(default_factory=list)
+    content_types: list[str] = []
+    skill_ids: list[str] = []
 
 
 class CurriculumMap(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
 
     curriculum_id: str
-    version: int
+    version: int = 1
+    brief_ref: Optional[str] = None
     program_name: str
     domain: str
-    pedagogy_profile: str = Field(validation_alias=AliasChoices("pedagogy_profile", "pedagogy_framework"))
-    pedagogy_rationale: str = Field(validation_alias=AliasChoices("pedagogy_rationale", "pedagogy_justification"))
-    differentiation_strategy: dict
-    modules: list[Module]
+    pedagogy_profile: str
+    pedagogy_rationale: str
+    differentiation_strategy: dict = Field(default_factory=dict)
+    courses: list[Course]
     total_hours: float
-    created_at: str
+    created_at: str = ""
     approved_at: Optional[str] = None
 
-    def get_module(self, module_id: str) -> Optional[Module]:
-        """Look up a module by its ID."""
-        for module in self.modules:
-            if module.module_id == module_id:
-                return module
+    def get_course(self, course_id: str) -> Optional[Course]:
+        """Look up a course by its ID."""
+        for course in self.courses:
+            if course.course_id == course_id:
+                return course
         return None
-
-    @property
-    def pedagogy_framework(self) -> str:
-        """Compatibility alias for older code paths."""
-        return self.pedagogy_profile
-
-    @property
-    def pedagogy_justification(self) -> str:
-        """Compatibility alias for older code paths."""
-        return self.pedagogy_rationale

@@ -166,6 +166,7 @@ Brief-first note:
 - `generate_brief` should be the first true design artifact in Loop B
 - `generate_curriculum` should consume that brief plus structural inputs, not directly redo all upstream interpretation work
 - downstream design stages should keep inheriting from the brief and curriculum artifacts instead of re-reading raw context
+- `generate_curriculum` now emits packaged `courses` as its native structure output
 - `generate_curriculum` should output packaged course structure, not explicit level objects
 - source-defined levels or phases should act as ordering and scope cues for courses, not as mandatory output fields
 - topic placement should be decided later and should eventually be informed by channel-analysis digests
@@ -192,8 +193,8 @@ The stage lifecycle is:
 
 For stricter pipelines, schema and review failures should block progress rather than merely producing warnings.
 
-Loop C still works against the older module-oriented compatibility layer today.
-But as Loop B becomes richer, Loop C should increasingly consume:
+Loop C consumes the course-native curriculum output plus the downstream module/topic/unit design artifacts.
+Its runtime context should include:
 
 - selected course context
 - selected module context

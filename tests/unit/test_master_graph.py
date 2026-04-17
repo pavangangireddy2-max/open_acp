@@ -7,13 +7,13 @@ def test_build_loop_c_execution_context_prefers_module_work_plan():
         "curriculum_map": {
             "curriculum_id": "cur_genai",
             "program_name": "GenAI Stack Curriculum",
-            "modules": [
+            "courses": [
                 {
-                    "module_id": "seed_l1",
+                    "course_id": "seed_l1",
                     "title": "Level 1 — Foundations",
                     "estimated_hours": 12,
                     "objectives": [{"id": "obj_1", "statement": "Understand framing", "skill_ids": ["python"]}],
-                    "prerequisite_modules": [],
+                    "prerequisite_courses": [],
                 }
             ],
         },
@@ -21,7 +21,7 @@ def test_build_loop_c_execution_context_prefers_module_work_plan():
             "courses": [
                 {
                     "course_id": "course_seed_l1",
-                    "source_module_id": "seed_l1",
+                    "source_course_id": "seed_l1",
                     "title": "Level 1 — Foundations",
                     "sequence": 1,
                 }

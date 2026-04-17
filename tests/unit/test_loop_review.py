@@ -223,7 +223,7 @@ def test_loop_review_runner_generate_curriculum_fallback_wording(monkeypatch, tm
                 "brief_ref": "brief_genai_niat_b3",
                 "program_name": "genai Curriculum",
                 "domain": "genai",
-                "modules": [],
+                "courses": [],
                 "total_hours": 0,
             },
         }

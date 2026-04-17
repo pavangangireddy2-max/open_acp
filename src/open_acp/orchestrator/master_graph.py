@@ -92,7 +92,7 @@ def _select_module(
             course = courses_by_id.get(module.get("course_id", ""), {})
             if course.get("course_id") == requested_module_id:
                 return module
-            if course.get("source_module_id") == requested_module_id:
+            if course.get("source_course_id") == requested_module_id:
                 return module
 
     if requested_module_title:
@@ -242,9 +242,9 @@ def _build_module_work_plan(
 def _build_loop_c_execution_context(loop_b_result: dict, state: dict) -> dict:
     """Build a richer Loop C execution context from Loop B outputs.
 
-    Compatibility behavior:
+    Behavior:
     - Prefer a module-first execution target with a nested delivery plan when Loop B has expanded design artifacts.
-    - Fall back to the older curriculum_map.modules contract when those richer artifacts are absent.
+    - Fall back to the curriculum course-seed contract when those richer artifacts are absent.
     """
     content_type = state.get("content_type", "concept_explainer")
     domain = state.get("domain", "ml-engineering")
@@ -258,7 +258,7 @@ def _build_loop_c_execution_context(loop_b_result: dict, state: dict) -> dict:
     assessment_alignment_report = loop_b_result.get("assessment_alignment_report", {}) or {}
     packaging_profile = loop_b_result.get("packaging_profile", {}) or {}
 
-    curriculum_seeds = _index_by(curriculum.get("modules", []) or [], "module_id")
+    curriculum_seeds = _index_by(curriculum.get("courses", []) or [], "course_id")
     courses_by_id = _index_by(course_design.get("courses", []) or [], "course_id")
     modules_by_id = _index_by(module_design.get("modules", []) or [], "module_id")
     modules = sorted(
@@ -278,7 +278,7 @@ def _build_loop_c_execution_context(loop_b_result: dict, state: dict) -> dict:
     )
     if selected_module:
         course = courses_by_id.get(selected_module.get("course_id", ""), {})
-        source_seed = curriculum_seeds.get(course.get("source_module_id", ""), {})
+        source_seed = curriculum_seeds.get(course.get("source_course_id", ""), {})
         selected_topics = sorted(
             [
                 topic
@@ -358,45 +358,45 @@ def _build_loop_c_execution_context(loop_b_result: dict, state: dict) -> dict:
             "requested_module_title": state.get("module_title"),
         }
 
-    modules = curriculum.get("modules", []) or []
-    if modules:
-        first_module = modules[0]
+    course_seeds = curriculum.get("courses", []) or []
+    if course_seeds:
+        first_course = course_seeds[0]
         fallback_plan = ModuleWorkPlan(
             curriculum_id=curriculum.get("curriculum_id"),
             curriculum_title=curriculum.get("program_name", f"{domain} Curriculum"),
-            module_id=first_module.get("module_id", state.get("module_id", "m1")),
-            module_title=first_module.get("title", state.get("module_title", "Introduction")),
+            module_id=first_course.get("course_id", state.get("module_id", "m1")),
+            module_title=first_course.get("title", state.get("module_title", "Introduction")),
             module_change_type=ModuleChangeType.MODULE_CREATION.value,
-            estimated_hours=float(first_module.get("estimated_hours", state.get("estimated_hours", 1.0)) or 0),
+            estimated_hours=float(first_course.get("estimated_hours", state.get("estimated_hours", 1.0)) or 0),
             pedagogy_profile=loop_b_result.get("pedagogy_profile"),
             instructional_pattern=content_type,
             skill_ids=_unique_preserve_order(
                 skill_id
-                for objective in first_module.get("objectives", [])
+                for objective in first_course.get("objectives", [])
                 for skill_id in objective.get("skill_ids", [])
             ),
             focus_outcomes=[
                 objective.get("statement", "")
-                for objective in first_module.get("objectives", [])
+                for objective in first_course.get("objectives", [])
                 if objective.get("statement")
             ],
         )
         return {
             "execution_scope": "module",
-            "execution_id": first_module.get("module_id", state.get("module_id", "m1")),
-            "execution_title": first_module.get("title", state.get("module_title", "Introduction")),
-            "module_id": first_module.get("module_id", state.get("module_id", "m1")),
-            "title": first_module.get("title", state.get("module_title", "Introduction")),
+            "execution_id": first_course.get("course_id", state.get("module_id", "m1")),
+            "execution_title": first_course.get("title", state.get("module_title", "Introduction")),
+            "module_id": first_course.get("course_id", state.get("module_id", "m1")),
+            "title": first_course.get("title", state.get("module_title", "Introduction")),
             "domain": domain,
-            "estimated_hours": first_module.get("estimated_hours", state.get("estimated_hours", 1.0)),
-            "objectives": first_module.get("objectives", []),
-            "prerequisites": first_module.get("prerequisite_modules", []),
+            "estimated_hours": first_course.get("estimated_hours", state.get("estimated_hours", 1.0)),
+            "objectives": first_course.get("objectives", []),
+            "prerequisites": first_course.get("prerequisite_courses", []),
             "pedagogy_profile": loop_b_result.get("pedagogy_profile"),
             "instructional_pattern": content_type,
             "curriculum_id": curriculum.get("curriculum_id"),
             "curriculum_title": curriculum.get("program_name", f"{domain} Curriculum"),
-            "curriculum_module_id": first_module.get("module_id", state.get("module_id", "m1")),
-            "curriculum_module_title": first_module.get("title", state.get("module_title", "Introduction")),
+            "curriculum_module_id": first_course.get("course_id", state.get("module_id", "m1")),
+            "curriculum_module_title": first_course.get("title", state.get("module_title", "Introduction")),
             "module_topic_count": 0,
             "module_learning_unit_count": 0,
             "module_learning_unit_types": [],
@@ -472,8 +472,8 @@ def run_loop_b_node(state: dict) -> dict:
     )
 
     curriculum = result.get("curriculum_map", {})
-    modules = curriculum.get("modules", [])
-    print(f"\n  Loop B complete: {len(modules)} modules, pedagogy_profile={result.get('pedagogy_profile', '?')}")
+    courses = curriculum.get("courses", []) or []
+    print(f"\n  Loop B complete: {len(courses)} courses, pedagogy_profile={result.get('pedagogy_profile', '?')}")
     return {"loop_b_result": result, "current_loop": "C"}
 
 

@@ -185,20 +185,15 @@ The current Loop B flow is:
 
 `generate_differentiation` is intentionally removed from the core learning-design path.
 
-## Compatibility Note
+## Course-Native Output
 
-The current `generate_curriculum` stage still writes a `curriculum_map.modules` array.
-That is a compatibility shape inherited from the earlier repo model.
+`generate_curriculum` writes a native `curriculum_map.courses` array.
 
-Architecturally, those current "modules" are now treated as **course seeds** by the downstream stages.
+That current meaning is:
 
-So today:
-
-- `curriculum_map.modules` = course-level structural seeds
-- `design_courses` = converts those seeds into explicit course design
+- `curriculum_map.courses` = packaged course seeds
+- `design_courses` = normalizes those seeds into explicit course design
 - `design_modules`, `design_topics`, and `design_learning_units` = expand the structure further
-
-Later, the compatibility layer can be removed and the upstream artifact can become course-native.
 
 Clarification:
 
@@ -478,9 +473,7 @@ The long-term direction is:
   - planned learning units
   - practice intent
   - learning assessment context
-  - skill assessment alignment context
-
-Until that migration happens, Loop C still works through the compatibility layer.
+- skill assessment alignment context
 
 Current implementation note:
 

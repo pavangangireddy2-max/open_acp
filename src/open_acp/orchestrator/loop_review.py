@@ -533,8 +533,8 @@ class LoopReviewRunner:
 
         if stage_id == "generate_curriculum":
             curriculum = state.get("curriculum_map", {}) or {}
-            modules = curriculum.get("modules", [])
-            module_titles = [module.get("title", "Untitled") for module in modules[:6]]
+            courses = curriculum.get("courses", []) or []
+            course_titles = [course.get("title", "Untitled") for course in courses[:6]]
             status = state.get("curriculum_generation_status", "parsed")
             note = state.get("curriculum_generation_note")
             raw_response = state.get("curriculum_generation_raw_response")
@@ -542,7 +542,7 @@ class LoopReviewRunner:
                 decisions = []
                 if note:
                     decisions.append(note)
-                decisions.append(f"Module flow: {' | '.join(module_titles) if module_titles else 'none'}.")
+                decisions.append(f"Course flow: {' | '.join(course_titles) if course_titles else 'none'}.")
                 if raw_response:
                     preview = " ".join(raw_response.split())[:300]
                     decisions.append(f"Raw response preview: {preview}")
@@ -551,10 +551,10 @@ class LoopReviewRunner:
                     decisions,
                 )
             return (
-                f"Generated domain curriculum with {len(modules)} course seeds and total hours {curriculum.get('total_hours', 0)}.",
+                f"Generated domain curriculum with {len(courses)} course seeds and total hours {curriculum.get('total_hours', 0)}.",
                 [
                     f"Brief ref: {(state.get('brief') or {}).get('brief_id', 'none')}.",
-                    f"Course-seed flow: {' | '.join(module_titles) if module_titles else 'none'}.",
+                    f"Course-seed flow: {' | '.join(course_titles) if course_titles else 'none'}.",
                 ],
             )
 

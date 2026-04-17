@@ -9,7 +9,7 @@ def test_parse_json_object_response_extracts_embedded_json():
 
     {
       "curriculum_id": "cur_genai",
-      "modules": [],
+      "courses": [],
       "total_hours": 120
     }
 
@@ -130,7 +130,7 @@ def test_generate_brief_uses_resolved_inputs_and_reports_fallback(monkeypatch):
 def test_generate_curriculum_reports_probable_truncation(monkeypatch):
     class FakeClaudeClient:
         def generate(self, prompt, system, model_tier, max_tokens):
-            return '{"curriculum_id": "cur_genai", "modules": ['
+            return '{"curriculum_id": "cur_genai", "courses": ['
 
     monkeypatch.setattr(nodes, "ClaudeClient", FakeClaudeClient)
 
@@ -353,6 +353,7 @@ def test_generate_curriculum_uses_brief_artifact_and_reports_fallback(monkeypatc
     assert result["curriculum_generation_raw_response"] == "This is not valid JSON."
     assert result["curriculum_map"]["brief_ref"] == "brief_genai_niat_b3"
     assert result["curriculum_map"]["total_hours"] == 120.0
+    assert result["curriculum_map"]["courses"] == []
 
 
 def test_design_and_alignment_pipeline_exposes_external_skill_gaps():
@@ -364,9 +365,9 @@ def test_design_and_alignment_pipeline_exposes_external_skill_gaps():
             "curriculum_id": "cur_genai",
             "program_name": "GenAI Stack Curriculum",
             "domain": "genai",
-            "modules": [
+            "courses": [
                 {
-                    "module_id": "l1",
+                    "course_id": "c1",
                     "title": "Level 1 — GenAI Foundations",
                     "sequence": 1,
                     "objectives": [
@@ -384,7 +385,7 @@ def test_design_and_alignment_pipeline_exposes_external_skill_gaps():
                         },
                     ],
                     "estimated_hours": 24,
-                    "prerequisite_modules": [],
+                    "prerequisite_courses": [],
                     "content_types": ["concept_explainer", "project_building"],
                 }
             ],

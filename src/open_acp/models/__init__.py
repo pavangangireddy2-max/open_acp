@@ -4,9 +4,9 @@ from open_acp.models.content_types import ContentType, PipelineFamily
 from open_acp.models.curriculum import (
     Assessment,
     BloomLevel,
+    Course,
     CurriculumMap,
     LearningObjective,
-    Module,
 )
 from open_acp.models.delivery import (
     AssessmentNature,
@@ -70,9 +70,9 @@ __all__ = [
     # curriculum
     "Assessment",
     "BloomLevel",
+    "Course",
     "CurriculumMap",
     "LearningObjective",
-    "Module",
     # delivery
     "AssessmentNature",
     "AssessmentSystem",

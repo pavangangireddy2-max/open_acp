@@ -118,13 +118,27 @@ This keeps Git clean while preserving compounding intelligence.
 
 - Loop B no longer asks an LLM to pick the pedagogy framework.
 - Loop B resolves `pedagogy_profile` deterministically.
+- Loop B now starts with explicit pre-design resolution:
+  - product context
+  - structure profile
+  - packaging profile
+  - design-priority profile
+  - time-budget context
+  - pedagogy profile
+  - brief generation
+- Loop B uses a course-native curriculum contract:
+  - `generate_curriculum` emits packaged `courses`
+  - explicit `levels` are not a required output shape
+  - topic placement is deferred to later design stages
 - Loop B is moving from a coarse curriculum step into a richer curriculum-design chain:
+  - brief generation
   - curriculum generation
   - curriculum change visibility
   - packaging resolution
   - course/module/topic/unit design
   - practice and learning-assessment design
   - external skill-assessment alignment
+- Loop C consumes the course-native curriculum output plus downstream module/topic/unit design context.
 - Loop C stages follow: generate -> parse -> schema validate -> review -> revise -> persist.
 - First-wave pipelines use `strict_execution`, which blocks on schema or review failures after bounded retries.
 

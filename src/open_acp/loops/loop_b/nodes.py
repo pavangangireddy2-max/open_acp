@@ -742,16 +742,16 @@ Return JSON:
   "domain": "{domain}",
   "pedagogy_profile": "{pedagogy_profile}",
   "pedagogy_rationale": "{pedagogy_rationale}",
-  "modules": [
+  "courses": [
     {{
-      "module_id": "m1",
+      "course_id": "c1",
       "title": "Module Title",
       "sequence": 1,
       "objectives": [
         {{"id": "obj_1", "statement": "...", "bloom_level": "understand", "skill_ids": ["skill_id"]}}
       ],
       "estimated_hours": 1.5,
-      "prerequisite_modules": [],
+      "prerequisite_courses": [],
       "content_types": ["{content_type}"]
     }}
   ],
@@ -763,11 +763,10 @@ Important constraints:
 - Preserve source-defined progression when it exists, but encode it through course sequence and course scope rather than explicit level output.
 - Represent each major phase or specialization as its own packaged course only when time budget and product requirements justify it.
 - Do not collapse a detailed long-form curriculum into 4-6 generic courses unless the source clearly justifies it.
-- Limit to 2-3 concise objectives per module.
+- Limit to 2-3 concise objectives per course.
 - Keep each objective statement under 18 words.
 - Use stable snake_case wiki skill IDs when referencing skills, not display titles.
 - Prefer 4-8 packaged courses total for this stage unless the source clearly requires more.
-- Treat current `modules` in the JSON schema as packaged course outputs for compatibility with the existing repo.
 
 Return ONLY the JSON object."""
 
@@ -803,15 +802,15 @@ Return ONLY the JSON object."""
             "domain": domain,
             "pedagogy_profile": pedagogy_profile,
             "pedagogy_rationale": pedagogy_rationale,
-            "modules": [],
+            "courses": [],
             "total_hours": total_hours,
         }
 
-    modules = data.get("modules", [])
+    courses = data.get("courses", [])
     if curriculum_generation_status == "fallback_non_json":
         print("  Curriculum generation parse failed; using empty fallback curriculum draft.")
     else:
-        print(f"  Curriculum: {len(modules)} modules, {data.get('total_hours', 0)} hours")
+        print(f"  Curriculum: {len(courses)} courses, {data.get('total_hours', 0)} hours")
     return {
         "curriculum_generation_status": curriculum_generation_status,
         "curriculum_generation_note": curriculum_generation_note,
@@ -826,39 +825,45 @@ def compare_curriculum_changes(state: dict) -> dict:
     current = state.get("curriculum_map", {}) or {}
     previous = state.get("previous_curriculum_map", {}) or {}
 
-    current_modules = current.get("modules", []) or []
-    previous_modules = previous.get("modules", []) or []
+    current_courses = current.get("courses", []) or []
+    previous_courses = previous.get("courses", []) or []
 
-    current_by_id = {module.get("module_id", f"module_{index + 1}"): module for index, module in enumerate(current_modules)}
-    previous_by_id = {module.get("module_id", f"module_{index + 1}"): module for index, module in enumerate(previous_modules)}
+    current_by_id = {
+        course.get("course_id", f"course_{index + 1}"): course
+        for index, course in enumerate(current_courses)
+    }
+    previous_by_id = {
+        course.get("course_id", f"course_{index + 1}"): course
+        for index, course in enumerate(previous_courses)
+    }
 
     added_courses = [
-        module.get("title", module_id)
-        for module_id, module in current_by_id.items()
-        if module_id not in previous_by_id
+        course.get("title", course_id)
+        for course_id, course in current_by_id.items()
+        if course_id not in previous_by_id
     ]
     removed_courses = [
-        module.get("title", module_id)
-        for module_id, module in previous_by_id.items()
-        if module_id not in current_by_id
+        course.get("title", course_id)
+        for course_id, course in previous_by_id.items()
+        if course_id not in current_by_id
     ]
     renamed_courses = []
-    for module_id, module in current_by_id.items():
-        if module_id in previous_by_id:
-            previous_title = previous_by_id[module_id].get("title", module_id)
-            current_title = module.get("title", module_id)
+    for course_id, course in current_by_id.items():
+        if course_id in previous_by_id:
+            previous_title = previous_by_id[course_id].get("title", course_id)
+            current_title = course.get("title", course_id)
             if previous_title != current_title:
-                renamed_courses.append({"course_id": module_id, "from": previous_title, "to": current_title})
+                renamed_courses.append({"course_id": course_id, "from": previous_title, "to": current_title})
 
     report = {
-        "status": "baseline" if not previous_modules else "changed",
-        "previous_course_count": len(previous_modules),
-        "current_course_count": len(current_modules),
+        "status": "baseline" if not previous_courses else "changed",
+        "previous_course_count": len(previous_courses),
+        "current_course_count": len(current_courses),
         "added_courses": added_courses,
         "removed_courses": removed_courses,
         "renamed_courses": renamed_courses,
         "hours_change": round(float(current.get("total_hours", 0) or 0) - float(previous.get("total_hours", 0) or 0), 2),
-        "current_titles": [module.get("title", "Untitled") for module in current_modules],
+        "current_titles": [course.get("title", "Untitled") for course in current_courses],
     }
 
     status = "baseline snapshot" if report["status"] == "baseline" else "change report"
@@ -891,17 +896,17 @@ def resolve_packaging_profile(state: dict) -> dict:
 
 
 def design_courses(state: dict) -> dict:
-    """Treat the current curriculum draft modules as course seeds for downstream design."""
+    """Treat the current curriculum draft courses as explicit course seeds for downstream design."""
     curriculum = state.get("curriculum_map", {}) or {}
-    course_seeds = curriculum.get("modules", []) or []
+    course_seeds = curriculum.get("courses", []) or []
 
     courses = []
     for index, seed in enumerate(course_seeds, start=1):
-        course_id = f"course_{_slugify(seed.get('module_id') or seed.get('title', f'course_{index}'))}"
+        course_id = seed.get("course_id") or f"course_{_slugify(seed.get('title', f'course_{index}'))}"
         courses.append(
             {
                 "course_id": course_id,
-                "source_module_id": seed.get("module_id", course_id),
+                "source_course_id": seed.get("course_id", course_id),
                 "title": seed.get("title", f"Course {index}"),
                 "sequence": seed.get("sequence", index),
                 "estimated_hours": seed.get("estimated_hours", 0),
@@ -911,7 +916,7 @@ def design_courses(state: dict) -> dict:
                     for obj_index, objective in enumerate(seed.get("objectives", []))
                 ],
                 "outcomes": _course_objective_statements(seed),
-                "skill_ids": _course_skill_ids(seed),
+                "skill_ids": seed.get("skill_ids", []) or _course_skill_ids(seed),
             }
         )
 
