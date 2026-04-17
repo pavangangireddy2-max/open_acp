@@ -24,8 +24,14 @@ class LoopBGraphState(TypedDict, total=False):
     program_context: Annotated[str, _replace]
     product_context: Annotated[Any, _replace]
     structure_profile: Annotated[Any, _replace]
+    design_priority_profile: Annotated[Any, _replace]
+    time_budget_context: Annotated[Any, _replace]
     pedagogy_profile: Annotated[str, _replace]
     pedagogy_rationale: Annotated[str, _replace]
+    brief_generation_status: Annotated[str, _replace]
+    brief_generation_note: Annotated[Any, _replace]
+    brief_generation_raw_response: Annotated[Any, _replace]
+    brief: Annotated[Any, _replace]
     curriculum_generation_status: Annotated[str, _replace]
     curriculum_generation_note: Annotated[Any, _replace]
     curriculum_generation_raw_response: Annotated[Any, _replace]
@@ -50,7 +56,10 @@ def build_loop_b_graph() -> StateGraph:
         resolve_product_context,
         resolve_structure_profile,
         resolve_packaging_profile,
+        resolve_design_priority_profile,
+        resolve_time_budget_context,
         resolve_pedagogy_profile,
+        generate_brief,
         generate_curriculum,
         compare_curriculum_changes,
         design_courses,
@@ -68,7 +77,10 @@ def build_loop_b_graph() -> StateGraph:
     graph.add_node("resolve_product_context", resolve_product_context)
     graph.add_node("resolve_structure_profile", resolve_structure_profile)
     graph.add_node("resolve_packaging_profile", resolve_packaging_profile)
+    graph.add_node("resolve_design_priority_profile", resolve_design_priority_profile)
+    graph.add_node("resolve_time_budget_context", resolve_time_budget_context)
     graph.add_node("resolve_pedagogy_profile", resolve_pedagogy_profile)
+    graph.add_node("generate_brief", generate_brief)
     graph.add_node("generate_curriculum", generate_curriculum)
     graph.add_node("compare_curriculum_changes", compare_curriculum_changes)
     graph.add_node("design_courses", design_courses)
@@ -84,8 +96,11 @@ def build_loop_b_graph() -> StateGraph:
     graph.add_edge("load_wiki_context", "resolve_product_context")
     graph.add_edge("resolve_product_context", "resolve_structure_profile")
     graph.add_edge("resolve_structure_profile", "resolve_packaging_profile")
-    graph.add_edge("resolve_packaging_profile", "resolve_pedagogy_profile")
-    graph.add_edge("resolve_pedagogy_profile", "generate_curriculum")
+    graph.add_edge("resolve_packaging_profile", "resolve_design_priority_profile")
+    graph.add_edge("resolve_design_priority_profile", "resolve_time_budget_context")
+    graph.add_edge("resolve_time_budget_context", "resolve_pedagogy_profile")
+    graph.add_edge("resolve_pedagogy_profile", "generate_brief")
+    graph.add_edge("generate_brief", "generate_curriculum")
     graph.add_edge("generate_curriculum", "compare_curriculum_changes")
     graph.add_edge("compare_curriculum_changes", "design_courses")
     graph.add_edge("design_courses", "design_modules")

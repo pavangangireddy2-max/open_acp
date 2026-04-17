@@ -22,7 +22,47 @@ def test_parse_json_object_response_extracts_embedded_json():
     assert parsed["total_hours"] == 120
 
 
-def test_generate_curriculum_uses_curriculum_source_context_and_reports_fallback(monkeypatch):
+def test_resolve_design_priority_profile_uses_structure_dimensions():
+    result = nodes.resolve_design_priority_profile(
+        {
+            "structure_profile": {
+                "structure_profile_id": "niat_university_structure",
+                "design_priority_dimensions": [
+                    "regulatory_compliance",
+                    "university_policy_and_infra_constraints",
+                    "job_placement_outcomes",
+                ],
+            },
+            "product_context": {"focus_priority": "active"},
+        }
+    )
+
+    profile = result["design_priority_profile"]
+    assert profile["profile_id"] == "niat_university_structure_design_priorities"
+    assert profile["dimension_ids"] == [
+        "regulatory_compliance",
+        "university_policy_and_infra_constraints",
+        "job_placement_outcomes",
+    ]
+    assert profile["focus_priority"] == "active"
+
+
+def test_resolve_time_budget_context_prefers_source_total_hours():
+    result = nodes.resolve_time_budget_context(
+        {
+            "domain": "genai",
+            "curriculum_source_context": "# GenAI 120 Hr Curriculum\nThis path is 120 hours long.",
+            "packaging_profile": {},
+        }
+    )
+
+    budget = result["time_budget_context"]
+    assert budget["source_total_hours"] == 120.0
+    assert budget["target_total_hours"] == 120.0
+    assert budget["available_design_hours"] == 120.0
+
+
+def test_generate_brief_uses_resolved_inputs_and_reports_fallback(monkeypatch):
     captured: dict = {}
 
     class FakeClaudeClient:
@@ -32,7 +72,7 @@ def test_generate_curriculum_uses_curriculum_source_context_and_reports_fallback
 
     monkeypatch.setattr(nodes, "ClaudeClient", FakeClaudeClient)
 
-    result = nodes.generate_curriculum(
+    result = nodes.generate_brief(
         {
             "domain": "genai",
             "pedagogy_profile": "project_build_along",
@@ -40,18 +80,51 @@ def test_generate_curriculum_uses_curriculum_source_context_and_reports_fallback
             "skill_graph_context": "## Skills in Wiki\n- **Python Programming**",
             "learner_context": "## Learner Segments\n- **Career Switcher**",
             "curriculum_source_context": "### Source: stack curriculum seed",
-            "content_type": "concept_explainer",
+            "product_context": {
+                "product_label": "NIAT B3",
+                "product_category": "degree_program_product",
+                "curriculum_container_kind": "academic_degree_curriculum",
+                "delivery_mode": "mixed_partner_delivery",
+                "focus_priority": "active",
+            },
+            "structure_profile": {
+                "structure_profile_id": "niat_university_structure",
+                "hierarchy": ["batch_curriculum_grid_template", "university", "branch"],
+                "design_priority_dimensions": ["regulatory_compliance", "job_placement_outcomes"],
+            },
+            "packaging_profile": {
+                "packaging_profile_id": "niat_b3_genai_packaging",
+                "module_count_per_course": {"default": 3},
+                "topic_count_per_module": {"default": 4},
+                "allowed_learning_unit_types": ["video_session_unit", "reading_material_unit"],
+            },
+            "design_priority_profile": {
+                "profile_id": "niat_university_structure_design_priorities",
+                "ordered_dimensions": ["regulatory_compliance", "job_placement_outcomes"],
+                "dimension_ids": ["regulatory_compliance", "job_placement_outcomes"],
+                "focus_priority": "active",
+                "resolution_reason": "structure-driven",
+            },
+            "time_budget_context": {
+                "context_id": "time_budget_genai",
+                "source_total_hours": 120.0,
+                "target_total_hours": 120.0,
+                "slot_budget_hours": 120.0,
+                "reserved_hours": 0.0,
+                "available_design_hours": 120.0,
+                "resolution_reason": "source-defined total hours preserved",
+            },
         }
     )
 
-    assert "## Curriculum Source Context" in captured["prompt"]
-    assert "### Source: stack curriculum seed" in captured["prompt"]
-    assert "Limit to 2-3 concise objectives per module." in captured["prompt"]
-    assert "Use stable snake_case wiki skill IDs" in captured["prompt"]
-    assert result["curriculum_generation_status"] == "fallback_non_json"
-    assert "empty fallback curriculum draft" in result["curriculum_generation_note"]
-    assert result["curriculum_generation_raw_response"] == "This is not valid JSON."
-    assert result["curriculum_map"]["modules"] == []
+    assert "## Design Priority Profile" in captured["prompt"]
+    assert "## Time Budget Context" in captured["prompt"]
+    assert "Target total hours: 120.0" in captured["prompt"]
+    assert result["brief_generation_status"] == "fallback_non_json"
+    assert "deterministic fallback brief" in result["brief_generation_note"]
+    assert result["brief_generation_raw_response"] == "This is not valid JSON."
+    assert result["brief"]["pedagogy"]["default_profile"] == "project_build_along"
+    assert result["brief"]["total_hours"] == 120.0
 
 
 def test_generate_curriculum_reports_probable_truncation(monkeypatch):
@@ -64,10 +137,12 @@ def test_generate_curriculum_reports_probable_truncation(monkeypatch):
     result = nodes.generate_curriculum(
         {
             "domain": "genai",
-            "pedagogy_profile": "project_build_along",
-            "pedagogy_rationale": "Project-centered stack.",
-            "skill_graph_context": "",
-            "learner_context": "",
+            "brief": {
+                "brief_id": "brief_genai",
+                "program_name": "GenAI 120 Hr Curriculum",
+                "pedagogy": {"default_profile": "project_build_along", "rationale": "Project-centered stack."},
+                "total_hours": 120.0,
+            },
             "curriculum_source_context": "### Source: stack curriculum seed",
             "content_type": "concept_explainer",
         }
@@ -228,6 +303,54 @@ def test_resolve_pedagogy_profile_refreshes_stale_product_context():
 
     assert result["pedagogy_profile"] == "project_build_along"
     assert result["pedagogy_source"] == "product_version_domain:NIAT:B3:genai"
+
+
+def test_generate_curriculum_uses_brief_artifact_and_reports_fallback(monkeypatch):
+    captured: dict = {}
+
+    class FakeClaudeClient:
+        def generate(self, prompt, system, model_tier, max_tokens):
+            captured["prompt"] = prompt
+            return "This is not valid JSON."
+
+    monkeypatch.setattr(nodes, "ClaudeClient", FakeClaudeClient)
+
+    result = nodes.generate_curriculum(
+        {
+            "domain": "genai",
+            "brief": {
+                "brief_id": "brief_genai_niat_b3",
+                "program_name": "GenAI 120 Hr Curriculum",
+                "pedagogy": {
+                    "default_profile": "project_build_along",
+                    "rationale": "NIAT B3 GenAI needs milestone-based implementation practice.",
+                },
+                "total_hours": 120.0,
+            },
+            "curriculum_source_context": "### Source: stack curriculum seed",
+            "structure_profile": {
+                "structure_profile_id": "niat_university_structure",
+                "hierarchy": ["batch_curriculum_grid_template", "university", "branch"],
+                "design_priority_dimensions": ["regulatory_compliance", "job_placement_outcomes"],
+            },
+            "packaging_profile": {
+                "packaging_profile_id": "niat_b3_genai_packaging",
+                "module_count_per_course": {"default": 3},
+                "topic_count_per_module": {"default": 4},
+                "allowed_learning_unit_types": ["video_session_unit", "reading_material_unit"],
+            },
+            "content_type": "concept_explainer",
+        }
+    )
+
+    assert "## Brief Artifact" in captured["prompt"]
+    assert '"brief_id": "brief_genai_niat_b3"' in captured["prompt"]
+    assert "Respect the total hours from the brief" in captured["prompt"]
+    assert result["curriculum_generation_status"] == "fallback_non_json"
+    assert "empty fallback curriculum draft" in result["curriculum_generation_note"]
+    assert result["curriculum_generation_raw_response"] == "This is not valid JSON."
+    assert result["curriculum_map"]["brief_ref"] == "brief_genai_niat_b3"
+    assert result["curriculum_map"]["total_hours"] == 120.0
 
 
 def test_design_and_alignment_pipeline_exposes_external_skill_gaps():

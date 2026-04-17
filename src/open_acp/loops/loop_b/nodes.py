@@ -176,6 +176,211 @@ def _extract_keywords(texts: list[str]) -> list[str]:
     return _unique_preserve_order([word for word in words if len(word) >= 4 and word not in stopwords])
 
 
+def _product_summary(product_context: dict) -> str:
+    return "\n".join(
+        [
+            f"- Product label: {product_context.get('product_label', 'Stack-only default')}",
+            f"- Product category: {product_context.get('product_category', 'standard_product')}",
+            f"- Curriculum container kind: {product_context.get('curriculum_container_kind', 'standard_curriculum')}",
+            f"- Delivery mode: {product_context.get('delivery_mode', 'unspecified')}",
+            f"- Focus priority: {product_context.get('focus_priority', 'default')}",
+        ]
+    )
+
+
+def _structure_summary(structure_profile: dict) -> str:
+    return "\n".join(
+        [
+            f"- Structure profile: {structure_profile.get('structure_profile_id', 'standard_product_structure')}",
+            (
+                f"- Hierarchy: {' -> '.join(structure_profile.get('hierarchy', [])) or 'curriculum_container -> courses -> modules -> topics -> learning_units'}"
+            ),
+            (
+                f"- Design priorities: {', '.join(structure_profile.get('design_priority_dimensions', [])) or 'default'}"
+            ),
+        ]
+    )
+
+
+def _packaging_summary(packaging_profile: dict) -> str:
+    return "\n".join(
+        [
+            f"- Packaging profile: {packaging_profile.get('packaging_profile_id', 'default_learning_packaging')}",
+            f"- Modules per course default: {packaging_profile.get('module_count_per_course', {}).get('default', 'unknown')}",
+            f"- Topics per module default: {packaging_profile.get('topic_count_per_module', {}).get('default', 'unknown')}",
+            f"- Learning unit types: {', '.join(packaging_profile.get('allowed_learning_unit_types', [])) or 'none'}",
+        ]
+    )
+
+
+def _extract_total_hours_from_curriculum_source(curriculum_source_context: str) -> float | None:
+    if not curriculum_source_context:
+        return None
+    patterns = [
+        r"(\d+(?:\.\d+)?)\s*(?:hour|hours|hr|hrs)\b",
+        r"(\d+(?:\.\d+)?)h\b",
+    ]
+    for pattern in patterns:
+        matches = re.findall(pattern, curriculum_source_context, flags=re.IGNORECASE)
+        if matches:
+            try:
+                return float(matches[0])
+            except ValueError:
+                continue
+    return None
+
+
+def _design_priority_label(dimension_id: str) -> str:
+    labels = {
+        "job_placement_outcomes": "job_placement_outcomes",
+        "student_learning_outcomes": "student_learning_outcomes",
+        "degree_and_higher_ed_outcomes": "degree_and_higher_ed_outcomes",
+        "regulatory_compliance": "regulatory_compliance",
+        "university_policy_and_infra_constraints": "university_policy_and_infra_constraints",
+        "operational_efficiency": "operational_efficiency",
+        "cross_product_alignment": "cross_product_alignment",
+        "industry_partnerships_and_certifications": "industry_partnerships_and_certifications",
+        "market_and_community_signals": "market_and_community_signals",
+        "customer_and_sales_intelligence": "customer_and_sales_intelligence",
+        "internal_expertise": "internal_expertise",
+    }
+    return labels.get(dimension_id, dimension_id)
+
+
+def _build_design_priority_summary(profile: dict) -> str:
+    dimensions = profile.get("ordered_dimensions") or profile.get("dimension_ids") or []
+    return "\n".join(
+        [
+            f"- Design priority profile: {profile.get('profile_id', 'default_design_priorities')}",
+            f"- Ordered dimensions: {', '.join(dimensions) or 'none'}",
+            f"- Focus priority: {profile.get('focus_priority', 'default')}",
+            f"- Resolution reason: {profile.get('resolution_reason', 'not provided')}",
+        ]
+    )
+
+
+def _build_time_budget_summary(context: dict) -> str:
+    return "\n".join(
+        [
+            f"- Time budget context: {context.get('context_id', 'unknown')}",
+            f"- Source total hours: {context.get('source_total_hours', 'unknown')}",
+            f"- Target total hours: {context.get('target_total_hours', 'unknown')}",
+            f"- Slot budget hours: {context.get('slot_budget_hours', 'unknown')}",
+            f"- Reserved hours: {context.get('reserved_hours', 'unknown')}",
+            f"- Available design hours: {context.get('available_design_hours', 'unknown')}",
+            f"- Resolution reason: {context.get('resolution_reason', 'not provided')}",
+        ]
+    )
+
+
+def _extract_markdown_bullets(section_text: str, limit: int = 8) -> list[str]:
+    bullets: list[str] = []
+    for line in (section_text or "").splitlines():
+        stripped = line.strip()
+        if stripped.startswith("- **") and "**" in stripped[4:]:
+            title = stripped[4:]
+            title = title.split("**", 1)[0].strip()
+            if title:
+                bullets.append(_slugify(title))
+        elif stripped.startswith("- "):
+            value = stripped[2:].strip()
+            if value:
+                bullets.append(_slugify(value))
+        if len(bullets) >= limit:
+            break
+    return _unique_preserve_order(bullets)
+
+
+def _default_allowed_local_overrides(profile: str) -> list[str]:
+    mapping = {
+        "project_build_along": ["concept_progression", "tool_workflow"],
+        "concept_progression": ["skill_drill", "case_reasoning"],
+        "skill_drill": ["concept_progression"],
+        "case_reasoning": ["concept_progression"],
+        "tool_workflow": ["concept_progression", "project_build_along"],
+    }
+    return mapping.get(profile, [])
+
+
+def _fallback_terminal_outcomes(domain: str, pedagogy_profile: str, curriculum_source_context: str) -> list[str]:
+    source_text = curriculum_source_context.lower()
+    if domain == "genai":
+        outcomes = [
+            "Build and deploy a document-grounded GenAI application",
+            "Implement retrieval, tool use, and evaluation in GenAI systems",
+            "Ship a milestone-based AI workflow with production constraints",
+        ]
+        if "agent" in source_text:
+            outcomes.append("Build and evaluate an agent with tool use")
+        return outcomes[:5]
+
+    if pedagogy_profile == "skill_drill":
+        return [
+            f"Demonstrate timed proficiency in core {domain} problem patterns",
+            f"Apply {domain} concepts under assessment-style constraints",
+        ]
+
+    return [
+        f"Apply core {domain} concepts in realistic scenarios",
+        f"Demonstrate observable {domain} skills through guided outputs",
+    ]
+
+
+def resolve_design_priority_profile(state: dict) -> dict:
+    """Resolve the active design-priority dimensions from structure and product context."""
+    structure_profile = state.get("structure_profile", {}) or {}
+    product_context = state.get("product_context", {}) or {}
+    dimension_ids = [
+        _design_priority_label(dimension_id)
+        for dimension_id in structure_profile.get("design_priority_dimensions", [])
+    ]
+    ordered_dimensions = _unique_preserve_order(dimension_ids)
+    profile = {
+        "profile_id": f"{structure_profile.get('structure_profile_id', 'standard_product_structure')}_design_priorities",
+        "dimension_ids": ordered_dimensions,
+        "ordered_dimensions": ordered_dimensions,
+        "dimensions": [{"dimension_id": dimension_id} for dimension_id in ordered_dimensions],
+        "focus_priority": product_context.get("focus_priority", "default"),
+        "resolution_reason": (
+            f"structure profile {structure_profile.get('structure_profile_id', 'standard_product_structure')} "
+            "defines the active design-priority dimensions"
+        ),
+    }
+    print(f"  Design priorities: {len(ordered_dimensions)} dimensions resolved")
+    return {"design_priority_profile": profile}
+
+
+def resolve_time_budget_context(state: dict) -> dict:
+    """Resolve a structured time-budget object for the current curriculum-design run."""
+    curriculum_source_context = state.get("curriculum_source_context", "") or ""
+    packaging_profile = state.get("packaging_profile", {}) or {}
+    domain = state.get("domain", "unknown")
+
+    source_total_hours = _extract_total_hours_from_curriculum_source(curriculum_source_context)
+    target_total_hours = source_total_hours if source_total_hours is not None else 20.0
+    slot_budget_hours = target_total_hours
+    reserved_hours = float(packaging_profile.get("reserved_hours", 0.0) or 0.0)
+    available_design_hours = max(0.0, round(slot_budget_hours - reserved_hours, 2))
+
+    if source_total_hours is not None:
+        reason = "source-defined total hours preserved from curriculum source context"
+    else:
+        reason = "no explicit source total hours found; using default planning budget"
+
+    context = {
+        "context_id": f"time_budget_{_slugify(domain)}",
+        "source_total_hours": source_total_hours,
+        "target_total_hours": target_total_hours,
+        "slot_budget_hours": slot_budget_hours,
+        "reserved_hours": reserved_hours,
+        "available_design_hours": available_design_hours,
+        "resolution_reason": reason,
+    }
+
+    print(f"  Time budget: target {target_total_hours} hours")
+    return {"time_budget_context": context}
+
+
 def load_wiki_context(state: dict) -> dict:
     """Load skill graph and learner model from wiki entities."""
     wiki = WikiEngine()
@@ -265,6 +470,192 @@ def resolve_structure_profile(state: dict) -> dict:
     return {"structure_profile": profile}
 
 
+def generate_brief(state: dict) -> dict:
+    """Generate a Stage 0 curriculum brief artifact from resolved context."""
+    domain = state.get("domain", "ml-engineering")
+    product_context = state.get("product_context", {}) or {}
+    structure_profile = state.get("structure_profile", {}) or {}
+    packaging_profile = state.get("packaging_profile", {}) or {}
+    design_priority_profile = state.get("design_priority_profile", {}) or {}
+    time_budget_context = state.get("time_budget_context", {}) or {}
+    pedagogy_profile = state.get("pedagogy_profile", "concept_progression")
+    pedagogy_rationale = state.get("pedagogy_rationale", "content-type default")
+    skill_context = state.get("skill_graph_context", "")
+    learner_context = state.get("learner_context", "")
+    curriculum_source_context = state.get("curriculum_source_context") or state.get("program_context", "")
+
+    product_summary = _product_summary(product_context)
+    structure_summary = _structure_summary(structure_profile)
+    packaging_summary = _packaging_summary(packaging_profile)
+    design_priority_summary = _build_design_priority_summary(design_priority_profile)
+    time_budget_summary = _build_time_budget_summary(time_budget_context)
+
+    claude = ClaudeClient()
+    prompt = f"""Create a curriculum brief for the "{domain}" stack.
+
+## Curriculum Source Context
+{curriculum_source_context or "No explicit curriculum source provided."}
+
+## Product Context
+{product_summary}
+
+## Structure Profile
+{structure_summary}
+
+## Packaging Context
+{packaging_summary}
+
+## Design Priority Profile
+{design_priority_summary}
+
+## Time Budget Context
+{time_budget_summary}
+
+## Skill Context
+{skill_context or "No explicit skill context provided."}
+
+## Learner Context
+{learner_context or "No explicit learner context provided."}
+
+Decide only the Stage 0 brief:
+1. Program name
+2. Primary target learner segments (maximum 2)
+3. Differentiation angle
+4. Default pedagogy profile and allowed local overrides
+5. Total hours
+6. Terminal outcomes (maximum 5, observable verbs only)
+7. Success metrics
+
+Do not design modules, topics, or content yet.
+
+Return JSON:
+{{
+  "brief_id": "brief_{domain}",
+  "program_name": "Program name",
+  "audience": {{
+    "primary": ["audience_segment_id"],
+    "english_level": 8
+  }},
+  "pedagogy": {{
+    "default_profile": "{pedagogy_profile}",
+    "allowed_local_overrides": ["concept_progression"]
+  }},
+  "total_hours": {time_budget_context.get("target_total_hours", 20.0)},
+  "terminal_outcomes": [
+    "Observable terminal outcome"
+  ],
+  "success_metrics": {{
+    "completion_rate_target": 0.75,
+    "median_assessment_score_target": 0.70
+  }},
+  "differentiation": "One-line differentiation angle",
+  "design_priority_dimensions": {json.dumps(design_priority_profile.get("ordered_dimensions", []))}
+}}
+
+Important constraints:
+- Terminal outcomes must use observable verbs, not vague verbs like understand or know.
+- Keep primary audience to at most 2 segments.
+- Use the resolved pedagogy profile unless the sources clearly justify a different default.
+- Respect source-defined total hours when provided.
+- Keep this brief compact and structural.
+
+Return ONLY the JSON object."""
+
+    response = claude.generate(
+        prompt=prompt,
+        system="You are a curriculum architect preparing a brief artifact before curriculum structuring.",
+        model_tier="strong",
+        max_tokens=6000,
+    )
+
+    audience_candidates = _extract_markdown_bullets(learner_context, limit=2)
+    brief_generation_status = "parsed"
+    brief_generation_note = None
+    brief_generation_raw_response = None
+    try:
+        brief = _parse_json_object_response(response)
+    except (json.JSONDecodeError, ValueError):
+        brief_generation_status = "fallback_non_json"
+        brief_generation_note = (
+            "Brief generation response could not be parsed as JSON. "
+            "Using a deterministic fallback brief."
+        )
+        brief_generation_raw_response = response[:4000]
+        brief = {
+            "brief_id": f"brief_{_slugify(domain)}",
+            "program_name": product_context.get("product_label") or f"{domain.title()} Curriculum",
+            "audience": {
+                "primary": audience_candidates[:2],
+                "english_level": 8,
+            },
+            "pedagogy": {
+                "default_profile": pedagogy_profile,
+                "allowed_local_overrides": _default_allowed_local_overrides(pedagogy_profile),
+            },
+            "total_hours": time_budget_context.get("target_total_hours", 20.0),
+            "terminal_outcomes": _fallback_terminal_outcomes(domain, pedagogy_profile, curriculum_source_context),
+            "success_metrics": {
+                "completion_rate_target": 0.75,
+                "median_assessment_score_target": 0.70,
+            },
+            "differentiation": (
+                "Milestone-driven, implementation-first curriculum shaped by product and structure constraints."
+            ),
+            "design_priority_dimensions": design_priority_profile.get("ordered_dimensions", []),
+        }
+
+    brief.setdefault("brief_id", f"brief_{_slugify(domain)}")
+    brief.setdefault("program_name", product_context.get("product_label") or f"{domain.title()} Curriculum")
+    brief.setdefault(
+        "audience",
+        {"primary": audience_candidates[:2], "english_level": 8},
+    )
+    brief.setdefault(
+        "pedagogy",
+        {
+            "default_profile": pedagogy_profile,
+            "allowed_local_overrides": _default_allowed_local_overrides(pedagogy_profile),
+        },
+    )
+    brief.setdefault("total_hours", time_budget_context.get("target_total_hours", 20.0))
+    brief.setdefault(
+        "terminal_outcomes",
+        _fallback_terminal_outcomes(domain, pedagogy_profile, curriculum_source_context),
+    )
+    brief.setdefault(
+        "success_metrics",
+        {
+            "completion_rate_target": 0.75,
+            "median_assessment_score_target": 0.70,
+        },
+    )
+    brief.setdefault("differentiation", "Curriculum shaped by product, structure, and skill-outcome priorities.")
+    brief.setdefault("design_priority_dimensions", design_priority_profile.get("ordered_dimensions", []))
+    brief["pedagogy"].setdefault("default_profile", pedagogy_profile)
+    brief["pedagogy"].setdefault("allowed_local_overrides", _default_allowed_local_overrides(pedagogy_profile))
+    brief["pedagogy"].setdefault("rationale", pedagogy_rationale)
+    brief["time_budget"] = time_budget_context
+    brief["product_ref"] = product_context.get("product_label")
+    brief["structure_profile_id"] = structure_profile.get("structure_profile_id")
+    brief["packaging_profile_id"] = packaging_profile.get("packaging_profile_id")
+
+    if brief_generation_status == "fallback_non_json":
+        print("  Brief generation parse failed; using deterministic fallback brief.")
+    else:
+        print(
+            "  Brief: "
+            f"{brief.get('program_name', domain)} "
+            f"({len(brief.get('terminal_outcomes', []))} terminal outcomes)"
+        )
+
+    return {
+        "brief_generation_status": brief_generation_status,
+        "brief_generation_note": brief_generation_note,
+        "brief_generation_raw_response": brief_generation_raw_response,
+        "brief": brief,
+    }
+
+
 def resolve_pedagogy_profile(state: dict) -> dict:
     """Resolve and justify a pedagogy profile from config."""
     domain = state.get("domain", "ml-engineering")
@@ -299,51 +690,29 @@ def resolve_pedagogy_profile(state: dict) -> dict:
 
 
 def generate_curriculum(state: dict) -> dict:
-    """Generate a curriculum map using backward design."""
+    """Generate a curriculum structure from the approved brief and source curriculum."""
     domain = state.get("domain", "ml-engineering")
-    pedagogy_profile = state.get("pedagogy_profile", "concept_progression")
-    pedagogy_rationale = state.get("pedagogy_rationale", "content-type default")
-    skill_context = state.get("skill_graph_context", "")
-    learner_context = state.get("learner_context", "")
+    brief = state.get("brief", {}) or {}
     curriculum_source_context = state.get("curriculum_source_context") or state.get("program_context", "")
     content_type = state.get("content_type", "concept_explainer")
-    product_context = state.get("product_context", {}) or {}
     structure_profile = state.get("structure_profile", {}) or {}
     packaging_profile = state.get("packaging_profile", {}) or {}
-
-    product_summary = "\n".join(
-        [
-            f"- Product label: {product_context.get('product_label', 'Stack-only default')}",
-            f"- Product category: {product_context.get('product_category', 'standard_product')}",
-            f"- Curriculum container kind: {product_context.get('curriculum_container_kind', 'standard_curriculum')}",
-            f"- Delivery mode: {product_context.get('delivery_mode', 'unspecified')}",
-            f"- Focus priority: {product_context.get('focus_priority', 'default')}",
-        ]
-    )
-    structure_summary = "\n".join(
-        [
-            f"- Structure profile: {structure_profile.get('structure_profile_id', 'standard_product_structure')}",
-            f"- Hierarchy: {' -> '.join(structure_profile.get('hierarchy', [])) or 'curriculum_container -> courses -> modules -> topics -> learning_units'}",
-            f"- Design priorities: {', '.join(structure_profile.get('design_priority_dimensions', [])) or 'default'}",
-        ]
-    )
-    packaging_summary = "\n".join(
-        [
-            f"- Packaging profile: {packaging_profile.get('packaging_profile_id', 'default_learning_packaging')}",
-            f"- Modules per course default: {packaging_profile.get('module_count_per_course', {}).get('default', 'unknown')}",
-            f"- Topics per module default: {packaging_profile.get('topic_count_per_module', {}).get('default', 'unknown')}",
-            f"- Learning unit types: {', '.join(packaging_profile.get('allowed_learning_unit_types', [])) or 'none'}",
-        ]
-    )
+    structure_summary = _structure_summary(structure_profile)
+    packaging_summary = _packaging_summary(packaging_profile)
+    brief_json = json.dumps(brief, indent=2)
+    pedagogy_profile = ((brief.get("pedagogy") or {}).get("default_profile")) or state.get("pedagogy_profile", "concept_progression")
+    pedagogy_rationale = ((brief.get("pedagogy") or {}).get("rationale")) or state.get("pedagogy_rationale", "content-type default")
+    total_hours = brief.get("total_hours", 20.0)
+    program_name = brief.get("program_name", f"{domain.title()} Curriculum")
 
     claude = ClaudeClient()
-    prompt = f"""Design a curriculum for "{domain}" using the "{pedagogy_profile}" pedagogy profile.
+    prompt = f"""Design a curriculum structure for "{domain}" using the approved brief artifact.
+
+## Brief Artifact
+{brief_json}
 
 ## Curriculum Source Context
 {curriculum_source_context or "No explicit curriculum source provided."}
-
-## Product Context
-{product_summary}
 
 ## Structure Profile
 {structure_summary}
@@ -351,23 +720,20 @@ def generate_curriculum(state: dict) -> dict:
 ## Packaging Context
 {packaging_summary}
 
-{skill_context}
-
-{learner_context}
-
-Use backward design:
+Use backward design and keep this stage structural:
 1. Start with terminal outcomes (what can learners DO after?)
 2. Map prerequisites per outcome
 3. Sequence modules respecting prerequisite chains
 4. Estimate duration per module
-5. If the program source already defines levels, phases, or tracks, preserve that structure as faithfully as possible in the module list instead of collapsing it.
-6. Only synthesize a new structure when the sources do not define one.
+5. If the source already defines levels, phases, or tracks, preserve that structure as faithfully as possible in the module list.
+6. Use the packaging profile only to decide how coarse or fine the module boundaries should be.
 7. Keep this stage structural and compact rather than fully expanded.
 
 Return JSON:
 {{
   "curriculum_id": "cur_{domain}",
-  "program_name": "ML Engineering Fundamentals",
+  "brief_ref": "{brief.get('brief_id', f'brief_{domain}')}",
+  "program_name": "{program_name}",
   "domain": "{domain}",
   "pedagogy_profile": "{pedagogy_profile}",
   "pedagogy_rationale": "{pedagogy_rationale}",
@@ -384,14 +750,14 @@ Return JSON:
       "content_types": ["{content_type}"]
     }}
   ],
-  "total_hours": 20.0
+  "total_hours": {total_hours}
 }}
 
 Important constraints:
-- Preserve source-defined total hours when a source curriculum provides them.
+- Respect the total hours from the brief unless the source curriculum clearly forces a different total.
 - Preserve source-defined level or pathway progression when it exists.
 - Represent each major level, phase, or specialization as its own module in this schema when needed.
-- Do not collapse a detailed long-form curriculum into 4-6 generic modules unless the sources clearly justify it.
+- Do not collapse a detailed long-form curriculum into 4-6 generic modules unless the source clearly justifies it.
 - Limit to 2-3 concise objectives per module.
 - Keep each objective statement under 18 words.
 - Use stable snake_case wiki skill IDs when referencing skills, not display titles.
@@ -426,12 +792,13 @@ Return ONLY the JSON object."""
         curriculum_generation_raw_response = response[:4000]
         data = {
             "curriculum_id": f"cur_{domain}",
-            "program_name": f"{domain} Curriculum",
+            "brief_ref": brief.get("brief_id", f"brief_{domain}"),
+            "program_name": program_name,
             "domain": domain,
             "pedagogy_profile": pedagogy_profile,
             "pedagogy_rationale": pedagogy_rationale,
             "modules": [],
-            "total_hours": 0,
+            "total_hours": total_hours,
         }
 
     modules = data.get("modules", [])

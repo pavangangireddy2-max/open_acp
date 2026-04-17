@@ -115,3 +115,14 @@ As the system matures, evaluation and learning should also support:
 - cross-run performance monitoring
 
 The main principle is that learning should not only change content. It should also improve the system's own standards, memory, and control logic.
+
+## TODO: Backpropagation Maturity
+
+The current Loop D routing is still too coarse for the richer artifact model now emerging in Loop A and Loop B.
+
+TODO:
+
+- route fixes to the earliest owning artifact stage rather than only broad loop-level targets
+- distinguish fixes that belong to canonical inputs, runtime knowledge synthesis, design artifacts, and generated outputs
+- add rerun-start semantics so downstream stages are recomputed from the first corrected artifact boundary
+- make channel and dimension digests first-class inputs to backprop routing instead of treating all feedback as generic content noise

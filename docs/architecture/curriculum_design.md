@@ -96,7 +96,6 @@ So the effective pedagogy profile should resolve from canonical manifests in thi
 - product + version pedagogy
 - product + version + domain pedagogy
 - stack/domain pedagogy baseline
-- profile-matrix fallback
 
 This keeps product-specific academic or delivery realities visible without losing the stack's
 baseline instructional logic.
@@ -169,17 +168,20 @@ The current Loop B flow is:
 2. `resolve_product_context`
 3. `resolve_structure_profile`
 4. `resolve_packaging_profile`
-5. `resolve_pedagogy_profile`
-6. `generate_curriculum`
-7. `compare_curriculum_changes`
-8. `design_courses`
-9. `design_modules`
-10. `design_topics`
-11. `design_learning_units`
-12. `design_practice`
-13. `design_learning_assessments`
-14. `resolve_skill_assessment_requirements`
-15. `align_learning_with_skill_assessments`
+5. `resolve_design_priority_profile`
+6. `resolve_time_budget_context`
+7. `resolve_pedagogy_profile`
+8. `generate_brief`
+9. `generate_curriculum`
+10. `compare_curriculum_changes`
+11. `design_courses`
+12. `design_modules`
+13. `design_topics`
+14. `design_learning_units`
+15. `design_practice`
+16. `design_learning_assessments`
+17. `resolve_skill_assessment_requirements`
+18. `align_learning_with_skill_assessments`
 
 `generate_differentiation` is intentionally removed from the core learning-design path.
 
@@ -197,6 +199,29 @@ So today:
 - `design_modules`, `design_topics`, and `design_learning_units` = expand the structure further
 
 Later, the compatibility layer can be removed and the upstream artifact can become course-native.
+
+## Brief-First Transition
+
+Loop B is moving toward a stricter artifact chain:
+
+1. resolve context
+2. generate a compact `brief`
+3. generate curriculum structure from that brief
+4. expand into course, module, topic, and learning-unit design
+
+This keeps the responsibilities cleaner:
+
+- `generate_brief`
+  - picks audience focus, differentiation, total hours, default pedagogy, and terminal outcomes
+- `generate_curriculum`
+  - turns the brief plus source curriculum into a structural course-seed map
+- downstream design stages
+  - expand that structure without re-deciding the Brief
+
+This is intentionally closer to the longer-term stage discipline rule:
+
+- each stage owns a fixed decision set
+- later stages read upstream artifacts, not the full raw-source pile
 
 ## Packaging Layer
 

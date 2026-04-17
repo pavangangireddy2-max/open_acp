@@ -29,6 +29,7 @@ Open ACP is an agentic educational content production system. It combines:
 - [Source And Guidance Model](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/source_and_guidance_model.md)
 - [Curriculum Design](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/curriculum_design.md)
 - [Design Priorities](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/design_priorities.md)
+- [Feedback Channels](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/feedback_channels.md)
 - [Prompt Organization](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/prompt_organization.md)
 - [Product Catalog](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/product_catalog.md)
 - [Knowledge Model](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/knowledge_model.md)

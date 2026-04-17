@@ -32,7 +32,7 @@ Covers:
 - take-home projects
 - skill assessment performance
 - interview assessment performance
-- recruiter first-hand insights
+- recruiter first-hand insights about learner and role readiness
 - corporate skill assessments
 
 ### 2. Student Learning Outcomes
@@ -55,6 +55,8 @@ Covers:
 - instructors
 - in-app platform feedback and surveys
 - video, reading, MCQ, and coding-practice feedback
+- classroom assessment performance
+- module assessment performance
 - engagement and retention analytics
 
 ### 3. Degree and Higher Ed Outcomes
@@ -70,8 +72,6 @@ It influences:
 
 Covers:
 
-- classroom assessment performance
-- module assessment performance
 - academic assessment performance
 - GATE readiness benchmarks
 - MS readiness benchmarks
@@ -205,6 +205,191 @@ The current intended design sequence is:
 4. **Dimensions 7, 8, 9, 10, and 11** sharpen and pressure-test those choices.
 5. **Dimension 6** distributes the final plan across semesters or delivery blocks for operational balance.
 
+## Planned Source And Digest Model
+
+Each dimension should eventually have:
+
+1. canonical source inputs under `knowledge/sources/` or `knowledge/catalog/`
+2. a runtime synthesized digest or entity layer in `storage/wiki/` or cycle artifacts
+3. explicit influence points in Loop B design stages
+
+The design goal is to keep raw evidence canonical and versioned, while the runtime wiki
+stores synthesized operating knowledge rather than becoming the source of truth.
+
+### Dimension 1: Job / Placement Outcomes
+
+- Canonical sources:
+  - stack-level target roles
+  - role-skill expectations
+  - interview intelligence
+  - recruiter feedback about learner and role readiness
+  - skill-assessment patterns
+- Channel-contract note:
+  - interview intelligence should be treated as a first-class channel contract
+  - high-volume question collections should prefer canonical aggregated exports or normalized snapshots instead of direct raw-event ingestion in the first wave
+- Planned runtime digests:
+  - `skill_outcomes_signal_digest`
+  - `role_profile` runtime entities
+- Primary Loop B influence:
+  - Brief
+  - curriculum structure
+  - assessment alignment
+- Planned implementation wave:
+  - Wave 1
+
+### Dimension 2: Student Learning Outcomes
+
+- Canonical sources:
+  - target-audience profiles
+  - mentor and instructor observations
+  - queries and support themes
+  - in-app content feedback
+  - classroom and module assessment performance
+  - engagement and retention summaries
+- Planned runtime digests:
+  - `learning_outcomes_signal_digest`
+  - audience-need overlays
+- Primary Loop B influence:
+  - Brief
+  - module design
+  - topic design
+  - practice design
+- Planned implementation wave:
+  - Wave 1
+
+### Dimension 3: Degree And Higher Ed Outcomes
+
+- Canonical sources:
+  - academic benchmark docs
+  - BOS outcome expectations
+  - GATE and MS readiness targets
+  - higher-ed preparation notes
+- Planned runtime digests:
+  - `degree_outcomes_digest`
+- Primary Loop B influence:
+  - Brief
+  - curriculum structure
+  - assessment design
+- Planned implementation wave:
+  - Wave 1
+
+### Dimension 4: Regulatory Compliance
+
+- Canonical sources:
+  - AICTE tables
+  - UGC and NEP constraints
+  - degree-credit rules
+- Planned runtime digests:
+  - `regulatory_constraints_digest`
+- Primary Loop B influence:
+  - structure profile
+  - curriculum container generation
+  - slot reservation
+- Planned implementation wave:
+  - Wave 1
+
+### Dimension 5: University Policy And Infrastructure Constraints
+
+- Canonical sources:
+  - university calendars
+  - delivery-mode agreements
+  - lab and infra capacity
+  - timetable and slot constraints
+- Planned runtime digests:
+  - `delivery_constraints_digest`
+  - `time_budget_context`
+- Primary Loop B influence:
+  - Brief
+  - curriculum generation
+  - packaging resolution
+- Planned implementation wave:
+  - Wave 1
+
+### Dimension 6: Operational Efficiency
+
+- Canonical sources:
+  - faculty deployment plans
+  - program-ops constraints
+  - semester-wise load distributions
+- Planned runtime digests:
+  - `operational_planning_digest`
+- Primary Loop B influence:
+  - curriculum balancing
+  - later semester or block allocation
+- Planned implementation wave:
+  - Wave 2
+
+### Dimension 7: Cross-Product Alignment
+
+- Canonical sources:
+  - product comparison docs
+  - placed-user feedback
+  - related bootcamp or workshop learnings
+- Planned runtime digests:
+  - `cross_product_alignment_digest`
+- Primary Loop B influence:
+  - Brief
+  - curriculum pressure-testing
+- Planned implementation wave:
+  - Wave 2
+
+### Dimension 8: Industry Partnerships And Certifications
+
+- Canonical sources:
+  - partner workshop notes
+  - certification-track expectations
+  - external tool adoption requirements
+- Planned runtime digests:
+  - `partnership_and_certification_digest`
+- Primary Loop B influence:
+  - Brief
+  - assessment alignment
+  - optional curriculum enrichments
+- Planned implementation wave:
+  - Wave 2
+
+### Dimension 9: Market And Community Signals
+
+- Canonical sources:
+  - competitor snapshots
+  - public signal collections
+  - tech-shift notes
+- Planned runtime digests:
+  - `market_and_community_digest`
+- Primary Loop B influence:
+  - curriculum pressure-testing
+  - differentiation
+- Planned implementation wave:
+  - Wave 3
+
+### Dimension 10: Customer And Sales Intelligence
+
+- Canonical sources:
+  - escalated support themes
+  - sales objections
+  - calls and meetup notes
+- Planned runtime digests:
+  - `customer_and_sales_digest`
+- Primary Loop B influence:
+  - Brief
+  - differentiation
+  - explanation strategy
+- Planned implementation wave:
+  - Wave 3
+
+### Dimension 11: Internal Expertise
+
+- Canonical sources:
+  - SME notes
+  - pedagogy reviews
+  - developer and placement-ops inputs
+- Planned runtime digests:
+  - `internal_expertise_digest`
+- Primary Loop B influence:
+  - all design stages as a pressure-test layer
+- Planned implementation wave:
+  - Wave 3
+
 ## Where This Sits In The Architecture
 
 This framework should eventually influence:
@@ -221,9 +406,52 @@ Examples:
 - an Academy certification structure may strongly activate Dimensions 1, 2, 7, and 8
 - a Launchpad-style structure may strongly activate Dimensions 1, 7, 9, and 11
 
+## Implementation Waves
+
+The current intended rollout is:
+
+### Wave 1
+
+- Dimension 1: Job / Placement Outcomes
+- Dimension 2: Student Learning Outcomes
+- Dimension 3: Degree and Higher Ed Outcomes
+- Dimension 4: Regulatory Compliance
+- Dimension 5: University Policy and Infrastructure Constraints
+
+These are the dimensions that most directly shape curriculum structure and slot budgeting.
+
+### Wave 2
+
+- Dimension 6: Operational Efficiency
+- Dimension 7: Cross-Product Alignment
+- Dimension 8: Industry Partnerships and Certifications
+
+These should pressure-test and operationalize the curriculum once the base structure is stable.
+
+### Wave 3
+
+- Dimension 9: Market and Community Signals
+- Dimension 10: Customer and Sales Intelligence
+- Dimension 11: Internal Expertise
+
+These remain important, but should not destabilize the first structural rollout.
+
+## Feedback Channel Maintenance Note
+
+The intent is to preserve all feedback channels from this framework, even before every
+dimension is fully automated.
+
+So the current architecture should be read as:
+
+- all 11 dimensions are part of the long-term design contract
+- only a subset is operationalized in code today
+- the remaining dimensions should still be represented in docs, manifests, and rollout planning
+- runtime implementation should happen incrementally, not by ignoring the unimplemented dimensions
+
 ## TODO
 
 - define explicit `design_priority_profile` artifacts
 - decide which dimensions are default for each structure profile
 - decide which dimensions are configurable by product overlay
-- later connect Loop A signal categories directly to these priority dimensions
+- connect Loop A signal categories directly to these priority dimensions
+- add `time_budget_context` and other hard-constraint digests as structured inputs before curriculum generation

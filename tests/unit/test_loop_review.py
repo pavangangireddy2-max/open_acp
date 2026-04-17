@@ -177,10 +177,42 @@ def test_loop_review_runner_generate_curriculum_fallback_wording(monkeypatch, tm
                     "allowed_learning_unit_types": ["video_session_unit", "reading_material_unit"],
                 }
             }
+        if stage_id == "resolve_design_priority_profile":
+            return lambda state: {
+                "design_priority_profile": {
+                    "profile_id": "niat_university_structure_design_priorities",
+                    "dimension_ids": ["regulatory_compliance", "job_placement_outcomes"],
+                    "ordered_dimensions": ["regulatory_compliance", "job_placement_outcomes"],
+                    "dimensions": [{"dimension_id": "regulatory_compliance"}, {"dimension_id": "job_placement_outcomes"}],
+                    "resolution_reason": "structure-driven",
+                }
+            }
+        if stage_id == "resolve_time_budget_context":
+            return lambda state: {
+                "time_budget_context": {
+                    "context_id": "time_budget_genai",
+                    "source_total_hours": 120.0,
+                    "target_total_hours": 120.0,
+                    "slot_budget_hours": 120.0,
+                    "available_design_hours": 120.0,
+                    "resolution_reason": "source-defined total hours preserved",
+                }
+            }
         if stage_id == "resolve_pedagogy_profile":
             return lambda state: {
                 "pedagogy_profile": "project_build_along",
                 "pedagogy_rationale": "Project-centered stack.",
+            }
+        if stage_id == "generate_brief":
+            return lambda state: {
+                "brief_generation_status": "parsed",
+                "brief": {
+                    "brief_id": "brief_genai_niat_b3",
+                    "program_name": "GenAI 120 Hr Curriculum",
+                    "audience": {"primary": ["genai_specialization_seekers"]},
+                    "pedagogy": {"default_profile": "project_build_along"},
+                    "terminal_outcomes": ["Build and deploy a document-grounded GenAI app"],
+                },
             }
         return lambda state: {
             "curriculum_generation_status": "fallback_non_json",
@@ -188,6 +220,7 @@ def test_loop_review_runner_generate_curriculum_fallback_wording(monkeypatch, tm
             "curriculum_generation_raw_response": "This is not valid JSON.",
             "curriculum_map": {
                 "curriculum_id": "cur_genai",
+                "brief_ref": "brief_genai_niat_b3",
                 "program_name": "genai Curriculum",
                 "domain": "genai",
                 "modules": [],
@@ -198,7 +231,7 @@ def test_loop_review_runner_generate_curriculum_fallback_wording(monkeypatch, tm
     monkeypatch.setattr(runner, "_load_stage_callable", fake_callable)
 
     base_state = {"domain": "genai", "cycle_id": "cycle_curriculum", "content_type": "concept_explainer"}
-    for _ in range(5):
+    for _ in range(8):
         runner.execute_review_stage(loop_id="loop_b", base_state=base_state)
     result = runner.execute_review_stage(
         loop_id="loop_b",

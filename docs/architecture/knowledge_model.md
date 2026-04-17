@@ -171,6 +171,37 @@ So:
 
 This keeps the canonical/shared layer and the contextual/stack-specific layer separate.
 
+## Planned Dimension Digests
+
+Beyond shared entities and stack profiles, the knowledge model should gradually add
+dimension-specific runtime digests.
+
+Important rule:
+
+- canonical evidence stays in `knowledge/sources/` and `knowledge/catalog/`
+- runtime digests in `storage/wiki` or cycle artifacts summarize what the system has inferred
+- digests should not replace canonical source documents
+
+Examples planned from the design-priority model:
+
+- `skill_outcomes_signal_digest`
+- `learning_outcomes_signal_digest`
+- `degree_outcomes_digest`
+- `regulatory_constraints_digest`
+- `delivery_constraints_digest`
+
+These digests should become the bridge between Loop A evidence synthesis and Loop B design decisions.
+
+High-volume channel note:
+
+- some channels may generate thousands of raw records per month
+- the first implementation wave should prefer canonical aggregated exports or normalized snapshots for those channels
+- the runtime knowledge model should ingest the synthesized result, not try to mirror the entire upstream analytics store
+
+See also:
+
+- [Design Priorities](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/design_priorities.md)
+
 ## How Loop A Should Use This
 
 Loop A should continue to ingest shared and stack-specific source inputs.
@@ -228,6 +259,8 @@ The target architecture is clear, but the repo is not fully there yet.
 
 TODO:
 
+- replace free-text `skill_graph_context` usage in Loop B with structured dimension digests and role-profile inputs before expanding stack-profile fields further
+- decide whether the typed `SkillGraph` model should become a real maintained runtime graph or be demoted until structured consumers exist
 - introduce explicit stack-scoped skill profiles alongside shared canonical entities
 - introduce stack-scoped relationship overlays without duplicating the whole wiki
 - add canonical guidance inputs for stack-profile creation so Loop A can shape stack-specific skill roles, pedagogy notes, and assessment implications from designed sources instead of relying only on signal extraction

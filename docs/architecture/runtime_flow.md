@@ -48,6 +48,7 @@ The older `src/open_acp/knowledge/raw/` tree has been removed from the repo.
 See also:
 
 - [Source And Guidance Model](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/source_and_guidance_model.md)
+- [Feedback Channels](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/feedback_channels.md)
 
 Bootstrap mode is allowed in Loop A for market, hiring, and competitor signals: if stack-specific inputs are thin or missing, the loop can continue with shared and generic seed sources, surface explicit coverage warnings, and let the runtime knowledge store compound from those inputs instead of blocking execution.
 
@@ -59,6 +60,13 @@ Important exception:
   and no canonical product-specific target-audience sources
 
 Within Loop A, the intended chain is: signals -> detected patterns -> wiki entity updates. Pattern detection should actively guide later skill, learner, and competitor extraction instead of being treated as a disconnected side report.
+
+Planned next step:
+
+- Loop A should gradually derive dimension-specific digests before entity updates
+- the first intended digest is `skill_outcomes_signal_digest` for Dimension 1
+- later dimensions should follow the same model rather than bypassing it
+- high-volume channels such as interview intelligence should prefer canonical aggregated exports or normalized snapshots instead of direct raw-event ingestion in the first implementation wave
 
 TODO:
 
@@ -75,6 +83,16 @@ The current intended Loop A flow is:
 5. update competitor map
 6. update product context
 7. update wiki index
+
+Planned evolution:
+
+1. ingest signals
+2. detect patterns
+3. derive dimension digests
+4. update canonical/shared runtime entities
+5. update stack-scoped overlays
+6. update product summaries
+7. rebuild wiki views
 
 Product note:
 
@@ -126,19 +144,28 @@ The current intended Loop B flow is:
 2. resolve product context
 3. resolve structure profile
 4. resolve packaging profile
-5. resolve pedagogy profile
-6. generate curriculum
-7. compare curriculum changes
-8. design courses
-9. design modules
-10. design topics
-11. design learning units
-12. design practice
-13. design learning assessments
-14. resolve skill-assessment requirements
-15. align learning with skill assessments
+5. resolve design-priority profile
+6. resolve time-budget context
+7. resolve pedagogy profile
+8. generate brief
+9. generate curriculum
+10. compare curriculum changes
+11. design courses
+12. design modules
+13. design topics
+14. design learning units
+15. design practice
+16. design learning assessments
+17. resolve skill-assessment requirements
+18. align learning with skill assessments
 
 `generate_differentiation` is no longer part of the core learning-design path.
+
+Brief-first note:
+
+- `generate_brief` should be the first true design artifact in Loop B
+- `generate_curriculum` should consume that brief plus structural inputs, not directly redo all upstream interpretation work
+- downstream design stages should keep inheriting from the brief and curriculum artifacts instead of re-reading raw context
 
 Runtime policy note:
 

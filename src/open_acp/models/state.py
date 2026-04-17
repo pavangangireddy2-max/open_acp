@@ -63,7 +63,13 @@ class LoopBState(BaseModel):
     curriculum_source_context: str = ""
     product_context: Optional[dict] = None
     structure_profile: Optional[dict] = None
+    design_priority_profile: Optional[dict] = None
+    time_budget_context: Optional[dict] = None
     pedagogy_profile: Optional[str] = None
+    brief_generation_status: str = "not_started"
+    brief_generation_note: Optional[str] = None
+    brief_generation_raw_response: Optional[str] = None
+    brief: Optional[dict] = None
     curriculum_generation_status: str = "not_started"
     curriculum_generation_note: Optional[str] = None
     curriculum_generation_raw_response: Optional[str] = None

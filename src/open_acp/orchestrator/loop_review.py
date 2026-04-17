@@ -27,7 +27,10 @@ _LOOP_STAGE_ORDER = {
         "resolve_product_context",
         "resolve_structure_profile",
         "resolve_packaging_profile",
+        "resolve_design_priority_profile",
+        "resolve_time_budget_context",
         "resolve_pedagogy_profile",
+        "generate_brief",
         "generate_curriculum",
         "compare_curriculum_changes",
         "design_courses",
@@ -479,6 +482,55 @@ class LoopReviewRunner:
                 ],
             )
 
+        if stage_id == "resolve_design_priority_profile":
+            profile = state.get("design_priority_profile", {}) or {}
+            return (
+                f"Resolved design-priority profile with {len(profile.get('dimensions', []))} active dimensions.",
+                [
+                    f"Dimensions: {', '.join(profile.get('dimension_ids', [])) or 'none'}.",
+                    f"Priority order: {' | '.join(profile.get('ordered_dimensions', [])) or 'none'}.",
+                    f"Resolution reason: {profile.get('resolution_reason', 'not provided')}.",
+                ],
+            )
+
+        if stage_id == "resolve_time_budget_context":
+            budget = state.get("time_budget_context", {}) or {}
+            return (
+                f"Resolved time budget context targeting {budget.get('target_total_hours', 'unknown')} total hours.",
+                [
+                    f"Source total hours: {budget.get('source_total_hours', 'unknown')}.",
+                    f"Slot budget hours: {budget.get('slot_budget_hours', 'unknown')}.",
+                    f"Available design hours: {budget.get('available_design_hours', 'unknown')}.",
+                    f"Resolution reason: {budget.get('resolution_reason', 'not provided')}.",
+                ],
+            )
+
+        if stage_id == "generate_brief":
+            brief = state.get("brief", {}) or {}
+            outcomes = brief.get("terminal_outcomes", []) or []
+            audience = ((brief.get("audience") or {}).get("primary", [])) or []
+            status = state.get("brief_generation_status", "parsed")
+            note = state.get("brief_generation_note")
+            raw_response = state.get("brief_generation_raw_response")
+            if status == "fallback_non_json":
+                decisions = []
+                if note:
+                    decisions.append(note)
+                decisions.append(f"Primary audience: {', '.join(audience) or 'none'}.")
+                decisions.append(f"Terminal outcomes: {' | '.join(outcomes[:5]) or 'none'}.")
+                if raw_response:
+                    preview = " ".join(raw_response.split())[:300]
+                    decisions.append(f"Raw response preview: {preview}")
+                return ("Brief generation parse failed; using a deterministic fallback brief.", decisions)
+            return (
+                f"Generated curriculum brief for {brief.get('program_name', state.get('domain', 'unknown'))}.",
+                [
+                    f"Primary audience: {', '.join(audience) or 'none'}.",
+                    f"Default pedagogy: {(brief.get('pedagogy') or {}).get('default_profile', 'unknown')}.",
+                    f"Terminal outcomes: {' | '.join(outcomes[:5]) or 'none'}.",
+                ],
+            )
+
         if stage_id == "generate_curriculum":
             curriculum = state.get("curriculum_map", {}) or {}
             modules = curriculum.get("modules", [])
@@ -500,7 +552,10 @@ class LoopReviewRunner:
                 )
             return (
                 f"Generated domain curriculum with {len(modules)} course seeds and total hours {curriculum.get('total_hours', 0)}.",
-                [f"Course-seed flow: {' | '.join(module_titles) if module_titles else 'none'}."],
+                [
+                    f"Brief ref: {(state.get('brief') or {}).get('brief_id', 'none')}.",
+                    f"Course-seed flow: {' | '.join(module_titles) if module_titles else 'none'}.",
+                ],
             )
 
         if stage_id == "compare_curriculum_changes":
