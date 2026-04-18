@@ -220,9 +220,9 @@ Loop B is moving toward a stricter artifact chain:
 This keeps the responsibilities cleaner:
 
 - `generate_brief`
-  - picks audience focus, differentiation, total hours, default pedagogy, and terminal outcomes
+  - picks stack identity, audience focus, default pedagogy, stack learning outcomes, and the downstream product context minimum
 - `generate_curriculum`
-  - turns the brief plus source curriculum into a structural course-seed map
+  - turns the brief plus source curriculum into a structural course-seed map using packaging-owned time constraints
 - downstream design stages
   - expand that structure without re-deciding the Brief
 
@@ -230,6 +230,96 @@ This is intentionally closer to the longer-term stage discipline rule:
 
 - each stage owns a fixed decision set
 - later stages read upstream artifacts, not the full raw-source pile
+
+## Runtime Design Artifacts
+
+Loop B is now moving toward persisted design artifacts under:
+
+```text
+storage/design/<domain>/<cycle_id>/
+  brief.yaml
+  curriculum.yaml
+  courses/
+    index.yaml
+    course.<id>.yaml
+  modules/
+    index.yaml
+    module.<id>.yaml
+  topics/
+    index.yaml
+    topic.<id>.yaml
+  units/
+    index.yaml
+    unit.<id>.yaml
+```
+
+Near-term rule:
+
+- `generate_brief` persists `brief.yaml`
+- `generate_curriculum` persists `curriculum.yaml`
+- `design_courses`, `design_modules`, `design_topics`, and `design_learning_units` now persist stage collections and per-item docs
+
+Stage 1 validation rule:
+
+- `total_hours` is the full Stage 1 budget for packaged courses plus any
+  `capstone_project` and `grand_quiz`
+- a parsed curriculum gets one structured repair pass if the first draft fails
+  strict hours accounting
+- if the repaired artifact still fails the validator, the stage must fail rather
+  than silently persisting an invalid curriculum
+- downstream stages should increasingly read those artifacts rather than relying only on in-memory state
+
+Current Brief contract:
+
+- `stack_name`
+- `packaging_profile_ref`
+- minimal `product_context`
+- `audience`
+- `pedagogy`
+- `stack_learning_outcomes`
+- `source_refs`
+- `source_hours_declared`
+- `source_vs_packaging_conflict`
+
+Current Curriculum contract:
+
+- `stack_name`
+- `packaging_profile_ref`
+- `courses`
+- `capstone_project`
+- `grand_quiz`
+- `total_hours`
+- `hours_check`
+
+This is different from canonical source truth:
+
+- manifests, catalogs, sources, and guidance remain the canonical input layer
+- `storage/design` is the accepted runtime design layer for a specific cycle
+
+The intended direction is:
+
+```text
+canonical inputs -> Loop B stage artifacts -> Loop C generation
+```
+
+not:
+
+```text
+canonical inputs -> ad hoc state dicts -> Loop C generation
+```
+
+## First Strict Validator
+
+The first strict validator in this design chain is the curriculum-hours check.
+
+At `generate_curriculum` time, the system should verify:
+
+- sum of packaged course hours
+- curriculum total hours
+- brief total hours
+
+If those totals disagree beyond the configured tolerance, the curriculum stage should fail
+rather than silently carrying an inconsistent structure downstream.
 
 TODO:
 

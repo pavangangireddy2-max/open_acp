@@ -136,7 +136,7 @@ def _build_domain_review_packet(
         "loop_b": {
             "pedagogy_profile": loop_b_result.get("pedagogy_profile", "unknown"),
             "pedagogy_rationale": loop_b_result.get("pedagogy_rationale", "unknown"),
-            "curriculum_label": curriculum.get("program_name", f"{domain} Curriculum"),
+            "curriculum_label": curriculum.get("stack_name", f"{domain} Stack Curriculum"),
             "total_hours": curriculum.get("total_hours", 0),
             "course_count": len(courses),
             "courses": [

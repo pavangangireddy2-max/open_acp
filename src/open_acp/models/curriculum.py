@@ -36,6 +36,7 @@ class Course(BaseModel):
     sequence: int
     objectives: list[LearningObjective]
     estimated_hours: float
+    pedagogy_profile: Optional[str] = None
     prerequisite_courses: list[str] = Field(default_factory=list)
     content_types: list[str] = []
     skill_ids: list[str] = []
@@ -47,13 +48,14 @@ class CurriculumMap(BaseModel):
     curriculum_id: str
     version: int = 1
     brief_ref: Optional[str] = None
-    program_name: str
+    packaging_profile_ref: Optional[str] = None
+    stack_name: str
     domain: str
-    pedagogy_profile: str
-    pedagogy_rationale: str
-    differentiation_strategy: dict = Field(default_factory=dict)
     courses: list[Course]
+    capstone_project: dict = Field(default_factory=dict)
+    grand_quiz: dict = Field(default_factory=dict)
     total_hours: float
+    hours_check: dict = Field(default_factory=dict)
     created_at: str = ""
     approved_at: Optional[str] = None
 

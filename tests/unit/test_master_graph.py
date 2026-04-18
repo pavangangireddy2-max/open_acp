@@ -6,7 +6,7 @@ def test_build_loop_c_execution_context_prefers_module_work_plan():
         "pedagogy_profile": "project_build_along",
         "curriculum_map": {
             "curriculum_id": "cur_genai",
-            "program_name": "GenAI Stack Curriculum",
+            "stack_name": "GenAI Stack Curriculum",
             "courses": [
                 {
                     "course_id": "seed_l1",

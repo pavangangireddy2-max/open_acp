@@ -213,7 +213,7 @@ def _build_module_work_plan(
 
     return ModuleWorkPlan(
         curriculum_id=curriculum.get("curriculum_id"),
-        curriculum_title=curriculum.get("program_name"),
+        curriculum_title=curriculum.get("stack_name"),
         course_id=course.get("course_id"),
         course_title=course.get("title"),
         module_id=curriculum_module.get("module_id", "unknown_module"),
@@ -339,7 +339,7 @@ def _build_loop_c_execution_context(loop_b_result: dict, state: dict) -> dict:
             "pedagogy_profile": loop_b_result.get("pedagogy_profile"),
             "instructional_pattern": content_type,
             "curriculum_id": curriculum.get("curriculum_id"),
-            "curriculum_title": curriculum.get("program_name", f"{domain} Curriculum"),
+            "curriculum_title": curriculum.get("stack_name", f"{domain} Stack Curriculum"),
             "course_id": course.get("course_id"),
             "course_title": course.get("title"),
             "course_sequence": course.get("sequence"),
@@ -363,7 +363,7 @@ def _build_loop_c_execution_context(loop_b_result: dict, state: dict) -> dict:
         first_course = course_seeds[0]
         fallback_plan = ModuleWorkPlan(
             curriculum_id=curriculum.get("curriculum_id"),
-            curriculum_title=curriculum.get("program_name", f"{domain} Curriculum"),
+            curriculum_title=curriculum.get("stack_name", f"{domain} Stack Curriculum"),
             module_id=first_course.get("course_id", state.get("module_id", "m1")),
             module_title=first_course.get("title", state.get("module_title", "Introduction")),
             module_change_type=ModuleChangeType.MODULE_CREATION.value,
@@ -394,7 +394,7 @@ def _build_loop_c_execution_context(loop_b_result: dict, state: dict) -> dict:
             "pedagogy_profile": loop_b_result.get("pedagogy_profile"),
             "instructional_pattern": content_type,
             "curriculum_id": curriculum.get("curriculum_id"),
-            "curriculum_title": curriculum.get("program_name", f"{domain} Curriculum"),
+            "curriculum_title": curriculum.get("stack_name", f"{domain} Stack Curriculum"),
             "curriculum_module_id": first_course.get("course_id", state.get("module_id", "m1")),
             "curriculum_module_title": first_course.get("title", state.get("module_title", "Introduction")),
             "module_topic_count": 0,
@@ -408,7 +408,7 @@ def _build_loop_c_execution_context(loop_b_result: dict, state: dict) -> dict:
     fallback_id = state.get("module_id", "m1")
     fallback_title = state.get("module_title", "Introduction")
     fallback_plan = ModuleWorkPlan(
-        curriculum_title=curriculum.get("program_name", f"{domain} Curriculum"),
+        curriculum_title=curriculum.get("stack_name", f"{domain} Stack Curriculum"),
         module_id=fallback_id,
         module_title=fallback_title,
         module_change_type=ModuleChangeType.MODULE_CREATION.value,
@@ -428,7 +428,7 @@ def _build_loop_c_execution_context(loop_b_result: dict, state: dict) -> dict:
         "prerequisites": [],
         "pedagogy_profile": loop_b_result.get("pedagogy_profile"),
         "instructional_pattern": content_type,
-        "curriculum_title": curriculum.get("program_name", f"{domain} Curriculum"),
+        "curriculum_title": curriculum.get("stack_name", f"{domain} Stack Curriculum"),
         "curriculum_module_id": fallback_id,
         "curriculum_module_title": fallback_title,
         "module_topic_count": 0,

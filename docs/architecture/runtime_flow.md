@@ -159,7 +159,6 @@ The current intended Loop B flow is:
 17. resolve skill-assessment requirements
 18. align learning with skill assessments
 
-`generate_differentiation` is no longer part of the core learning-design path.
 
 Brief-first note:
 
@@ -170,6 +169,18 @@ Brief-first note:
 - `generate_curriculum` should output packaged course structure, not explicit level objects
 - source-defined levels or phases should act as ordering and scope cues for courses, not as mandatory output fields
 - topic placement should be decided later and should eventually be informed by channel-analysis digests
+- `brief.yaml` and `curriculum.yaml` should be persisted under `storage/design/<domain>/<cycle_id>/`
+- downstream course/module/topic/unit stages should persist:
+  - `courses/index.yaml` and `course.<id>.yaml`
+  - `modules/index.yaml` and `module.<id>.yaml`
+  - `topics/index.yaml` and `topic.<id>.yaml`
+  - `units/index.yaml` and `unit.<id>.yaml`
+- downstream Loop B stages should increasingly reload those artifacts instead of trusting only in-memory state
+- curriculum generation now includes a strict hours validator against:
+  - packaging / time-budget target hours
+  - curriculum total hours
+  - sum of course hours, capstone hours, and grand quiz hours
+- if the first parsed Stage 1 curriculum fails that validator, the system may run one structured repair pass, but only a validator-clean artifact may be persisted as the accepted curriculum
 
 Runtime policy note:
 

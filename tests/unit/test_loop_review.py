@@ -192,10 +192,12 @@ def test_loop_review_runner_generate_curriculum_fallback_wording(monkeypatch, tm
                 "time_budget_context": {
                     "context_id": "time_budget_genai",
                     "source_total_hours": 120.0,
+                    "packaging_total_hours": 120.0,
                     "target_total_hours": 120.0,
                     "slot_budget_hours": 120.0,
                     "available_design_hours": 120.0,
-                    "resolution_reason": "source-defined total hours preserved",
+                    "source_vs_packaging_conflict": False,
+                    "resolution_reason": "packaging-owned total hours resolved and cross-checked against the source curriculum",
                 }
             }
         if stage_id == "resolve_pedagogy_profile":
@@ -208,10 +210,11 @@ def test_loop_review_runner_generate_curriculum_fallback_wording(monkeypatch, tm
                 "brief_generation_status": "parsed",
                 "brief": {
                     "brief_id": "brief_genai_niat_b3",
-                    "program_name": "GenAI 120 Hr Curriculum",
+                    "stack_name": "GenAI Stack Curriculum",
+                    "packaging_profile_ref": "niat_b3_genai_packaging",
                     "audience": {"primary": ["genai_specialization_seekers"]},
                     "pedagogy": {"default_profile": "project_build_along"},
-                    "terminal_outcomes": ["Build and deploy a document-grounded GenAI app"],
+                    "stack_learning_outcomes": ["Build and deploy a document-grounded GenAI app"],
                 },
             }
         return lambda state: {
@@ -221,7 +224,8 @@ def test_loop_review_runner_generate_curriculum_fallback_wording(monkeypatch, tm
             "curriculum_map": {
                 "curriculum_id": "cur_genai",
                 "brief_ref": "brief_genai_niat_b3",
-                "program_name": "genai Curriculum",
+                "packaging_profile_ref": "niat_b3_genai_packaging",
+                "stack_name": "GenAI Stack Curriculum",
                 "domain": "genai",
                 "courses": [],
                 "total_hours": 0,

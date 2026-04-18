@@ -507,27 +507,32 @@ class LoopReviewRunner:
 
         if stage_id == "generate_brief":
             brief = state.get("brief", {}) or {}
-            outcomes = brief.get("terminal_outcomes", []) or []
+            outcomes = brief.get("stack_learning_outcomes", []) or []
             audience = ((brief.get("audience") or {}).get("primary", [])) or []
             status = state.get("brief_generation_status", "parsed")
             note = state.get("brief_generation_note")
             raw_response = state.get("brief_generation_raw_response")
+            artifact_path = state.get("brief_artifact_path")
             if status == "fallback_non_json":
                 decisions = []
                 if note:
                     decisions.append(note)
                 decisions.append(f"Primary audience: {', '.join(audience) or 'none'}.")
                 decisions.append(f"Terminal outcomes: {' | '.join(outcomes[:5]) or 'none'}.")
+                if artifact_path:
+                    decisions.append(f"Artifact path: {artifact_path}")
                 if raw_response:
                     preview = " ".join(raw_response.split())[:300]
                     decisions.append(f"Raw response preview: {preview}")
                 return ("Brief generation parse failed; using a deterministic fallback brief.", decisions)
             return (
-                f"Generated curriculum brief for {brief.get('program_name', state.get('domain', 'unknown'))}.",
+                f"Generated curriculum brief for {brief.get('stack_name', state.get('domain', 'unknown'))}.",
                 [
                     f"Primary audience: {', '.join(audience) or 'none'}.",
                     f"Default pedagogy: {(brief.get('pedagogy') or {}).get('default_profile', 'unknown')}.",
-                    f"Terminal outcomes: {' | '.join(outcomes[:5]) or 'none'}.",
+                    f"Packaging profile ref: {brief.get('packaging_profile_ref', 'unknown')}.",
+                    f"Stack learning outcomes: {' | '.join(outcomes[:5]) or 'none'}.",
+                    f"Artifact path: {artifact_path or 'not saved'}.",
                 ],
             )
 
@@ -538,11 +543,15 @@ class LoopReviewRunner:
             status = state.get("curriculum_generation_status", "parsed")
             note = state.get("curriculum_generation_note")
             raw_response = state.get("curriculum_generation_raw_response")
+            artifact_path = state.get("curriculum_artifact_path")
+            validation = state.get("curriculum_validation_report", {}) or {}
             if status == "fallback_non_json":
                 decisions = []
                 if note:
                     decisions.append(note)
                 decisions.append(f"Course flow: {' | '.join(course_titles) if course_titles else 'none'}.")
+                if artifact_path:
+                    decisions.append(f"Artifact path: {artifact_path}")
                 if raw_response:
                     preview = " ".join(raw_response.split())[:300]
                     decisions.append(f"Raw response preview: {preview}")
@@ -554,7 +563,17 @@ class LoopReviewRunner:
                 f"Generated domain curriculum with {len(courses)} course seeds and total hours {curriculum.get('total_hours', 0)}.",
                 [
                     f"Brief ref: {(state.get('brief') or {}).get('brief_id', 'none')}.",
+                    f"Packaging profile ref: {curriculum.get('packaging_profile_ref', 'unknown')}.",
                     f"Course-seed flow: {' | '.join(course_titles) if course_titles else 'none'}.",
+                    (
+                        "Hours validation: "
+                        f"course_sum={validation.get('course_hours_sum', 'unknown')}, "
+                        f"capstone={validation.get('capstone_hours', 'unknown')}, "
+                        f"grand_quiz={validation.get('grand_quiz_hours', 'unknown')}, "
+                        f"curriculum_total={validation.get('curriculum_total_hours', 'unknown')}, "
+                        f"target_total={validation.get('target_total_hours', 'unknown')}."
+                    ),
+                    f"Artifact path: {artifact_path or 'not saved'}.",
                 ],
             )
 
@@ -577,7 +596,10 @@ class LoopReviewRunner:
             courses = course_design.get("courses", [])
             return (
                 f"Derived {len(courses)} courses from the curriculum blueprint.",
-                [f"Course flow: {' | '.join(course.get('title', 'Untitled') for course in courses[:6]) or 'none'}."],
+                [
+                    f"Course flow: {' | '.join(course.get('title', 'Untitled') for course in courses[:6]) or 'none'}.",
+                    f"Artifact path: {state.get('course_design_artifact_path', 'not saved')}.",
+                ],
             )
 
         if stage_id == "design_modules":
@@ -587,6 +609,7 @@ class LoopReviewRunner:
                 f"Designed {len(modules)} modules across the current course set.",
                 [
                     f"Module titles: {' | '.join(module.get('title', 'Untitled') for module in modules[:6]) or 'none'}.",
+                    f"Artifact path: {state.get('module_design_artifact_path', 'not saved')}.",
                 ],
             )
 
@@ -595,7 +618,10 @@ class LoopReviewRunner:
             topics = topic_design.get("topics", [])
             return (
                 f"Designed {len(topics)} topics across the current modules.",
-                [f"Topic samples: {' | '.join(topic.get('title', 'Untitled') for topic in topics[:6]) or 'none'}."],
+                [
+                    f"Topic samples: {' | '.join(topic.get('title', 'Untitled') for topic in topics[:6]) or 'none'}.",
+                    f"Artifact path: {state.get('topic_design_artifact_path', 'not saved')}.",
+                ],
             )
 
         if stage_id == "design_learning_units":
@@ -603,7 +629,10 @@ class LoopReviewRunner:
             unit_types = (state.get("learning_unit_plan", {}) or {}).get("unit_types_present", [])
             return (
                 f"Planned {len(learning_units)} learning units for topic delivery.",
-                [f"Learning unit types present: {', '.join(unit_types) or 'none'}."],
+                [
+                    f"Learning unit types present: {', '.join(unit_types) or 'none'}.",
+                    f"Artifact path: {state.get('learning_unit_plan_artifact_path', 'not saved')}.",
+                ],
             )
 
         if stage_id == "design_practice":

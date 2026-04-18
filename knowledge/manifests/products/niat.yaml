@@ -94,6 +94,8 @@ packaging:
     B3:
       genai:
         packaging_profile_id: niat_b3_genai_packaging
+        total_hours: 120
+        time_tolerance: 0.05
         module_count_per_course:
           default: 3
           min: 2

@@ -2,7 +2,7 @@
 
 ## Storage Categories
 
-Open ACP has four distinct storage categories.
+Open ACP has five distinct storage categories.
 
 ## 1. Tracked Source Inputs
 
@@ -40,7 +40,28 @@ Current implementation note:
 For controlled reruns or clean simulations, it should be acceptable to wipe `storage/wiki`
 and rebuild the runtime knowledge store from canonical manifests and source inputs.
 
-## 3. Execution Outputs
+## 3. Runtime Design Artifacts
+
+These are generated design-stage artifacts from Loop B and should not be treated as
+canonical source inputs:
+
+- `brief.yaml`
+- `curriculum.yaml`
+- `courses/index.yaml` and `course.<id>.yaml`
+- `modules/index.yaml` and `module.<id>.yaml`
+- `topics/index.yaml` and `topic.<id>.yaml`
+- `units/index.yaml` and `unit.<id>.yaml`
+- later `unit.<id>.yaml`, `practice.<id>.yaml`, and `assessment.<id>.yaml`
+
+These belong under `storage/design/<domain>/<cycle_id>/`.
+
+This layer should become the source of truth for downstream design-stage reads during a
+run. In other words:
+
+- manifests and catalogs define canonical input truth
+- `storage/design` defines accepted runtime design truth for the current cycle
+
+## 4. Execution Outputs
 
 These are generated artifacts from pipeline runs:
 
@@ -50,7 +71,7 @@ These are generated artifacts from pipeline runs:
 
 These belong under `outputs/`.
 
-## 4. Memory Stores
+## 5. Memory Stores
 
 The system conceptually wants multiple memory types:
 

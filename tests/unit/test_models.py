@@ -145,16 +145,15 @@ def test_curriculum_map():
     cmap = CurriculumMap(
         curriculum_id="cur_1",
         version=1,
-        program_name="ML Engineering",
+        packaging_profile_ref="pack_ml",
+        stack_name="ML Engineering",
         domain="ml-engineering",
-        pedagogy_profile="concept_progression",
-        pedagogy_rationale="Progressive conceptual sequencing",
-        differentiation_strategy={"focus": "hands-on"},
         courses=[
             Course(
                 course_id="c1",
                 title="Programming Foundations",
                 sequence=1,
+                pedagogy_profile="concept_progression",
                 objectives=[],
                 estimated_hours=20.0,
                 prerequisite_courses=[],
@@ -162,12 +161,15 @@ def test_curriculum_map():
                 skill_ids=["python"],
             )
         ],
+        capstone_project={"type": "capstone_project_unit", "estimated_hours": 15.0},
+        grand_quiz={"type": "grand_quiz_unit", "estimated_hours": 5.0},
         total_hours=40.0,
+        hours_check={"courses_sum": 20.0, "capstone": 15.0, "grand_quiz": 5.0},
         created_at=datetime.now(UTC).isoformat(),
     )
     assert cmap.get_course("c1") is not None
     assert cmap.approved_at is None
-    assert cmap.pedagogy_profile == "concept_progression"
+    assert cmap.stack_name == "ML Engineering"
     assert cmap.courses[0].course_id == "c1"
 
 
@@ -466,9 +468,8 @@ def test_all_models_serialize_deserialize():
 
     for ModelClass, kwargs in [
         (CurriculumMap, dict(
-            curriculum_id="c1", version=1, program_name="Test", domain="test",
-            pedagogy_profile="concept_progression", pedagogy_rationale="test",
-            differentiation_strategy={}, courses=[], total_hours=10,
+            curriculum_id="c1", version=1, packaging_profile_ref="pack_test", stack_name="Test", domain="test",
+            courses=[], capstone_project={}, grand_quiz={}, total_hours=10, hours_check={},
             created_at=datetime.now(UTC).isoformat(),
         )),
         (SkillGraph, dict(

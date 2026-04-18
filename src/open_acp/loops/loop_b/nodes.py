@@ -2,6 +2,7 @@
 import json
 from pathlib import Path
 import re
+from typing import Any
 
 import yaml
 
@@ -10,6 +11,7 @@ from open_acp.styles.pedagogy_resolver import PedagogyResolver
 from open_acp.utils.claude import ClaudeClient
 from open_acp.config.curriculum_context import (
     find_project_root,
+    load_stack_manifest,
     load_yaml,
     resolve_packaging_profile as resolve_packaging_manifest_profile,
     resolve_product_context as resolve_product_manifest_context,
@@ -19,6 +21,126 @@ from open_acp.config.curriculum_context import (
 
 def _find_project_root() -> Path:
     return find_project_root()
+
+
+def _design_artifact_dir(state: dict) -> Path:
+    project_root = _find_project_root()
+    domain = state.get("domain", "unknown")
+    cycle_id = state.get("cycle_id", "cycle_1")
+    return project_root / "storage" / "design" / domain / cycle_id
+
+
+def _persist_design_artifact(state: dict, artifact_key: str, filename: str, payload: dict) -> tuple[str, dict[str, str]]:
+    artifact_dir = _design_artifact_dir(state)
+    artifact_dir.mkdir(parents=True, exist_ok=True)
+    path = artifact_dir / filename
+    path.write_text(yaml.safe_dump(payload, sort_keys=False, allow_unicode=False), encoding="utf-8")
+    artifact_paths = dict(state.get("design_artifact_paths", {}) or {})
+    artifact_paths[artifact_key] = str(path)
+    return str(path), artifact_paths
+
+
+def _persist_design_collection_artifacts(
+    state: dict,
+    artifact_key: str,
+    subdir: str,
+    item_prefix: str,
+    item_key: str,
+    item_id_key: str,
+    payload: dict,
+) -> tuple[str, dict[str, str]]:
+    artifact_dir = _design_artifact_dir(state) / subdir
+    artifact_dir.mkdir(parents=True, exist_ok=True)
+
+    index_path = artifact_dir / "index.yaml"
+    index_path.write_text(yaml.safe_dump(payload, sort_keys=False, allow_unicode=False), encoding="utf-8")
+
+    for item in payload.get(item_key, []) or []:
+        item_id = item.get(item_id_key)
+        if not item_id:
+            continue
+        item_path = artifact_dir / f"{item_prefix}.{item_id}.yaml"
+        item_path.write_text(yaml.safe_dump(item, sort_keys=False, allow_unicode=False), encoding="utf-8")
+
+    artifact_paths = dict(state.get("design_artifact_paths", {}) or {})
+    artifact_paths[artifact_key] = str(index_path)
+    return str(index_path), artifact_paths
+
+
+def _load_design_artifact(state: dict, artifact_key: str, state_key: str, filename: str) -> dict:
+    in_state = state.get(state_key, {}) or {}
+    if in_state:
+        return in_state
+
+    artifact_paths = state.get("design_artifact_paths", {}) or {}
+    path_value = artifact_paths.get(artifact_key)
+    if not path_value:
+        candidate = _design_artifact_dir(state) / filename
+        if candidate.exists():
+            path_value = str(candidate)
+
+    if not path_value:
+        return {}
+
+    path = Path(path_value)
+    if not path.exists():
+        return {}
+
+    loaded = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    if not isinstance(loaded, dict):
+        return {}
+    return loaded
+
+
+def _validate_curriculum_hours(curriculum: dict, packaging_profile: dict, time_budget_context: dict) -> dict:
+    target_total = float(
+        time_budget_context.get("target_total_hours")
+        or packaging_profile.get("total_hours")
+        or 0
+    )
+    curriculum_total = float(curriculum.get("total_hours", 0) or 0)
+    courses = curriculum.get("courses", []) or []
+    course_hours_sum = round(sum(float(course.get("estimated_hours", 0) or 0) for course in courses), 2)
+    capstone_hours = round(float((curriculum.get("capstone_project") or {}).get("estimated_hours", 0) or 0), 2)
+    grand_quiz_hours = round(float((curriculum.get("grand_quiz") or {}).get("estimated_hours", 0) or 0), 2)
+    accounted_total = round(course_hours_sum + capstone_hours + grand_quiz_hours, 2)
+    time_tolerance = packaging_profile.get("time_tolerance")
+    if time_tolerance is not None:
+        tolerance_hours = round(float(time_tolerance) * max(target_total, curriculum_total, 1.0), 2)
+    else:
+        tolerance_hours = float(packaging_profile.get("curriculum_hours_tolerance", 0.5) or 0.5)
+
+    issues: list[str] = []
+    if abs(accounted_total - curriculum_total) > tolerance_hours:
+        issues.append(
+            "Sum of course hours plus capstone and grand quiz "
+            f"({accounted_total}) does not match curriculum total ({curriculum_total}) within tolerance {tolerance_hours}."
+        )
+    if target_total and abs(curriculum_total - target_total) > tolerance_hours:
+        issues.append(
+            f"Curriculum total ({curriculum_total}) does not match resolved target total ({target_total}) within tolerance {tolerance_hours}."
+        )
+
+    return {
+        "target_total_hours": target_total,
+        "curriculum_total_hours": curriculum_total,
+        "course_hours_sum": course_hours_sum,
+        "capstone_hours": capstone_hours,
+        "grand_quiz_hours": grand_quiz_hours,
+        "accounted_total_hours": accounted_total,
+        "tolerance_hours": tolerance_hours,
+        "within_tolerance": not issues,
+        "issues": issues,
+    }
+
+
+def _normalize_curriculum_payload(data: dict) -> dict:
+    """Ensure optional Stage 1 curriculum keys exist before validation/persistence."""
+    data.setdefault("courses", [])
+    data.setdefault("capstone_project", {})
+    data.setdefault("grand_quiz", {})
+    data.setdefault("hours_check", {})
+    return data
 
 
 def _parse_json_object_response(response: str) -> dict:
@@ -264,6 +386,7 @@ def _build_time_budget_summary(context: dict) -> str:
         [
             f"- Time budget context: {context.get('context_id', 'unknown')}",
             f"- Source total hours: {context.get('source_total_hours', 'unknown')}",
+            f"- Packaging total hours: {context.get('packaging_total_hours', 'unknown')}",
             f"- Target total hours: {context.get('target_total_hours', 'unknown')}",
             f"- Slot budget hours: {context.get('slot_budget_hours', 'unknown')}",
             f"- Reserved hours: {context.get('reserved_hours', 'unknown')}",
@@ -271,6 +394,27 @@ def _build_time_budget_summary(context: dict) -> str:
             f"- Resolution reason: {context.get('resolution_reason', 'not provided')}",
         ]
     )
+
+
+def _extract_source_refs(curriculum_source_context: str) -> list[str]:
+    refs = re.findall(r"^### Source: (.+)$", curriculum_source_context or "", flags=re.MULTILINE)
+    return _unique_preserve_order([ref.strip() for ref in refs if ref.strip()])
+
+
+def _default_stack_name(domain: str, curriculum_source_context: str) -> str:
+    heading_match = re.search(r"^#\s+(.+)$", curriculum_source_context or "", flags=re.MULTILINE)
+    if heading_match:
+        heading = heading_match.group(1).strip()
+        heading = re.sub(r"\s+(Seed|Reference|Source)$", "", heading, flags=re.IGNORECASE).strip()
+        if heading:
+            return heading
+
+    stack_manifest = load_stack_manifest(domain)
+    catalog_label = stack_manifest.get("catalog_label")
+    if catalog_label:
+        return f"{catalog_label} Stack Curriculum"
+
+    return f"{domain.title()} Stack Curriculum"
 
 
 def _extract_markdown_bullets(section_text: str, limit: int = 8) -> list[str]:
@@ -302,7 +446,7 @@ def _default_allowed_local_overrides(profile: str) -> list[str]:
     return mapping.get(profile, [])
 
 
-def _fallback_terminal_outcomes(domain: str, pedagogy_profile: str, curriculum_source_context: str) -> list[str]:
+def _fallback_stack_learning_outcomes(domain: str, pedagogy_profile: str, curriculum_source_context: str) -> list[str]:
     source_text = curriculum_source_context.lower()
     if domain == "genai":
         outcomes = [
@@ -357,23 +501,38 @@ def resolve_time_budget_context(state: dict) -> dict:
     domain = state.get("domain", "unknown")
 
     source_total_hours = _extract_total_hours_from_curriculum_source(curriculum_source_context)
-    target_total_hours = source_total_hours if source_total_hours is not None else 20.0
+    packaging_total_hours = packaging_profile.get("total_hours")
+    target_total_hours = (
+        float(packaging_total_hours)
+        if packaging_total_hours is not None
+        else (source_total_hours if source_total_hours is not None else 20.0)
+    )
     slot_budget_hours = target_total_hours
     reserved_hours = float(packaging_profile.get("reserved_hours", 0.0) or 0.0)
     available_design_hours = max(0.0, round(slot_budget_hours - reserved_hours, 2))
 
-    if source_total_hours is not None:
-        reason = "source-defined total hours preserved from curriculum source context"
+    if packaging_total_hours is not None and source_total_hours is not None:
+        reason = "packaging-owned total hours resolved and cross-checked against the source curriculum"
+    elif packaging_total_hours is not None:
+        reason = "packaging-owned total hours resolved from canonical packaging profile"
+    elif source_total_hours is not None:
+        reason = "source-defined total hours used because packaging profile does not declare total hours"
     else:
         reason = "no explicit source total hours found; using default planning budget"
 
     context = {
         "context_id": f"time_budget_{_slugify(domain)}",
         "source_total_hours": source_total_hours,
+        "packaging_total_hours": float(packaging_total_hours) if packaging_total_hours is not None else None,
         "target_total_hours": target_total_hours,
         "slot_budget_hours": slot_budget_hours,
         "reserved_hours": reserved_hours,
         "available_design_hours": available_design_hours,
+        "source_vs_packaging_conflict": (
+            packaging_total_hours is not None
+            and source_total_hours is not None
+            and abs(float(packaging_total_hours) - float(source_total_hours)) > 0.01
+        ),
         "resolution_reason": reason,
     }
 
@@ -489,9 +648,13 @@ def generate_brief(state: dict) -> dict:
     packaging_summary = _packaging_summary(packaging_profile)
     design_priority_summary = _build_design_priority_summary(design_priority_profile)
     time_budget_summary = _build_time_budget_summary(time_budget_context)
+    source_refs = _extract_source_refs(curriculum_source_context)
+    source_hours_declared = time_budget_context.get("source_total_hours")
+    source_vs_packaging_conflict = bool(time_budget_context.get("source_vs_packaging_conflict", False))
+    default_stack_name = _default_stack_name(domain, curriculum_source_context)
 
     claude = ClaudeClient()
-    prompt = f"""Create a curriculum brief for the "{domain}" stack.
+    prompt = f"""Create a Stage 0 curriculum brief for the "{domain}" stack.
 
 ## Curriculum Source Context
 {curriculum_source_context or "No explicit curriculum source provided."}
@@ -518,20 +681,23 @@ def generate_brief(state: dict) -> dict:
 {learner_context or "No explicit learner context provided."}
 
 Decide only the Stage 0 brief:
-1. Program name
+1. Stack name
 2. Primary target learner segments (maximum 2)
-3. Differentiation angle
-4. Default pedagogy profile and allowed local overrides
-5. Total hours
-6. Terminal outcomes (maximum 5, observable verbs only)
-7. Success metrics
-
-Do not design modules, topics, or content yet.
+3. Default pedagogy profile and allowed local overrides
+4. Stack learning outcomes (maximum 5, observable verbs only)
+5. Minimum product context downstream stages need
+6. Cross-check the declared source hours against the packaging profile target hours and mark the conflict flag
 
 Return JSON:
 {{
   "brief_id": "brief_{domain}",
-  "program_name": "Program name",
+  "stack_name": "Stack name",
+  "packaging_profile_ref": "{packaging_profile.get('packaging_profile_id', 'default_learning_packaging')}",
+  "product_context": {{
+    "product_label": "{product_context.get('product_label', 'Stack-only default')}",
+    "delivery_mode": "{product_context.get('delivery_mode', 'unspecified')}",
+    "curriculum_container_kind": "{product_context.get('curriculum_container_kind', 'standard_curriculum')}"
+  }},
   "audience": {{
     "primary": ["audience_segment_id"],
     "english_level": 8
@@ -540,30 +706,27 @@ Return JSON:
     "default_profile": "{pedagogy_profile}",
     "allowed_local_overrides": ["concept_progression"]
   }},
-  "total_hours": {time_budget_context.get("target_total_hours", 20.0)},
-  "terminal_outcomes": [
-    "Observable terminal outcome"
+  "stack_learning_outcomes": [
+    "Observable stack learning outcome"
   ],
-  "success_metrics": {{
-    "completion_rate_target": 0.75,
-    "median_assessment_score_target": 0.70
-  }},
-  "differentiation": "One-line differentiation angle",
-  "design_priority_dimensions": {json.dumps(design_priority_profile.get("ordered_dimensions", []))}
+  "source_refs": {json.dumps(source_refs)},
+  "source_hours_declared": {json.dumps(source_hours_declared)},
+  "source_vs_packaging_conflict": {json.dumps(source_vs_packaging_conflict)}
 }}
 
 Important constraints:
-- Terminal outcomes must use observable verbs, not vague verbs like understand or know.
+- Stack learning outcomes must use observable verbs, not vague verbs like understand or know.
 - Keep primary audience to at most 2 segments.
 - Use the resolved pedagogy profile unless the sources clearly justify a different default.
-- Respect source-defined total hours when provided.
+- Do not design courses, modules, topics, or content yet.
+- Do not introduce success metrics, differentiation strategy, or hour allocation into this artifact.
 - Keep this brief compact and structural.
 
 Return ONLY the JSON object."""
 
     response = claude.generate(
         prompt=prompt,
-        system="You are a curriculum architect preparing a brief artifact before curriculum structuring.",
+        system="You are a curriculum architect preparing a Stage 0 brief artifact before curriculum structuring.",
         model_tier="strong",
         max_tokens=6000,
     )
@@ -583,7 +746,13 @@ Return ONLY the JSON object."""
         brief_generation_raw_response = response[:4000]
         brief = {
             "brief_id": f"brief_{_slugify(domain)}",
-            "program_name": product_context.get("product_label") or f"{domain.title()} Curriculum",
+            "stack_name": default_stack_name,
+            "packaging_profile_ref": packaging_profile.get("packaging_profile_id"),
+            "product_context": {
+                "product_label": product_context.get("product_label", "Stack-only default"),
+                "delivery_mode": product_context.get("delivery_mode", "unspecified"),
+                "curriculum_container_kind": product_context.get("curriculum_container_kind", "standard_curriculum"),
+            },
             "audience": {
                 "primary": audience_candidates[:2],
                 "english_level": 8,
@@ -592,20 +761,23 @@ Return ONLY the JSON object."""
                 "default_profile": pedagogy_profile,
                 "allowed_local_overrides": _default_allowed_local_overrides(pedagogy_profile),
             },
-            "total_hours": time_budget_context.get("target_total_hours", 20.0),
-            "terminal_outcomes": _fallback_terminal_outcomes(domain, pedagogy_profile, curriculum_source_context),
-            "success_metrics": {
-                "completion_rate_target": 0.75,
-                "median_assessment_score_target": 0.70,
-            },
-            "differentiation": (
-                "Milestone-driven, implementation-first curriculum shaped by product and structure constraints."
-            ),
-            "design_priority_dimensions": design_priority_profile.get("ordered_dimensions", []),
+            "stack_learning_outcomes": _fallback_stack_learning_outcomes(domain, pedagogy_profile, curriculum_source_context),
+            "source_refs": source_refs,
+            "source_hours_declared": source_hours_declared,
+            "source_vs_packaging_conflict": source_vs_packaging_conflict,
         }
 
     brief.setdefault("brief_id", f"brief_{_slugify(domain)}")
-    brief.setdefault("program_name", product_context.get("product_label") or f"{domain.title()} Curriculum")
+    brief.setdefault("stack_name", default_stack_name)
+    brief.setdefault("packaging_profile_ref", packaging_profile.get("packaging_profile_id"))
+    brief.setdefault(
+        "product_context",
+        {
+            "product_label": product_context.get("product_label", "Stack-only default"),
+            "delivery_mode": product_context.get("delivery_mode", "unspecified"),
+            "curriculum_container_kind": product_context.get("curriculum_container_kind", "standard_curriculum"),
+        },
+    )
     brief.setdefault(
         "audience",
         {"primary": audience_candidates[:2], "english_level": 8},
@@ -617,42 +789,39 @@ Return ONLY the JSON object."""
             "allowed_local_overrides": _default_allowed_local_overrides(pedagogy_profile),
         },
     )
-    brief.setdefault("total_hours", time_budget_context.get("target_total_hours", 20.0))
     brief.setdefault(
-        "terminal_outcomes",
-        _fallback_terminal_outcomes(domain, pedagogy_profile, curriculum_source_context),
+        "stack_learning_outcomes",
+        _fallback_stack_learning_outcomes(domain, pedagogy_profile, curriculum_source_context),
     )
-    brief.setdefault(
-        "success_metrics",
-        {
-            "completion_rate_target": 0.75,
-            "median_assessment_score_target": 0.70,
-        },
-    )
-    brief.setdefault("differentiation", "Curriculum shaped by product, structure, and skill-outcome priorities.")
-    brief.setdefault("design_priority_dimensions", design_priority_profile.get("ordered_dimensions", []))
+    brief.setdefault("source_refs", source_refs)
+    brief.setdefault("source_hours_declared", source_hours_declared)
+    brief.setdefault("source_vs_packaging_conflict", source_vs_packaging_conflict)
     brief["pedagogy"].setdefault("default_profile", pedagogy_profile)
     brief["pedagogy"].setdefault("allowed_local_overrides", _default_allowed_local_overrides(pedagogy_profile))
-    brief["pedagogy"].setdefault("rationale", pedagogy_rationale)
-    brief["time_budget"] = time_budget_context
-    brief["product_ref"] = product_context.get("product_label")
-    brief["structure_profile_id"] = structure_profile.get("structure_profile_id")
-    brief["packaging_profile_id"] = packaging_profile.get("packaging_profile_id")
 
     if brief_generation_status == "fallback_non_json":
         print("  Brief generation parse failed; using deterministic fallback brief.")
     else:
         print(
             "  Brief: "
-            f"{brief.get('program_name', domain)} "
-            f"({len(brief.get('terminal_outcomes', []))} terminal outcomes)"
+            f"{brief.get('stack_name', domain)} "
+            f"({len(brief.get('stack_learning_outcomes', []))} stack learning outcomes)"
         )
+
+    artifact_path, artifact_paths = _persist_design_artifact(
+        state=state,
+        artifact_key="brief",
+        filename="brief.yaml",
+        payload=brief,
+    )
 
     return {
         "brief_generation_status": brief_generation_status,
         "brief_generation_note": brief_generation_note,
         "brief_generation_raw_response": brief_generation_raw_response,
         "brief": brief,
+        "brief_artifact_path": artifact_path,
+        "design_artifact_paths": artifact_paths,
     }
 
 
@@ -692,18 +861,21 @@ def resolve_pedagogy_profile(state: dict) -> dict:
 def generate_curriculum(state: dict) -> dict:
     """Generate packaged course structure from the approved brief and source curriculum."""
     domain = state.get("domain", "ml-engineering")
-    brief = state.get("brief", {}) or {}
+    brief = _load_design_artifact(state, artifact_key="brief", state_key="brief", filename="brief.yaml")
+    if not brief:
+        raise ValueError("Missing brief artifact. Run generate_brief successfully before generate_curriculum.")
     curriculum_source_context = state.get("curriculum_source_context") or state.get("program_context", "")
     content_type = state.get("content_type", "concept_explainer")
     structure_profile = state.get("structure_profile", {}) or {}
     packaging_profile = state.get("packaging_profile", {}) or {}
+    time_budget_context = state.get("time_budget_context", {}) or {}
     structure_summary = _structure_summary(structure_profile)
     packaging_summary = _packaging_summary(packaging_profile)
     brief_json = json.dumps(brief, indent=2)
     pedagogy_profile = ((brief.get("pedagogy") or {}).get("default_profile")) or state.get("pedagogy_profile", "concept_progression")
-    pedagogy_rationale = ((brief.get("pedagogy") or {}).get("rationale")) or state.get("pedagogy_rationale", "content-type default")
-    total_hours = brief.get("total_hours", 20.0)
-    program_name = brief.get("program_name", f"{domain.title()} Curriculum")
+    total_hours = time_budget_context.get("target_total_hours", packaging_profile.get("total_hours", 20.0))
+    stack_name = brief.get("stack_name", _default_stack_name(domain, curriculum_source_context))
+    packaging_profile_ref = brief.get("packaging_profile_ref", packaging_profile.get("packaging_profile_id"))
 
     claude = ClaudeClient()
     prompt = f"""Design a curriculum structure for "{domain}" using the approved brief artifact.
@@ -738,28 +910,40 @@ Return JSON:
 {{
   "curriculum_id": "cur_{domain}",
   "brief_ref": "{brief.get('brief_id', f'brief_{domain}')}",
-  "program_name": "{program_name}",
+  "packaging_profile_ref": "{packaging_profile_ref}",
+  "stack_name": "{stack_name}",
   "domain": "{domain}",
-  "pedagogy_profile": "{pedagogy_profile}",
-  "pedagogy_rationale": "{pedagogy_rationale}",
   "courses": [
     {{
       "course_id": "c1",
-      "title": "Module Title",
+      "title": "Course Title",
       "sequence": 1,
+      "pedagogy_profile": "{pedagogy_profile}",
       "objectives": [
         {{"id": "obj_1", "statement": "...", "bloom_level": "understand", "skill_ids": ["skill_id"]}}
       ],
       "estimated_hours": 1.5,
       "prerequisite_courses": [],
-      "content_types": ["{content_type}"]
+      "content_types": ["{content_type}"],
+      "skill_ids": ["skill_id"]
     }}
   ],
-  "total_hours": {total_hours}
+  "capstone_project": {{}},
+  "grand_quiz": {{}},
+  "total_hours": {total_hours},
+  "hours_check": {{
+    "courses_sum": {total_hours},
+    "capstone": 0.0,
+    "grand_quiz": 0.0
+  }}
 }}
 
 Important constraints:
-- Respect the total hours from the brief unless the source curriculum clearly forces a different total.
+- Respect the resolved target total hours unless the source curriculum clearly forces a human-reviewed conflict.
+- `total_hours` is the full Stage 1 budget for packaged courses + capstone_project + grand_quiz combined.
+- `hours_check.courses_sum + hours_check.capstone + hours_check.grand_quiz` must equal `total_hours`.
+- If capstone_project or grand_quiz are not explicitly required by the product/source, return them as empty objects and keep their hours at 0.
+- If capstone_project or grand_quiz are present, their estimated hours must fit inside the same `total_hours`; reduce packaged course hours accordingly.
 - Preserve source-defined progression when it exists, but encode it through course sequence and course scope rather than explicit level output.
 - Represent each major phase or specialization as its own packaged course only when time budget and product requirements justify it.
 - Do not collapse a detailed long-form curriculum into 4-6 generic courses unless the source clearly justifies it.
@@ -798,31 +982,115 @@ Return ONLY the JSON object."""
         data = {
             "curriculum_id": f"cur_{domain}",
             "brief_ref": brief.get("brief_id", f"brief_{domain}"),
-            "program_name": program_name,
+            "packaging_profile_ref": packaging_profile_ref,
+            "stack_name": stack_name,
             "domain": domain,
-            "pedagogy_profile": pedagogy_profile,
-            "pedagogy_rationale": pedagogy_rationale,
             "courses": [],
+            "capstone_project": {},
+            "grand_quiz": {},
             "total_hours": total_hours,
+            "hours_check": {"courses_sum": 0, "capstone": 0, "grand_quiz": 0},
         }
 
+    data = _normalize_curriculum_payload(data)
     courses = data.get("courses", [])
+    validation_report = _validate_curriculum_hours(
+        curriculum=data,
+        packaging_profile=packaging_profile,
+        time_budget_context=time_budget_context,
+    )
+    if curriculum_generation_status != "fallback_non_json" and not validation_report["within_tolerance"]:
+        repair_prompt = f"""Repair this Stage 1 curriculum JSON so its hours accounting is valid.
+
+## Brief Artifact
+{brief_json}
+
+## Packaging Context
+{packaging_summary}
+
+## Time Budget Context
+{_build_time_budget_summary(time_budget_context)}
+
+## Current Curriculum JSON
+{json.dumps(data, indent=2)}
+
+## Validation Issues
+{json.dumps(validation_report.get("issues", []), indent=2)}
+
+Return a corrected JSON object only.
+
+Hard requirements:
+- Keep the same curriculum_id, brief_ref, packaging_profile_ref, stack_name, and domain.
+- Preserve course intent and sequence where possible.
+- `total_hours` is the full budget for courses + capstone_project + grand_quiz combined.
+- `hours_check.courses_sum + hours_check.capstone + hours_check.grand_quiz` must equal `total_hours`.
+- If capstone_project or grand_quiz are not required, return them as empty objects and keep their hours at 0.
+- Keep packaged course count within the same rough scale unless a small reduction is needed to satisfy the budget.
+- Return ONLY the corrected JSON object."""
+        repair_response = claude.generate(
+            prompt=repair_prompt,
+            system="You are repairing a Stage 1 curriculum artifact to satisfy strict time-budget validation.",
+            model_tier="strong",
+            max_tokens=8000,
+        )
+        try:
+            repaired = _normalize_curriculum_payload(_parse_json_object_response(repair_response))
+            repair_validation_report = _validate_curriculum_hours(
+                curriculum=repaired,
+                packaging_profile=packaging_profile,
+                time_budget_context=time_budget_context,
+            )
+            if repair_validation_report["within_tolerance"]:
+                data = repaired
+                validation_report = repair_validation_report
+                curriculum_generation_status = "validated_after_repair"
+                curriculum_generation_note = (
+                    "Initial curriculum draft failed hours validation; a single structured repair pass produced a valid artifact."
+                )
+                curriculum_generation_raw_response = repair_response[:4000]
+            else:
+                raise ValueError(
+                    "Curriculum hours validation failed: " + " ".join(repair_validation_report["issues"])
+                )
+        except (json.JSONDecodeError, ValueError) as exc:
+            raise ValueError(
+                "Curriculum hours validation failed: " + " ".join(validation_report["issues"])
+            ) from exc
+
+    courses = data.get("courses", [])
+    data["hours_check"] = {
+        "courses_sum": validation_report["course_hours_sum"],
+        "capstone": float((data.get("capstone_project") or {}).get("estimated_hours", 0) or 0),
+        "grand_quiz": float((data.get("grand_quiz") or {}).get("estimated_hours", 0) or 0),
+    }
     if curriculum_generation_status == "fallback_non_json":
         print("  Curriculum generation parse failed; using empty fallback curriculum draft.")
+    elif curriculum_generation_status == "validated_after_repair":
+        print("  Curriculum validated after one repair pass.")
     else:
         print(f"  Curriculum: {len(courses)} courses, {data.get('total_hours', 0)} hours")
+
+    artifact_path, artifact_paths = _persist_design_artifact(
+        state=state,
+        artifact_key="curriculum",
+        filename="curriculum.yaml",
+        payload=data,
+    )
     return {
         "curriculum_generation_status": curriculum_generation_status,
         "curriculum_generation_note": curriculum_generation_note,
         "curriculum_generation_raw_response": curriculum_generation_raw_response,
         "previous_curriculum_map": state.get("curriculum_map"),
         "curriculum_map": data,
+        "curriculum_validation_report": validation_report,
+        "curriculum_artifact_path": artifact_path,
+        "design_artifact_paths": artifact_paths,
     }
 
 
 def compare_curriculum_changes(state: dict) -> dict:
     """Compare the current curriculum draft to the previous saved version, if any."""
-    current = state.get("curriculum_map", {}) or {}
+    current = _load_design_artifact(state, artifact_key="curriculum", state_key="curriculum_map", filename="curriculum.yaml")
     previous = state.get("previous_curriculum_map", {}) or {}
 
     current_courses = current.get("courses", []) or []
@@ -897,7 +1165,7 @@ def resolve_packaging_profile(state: dict) -> dict:
 
 def design_courses(state: dict) -> dict:
     """Treat the current curriculum draft courses as explicit course seeds for downstream design."""
-    curriculum = state.get("curriculum_map", {}) or {}
+    curriculum = _load_design_artifact(state, artifact_key="curriculum", state_key="curriculum_map", filename="curriculum.yaml")
     course_seeds = curriculum.get("courses", []) or []
 
     courses = []
@@ -926,12 +1194,22 @@ def design_courses(state: dict) -> dict:
         "courses": courses,
     }
     print(f"  Course design: {len(courses)} course seeds prepared")
-    return {"course_design": course_design}
+    artifact_path, artifact_paths = _persist_design_collection_artifacts(
+        state=state,
+        artifact_key="course_design",
+        subdir="courses",
+        item_prefix="course",
+        item_key="courses",
+        item_id_key="course_id",
+        payload=course_design,
+    )
+    return {"course_design": course_design, "design_artifact_paths": artifact_paths, "course_design_artifact_path": artifact_path}
 
 
 def design_modules(state: dict) -> dict:
     """Expand each course into packaging-shaped modules."""
-    courses = (state.get("course_design", {}) or {}).get("courses", [])
+    course_design = _load_design_artifact(state, artifact_key="course_design", state_key="course_design", filename="courses/index.yaml")
+    courses = (course_design or {}).get("courses", [])
     packaging_profile = state.get("packaging_profile", {}) or {}
     phase_labels = _module_phase_labels(packaging_profile)
     module_rule = packaging_profile.get("module_count_per_course", {})
@@ -961,12 +1239,22 @@ def design_modules(state: dict) -> dict:
         "modules": modules,
     }
     print(f"  Module design: {len(modules)} modules across {len(courses)} courses")
-    return {"module_design": module_design}
+    artifact_path, artifact_paths = _persist_design_collection_artifacts(
+        state=state,
+        artifact_key="module_design",
+        subdir="modules",
+        item_prefix="module",
+        item_key="modules",
+        item_id_key="module_id",
+        payload=module_design,
+    )
+    return {"module_design": module_design, "design_artifact_paths": artifact_paths, "module_design_artifact_path": artifact_path}
 
 
 def design_topics(state: dict) -> dict:
     """Design topics inside each module using packaging defaults."""
-    modules = (state.get("module_design", {}) or {}).get("modules", [])
+    module_design = _load_design_artifact(state, artifact_key="module_design", state_key="module_design", filename="modules/index.yaml")
+    modules = (module_design or {}).get("modules", [])
     packaging_profile = state.get("packaging_profile", {}) or {}
     pedagogy_profile = state.get("pedagogy_profile", "concept_progression")
     topic_rule = packaging_profile.get("topic_count_per_module", {})
@@ -997,12 +1285,22 @@ def design_topics(state: dict) -> dict:
         "topics": topics,
     }
     print(f"  Topic design: {len(topics)} topics prepared")
-    return {"topic_design": topic_design}
+    artifact_path, artifact_paths = _persist_design_collection_artifacts(
+        state=state,
+        artifact_key="topic_design",
+        subdir="topics",
+        item_prefix="topic",
+        item_key="topics",
+        item_id_key="topic_id",
+        payload=topic_design,
+    )
+    return {"topic_design": topic_design, "design_artifact_paths": artifact_paths, "topic_design_artifact_path": artifact_path}
 
 
 def design_learning_units(state: dict) -> dict:
     """Assign learning unit types to each topic based on packaging and pedagogy."""
-    topics = (state.get("topic_design", {}) or {}).get("topics", [])
+    topic_design = _load_design_artifact(state, artifact_key="topic_design", state_key="topic_design", filename="topics/index.yaml")
+    topics = (topic_design or {}).get("topics", [])
     packaging_profile = state.get("packaging_profile", {}) or {}
     pedagogy_profile = state.get("pedagogy_profile", "concept_progression")
     preferred_mix = packaging_profile.get("preferred_learning_unit_mix", [])
@@ -1042,7 +1340,20 @@ def design_learning_units(state: dict) -> dict:
         "learning_units": units,
     }
     print(f"  Learning units: {len(units)} units across {len(topics)} topics")
-    return {"learning_unit_plan": learning_unit_plan}
+    artifact_path, artifact_paths = _persist_design_collection_artifacts(
+        state=state,
+        artifact_key="learning_unit_plan",
+        subdir="units",
+        item_prefix="unit",
+        item_key="learning_units",
+        item_id_key="learning_unit_id",
+        payload=learning_unit_plan,
+    )
+    return {
+        "learning_unit_plan": learning_unit_plan,
+        "design_artifact_paths": artifact_paths,
+        "learning_unit_plan_artifact_path": artifact_path,
+    }
 
 
 def design_practice(state: dict) -> dict:
