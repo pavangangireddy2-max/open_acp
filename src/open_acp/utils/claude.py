@@ -1,10 +1,12 @@
 """Model client wrapper with Anthropic + OpenAI fallback support."""
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Optional
 
 import anthropic
 import httpx
+import yaml
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 
 from open_acp.config.constants import (
@@ -20,6 +22,31 @@ class OpenAIRetryableError(Exception):
     """Raised for transient OpenAI transport or rate-limit failures."""
 
 
+def _load_continue_openrouter_config(path_value: str) -> dict:
+    """Load the first OpenRouter model entry from Continue config, if present."""
+    if not path_value:
+        return {}
+
+    path = Path(path_value).expanduser()
+    if not path.exists():
+        return {}
+
+    try:
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    except (OSError, yaml.YAMLError):
+        return {}
+
+    for model in data.get("models", []) or []:
+        if (model.get("provider") or "").strip().lower() != "openrouter":
+            continue
+        return {
+            "api_key": model.get("apiKey") or "",
+            "model": model.get("model") or "",
+            "display_name": model.get("name") or "",
+        }
+    return {}
+
+
 class ClaudeClient:
     """Backward-compatible text generation client with provider fallback.
 
@@ -32,10 +59,23 @@ class ClaudeClient:
         self.settings = settings
         self.anthropic_api_key = settings.anthropic_api_key
         self.openai_api_key = settings.openai_api_key
+        continue_openrouter = _load_continue_openrouter_config(settings.continue_config_path)
+        self.openrouter_api_key = settings.openrouter_api_key or continue_openrouter.get("api_key", "")
         self.model_provider = (settings.model_provider or "auto").strip().lower()
         self.openai_base_url = settings.openai_base_url.rstrip("/")
         self.openai_model_strong = settings.openai_model_strong
         self.openai_model_cheap = settings.openai_model_cheap
+        self.openrouter_base_url = settings.openrouter_base_url.rstrip("/")
+        self.openrouter_model_strong = (
+            settings.openrouter_model_strong
+            or continue_openrouter.get("model")
+            or "openai/gpt-5.4-pro"
+        )
+        self.openrouter_model_cheap = (
+            settings.openrouter_model_cheap
+            or continue_openrouter.get("model")
+            or self.openrouter_model_strong
+        )
         self._provider_override: Optional[str] = None
         self.anthropic_client: Optional[anthropic.Anthropic] = None
 
@@ -55,6 +95,14 @@ class ClaudeClient:
 
         if provider == "openai":
             return self._generate_openai(
+                prompt=prompt,
+                system=system,
+                model_tier=model_tier,
+                max_tokens=max_tokens,
+                temperature=temperature,
+            )
+        if provider == "openrouter":
+            return self._generate_openrouter(
                 prompt=prompt,
                 system=system,
                 model_tier=model_tier,
@@ -90,6 +138,13 @@ class ClaudeClient:
         if self._provider_override:
             return self._provider_override
 
+        if self.model_provider == "openrouter":
+            if not self.openrouter_api_key:
+                raise RuntimeError(
+                    "MODEL_PROVIDER=openrouter but no OpenRouter API key was found in OPENROUTER_API_KEY or the Continue config."
+                )
+            return "openrouter"
+
         if self.model_provider == "openai":
             if not self.openai_api_key:
                 raise RuntimeError("MODEL_PROVIDER=openai but OPENAI_API_KEY is missing.")
@@ -102,10 +157,14 @@ class ClaudeClient:
 
         if self.anthropic_api_key:
             return "anthropic"
+        if self.openrouter_api_key:
+            return "openrouter"
         if self.openai_api_key:
             return "openai"
 
-        raise RuntimeError("No model API key configured. Set ANTHROPIC_API_KEY or OPENAI_API_KEY.")
+        raise RuntimeError(
+            "No model API key configured. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, OPENROUTER_API_KEY, or provide a Continue OpenRouter config."
+        )
 
     @retry(
         stop=stop_after_attempt(API_MAX_RETRIES),
@@ -188,6 +247,62 @@ class ClaudeClient:
             raise RuntimeError("OpenAI response did not contain output text.")
         return text
 
+    @retry(
+        stop=stop_after_attempt(API_MAX_RETRIES),
+        wait=wait_exponential(multiplier=API_RETRY_BACKOFF, min=1, max=30),
+        retry=retry_if_exception_type((OpenAIRetryableError, httpx.TransportError)),
+        reraise=True,
+    )
+    def _generate_openrouter(
+        self,
+        prompt: str,
+        system: str,
+        model_tier: str,
+        max_tokens: int,
+        temperature: float,
+    ) -> str:
+        if not self.openrouter_api_key:
+            raise RuntimeError("No OpenRouter API key available.")
+
+        model = self.openrouter_model_strong if model_tier == "strong" else self.openrouter_model_cheap
+        messages = []
+        if system:
+            messages.append({"role": "system", "content": system})
+        messages.append({"role": "user", "content": prompt})
+
+        payload = {
+            "model": model,
+            "messages": messages,
+            "max_tokens": max_tokens,
+        }
+        if self._supports_temperature(model):
+            payload["temperature"] = temperature
+
+        headers = {
+            "Authorization": f"Bearer {self.openrouter_api_key}",
+            "Content-Type": "application/json",
+            "X-Title": "open_acp",
+        }
+
+        with httpx.Client(timeout=120.0) as client:
+            response = client.post(
+                f"{self.openrouter_base_url}/chat/completions",
+                headers=headers,
+                json=payload,
+            )
+
+        if response.status_code in {429, 500, 502, 503, 504}:
+            raise OpenAIRetryableError(self._format_openai_error(response))
+
+        if response.is_error:
+            raise RuntimeError(self._format_openai_error(response))
+
+        data = response.json()
+        text = self._extract_openrouter_text(data)
+        if not text:
+            raise RuntimeError("OpenRouter response did not contain assistant text.")
+        return text
+
     def _should_fallback_to_openai(self, exc: Exception) -> bool:
         if self.model_provider != "auto" or not self.openai_api_key:
             return False
@@ -233,6 +348,24 @@ class ClaudeClient:
         return f"OpenAI API error {response.status_code}: {message}"
 
     @staticmethod
+    def _extract_openrouter_text(data: dict) -> str:
+        texts: list[str] = []
+        for choice in data.get("choices", []) or []:
+            message = choice.get("message", {}) or {}
+            content = message.get("content")
+            if isinstance(content, str) and content.strip():
+                texts.append(content)
+            elif isinstance(content, list):
+                for item in content:
+                    if isinstance(item, dict):
+                        if item.get("type") in {"text", "output_text"} and item.get("text"):
+                            texts.append(item["text"])
+                        elif item.get("type") == "text" and isinstance(item.get("content"), str):
+                            texts.append(item["content"])
+
+        return "\n".join(part.strip() for part in texts if part.strip()).strip()
+
+    @staticmethod
     def _supports_temperature(model: str) -> bool:
         normalized = model.strip().lower()
-        return not normalized.startswith("gpt-5")
+        return "gpt-5" not in normalized

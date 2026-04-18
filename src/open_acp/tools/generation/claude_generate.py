@@ -3,7 +3,7 @@ import time
 
 from open_acp.config.settings import get_settings
 from open_acp.tools.base_tool import BaseTool, ToolResult, ToolStatus, ToolTier
-from open_acp.utils.claude import ClaudeClient
+from open_acp.utils.claude import ClaudeClient, _load_continue_openrouter_config
 
 
 class ClaudeGenerate(BaseTool):
@@ -57,6 +57,12 @@ class ClaudeGenerate(BaseTool):
     def get_status(self) -> ToolStatus:
         """Check whether any supported model provider key is set."""
         settings = get_settings()
-        if settings.anthropic_api_key or settings.openai_api_key:
+        continue_openrouter = _load_continue_openrouter_config(settings.continue_config_path)
+        if (
+            settings.anthropic_api_key
+            or settings.openai_api_key
+            or settings.openrouter_api_key
+            or continue_openrouter.get("api_key")
+        ):
             return ToolStatus.AVAILABLE
         return ToolStatus.UNAVAILABLE
