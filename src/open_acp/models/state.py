@@ -90,9 +90,13 @@ class LoopBState(BaseModel):
     learning_unit_plan: Optional[dict] = None
     learning_unit_plan_artifact_path: Optional[str] = None
     practice_design: Optional[dict] = None
+    practice_design_artifact_path: Optional[str] = None
     learning_assessment_plan: Optional[dict] = None
+    learning_assessment_plan_artifact_path: Optional[str] = None
     skill_assessment_requirements: Optional[dict] = None
+    skill_assessment_requirements_artifact_path: Optional[str] = None
     assessment_alignment_report: Optional[dict] = None
+    assessment_alignment_report_artifact_path: Optional[str] = None
     gate_g2_outcome: Optional[GateOutcome] = None
 
 

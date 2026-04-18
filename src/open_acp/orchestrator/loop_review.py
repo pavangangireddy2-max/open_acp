@@ -639,14 +639,20 @@ class LoopReviewRunner:
             practice_design = state.get("practice_design", {}) or {}
             return (
                 f"Designed {practice_design.get('practice_touchpoint_count', 0)} practice touchpoints.",
-                [f"Practice types: {', '.join(practice_design.get('practice_types', [])) or 'none'}."],
+                [
+                    f"Practice types: {', '.join(practice_design.get('practice_types', [])) or 'none'}.",
+                    f"Artifact path: {state.get('practice_design_artifact_path', 'not saved')}.",
+                ],
             )
 
         if stage_id == "design_learning_assessments":
             plan = state.get("learning_assessment_plan", {}) or {}
             return (
                 f"Designed {len(plan.get('classroom_quizzes', []))} classroom quizzes and {len(plan.get('module_quizzes', []))} module quizzes.",
-                [f"Question types covered: {', '.join(plan.get('question_types_covered', [])) or 'none'}."],
+                [
+                    f"Question types covered: {', '.join(plan.get('question_types_covered', [])) or 'none'}.",
+                    f"Artifact path: {state.get('learning_assessment_plan_artifact_path', 'not saved')}.",
+                ],
             )
 
         if stage_id == "resolve_skill_assessment_requirements":
@@ -657,6 +663,7 @@ class LoopReviewRunner:
                     f"Question types required: {', '.join(requirements.get('question_types', [])) or 'none'}.",
                     f"Cadence: every {requirements.get('skill_assessment_every_n_topics', 'unknown')} topics.",
                     f"Signal sync status: {requirements.get('signal_sync_status', 'unknown')}.",
+                    f"Artifact path: {state.get('skill_assessment_requirements_artifact_path', 'not saved')}.",
                 ],
             )
 
@@ -670,6 +677,7 @@ class LoopReviewRunner:
                     f"Concept coverage alignment: {report.get('concept_coverage_alignment', {}).get('status', 'unknown')}.",
                     f"Pattern alignment: {report.get('pattern_alignment', {}).get('status', 'unknown')}.",
                     f"Cadence alignment: {report.get('cadence_alignment', {}).get('status', 'unknown')}.",
+                    f"Artifact path: {state.get('assessment_alignment_report_artifact_path', 'not saved')}.",
                 ],
             )
 

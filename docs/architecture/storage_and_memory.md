@@ -51,7 +51,10 @@ canonical source inputs:
 - `modules/index.yaml` and `module.<id>.yaml`
 - `topics/index.yaml` and `topic.<id>.yaml`
 - `units/index.yaml` and `unit.<id>.yaml`
-- later `unit.<id>.yaml`, `practice.<id>.yaml`, and `assessment.<id>.yaml`
+- `practice.yaml`
+- `learning_assessments.yaml`
+- `skill_assessment_requirements.yaml`
+- `assessment_alignment.yaml`
 
 These belong under `storage/design/<domain>/<cycle_id>/`.
 

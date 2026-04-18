@@ -251,6 +251,10 @@ storage/design/<domain>/<cycle_id>/
   units/
     index.yaml
     unit.<id>.yaml
+  practice.yaml
+  learning_assessments.yaml
+  skill_assessment_requirements.yaml
+  assessment_alignment.yaml
 ```
 
 Near-term rule:
@@ -258,6 +262,7 @@ Near-term rule:
 - `generate_brief` persists `brief.yaml`
 - `generate_curriculum` persists `curriculum.yaml`
 - `design_courses`, `design_modules`, `design_topics`, and `design_learning_units` now persist stage collections and per-item docs
+- `design_practice`, `design_learning_assessments`, `resolve_skill_assessment_requirements`, and `align_learning_with_skill_assessments` now persist their own stage artifacts
 
 Stage 1 validation rule:
 

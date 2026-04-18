@@ -11,7 +11,7 @@ Routing table:
 │ DESIGN_FIX      │ HIGH/CRIT  │ B / generate_curriculum      │ G2   │ No   │
 │ CURRICULUM_FIX  │ any        │ A→B / update_skill_graph →   │ G4   │ No   │
 │                 │            │      generate_curriculum     │      │      │
-│ PEDAGOGY_FIX    │ any        │ B+C / select_pedagogy +      │ G4   │ No   │
+│ PEDAGOGY_FIX    │ any        │ B+C / resolve_pedagogy_profile│ G4  │ No   │
 │                 │            │       activities             │      │      │
 └─────────────────┴────────────┴──────────────────────────────┴──────┴──────┘
 """
@@ -57,7 +57,7 @@ class BackpropRouter:
         elif fix_type == "PEDAGOGY_FIX":
             return {
                 "target_loop": "B+C",
-                "target_nodes": ["select_pedagogy", "activities"],
+                "target_nodes": ["resolve_pedagogy_profile", "activities"],
                 "gate": "G4",
                 "auto_approved": False,
             }

@@ -641,9 +641,11 @@ def test_design_stages_persist_course_module_topic_and_unit_artifacts(monkeypatc
     assert (artifact_root / "units" / "index.yaml").exists()
 
 
-def test_design_and_alignment_pipeline_exposes_external_skill_gaps():
+def test_design_and_alignment_pipeline_exposes_external_skill_gaps(monkeypatch, tmp_path):
+    monkeypatch.setattr(nodes, "_find_project_root", lambda: tmp_path)
     state = {
         "domain": "genai",
+        "cycle_id": "cycle_alignment",
         "content_type": "concept_explainer",
         "pedagogy_profile": "project_build_along",
         "curriculum_map": {
@@ -702,3 +704,8 @@ def test_design_and_alignment_pipeline_exposes_external_skill_gaps():
     assert state["skill_assessment_requirements"]["signal_sync_status"] == "shared_loop_a_patterns"
     assert state["assessment_alignment_report"]["question_type_alignment"]["status"] == "gap"
     assert "project" in state["assessment_alignment_report"]["question_type_alignment"]["missing"]
+    artifact_root = tmp_path / "storage" / "design" / "genai" / "cycle_alignment"
+    assert (artifact_root / "practice.yaml").exists()
+    assert (artifact_root / "learning_assessments.yaml").exists()
+    assert (artifact_root / "skill_assessment_requirements.yaml").exists()
+    assert (artifact_root / "assessment_alignment.yaml").exists()

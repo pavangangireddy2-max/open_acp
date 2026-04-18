@@ -175,6 +175,11 @@ Brief-first note:
   - `modules/index.yaml` and `module.<id>.yaml`
   - `topics/index.yaml` and `topic.<id>.yaml`
   - `units/index.yaml` and `unit.<id>.yaml`
+- downstream practice/assessment stages should persist:
+  - `practice.yaml`
+  - `learning_assessments.yaml`
+  - `skill_assessment_requirements.yaml`
+  - `assessment_alignment.yaml`
 - downstream Loop B stages should increasingly reload those artifacts instead of trusting only in-memory state
 - curriculum generation now includes a strict hours validator against:
   - packaging / time-budget target hours

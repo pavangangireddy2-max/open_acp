@@ -52,9 +52,13 @@ class LoopBGraphState(TypedDict, total=False):
     learning_unit_plan: Annotated[Any, _replace]
     learning_unit_plan_artifact_path: Annotated[Any, _replace]
     practice_design: Annotated[Any, _replace]
+    practice_design_artifact_path: Annotated[Any, _replace]
     learning_assessment_plan: Annotated[Any, _replace]
+    learning_assessment_plan_artifact_path: Annotated[Any, _replace]
     skill_assessment_requirements: Annotated[Any, _replace]
+    skill_assessment_requirements_artifact_path: Annotated[Any, _replace]
     assessment_alignment_report: Annotated[Any, _replace]
+    assessment_alignment_report_artifact_path: Annotated[Any, _replace]
     gate_g2_outcome: Annotated[Any, _replace]
 
 

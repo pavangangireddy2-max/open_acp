@@ -160,7 +160,7 @@ def route_fixes(state: dict) -> dict:
         },
         FixType.PEDAGOGY_FIX.value: {
             "target_loop": "B+C",
-            "target_nodes": ["select_pedagogy", "activities"],
+            "target_nodes": ["resolve_pedagogy_profile", "activities"],
             "gate": "G4",
         },
     }

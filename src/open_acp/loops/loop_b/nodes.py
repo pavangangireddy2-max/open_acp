@@ -1358,8 +1358,20 @@ def design_learning_units(state: dict) -> dict:
 
 def design_practice(state: dict) -> dict:
     """Design practice touchpoints from the planned learning-unit mix."""
-    topics = (state.get("topic_design", {}) or {}).get("topics", [])
-    learning_units = (state.get("learning_unit_plan", {}) or {}).get("learning_units", [])
+    topic_design = _load_design_artifact(
+        state,
+        artifact_key="topic_design",
+        state_key="topic_design",
+        filename="topics/index.yaml",
+    ) or {}
+    learning_unit_plan = _load_design_artifact(
+        state,
+        artifact_key="learning_unit_plan",
+        state_key="learning_unit_plan",
+        filename="units/index.yaml",
+    ) or {}
+    topics = topic_design.get("topics", [])
+    learning_units = learning_unit_plan.get("learning_units", [])
 
     practice_items = []
     for topic in topics:
@@ -1386,15 +1398,43 @@ def design_practice(state: dict) -> dict:
         "practice_types": _unique_preserve_order([item["practice_type"] for item in practice_items]),
         "items": practice_items,
     }
+    artifact_path, artifact_paths = _persist_design_artifact(
+        state=state,
+        artifact_key="practice_design",
+        filename="practice.yaml",
+        payload=practice_design,
+    )
     print(f"  Practice design: {len(practice_items)} touchpoints")
-    return {"practice_design": practice_design}
+    return {
+        "practice_design": practice_design,
+        "design_artifact_paths": artifact_paths,
+        "practice_design_artifact_path": artifact_path,
+    }
 
 
 def design_learning_assessments(state: dict) -> dict:
     """Design internal learning assessments before external skill-assessment alignment."""
-    modules = (state.get("module_design", {}) or {}).get("modules", [])
-    topics = (state.get("topic_design", {}) or {}).get("topics", [])
-    learning_units = (state.get("learning_unit_plan", {}) or {}).get("learning_units", [])
+    module_design = _load_design_artifact(
+        state,
+        artifact_key="module_design",
+        state_key="module_design",
+        filename="modules/index.yaml",
+    ) or {}
+    topic_design = _load_design_artifact(
+        state,
+        artifact_key="topic_design",
+        state_key="topic_design",
+        filename="topics/index.yaml",
+    ) or {}
+    learning_unit_plan = _load_design_artifact(
+        state,
+        artifact_key="learning_unit_plan",
+        state_key="learning_unit_plan",
+        filename="units/index.yaml",
+    ) or {}
+    modules = module_design.get("modules", [])
+    topics = topic_design.get("topics", [])
+    learning_units = learning_unit_plan.get("learning_units", [])
     packaging_profile = state.get("packaging_profile", {}) or {}
 
     classroom_quizzes = []
@@ -1459,18 +1499,34 @@ def design_learning_assessments(state: dict) -> dict:
             "module_quizzes": "At the end of each module",
         },
     }
+    artifact_path, artifact_paths = _persist_design_artifact(
+        state=state,
+        artifact_key="learning_assessment_plan",
+        filename="learning_assessments.yaml",
+        payload=learning_assessment_plan,
+    )
 
     print(
         "  Learning assessments: "
         f"{len(classroom_quizzes)} classroom quizzes, {len(module_quizzes)} module quizzes"
     )
-    return {"learning_assessment_plan": learning_assessment_plan}
+    return {
+        "learning_assessment_plan": learning_assessment_plan,
+        "design_artifact_paths": artifact_paths,
+        "learning_assessment_plan_artifact_path": artifact_path,
+    }
 
 
 def resolve_skill_assessment_requirements(state: dict) -> dict:
     """Resolve external skill-assessment expectations from packaging plus shared signal context."""
     packaging_profile = state.get("packaging_profile", {}) or {}
-    course_design = (state.get("course_design", {}) or {}).get("courses", [])
+    course_design = _load_design_artifact(
+        state,
+        artifact_key="course_design",
+        state_key="course_design",
+        filename="courses/index.yaml",
+    ) or {}
+    course_design = course_design.get("courses", [])
     detected_patterns = state.get("detected_patterns", []) or []
 
     concept_targets = _unique_preserve_order(
@@ -1489,22 +1545,60 @@ def resolve_skill_assessment_requirements(state: dict) -> dict:
         "industry_patterns": [pattern.get("description", "pattern") for pattern in detected_patterns[:5]],
         "signal_sync_status": "shared_loop_a_patterns" if detected_patterns else "no_explicit_signal_digest",
     }
+    artifact_path, artifact_paths = _persist_design_artifact(
+        state=state,
+        artifact_key="skill_assessment_requirements",
+        filename="skill_assessment_requirements.yaml",
+        payload=requirements,
+    )
 
     print(
         "  Skill assessment requirements: "
         f"{len(requirements['question_types'])} question types, cadence every "
         f"{requirements['skill_assessment_every_n_topics']} topics"
     )
-    return {"skill_assessment_requirements": requirements}
+    return {
+        "skill_assessment_requirements": requirements,
+        "design_artifact_paths": artifact_paths,
+        "skill_assessment_requirements_artifact_path": artifact_path,
+    }
 
 
 def align_learning_with_skill_assessments(state: dict) -> dict:
     """Check whether internal learning assessments prepare learners for external skill assessments."""
-    learning_plan = state.get("learning_assessment_plan", {}) or {}
-    requirements = state.get("skill_assessment_requirements", {}) or {}
-    courses = (state.get("course_design", {}) or {}).get("courses", [])
-    modules = (state.get("module_design", {}) or {}).get("modules", [])
-    topics = (state.get("topic_design", {}) or {}).get("topics", [])
+    learning_plan = _load_design_artifact(
+        state,
+        artifact_key="learning_assessment_plan",
+        state_key="learning_assessment_plan",
+        filename="learning_assessments.yaml",
+    ) or {}
+    requirements = _load_design_artifact(
+        state,
+        artifact_key="skill_assessment_requirements",
+        state_key="skill_assessment_requirements",
+        filename="skill_assessment_requirements.yaml",
+    ) or {}
+    course_design = _load_design_artifact(
+        state,
+        artifact_key="course_design",
+        state_key="course_design",
+        filename="courses/index.yaml",
+    ) or {}
+    module_design = _load_design_artifact(
+        state,
+        artifact_key="module_design",
+        state_key="module_design",
+        filename="modules/index.yaml",
+    ) or {}
+    topic_design = _load_design_artifact(
+        state,
+        artifact_key="topic_design",
+        state_key="topic_design",
+        filename="topics/index.yaml",
+    ) or {}
+    courses = course_design.get("courses", [])
+    modules = module_design.get("modules", [])
+    topics = topic_design.get("topics", [])
     detected_patterns = state.get("detected_patterns", []) or []
 
     covered_question_types = set(learning_plan.get("question_types_covered", []))
@@ -1584,10 +1678,16 @@ def align_learning_with_skill_assessments(state: dict) -> dict:
             "skill_assessment_every_n_topics": required_cadence,
         },
     }
+    artifact_path, artifact_paths = _persist_design_artifact(
+        state=state,
+        artifact_key="assessment_alignment_report",
+        filename="assessment_alignment.yaml",
+        payload=alignment_report,
+    )
 
     print(f"  Skill-assessment alignment: {overall_status}")
-    return {"assessment_alignment_report": alignment_report}
-
-
-# Compatibility alias for older call sites.
-select_pedagogy = resolve_pedagogy_profile
+    return {
+        "assessment_alignment_report": alignment_report,
+        "design_artifact_paths": artifact_paths,
+        "assessment_alignment_report_artifact_path": artifact_path,
+    }
