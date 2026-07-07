@@ -20,9 +20,12 @@ Programming & Algorithms stack) is the pilot.
 
 | doc | what it holds |
 |---|---|
+| [context_agent_family_architecture.md](context_agent_family_architecture.md) | **The system map** — the full 10-agent family (Canon/Crux/Loop/Relay/Forge/Lens/Radar/Panel/Prism/Docket + Compass), how they connect, locked cross-thread concepts (cuts, GRIT shadow ladder, born-tagging), and where every other doc plugs in. Read after this README for the whole circuit |
 | [context_products_all.md](context_products_all.md) | All product families (NIAT/Academy/Intensive/GRIT/Launchpad/default), structure profiles, packaging, resolution semantics — fully inlined |
 | [context_pedagogy_intelligence.md](context_pedagogy_intelligence.md) | The deck-mined pedagogy: universal principles (inlined YAML v4), stack overlays, E01–E20 eval set, session flows |
 | [context_question_intelligence_python.md](context_question_intelligence_python.md) | The HOW rail for Forge: 4,963-question corpus mine, ~310-entry misconception bank, item anatomy per axis, mechanical rungs, C01–C25 gates, format contracts, do-not-port defects |
+| [intake_spec_question_intelligence_per_stack.md](intake_spec_question_intelligence_per_stack.md) | Intake spec to extend question intelligence to **all stacks**: the per-stack input bundle, join rules, stack-list disambiguation, delivery checklist. Read before gathering non-Python corpora |
+| [design_echo_rag_app.md](design_echo_rag_app.md) | Design spec for **Echo** — the Agentic-RAG surface over the intelligence layer (ask-questions-about-docs now; weekly Portal-MCP refresh w/ HITL later). Whole-doc-into-context retrieval, lives at `src/open_acp/echo/` |
 | [context_platform_student_experience.md](context_platform_student_experience.md) | How the platform actually behaves (UI, grading, completion, players) + all 16 owner-confirmed answers |
 | [proposal_forge_review_and_adaptive_experience.md](proposal_forge_review_and_adaptive_experience.md) | Our proposals: Forge reviewer UX (coverage matrix, gate-evidence cards) + student adaptive walk (node rail, mastery map) |
 | [review_adaptive_coding_prd.md](review_adaptive_coding_prd.md) | Simulation-backed review of the product team's IRT/Elo adaptive PRD (verdict: fix math, add node outer-loop) |
