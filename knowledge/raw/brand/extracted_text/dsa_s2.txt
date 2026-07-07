@@ -1,0 +1,630 @@
+WELCOME
+   Analyzing Algorithm
+Efﬁciency : Time complexity
+Analyzing Algorithm Efﬁciency
+
+Agenda
+
+
+
+
+                Introduction    Time Complexity   Asymptotic Notation
+Analyzing Algorithm Efﬁciency
+
+Introduction
+
+
+
+
+        Algorithm Efﬁciency refers to how
+        effectively an algorithm performs in
+        terms of the resources it uses as the
+        input size increases.
+Analyzing Algorithm Efﬁciency
+
+Consider Algorithm 1
+
+
+          Input = n                         output                                  Input = 2*n                      output
+
+                       Uses x1 resources                                                       Uses 2*x1 resources
+
+
+
+
+         Input = 3*n                        output                                  Input = 4*n                      output
+
+                      Uses 3*x1 resources                                                      Uses 4*x1 resources
+
+
+
+
+                                    Point to note:
+
+                                            On increasing input by an additional value of n,
+                                   resources consumed increase by additional value of x1 (linear).
+Analyzing Algorithm Efﬁciency
+
+Consider Algorithm 2
+
+
+          Input = n                       output                                 Input = 2*n                       output
+
+                      Uses x2 resources                                                     Uses (x2)2 resources
+
+
+
+
+         Input = 3*n                      output                                 Input = 4*n                       output
+
+                  Uses (x2)3 resources                                                     Uses (x2)4 resources
+
+
+
+
+                                   Point to note
+
+                                            On increasing input by additional value n,
+                                  resources consumed increase by a multiple of x2 (exponential).
+Analyzing Algorithm Efﬁciency
+
+Introduction
+
+
+                      Algorithm 1                                 Algorithm 2
+
+
+         →     Input = n → resource = x1             →     Input = n → resource = x2
+         →     Input = 2*n → resource = 2*x1         →     Input = 2*n → resource = (x2)2
+         →     Input = 3*n → resource = 3*x1         →     Input = 3*n → resource = (x2)3
+         →     Input = 4*n → resource = 4*x1         →     Input = 4*n → resource = (x2)4
+
+
+             So resource consumption is increasing       So resource consumption is increasing
+                    linearly with input value.               exponentially with input value.
+Analyzing Algorithm Efﬁciency
+
+Conclusion
+
+      From this, we can conclude that as the input
+     size increases, the resource usage of Algorithm 1
+         grows slower compared to Algorithm 2.
+
+        Hence, Algorithm 1 is more efﬁcient than
+    Algorithm 2 in terms of resource usage for larger
+                       input values.
+
+
+                           Note
+
+                For comparing efﬁciency, we do not need to compare the exact values of x₁ and x₂ here.
+                 Instead, we focus on how the resource consumption varies as the input size increases.
+Analyzing Algorithm Efﬁciency
+
+Algorithm Efﬁciency
+                                  When measuring Algorithm efﬁciency,
+                                      we consider two types of Resources.
+
+                    Time                                                          Space
+
+
+
+
+                                                  Resources
+
+
+
+
+           Time - measures how long                                         Space - measures how
+             the algorithm takes to                                           much memory the
+                    execute.                                                 algorithm consumes.
+                                        Let's see both one by one
+Analyzing Algorithm Efﬁciency
+
+Time Complexity
+
+
+                                    Time Complexity
+
+
+                  Time complexity analysis measures how the speed of
+                   an algorithm changes as the input size increases by
+                 counting the number of basic operations performed as
+                                a function of the input size.
+Analyzing Algorithm Efﬁciency
+
+Time Complexity
+
+                                    Code
+
+
+                      Step 1
+                                        Step 2
+                                        Step 3
+                               Step 4
+                                        Step 5
+                                                   Time taken by the system to run a code:
+                      Step 6
+                                                 Time taken = (# steps) * (Time taken per step)
+
+
+
+             Step n
+Analyzing Algorithm Efﬁciency
+
+Time Complexity
+
+                                    Code
+
+
+                      Step 1
+                                        Step 2     Time taken by the system to run a code:
+                                        Step 3
+                                                 Time taken = (# steps) * (Time taken per step)
+                               Step 4
+                                        Step 5
+                      Step 6
+
+
+
+
+                                                       Count of steps taken by the Algorithm
+             Step n                                    (Varies from algorithm to algorithm)
+Analyzing Algorithm Efﬁciency
+
+Time Complexity
+
+                                    Code
+
+
+                      Step 1
+                                        Step 2     Time taken by the system to run a code:
+                                        Step 3
+                                                 Time taken = (# steps) * (Time taken per step)
+                               Step 4
+                                        Step 5
+                      Step 6
+
+
+
+
+                                                           Varies from device to device
+             Step n                                      (Based on device performance).
+Analyzing Algorithm Efﬁciency
+
+Time Complexity
+
+
+
+
+                            Time taken by the system to run a code:
+
+                        Time taken = (# steps) * (Time taken per step)
+
+
+
+
+                       Depends on the efﬁciency       Ignore for algorithm
+                       of algorithm,                  comparison as this is related
+                                                      to device performance
+Analyzing Algorithm Efﬁciency
+
+Time Complexity
+
+
+
+
+            So, to calculate time complexity,
+            we measure how the number of
+            steps varies with the input size.
+
+
+
+
+                            Let's understand with some examples:
+Time Complexity
+
+Problem - 1
+
+                                 Code
+
+
+
+
+     for(int i = 1; i<=N; i++)
+     {                                        Given an input N,
+         cout<<i<<endl;                 print the numbers from 1 to N.
+     }
+Time Complexity
+
+Problem - 1
+
+                                 Code
+                                        Initiation             i=1
+
+
+                                        Condition              i <= N (True)
+     for(int i = 1; i<=N; i++)
+     {
+         cout<<i<<endl;                   Print                Output
+     }
+
+
+                                             Iteration: 1 (3 steps)
+Time Complexity
+
+Problem - 1
+
+                                 Code
+                                         Updation               increased ‘i’
+
+
+                                         Condition              i <= N (True)
+     for(int i = 1; i<=N; i++)
+     {
+         cout<<i<<endl;                    Print                Output
+     }
+
+
+                                        Iteration: 2 to N (3 steps each)
+Time Complexity
+
+Problem - 1
+
+                                 Code
+
+
+
+
+                                        Updation            i = N+1
+     for(int i = 1; i<=N; i++)
+     {
+                                        Condition           i <= N (False)
+         cout<<i<<endl;
+     }
+
+                                            Loop break (2 steps)
+Time Complexity
+
+Problem - 1
+
+
+       To calculate the time complexity of a single ‘for’ loop, the loop iterates N times
+       from i = 1 to i = N and then the loop performs two actions: updating i(to N+1) and
+       checking the condition. Since the condition fails at i = N+1, the loop terminates.
+
+
+                                          # Steps = 3 * N + 2
+
+
+         The number of steps is given by 3N + 2, indicating that the time taken by the algorithm
+                   varies linearly with the input size, with a multiplication factor of 3.
+Time Complexity
+
+Problem - 2
+
+                                  Code
+
+
+     if(N%2   0) {
+          cout<<”even”<<end;
+     }
+     else {                              Given an input N, print "even" if N
+         cout << ”odd” << endl;            is even and "odd " if N is odd.
+     }
+Time Complexity
+
+Problem - 2
+
+                                  Code
+                                            If N is even, the if block is executed;
+                                           otherwise, the else block is executed.
+     if(N%2   0) {                         However, the number of steps in the
+          cout<<”even”<<end;             given code remains constant, i.e., 2, and is
+     }                                        independent of the value of N.
+     else {
+         cout << ”odd” << endl;                        # Steps = 2
+     }
+                                            The number of steps is 2, indicating
+                                           that the time taken by the algorithm
+                                             is independent of the value of N.
+Time Complexity
+
+Problem - 3
+
+                                  Code
+
+
+
+
+     for( int i=1; i<=N; i++ )
+     {                                   Given an input N, print the
+         for(int j=1;j<=N; j++)            character '*' N² times.
+         {
+             cout<<”*”;
+         }
+     }
+Time Complexity
+
+Problem - 3
+
+                                  Code
+                                         Initiation (i)           i=1
+
+
+     for( int i=1; i<=N; i++ )            Condition              1 <= N (True)
+     {
+         for(int j=1;j<=N; j++)
+                                                                  Takes 3*N+2 operations as
+
+         {                               Inner loop               calculated previously(since it is
+                                                                  independent from outer loop).
+
+             cout<<”*”;
+         }
+     }
+                                              Iteration : 1 ( 3*N+4 steps )
+Time Complexity
+
+Problem - 3
+
+                                  Code
+
+                                         Updation (i)           Increment i
+
+
+     for( int i=1; i<=N; i++ )
+                                          Condition             i <= N (True)
+     {
+         for(int j=1;j<=N; j++)
+                                                                Takes 3*N+2 operations as
+
+         {                               Inner loop             calculated previously(since it is
+                                                                independent then outer loop)
+
+             cout<<”*”;
+         }
+     }
+                                         Iteration : 2 to N (3*N+4 steps each)
+Time Complexity
+
+Problem - 3
+
+                                  Code
+
+
+
+
+     for( int i=1; i<=N; i++ )           Updation (i)          i = N+1
+     {
+         for(int j=1;j<=N; j++)
+                                          Condition           i <= N (False)
+         {
+             cout<<”*”;
+         }
+     }
+                                                Loop break (2 steps)
+Time Complexity
+
+Problem - 3
+
+
+
+             Summing up the steps described previously we get:
+
+                    N*(3*N+4)+2 = 3*N*N + 4*N + 2
+
+
+
+
+                                 # Steps = 3*N*N + 4*N + 2
+Comparison
+Compare Different Algorithms
+Different Algorithms in Time Complexity
+
+
+
+
+                           Algorithm 1        Algorithm 2        Algorithm 3
+
+     #Steps                  3N + 2                2             3N² + 4N + 2
+
+
+
+
+       Let's compare how many steps each algorithm takes for different inputs.
+Different Algorithms in Time Complexity
+
+
+
+
+                     Algorithm 1     Algorithm 2        Algorithm 3
+
+     #Steps              3N + 2          2              3N² + 4N + 2
+
+     N=1                   5             2                     9
+
+
+
+
+                           3N + 2                        3N² + 4N + 2
+                  N=1⟶    3(1) + 2             N = 1 ⟶ 3(1)² + 4(1) + 2
+                           3+2=5                        3+4+2=9
+Different Algorithms in Time Complexity
+
+
+
+
+                          Algorithm 1       Algorithm 2        Algorithm 3
+
+     #Steps                 3N + 2               2             3N² + 4N + 2
+
+     N=1                       5                 2                   9
+
+     N=5                      17                 2                  97
+
+     N = 100                  302                2                 30402
+
+     N = 100000             300002               2           3000 Cr+4 Lakh+2
+
+
+                  When comparing 2 and 3000 Cr, 2 can be ignored
+Different Algorithms in Time Complexity
+
+
+
+
+                            Algorithm 1       Algorithm 2        Algorithm 3
+
+     #Steps                   3N + 2               2             3N² + 4N + 2
+
+     N=1                         5                 2                  9
+
+     N=5                        17                 2                 97
+
+     N = 100                   302                 2                30402
+
+     N = 100000               300002               2           3000 Cr+4 Lakh+2
+
+
+                  Approximately 300000.   4 Lakh and 3000 Cr are also incomparable
+Different Algorithms in Time Complexity
+
+
+                      Algorithm 1         Algorithm 2              Algorithm 3
+
+     #Steps               3N + 2               2                   3N² + 4N + 2
+
+     N=1                     5                 2                         9
+
+     N=5                    17                 2                         97
+
+     N = 100               302                 2                      30402
+
+     N = 100000          300000                2                     3000 Cr
+
+
+                  This will take   Less time       This task involves a signiﬁcant number
+                  medium time.                     of steps, which means that it will
+                                                   require maximum time to complete.
+Asymptotic Notation
+   Learning about Asymptotic Notation
+Time Complexity
+
+Big O Notation
+
+
+                                                                         Asymptotic Notations
+       Asymptotic notations are mathematical tools that describe an
+       algorithm's efﬁciency as the input size grows. They simplify
+       analysis by focusing on dominant growth rates rather than exact   01   Big O Notation
+       runtimes. Here are the main types:
+
+         →   Big O (O): Upper bound (worst-case).                        02   Omega Notation
+         →   Big Omega (Ω): Lower bound.
+
+         →   Big Theta (Θ): Tight bound (both upper and lower).          03   Theta Notation
+Time Complexity
+
+Big O Notation
+
+                                           Big O Notation
+
+                  ●   Big O notation is a mathematical representation used to
+                      describe the upper bound or worst-case scenario of an
+                      algorithm's time or space complexity.
+
+
+                  ●   It provides a simpliﬁed way to express how the performance of
+                      an algorithm scales with input size.
+Asymptotic Notation
+
+Fundamental Rules
+
+
+
+                           1    Ignore/neglect constants
+
+
+             Fundamental
+                           2   Ignore lower values/powers
+                 Rules
+
+
+                           3     Worst Case Complexity
+Time Complexity
+
+Comparison of Different Algorithms
+
+
+
+                              Algorithm 1        Algorithm 2        Algorithm 3
+
+             #Steps             3N + 2                2             3N² + 5N + 2
+
+
+                                 O(N)                O(1)                O(N²)
+
+
+             We can represent the speed of any algorithm using big O notation.
+Comparison of Different Algorithms
+
+Big O Notation
+
+
+                                                         Slowest
+
+                                              O(N²)
+
+                        T
+                        i                         O(N)   Slow
+                        m
+                        e
+
+                                                  O(1)   Fastest
+
+
+                                     Input size
+Comparison of Different Algorithms
+
+Big Ω (Omega) Notation
+
+
+
+            Big Ω (Omega) Notation is a mathematical representation used to
+            describe the lower bound of an algorithm’s time or space complexity.
+
+
+            It provides a simpliﬁed way to express the minimum performance of
+            an algorithm as the input size grows.
+Comparison of Different Algorithms
+
+Big Θ (Theta) Notation
+
+               Θ
+              Big Θ (Theta) Notation is a mathematical representation used to     Θ
+              describe a tight bound on an algorithm’s time or space complexity
+     Θ        (both upper and lower bounds).
+
+
+              It provides a simpliﬁed way to express how the performance of an
+              algorithm scales with input size from both above and below.
+                                                                            Θ
+                                               Θ
+Analyzing Algorithm Efﬁciency
+
+Key Takeaways
+
+     ●   Algorithm efﬁciency is about how resources like time
+         and space grow as input increases.
+
+     ●   Time Complexity – Measures how the number of
+         steps in an algorithm grows with input size (e.g., O(1),
+         O(N), O(N²)).
+
+     ●   Asymptotic Notation – Big O (worst case), Big Ω (best
+         case), and Big Θ (average/tight bound) help describe
+         algorithm efﬁciency.
+THANK YOU
+ALL THE BEST
+

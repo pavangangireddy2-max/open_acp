@@ -1,0 +1,788 @@
+WELCOME
+Working with Strings
+& Input-Output Basics
+Recap
+
+Sequence of Instructions
+
+
+
+        Sequence of Instructions
+        BODMAS
+Agenda for Today’s Session
+
+Working with Strings & Input Output Basics
+
+
+
+
+        Working with Strings   Type Conversion   Input Output Basics
+Working with Strings
+Working with Strings
+
+Adding Strings
+
+
+                       Python                                   Python
+
+  a = 1 + 2                     a = "1" + "2"
+  print(a)                      print(a)
+
+
+
+                       Output
+
+     3                               What will be the output?
+Working with Strings
+
+Adding Strings
+
+                                     Python                                            Output
+ a = "1" + "2"
+                                                          12
+ print(a)
+
+
+
+
+             Anything within quotes (single or double) will be treated as a string
+
+             + operator is used between the strings, it combines (concatenates) them
+             into a single string
+String Concatenation
+
+Example
+
+                                                     Python
+                       a = "Hello" + " " + "World"
+                       print(a)
+
+
+
+
+                                                     Output
+
+                          Hello World
+String Concatenation
+
+Example
+
+
+                       JavaScript                                 Python
+
+   a = "*" + 10                     a = "*" + 10
+   console.log(a)                   print(a)
+
+
+
+
+                           Output
+
+      *10                                  What will be the output ?
+String Concatenation
+
+Concatenation Errors
+
+                                    Python
+    a = "*" + 10
+    print(a)
+
+
+                                     Output
+
+       ERROR!
+       Traceback (most recent call last):
+         File "<main.py>", line 1, in
+       <module>
+       TypeError: can only concatenate str
+       (not "int") to str
+String Concatenation
+
+Key Differences
+
+                                            Key Difference
+
+
+
+
+                     Python                                         JavaScript
+           Requires explicit conversion
+                                                               Automatically converts
+            of non-strings to strings for
+                                                             non-strings to strings when
+                  concatenation
+                                                                   concatenating
+String Concatenation
+
+Explicit Conversion
+
+
+                                                                           Python
+                                                          a = str(5)
+       In Python, we can convert an integer to a string   print(type(a))
+       using the str( ) function
+
+       This is an example of explicit conversion, also                     Output
+
+       known as type conversion                               <class ‘str’>
+String Concatenation
+
+Correct Code
+
+
+                                Python
+            a = "*" + str(10)
+            print(a)
+
+
+
+                       Output
+
+               *10
+String Concatenation
+
+Type Conversions
+
+
+                       int()     Converts to integer data type
+
+
+
+                       float()   Converts to ﬂoat data type
+
+
+
+                       str()     Converts to string data type
+
+
+
+                       bool()    Converts to boolean data type
+ Type Conversions
+
+Type Conversion in Python
+
+   Conversion Type            Example                Output                     Explanation
+
+                            a = int("5")                                Converts a valid numeric string
+String → Integer                                  <class 'int'>
+                           print(type(a))                                         to integer
+
+                                               ValueError: invalid       Raises ValueError if string is
+Invalid String → Integer   a = int("Five")
+                                               literal for int()...              not numeric
+
+                           a = float("5.5")                             Converts a valid numeric string
+String → Float                                   <class 'float'>
+                            print(type(a))                                          to ﬂoat
+
+                                               ValueError: could not     Raises ValueError if string is
+Invalid String → Float     a = float("abc")
+                                              convert string to float          not a valid ﬂoat
+ Type Conversions
+
+Type Conversion in Python
+
+   Conversion Type   Example       Output           Explanation
+
+                     b=int(True)                  True → 1, False → 0
+Boolean → Integer                    1
+                     print(b)
+
+                     b=bool(5)                Non-zero integers → True,
+Integer → Boolean                  True
+                     print(b)                        0 → False
+
+                     a=str(123)
+Integer to String                   123     Converts a string to an integer
+                     print(a)
+
+                     a=float(3)
+Integer to Float                    3.0       Converts integer to a ﬂoat
+                     print(a)
+Type Conversions
+
+Python vs JavaScript
+
+
+                   JavaScript   Python
+
+
+                   String()     str()
+
+
+                   Number()     int()
+
+
+                   parseInt()   int()
+
+
+                   toString()   str()
+Type Conversions
+
+Python vs JavaScript
+
+
+                    JavaScript    Python
+
+
+                   parseFloat()   float()
+
+
+                    Boolean()     bool()
+Type Conversions
+
+None to Integer Conversion
+                                                                               Output
+                                              Traceback (most recent call last):
+                                                File "main.py", line 1, in <module>
+                                Python
+                                                  print(int(None))
+ print(int(None))                             TypeError: int() argument must be a
+                                              string, a bytes like object or a number,
+                                              not 'NoneType'
+
+
+
+
+                    ●   int(None) → raises TypeError (None is not numeric)
+Type Conversions
+
+None to Boolean Conversion
+
+
+                               Python                 Output
+
+ print(bool(None))                            False
+
+
+
+
+                   ●   bool(None) → returns False
+Type Conversions
+
+Null to Integer / Boolean Conversion
+
+
+                               Javascript             Output
+
+  console.log(Number(null));                  0
+  console.log(Boolean(null));                 false
+
+
+
+
+                   ●   bool(None) → returns False
+Type Conversions
+
+Invalid Number Conversion - Python
+
+                                                                               Output
+
+                                               Traceback (most recent call last):
+                                 Python
+                                                 File "main.py", line 1, in <module>
+  print(int("hello"))                              print(int("hello"))
+                                               ValueError: invalid literal for int()
+                                               with base 10: 'hello'
+
+
+
+
+                   ●    invalid numeric conversion → raises ValueError
+Type Conversions
+
+Invalid Number Conversion - Python
+
+                                                                               Output
+
+                                               Traceback (most recent call last):
+                                 Python
+                                                 File "main.py", line 1, in <module>
+  print(float("abc"))                              print(float("abc"))
+                                               ValueError: could not convert string
+                                               to float: 'abc'
+
+
+
+
+                   ●    invalid numeric conversion → raises ValueError
+Type Conversions
+
+Invalid Number Conversion - JavaScript
+
+
+                              Javascript                              Output
+
+  console.log(Number("hello"));              NaN
+  console.log(parseInt("abc"));              NaN
+
+
+
+
+                   ●   invalid numeric conversion → returns NaN (no
+                   ●   bool(None) → returns False
+                       error)
+Working with Strings
+
+String Repetition
+
+                                             Python
+
+                       a = "*" + "*" + "*"
+                       print(a)
+
+
+
+                                             Output
+
+                         ***
+Working with Strings
+
+String Repetition
+
+
+
+                       What if we want to print 10 stars?
+Working with Strings
+
+String Repetition
+
+                                                       Python
+
+                       a = "*" * 10
+                       print(a)
+
+                                                       Output
+
+                         **********
+
+
+
+                           String will be repeated 10 times
+
+                           This is called String Repetition
+Working with Strings
+
+String Repetition Example
+
+
+                                                     Python
+
+                       s = "Python"
+                       s = ("* " * 3) + s + (" *" * 3)
+                       print(s)
+
+
+                                                     Output
+
+                       * * * Python * * *
+String Repetition
+
+Key Differences
+
+                                        str
+
+                                    "Hello"
+
+
+
+                    Method for String
+       Language                                Code Example        Result
+                       Repetition
+
+ JavaScript         .repeat() method          str.repeat(3)   "HelloHelloHello "
+
+ Python                * operator             str * 3         "HelloHelloHello "
+Working with Strings
+
+Length of String
+
+
+                              Python
+
+     username = "Ravi"                  ●   len( ) returns number of characters
+     length = len(username)                 in a given string
+     print(length)
+                                        ●   The return value is of data type int
+                               Output
+
+     4
+Working with Strings
+
+Python vs JavaScript
+
+
+   Language      Method to Find Length        Code Example          Output
+
+
+                                          let str = "Python" ;
+  JavaScript           .length                                        6
+                                         console.log(str.length);
+
+                                             str = "Python"
+  Python                len()                                         6
+                                          console.log(len(str))
+Working with Strings
+
+Accessing Characters in String
+
+
+                       username                               username[0]
+                       "Ravi"
+                       0 1 2 3
+                                                                "R"
+
+
+                   Individual characters in a string can be accessed using
+                   their positions (starting from 0)
+
+                   These positions are also called as index
+Working with Strings
+
+Accessing Characters in String
+
+
+                                 Python
+
+    username = "Ravi"
+    first_letter = username[0]
+                                          username
+    print(first_letter)
+                                          "Ravi"
+                                 Output   0 1 2 3
+
+        R
+Accessing Characters in String
+
+Difference
+
+
+
+                                 String indexing works the same way in
+                                 JavaScript and Python
+
+                                 Indexing starts from 0
+
+                                 Strings are immutable (characters cannot be
+                                 modiﬁed directly)
+Accessing Characters in String
+
+Changing a Character
+
+
+                                                    Python
+
+
+
+                                 message = "sea you soon"
+                                                             Can we modify a
+                                 message[2] = "e"
+                                                             string like this?
+                                 print(message)
+Accessing Characters in String
+
+Changing a Character
+
+
+                                  Python                      Output
+
+
+
+               message = "sea you soon"    TypeError:
+               message[2] = "e"            'str' object does not
+               print(message)              support item assignment
+
+
+
+               Strings are Immutable
+                 (Can’t be modiﬁed)
+Working with Strings
+
+Obtain Part of a String
+
+
+                          message
+
+
+                       "Hi Ravi"                           "Ravi"
+
+
+
+                       Obtaining a part of a string is called String Slicing
+Working with Strings
+
+Slicing Syntax
+
+
+                         Start from this index
+
+
+
+                                                                    Python
+
+              variable_name[start_index:end_index]
+
+
+
+
+                                Stops at end_index (not included)
+Working with Strings
+
+Slicing
+
+                                             Python
+
+                       message = "Hi Ravi"
+                       part = message[3:6]
+                       print(part)
+
+
+                                             Output
+
+                         Rav
+Working with Strings
+
+Slicing
+
+                            Python
+      message = "Hi Ravi"
+      part = message[3:]                If end index is not
+      print(part)                    speciﬁed, slicing stops at
+                                       the end of the string
+
+                            Output
+
+        Ravi
+Working with Strings
+
+Slicing
+
+                            Python
+      message = "Hi Ravi"
+      part = message[:2]               If start index is not
+      print(part)                    speciﬁed, slicing starts
+                                        from the index 0
+
+                            Output
+
+        Hi
+Working with Strings
+
+Slicing
+
+                            Python
+      message = "Hi Ravi"            If start and end index are
+      part = message[:]
+                                     not speciﬁed, the sliced
+      print(part)
+                                       string is same as the
+                                          original string
+                            Output
+
+        Hi Ravi
+Working with Strings
+
+JavaScript vs Python
+
+          Topic             Python              JavaScript                    Difference / Notes
+
+Extract part of string   str[start:end]   str.slice(start, end)   Both extract substring; end index excluded
+
+Start index only          str[start:]       str.slice(start)           Extracts till end of string in both
+
+                                                                  Python allows extracting from start up to
+End index only             str[:end]        str.slice(0,end)
+                                                                        end; JS needs slice(0, end)
+
+                                             str[index] or
+Extract single char       str[index]                                 Similar syntax, both provide the char
+                                           str.charAt(index)
+Taking Input From User
+Input Output Basics
+
+Taking Input From User
+
+
+
+                      input() function allows users to enter data
+
+                      Data entered is always stored as a string
+
+                      Even if the input is a number or boolean, it
+                      will be treated as a string
+Input Output Basics
+
+Taking Input From User
+
+
+                       When we download software, we usually
+                           don't change the instructions in it
+
+
+
+
+                         But, we interact with the software through an
+                      interface, providing input that inﬂuences its behavior
+Input Output Basics
+
+Take Input From User
+
+
+
+
+                      input()
+
+             Allows to take the input   username = input()
+             from the user
+Input Output Basics
+
+Example - Python
+
+                                                             Python
+
+
+                      username = input()
+                      age = input()
+                      print(username + " is " + age + " years old")
+
+
+                                                              Input
+                        Ravi
+                        10
+
+                                                              Output
+
+                        Ravi is 10 years old
+Input Output Basics
+
+Example - JavaScript
+
+                                                           Javascript
+
+
+               let username = prompt();
+               let age = prompt();
+               console.log(username + " is " + age + " years old");
+
+
+                                                           Input
+                      Ravi
+                      10
+
+                                                          Output
+
+                      Ravi is 10 years old
+Input Output Basics
+
+Take Input From User
+
+
+                      input() function reads all input as strings
+
+                      Even if a number (e.g., 10) is entered, it's treated as a string
+
+                      Concatenating strings results in "Ravi is 10 years old"
+Input Output Basics
+
+Key Difference
+
+
+
+
+                       Python                               JavaScript
+
+              input( ) is used to get                    prompt( ) is used
+                      user input                          for user input
+
+
+
+
+             User input is always treated as a string, regardless of data type
+Output Functions
+
+Python vs JavaScript
+
+
+
+
+    print() function is used to display   console.log() function is used to print
+          output to the console                   output to the console
+
+
+                                Python                                JavaScript
+
+
+   print("Hello, World!")                   console.log("Hello, World!")
+Input Output Basics
+
+print() - Using Comma
+
+
+                        Python
+
+          a = 3                  print() function allows us to print multiple
+          b = 2                  values by passing several variables as
+          print(a, b)            arguments, separated by commas
+
+
+
+
+                                               Output
+
+         3 2
+print()-Using Comma
+
+Using Comma vs Using “+” Operator
+
+                                                                      Python
+
+     name = "Rahul"
+     age = 25
+     print("My name is", name, "and I am", age, "years old.")
+
+
+                                      or
+                                                                      Python
+
+     name = "Rahul"
+     age = 25
+     print("My name is " + name + " and I am " + str(age) + " years old.")
+Using Comma vs Using “+” Operator
+
+Output
+
+
+
+                                                           Output
+
+                      My name is Rahul and I am 25 years old.
+Using Comma vs Using “+” Operator
+
+Key Differences
+
+
+                             Feature         +      ,
+
+                 Works only with strings?    Yes   No
+
+                 Auto converts numbers?      No    Yes
+
+                 Adds space automatically?   No    Yes
+
+                 Causes error with int?      Yes   No
+Quiz Time!
+Working with Strings & Input Output Basics
+
+Key Takeaways
+
+
+               ●   Working with Strings
+               ●   Type Conversion
+               ●   Input Output Basics
+Practice
+      Next Session
+
+How to Debug Your Code
+THANK YOU
+ALL THE BEST
+

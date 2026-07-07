@@ -1,0 +1,516 @@
+WELCOME
+Variables and Data
+      Types
+Recap
+
+Coding Practice Walkthrough | Part 1
+
+        ●   Coding Practice
+             ○   Walkthrough
+        ●   Coding Question
+             ○   Write
+             ○   Run & Submit Code
+        ●   Other Features
+             ○   AI Tutor
+             ○   Save
+             ○   Reset ...etc
+Agenda for Today’s Session
+
+Variables and Data Types
+
+
+
+
+              Variables      Data Types   Constants
+Variables
+Variables
+
+What is a Variable?
+
+
+
+
+                 A variable is essentially a container used to store data
+
+                 It can be accessed and modiﬁed during program
+                 execution
+Variables
+
+What is a Variable?
+
+
+
+                      Python and JavaScript are dynamically typed languages
+
+                      Type of variable is decided at runtime
+Variables
+
+What is a Variable?
+
+
+
+            Example in JavaScript                       Example in Python
+
+
+                                Javascript                                  Python
+
+let age = 10;                                age = 10
+let sport = "Cricket";                       sport = "Cricket"
+Variables
+
+Deﬁning a Variable in JavaScript
+
+
+
+               Variables are created using keywords like let, const, or var
+
+               Their type is determined by the assigned value (e.g.,
+               number, string)
+
+               Statements may end with semicolons, though they are
+               optional
+Variables
+
+Deﬁning a Variable in Python
+
+
+
+                In Python, variables can be created directly without
+                any keywords
+
+                A variable is created automatically when you assign a
+                value to it
+Variables
+
+Example
+
+
+                                                      Python
+
+                  age = 10
+                  sport ="Cricket"
+
+
+             The moment you assign age a value (age = 10), the
+            variable age is created and the value 10 is stored in it
+Variables
+
+Variable Naming Rules & Conventions
+
+
+                Must start with a letter or an underscore (_)
+
+                Cannot start with a number
+
+                Case-Sensitive: Variables like age and Age are
+                considered different
+
+                No KeyWords: You can't use Python keywords like
+                print, if, or True as variable names
+Variables
+
+Variable Naming Rules & Conventions
+
+                                       Key Difference
+
+
+
+
+                  JavaScript                                  Python
+            Variable names can start                A variable cannot start
+              with a dollar sign ($)                    with a dollar sign ($)
+Variables
+
+Variable Naming Rules & Conventions
+
+              Best Practices for Naming Variables
+
+
+
+
+                  Snake case is preferred (e.g., user_age)
+
+
+
+
+                  Camel case is used (e.g., userAge)
+Data Types
+Data Types
+
+Data Type Classiﬁcation
+
+
+                                                 Python Data Types
+
+
+
+
+                      Primitive Data Types                           Non Primitive Data Types
+
+
+
+
+   Integer    Float                          Boolean
+                           String(str)                        List       Tuple           Set    Dictionary
+     (int)   (ﬂoat)                           (bool)
+Data Types
+
+Primitive Data Types
+
+
+
+
+               Primitive types are basic data types like numbers,
+               strings, and booleans
+
+               They hold single values and form the building
+               blocks of data in programming
+Primitive Data Types
+
+Integer
+
+
+
+                           Integer (int): Whole numbers
+
+
+                       Represents positive , negative numbers and Zero
+                                  without a fractional part
+Primitive Data Types
+
+Integer
+
+                                  Python                                   Javascript
+   age = 42                                       let age = 42;
+   print(age)                                     console.log(age);
+
+                                                           Output
+
+                            42
+
+
+
+
+                 Both in Python and JavaScript, integers represent whole
+                                           numbers.
+Primitive Data Types
+
+Float
+
+
+
+                                 Float (ﬂoat): decimal points
+
+
+
+                       Represents numbers with a fractional part (e.g., 3.14, 2.5)
+Primitive Data Types
+
+Float
+
+                                  Python                                       Javascript
+  height = 5.8                                   let height = 5.8;
+  print(height)                                  console.log(height);
+
+
+                                                               Output
+
+                            5.8
+
+
+
+
+                   In Python and JavaScript, ﬂoats represent decimal numbers
+                                    for precise calculations
+Primitive Data Types
+
+String
+
+
+
+                             String (str): A sequence of characters
+
+
+
+                       Represents text enclosed within quotes (single or double)
+Primitive Data Types
+
+String
+
+                                  Python                                     Javascript
+
+ greeting = "Hello, world!"                       let greeting = "Hello, world!";
+ print(greeting)                                  console.log(greeting);
+
+
+                                                            Output
+
+                          Hello, world!
+
+
+
+
+                 Both Python and JavaScript use strings to represent text,
+                   enclosed in either single or double quotation marks
+Primitive Data Types
+
+Boolean
+
+
+                       Boolean (bool): Represents True or False
+
+
+
+
+                           Represents a binary state (True/False)
+Primitive Data Types
+
+Boolean
+
+                                  Python                                    Javascript
+  is_active = True                             let is_active = true;
+  print(is_active)                             console.log(is_active);
+
+
+                                   Output                                        Output
+
+    True                                        True
+
+
+
+
+               In both Python and JavaScript, booleans represent binary values
+Primitive Data Types
+
+None
+
+
+                       None (NoneType): Represents absence of a value
+
+
+
+
+                         None is Python’s equivalent of null, representing
+                                      the absence of a value
+Primitive Data Types
+
+None
+
+                                     Python                                    Javascript
+
+   value = None                                     let value = null;
+   print(value)                                     console.log(value);
+
+
+                                       Output                                      Output
+
+    None                                             Null
+
+
+
+
+                While None is used in Python to signify no value or an empty
+                       state, null is used in JavaScript for similar purpose
+Data Types
+
+Non Primitive Data Types
+
+
+
+                   We will learn Non-Primitive Data
+                     Types in upcoming sessions
+Quiz Time!
+Data Types
+
+type( ) Function in Python
+
+
+
+             type() is a built-in function in Python that allows you
+             to determine the type of a variable
+
+             It is used to check what data type a variable holds,
+
+             Helpful for debugging or for ensuring that the
+             variable is of the expected type
+Data Types
+
+type( ) Function in Python
+
+                                   Python
+
+ age = 42                                                                           Output
+ print(type(age))                                       <class 'int'>
+                                                        <class 'str'>
+ name = "Alice"
+ print(type(name))
+
+
+             Here, the type() function is used to print the type of age and name,
+                           which are an int and a str respectively
+Data Types
+
+None in Python
+
+
+
+
+             None is a keyword in Python that represents
+             the absence of a value or a null state
+
+             You often encounter None when a variable is
+             declared but not initialized
+Data Types
+
+None
+
+                                       Python
+
+             value = None
+             print(type(value))
+
+
+
+
+                                        Output
+
+                  <class 'NoneType'>
+Data Types
+
+None
+
+      Variable Value   Assigned None
+
+
+
+
+             Type      NoneType (conﬁrmed by type())
+
+
+
+
+        Meaning        Represents the absence of a value
+
+
+
+         Usage         Useful for initializing variables without meaningful data
+Data Type Classiﬁcation
+
+Python vs JavaScript
+                                   Comparison of Data Types
+
+         Feature                       Python                             JavaScript
+
+                          Two types: int (for whole numbers)    One type: number handles both
+    Number Types
+                               and ﬂoat (for decimals)                  ints and ﬂoats
+
+                              Written as True and False            Written as true and false
+    Booleans
+                                    (capitalized)                        (lowercase)
+
+                          Python uses None to represent the     Variables that are declared but
+    Undeﬁned
+                           absence of a value or a null value    not assigned are undeﬁned
+
+    Type Checking                Uses type() function                Uses typeof operator
+Constants
+Constants
+
+Constants in JavaScript
+
+
+
+            JavaScript provides a keyword called const to declare constants
+
+
+
+
+                  Used when the value should remain ﬁxed
+                           throughout the program
+Constants
+
+Constants in Python
+
+
+
+            Python does NOT have a const keyword
+
+            Python does not provide any built-in feature to create true
+            constants
+
+            Developers follow a naming convention to indicate constants
+Constants
+
+Convention Used in Python
+
+
+            Constants are written in UPPERCASE to indicate they
+                            should not be changed
+
+                  Example
+                                                    Python
+
+                  PI = 3.14
+Constants
+
+Convention Used in Python
+
+
+                 ⚠ Even though reassignment is possible, it is not
+                                  recommended
+
+
+                                   Python
+                                                           Allowed, but
+       PI = 3.14159
+                                                            discouraged
+Constants
+
+Constants in JavaScript
+
+
+  Example                                                                    Output
+                                 Javascript
+
+   const Pi = 3.14;                           TypeError{"Assignment to constant
+                                              variable."}
+
+
+
+  ❌ Reassigning is not allowed
+                                 Javascript
+
+   Pi = 3.14159;
+Data Type Classiﬁcation
+
+Constants
+
+                                     Key Difference
+
+
+
+
+                     JavaScript                             Python
+               constants are supported                  constants are by
+                     using const                      convention only, not
+                                                 enforced by the language
+Quiz Time!
+Variables and Data Types
+
+Key Takeaways
+
+
+
+          ●   Variables
+
+          ●   Data Types
+
+          ●   Constants
+Practice
+       Next Session
+
+Sequence of Instructions
+THANK YOU
+ALL THE BEST
+

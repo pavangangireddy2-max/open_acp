@@ -1,0 +1,1084 @@
+WELCOME
+      C++ STL:
+Queue & Priority Queue
+Agenda
+
+C++ Bridge Course
+
+
+
+
+                Queue   Priority Queue
+Queue
+
+Introduction
+
+
+                Queue follows the FIFO (First-In, First-Out) principle,
+        meaning elements are added at the back and removed from the front.
+
+
+
+
+                            1      2      3      4      5     6
+Queue
+
+Declaration and Initialization
+
+
+
+                    C++
+                                           Front
+   queue<int> q;                           Rear
+
+
+
+
+                                      -1           0   1   2
+
+
+            Creates an empty queue.
+Queue
+
+Adding Element
+
+
+
+                    C++
+                                                   Front
+   queue<int> q;                                   Rear
+
+   q.push(10);
+                                              10
+
+
+                                         -1   0            1   2
+
+
+         Adding Elements to the Queue.
+Queue
+
+Adding Element
+
+
+
+                    C++
+
+   queue<int> q;                              Front        Rear
+
+   q.push(10);
+   q.push(20);                           10           20
+
+
+                                         0            1           2
+
+
+         Adding Elements to the Queue.
+Queue
+
+Adding Element
+
+
+
+                    C++
+
+   queue<int> q;                              Front            Rear
+
+   q.push(10);
+   q.push(20);                           10           20   30
+
+   q.push(30);
+                                         0            1    2
+
+
+         Adding Elements to the Queue.
+Queue
+
+Removing Element
+
+
+
+                     C++
+
+   queue<int> q;                                   Front       Rear
+
+   .
+   .                                           20          30
+
+   q.pop();
+                                           0   1           2
+
+
+         Removes the front element (10).
+Queue
+
+Accessing Front Element
+
+
+                                                      Front       Rear
+                        C++
+                                                  20          30
+   queue<int> q;
+   .                                        0     1           2
+   q.pop();
+                                                Output
+   cout << q.front();
+
+                                                  20
+
+              Outputs 20 (Front element).
+Queue
+
+Accessing Back Element
+
+
+                                                     Front       Rear
+                        C++
+   queue<int> q;                                 20          30
+   .
+   .                                       0     1           2
+   q.pop();
+   cout << q.front();                          Output
+
+   cout << q.back();
+                                                 30
+
+              Outputs 30 (Back element).
+Queue
+
+Checking if the Queue is Empty
+
+
+
+                            C++
+   queue<int> q;
+   .                                                                                Front       Rear
+   .
+   .
+   if (q.empty()) {
+                                                                               20           30
+    cout << "Queue is empty";
+   }
+   else {                                                               0       1           2
+       cout << "Queue is not empty";
+   }
+
+
+
+
+                      q.empty() - returns 1 if queue is empty otherwise returns 0
+Queue
+
+Checking if the Queue is Empty
+
+
+                                                  Front       Rear
+                            C++
+   queue<int> q;
+   .                                         20           30
+   .
+   .
+   if (q.empty()) {
+                                       0      1           2
+    cout << "Queue is empty";
+   }
+                                           Output
+   else {
+       cout << "Queue is not empty";
+   }                                   Queue is not empty
+Queue
+
+Getting the Size of the Queue
+
+
+
+                   C++
+
+   queue<int> q;                                                        Front       Rear
+   .
+   .                                                                20          30
+   .
+   cout << q.size();
+                                                                0   1           2
+
+
+
+                   q.size() returns the elements present in Queue
+Queue
+
+Getting the Size of the Queue
+
+
+
+                   C++
+
+   queue<int> q;                Output
+   .
+   .                               2
+   .
+   cout << q.size();
+Quiz Time!
+Queue
+
+Queue Manager
+
+
+        You are tasked with implementing a program to manage a queue of
+        integers using the C++ STL queue container. The program should
+        support the following operations:
+
+
+             enqueue x: Add an integer to the back of the queue.
+             dequeue: Remove an integer from the front of the queue.
+             product: Calculate and return the product of the front and back
+             elements of the queue.
+             size: Return the number of elements currently in the queue.
+Queue Manager
+
+Example
+
+         Input:
+                  enqueue 10
+
+                  enqueue 20
+
+                     size
+
+                  enqueue 30
+
+                   product
+
+                   dequeue
+
+                   product
+Queue Manager
+
+Example
+     Explanation:
+
+
+                    enqueue 10
+
+                    enqueue 20          Queue
+                       size
+                                           10
+                    enqueue 30
+
+                     product
+                                 enqueued “10” into Queue
+                     dequeue
+
+                     product
+Queue Manager
+
+Example
+     Explanation:
+
+
+                    enqueue 10
+
+                    enqueue 20          Queue
+                       size
+                                        10    20
+                    enqueue 30
+
+                     product
+                                 enqueued “20” into Queue
+                     dequeue
+
+                     product
+Queue Manager
+
+Example
+     Explanation:
+
+
+                    enqueue 10
+
+                    enqueue 20         Queue
+                       size
+                                        10     20
+                    enqueue 30
+
+                     product
+                                 Size of the queue is “2”
+                     dequeue
+
+                     product
+Queue Manager
+
+Example
+     Explanation:
+
+
+                    enqueue 10
+
+                    enqueue 20            Queue
+                       size
+                                     10     20    30
+                    enqueue 30
+
+                     product
+                                 enqueued “30” into Queue
+                     dequeue
+
+                     product
+Queue Manager
+
+Example
+     Explanation:
+
+
+                    enqueue 10
+
+                    enqueue 20            Queue
+                       size
+                                     10     20     30
+                    enqueue 30
+
+                     product     Product of front and back
+                     dequeue         elements: “300”
+                     product
+Queue Manager
+
+Example
+     Explanation:
+
+
+                    enqueue 10
+
+                    enqueue 20            Queue
+                       size
+                                     10     20    30
+                    enqueue 30
+
+                     product
+                                 dequeued “10” from Queue
+                     dequeue
+
+                     product
+Queue Manager
+
+Example
+     Explanation:
+
+
+                    enqueue 10
+
+                    enqueue 20          Queue
+                       size
+                                        20      30
+                    enqueue 30
+
+                     product     Product of front and back
+                     dequeue         elements: “600”
+                     product
+Queue Manager
+
+Example
+
+                                    C++
+     #include <bits/stdc++.h>
+     using namespace std;
+     class QueueManager {
+     public:
+        queue<int> q;
+        void enqueue(int value) {
+             q.push(value);
+             cout << value << " has been enqueued." << endl;
+        }
+        void dequeue() {
+            if (!q.empty()) {
+          q.pop();
+                 cout << q.front() << " has been dequeued." << endl;
+             } else {
+                 cout << "Queue is empty. Cannot dequeue." << endl;
+             }
+        }
+                                                                       continued
+Queue Manager
+
+Example
+
+                                 C++
+
+    void productOfFrontAndBack() {
+         if (!q.empty()) {
+         cout << "Product of front and back elements: "   <<
+    q.front() * q.back() << endl;
+         } else {
+         cout << "Queue is empty. No product to compute."      <<
+    endl;
+         }
+    }
+    void size() {
+     cout << "Size of the queue: " << q.size() << endl;
+    }
+    };
+Priority Queue (Max-Heap)
+Priority Queue
+
+Max-Heap
+
+
+             A priority queue is a type of queue where elements are served
+             based on priority rather than on the order in which they arrive.
+
+
+
+                      0       1      2      3       4          5         6
+
+                     VIP   Regular   VIP   VIP    Regular   Regular   Regular
+
+
+
+
+                                So, VIP are prioritized ﬁrst,
+                           irrespective of the order of insertion.
+Priority Queue
+
+Max-Heap
+
+
+                 It is a special type of tree-based data structure where the largest value is
+                                    always at the top (root node of tree).
+
+
+
+                                                 Example
+
+             ➢      50 is the largest element.
+             ➢      Removing the top (50) moves the next greater element (30) to the top.
+Priority Queue
+
+Max-Heap
+
+
+
+                      C++
+
+    priority_queue<int> pq;
+
+
+
+
+                 Default max-heap   Priority Queue (Max-Heap)
+Priority Queue
+
+Insert Elements
+
+
+
+                        C++
+
+    priority_queue<int> pq;
+    pq.push(50);
+
+
+
+
+                                                   Top              50
+
+
+        Element “50” is added to Priority queue.         Priority Queue (Max-Heap)
+Priority Queue
+
+Insert Elements
+
+
+
+                        C++
+
+    priority_queue<int> pq;
+    pq.push(50);
+    pq.push(30);
+                                              Top              50
+
+                                              Top              30
+
+
+             Largest element is at the top.         Priority Queue (Max-Heap)
+Priority Queue
+
+Insert Elements
+
+
+
+                        C++
+
+    priority_queue<int> pq;
+    pq.push(50);
+    pq.push(30);
+                                              Top              50
+    pq.push(20);                              Top              30
+
+                                                               20
+
+
+             Largest element is at the top.         Priority Queue (Max-Heap)
+Priority Queue
+
+Insert Elements
+
+
+
+                        C++
+
+    priority_queue<int> pq;                   Top              50
+    pq.push(50);
+    pq.push(30);
+                                              Top              30
+    pq.push(20);                                               20
+    pq.push(10);
+                                                               10
+
+
+             Largest element is at the top.         Priority Queue (Max-Heap)
+Priority Queue
+
+Insert Elements
+
+
+
+                        C++                   Top              50
+
+    priority_queue<int> pq;                   Top              30
+    pq.push(50);
+    pq.push(30);                                               20
+    pq.push(20);                                               10
+    pq.push(10);
+    pq.push(5);                                                5
+
+
+             Largest element is at the top.         Priority Queue (Max-Heap)
+Priority Queue
+
+Remove the Top Element
+
+
+
+                       C++                  Top              50           50
+                                                                         pop()
+    priority_queue<int> pq;                 Top              30
+    .
+    .                                                        20
+    .                                                        10
+    pq.pop();
+                                                             5
+
+
+            Removes the top element “50”.         Priority Queue (Max-Heap)
+Priority Queue
+
+Get the Top Element
+
+
+
+                        C++
+
+    priority_queue<int> pq;                  Top              30
+    .
+    .                                                         20
+    .                                                         10
+    cout << pq.top();
+                                                              5
+
+
+             Get highest priority element.         Priority Queue (Max-Heap)
+Priority Queue
+
+Get the Top Element
+
+
+
+                        C++
+
+    priority_queue<int> pq;
+                                             Output
+    .
+    .
+                                               30
+    .
+    cout << pq.top();
+
+
+
+
+             Get highest priority element.
+Priority Queue
+
+Check if the Priority Queue is Empty
+
+
+
+                              C++
+    priority_queue<int> pq;
+    .                                                     Top              30
+    .
+    .
+    if (pq.empty()) {                                                      20
+     cout << "Priority queue is empty";
+    }                                                                      10
+    else {
+        cout << "Priority queue is not empty";                             5
+    }
+
+
+    pq.empty() returns 1 if it is empty, else returns 0         Priority Queue (Max-Heap)
+Priority Queue
+
+Check if the Priority Queue is Empty
+
+
+
+                              C++
+    priority_queue<int> pq;
+    .
+    .                                                         Output
+    .
+    if (pq.empty()) {
+                                                            Priority queue is
+     cout << "Priority queue is empty";
+                                                               not empty
+    }
+    else {
+        cout << "Priority queue is not empty";
+    }
+
+
+    pq.empty() - returns 1 if it is empty, else returns 0
+Priority Queue
+
+Get the Size of the Priority Queue
+
+
+
+                         C++
+
+    priority_queue<int> pq;                              Top              30
+    .
+    .                                                                     20
+    .                                                                     10
+    cout << pq.size();
+                                                                          5
+
+
+ Outputs the number of elements in the priority queue.         Priority Queue (Max-Heap)
+Priority Queue
+
+Get the Size of the Priority Queue
+
+
+
+                         C++
+
+    priority_queue<int> pq;
+                                                                   Output
+    .
+    .
+                                                                      4
+    .
+    cout << pq.size();
+
+
+
+
+                   Outputs the number of elements in the priority queue.
+Priority Queue (Min-Heap)
+Priority Queue
+
+Min-Heap
+
+
+
+                           C++
+
+    priority_queue<int, vector<int>, greater<int>> pq;
+
+
+
+
+                            A Min-Heap ensures that the smallest element is
+                                    always at the top and is used ﬁrst.
+Priority Queue
+
+Insert Elements
+
+
+
+                           C++
+
+    priority_queue<int, vector<int>, greater<int>> pq;
+    pq.push(50);
+
+
+
+
+                                                         Top              50
+
+
+      Element “50” is added to the priority queue.             Priority Queue (Min-Heap)
+Priority Queue
+
+Insert Elements
+
+
+
+                           C++
+
+    priority_queue<int, vector<int>, greater<int>> pq;
+    pq.push(50);
+    pq.push(30);
+
+                                                         Top              30
+
+                                                         Top              50
+
+
+             Smallest element is at the top.                   Priority Queue (Min-Heap)
+Priority Queue
+
+Insert Elements
+
+
+
+                           C++
+
+    priority_queue<int, vector<int>, greater<int>> pq;
+    pq.push(50);
+                                                         Top              20
+    pq.push(30);
+    pq.push(20);
+                                                         Top              30
+
+                                                                          50
+
+
+             Smallest element is at the top.                   Priority Queue (Min-Heap)
+Priority Queue
+
+Insert Elements
+
+
+
+                           C++
+
+                                                         Top              10
+    priority_queue<int, vector<int>, greater<int>> pq;
+    pq.push(50);
+                                                         Top              20
+    pq.push(30);
+    pq.push(20);
+                                                                          30
+    pq.push(10);
+
+                                                                          50
+
+
+             Smallest element is at the top.                   Priority Queue (Min-Heap)
+Priority Queue
+
+Insert Elements
+
+
+
+                           C++                           Top              5
+
+                                                         Top              10
+    priority_queue<int, vector<int>, greater<int>> pq;
+    pq.push(50);
+                                                                          20
+    pq.push(30);
+    pq.push(20);
+                                                                          30
+    pq.push(10);
+    pq.push(5);
+                                                                          50
+
+
+             Smallest element is at the top.                   Priority Queue (Min-Heap)
+Priority Queue
+
+Remove the Top Element
+
+
+
+                           C++                           Top              5                5
+                                                                                      pop()
+                                                         Top              10
+    priority_queue<int, vector<int>, greater<int>> pq;
+    .
+                                                                          20
+    .
+    .
+                                                                          30
+    pq.pop();
+
+                                                                          50
+
+
+                Removes the top element “5”.                   Priority Queue (Min-Heap)
+Priority Queue
+
+Remove the Top Element
+
+
+
+                           C++
+
+                                                         Top              10
+    priority_queue<int, vector<int>, greater<int>> pq;
+    .
+                                                                          20
+    .
+    .
+                                                                          30
+    cout << pq.top();
+
+                                                                          50
+
+
+             Returns smallest element “10”.                    Priority Queue (Min-Heap)
+Priority Queue
+
+Remove the Top Element
+
+
+
+                           C++
+
+    priority_queue<int, vector<int>, greater<int>> pq;   Output
+    .
+    .
+    .
+                                                           10
+    cout << pq.top();
+
+
+
+
+             Returns smallest element “10”.
+Priority Queue
+
+Check if the Priority Queue is Empty
+
+
+
+                             C++
+    priority_queue<int, vector<int>, greater<int>> pq;
+    .                                                      Top              10
+    .
+    .
+    if (pq.empty()) {                                                       20
+     cout << "Priority queue is empty";
+    }                                                                       30
+    else {
+        cout << "Priority queue is not empty";                              50
+    }
+
+
+    pq.empty() returns 1 if it is empty, else returns 0.         Priority Queue (Min-Heap)
+Priority Queue
+
+Check if the Priority Queue is Empty
+
+
+
+                             C++
+    priority_queue<int, vector<int>, greater<int>> pq;
+    .
+    .                                                             Output
+    .
+    if (pq.empty()) {
+     cout << "Priority queue is empty";                    Priority queue is not empty
+    }
+    else {
+        cout << "Priority queue is not empty";
+    }
+
+
+    pq.empty() returns 1 if it is empty, else returns 0.
+Priority Queue
+
+Get the Size of the Priority Queue
+
+
+
+                           C++
+
+                                                           Top              10
+    priority_queue<int, vector<int>, greater<int>> pq;
+    .
+                                                                            20
+    .
+    .
+                                                                            30
+    cout << pq.size();
+
+                                                                            50
+
+
+   Outputs the number of elements in the priority queue.         Priority Queue (Min-Heap)
+Priority Queue
+
+Get the Size of the Priority Queue
+
+
+
+                           C++
+
+    priority_queue<int, vector<int>, greater<int>> pq;     Output
+    .
+    .
+    .
+                                                              4
+    cout << pq.size();
+
+
+
+
+   Outputs the number of elements in the priority queue.
+Quiz Time!
+Priority Queue
+
+Key Takeaways
+
+
+
+         Queue (FIFO - First In, First Out): Elements are added at
+         the rear and removed from the front, making it useful
+         for sequential processing.
+
+
+         Priority Queue: A special queue where elements are
+         served based on priority rather than insertion order.
+         Implemented as Max-Heap (largest element at the top)
+         or Min-Heap (smallest element at the top).
+Priority Queue
+
+Key Takeaways
+
+     Operations:
+
+      ➢    Queue: push(), pop(), front(), back(), size(), empty().
+      ➢    Priority Queue: push(), pop(), top(), size(), empty().
+
+
+     Examples:
+
+      ➢    Queue: Used for task scheduling and managing
+           requests in order.
+      ➢    Priority Queue: Used for designing emergency rooms
+           management system (patients with severe conditions
+           treated ﬁrst).
+THANK YOU
+ALL THE BEST
+Priority Queue
+
+Emergency Room
+
+
+         In an emergency room management system, patients are
+
+         prioritized based on the severity of their condition using a
+
+         priority queue. This ensures that patients with the most critical
+
+         conditions receive immediate attention and treatment, while
+
+         those with less severe cases are handled subsequently.
+
+
+         Each patient is represented by their name and severity level,
+
+         where the severity level determines their priority in the queue.
+Priority Queue
+
+Emergency Room
+
+    Supported Operations:
+
+
+         1.   Add Patient: A(severity, name)
+
+                 ✓   Adds a new patient with the speciﬁed severity and name to the queue.
+
+         2.   Treat and Remove Patient: T()
+
+                 ✓   Displays and removes the patient with the highest severity from the queue.
+
+         3.   Display Next Patient: D()
+
+                 ✓   Displays the patient with the highest severity without removing them from the queue.
+
+
+
+                      No two patients will have the same severity or name at the same time.
+Emergency Room
+
+Example
+
+                               Input                             Output
+
+                              5
+                              A 5 John
+                                                                   Alice
+                              A 10 Alice
+                              T                                     Bob
+                              A 7 Bob
+                              D
+
+
+           ➢     A 5 John : Adds patient John with severity 5 to the queue.
+           ➢     A 10 Alice : Adds patient Alice with severity 10 to the queue.
+           ➢     T : Removes and treats the patient with the highest severity which is Alice.
+           ➢     A 7 Bob : Adds patient Bob with severity 7 to the queue.
+           ➢     D : Displays the next patient to be treated, which is Bob.
+Emergency Room
+
+Code
+
+                               C++
+
+    #include <bits/stdc++.h>
+    using namespace std;
+
+
+    class EmergencyRoom {
+    public:
+       priority_queue<pair<int, string>> patients;
+
+
+      void addPatient(string name, int severity) {
+           patients.push({severity, name});
+           }
+Emergency Room
+
+Code
+
+                               C++
+
+    void treatPatient() {
+        if (!patients.empty()) {
+            pair<int, string> topPatient = patients.top();
+            patients.pop();
+            cout << patients.top().second << endl;
+        } else {
+            cout << "No patient to treat." << endl;
+        }
+    }
+Emergency Room
+
+Code
+
+                                   C++
+
+    void displayNextPatient() {
+         if (patients.empty()) {
+             cout << "No patient in the queue." << endl;
+             return;
+         }
+         cout << patients.top().second << endl;
+    }
+    };
+

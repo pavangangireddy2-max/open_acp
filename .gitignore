@@ -37,3 +37,4 @@ storage/
 outputs/
 knowledge/graph/
 src/open_acp/knowledge/wiki/
+knowledge/raw/brand/.predownload_backup/

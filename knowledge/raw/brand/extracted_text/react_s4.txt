@@ -1,0 +1,478 @@
+WELCOME
+Components and Props
+Recap
+
+Introduction to React JS
+
+        ●   MERN Stack
+            ○     Introduction to React JS
+        ●   React
+            ○     React.createElement()
+            ○     ReactDOMClient.createRoot()
+            ○     root.render()
+        ●   JSX
+            ○     Embedding Expressions
+            ○     Nesting elements
+Agenda for Today’s Session
+
+Components and Props
+
+                             Starting the Application
+                               React Project Setup
+
+
+
+
+                               Creating React App
+Introduction to React JS
+
+Session Initial Setup
+Components
+React
+
+Component
+
+
+ A Component is a JS Function that returns a JSX Element
+
+
+                                                              JS
+
+
+ const Welcome = () => <h1 className="message">Hello, User</h1>
+Component
+
+Naming Convention
+
+ Component name should always start with a Capital letter
+                                                                       JS
+ ...
+ <script type="text/babel" data-type="module">
+   import React from "https://esm.sh/react@19.1.1/?dev";
+   import ReactDOMClient from "https://esm.sh/react-dom@19.1.1/client?dev";
+
+
+   const Welcome = () => <h1 className="message">Hello, User</h1>
+   const root = ReactDOMClient.createRoot(document.getElementById("root"));
+   root.render(<Welcome/>);
+ </script>
+ ...
+Creating a Component
+
+Output
+What if a Component name
+ starts with LowerCase?
+Component
+
+Naming Convention
+
+React treats components starting with lowercase letters
+as HTML Elements
+                                                                       JS
+ ...
+ <script type="text/babel" data-type="module">
+   ...
+   const welcome = () => <h1 className="message">Hello, User</h1>
+   const root = ReactDOMClient.createRoot(document.getElementById("root"));
+   root.render(<welcome/>);
+ </script>
+ ...
+Component Name with Lowercase
+
+Element Panel Output
+Component Name with Lowercase
+
+Console Output
+Properties (Props)
+React Component
+
+Properties (Props)
+
+
+
+
+      React allows us to pass information
+                                            props
+      to a Component using props
+                                                    Component
+React Component
+
+Passing Props
+
+ We can pass props to any Component
+ as we declare attributes for any HTML tag
+
+
+
+  <Component propName1="propValue1" propName2="propValue2" />
+React Component
+
+Passing Props
+
+                                                                      JS
+
+ ...
+ const Welcome = () => <h1 className="message">Hello, User</h1>
+ const root = ReactDOMClient.createRoot(document.getElementById("root"));
+ root.render(<Welcome name="Rahul" greeting="Hello" />);
+ ...
+React Component
+
+Accessing Props
+
+
+                                                                   JS
+     Components accept props
+                                const Component = ( props ) => {
+     as parameters and can be    // We can access props here
+     accessed directly          }
+React Component
+
+Accessing Props
+
+                                                       JS
+
+ ...
+ const Welcome =( props ) => {
+   console.log(props);
+   return <h1 className="message">Hello, User</h1>;
+ };
+ const root =
+ ReactDOMClient.createRoot(document.getElementById("root"));
+ root.render(<Welcome name="Rahul" greeting="Hello" />);
+ ...
+React Component
+
+Accessing Props
+
+                                                       JS
+
+ ...
+ const Welcome =( props ) => {
+   const { name, greeting } = props;
+   return <h1 className="message">{greeting}, {name}</h1>;
+ };
+ const root =
+ ReactDOMClient.createRoot(document.getElementById("root"));
+ root.render(<Welcome name="Rahul" greeting="Hello" />);
+ ...
+Accessing Props
+
+Output
+React Component
+
+Reusable
+
+
+
+    A Component is a piece of
+    reusable code that can be used
+    in various parts of an application
+React Component
+
+Reusable
+                                                              JS
+ ...
+ const Welcome =( props ) => {
+   const { name, greeting } = props;
+   return <h1 className="message">{greeting}, {name}</h1>;
+ };
+ const root = ReactDOMClient.createRoot(document.getElementById("root"));
+ root.render(
+   <div>
+       <Welcome name="Rahul" greeting="Hello" />
+       <Welcome name="Ram" greeting="Hi" />
+   </div>
+ );
+ ...
+React Component
+
+Output
+React Component
+
+Composable
+
+
+
+      Components are composable
+
+      We can include a component   Component 1   Component 2
+
+      inside another component
+React Component
+
+Composable
+                                                                  JS
+  ...
+  const Welcome = (props) => {
+      const { name, greeting } = props;
+      return (<h1 className="message">{greeting}, {name}</h1>);
+  }
+  const Greetings = () => (
+      <div>
+        <Welcome name="Rahul" greeting="Hello" />
+        <Welcome name="Ram" greeting="Hi" />
+      </div>
+  )
+  const root = ReactDOMClient.createRoot(document...("root"));
+  root.render(<Greetings/>);
+  ...
+React Component
+
+Output
+Building Applications
+
+Real World React Apps
+
+
+    ●   Creating a real-world app involves a lot of setup
+        because a large number of components need to be organised
+
+
+    ●   Evan You, the creator of Vue.js created a third-party package
+        “Vite” to generate a ready-made react application setup
+Third-Party Packages
+
+NPM (Node Package Manager)
+
+
+
+                              https://www.npmjs.com/
+
+                             NPM is a package manager with
+                             millions of packages, serving as a
+                             repository and tool for managing
+                             JavaScript project dependencies
+Third-Party Packages
+
+Node Package Manager
+
+
+
+      NPM Company provides a Command line tool
+      which will allow you to publish, discover, install,
+      and develop node programs
+vite
+
+Creating a React app using Vite
+
+
+
+
+            https://vite.dev/guide/
+Real World React Apps
+
+vite
+
+    Run this command in CCBP-IDE terminal
+    to create a React application
+
+
+                                                   Terminal
+
+
+
+    nxtwave@RJSIVIMLDB:~/.../$ npm create vite@8.0.2
+Real World React Apps
+
+Creating a React app using Vite
+                        Terminal
+
+
+
+
+                                   It installs all the required dependencies
+                                   and runs automatically
+React Application
+
+Folder Structure
+React Application
+
+Folder Structure
+
+
+  ●   public/ folder: Where we’ll keep assets like
+      images, icons, fonts, etc.
+
+
+  ●   src/ folder: Where we'll do the majority of our
+      work. All of our React components will be
+      placed here
+Vite Project
+
+IDE Speciﬁc Conﬁg
+                                             vite.config.js
+  import { defineConfig } from "vite";
+  import react from "@vitejs/plugin-react";
+  import eslint from "vite-plugin-eslint";
+
+                                                              Here, it tells Vite to start the dev
+  // https://vite.dev/config/
+                                                              server on port 3000
+  export default defineConfig({
+   server: {
+                                                              Make sure to add this to check
+     port: 3000,
+     host: "0.0.0.0",                                         the output
+     allowedHosts: true,
+   },
+   plugins: [react(), eslint()],
+  });
+Vite Project
+
+IDE Speciﬁc Conﬁg
+                                             vite.config.js
+  import { defineConfig } from "vite";
+  import react from "@vitejs/plugin-react";
+  import eslint from "vite-plugin-eslint";
+
+
+  // https://vite.dev/config/                                 It’s speciﬁc to only our IDE, you
+  export default defineConfig({                               might not need this when
+   server: {
+                                                              running locally
+     port: 3000,
+     host: "0.0.0.0",
+     allowedHosts: true,
+   },
+   plugins: [react(), eslint()],
+  });
+myapp
+
+Installing Dependencies
+
+   Install the dependencies from myapp directory
+
+                                                          Terminal
+
+    nxtwave@RJSIVIMLDB:~/components-and-props/myapp$ npm install
+    vite-plugin-eslint   save-dev
+myapp
+
+Starting an Application
+
+   Now, run npm run dev command to start the application
+
+
+                                                           Terminal
+
+
+    nxtwave@RJSIVIMLDB:~/components-and-props/myapp$ npm run dev
+myapp
+
+Checking the Output
+   Open the URL in the new tab to check the output
+                                          New Tab
+React Application
+
+Output
+React Application
+
+src/ folder
+    The main.jsx is a starting point to the Application
+React Application
+
+Structure
+
+                    App.css   App.jsx ... index.css
+
+
+
+
+                                main.jsx
+
+    $ npm run dev
+Folder Structure
+
+src/ folder
+   The main.jsx is a starting point to the Application
+React Application
+
+Folder Structure
+
+
+
+  ●   package.json: JSON ﬁle containing the
+      conﬁguration for the project, including
+      dependencies and other project details
+create-react-app
+
+ES6 Modules
+
+  JavaScript ﬁles containing JSX syntax should be named with .jsx extension
+
+
+
+          Default Exports          export default ComponentName
+
+
+
+
+          Named Exports            export const ComponentName = () => {}
+React Application
+
+Inspect Element Output
+
+
+
+
+                         Everything gets attached
+                         to div element with id root
+                         in the index.html
+React Application
+
+Pre-Conﬁgured Tools
+
+
+
+   create vite comes pre-conﬁgured with
+
+    ●   Live editing
+    ●   esbuild
+    ●   Rollup
+Pre-Conﬁgured Tools
+
+Live Editing
+
+
+
+
+    Live editing allows React components
+    to be live reloaded
+Pre-Conﬁgured Tools
+
+Esbuild & Rollup
+
+
+
+   These are tools used to stitch together a group
+   of modules into a single ﬁle (or group of ﬁles)
+
+   This process is called Bundling
+Pre-Conﬁgured Tools
+
+esbuild
+
+                                                JSX
+
+
+   esbuild is also a JavaScript Compiler,
+   compiles JSX into Regular JavaScript
+
+
+
+
+                                            Regular JavaScript
+Components and Props
+
+Key Takeaways
+
+      ●   Creating React App using Vite
+           ○   React Project Setup
+           ○   Starting the Application
+Practice
+ Next Session
+Lists & Keys
+THANK YOU
+ALL THE BEST
+

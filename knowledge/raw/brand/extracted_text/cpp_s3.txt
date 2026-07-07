@@ -1,2 +1,587 @@
-# cpp_s3 (0 pages, 0 with text)
+WELCOME
+C++ Loops and Arrays
+Agenda
 
+C++ Bridge Course
+
+
+
+
+             Loops   Arrays   Practice
+Loops
+
+
+ v/s
+Syntax: C++ Vs Python
+
+For Loop
+
+
+                                                    Start For Loop
+
+
+
+      A For loop in programming is used to                       Initialization
+
+
+   repeatedly execute a block of code a speciﬁc
+                                                       False
+     number of times, controlled by an initial                   Condition
+                                                                                       Increment/
+                                                                                       Decrement
+
+  condition, a condition for continuation, and an                        True
+
+                update statement.                                Statements
+
+
+                                                                             End For
+                                                                              Loop
+Syntax: C++ Vs Python
+
+For Loop
+
+for (initialization; condition; update) {   for variable in range(start, stop, step):
+
+
+
+
+}
+Syntax: C++ Vs Python
+
+For Loop
+
+                                     for( int i = 1 ; i<5 ; i = i+1 )
+                                         { cout << i << endl; }
+
+
+
+     Iteration   i Value Before Update     Condition (i < 5)       Action (Print i)   Updated i Value
+
+         1                 1                     TRUE                   Print 1              2
+
+         2                 2                     TRUE                   Print 2              3
+
+         3                 3                     TRUE                   Print 3             4
+
+         4                4                      TRUE                   Print 4              5
+
+         5                 5                     FALSE
+Syntax: C++ Vs Python
+
+For Loop
+
+                        C++
+
+       #include <bits/stdc++.h>      Output
+       using namespace std;
+                                        1
+       int main()       {               2
+           for(int i=1; i<5; i++){
+               cout << i << endl;       3
+           }                           4
+           return 0;
+       }
+Syntax: C++ Vs Python
+
+For Loop (Range-Based)
+
+
+   for (type each_item : sequence) {   for each_item in sequence:
+
+
+
+
+   }
+Syntax: C++ Vs Python
+
+For Loop (Range-Based)
+
+
+
+                    C++                           Python
+
+
+
+     int num_seq[] = {1, 2, 3, 4, 5};   num_seq = [1, 2, 3, 4, 5]
+
+     for (int each_item : num_seq) {    for each_item in num_seq:
+
+         cout << each_item << endl;        print(each_item)
+
+     }
+For Loop (Range-Based)
+
+Example
+
+                       C++
+
+       #include <bits/stdc++.h>               Output
+       using namespace std;
+                                                 1
+       int main() {
+           int num_seq[] = {1, 2, 3, 4, 5};
+                                                 2
+           for (int each_item : num_seq) {       3
+               cout << each_item << endl;
+           }
+                                                 4
+           return 0;                             5
+       }
+Syntax: C++ Vs Python
+
+While Loop
+
+
+  while (condition) {   while condition:
+
+
+
+
+  }
+Syntax: C++ Vs Python
+
+While Loop
+
+
+
+                    C++                 Python
+
+
+       int i = 1;               i = 1
+       while (i <= 5) {         while i <= 5:
+           cout << i << endl;     print(i)
+           i = i + 1;              i = i + 1
+       }
+While Loop
+
+Example
+
+                        C++
+
+       #include <bits/stdc++.h>     Output
+       using namespace std;
+                                       1
+       int main() {
+           int i = 1;
+                                       2
+           while (i <= 5) {            3
+               cout << i << endl;
+               i = i + 1;
+                                       4
+           }                           5
+           return 0;
+       }
+Syntax: C++ Vs Python
+
+Do-While Loop
+
+                        C++
+
+
+
+       int i = 1;
+       do {
+           cout << i << endl;
+           i = i + 1;
+       } while (i <= 5);
+Syntax: C++ Vs Python
+
+Do-While Loop
+
+                        C++
+
+
+
+       int i = 1;
+       do {
+                                Initializes the variable i to 1
+           cout << i << endl;
+                                  before the loop starts.
+           i = i + 1;
+       } while (i <= 5);
+Syntax: C++ Vs Python
+
+Do-While Loop
+
+                        C++
+
+
+
+       int i = 1;
+       do {                     Marks the beginning of the do-while
+           cout << i << endl;   loop, which will execute at least once
+           i = i + 1;              before checking the condition.
+       } while (i <= 5);
+Syntax: C++ Vs Python
+
+Do-While Loop
+
+                        C++
+
+
+
+       int i = 1;
+       do {
+                                Prints the current value of i on
+           cout << i << endl;
+                                          the screen.
+           i = i + 1;
+       } while (i <= 5);
+Syntax: C++ Vs Python
+
+Do-While Loop
+
+                        C++
+
+
+
+       int i = 1;
+       do {
+                                Increments the value of i by 1 to
+           cout << i << endl;
+                                update it for the next iteration.
+            i = i + 1;
+       } while (i <= 5);
+Syntax: C++ Vs Python
+
+Do-While Loop
+
+                        C++
+
+
+
+       int i = 1;
+       do {                     After each iteration, checks if i is less
+           cout << i << endl;    than or equal to 5. If true, the loop
+            i = i + 1;            continues. If false, the loop ends.
+       } while (i <= 5);
+Do-While Loop
+
+Example
+
+                        C++
+
+       #include <bits/stdc++.h>        Output
+       using namespace std;
+                                          1
+       int main() {
+                                          2
+           int i = 1;
+           do {                           3
+                  cout << i << endl;      4
+                  i = i + 1;
+                                          5
+           } while (i <= 5);
+           return 0;
+       }
+Loop Control Statements
+
+
+          v/s
+C++
+
+Loop Control Statements
+
+
+
+      Control statements alter the sequential
+      execution of a program.
+
+
+      In both Python and C++, loop control
+      statements break and continue work similarly.
+Break Statement
+
+Example
+                                                       Output
+                        C++
+        #include <iostream>                                1
+        using namespace std;
+                                                          2
+        int main() {
+            int num_seq[] = {1, 2, 3, 4, 5};              3
+            for (int i = 0; i < 5; i++) {
+                if (num_seq[i] == 4) {
+                    break;                     The break statement is used to
+                }                              stop a loop and move on to the
+                cout << num_seq[i] << endl;       next part of the program.
+            }
+            return 0;
+        }
+Continue Statement
+
+Example
+                                                        Output
+                        C++
+        #include <iostream>
+        using namespace std;
+                                                            2
+        int main() {                                        4
+            int num_seq[] = {1, 2, 3, 4, 5};
+            for (int i = 0; i < 5; i++) {
+                if (num_seq[i] % 2 == 1) {
+                     continue;                 The continue statement is used
+                }                              to skip the current iteration of a
+                cout << num_seq[i] << endl;     loop and move to the next one.
+            }
+            return 0;
+        }
+Quiz Time!
+Arrays
+C++
+
+Arrays
+
+
+
+                                             Contiguous memory location.
+      An array in C++ is a collection of
+      elements of the same type, stored in   100   104   108   112     116
+      contiguous memory locations. It
+                                               1    3    5     7      9
+      allows easy storage and manipulation
+                                              0     1    2     3       4
+      of multiple values of the same type.
+
+                                                                   Index
+C++
+
+Declaration of Arrays
+
+      C++ Array Declaration
+      In C++, the size of the array must be speciﬁed at the time of declaration
+      (except for dynamically allocated arrays).
+
+            int num_seq[5]; // Declaring an array of 5 integers
+
+
+
+      Python Array Declaration
+      In Python, arrays are usually implemented using lists, and size is not ﬁxed.
+
+            num_seq = [1, 2, 3, 4, 5] # List in Python
+C++
+
+Arrays
+
+
+         Syntax of Array Declaration in C++
+
+                         type array_name[array_size];
+
+
+
+
+                              Speciﬁes the data type
+                                (e.g., int, ﬂoat, char).
+C++
+
+Arrays
+
+
+         Syntax of Array Declaration in C++
+
+                         type array_name [array_size];
+
+
+
+
+                                Name of the array.
+C++
+
+Arrays
+
+
+         Syntax of Array Declaration in C++
+
+                         type array_name [array_size];
+
+
+
+
+                            The number of elements the
+                                   array can hold.
+C++
+
+Arrays
+
+
+          Syntax in C++
+
+                          type array_name[array_size];
+
+
+
+         Example in C++
+
+          int num_seq[5] = {1, 2, 3, 4, 5};//Array of integers with 5 elements
+C++
+
+How to Take Array Input
+
+              C++
+               Code
+
+
+
+
+                          To take user input in C++ for
+                           an array, we use a for loop
+                          along with the cin function to
+                                store the values.
+C++
+
+How to Take Array Input
+
+                              C++
+      #include <iostream>
+      using namespace std;
+      int main() {
+          int num_seq[5];   // Declare array of size 5
+                                                           To take user input in C++ for
+          for (int i = 0; i < 5; i++) {
+              cout << "Enter element " << i + 1 << ": ";    an array, we use a for loop
+              cin >> num_seq[i];                           along with the cin function to
+          }
+                                                                 store the values.
+          for (int i = 0; i < 5; i++) {
+              cout << num_seq[i] << " ";
+          }
+          return 0;
+      }
+Quiz Time!
+C++
+
+Key Takeaways
+
+
+      ●   Loops in C++
+           Explanation of for, while, and do-while loops, along with
+           range-based for loops for better readability.
+
+      ●   Loop Control Statements
+           Covers break and continue, demonstrating their effect
+           on loop execution.
+
+      ●   Working with Arrays
+           Covers array declaration, input handling, and iterating
+           over arrays using both for-loops and range-based loops.
+THANK YOU
+ALL THE BEST
+Reading array as Input
+
+Problem Statement
+
+        Write a program that reads user input and prints the square of each integer.
+
+
+
+                   Input                                      Output
+
+             5
+                                                      1 4 9 16 25
+             1 2 3 4 5
+
+
+            Here, we are required to print the square of each integer with the
+                              results separated by a space.
+C++
+
+Problem Solution
+
+
+                                   C++
+      #include<bits/stdc++.h>
+                                                         Input
+      using namespace std;
+      int main() {                                    5
+          int size;                                   12345
+          cin >> size;
+          int num_seq[size];
+          for(int i = 0; i < size; i++) {
+              cin >> num_seq[i];
+                                                        Output
+          }
+          for (int each_item: num_seq) {
+              cout << each_item * each_item << " ";    1 4 9 16 25
+          }
+          return 0;
+      }
+Practice Problem
+
+
+       v/s
+Practice Problem
+
+Repeated Inputs
+
+
+
+                   Write a program that repeatedly prompts the user for
+                   a positive number and prints it. If the input is zero or
+                   negative, the program should continue asking until a
+                    valid number is entered. Implement this using for,
+                    while, and do-while loops, and discuss which loop is
+                            the most intuitive for this scenario.
+Repeated Inputs
+
+Using for Loop
+
+
+                              C++
+   #include <bits/stdc++.h>
+   using namespace std;
+   int main() {
+       int num;
+       for (;;) {
+           cout << "Enter a positive number" << endl;
+           cin >> num;
+           if (num > 0) {
+               cout << num << endl;
+                  break;
+           }
+       }
+       return 0;
+   }
+Repeated Inputs
+
+Using while Loop
+
+
+                              C++
+   #include <bits/stdc++.h>
+   using namespace std;
+   int main() {
+       int num;
+       while (1) {
+           cout << "Enter a positive number" << endl;
+           cin >> num;
+           if (num > 0) {
+               cout << num << endl;
+                  break;
+           }
+       }
+       return 0;
+   }
+Repeated Inputs
+
+Using do-while Loop
+
+
+                               C++
+
+    #include <bits/stdc++.h>
+    using namespace std;
+    int main() {
+        int num;
+        do {
+            cout << "Enter a positive number" << endl;
+            cin >> num;
+        } while (num <= 0);
+
+
+        cout << num << endl;
+        return 0;
+    }
+

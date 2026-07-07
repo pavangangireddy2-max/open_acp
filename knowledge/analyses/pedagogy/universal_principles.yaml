@@ -1,8 +1,34 @@
 # Universal Pedagogy Principles
-# Extracted from: 12 sample PPTs across Python, C++, DSA, ReactJS, GenAI + Slide Prep Guide
 # These apply to ALL content types and ALL domain stacks
+#
+# Provenance (see knowledge/analyses/style/ for per-deck analyses):
+#   - Core principles are heavily C++-derived (C++ S1 + STL/Loops/Operators/Functions),
+#     with Python S1-S3, DSA S1, and generic ReactJS input.
+#   - 2026-07-06 (v2): added project-building / framework / GenAI patterns from the two
+#     intact sample decks (sample_react_project 44p, sample_genai_project 14p).
+#   - 2026-07-06 (v3): the previously-corrupt numbered decks were re-exported clean and
+#     fully analyzed (24 decks, one analyst per domain-chunk). Coverage now spans:
+#       C++ S2-S10 (operators/loops/functions + STL sets/maps/pair/vector/deque/stack/
+#         queue/PQ + utility algorithms); Python S4-S5 (variables/types, strings & I/O);
+#         DSA S2-S4 (time/space complexity, pseudocode); HTML/CSS S1-S3 (HTML intro, CSS
+#         color/background) — HTML/CSS previously had ZERO source; ReactJS S2-S4
+#         (JSX/intro, components & props, Vite app setup); GenAI S2-S5 (capabilities tour,
+#         productivity tools, prompt engineering, no-code workflow-automation build).
+#   - 2026-07-06 (v4): added the previously-missing "Introduction to CSS | Part 1" deck
+#     (user-provided file, 37p → knowledge/raw/brand/htmlcss_css_part1.pdf; no Drive ID).
+#     Closes the CSS-syntax-fundamentals gap: ruleset/selector/property/value, container
+#     div, class attribute — the material htmlcss_s2/s3 only recapped. True session
+#     order: htmlcss_s1 (HTML intro) → css_part1 → htmlcss_s2/s3 (both "Part 2").
+#   - CAVEATS: some re-exported decks (genai_s4/s5) contain duplicated/reordered slide
+#     runs (working merges) — flows below are reconstructed by content grouping, not raw
+#     page order. ReactJS filenames don't match content (react_s2 = JSX intro,
+#     react_s3/s4 = Components&Props + Vite; none cover Lists/State/Routing).
+#     The HTML/CSS track's recap slides reference two further sessions NOT in the corpus:
+#     "Getting Started with Frontend" and "Leveraging Gen AI for accelerated learning".
+#   - Visual patterns below are DESCRIPTIVE (observed in decks produced under time
+#     constraints), not prescriptive mandates — treat as "observed", weigh accordingly.
 
-version: 1
+version: 4
 
 # ─── CORE PRINCIPLES ────────────────────────────────────────────────────────────
 
@@ -17,6 +43,8 @@ principles:
       - "DSA S1: definition → real-life analogy → examples → applications → benefits → takeaways"
       - "C++ Loops: For loop flowchart → syntax comparison → iteration trace table → code example — visual before textual before executable"
       - "C++ Operators: Operators comparison tables → key differences → type conversion → conditionals — each builds on the prior concept"
+      - "C++ STL Pair & Vector: STL overview (4 components) → Pair (simple container) → Vector (complex container) → iterators — each topic builds on the prior"
+      - "C++ STL Sets: Set (unique+sorted) → Multiset (duplicate+sorted) → Unordered Set (unique+unordered) — each variant introduced by contrast with the previous"
     rules:
       - "Start every concept with what the learner already knows (prior knowledge activation)"
       - "Introduce ONE new concept per slide/section — never two"
@@ -31,6 +59,13 @@ principles:
       - "C++ S1: same car analogy reused — proving it's a deliberate pedagogical pattern"
       - "DSA S1: 'Bookshelf in a library' for data structures, 'recipe in a cookbook' for algorithms, 'ingredients in containers' for data organization"
       - "ReactJS: component trees shown as visual diagrams before code"
+      - "C++ STL Queue: FIFO concept shown with people-in-line illustration (numbered 1-6) BEFORE any code"
+      - "C++ STL Priority Queue: VIP queue analogy (VIP vs Regular passengers) BEFORE formal max-heap definition — structurally maps: VIP = higher priority = served first regardless of arrival order"
+      - "C++ STL Vector: Array limitation (fixed size) introduced via character dialogue BEFORE vector definition — motivates WHY vectors exist"
+      - "GenAI S4: LLM introduced as 'a new intern who doesn't know what to do unless you explain' BEFORE defining prompt engineering"
+      - "GenAI S2: 'different AI models are like different tools in a toolbox' BEFORE the model-category taxonomy"
+      - "GenAI S5: an AI workflow framed as 'creating a recipe for the AI to follow' before the build"
+      - "CSS Part 1: 'Real World Example — Container' — loose boxes → one packed box → loaded truck illustration shown BEFORE the div syntax"
     rules:
       - "Every abstract concept must have a concrete analogy BEFORE the formal definition"
       - "Analogies should use everyday objects (cars, bookshelves, recipes, containers)"
@@ -47,11 +82,21 @@ principles:
       - "C++ Functions: Every function concept shown as C++ vs Python side-by-side (definition, calling, pass by value/reference)"
       - "C++ Loops: For/While/Do-While each shown as C++ syntax left, Python syntax right, with dashed orange separator"
       - "C++ Operators: Comparison tables for Logical, Arithmetic, Relational, Assignment operators — Python column vs C++ column"
+      - "C++ STL Vector: Every operation (declaration, indexing, push_back/append, pop_back/pop, size/len, erase/del, insert, reverse, clear, swap) shown C++ left, Python right"
+      - "C++ STL Vector: 'To better comprehend the significance of vectors, let's consider the concept of arrays' — bridges from arrays (known) to vectors (new)"
+      - "C++ STL Priority Queue: Max-Heap taught first, then Min-Heap introduced as variation — bridges from default to parameterized"
+      - "ReactJS S1 (sample): build 'Hello World' the vanilla-DOM way first (document.createElement/appendChild), then rebuild the IDENTICAL result with React (React.createElement/createRoot/render) — whole-artifact bridge, not line-by-line"
+      - "ReactJS S1 (sample): JSX introduced as a 'compiles to' equivalent of the React.createElement call the learner just wrote — new syntax bridged to the API they already learned"
+      - "Python S4-S5: nearly every concept shown JavaScript-left vs Python-right (variables, int/float/str/bool/None, constants, type checking) + a JS→Py conversion-API map (String()→str, Number()/parseInt()→int, Boolean()→bool)"
+      - "ReactJS S3: passing props framed as 'like declaring attributes for any HTML tag' — bridges props to the already-known HTML-attribute mental model"
     rules:
       - "When learners know Language A and are learning Language B, ALWAYS show A vs B comparison"
       - "Use side-by-side code comparison slides (Language A on left, Language B on right)"
       - "Highlight what's SAME first (reduces anxiety), then what's DIFFERENT (focused learning)"
       - "Explicitly state transfer: 'The problem-solving approach is the same across all languages'"
+      - "Use Python comparison selectively — Vector uses it (direct equivalent: list), but Queue/Priority Queue/Sets drop it when Python equivalents would confuse more than help"
+      - "For a new framework/library: build the target artifact the KNOWN way first (vanilla), run it, show output; then rebuild the same artifact the new way and prove identical output (matched-output proof)"
+      - "Introduce a framework's ergonomic syntax (e.g. JSX) as a compile-target of the lower-level API just taught — 'this sugar becomes that call'"
 
   contextual_and_applied_learning:
     description: "Every concept must connect to real-world application"
@@ -60,6 +105,9 @@ principles:
       - "C++ S1: desktop apps, mobile apps, gaming, big data, cloud, web — with named companies"
       - "ReactJS: Meta/Facebook, Netflix, Airbnb as companies using React"
       - "C++ S1: 'F-35 fighter jet uses C++ for avionics', 'NASA uses C++ for flight software'"
+      - "HTML/CSS S1: opens with frontend importance + MNC-salary framing before any markup (career lever for a job-track skill)"
+      - "GenAI S2: each capability mapped across Agriculture/Sports/Education/Fashion domains; deep-research shown as an industry use-case wheel"
+      - "GenAI S5: manual-vs-workflow time contrast ('30-45 min per article' vs '< 2 min of human effort')"
     rules:
       - "After introducing a concept, immediately show 2-3 real-world applications"
       - "Use named companies and specific products (not generic 'many companies use X')"
@@ -75,6 +123,10 @@ principles:
       - "Python S3: coding practice walkthrough uses 15+ slides for one question"
       - "C++ Loops: Do-while loop explained across 5 progressive annotation slides — same code shown 5 times, each highlighting ONE different line with a callout box"
       - "C++ Operators: Array declaration syntax revealed across 3 slides — first highlights 'type', then 'array_name', then '[array_size]'"
+      - "C++ STL Queue: Push operation shown across 3 progressive slides (push 10 → push 20 → push 30), one element per slide"
+      - "C++ STL Priority Queue: Push operation shown across 5 progressive slides (push 50 → 30 → 20 → 10 → 5), maintaining visual container state on every slide"
+      - "C++ STL Vector: Iterator concept taught across 4 slides — begin() → *it dereference → end() → end()-1 — each slide adds one annotation to the same code"
+      - "CSS Part 1: the SAME HTML panel re-shown across 3 consecutive slides while only the caption evolves — 'All The Elements At Once!' → 'Wrapping: grouping elements at one place' → 'we use container element' — vocabulary staged one term per slide over a static code panel"
     rules:
       - "Maximum 30-40 words per slide — enforced, not suggested"
       - "One idea per slide — if you need more space, add another slide"
@@ -151,6 +203,9 @@ strategies:
       - "Python S2: 'Hello World' in JS first, then Python equivalent"
       - "C++ Loops: Do-while progressive annotation — full code shown but each line highlighted with dashed-arrow callout explaining one aspect per slide"
       - "C++ Operators: Array syntax 'type array_name[array_size]' revealed in 3 separate slides highlighting each component"
+      - "ReactJS S2: git-style red/green diff replaces <script type='module'> with type='text/babel', then collapses the 4-line React.createElement call into 1-line JSX"
+      - "ReactJS S3: 'Accessing Props' across ~3 same-code slides, each adding one orange box — (props) param → console.log(props) → const {name}=props destructure"
+      - "GenAI S4: a prompt built up Role → +Context → +Action → +Format → +Tone, prior lines greyed and the new block bold — progressive reveal applied to a PROMPT, not code"
     rules:
       - "NEVER show a complete code block on the first slide — build it up"
       - "Each slide adds 1-2 lines to the previous code, highlighted with blue box"
@@ -158,6 +213,8 @@ strategies:
       - "When showing errors, follow the sequence: write code → run → see error → explain → fix → run again"
       - "Use git-style formatting (red/green) when replacing lines of code"
       - "Two variants: (1) build-up — add lines incrementally; (2) annotation — show complete code, highlight one element per slide with callout"
+      - "Token-level annotation sub-variant: for a syntax template with named slots, dissect ONE token per slide (highlight box + dashed arrow + caption) while the full template stays stable (e.g. C++ 'type array_name[array_size]')"
+      - "Applies beyond source code — build up prompts, config, and node setups the same way (grey prior parts, bold the new)"
 
   metacognitive_development:
     description: "Help learners understand their own learning process"
@@ -166,6 +223,7 @@ strategies:
       - "C++ S1: 'Three key areas to focus: Abstractions, Problem-Solving, Syntax' — framework for learning ANY language"
       - "Python S3: teaches how to USE the coding platform (timer, save, reset, AI tutor) — learning to learn"
       - "C++ S1: 'Learning time: ~300 hours for first language, ~10 hours for second' — setting expectations"
+      - "CSS Part 1: opens by recapping a dedicated 'Leveraging Gen AI for accelerated learning' session (learning/clarifying a concept, testing knowledge, understanding code; tools: Perplexity, NotebookLM) — AI-assisted learning taught as an explicit meta-skill inside the frontend track"
     rules:
       - "Include sessions that explicitly teach 'how to learn' this subject"
       - "Provide frameworks for self-directed learning (three key areas, learning roadmaps)"
@@ -179,6 +237,7 @@ strategies:
       - "DSA S1: search engines, social media, healthcare, finance as real applications"
       - "ReactJS: download trends chart, top companies, career advantages"
       - "C++ S1: 'F-35 fighter jet relies on C++ for avionics' — impressive facts"
+      - "CSS Part 1: 'Google Chrome is a Must' justified with ~89.1% India browser market share, source (gs.statcounter) cited on-slide — even tooling choices get a sourced statistic"
     rules:
       - "First 10% of any new topic: WHY should I care? (industry relevance, career impact)"
       - "Show named companies, real products, job statistics"
@@ -192,6 +251,9 @@ strategies:
       - "C++ Loops: Array memory diagram with contiguous addresses (100, 104, 108, 112, 116) and index labels before array syntax"
       - "C++ Operators: Type conversion hierarchy diagram (int → long long, int → float, int → double) before code examples"
       - "C++ Operators: Binary representation (16-bit short) diagram to explain data loss in short → char conversion"
+      - "DSA S2: Big O growth-curve graph (Time vs Input size, three curves labeled Slowest/Slow/Fastest) before naming asymptotic classes"
+      - "DSA S3: memory-cell boxes a|b|c with 'Number of memory spaces = 3' before stating O(1)"
+      - "Python S5: string 'Ravi' shown with index labels 0 1 2 3 and username[0]→'R' BEFORE the indexing code"
     rules:
       - "When a concept has a visual model (flowcharts, memory layouts, type hierarchies), show the diagram FIRST"
       - "Include actual values in diagrams (memory addresses, binary digits, iteration values) — not just abstract shapes"
@@ -204,10 +266,59 @@ strategies:
       - "C++ Operators: Switch statement shown WITHOUT break — output is 'A B' instead of just 'A' — then correct version with break"
       - "C++ Operators: short 300 → char produces ',' (ASCII 44) — shows data loss with binary diagram, then explains why"
       - "C++ Functions: Pass by value shown first, then pass by reference — contrasting outputs (Main: a=2 vs Main: a=4) to highlight the difference"
+      - "Python S5: '\"*\" + 10' shown producing a real TypeError traceback (with a frustrated-character illustration), then fixed with str(10)"
+      - "Python S5: message[2]='e' shown producing 'str object does not support item assignment' to teach immutability"
+      - "ReactJS S3: component renamed Welcome→welcome to show React treats a lowercase name as a raw HTML tag (breaks), then restates the capitalization rule"
     rules:
       - "When a construct has a common pitfall, show the pitfall BEFORE the correct usage"
       - "Compare outputs side-by-side: 'what you expected' vs 'what actually happened'"
       - "Use the error to motivate WHY the correct approach exists"
+
+  predict_the_output_challenge:
+    description: "Freeze a code result behind a 'What will be the output?' prompt — often pairing a KNOWN case (answer shown) with a TWIST case (answer withheld) — then reveal on the next slide"
+    observed_in:
+      - "Python S5: '1+2 → 3' shown, but adjacent '\"1\"+\"2\"' replaced with a dashed-arrow 'What will be the output?' box; answer (12) revealed next slide"
+      - "Python S5: '\"*\" + 10' output withheld, next slide reveals it is a TypeError"
+      - "Python S5: 'Can we modify a string like this?' posed before revealing message[2]='e' errors"
+    rules:
+      - "Pair a working case with a surprising/breaking case on one slide; show the known answer, hide the surprising one"
+      - "Use a dashed connector into a bordered prompt box to mark 'you predict, we reveal'"
+      - "Reveal the withheld answer only on the NEXT slide — force a prediction first"
+      - "Prefer this where the intuitive guess is WRONG, so the reveal corrects a misconception"
+
+  incremental_visual_styling_loop:
+    description: "Teach visual/markup domains by applying ONE property/element at a time and immediately rendering the change — the payoff is a SEEN visual delta, not just a new code line (visual analogue of progressive_code_reveal)"
+    observed_in:
+      - "HTML/CSS S1: a Tourism page built element-by-element — h1 appears → p appended → button appended, each on its own slide"
+      - "HTML/CSS S2: styling arc color:blue (heading) → color:grey (paragraph) → background-color:lightblue (.card), each an apply→render step"
+      - "CSS Part 1: one structural step (wrap in div, render unchanged) then one styling step (class='h-center', render centered) — each rendered before the next"
+    rules:
+      - "Change exactly one property/element per step and render the result before adding the next"
+      - "Keep the same running artifact (one page/card) across the session so every change is a visible diff"
+      - "Sequence content before chrome (text styling before container/background)"
+      - "Separate structural steps from styling steps — never bundle a wrapper change and a style change into one reveal"
+
+  contrastive_prompt_quality_demo:
+    description: "Teach prompt quality by showing a weak prompt and its poor output, then an improved prompt and its better output — the prompt is the 'code' and a vague prompt is the 'error' (prompt-domain analogue of deliberate_error_exposure)"
+    observed_in:
+      - "GenAI S4: 'Write a resume.' → 'Can you improvise the prompt?' → detailed prompt with sections/tips"
+      - "GenAI S4: bare 'What is generative AI?' vs the same targeted at a 'first-year B.Tech student with examples in apps like ChatGPT'"
+      - "GenAI S4: 'How to prepare for exams?' vs a context-loaded version (exams in two weeks, revision + breaks + hard subjects)"
+    rules:
+      - "Present the naive short prompt first; let its weakness be felt before improving it"
+      - "Improve by adding ONE specific missing dimension (role, context, constraints, format) so the lesson is legible"
+      - "Show both prompts' resulting outputs so the causal link (better prompt → better output) is explicit"
+
+  capability_menu_with_selection_judgment:
+    description: "For fast-moving tool/model landscapes, teach a MENU of options plus the judgment for when to use which — selection skill over memorization"
+    observed_in:
+      - "GenAI S2: six model categories, each definition → strengths → named top models → example task, closing 'choose the best LLM depending on your needs'"
+      - "GenAI S4: Zero/One/Few-shot each taught, then unified in a 'when it is best' table"
+      - "GenAI S2/S3: repeated 'try Claude, Gemini, and Llama' + daily-limit notes — tool substitution taught as a skill"
+    rules:
+      - "Present options as a labeled menu; give each a one-line 'best when…' criterion"
+      - "End with an explicit selection heuristic ('choose depending on your needs/task')"
+      - "Name real current exemplars but frame them as interchangeable/expiring — encourage trying multiple"
 
 # ─── SESSION STRUCTURE PATTERNS ─────────────────────────────────────────────────
 
@@ -252,6 +363,40 @@ session_patterns:
       - "Testing each increment"
       - "Key Takeaways"
 
+  framework_intro_flow:
+    description: "Session 1 of a project-building framework/library track (e.g. ReactJS)"
+    pattern:
+      - "WELCOME"
+      - "Session title"
+      - "Stack context (name the stack, e.g. MERN; architecture flow diagram; highlight the piece being taught)"
+      - "Topics to be Covered (whole-course checklist — macro scope)"
+      - "Agenda for Today (single-session chevron — micro scope)"
+      - "Motivation (what it is → why: perf/less-code/reusable → top companies → download trends chart)"
+      - "Session Initial Setup (screenshots of the real IDE/workspace/terminal — followable click-path)"
+      - "Vanilla baseline (build the target artifact the known way → run → show output)"
+      - "Framework rebuild (same artifact the new way, side-by-side old/new with logo tags, matched output)"
+      - "Progressive build of the working snippet (imports → module → create → root → render)"
+      - "New-syntax bridge (JSX shown, 'compiles to' the API just learned)"
+      - "Key Takeaways (green checks, mirror agenda)"
+      - "Practice"
+      - "Next Session preview"
+      - "THANK YOU / ALL THE BEST"
+    observed: "ReactJS 'Introduction to React JS' sample project deck (44 slides)"
+
+  project_track_intro_flow:
+    description: "Opener for a project-building track that motivates and previews capstones (e.g. GenAI)"
+    pattern:
+      - "WELCOME"
+      - "'Your Learning Journey' title (aspirational subtitle: 'From X-curious to X-confident')"
+      - "Motivation (the field is changing rapidly — visual escalation device)"
+      - "Relevance (grid of familiar consumer products powered by the tech)"
+      - "Stakes (cited disruption statistic + urgency/worried-character framing)"
+      - "Transition ('Your Path to Excellence')"
+      - "Concepts You Will Learn (outcome-phrased chevrons, not topic names)"
+      - "Projects You Will Build (one data-flow pipeline diagram per capstone)"
+      - "THANK YOU / ALL THE BEST"
+    observed: "GenAI sample project deck (14 slides)"
+
   new_language_intro_flow:
     description: "Standard flow when introducing a new programming language"
     pattern:
@@ -265,6 +410,26 @@ session_patterns:
       - "Progressive syntax introduction (each feature compared with known language)"
       - "Practice questions (in both languages for comparison)"
       - "Key Takeaways"
+
+  stl_container_flow:
+    description: "Standard flow for teaching STL container sessions (C++-only or selective Python comparison)"
+    pattern:
+      - "WELCOME"
+      - "Session title (C++ STL : Container Name)"
+      - "Agenda (2-3 containers/topics with chevron flow)"
+      - "For each container:"
+      - "  Section break slide (just the container name)"
+      - "  Introduction (definition with key terms bolded in dashed box)"
+      - "  Bridge from known (arrays → vectors, or Python list → vector)"
+      - "  Declaration and Initialization (C++ vs Python if applicable)"
+      - "  Operations (progressive push/pop/insert/erase with Before/After visuals)"
+      - "  Quiz Time!"
+      - "  Practice Problem (problem statement → step-by-step walkthrough → code)"
+      - "Key Takeaways (Part 1/N, green checkmarks)"
+      - "THANK YOU"
+      - "ALL THE BEST"
+      - "Supplementary slides (advanced topics, real-world problems)"
+    observed: "C++ STL Pair & Vector, C++ STL Queue & Priority Queue, C++ STL Sets, C++ STL Deque & Stack, C++ STL Maps — all follow this structure"
 
   bridge_course_flow:
     description: "Standard flow for bridging from a known language to a new one (mid-course sessions)"
@@ -284,6 +449,87 @@ session_patterns:
       - "ALL THE BEST"
       - "Practice Problems (problem statement → side-by-side solutions in both languages)"
     observed: "C++ Functions, C++ Loops and Arrays, C++ Operators/Type Conversion/Conditionals — all follow this exact structure"
+
+  stl_algorithm_flow:
+    description: "Flow for teaching free-function STL algorithms (not containers) — organized by function family, each taught as a signature contract applied uniformly across array/vector with matched I/O"
+    pattern:
+      - "WELCOME → title (e.g. C++ Utility Functions) → Agenda (Sorting → Max/Min/Find → Permutations chevrons)"
+      - "For each algorithm: 'About' slide (what it does + which <header>) → annotated signature (first/last iterators, 'includes start, excludes end')"
+      - "Apply to array → apply to vector (same algorithm back-to-back, to establish generality)"
+      - "Variants as incremental modifiers (default → greater<int>() → custom comparator → subarray/range → 2D)"
+      - "Quiz Time! between families → Key Takeaways → THANK YOU / ALL THE BEST → supplementary coded problems"
+    observed: "C++ S10 (Utility): sort → max_element/min_element/find → next_permutation/prev_permutation"
+
+  complexity_analysis_flow:
+    description: "Flow for teaching algorithm-efficiency analysis (time/space complexity)"
+    pattern:
+      - "WELCOME → title (Analyzing Algorithm Efficiency : Time/Space Complexity)"
+      - "Agenda (Introduction → Complexity → Asymptotic Notation / Key Takeaways)"
+      - "Motivation illustration + formal definition of the metric"
+      - "Intuition builder (linear vs exponential resource tables; constant/linear/quadratic examples)"
+      - "Method statement (step-counting formula; memory-cell counting)"
+      - "Worked problems, escalating (single loop → conditional → nested loop) via algorithm_step_trace_annotation"
+      - "Cross-algorithm complexity_growth_table with substitutions and verdicts"
+      - "Abstraction layer (Big O/Ω/Θ, growth-curve graph, simplification rules)"
+      - "Optimization refactor (Socratic 'can we reduce this?' → improved code)"
+      - "Key Takeaways → THANK YOU / ALL THE BEST"
+    observed: "DSA S2 (time complexity), DSA S3 (space complexity)"
+
+  pseudocode_intro_flow:
+    description: "Short flow for introducing language-agnostic pseudocode"
+    pattern:
+      - "WELCOME → definition (language-agnostic algorithm representation)"
+      - "Problem statement → numbered pseudocode → C++ implementation → Python implementation"
+      - "THANK YOU / ALL THE BEST"
+    observed: "DSA S4 (Pseudo Code, 9p)"
+
+  html_css_markup_flow:
+    description: "Flow for HTML/CSS markup/styling sessions — build one visible artifact incrementally, code always paired with rendered output"
+    pattern:
+      - "WELCOME + session title"
+      - "Recap (heavy in the CSS decks — a full re-derivation of prior syntax)"
+      - "Agenda (chevron of sub-topics with callout labels)"
+      - "Driving question + before→after rendered goal states of today's artifact (goal_state_preview)"
+      - "Motivation (frontend importance / MNC-salary lever; tooling choices backed by sourced stats)"
+      - "Tooling/environment (browser + Code Playground desktop & mobile preview)"
+      - "Decompose the target artifact into named parts (real screenshot with labeled orange boxes: Image/Heading/Paragraph/Button)"
+      - "Per element/property: section-break (mascot 'How to add X') → syntax-anatomy diagram (labeled braces; template before instance) → code slide with the new line/attribute highlighted, PAIRED with rendered output → (CSS) color swatch → isolated rendered 'after'"
+      - "Quiz Time! → Key Takeaways (mirror agenda) → Practice (+ Feedback) → Next Session → THANK YOU / ALL THE BEST"
+    observed: "HTML/CSS S1 (HTML intro), CSS Part 1 (syntax, div, class attribute), S2/S3 (CSS color & background)"
+
+  tool_walkthrough_flow:
+    description: "Flow for teaching third-party AI tools/platforms as followable 'how to use' recipes (breadth over one tool)"
+    pattern:
+      - "WELCOME + reflective hook ('think of a task where AI could help')"
+      - "Agenda (chevron of tools/capabilities, re-shown between sections)"
+      - "Per tool: Problem Statement (the pain it removes) → one-line 'what it does' on a logo section-break → 'How to Use' numbered step tracker (usually 3, completed steps ticked green) → per-step screens → Advantages → Similar Tools (2-3 alternatives)"
+      - "Reflection prompt → Quiz Time!"
+      - "Key Takeaways → Practice → Feedback → THANK YOU / ALL THE BEST"
+      - "'Stay Updated' meta-slide (how to keep current)"
+    observed: "GenAI S2 (capabilities tour), GenAI S3 (Gamma / Code2Tutorial / ChatGPT features)"
+
+  prompt_engineering_concept_flow:
+    description: "Flow for a prompt-engineering concept session"
+    pattern:
+      - "WELCOME → hook (a bad-response question) → contrastive weak-vs-improved prompt demo"
+      - "Define prompt / prompt engineering → 'why it matters' grid → intern analogy"
+      - "Framework taught one component per slide, each accumulating onto a running example prompt (CRAFT/RCAFT: Role → Context → Action → Format → Tone)"
+      - "Frameworks menu (RCAFT/STAR/RISEN) → shot techniques (Zero/One/Few) with a 'when best' table"
+      - "Templates with {{variables}} (separate data from instructions) → System/User/Assistant roles → iteration"
+      - "Quiz → Key Takeaways → Practice → Next Session"
+    observed: "GenAI S4 (Prompt Engineering Fundamentals)"
+
+  no_code_workflow_build_flow:
+    description: "Flow for building a multi-service no-code AI automation end-to-end (the 'code' is node config + prompts, not source — distinct from project_building_flow)"
+    pattern:
+      - "Recap of prior concepts → hook ('Can an LLM do this alone?')"
+      - "Anchor pipeline diagram (re-shown throughout with the active stage/LLM badge highlighted)"
+      - "Workflow concept + manual-vs-automated time contrast → applications"
+      - "Building blocks (nodes/modules/connections) → list account/API pre-requisites up front"
+      - "Per-step build: add node → configure → paste the exact prompt (one node per slide), master step-tracker re-shown between steps"
+      - "Real-world friction notes → scheduling → testing (trigger → content-quality → end-to-end) + Common Issues"
+      - "(optional) rebuild the same pipeline in a second platform → Quiz → Key Takeaways → Practice"
+    observed: "GenAI S5 (Social Media Content Automation — built in n8n, then rebuilt in Make.com)"
 
 # ─── CROSS-CUTTING PATTERNS ─────────────────────────────────────────────────────
 
@@ -317,7 +563,219 @@ cross_cutting:
       - "DSA S1: visual icons for Arrays, Linked Lists, Stacks, Queues, Trees, Graphs"
       - "ReactJS: component tree diagrams, HTML DOM tree, lifecycle phase diagrams"
       - "Coding Illustrations: 251 pages of branded visual assets"
+      - "C++ STL Vector: Array blocks with indices (0, 1, 2...) and Before/After rows for every operation"
+      - "C++ STL Queue: Horizontal cells with Front/Rear pointer labels, updated on every push/pop slide"
+      - "C++ STL Priority Queue: Vertical stack with dashed border and Top pointer arrow — consistent across all 5 push slides"
+      - "C++ STL Set: Mathematical curly brace notation { } with elements, green arrow showing state transitions"
     rules:
       - "Every data structure must have a visual representation"
       - "Use branded illustration style (vector, freepik-sourced)"
       - "Diagrams should build up incrementally (not show the full complex diagram at once)"
+      - "Container state must be shown on EVERY operation slide — never drop the visual"
+      - "Each container type has a consistent visual idiom: arrays use blocks+indices, queues use horizontal cells+pointers, stacks/PQs use vertical stacks+Top pointer, sets use curly braces"
+
+  supplementary_content_pattern:
+    description: "Optional/advanced content placed after the closing slides for self-paced reference"
+    examples:
+      - "C++ STL Pair & Vector: Safe Access .at() slides (pp 81-82) placed AFTER THANK YOU / ALL THE BEST"
+      - "C++ STL Queue & Priority Queue: Emergency Room real-world problem with full class code (pp 63-68) AFTER closing"
+      - "C++ STL Sets: Iteration slides and additional problem statements (pp 76-80) AFTER closing"
+    rules:
+      - "Core session ends at THANK YOU / ALL THE BEST — this is the natural stopping point for live delivery"
+      - "Supplementary slides follow closing for: advanced topics, real-world application problems, additional API methods"
+      - "Supplementary content should be self-contained (not dependent on live explanation)"
+      - "Use for content that motivated learners can explore asynchronously"
+
+  stack_context_map:
+    description: "Before teaching a technology, place it inside its larger stack/architecture with a 'you are here' diagram"
+    examples:
+      - "ReactJS S1 (sample): MERN definition (MongoDB/Express/React/Node) + application-flow diagram (React=client ⇄ Node/Express=server ⇄ MongoDB=db), React highlighted in an orange box, BEFORE defining React"
+    rules:
+      - "For framework/library/tool domains, open with where the tech sits in the whole architecture, then zoom into the piece being taught"
+      - "Pair a macro scope (whole-course/whole-stack) with the micro scope (today's session) on consecutive slides"
+
+  api_signature_annotation:
+    description: "Teach a function/API contract by annotating its signature with braces pointing to each argument"
+    examples:
+      - "ReactJS S1 (sample): React.createElement(type, props, children) with up/down braces labeling 'tag name / properties / child nodes', then green-checked expansions of each"
+      - "GenAI/tool APIs: label each parameter with what it controls and give 2-3 concrete example values"
+      - "CSS Part 1: ruleset TEMPLATE 'selector { property1: value1; }' (green Ruleset brace) → concrete '.h-center { text-align: center; }' with SELECTOR/PROPERTY/VALUE label boxes — each syntax role keeps ONE color across template, instance, and label (selector=red, property=orange, value=blue)"
+      - "CSS Part 1: generic attribute template '<tag attribute=\"value\">Content</tag>' with labeled braces taught BEFORE the concrete '<h1 class=\"h-center\">Tourism</h1>' instance"
+    rules:
+      - "When introducing an API call, annotate the signature itself — don't just describe it in prose"
+      - "Follow the annotated signature with concrete example values for each parameter"
+      - "Teach the generic template first, then instantiate it — and keep one color per syntax role, reused across the template, the concrete instance, and the label boxes"
+
+  project_as_pipeline:
+    description: "Scope a project (esp. GenAI/integration projects) as a left-to-right pipeline of processing stages, not a feature list"
+    examples:
+      - "GenAI (sample): Social Media Automation = List articles → Summarize → Generate platform content → Asset handling → Auto-post (numbered stages)"
+      - "GenAI (sample): AI News Summarizer = Fetch news → Summarize with Gemini → Deliver newsletter; the LLM is ONE stage among fetch/deliver stages"
+      - "GenAI (sample): pipelines name real services as endpoints — Gemini, Telegram, Amazon, Google Docs, Google Calendar"
+    rules:
+      - "Present integration/AI projects as a data-flow pipeline of labeled stages with arrows, each stage an icon + short label"
+      - "Show the LLM/model as one stage among fetch/transform/deliver stages — foreground orchestration, not model internals"
+      - "Name the real external tools/services students will wire together (tool-orchestration literacy)"
+      - "Phrase learning outcomes as capabilities ('build X without coding', 'save hours weekly'), not topic names"
+
+  motivation_lever_varies_by_domain:
+    description: "The emotional lever used to motivate differs by domain — match it"
+    examples:
+      - "C++/DSA: aspiration/impressiveness ('NASA uses C++ for flight software', competitive-programming stats)"
+      - "GenAI (sample): adapt-or-fall-behind urgency ('22% of jobs disrupted by 2030', WEF 2025, worried-character framing)"
+      - "ReactJS (sample): pragmatic career/industry proof (top companies grid, npm download-trend chart vs Angular/Vue)"
+    rules:
+      - "Choose the motivation lever by domain: aspiration for foundational CS, urgency for fast-moving fields (GenAI), industry-adoption proof for framework choices"
+      - "Always pair any statistic with a credible named source shown on the slide"
+
+  variant_based_teaching:
+    description: "Teach related data structure variants sequentially using identical API to highlight behavioral differences"
+    examples:
+      - "C++ STL Sets: Set (unique+sorted) → Multiset (duplicate+sorted) → Unordered Set (unique+unordered) — same operations (insert, erase, find, size, empty, clear, swap) for each"
+      - "C++ STL Priority Queue: Max-Heap → Min-Heap — same operations, different declaration syntax"
+      - "C++ STL Maps: Map → Multimap → Unordered Map — same pattern (from prior analysis)"
+    rules:
+      - "When teaching variants of a data structure, use the SAME API operations in the SAME order for each variant"
+      - "Highlight behavioral differences through contrast (sorted vs unsorted, unique vs duplicate) rather than through separate conceptual explanations"
+      - "Each variant section gets its own section break slide and Quiz Time!"
+
+  matched_output_code_slide:
+    description: "Show each runnable example as a consistent two-box slide: a bordered code panel tagged with a language pill, only the lines-of-interest highlighted (boilerplate left quiet), and the result in a separate box tagged with an 'Output' pill — output often revealed on a second slide"
+    examples:
+      - "C++ S2: stoi/stod slides — orange box around the 3 relevant lines, green Output pill (123 / 3.14159); #include/main left un-highlighted"
+      - "C++ S4: function examples use the same code-then-Output reveal"
+      - "CSS Part 1: the pill idiom generalizes to markup — every panel tagged HTML or CSS; 'Combining HTML & CSS' shows an HTML-pill panel and a CSS-pill panel side by side; newly-added lines (div tags, class attribute) boxed orange while the rest stays quiet"
+    rules:
+      - "Tag each code panel with a language pill so multi-language slides are unambiguous; tag results with a distinct 'Output' pill"
+      - "Highlight ONLY the lines that carry the concept; leave boilerplate visually quiet"
+      - "Reveal output on a separate slide after the code so learners can predict it first"
+
+  use_case_data_table_motivation:
+    description: "Motivate a keyed/associative structure by walking a realistic dataset table and iteratively discovering WHY a naive design fails — reaching the correct design by elimination"
+    examples:
+      - "C++ S9 (Maps): 'store all citizens' → table (Name/Gender/Place) → 'names aren't unique, can't be key' → add Aadhaar column → adopt Aadhaar as key"
+    rules:
+      - "Motivate keyed structures with a concrete dataset table before the definition, not a one-line analogy"
+      - "Introduce the correct design by proposing and refuting a naive one (active elimination)"
+      - "Grow the table across slides so the fix is visibly motivated by the failure"
+
+  iterator_result_caveat_box:
+    description: "When an STL function returns an iterator (not a value), a repeated highlighted 'Important note' box warns it must be dereferenced with *"
+    examples:
+      - "C++ S10: identical 'result is an iterator, not the value; dereference with *' box for max_element, min_element, and find"
+    rules:
+      - "Flag return-type gotchas (iterator vs value/bool) with a consistent, repeated callout across every function that shares the gotcha"
+      - "Pair the caveat with the corrected usage inline (*max_element(...))"
+
+  real_world_problem_capstone_pattern:
+    description: "Close a data-structure session (in the supplementary zone) with ONE named real-world scenario whose natural solution IS this container — delivered as problem → ops → traced example → full class code"
+    examples:
+      - "C++ S7 Priority Queue: 'Emergency Room' — patients ranked by severity, ops A/T/D, worked trace, then a full EmergencyRoom class using priority_queue<pair<int,string>>"
+      - "C++ S6 Stack: 'SpecialStack' with O(1) getMin, two-stack (main + min) class code"
+      - "C++ S6 Deque: online food-delivery order-management (AF/AB/RF/RB/D)"
+    rules:
+      - "End each data-structure session with exactly one named, domain-flavored problem whose natural solution is this container"
+      - "Structure it as: problem statement → supported operations → worked I/O trace → full class implementation"
+      - "Place it after THANK YOU/ALL THE BEST so live delivery can stop earlier but motivated learners get the applied payoff"
+
+  algorithm_step_trace_annotation:
+    description: "Teach time/space complexity by overlaying execution onto the source code — color-coded boxes tag each part (init/condition/updation/body) with dotted arrows to its runtime effect and per-iteration step count, accumulated into a closed-form expression"
+    examples:
+      - "DSA S2 Problem-1: for-loop with green box on condition, orange on i++, purple on cout body; 'Iteration 2 to N (3 steps each)' + 'loop break (2 steps)' summed to # Steps = 3N+2"
+      - "DSA S2 Problem-3: nested loop reuses the 3N+2 inner cost → 3N²+4N+2"
+      - "DSA S3: function annotated with memory cells a|b|c → 'memory spaces = 3'; array split into input O(n) vs auxiliary O(1)"
+    rules:
+      - "Overlay the analysis on the actual code: box each part, connect with a dotted arrow to its cost"
+      - "Use a consistent color per role (condition=green, updation=orange, body=purple; failing condition=red), stable across slides"
+      - "Accumulate per-iteration costs into an explicit closed form (3N+2, 3N²+4N+2), then reduce to Big O later"
+      - "Reuse a previously derived cost as a building block for a more complex structure"
+
+  complexity_growth_table:
+    description: "Compare algorithms by tabulating step-count formulas against escalating input sizes, substituting concrete N values on-slide, so learners SEE divergence before Big O is introduced"
+    examples:
+      - "DSA S2: rows N=1,5,100,100000 for 3N+2 / 2 / 3N²+4N+2 with substitution shown; verdicts 'medium/less/maximum time'; then each column mapped to O(N)/O(1)/O(N²)"
+    rules:
+      - "Before naming Big O, build a formula-rows × increasing-N-columns table filled with computed values (show the substitution)"
+      - "Escalate N dramatically (1 → 100000) so constants/lower-order terms visibly become negligible"
+      - "Cap the table by mapping each column to its Big O class — the abstraction as a summary of data already seen"
+
+  code_and_rendered_output_pairing:
+    description: "Pair source code with its live browser-rendered result so cause (markup/style) and effect (visual) are seen together — the defining loop of markup/visual teaching"
+    examples:
+      - "HTML/CSS S2: 'Code' slide shows the <body> markup LEFT and the actual rendered card (heading, paragraph, 'Get Started' button) RIGHT"
+      - "HTML/CSS S1: Code Playground desktop & mobile preview — HTML source pane left, rendered output pane right, 'Run Code' button"
+      - "CSS Part 1 'Adding Div': div-wrapped HTML (new <div></div> tags boxed orange) paired with a deliberately UNCHANGED render; only after class='h-center' is added is the render re-shown centered — structure-only vs styling changes separated visually"
+    rules:
+      - "For markup/styling, always show the rendered output, not just code — source left, rendered result right"
+      - "After applying a style, show the rendered 'after' state on its own so the change is unmistakable"
+      - "Prefer the real in-product editor (split code/preview + Run) so slides mirror the tool students use"
+      - "Show the render even when a structural-only edit leaves it UNCHANGED — proving structure and style are separate concerns"
+
+  goal_state_preview:
+    description: "Open the session with the target end-state as a driving question plus before→after views of the same artifact — the whole session then works toward one visible, promised goal"
+    examples:
+      - "CSS Part 1: 'How to Center the Heading, Paragraph, & Button Elements Horizontally?' with left-aligned vs centered Tourism-card renders joined by a green arrow — shown BEFORE any CSS is taught; the session ends by producing exactly that after-state via class='h-center'"
+      - "GenAI S5 (related): manual process vs automated workflow time contrast shown before the build — the target state motivates the session"
+    rules:
+      - "Phrase the session goal as a question the learner cannot yet answer"
+      - "Show the before and after states of the SAME artifact side by side (rendered/real, not described)"
+      - "Anchor every intermediate concept as a step toward that one goal, and end by delivering the exact promised after-state"
+
+  color_value_swatch_rendering:
+    description: "When a CSS value is a color, render it as a literal swatch on the slide so the keyword maps to what the eye will see"
+    examples:
+      - "HTML/CSS S2: 'color: blue;' with 'Blue =' followed by a solid blue rectangle; 'background-color: lightblue;' with a light-blue swatch"
+    rules:
+      - "Represent every color value as an on-slide swatch next to the keyword"
+      - "Place the swatch adjacent to the rule so value → appearance is a one-glance mapping"
+
+  attribute_as_html_css_bridge:
+    description: "Teach the HTML class attribute as the explicit connective tissue between an element and a CSS ruleset — decomposed into Attribute Name (class) and Attribute Value (selector), with the added attribute highlighted"
+    examples:
+      - "CSS Part 1 (the original teaching): HTML panel left / CSS panel right with language pills, then 'With the help of Attribute, we can combine HTML and CSS' → attribute anatomy → explicit rule slide: 'class name in HTML and Selector name in CSS must be the same, then only the styling will be applied correctly' (pointing-character emphasis)"
+      - "HTML/CSS S2: 'Combining HTML & CSS' — 'Attribute Name - class' / 'Attribute Value - main-heading' ties the .main-heading ruleset to the <h1>"
+      - "HTML/CSS S2: newly-added class='paragraph' / class='card' boxed in orange in otherwise-unchanged markup"
+    rules:
+      - "Name the wiring mechanism explicitly (class attribute) and split it into name vs value"
+      - "Box/highlight the attribute added to the HTML so learners see exactly what changed"
+      - "Reinforce that the selector name (.x) and the attribute value (x) are the same token"
+      - "State the matching requirement as an explicit rule slide with emphasis — it is the #1 silent failure mode for beginners"
+
+  tooling_onboarding_walkthrough:
+    description: "Teach real project scaffolding by walking the actual terminal/IDE flow with labeled screenshots — command → interactive prompts → generated folder tree → config → install → run → live output — not abstract description"
+    examples:
+      - "ReactJS S4: 'npm create vite@8.0.2' → screenshot of Vite's interactive prompts → generated myapp tree (public/src boxed) → 'npm install' → 'npm run dev' → 'Checking the Output' dev-server URL popup"
+    rules:
+      - "Show each command in its own Terminal-labeled block using the real course-IDE prompt string"
+      - "Screenshot the tool's actual output (scaffolder prompts, file tree, dev-server URL) — don't paraphrase"
+      - "Flag environment-specific steps as skippable ('specific to our IDE; you may not need this locally')"
+      - "Sequence strictly: scaffold → prompts → folder tree → config → install → run → verify"
+
+  api_equivalence_summary_grid:
+    description: "Close a 'build the same artifact N ways' arc with a side-by-side grid mapping each approach's key API calls, so learners see the through-line (reinforces bridge_from_known_to_unknown)"
+    examples:
+      - "ReactJS S2 'Summary': three logo-headed columns — vanilla JS (document.createElement/appendChild), React (React.createElement/createRoot().render), React+JSX (<h1>…</h1>/createRoot().render)"
+    rules:
+      - "After teaching the same result via progressive equivalent approaches, add one recap grid aligning the corresponding call in each column"
+      - "Head each column with the approach's logo/icon for instant recognition"
+
+  mock_tool_ui_prompt_card:
+    description: "Make 'use the AI this way' ideas concrete with a stylized mock chat/prompt UI (input box, avatar, sample prompt, target-model logos) rather than plain body text"
+    examples:
+      - "GenAI S2: Trending Reels / Local Recommendations / Financial Updates each shown as a prompt card with input box + Gemini/ChatGPT/Claude logo trio"
+      - "GenAI S4: role/context prompts rendered as avatar speech-bubble cards with the newly-added part bold"
+    rules:
+      - "Show the concrete example prompt inside a branded mock input box, not as plain text"
+      - "Attach the relevant model logos so learners know which tools apply"
+      - "Bold/foreground the part of the prompt that illustrates the current teaching point"
+
+  real_world_friction_note:
+    description: "Distinct pink/amber 'Note / Important' callouts that surface current external-tool friction (paywalls, rate limits, API errors, UI drift) — teaching operational resilience, not just the happy path"
+    examples:
+      - "GenAI S5: 'X Developer Portal moved to pay-for-use → posting to X not possible with new accounts'"
+      - "GenAI S5: 'Common Issues' — 402 (post too long), auth failures, rate limiting; free-tier Gemini rate-limit → 'use an alternate API key'"
+      - "GenAI S5: 'n8n changed the Active button to Publish' UI-drift note"
+    rules:
+      - "Flag known external failure modes and platform changes in a visually distinct callout"
+      - "Give the concrete workaround (alternate API key, keep posts short, use a business account)"
+      - "Acknowledge live tools drift ('this button may now be named X') — set expectation the UI won't match exactly"

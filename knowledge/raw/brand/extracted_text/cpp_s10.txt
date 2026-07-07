@@ -1,2 +1,1277 @@
-# cpp_s10 (0 pages, 0 with text)
+WELCOME
+C++ Utility Functions
+C++ Utility Functions
 
+Agenda
+
+
+
+
+                                     Next       Max/Min/Find
+                        Sorting
+                                  Permutation     Element
+Sort Function
+Sorting
+
+Sorting in C++ STL
+
+
+
+          Sorting is the process of arranging elements in a
+          particular order (ascending/descending).
+
+          C++ provides an efﬁcient in-built sorting
+          function: sort().
+                                                              sorted
+          Sorting improves searching efﬁciency in
+          applications.
+Sorting
+
+Basic Syntax and library
+
+
+
+                   Syntax
+
+                            C++ provides the sort() function
+    #include <algorithm>
+                             from the <algorithm> library to
+    .
+                              efﬁciently sort elements in a
+    .
+                            container such as arrays, vectors,
+    .                        and other iterable sequences.
+    sort(start, end);
+Sorting
+
+Basic Syntax and library
+
+
+
+                   Syntax
+
+
+    #include <algorithm>
+    .                       start: Iterator pointing to the ﬁrst
+
+    .                       element of the range to be sorted.
+
+    .
+    sort(start, end);
+Sorting
+
+Basic Syntax and library
+
+
+
+                   Syntax
+
+
+    #include <algorithm>
+                            end: Iterator pointing one past the
+    .
+                             last element of the range to be
+    .
+                                          sorted.
+    .
+    sort(start, end);
+Sorting
+
+Basic Syntax and library
+
+
+
+                   Syntax
+
+
+    #include <algorithm>
+    .                       The sorting includes start but
+
+    .                               excludes end
+
+    .
+    sort(start, end);
+Sorting
+
+Sorting an Array
+
+
+
+    #include <iostream>
+                                     C++
+    #include <algorithm>
+    using namespace std;
+    int main() {
+        int arr[] = {13, 5, 17, 9, 70, 43, 15};
+        int n = 7;
+                                                  13   5   17   9     70   43   15
+        sort(arr, arr + n);
+                                                  0    1   2    3     4    5    6
+        for (int i = 0; i < n; i++) {
+            cout << arr[i] << " ";                              arr
+        }
+        return 0;
+    }
+Sorting
+
+Sorting an Array
+
+
+
+    #include <iostream>
+                                     C++
+    #include <algorithm>                                                             arr + n
+    using namespace std;
+    int main() {
+        int arr[] = {13, 5, 17, 9, 70, 43, 15};
+        int n = 7;
+                                                  13   5   17   9     70   43   15
+        sort(arr, arr + n);
+                                                  0    1   2    3     4    5    6
+        for (int i = 0; i < n; i++) {
+            cout << arr[i] << " ";                              arr
+        }
+        return 0;
+    }
+Sorting
+
+Sorting an Array
+
+
+
+    #include <iostream>
+                                     C++
+    #include <algorithm>
+    using namespace std;
+                                                            Output
+    int main() {
+        int arr[] = {13, 5, 17, 9, 70, 43, 15};
+        int n = 7;
+        sort(arr, arr + n);
+                                                   5 9 13 15 17 43 70
+        for (int i = 0; i < n; i++) {
+            cout << arr[i] << " ";
+        }
+        return 0;
+    }
+
+
+
+             Sorts the array in ascending order.
+Sorting
+
+Sorting a Vector
+
+
+
+    #include <iostream>
+                                    C++
+    #include <vector>                                 begin()
+    #include <algorithm>
+    using namespace std;
+    int main() {
+        vector<int> v = {13, 5, 17, 9, 70, 43, 15};
+                                                        13      5   17   9     70   43   15
+        sort(v.begin(), v.end());
+                                                        0       1   2    3     4    5    6
+        for (int num : v) {
+            cout << num << " ";                                          arr
+        }
+        return 0;
+    }
+Sorting
+
+Sorting a Vector
+
+
+
+    #include <iostream>
+                                    C++
+    #include <vector>                                                                    end()
+    #include <algorithm>
+    using namespace std;
+    int main() {
+        vector<int> v = {13, 5, 17, 9, 70, 43, 15};
+                                                      13   5   17   9     70   43   15
+        sort(v.begin(), v.end());
+                                                      0    1   2    3     4    5    6
+        for (int num : v) {
+            cout << num << " ";                                     arr
+        }
+        return 0;
+    }
+Sorting
+
+Sorting a Vector
+
+
+
+    #include <iostream>
+                                    C++
+    #include <vector>
+    #include <algorithm>
+                                                               Output
+    using namespace std;
+    int main() {
+        vector<int> v = {13, 5, 17, 9, 70, 43, 15};
+        sort(v.begin(), v.end());
+                                                      5 9 13 15 17 43 70
+        for (int num : v) {
+            cout << num << " ";
+        }
+        return 0;
+    }
+
+
+
+            Sorts the vector in ascending order.
+Sorting
+
+Sorting a Subarray
+
+
+
+                       C++
+                                                       arr + 2
+
+
+
+    int arr[] = {13, 5, 17, 9, 70, 43, 15};   13   5     17      9     70   43   15
+
+    sort(arr + 2, arr + 5);                   0    1     2       3     4    5    6
+                                                                 arr
+
+
+
+
+          Sorts elements from index 2 to 4.
+Sorting
+
+Sorting a Subarray
+
+
+
+                       C++
+                                                                       arr + 5
+
+
+
+    int arr[] = {13, 5, 17, 9, 70, 43, 15};   13   5   17   9     70     43      15
+
+    sort(arr + 2, arr + 5);                   0    1   2    3     4      5       6
+                                                            arr
+
+
+
+
+          Sorts elements from index 2 to 4.
+Sorting
+
+Sorting a Subarray
+
+
+
+                       C++
+                                                       arr + 2              arr + 5
+
+
+
+    int arr[] = {13, 5, 17, 9, 70, 43, 15};   13   5     17      9     70     43      15
+
+    sort(arr + 2, arr + 5);                   0    1     2       3     4      5       6
+                                                                 arr
+
+
+
+
+          Sorts elements from index 2 to 4.
+Sorting
+
+Sorting a Subarray
+
+
+
+                        C++
+                                               After Sorting (arr + 2 to arr + 5)
+
+
+
+    int arr[] = {13, 5, 17, 9, 70, 43, 15};    13    5    9   17    70   43   15
+
+    sort(arr + 2, arr + 5);                     0    1    2   3     4    5    6
+                                                              arr
+
+
+
+
+          Sorted elements from index 2 to 4.
+Sorting
+
+Sorting a range in a Vector
+
+
+
+                       C++
+                                                       v.begin() + 2
+
+
+
+    vector<int> v = {13, 5, 17, 9, 70, 43, 15};   13   5    17    9    70   43   15
+    sort(v.begin() + 2, v.begin() + 5);           0    1    2     3    4    5    6
+                                                                 arr
+
+
+
+
+          Sorts elements from index 2 to 4.
+Sorting
+
+Sorting a range in a Vector
+
+
+
+                       C++
+                                                                      v.begin() + 5
+
+
+
+    vector<int> v = {13, 5, 17, 9, 70, 43, 15};   13   5   17   9     70   43    15
+    sort(v.begin() + 2, v.begin() + 5);           0    1   2    3     4    5     6
+                                                                arr
+
+
+
+
+          Sorts elements from index 2 to 4.
+Sorting
+
+Sorting a Subarray
+
+
+
+                       C++
+                                                   v.begin() + 2   v.begin() + 5
+
+
+
+    int arr[] = {13, 5, 17, 9, 70, 43, 15};   13   5    17    9    70   43    15
+
+    sort(arr + 2, arr + 5);                   0    1    2     3    4    5     6
+                                                             arr
+
+
+
+
+          Sorts elements from index 2 to 4.
+Sorting
+
+Sorting a range in a Vector
+
+
+
+                        C++
+                                                  After Sorting (v.begin() + 2 to v.begin() + 5)
+
+
+
+    vector<int> v = {13, 5, 17, 9, 70, 43, 15};          13   5   9    17    70   43   15
+    sort(v.begin() + 2, v.begin() + 5);                  0    1    2   3     4    5    6
+                                                                       arr
+
+
+
+
+          Sorted elements from index 2 to 4.
+Sorting
+
+Sorting Array in Descending Order
+
+
+
+
+                                               The greater<int>() function is a
+                                              comparator used to sort elements
+    int arr[] = {13, 5, 17, 9, 70, 43, 15};
+                                              in descending order by comparing
+    sort(arr, arr + n, greater<int>());
+                                                      them in reverse.
+Sorting
+
+Sorting Array in Descending Order
+
+
+
+                       C++
+                                                   Output
+
+
+    int arr[] = {13, 5, 17, 9, 70, 43, 15};
+                                              70 43 17 15 13 9 5
+    sort(arr, arr + n, greater<int>());
+
+
+
+                                              Descending Order
+
+
+          arr is sorted in descending order
+Sorting
+
+Sorting Vector in Descending Order
+
+
+
+                            C++
+                                                            Output
+
+
+    vector<int> v = {13, 5, 17, 9, 70, 43, 15};
+                                                       70 43 17 15 13 9 5
+    sort(v.begin(), v.end(), greater<int>());
+
+
+
+                                                       Descending Order
+
+
+          Works similarly to arrays but with vector.
+Custom Sorting (Using Comparator)
+
+Custom Comparator
+
+
+
+                         C++
+                                                                   customComparator
+                                                       ●   It’s a boolean function used to deﬁne custom
+
+    pair<int, int> arr[] = {{8, 4}, {5, 2}, {8, 6}};       sorting logic.
+    int n = 3;
+                                                       ●   It should return true if the ﬁrst element
+    sort(arr, arr + n, customComparator);
+                                                           should come before the second, and false
+                                                           otherwise.
+Custom Sorting (Using Comparator)
+
+Custom Comparator
+
+
+
+                         C++
+                                                           sort(arr, arr + n, customComparator)
+
+                                                       ●     This sorts the array using the custom
+    pair<int, int> arr[] = {{8, 4}, {5, 2}, {8, 6}};
+                                                             comparator.
+    int n = 3;
+    sort(arr, arr + n, customComparator);              ●     The elements are compared according to the
+                                                             logic deﬁned in the comparator.
+Custom Sorting (Using Comparator)
+
+Example
+
+                                 C++
+
+
+
+                                                                     After the comparison, the ‘sort’ function
+
+     bool customComparator(pair<int, int> p1, pair<int, int> p2) {     will arrange the pairs ﬁrst by the ﬁrst
+         if (p1.first < p2.first) return true;                       element in ascending order and then by
+         if (p1.first > p2.first) return false;
+                                                                     the second element in descending order.
+         return p1.second > p2.second;
+     }
+Custom Sorting (Using Comparator)
+
+Example
+
+
+      #include <iostream>
+                                    C++
+      #include <algorithm>
+      using namespace std;
+      bool customComparator(pair<int, int> p1, pair<int, int> p2) {   Before Sorting
+          if (p1.first < p2.first) return true;
+          if (p1.first > p2.first) return false;
+          return p1.second > p2.second;
+      }                                                                (8,4) (5,2) (8,6)
+      int main() {
+          pair<int, int> arr[] = {{8, 4}, {5, 2}, {8, 6}};
+          int n = 3;
+          sort(arr, arr + n, customComparator);
+          for (auto p : arr) {
+              cout << "(" << p.first << ", " << p.second << ") ";
+          }
+          return 0;
+      }
+Custom Sorting (Using Comparator)
+
+Example
+
+
+      #include <iostream>
+                                    C++
+      #include <algorithm>
+      using namespace std;
+      bool customComparator(pair<int, int> p1, pair<int, int> p2) {   After Sorting
+          if (p1.first < p2.first) return true;
+          if (p1.first > p2.first) return false;
+          return p1.second > p2.second;
+      }                                                               (5,2) (8,6) (8,4)
+      int main() {
+          pair<int, int> arr[] = {{8, 4}, {5, 2}, {8, 6}};
+          int n = 3;
+          sort(arr, arr + n, customComparator);
+          for (auto p : arr) {
+              cout << "(" << p.first << ", " << p.second << ") ";
+          }
+          return 0;
+      }
+Sorting a 2D Vector
+Sorting a 2D Vector by Rows (Default Sorting)
+
+Example
+
+                                        C++
+   #include <iostream>
+   #include <vector>
+   #include <algorithm>
+   using namespace std;
+                                                                      Sorting a 2D vector by rows sorts
+   int main() {                                                       each row individually in ascending
+       vector<vector<int>> vec = {{3, 2, 5}, {1, 7, 6}, {4, 9, 8}};
+       sort(vec.begin(), vec.end());
+                                                                      order based on the ﬁrst element of
+       for (auto row : vec) {                                         each row. If the ﬁrst elements are
+           for (int num : row) {
+                  cout << num << " ";                                 the same, it sorts lexicographically
+           }                                                           using the subsequent elements
+           cout << endl;
+       }
+       return 0;
+   }
+Sorting a 2D Vector by Rows (Default Sorting)
+
+Example
+
+                                        C++
+   #include <iostream>
+   #include <vector>
+   #include <algorithm>
+                                                                      After Sorting
+   using namespace std;
+   int main() {
+       vector<vector<int>> vec = {{3, 2, 5}, {1, 7, 6}, {4, 9, 8}};       176
+       sort(vec.begin(), vec.end());
+                                                                          325
+       for (auto row : vec) {
+           for (int num : row) {                                          498
+                  cout << num << " ";
+           }
+           cout << endl;
+       }
+       return 0;
+   }
+Sorting a 2D Vector in Descending Order
+
+Example
+
+
+
+                              C++
+                                                                   Before Sorting
+
+                                                                        325
+
+    vector<vector<int>> vec = {{3, 2, 5}, {1, 7, 6}, {4, 9, 8}};        176
+    sort(vec.begin(), vec.end(), greater<vector<int>>());               498
+Sorting a 2D Vector in Descending Order
+
+Example
+
+
+
+                              C++
+                                                                   After Sorting
+
+                                                                       498
+
+    vector<vector<int>> vec = {{3, 2, 5}, {1, 7, 6}, {4, 9, 8}};       325
+    sort(vec.begin(), vec.end(), greater<vector<int>>());              176
+
+
+
+
+Sorts each row in descending order by the ﬁrst element,
+  and lexicographically if the elements are the same.
+Sorting a 2D Vector by a Speciﬁc Column
+
+Example
+
+
+
+                              C++
+                                                            Before Sorting by Column 1
+    bool columnComparator(vector<int> &a, vector<int> &b)
+                                                                       325
+    {
+        return a[1] < b[1];                                            176
+    }                                                                  498
+
+    sort(vec.begin(), vec.end(), columnComparator);
+
+
+
+
+            Sort based on the second column.
+Sorting a 2D Vector by a Speciﬁc Column
+
+Example
+
+
+
+                              C++
+                                                            After Sorting by Column 1
+    bool columnComparator(vector<int> &a, vector<int> &b)
+                                                                      325
+    {
+        return a[1] < b[1];                                           176
+    }                                                                 498
+
+    sort(vec.begin(), vec.end(), columnComparator);
+
+
+
+
+            Sort based on the second column.
+Sorting a 2D Vector in Custom Order (Multiple Conditions)
+
+Example
+
+
+
+                              C++
+                                                            Before Sorting
+    bool customComparator(vector<int> &a, vector<int> &b)        325
+    {                                                            176
+        if (a[0] ! = b[0]) return a[0] < b[0];                   498
+        return a[1] > b[1];                                      351
+    }
+    sort(vec.begin(), vec.end(), customComparator);
+
+
+
+
+             Sort by ﬁrst column (ascending).
+Sorting a 2D Vector in Custom Order (Multiple Conditions)
+
+Example
+
+
+
+                              C++
+                                                            After Sorting
+    bool customComparator(vector<int> &a, vector<int> &b)        176
+    {                                                            351
+        if (a[0] ! = b[0]) return a[0] < b[0];                  325
+        return a[1] > b[1];                                     498
+    }
+    sort(vec.begin(), vec.end(), customComparator);
+
+
+
+
+    If ﬁrst column is equal, sort by second column
+                        (descending).
+Quiz Time!
+Max element, min element,
+       ﬁnd element
+Max element, min element, ﬁnd element
+
+Finding and Searching
+
+
+
+        The C++ STL provides built-in functions for
+        performing common operations such as ﬁnding the
+        maximum, minimum, and searching for elements
+        in various containers, including arrays, vectors, and
+        other iterable sequences.
+Finding the Maximum Element
+
+About
+
+
+
+      What does max_element(ﬁrst,last) do?
+
+
+       The max_element() function is part of the <algorithm>
+       header in C++.It ﬁnds the largest element in a given range
+       and returns an iterator to that element.
+Finding the Maximum Element
+
+About
+
+                          Input                                                            Output
+
+
+  ➢    A range deﬁned by two iterators: (ﬁrst, last)
+
+                                                                     ●    An iterator pointing to the maximum
+   ●   ﬁrst: Iterator pointing to the beginning of the
+                                                                          element in the range.
+       range.
+                                                                     ●    If the range is empty, max_element (ﬁrst,last)
+   ●   last: Iterator pointing one past the last
+                                                                          returns iterator last.
+       element of the range.
+
+
+
+                                                     Important note
+             The result of max_element() is an iterator, not the value itself.
+             To get the actual value, you need to dereference the iterator using * (e.g., *max_element(arr, arr + n)).
+Finding the Maximum Element (in an array)
+
+Example
+
+                             C++
+      #include <iostream>
+      #include <algorithm>
+                                                              Output
+      using namespace std;
+
+
+      int main() {
+                                                       Max Element: 70
+          int arr[] = {13, 5, 17, 9, 70, 43, 15};
+          int n = 7;
+          int maxVal = *max_element(arr, arr + n);
+          cout << "Max Element: " << maxVal << endl;
+          return 0;
+      }
+Finding the Maximum Element (in a Vector)
+
+Example
+
+
+
+                                                                                        Output
+                              C++
+
+        vector<int> v = {13, 5, 17, 9, 70, 43, 15};
+                                                                               Max Element: 70
+        int maxVal = *max_element(v.begin(),
+        v.end());
+
+
+
+
+               max_element(v.begin(), v.end()) returns an iterator to the maximum element in the vector.
+               The * operator dereferences the iterator to get the actual ,maximum value.
+Finding the Minimum Element
+
+About
+
+
+      What does min_element(ﬁrst,last) do?
+
+
+       The min_element() function is part of the <algorithm>
+       header in C++.
+
+       It ﬁnds the smallest element in a given range and returns
+       an iterator to that element.
+Finding the Minimum Element
+
+About
+
+                          Input                                                            Output
+
+
+  ➢    A range deﬁned by two iterators: (ﬁrst, last)
+
+                                                                     ●     An iterator pointing to the minimum element
+   ●   ﬁrst: Iterator pointing to the beginning of the
+                                                                           in the range.
+       range.
+                                                                     ●     If the range is empty, min_element (ﬁrst,last)
+   ●   last: Iterator pointing one past the last
+                                                                           returns iterator last.
+       element of the range.
+
+
+
+                                                     Important note
+             The result of min_element() is an iterator, not the value itself.
+             To get the actual value, you need to dereference the iterator using * (e.g., *min_element(arr, arr + n)).
+Finding the Minimum Element (in an array)
+
+Example
+
+                             C++
+      #include <iostream>
+      #include <algorithm>
+                                                              Output
+      using namespace std;
+
+
+      int main() {
+                                                       Min Element: 5
+          int arr[] = {13, 5, 17, 9, 70, 43, 15};
+          int n = 7;
+          int minVal = *min_element(arr, arr + n);
+          cout << "Min Element: " << minVal << endl;
+          return 0;
+      }
+Finding the Minimum Element(in a Vector)
+
+Example
+
+
+
+                                                                                             Output
+                               C++
+
+       vector<int> v = {13, 5, 17, 9, 70, 43, 15};                              Min Element: 5
+       int minVal = *min_element(v.begin(), v.end());
+
+
+
+
+                min_element(v.begin(), v.end()) returns an iterator to the minimum element in the vector.
+                The * operator dereferences the iterator to get the actual ,minimum value.
+Finding an Element
+
+About
+
+
+
+       What does ﬁnd() do?
+
+
+       The ﬁnd() function is part of the <algorithm> header in
+       C++. It searches for a given target element in a speciﬁed
+       range and returns an iterator to its ﬁrst occurrence.
+Finding an Element
+
+About
+
+                             Input                                                              Output
+
+  ➢    A range deﬁned by two iterators and a target
+       element: (ﬁrst, last, target)
+
+
+   ●   ﬁrst: Iterator pointing to the beginning of the                      ●   An iterator pointing to the ﬁrst occurrence of
+       range.                                                                   target in the range.
+   ●   last: Iterator pointing one past the last element of                 ●   If target is not found, ﬁnd() returns last.
+       the range.
+   ●   target: The element to search for in the given
+       range.
+
+                                                         Important note
+                The result of ﬁnd() is an iterator, not the value itself.
+                To get the actual value, you need to dereference the iterator using * (e.g., *ﬁnd(ﬁrst, last, target)).
+Finding an Element
+
+Example
+
+                               C++
+
+
+      int arr[] = {13, 5, 17, 9, 70, 43, 15};                          Output
+      auto it = find(arr, arr + n, 17);
+      if (it ! = arr + n) {
+          cout << "Element found at index: " << (it - arr);
+                                                              Element found at index: 2
+      } else {
+          cout << "Element not found";
+      }
+Searching in a Vector
+
+Example
+
+                                  C++
+
+
+       vector<int> v = {13, 5, 17, 9, 70, 43, 15};                            Output
+       auto it = find(v.begin(), v.end(), 17);
+       if (it ! = v.end()) {
+           cout << "Element found at index: " << (it - v.begin());
+                                                                     Element found at index: 2
+       } else {
+           cout << "Element not found";
+       }
+Permutations (next, previous, ﬁnd all)
+Permutations
+
+Permutations in C++ STL
+
+
+
+       A permutation is a rearrangement of elements in a given order.
+
+
+       C++ provides the next_permutation() and prev_permutation()
+       functions to generate lexicographic permutations.
+Generating the Next Permutation
+
+About
+
+
+       What does next_permutation() do?
+
+
+       The next_permutation() function is part of the
+       <algorithm> header in C++.
+
+       It rearranges elements in the given range to generate the
+       next lexicographical permutation of the sequence.
+Generating the Next Permutation
+
+About
+
+                            Input                                                          Output
+
+
+
+  ➢    A range deﬁned by two iterators: (ﬁrst, last)                   ●   Returns true if the previous permutation exists
+                                                                           and modiﬁes the range in-place.
+   ●   ﬁrst: Iterator pointing to the beginning of the                 ●   Returns false if the given range is the smallest
+       range.                                                              permutation (sorted in ascending order), in
+   ●   last: Iterator pointing one past the last element of                which case the sequence is rearranged to the
+       the range.                                                          largest permutation (sorted in descending order).
+
+
+
+
+                                                     Important note
+                The function modiﬁes the original sequence directly.
+                If no next permutation exists, the sequence is rearranged in descending order.
+Generating the Next Permutation
+
+Example
+
+                               C++
+     #include <iostream>
+                                                                     Output
+     #include <algorithm>
+     using namespace std;
+     int main() {
+         string str = "abc";
+         if (next_permutation(str.begin(), str.end())) {     Next permutation: acb
+             cout << "Next permutation: " << str << endl;
+         } else {
+             cout << "No next permutation exists" << endl;
+         }
+         return 0;
+     }
+Generating the Previous Permutation
+
+About
+
+
+       What does prev_permutation() do?
+
+
+       The prev_permutation() function is part of the
+       <algorithm> header in C++.
+
+       It rearranges elements in the given range to generate the
+       previous lexicographical permutation of the sequence.
+Generating the Previous Permutation
+
+About
+
+                            Input                                                          Output
+
+
+
+  ➢    A range deﬁned by two iterators: (ﬁrst, last)                   ●   Returns true if the previous permutation exists
+                                                                           and modiﬁes the range in-place.
+   ●   ﬁrst: Iterator pointing to the beginning of the                 ●   Returns false if the given range is the smallest
+       range.                                                              permutation (sorted in ascending order), in
+   ●   last: Iterator pointing one past the last element of                which case the sequence is rearranged to the
+       the range.                                                          largest permutation (sorted in descending order).
+
+
+
+
+                                                     Important note
+                The function modiﬁes the original sequence directly.
+                If no previous permutation exists, the sequence is rearranged in descending order.
+Generating the Previous Permutation
+
+Example
+
+                               C++
+     #include <iostream>
+                                                                          Output
+     #include <algorithm>
+     using namespace std;
+     int main() {
+         string str = "cba";
+         if (prev_permutation(str.begin(), str.end())) {         Previous permutation: cab
+             cout << "Previous permutation: " << str << endl;
+         } else {
+             cout << "No previous permutation exists" << endl;
+         }
+         return 0;
+     }
+Finding All Permutations
+
+Example
+
+                                  C++
+
+     #include <iostream>                                             Output
+     #include <algorithm>
+                                                               abc
+     using namespace std;
+     int main() {
+                                                               acb
+         string str = "bac";                                   bac
+         sort(str.begin(), str.end());                         bca
+         do {                                                  cab
+                cout << str << endl;
+                                                               cba
+         } while (next_permutation(str.begin(), str.end()));
+         return 0;
+     }
+Finding All Permutations
+
+About
+
+       What does Sorting Required?
+
+
+       The sorting step ensures that the permutations are
+       generated in lexicographical order when using
+       next_permutation().
+
+       If the input string is not in sorted order, the function will
+       continue from its current arrangement, missing some
+       permutations at the star.
+Finding All Permutations
+
+Supported Data Structures
+
+
+        Applicable to Various Containers: next_permutation
+        works with strings, arrays, and vectors, allowing
+        permutation generation for different data types.
+
+
+        Supports Bidirectional Iterators: It can be used with any
+        container that provides bidirectional iterators,
+        including std::list.
+
+
+        Flexible Across STL Containers: Compatible with standard
+        containers like std::deque, std::string, and std::vector,
+        making it versatile for sequence manipulation.
+Finding All Permutations for an Array
+
+Example
+                                         C++
+                                     C++
+              #include <iostream>
+              #include <algorithm>
+              using namespace std;                              Output
+              int main() {                                    123
+                  int arr[] = {1, 2, 3};
+                                                              132
+                  int n = 3;
+                  sort(arr, arr + n);                         213
+                  do {                                        231
+                     for (int i = 0; i < n; i++)
+                            cout << arr[i] << " ";
+                                                              312
+                         cout << endl;                        321
+                  } while (next_permutation(arr, arr + n));
+                  return 0;
+              }
+C++ STL
+
+Key Takeaways
+
+     Sorting in C++ STL: Using sort(start, end) from
+     <algorithm> to efﬁciently sort arrays and vectors in
+     ascending or descending order.
+
+     Custom Sorting with Comparators: Implementing a
+     boolean comparator function to deﬁne custom sorting
+     logic, such as sorting pairs or 2D vectors.
+
+     Finding Maximum and Minimum Elements: Using
+     max_element() and min_element() to ﬁnd the largest
+     and smallest values in an array or vector.
+C++ STL
+
+Key Takeaways
+
+
+     Searching for Elements: Using ﬁnd() to search for a
+     target value in a container and return its position.
+
+     Generating Permutations: Using next_permutation()
+     and prev_permutation() to generate lexicographic
+     permutations of sequences.
+
+     Working with 2D Vectors: Sorting entire rows, speciﬁc
+     columns, or using custom sorting conditions for
+     multi-dimensional data.
+THANK YOU
+ALL THE BEST
+Custom Sorting of Vector
+
+Problem Statement
+
+
+
+         Given a vector of unique integers ‘arr’ of length ‘n’,
+         you need to sort the vector in non-decreasing order
+         based on the absolute difference from ‘0’.
+
+
+         If two numbers have the same absolute difference,
+         the smaller number should come ﬁrst.
+Custom Sorting of Vector
+
+Example
+
+                                                     Calculate absolute difference values with ‘0’:
+                    Input
+                                                                    2        2    =   2
+       n=8                                                          6        6    =   6
+                                                                    -2       -2   =   2
+       arr = [2, 6, -2, 5, -5 , 7 ,11, -22]                         5        5    =   5
+                                                                    -5       -5   =   5
+                                                                    7        7    =   7
+                                                                    11       11   =   11
+                   Output
+                                                                   -22      -22   = 22
+
+           [-2, 2, -5, 5, 6, 7, 11, -22]          Sort by absolute values: [ -2, 2, -5, 5, 6, 7, 11, -22 ]
+
+                                              ➢      -2 before 2 (same absolute value, smaller ﬁrst).
+
+                                              ➢      -5 before 5 (same absolute value, smaller ﬁrst).
+Custom Sorting of Vector
+
+Example
+
+                                              C++
+
+                           #include <bits/stdc++.h>
+                           using namespace std;
+
+
+                           bool customSort(int a, int b) {
+                               if (abs(a) == abs(b))
+                                  return a < b;
+                               return abs(a) < abs(b);
+                           }
+
+
+                           void customSorting(vector<int>& arr) {
+                               sort(arr.begin(), arr.end(), customSort);
+                           }
+Max Element
+
+Problem Statement
+
+
+
+        Given a vector nums of size n containing integers,
+        check if the difference between the maximum
+        element and the ﬁrst element exists in the vector. If
+        found, print "Present".
+Max Element
+
+Problem Statement
+
+
+                                Input                            Output
+
+
+                          n=5
+                                                                 Present
+                          nums = [3, 1, 7, 4, 2]
+
+
+
+
+              The ﬁrst element is 3, the maximum is 7, and since 7 - 3 = 4 exists in the
+                                      vector, the output is "Present".
+Max Element
+
+Solution
+
+                                             C++
+              #include<bits/stdc++.h>
+              using namespace std;
+
+
+              void checkPresence(vector<int>& nums) {
+                  int first = nums[0];
+                  int maxElement = *max_element(nums.begin(), nums.end());
+                  int difference = maxElement - first;
+
+
+                  if (find(nums.begin(), nums.end(), difference) != nums.end()) {
+                      cout << "Present" << endl;
+                  } else {
+                      cout << "Not Present" << endl;
+                  }
+              }
+Finding All Permutations for an Array
+
+Problem Statement
+
+
+
+         Given a string s, ﬁnd the next k lexicographically greater
+         permutations of s. If there are fewer than k permutations
+         available, return only the ones that exist. Return the result as
+         a vector of strings in sorted order.
+Finding All Permutations for an Array
+
+Problem Statement
+
+
+                              Input                     Output
+
+
+                               s = "abc"
+                                                     ["acb", "bac"]
+                               k=2
+
+
+
+
+                The next permutation after "abc" is "acb", followed by "bac".
+Finding All Permutations for an Array
+
+Solution
+
+                                                     C++
+                        #include<bits/stdc++.h>
+                        using namespace std;
+
+
+                        vector<string> findNextPermutations(string s, int k) {
+                            vector<string> result;
+
+
+                            while (k-- && next_permutation(s.begin(), s.end())) {
+                                result.push_back(s);
+                            }
+
+
+                            return result;
+                        }
+

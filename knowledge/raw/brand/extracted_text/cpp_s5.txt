@@ -1,2 +1,1199 @@
-# cpp_s5 (0 pages, 0 with text)
+WELCOME
+C++ STL : Pair & Vector
+Agenda
 
+C++ Bridge Course
+
+
+
+
+           Introduction to
+                             Pair   Vector
+               C++ STL
+C++ STL
+
+Introduction
+
+
+
+          C++ STL (Standard Template Library) is a versatile
+
+          collection of template classes and functions providing
+
+          ready-to-use data structures and algorithms for
+
+          generic programming.
+C++ STL
+
+Introduction
+                      Containers
+
+
+
+
+                       C++ STL
+          Functions                Iterators
+                       includes
+
+
+
+
+                      Algorithms
+Pair Container
+Pair Container
+
+Introduction
+
+                             What is a Pair in C++?
+
+
+
+
+                 1                     2                       3
+
+
+
+        A pair in C++ is a   These values can be of   It is part of the C++
+      container that holds    the same or different   Standard Template
+      two values together.           types.              Library (STL).
+Pair Container
+
+Declaring a Pair
+
+                  A C++ pair stores two values together.
+
+
+
+
+                                   C++
+
+
+                 pair<int, char> p1 = {1, 'A'};
+                 pair<int, string> p2 = make_pair(2, "Alice");
+
+
+
+
+                            pair<type1, type2>
+Pair Container
+
+Accessing Elements in a Pair
+
+
+
+                                                               Output
+                                  C++
+
+                 pair<int, char> p1 = {1, 'A'};             First: 1
+                 cout << "First: " << p1.first << endl;     Second: A
+                 cout << "Second: " << p1.second << endl;
+
+
+
+
+          We use .ﬁrst and .second to access elements.
+Pair Container
+
+Storing 3 or More Elements
+
+
+                                Using Nested Pairs
+
+                                                                               Output
+                                         C++
+
+                 pair<int, pair<int, int>> p3 = {3, {4, 6}};                     3
+                 cout << p3.first << endl;
+                 cout << p3.second.first << " " << p3.second.second << endl;
+                                                                                 46
+
+
+
+        In case of nested Pairs, multiple .ﬁrst and .second
+                          can be used in above way.
+Pair Container
+
+Array of Pairs
+
+
+
+                                                                        Output
+                                        C++
+
+
+                 pair<int, int> arr[] = {{4,7}, {5,2}, {6,9}, {8,1}};      8
+                 cout << arr[3].first << endl;
+
+
+
+
+                          We can use array of pairs
+Pair Container
+
+Inserting and Modifying Elements in a Pair
+
+
+                        Modifying .ﬁrst and .second
+
+                                                                     Output
+                                        C++
+
+                 pair<int, string> student = {101, "John"};
+                                                                   201 Michael
+                 student.first = 201;
+                 student.second = "Michael";
+                 cout << student.first << " " << student.second;
+
+
+
+
+                       C++ pairs allow modiﬁcation.
+Comparison of Two Pairs
+
+Problem Statement
+
+
+        You are given two pairs, (a, b) and (x, y).
+
+
+        Compare the ﬁrst elements (a and x):
+         ➢   If a > x, then (a, b) is the greater pair.
+         ➢   If x > a, then (x, y) is the greater pair.
+
+        If a = x, compare the second elements (b and y) to
+        determine the greater pair.
+Quiz Time!
+Vector
+Vector
+
+Introduction
+
+
+                                   Vector
+
+
+
+               In C++ STL, a vector is a dynamic array container
+         offering dynamic resizing, contiguous memory storage, and
+          versatile functions for managing sequences of elements.
+Vector
+
+Introduction
+
+
+
+               To better comprehend the signiﬁcance of vectors,
+                      let's consider the concept of arrays.
+
+
+
+                       int arr[] = {4, 5, 6}
+
+                                   Size of the array = 3
+Vector
+
+Introduction
+
+
+          Once an array is created,     By using vectors, we can increase
+         its size cannot be changed.   and decrease the size of the storage.
+Vector
+
+Introduction
+
+
+
+                1      3       4       7       2      8
+
+
+
+
+           In Vector, all the elements are stored in contiguous
+                           memory locations.
+Declaration of a Vector
+Vector
+
+Declaration
+
+Declaration with Initialization
+
+         Vector with predeﬁned values.              List with predeﬁned values.
+
+
+                      C++                                    Python
+
+
+
+
+   vector<int> v1 = {1, 3, 5, 7, 9};          v1 = [1, 3, 5, 7, 9]
+
+
+
+
+  v1 =     1      3         5    7       9   v1 =    1       3        5     7     9
+Vector
+
+Declaration
+
+Constructor initialization of vector
+
+                       Creates a vector of size 5, all elements set to 20.
+
+
+
+                                               C++
+
+
+                          vector<int> v2(5, 20);
+
+
+
+
+                         v2 =    20       20         20    20      20
+Vector
+
+Declaration
+
+Constructor initialization with one parameter
+
+                     Creates a vector of size 5 with default values (0).
+
+
+
+                                            C++
+
+
+                        vector<int> v3(5);
+
+
+
+
+                       v3 =     0       0         0      0       0
+Vector
+
+Copying an Existing Vector
+
+
+                         Creates a copy of v1.
+
+
+
+                                 C++
+
+
+               vector<int> v1 = {1, 3, 5, 7, 9};
+               vector<int> v4(v1);
+
+
+
+              v4 =   1       3         5         7   9
+Accessing Elements in a Vector
+Vector
+
+Accessing Elements Using Indexing
+
+         Both C++ vectors and Python lists allow element access using indexing.
+
+
+
+                   C++                                           Python
+
+
+
+  vector<int> v = {1, 3, 5, 7, 9};              v = [1, 3, 5, 7, 9]
+
+
+
+               0    1    2   3   4                           0     1      2   3   4
+
+         v=    1    3    5   7   9                     v=    1     3      5   7   9
+Vector
+
+Accessing Elements Using Indexing
+
+           Both C++ vectors and Python lists allow element access using indexing.
+
+
+
+                      C++                                           Python
+
+
+
+  vector<int> v = {1, 3, 5, 7, 9};                v = [1, 3, 5, 7, 9]
+  cout << v[2] << endl;                           print(v[2])
+
+
+                  0    1    2   3   4                           0     1      2   3   4
+
+            v=    1    3    5   7   9                    v=     1     3      5   7   9
+
+         Accessing element at index 2 (5)             Accessing element at index 2 (5)
+Vector
+
+Accessing Elements Using Indexing
+
+         Both C++ vectors and Python lists allow element access using indexing.
+
+
+
+                 C++                                          Python
+
+
+
+  vector<int> v = {1, 3, 5, 7, 9};              v = [1, 3, 5, 7, 9]
+  cout << v[2] << endl;                         print(v[2])
+
+
+
+               Output                                         Output
+
+
+                  5                                              5
+Vector
+
+Accessing First and Last Element
+
+         C++ vectors allow easy access to the ﬁrst and last elements.
+
+
+
+                                     C++
+
+                   vector<int> v = {1, 3, 5, 7, 9};
+                   cout << v.front() << endl;
+                   cout << v.back() << endl;
+
+
+                                 0    1    2   3   4
+
+                           v=    1    3    5   7   9
+Vector
+
+Accessing First and Last Element
+
+         C++ vectors allow easy access to the ﬁrst and last elements.
+
+
+
+                                     C++
+
+                   vector<int> v = {1, 3, 5, 7, 9};
+                   cout << v.front() << endl;
+                   cout << v.back() << endl;
+
+
+                                 0    1    2   3   4
+
+                           v=    1    3    5   7   9
+Vector
+
+Accessing First and Last Element
+
+         C++ vectors allow easy access to the ﬁrst and last elements.
+
+
+
+                                   C++
+
+                   vector<int> v = {1, 3, 5, 7, 9};
+                   cout << v.front() << endl;
+                   cout << v.back() << endl;
+
+
+                                 Output
+
+                                    1
+                                    9
+Vector
+
+Accessing Elements Using Loop
+
+          We can loop through the C++ vector utilizing indexing.
+
+
+
+                                  C++
+                 vector<int> v = {1, 3, 5, 7, 9};
+                 for (int i = 0; i < v.size(); i++) {
+                     cout << v[i] << " ";
+                 }
+
+                               Output
+
+
+                               13579
+Adding Element at the
+   End of a Vector
+Vector
+
+Adding Element at the End
+
+
+                   C++                                  Python
+
+
+
+  vector<int> v = {1, 3, 5, 7, 9};   v = [1, 3, 5, 7, 9]
+  v.push_back(11);                   v.append(11)
+
+
+
+
+               0     1   2   3   4              0         1      2   3   4
+
+         v=    1     3   5   7   9         v=       1     3      5   7   9
+Vector
+
+Adding Element at the End
+
+
+                    C++                                         Python
+
+
+
+  vector<int> v = {1, 3, 5, 7, 9};           v = [1, 3, 5, 7, 9]
+  v.push_back(11);                           v.append(11)
+
+
+
+
+                0    1    2   3   4                      0        1      2   3   4
+
+  Before   v=   1    3    5   7   9        Before   v=      1     3      5   7   9
+
+                0    1    2   3   4   5                  0        1      2   3   4   5
+
+  After    v=   1    3    5   7   9   11   After    v=      1     3      5   7   9   11
+Vector
+
+Efﬁciently Adding Complex Elements
+
+
+
+                                        →   emplace_back() constructs
+                     C++
+                                            elements in-place, avoiding
+                                            unnecessary copies.
+         vector<pair<int, string>> v;
+         v.emplace_back(1, "Alice");    →   In C++, emplace_back() is more
+                                            efﬁcient than push_back() when
+                                            dealing with complex objects.
+Vector
+
+Efﬁciently Adding Complex Elements
+
+
+
+                                        →   With push_back, you typically use { }
+                     C++
+                                            to pass a fully constructed object,
+                                            whereas with emplace_back, you
+         vector<pair<int, string>> v;
+         v.emplace_back(1, "Alice")         can directly supply the constructor
+         v.push_back({2, "Bob"});           arguments without { }.
+Vector
+
+Adding Multiple Elements at the End
+
+
+                        C++                                             Python
+
+  vector<int> v = {1, 3, 5};
+  vector<int> new_elements = {7, 9, 11};            v = [1, 3, 5]
+                                                    new_elements = [7, 9, 11]
+  for (int i = 0; i < new_elements.size(); i++) {   v.extend(new_elements)
+      v.push_back(new_elements[i]);
+  }
+
+                    0    1    2                                     0     1      2
+
+             v=     1    3    5                            v=       1     3      5
+Vector
+
+Adding Multiple Elements at the End
+
+
+                        C++                                               Python
+
+  vector<int> v = {1, 3, 5};
+  vector<int> new_elements = {7, 9, 11};              v = [1, 3, 5]
+                                                      new_elements = [7, 9, 11]
+  for (int i = 0; i < new_elements.size(); i++) {     v.extend(new_elements)
+      v.push_back(new_elements[i]);
+  }
+
+                    0    1    2                                       0     1      2
+
+  Before     v=     1    3    5                     Before   v=       1     3      5
+
+                    0    1    2   3   4    5                          0     1      2   3   4   5
+
+  After      v=     1    3    5   7   9    11       After    v=       1     3      5   7   9   11
+Other Functions in C++ Vector
+Functions in Vector
+
+Removing Element From Last
+
+                                    To “remove” element from last.
+
+
+
+                      C++                                                Python
+
+     vector<int> v = {1, 3, 5, 7};                         v = [1, 3, 5, 7]
+
+
+
+                 0     1    2   3                                    0     1      2   3
+
+           v=    1     3    5   7                             v=     1     3      5   7
+Functions in Vector
+
+Removing Element From Last
+
+             Removes last element (7).              Removes last element (7).
+
+
+
+                      C++                                       Python
+
+     vector<int> v = {1, 3, 5, 7};                v = [1, 3, 5, 7]
+     v.pop_back();                                v.pop()
+
+                 0     1    2   3                           0     1      2   3
+
+  Before   v=    1     3    5   7        Before      v=     1     3      5   7
+
+                 0     1    2                               0     1      2
+
+  After    v=    1     3    5            After       v=     1     3      5
+Functions
+
+Getting the Number of Elements
+
+
+
+
+                     C++                         Python
+
+
+
+     vector<int> v = {1, 3, 5, 7};   v = [1, 3, 5, 7]
+
+
+                 0    1    2   3             0     1      2   3
+
+            v=   1    3    5   7        v=   1     3      5   7
+Functions
+
+Getting the Number of Elements
+
+
+
+
+                  C++                          Python
+
+     vector<int> v = {1, 3, 5, 7};   v = [1, 3, 5, 7]
+     cout << v.size();               print(len(v))
+
+
+
+               Output                         Output
+
+
+                  4                              4
+Functions in Vector
+
+Removing Element from a Speciﬁc Position
+
+                       To “Remove” a speciﬁc element based on its index.
+
+
+
+                      C++                                           Python
+
+
+     vector<int> v = {1, 3, 5, 7, 9};                 v = [1, 3, 5, 7, 9]
+
+
+                 0     1    2   3   4                           0     1      2   3   4
+
+           v=    1     3    5   7   9                      v=   1     3      5   7   9
+Functions in Vector
+
+Removing Element from a Speciﬁc Position
+
+           Removes element at index 2 (5).           Removes element at index 2 (5).
+
+
+
+                      C++                                         Python
+
+   vector<int> v = {1, 3, 5, 7, 9};              v = [1, 3, 5, 7, 9]
+   v.erase(v.begin() + 2);                       v.pop(2)
+
+                  0    1    2   3   4                         0     1      2   3   4
+
+  Before    v=    1    3    5   7   9        Before      v=   1     3      5   7   9
+
+                  0    1    2   3                             0     1      2   3
+
+  After     v=    1    3    7   9            After       v=   1     3      7   9
+Functions in Vector
+
+Removing a Range of Elements
+
+                      To remove multiple elements within a speciﬁed range.
+
+
+
+                      C++                                              Python
+
+   vector<int> v = {1, 3, 5, 7, 9};                   v = [1, 3, 5, 7, 9]
+   v.erase(v.begin() + 1, v.begin() + 4);             del v[1:4]
+
+                 0     1    2   3   4                              0     1      2   3   4
+
+           v=    1     3    5   7   9                      v=      1     3      5   7   9
+Functions in Vector
+
+Removing a Range of Elements
+
+          Removes elements from index 1 to 3.     Removes elements from index 1 to 3.
+
+
+
+                       C++                                           Python
+
+   vector<int> v = {1, 3, 5, 7, 9};                 v = [1, 3, 5, 7, 9]
+   v.erase(v.begin() + 1, v.begin() + 4);           del v[1:4]
+
+                   0    1    2   3   4                           0     1      2   3   4
+
+  Before     v=    1    3    5   7   9          Before   v=      1     3      5   7   9
+
+                   0    1                                        0     1      2   3
+
+  After      v=    1    9                       After    v=      1     9
+Functions in Vector
+
+Inserting Elements at a Speciﬁc Position
+
+                To insert 4 at index 2.         To insert 4 at index 2.
+
+
+
+                      C++                                Python
+
+   vector<int> v = {1, 3, 5, 7, 9};       v = [1, 3, 5, 7, 9]
+   v.insert(v.begin() + 2, 4);            v.insert(2, 4)
+
+
+                  0    1    2   3   4                0     1      2   3   4
+
+           v=     1    3    5   7   9          v=    1     3      5   7   9
+Functions in Vector
+
+Inserting Elements at a Speciﬁc Position
+
+           Inserts element 4 to index 2.             Inserts element 4 to index 2
+
+
+
+                      C++                                        Python
+
+   vector<int> v = {1, 3, 5, 7, 9};             v = [1, 3, 5, 7, 9]
+   v.insert(v.begin() + 2, 4);                  v.insert(2, 4)
+
+
+                 0     1    2   3   4                       0      1      2   3   4
+
+  Before   v=    1     3    5   7   9       Before     v=    1     3      5   7   9
+
+                 0     1    2   3   4   5                   0      1      2   3   4   5
+
+  After    v=    1     3    4   5   7   9   After      v=    1     3      4   5   7   9
+Functions in Vector
+
+Inserting Multiple Elements
+
+              Inserts [10, 11] at index 2.         Inserts [10, 11] at index 2.
+
+
+
+                      C++                                     Python
+
+   vector<int> v = {1, 3, 5, 7, 9};          v = [1, 3, 5, 7, 9]
+
+
+
+                  0    1    2   3     4                   0     1      2   3   4
+
+           v=     1    3    5   7     9             v=    1     3      5   7   9
+Functions in Vector
+
+Inserting Multiple Elements
+
+               Inserts [10, 11] at index 2.                               Inserts [10, 11] at index 2.
+
+
+
+                       C++                                                           Python
+  vector<int> v = {1, 3, 5, 7, 9};
+                                                                   v = [1, 3, 5, 7, 9]
+  vector<int> v2 = {10, 11};
+                                                                   v[2:2] = [10, 11]
+  v.insert(v.begin() + 2, v2.begin(), v2.end());
+
+
+                   0       1        2        3       4                           0        1        2        3       4
+
+  Before    v=     1       3       5         7       9           Before   v=     1        3       5         7       9
+
+                  0    1       2        3        4       5   6                  0     1       2        3        4       5   6
+
+  After     v=    1    3       10       11       5   7       9   After    v=    1     3       10       11       5   7       9
+Functions in Vector
+
+Reversing vector in C++
+
+                                        To reverse elements
+
+
+
+                      C++                                              Python
+
+     vector<int> v = {1, 3, 5, 7, 9};                    v = [1, 3, 5, 7, 9]
+
+
+
+                 0     1    2   3   4                              0     1      2   3   4
+
+           v=    1     3    5   7   9                         v=   1     3      5   7   9
+Functions in Vector
+
+Reversing vector in C++
+
+           Reverses all elements of vector             Reverses all elements of list
+
+
+
+                      C++                                          Python
+
+     vector<int> v = {1, 3, 5, 7, 9};                 v = [1, 3, 5, 7, 9]
+     reverse(v.begin(), v.end());                     v.reverse()
+
+                 0     1    2   3   4                          0     1      2   3   4
+
+  Before    v=    1    3    5   7   9        Before      v=    1     3      5   7   9
+
+                 0     1    2   3   4                          0     1      2   3   4
+
+  After     v=   9     7    5   3   1        After       v=    9     7      5   3   1
+Functions
+
+Removing All Elements
+
+            Removing all elements of vector   Removing all elements of list
+
+
+
+                       C++                                Python
+
+
+
+     vector<int> v = {1, 3, 5, 7};            v = [1, 3, 5, 7]
+
+
+                   0    1    2   3                    0     1      2   3
+
+             v=    1    3    5   7               v=   1     3      5   7
+Functions
+
+Removing All Elements
+
+            Removes all elements of vector             Removes all elements of list
+
+
+
+                      C++                                          Python
+
+     vector<int> v = {1, 3, 5, 7};                    v = [1, 3, 5, 7]
+     v.clear();                                       v.clear()
+
+                  0    1    2   3                              0     1      2   3
+
+  Before     v=   1    3    5   7            Before      v=    1     3      5   7
+
+                  0    1    2   3                              0     1      2   3
+
+  After      v=                              After       v=
+Functions
+
+Swapping Two Vectors
+
+                         Swap to have all values of v1 in v2 and vice versa
+
+
+
+                     C++                                                Python
+
+     vector<int> v1 = {1, 2};                             v1 = [1, 2]
+     vector<int> v2 = {3, 4};                             v2 = [3, 4]
+     v1.swap(v2);                                         v1, v2 = v2, v1
+
+                0    1            0   1                            0     1              0   1
+
+         v1 =   1    2     v2 =   3   4                     v1 =   1     2       v2 =   3   4
+Functions
+
+Swapping Two Vectors
+
+         v1 becomes {3, 4}, v2 becomes {1, 2}.       v1 becomes {3, 4}, v2 becomes {1, 2}.
+
+
+
+                        C++                                             Python
+        vector<int> v1 = {1, 2};                          v1 = [1, 2]
+        vector<int> v2 = {3, 4};                          v2 = [3, 4]
+        v1.swap(v2);                                      v1, v2 = v2, v1
+
+
+                   0    1            0   1                         0     1          0   1
+
+Before      v1 =   1    2     v2 =   3   4       Before     v1 =   1     2   v2 =   3   4
+
+                   0    1            0   1                         0     1          0   1
+
+After       v1 =   3   4      v2 =   1   2       After      v1 =   3     4   v2 =   1   2
+Functions
+
+Operation Costs
+
+
+
+
+              Adding at the End (push_back/append):
+
+              ➢    On average, 1 step to add the element.
+
+              Removing from the End (pop_back):
+
+              ➢    Steps: 1 step to remove the element.
+Functions
+
+Operation Costs
+
+
+        Inserting in the Middle (insert):
+
+            ➢   Scenario: An element is inserted somewhere other than the end.
+
+            ➢   Steps: Approximately N steps are needed (where N is the number of elements), since
+                every element after the insertion point must be moved one position over.
+
+        Deleting from the Middle (erase):
+
+            ➢   Steps: Approximately N steps (where N is the number of elements), as each element
+                following the removed element must be shifted to close the gap.
+Iterators in C++ vs Python
+Iterators
+
+Iterators in C++ vs Python
+
+
+                                What are Iterators?
+
+
+
+            ➢   C++ iterators allow traversing through STL
+                containers like vector, list, etc.
+
+            ➢   Python iterators work with sequences like list,
+                tuple, set, and support direct iteration using loops.
+
+            ➢   Iterators help access elements without using indexes.
+Iterators on Vector
+
+Accessing Start and End of a Vector
+
+
+                                        C++
+                      vector<int> v = {1, 3, 5, 7, 9};
+
+
+                      vector<int>::iterator it = v.begin();
+                      cout << "First element: " << *it << endl;
+
+
+                      vector<int>::iterator it_end = v.end();
+                      it_end--;
+                      cout << "Last element: " << *it_end << endl;
+
+
+
+                      v.begin() → Points to the ﬁrst element.
+Iterators on Vector
+
+Accessing Start and End of a Vector
+
+
+                                        C++
+                      vector<int> v = {1, 3, 5, 7, 9};
+
+
+                      vector<int>::iterator it = v.begin();
+                      cout << "First element: " << *it << endl;
+
+
+                      vector<int>::iterator it_end = v.end();
+                      it_end--;
+                      cout << "Last element: " << *it_end << endl;
+
+
+                      *it → used to dereference an iterator to
+                           access the value it points to.
+Iterators on Vector
+
+Accessing Start and End of a Vector
+
+
+                                        C++
+                      vector<int> v = {1, 3, 5, 7, 9};
+
+
+                      vector<int>::iterator it = v.begin();
+                      cout << "First element: " << *it << endl;
+
+
+                      vector<int>::iterator it_end = v.end();
+                      it_end--;
+                      cout << "Last element: " << *it_end << endl;
+
+
+
+                      v.end() → Points past the last element.
+Iterators on Vector
+
+Accessing Start and End of a Vector
+
+
+                                       C++
+                      vector<int> v = {1, 3, 5, 7, 9};
+
+
+                      vector<int>::iterator it = v.begin();
+                      cout << "First element: " << *it << endl;
+
+
+                      vector<int>::iterator it_end = v.end();
+                      it_end--;
+                      cout << "Last element: " << *it_end << endl;
+
+
+
+                         v.end()-1 gets the last element.
+Iterators on Vector
+
+Reverse Iteration
+
+
+                                             C++
+
+                      vector<int> v = {1, 3, 5, 7, 9};
+
+
+                      vector<int>::reverse_iterator rit = v.rbegin();
+                      cout << "Last element (using rbegin): " << *rit << endl;
+
+
+                      vector<int>::reverse_iterator rit_end = v.rend();
+                      rit_end--;
+                      cout << "First element (using rend-1): " << *rit_end <<
+                      endl;
+
+
+
+
+                         v.rbegin() → Points to the last element.
+Iterators on Vector
+
+Reverse Iteration
+
+
+                                             C++
+
+                      vector<int> v = {1, 3, 5, 7, 9};
+
+
+                      vector<int>::reverse_iterator rit = v.rbegin();
+                      cout << "Last element (using rbegin): " << *rit << endl;
+
+
+                      vector<int>::reverse_iterator rit_end = v.rend();
+                      rit_end--;
+                      cout << "First element (using rend-1): " << *rit_end <<
+                      endl;
+
+
+
+
+                       v.rend() → Points before the ﬁrst element.
+Iterators on Vector
+
+Reverse Iteration
+
+
+                                             C++
+
+                      vector<int> v = {1, 3, 5, 7, 9};
+
+
+                      vector<int>::reverse_iterator rit = v.rbegin();
+                      cout << "Last element (using rbegin): " << *rit << endl;
+
+
+                      vector<int>::reverse_iterator rit_end = v.rend();
+                      rit_end--;
+                      cout << "First element (using rend-1): " << *rit_end <<
+                      endl;
+
+
+
+
+                              so (v.rend()-1) gets the ﬁrst element.
+Iterating Over Elements
+       Using Loop
+Iterators
+
+Iterating Over Elements Using Loop
+
+
+
+
+                                C++
+                                                                           Output
+            vector<int> v = {1, 3, 5, 7, 9};
+            for (vector<int>::iterator it = v.begin(); it
+            != v.end(); it++) {
+                                                                           13579
+                cout << *it << " ";
+            }
+
+
+
+
+                                      Iterating Using begin() and end().
+Iterators
+
+Iterating Over Elements Using Loop
+
+
+
+
+                               C++
+                                                                         Output
+            vector<int> v = {1, 3, 5, 7, 9};
+            for (vector<int>::reverse_iterator rit =
+            v.rbegin(); rit != v.rend(); rit++) {
+                                                                         97531
+                cout << *rit << " ";
+            }
+
+
+
+
+                        Iterating Using rbegin() and rend() (Reverse Order).
+Iterators
+
+Using Auto For Simpliﬁed Iterator Declaration
+
+
+                                   C++
+
+
+             vector<int> v = {1, 3, 5, 7, 9};
+
+
+             for (auto it = v.begin(); it != v.end(); it++) {
+                 cout << *it << " ";
+             }
+Iterators
+
+Using Range-Based Loops for Simplicity
+
+
+
+
+                             C++
+                                               Output
+            vector<int> v = {1, 3, 5, 7, 9};
+            for (int num : v) {
+                                               13579
+                cout << num << " ";
+            }
+Quiz Time!
+Alternate Numbers from 1 to n
+
+Problem Statement
+
+
+
+
+          Write a function that takes integer N as input and
+          returns a vector containing every alternate number
+          from 1 to N, starting with 1.
+C++ STL
+
+Key Takeaways part(1/2)
+
+      ●   C++ STL:
+          A powerful library with containers, functions,
+          iterators, and algorithms for efﬁcient coding.
+
+
+      ●   Pair:
+          Stores two values of the same or different
+          types, accessed using .ﬁrst and .second.
+          Supports nesting and arrays of pairs.
+C++ STL
+
+Key Takeaways part(2/2)
+
+      ●   Vector:
+          A dynamic array that allows resizing,
+          element access ([]), and modiﬁcations like
+          push_back, erase, and insert.
+      ●   Operations:
+          Supports iterators (begin(), end()), safe
+          access, swapping, reversing, and
+          memory-efﬁcient insertion with
+          emplace_back().
+THANK YOU
+ALL THE BEST
+Vector
+
+Safe Access Using .at() in C++
+
+
+
+         ●   In C++, v.at(index) is safer than v[index] as it throws an
+             exception if the index is out of range, whereas v[index] can
+             cause undeﬁned behavior.
+
+         ●   Python does not have .at(), but list indexing already raises an
+             error when out of bounds.
+Vector
+
+Safe Access Using .at() in C++
+
+
+
+
+                        C++
+                                            Output
+
+         vector<int> v = {1, 3, 5, 7, 9};
+                                               5
+         cout << v.at(2) << endl;
+

@@ -1,2 +1,1142 @@
-# cpp_s6 (0 pages, 0 with text)
+WELCOME
+C++ STL : Deque & Stack
+Agenda
 
+C++ Bridge Course
+
+
+
+
+                    Deque   Stack
+Container : Deque
+Deque
+
+Introduction
+
+        A deque (double-ended queue) is a dynamic data structure that allows efﬁcient
+        insertion and deletion from both ends—the front and the back.
+
+        Both C++ deque and Python collections.deque are double-ended queues,
+        meaning they allow fast insertions and deletions at both the front and back.
+
+
+
+                             Insert front                       Insert back
+
+
+
+                                            2   5   1   4   7
+
+
+                             Delete front                   Delete back
+Deque
+
+Declaration and Initialization
+
+
+                          C++                              Python
+
+
+ deque<int> d1 = {1, 3, 5, 7, 9};       d1 = deque([1, 3, 5, 7, 9])
+ deque<int> d2(5, 10);                  d2 = deque([10] * 5)
+ deque<int> d3(d1);                     d3 = deque(d1)
+
+
+
+        ●   Initializing with values.    ●   Initializing with values.
+Deque
+
+Declaration and Initialization
+
+
+                          C++                                                       Python
+
+
+ deque<int> d1 = {1, 3, 5, 7, 9};                                d1 = deque([1, 3, 5, 7, 9])
+ deque<int> d2(5, 10);                                           d2 = deque([10] * 5)
+ deque<int> d3(d1);                                              d3 = deque(d1)
+
+
+
+        ●   Initializing with values.                             ●   Initializing with values.
+
+        ●   Creates a deque of size 5, all elements set to 10.    ●   Creates a deque of size 5, all elements set to 10.
+Deque
+
+Declaration and Initialization
+
+
+                          C++                                                       Python
+
+
+ deque<int> d1 = {1, 3, 5, 7, 9};                                d1 = deque([1, 3, 5, 7, 9])
+ deque<int> d2(5, 10);                                           d2 = deque([10] * 5)
+ deque<int> d3(d1);                                              d3 = deque(d1)
+
+
+
+        ●   Initializing with values.                             ●   Initializing with values.
+
+        ●   Creates a deque of size 5, all elements set to 10.    ●   Creates a deque of size 5, all elements set to 10.
+
+        ●   Copying to another deque.                             ●   Copying to another deque.
+Deque
+
+Declaration and Initialization
+
+
+                     C++                                   Python
+
+
+ deque<int> d1 = {1, 3, 5, 7, 9};         d1 = deque([1, 3, 5, 7, 9])
+ deque<int> d2(5, 10);                    d2 = deque([10] * 5)
+ deque<int> d3(d1);                       d3 = deque(d1)
+
+
+
+          d1     1    3    5    7    9            d1       1    3    5    7    9
+
+          d2    10    10   10   10   10           d2       10   10   10   10   10
+
+          d3     1    3    5    7    9            d3       1    3    5    7    9
+Deque
+
+Adding Elements
+
+
+
+
+                    C++                        Python
+
+ deque<int> d = {3, 5, 7};    d = deque([3, 5, 7])
+
+
+
+
+                0    1    2                0     1      2
+
+          d=    3    5    7          d=    3     5      7
+Deque
+
+Adding Elements at the Front
+
+               Adds 1 at the front.            Adds 1 at the front.
+
+
+
+                    C++                                Python
+
+
+ deque<int> d = {3, 5, 7};            d = deque([3, 5, 7])
+ d.push_front(1);                     d.appendleft(1)
+
+
+
+
+                0    1    2   3                    0     1      2   3
+
+          d=    1    3    5   7              d=    1     3      5   7
+Deque
+
+Adding Elements at the Back
+
+               Adds 9 at the back.                Adds 9 at the back.
+
+
+
+                       C++                                 Python
+
+
+ deque<int> d = {3, 5, 7};               d = deque([3, 5, 7])
+ d.push_front(1);                        d.appendleft(1)
+ d.push_back(9);                         d.append(9)
+
+
+                   0    1    2   3   4                 0     1      2   3   4
+
+          d=       1    3    5   7   9          d=     1     3      5   7   9
+Deque
+
+Adding Elements
+
+                   Adding Elements                      Adding Elements
+
+
+
+                        C++                                Python
+
+
+ deque<int> d = {3, 5, 7};                d = deque([3, 5, 7])
+ d.push_front(1);                         d.appendleft(1)
+ d.push_back(9);                          d.append(9)
+
+
+
+    Before   d      3    5    7            Before   d      3   5    7
+
+     After   d      1    3    5   7   9    After    d      1   3    5   7   9
+Deque
+
+Removing Elements
+
+
+
+
+                    C++                                 Python
+
+ deque<int> d = {1, 3, 5, 7, 9};       d = deque([1, 3, 5, 7, 9])
+
+
+
+
+          d=    1    3    5   7    9          d=    1     3      5   7   9
+Deque
+
+Removing Elements from the Front
+
+           Removes ﬁrst element (1).         Removes ﬁrst element (1).
+
+
+
+                      C++                                 Python
+
+ deque<int> d = {1, 3, 5, 7, 9};        d = deque([1, 3, 5, 7, 9])
+
+
+ d.pop_front();                         d.popleft()
+
+
+
+
+          d=      1    3    5   7   9          d=     1     3      5   7   9
+Deque
+
+Removing Elements from the Back
+
+           Removes last element (9).        Removes last element (9).
+
+
+
+                      C++                                 Python
+
+ deque<int> d = {1, 3, 5, 7, 9};       d = deque([1, 3, 5, 7, 9])
+
+
+ d.pop_front();                        d.popleft()
+ d.pop_back();                         d.pop()
+
+
+
+
+          d=      3    5    7   9                d=   3     5      7   9
+Deque
+
+Removing Elements from the Front and Back
+
+
+
+
+                      C++                             Python
+
+ deque<int> d = {1, 3, 5, 7, 9};        d = deque([1, 3, 5, 7, 9])
+
+
+ d.pop_front();                         d.popleft()
+ d.pop_back();                          d.pop()
+
+
+    Before   d    1    3    5   7   9    Before   d   1   3    5   7   9
+
+     After   d    3    5    7            After    d   3   5    7
+Deque
+
+Accessing Front and Back Element
+
+           C++ deque supports front() and back() for
+        accessing the ﬁrst and last elements of a deque.
+
+
+
+                             C++
+                                                           Output
+
+        deque<int> d = {1, 3, 5, 7, 9};
+
+
+
+
+                         0    1    2      3   4
+
+                  d=     1    3    5      7   9
+Deque
+
+Accessing Front and Back Element
+
+           C++ deque supports front() and back() for
+        accessing the ﬁrst and last elements of a deque.
+
+
+
+                             C++
+                                                           Output
+
+        deque<int> d = {1, 3, 5, 7, 9};
+        cout << d.front();                                    1
+
+
+
+                         0    1    2      3   4
+
+                  d=     1    3    5      7   9
+Deque
+
+Accessing Front and Back Element
+
+           C++ deque supports front() and back() for
+        accessing the ﬁrst and last elements of a deque.
+
+
+
+                                C++
+                                                           Output
+
+        deque<int> d = {1, 3, 5, 7, 9};
+        cout << d.front();                                    9
+        cout << d.back();
+
+
+
+                            0    1    2   3   4
+
+                  d=        1    3    5   7   9
+Deque
+
+Getting the Size
+
+           C++ deque supports size() for retrieving the
+           number of elements present in the deque.
+
+
+
+                                 C++
+                                                          Output
+
+         deque<int> d = {1, 3, 5, 7, 9};
+         cout << d.size();                                   5
+
+
+
+                             0    1    2   3   4
+
+
+                   d=        1    3    5   7   9
+Deque
+
+Iterating Over a Deque
+
+
+
+                        C++
+
+   deque<int> d = {1, 3, 5, 7, 9};   Deque of integers (d) initialized with
+                                                  {1, 3, 5, 7, 9}
+
+                                             0    1     2     3     4
+
+                                      d=     1    3     5     7     9
+Deque
+
+Iterating Over a Deque
+
+
+
+                            C++         Iterating using
+                                     Range-Based For Loop.
+   deque<int> d = {1, 3, 5, 7, 9};
+   for (int x : d) {
+                                           Output
+        cout << x << " ";
+   }
+                                           13579
+Deque
+
+Reversing a Deque
+
+
+
+                        C++
+
+                                          Deque of integers (d) initialized with
+        deque<int> d = {1, 3, 5, 7, 9};                {1, 3, 5, 7, 9}
+
+                                                   0    1     2     3    4
+
+                                            d=     1    3     5     7    9
+Deque
+
+Reversing a Deque
+
+
+
+                        C++
+
+
+        deque<int> d = {1, 3, 5, 7, 9};        Reverses the deque
+        reverse(d.begin(), d.end());
+                                                0   1   2   3   4
+
+                                          d=   9    7   5   3   1
+Deque
+
+Summary
+
+
+        ●   Deﬁnition:
+            A double-ended queue (deque) allows fast
+            insertion and deletion from both front and back.
+        ●   Adding Elements:
+             ○   push_front(x): Adds x at the front.
+             ○   push_back(x): Adds x at the back.
+        ●   Removing Elements:
+             ○   pop_front(): Removes the front element.
+             ○   pop_back(): Removes the back element.
+Deque
+
+Summary
+
+
+        ●   Accessing Front & Back Elements:
+             ○   front(): Returns the ﬁrst element.
+             ○   back(): Returns the last element.
+        ●   Inserting Elements at a Speciﬁc Position:
+             ○   insert(it, x): Inserts x at the given iterator
+                 position.
+        ●   Removing Elements at a Speciﬁc Position:
+             ○   erase(it): Removes the element at the given
+                 iterator position.
+Deque
+
+Summary
+
+
+        ●   Removing Elements by Value:
+             ○   erase(remove(d.begin(), d.end(), x), d.end()):
+                 Removes all occurrences of x.
+        ●   Iterating Over a Deque:
+             ○   Use iterators or range-based for loops for
+                 traversal.
+        ●   Reversing a Deque:
+             ○   reverse(d.begin(), d.end()): Reverses the
+                 order of elements.
+Quiz Time!
+Container : Stack
+Stack
+
+Introduction
+
+        A stack is a linear data structure that follows the LIFO (Last In, First Out) principle.
+               This means the last element inserted is the ﬁrst one to be removed.
+
+
+
+                                                         Out
+                                                 In
+                                                 1
+                                        1                       1
+
+
+
+                                                 2
+
+
+
+                                                 3
+Stack
+
+Declaration and Initialization
+
+
+                              Creates an empty stack.
+
+
+                        C++
+
+        stack<int> s;
+
+
+
+
+                                               Top      Stack
+Stack
+
+Pushing Elements onto the Stack
+
+
+                              Push 10 onto the stack.
+
+                        C++
+
+        stack<int> s;
+                                                                  10
+        s.push(10);
+                                                                Push()
+
+
+
+
+                                                Top     Stack
+Stack
+
+Pushing Elements onto the Stack
+
+
+                              Push 20 onto the stack.
+
+                        C++
+
+        stack<int> s;
+                                                                 20
+        s.push(10);
+        s.push(20);                                             Push()
+
+
+                                                Top      10
+
+
+                                                Top     Stack
+Stack
+
+Pushing Elements onto the Stack
+
+
+                              Push 30 onto the stack.
+
+                        C++
+
+        stack<int> s;
+                                                                 30
+        s.push(10);
+        s.push(20);                                             Push()
+        s.push(30);                             Top      20
+
+                                                Top      10
+
+                                                        Stack
+Stack
+
+Pushing Elements onto the Stack
+
+
+                              Stack Contents After Pushes.
+
+
+                        C++
+
+        stack<int> s;
+        s.push(10);                                Top        30
+        s.push(20);
+        s.push(30);                                Top        20
+
+                                                              10
+
+                                                             Stack
+Stack
+
+Popping Elements from the Stack
+
+
+                              Removes the top element (30).
+
+                        C++
+
+        stack<int> s;
+                                                                       30
+        s.push(10);                               Top          30
+        s.push(20);                                                   Pop()
+        s.push(30);                               Top          20
+        s.pop();
+                                                               10
+
+                                                              Stack
+Stack
+
+Popping Elements from the Stack
+
+
+                              Stack Contents After Pop:
+
+
+                        C++
+
+        stack<int> s;
+        s.push(10);
+        s.push(20);
+        s.push(30);                              Top       20
+        s.pop();
+                                                           10
+
+                                                          Stack
+Stack
+
+Getting the Top Element
+
+
+                                 Outputs 20 (Top element).
+
+
+                           C++
+
+        stack<int> s;
+                                                             Output
+        .
+        .
+                                                                20
+        .
+        cout << s.top();
+Stack
+
+Checking if the Stack is Empty
+
+
+                      s.empty() - returns 1 if stack is empty, otherwise returns 0
+
+
+                                C++
+        stack<int> s;
+        .
+        .
+        .
+        if (s.empty()) {
+                                                           Top             20
+         cout << "Stack is empty";
+        }
+        else {
+                                                                           10
+            cout << "Stack is not empty";
+        }                                                                Stack
+Stack
+
+Checking if the Stack is Empty
+
+
+                                            Output: Stack is not empty.
+
+
+                                C++
+        stack<int> s;
+        .
+        .                                                                     Output
+        .
+        if (s.empty()) {
+                                                                          Stack is not empty
+         cout << "Stack is empty";
+        }
+        else {
+            cout << "Stack is not empty";
+        }
+Stack
+
+Checking if the Stack is Empty
+
+
+                        s.size() returns number of elements in the stack.
+
+
+                            C++
+        stack<int> s;
+        .
+        .
+        .                                              Top            20
+        cout << s.size();
+                                                                      10
+
+                                                                     Stack
+Stack
+
+Checking If the Stack is Empty
+
+
+                        s.size() returns number of elements in the stack.
+
+
+                            C++
+        stack<int> s;
+        .                                                          Output
+        .
+        .                                                             2
+        cout << s.size();
+Stack
+
+Summary
+
+
+        ●   Deﬁnition
+             ○   A stack is a LIFO (Last In, First Out) data
+                 structure where the last inserted element is
+                 the ﬁrst to be removed.
+        ●   Declaration & Initialization:
+             ○   stack<int> s; → Creates an empty stack.
+        ●   Pushing Elements onto the Stack:
+             ○   push(x): Adds x to the top of the stack.
+Stack
+
+Summary
+
+
+        ●   Popping Elements from the Stack:
+             ○   pop(): Removes the top element from the
+                 stack.
+        ●   Getting the Top Element:
+             ○   top(): Returns the topmost element without
+                 removing it
+        ●   Checking if the Stack is Empty:
+             ○   empty(): Returns 1 if the stack is empty,
+                 otherwise 0.
+Quiz Time!
+C++ STL
+
+Key Takeaways
+
+          Deque (Double-Ended Queue) allows inserting, deleting,
+          and accessing elements from both ends efﬁciently.
+          Stack follows LIFO (Last In, First Out), where the last
+          inserted element is removed ﬁrst.
+          Operations:
+           ●    Deque: push_front(), push_back(), pop_front(),
+                pop_back(), insert(), erase().
+           ●    Stack: push(), pop(), top(), empty(), size().
+          Usage: Deques allow ﬂexible element access at both ends,
+          while Stacks are useful for managing sequential operations
+          like function calls.
+THANK YOU
+ALL THE BEST
+Deque
+
+Iterating Over a Deque
+
+
+
+                              C++
+                                                      Iterating using Iterators.
+   deque<int> d = {1, 3, 5, 7, 9};
+   for (auto it = d.begin(); it != d.end(); it++) {
+                                                              Output
+        cout << *it << " ";
+   }
+                                                              13579
+Deque
+
+Inserting Elements at a Speciﬁc Position
+
+
+
+                      C++
+
+                                       C++ deque supports insert() with
+        deque<int> d = {1, 3, 7, 9};
+                                                     iterators
+
+                                                 0      1   2    3
+
+                                          d=     1     3    7    9
+Deque
+
+Inserting Elements at a Speciﬁc Position
+
+
+
+                      C++
+
+        deque<int> d = {1, 3, 7, 9};    points iterator(it) to index 2
+        auto it = next(d.begin(), 2);
+Deque
+
+Inserting Elements at a Speciﬁc Position
+
+
+
+                      C++
+
+        deque<int> d = {1, 3, 7, 9};         Inserts 5 at index 2.
+        auto it = next(d.begin(), 2);
+        d.insert(it, 5);                       0   1   2   3   4
+
+                                        d=     1   3   5   7   9
+Deque
+
+Removing Elements at a Speciﬁc Position
+
+
+
+                      C++
+
+        deque<int> d = {1, 3, 7, 9};   C++ deque supports erase() with
+                                                  iterators
+
+                                              0   1   2       3
+
+                                        d=    1   3   7       9
+Deque
+
+Removing Elements at a Speciﬁc Position
+
+
+
+                      C++
+
+        deque<int> d = {1, 3, 7, 9};    points iterator(it) to index 2
+        auto it = next(d.begin(), 2);
+Deque
+
+Removing Elements at a Speciﬁc Position
+
+
+
+                       C++                   Remove 5 at index 2.
+
+                                              0       1       2   3   4
+        deque<int> d = {1, 3, 7, 9};
+                                        d=    1   3       5       7   9
+        auto it = next(d.begin(), 2);
+        d.erase(it);
+
+                                                  0       1       2   3
+
+                                             d=   1       3       7   9
+Deque
+
+Removing Elements by Value
+
+
+
+                      C++
+
+                                             Deque of integers (d) initialized with
+        deque<int> d = {1, 3, 5, 7, 9, 5};
+                                                         {1, 3, 5, 7, 9, 5}
+
+                                                     0    1     2      3      4
+
+                                              d=     1    3     5     7       9
+Deque
+
+Removing Elements by Value
+
+
+
+                        C++
+
+   deque<int> d = {1, 3, 5, 7, 9, 5};
+                                                       Removes occurrences of 5.
+   d.erase(remove(d.begin(), d.end(), 5), d.end());
+
+
+                                                           0   1   2   3   4   5
+
+                                                      d=   1   3   5   7   9   5
+Deque
+
+Removing Elements by Value
+
+
+
+                                                                 0   1   2   3   4   5
+                        C++
+                                                          d=     1   3   7   9   5   5
+   deque<int> d = {1, 3, 5, 7, 9, 5};
+   d.erase(remove(d.begin(), d.end(), 5), d.end());
+
+                                                               remove(d.begin(), d.end(), 5)
+
+                                                      Moves all values not equal to 5 to the
+                                                        front and returns iterator to new
+                                                      logical end (ﬁrst unwanted element).
+Deque
+
+Removing Elements by Value
+
+
+
+                        C++
+                                                      d.erase(remove(d.begin(), d.end(), 5), d.end())
+   deque<int> d = {1, 3, 5, 7, 9, 5};
+                                                          Erases all elements from new logical
+   d.erase(remove(d.begin(), d.end(), 5), d.end());
+                                                           end to the actual end (removing all
+                                                                    occurrences of 5).
+
+                                                                         0    1   2      3
+
+                                                                  d=     1   3    7      9
+Deque
+
+Problem Statement
+
+        You are tasked with developing an order management
+        system for an online food delivery service.
+
+
+        The system must efﬁciently handle customer orders
+        using a double-ended queue (deque).
+
+
+        Each order is identiﬁed by an orderId, and the system
+        should support the following operations:
+Deque
+
+Supported Operations
+
+                          The system will handle ﬁve types of operations:
+
+
+    ➢   AF (Add Order to Front) – Adds a new order with the given orderId to the front of the deque.
+
+
+    ➢   AB (Add Order to Back) – Adds a new order with the given orderId to the back of the deque.
+
+
+    ➢   RF (Remove Order from Front) – Removes the order from the front of the deque.
+
+
+    ➢   RB (Remove Order from Back) – Removes the order from the back of the deque.
+
+
+    ➢   D (Display Orders) – Displays the current state of the deque.
+Deque Operations
+
+Example 1
+              Input
+
+               5
+               AF 101
+               AB 202
+               RF
+                        ➢   AF 101: Adds the order 101 to the front of the deque.
+               AB 303
+               D        ➢   AB 202: Adds the order 202 to the back of the deque.
+                        ➢   RF: Removes the order from the front, which is 101.
+             Output
+                        ➢   AB 303: Adds the order 303 to the back of the deque.
+                        ➢   D: Displays the current deque, which is [202, 303]
+             202 303
+Deque Operations
+
+Solution
+
+
+                                     C++
+
+                   void addFront(deque<int> &dq, int orderId) {
+                       dq.push_front(orderId);
+                   }
+
+
+                   void addBack(deque<int> &dq, int orderId) {
+                       dq.push_back(orderId);
+                   }
+Deque Operations
+
+Solution
+
+
+                                     C++
+
+                   void removeFront(deque<int> &dq) {
+                       if (!dq.empty()) {
+                           dq.pop_front();
+                       }
+                   }
+                   void removeBack(deque<int> &dq) {
+                       if (!dq.empty()) {
+                           dq.pop_back();
+                       }
+                   }
+Deque Operations
+
+Solution
+
+
+                                       C++
+
+
+                   void displayDeque(deque<int> &dq) {
+                       for (int order : dq) {
+                           cout << order << " ";
+                       }
+                       cout << endl;
+                   }
+Stack
+
+Problem Statement
+
+
+         Design a data structure called SpecialStack that supports the
+         following operations:
+
+
+
+
+        push x : Adds an element x to the top of the stack.
+        pop : Removes and returns the top element from the stack.
+        getMin : Returns the minimum element currently
+        present in the stack.
+Special Stack
+
+Example
+
+          Input:
+                   push 5
+
+                   getMin
+
+                   push 3
+
+                   getMin
+
+                    pop
+
+                   getMin
+Special Stack
+
+Example
+
+          Explanation:
+
+                         push 5
+
+                         getMin
+
+                         push 3            Stack
+                         getMin       Push “5” into Stack
+                          pop     5
+                         getMin
+Special Stack
+
+Example
+
+          Explanation:
+
+                         push 5
+
+                         getMin
+
+                         push 3              Stack
+                         getMin       Minimum element is “5”
+                          pop     5
+                         getMin
+Special Stack
+
+Example
+
+          Explanation:
+
+                         push 5
+
+                         getMin
+
+                         push 3            Stack
+                         getMin   3   Push “3” into Stack
+                          pop     5
+                         getMin
+Special Stack
+
+Example
+
+          Explanation:
+
+                         push 5
+
+                         getMin
+
+                         push 3              Stack
+                         getMin   3   Minimum element is “3”
+                          pop     5
+                         getMin
+Special Stack
+
+Example
+
+          Explanation:
+
+                         push 5
+
+                         getMin
+
+                         push 3         Stack
+                         getMin   3   Removes “3”.
+                          pop     5
+                         getMin
+Special Stack
+
+Example
+
+          Explanation:
+
+                         push 5
+
+                         getMin
+
+                         push 3              Stack
+                         getMin       Minimum element is “5”
+                          pop     5
+                         getMin
+Special Stack
+
+Code
+
+
+                             Code
+     #include <bits/stdc++.h>
+     using namespace std;
+     class SpecialStack {
+     public:
+        stack<int> mainStack;
+        stack<int> minStack;
+       void push(int x) {
+               mainStack.push(x);
+            if (minStack.empty() || x <= minStack.top()) {
+                   minStack.push(x);
+               }
+        }
+
+
+                                                continued
+Special Stack
+
+Code
+
+
+                              Code
+     int pop() {
+         if (mainStack.empty()) {
+             cout << "Stack is empty" << endl;
+             return -1;
+         }
+         int topElement = mainStack.top();
+         mainStack.pop();
+         if (topElement == minStack.top()) {
+             minStack.pop();
+         }
+         return topElement;
+     }
+
+
+                                                 continued
+Special Stack
+
+Code
+
+
+                             Code
+
+          int getMin() {
+              if (minStack.empty()) {
+                  return -1;
+              }
+              return minStack.top();
+          }
+          bool isEmpty() {
+              return mainStack.empty();
+          }
+     };
+

@@ -1,0 +1,72 @@
+WELCOME
+Pseudo Code
+PseudoCode
+
+Explanation
+
+
+
+    Pseudo code is a language-agnostic
+    representation of an algorithm.
+
+
+    It uses plain English combined with
+    programming constructs to describe the steps.
+PseudoCode
+
+Problem Statement
+
+
+                  Sum of ﬁrst N numbers
+
+
+
+
+             Write a program that calculates and displays the
+                   sum of the ﬁrst N natural numbers.
+PseudoCode
+
+Example
+
+
+                                     Pseudocode
+
+             Step - 1: Input N from the user
+
+                        Initialize totalSum to 0
+
+             Step - 2: For each integer i in the range from 1 to N (inclusive):
+
+                             a. Add i to totalSum
+
+             Step - 3: Print the value of totalSum
+Code
+
+Example
+
+
+                         C++
+
+          int N;
+          cin >> N;
+          int totalSum = 0;
+          for (int i = 1; i <= N; i++) {
+              totalSum = totalSum + i;
+          }
+          cout << totalSum;
+Code
+
+Example
+
+
+                         Python
+
+
+          N = int(input())
+          totalSum = 0
+          for i in range(1, N+1):
+            totalSum = totalSum + i
+          print(totalSum)
+THANK YOU
+ALL THE BEST
+

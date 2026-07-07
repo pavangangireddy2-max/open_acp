@@ -1,0 +1,386 @@
+WELCOME
+Introduction to CSS
+       Part 2
+Agenda
+
+Introduction to CSS | Part 2
+           Container
+            Ruleset
+           Attribute             background-color
+
+
+
+
+            Recap         Text      Backgrounds
+
+
+
+
+                         color
+Recap
+
+Introduction to CSS
+
+        ●   CSS Syntax
+             ○   Ruleset
+             ○   Selector
+             ○   Property
+             ○   Value
+        ●   Container Element (div)
+        ●   Combining HTML & CSS
+             ○   Class Attribute
+Agenda
+
+Introduction to CSS | Part 2
+           Container
+            Ruleset
+           Attribute             background-color
+
+
+
+
+            Recap         Text      Backgrounds
+
+
+
+
+                         color
+Recap - Adjusting the Style
+
+Wrapping
+                                                            HTML
+                              <body>
+     ●   Main Heading,
+                                <h1>Tourism</h1>
+         Paragraph & Button
+                               <p>
+         - All The Elements
+                                  Plan your trip wherever
+           At Once!               you want to go
+     ●   We use Container      </p>
+                               <button>Get Started</button>
+         Element
+                              </body>
+Recap - Syntax
+
+Container Element - div
+
+                    Element
+
+
+      <div> Other Elements </div>
+        Start tag   Content   End tag
+Recap - Syntax
+
+Adding Div
+                                       HTML
+  <body>
+    <div>
+
+       <h1>Tourism</h1>
+       <p>
+           Plan your trip wherever
+           you want to go
+       </p>
+       <button>Get Started</button>
+
+    </div>              Standard Practices
+  </body>                    **Indent
+     How to Center the
+Heading, Paragraph, & Button
+   Elements Horizontally?
+Recap - Syntax
+
+CSS - Cascading Style Sheets
+
+    A CSS File will be created.
+    It is a list of RuleSets.
+    Each Ruleset looks like:
+
+
+                                selector   {
+                                               property1: value1;
+             Ruleset
+                                               property2: value2;
+                                           }
+Recap - Syntax
+
+CSS Ruleset - To Center Elements
+
+                     SELECTOR
+
+
+
+                 .h-center {
+                     text-align: center;
+                 }
+
+
+                       PROPERTY   VALUE
+Recap - Syntax
+
+Combining HTML & CSS
+
+
+                     HTML                       CSS
+
+   <body>
+                            .h-center {
+      <h1>Tourism</h1>
+                                text-align: center;
+      ...
+                            }
+   </body>
+Recap - Syntax
+
+HTML Attribute
+
+ Element
+
+                 <tag attribute = “value” >
+                       Syntax Name of
+                                             Attribute Value
+                        the Attribute
+
+
+
+                                 Start Tag
+Recap - Syntax
+
+Combining HTML & CSS
+
+
+                 Attribute Name
+
+                 Attribute Value
+Recap - Syntax
+
+Combining HTML & CSS
+
+
+                 Attribute Name - class
+
+                 Attribute Value - h-center
+Recap - Syntax
+
+Class Attribute - div
+Element - Container
+
+
+                 <div class = “h-center” >
+                     Syntax Name of
+                                                  Attribute Value
+                      the Attribute
+
+
+
+                                      Start Tag
+Recap - Alignment
+
+Horizontal Center
+                                       HTML
+  <body>
+    <div class="h-center" >
+
+       <h1>Tourism</h1>
+       <p>
+           Plan your trip wherever
+           you want to go
+       </p>
+       <button>Get Started</button>
+
+    </div>
+  </body>                            * Refer
+Let’s Add Color to the Text
+HTML Element
+
+Code
+                                      HTML
+ <body>
+   <div>
+
+      <h1>Tourism</h1>
+      <p>
+        Plan your trip wherever
+        you want to go
+      </p>
+      <button>Get Started</button>
+
+   </div>
+ </body>                 Standard Practices
+                              **Indent
+CSS Syntax
+
+Applying Color to Main Heading
+
+                  SELECTOR
+
+
+
+             .main-heading {
+
+                 color: blue;
+
+             }
+
+
+                 PROPERTY       VALUE
+                                        Blue =
+Syntax
+
+Combining HTML & CSS
+
+
+         Attribute Name
+
+         Attribute Value
+Syntax
+
+Combining HTML & CSS
+
+
+         Attribute Name - class
+
+         Attribute Value - main-heading
+Applying color to Main Heading
+
+Combining CSS with HTML
+
+                                             HTML
+
+     <body>
+       <div>
+
+          <h1 class="main-heading">Tourism</h1>
+       </div>
+     </body>
+Combining CSS with HTML
+
+Applying color to Main Heading
+Applying color to Main Heading
+
+Styling with HTML
+
+                                             HTML
+
+     <body>
+       <div>
+
+          <h1 style="color: blue;">Tourism</h1>
+       </div>
+     </body>
+Syntax
+
+Applying Color to Paragraph
+
+             SELECTOR
+
+
+
+         .paragraph {
+
+               color: grey;
+
+         }
+
+
+              PROPERTY        VALUE
+
+                                      Grey =
+Syntax
+
+Combining HTML & CSS
+
+
+         Attribute Name
+
+         Attribute Value
+Syntax
+
+Combining HTML & CSS
+
+
+         Attribute Name - class
+
+         Attribute Value - paragraph
+Applying color to Paragraph
+
+Combining CSS with HTML
+                                            HTML
+       <body>
+         <div>
+
+            <p class="paragraph">
+              Plan your trip wherever you
+              want to go, start traveling and
+              create a bag full of memories.
+            </p>
+
+         </div>
+       </body>
+Combining CSS with HTML
+
+Applying color to Paragraph
+Quiz Time!
+A Separate Class will be taken on
+        Styling a Button
+Let’s Add a Background Color
+Syntax
+
+CSS - Background Color
+
+
+         .card {
+             background-color: lightblue;
+         }
+
+
+                          Light Blue =
+Styling Div
+
+Background Color for Container (div)
+                                                    HTML
+ <body>
+    <div class="card" >
+      <h1>Tourism</h1>
+      <p>
+          Plan your trip wherever you want to go, start
+          traveling and create a bag full of memories.
+      </p>
+      <button> Get Started </button>
+    </div>
+ </body>
+Styling Div
+
+Background Color for Container (div)
+Quiz Time!
+Introduction to CSS | Part 2
+
+Key Takeaways
+
+
+
+          ●   CSS Properties
+          ●   Text
+               ○     color
+          ●   Background
+               ○     background-color
+     Announcement
+Advanced Practice Sessions
+Advanced Practice Sessions
+
+Desktop View
+Advanced Practice Sessions
+
+Mobile View
+Practice
+Feedback
+    Next Session
+
+Introduction to CSS
+      | Part 3
+THANK YOU
+ALL THE BEST
+A Separate Class will be taken on
+        Styling a Button
+

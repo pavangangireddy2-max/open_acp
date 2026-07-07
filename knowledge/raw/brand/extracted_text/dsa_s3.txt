@@ -1,0 +1,249 @@
+WELCOME
+    Analyzing Algorithm
+Efﬁciency : Space complexity
+Analyzing Algorithm Efﬁciency
+
+Agenda
+
+
+
+
+                       Space Complexity   Key Takeaways
+Space Complexity
+  Learning about Space Complexity
+Space Complexity
+
+Introduction
+
+
+                           Space Complexity
+
+
+
+                   Measures the memory an algorithm
+                     uses relative to the input size.
+Space Complexity
+
+Example - Constant Space
+
+                             Code
+
+   #include <iostream>
+   using namespace std;
+
+
+   int main() {
+       int a = 10;                       Constant space
+       int b = 20;
+       int sum = a + b;
+                                           O(1)
+       cout << "Sum: " << sum << endl;
+       return 0;
+   }
+Space Complexity
+
+Example - Linear Space
+
+                                       Code
+
+   #include <bits/stdc++.h>
+   using namespace std;
+
+
+   int main() {                                The program reads an integer n from
+       int n;
+       cin >> n;                              the user and creates a vector of size n, so
+       vector<int> arr(n);
+       for (int i = 0; i < n; i++) {
+                                               the space used grows linearly with n.
+           arr[i] = i;
+       }
+       for (int i = 0; i < n; i++) {                            O(n)
+           cout << arr[i] << " ";
+       }
+       return 0;
+   }
+Space Complexity
+
+Example - Linear Space
+
+                                         Code
+   #include <bits/stdc++.h>
+   using namespace std;
+   int main() {
+       int n;
+       cin >> n;
+       vector<vector<int>> matrix(n, vector<int>(n));
+                                                         The program creates a 2D vector
+       for (int i = 0; i < n; i++) {
+           for (int j = 0; j < n; j++) {
+                                                        (matrix) of size n×n. The space used
+                matrix[i][j] = i * n + j;
+           }
+                                                            grows quadratically with n.
+       }
+       for (int i = 0; i < n; i++) {
+           for (int j = 0; j < n; j++) {
+                cout << matrix[i][j] << " ";                         O(n*n)
+           }
+           cout << endl;
+       }
+       return 0;
+   }
+Space Complexity
+
+Example - Function
+
+                              Code
+
+
+     int addition(int a, int b){     What are the variables the
+                                        function is storing?
+         int c= a + b;
+
+
+         return c;
+     }
+Space Complexity
+
+Function
+
+                              Code
+
+                                      These are the three variables
+     int addition(int a, int b){
+                                        that need to be stored.
+
+         int c= a + b;
+
+
+         return c;                         a        b      c
+     }
+
+
+                                     Number of memory spaces = 3
+Space Complexity
+
+Function
+
+
+                                              Number of memory
+                                              spaces (a, b, c)
+
+                               a=4      b=5           3
+
+                               a = 20   b=5           3
+
+  A was assigned 4, but        a = 30   b=5           3          Constant
+  now it has 20, 30, 40, and
+                               a = 40   b=5           3          [O(3) ≈ O(1) ]
+  1 lakh instead.
+                               1 Lakh   b=5           3
+Space Complexity
+
+Function
+
+
+                   Space
+
+
+
+
+                           O(1)
+Space Complexity
+
+Function
+
+                              Code
+
+
+     int addition(int a, int b){
+
+
+         int c= a + b;
+                                     Is there anything we can do
+         return c;                        to reduce space?
+     }
+Space Complexity
+
+Function
+
+                              Code
+
+
+     int addition(int a, int b){
+
+
+         return(a + b);              a and b are required. Instead
+     }                               of creating variable c, directly
+                                             return (a + b).
+Space Complexity
+
+Array-Function
+
+                              Code
+
+
+     int addarray(int arr[], int n){   Give the sum of all the elements
+                                                 in the array.
+         int sum=0;
+
+         for(int i=0; i<n; i++){
+                                                     Input
+             sum = sum + arr[i];
+                                                arr = 5, 7, 10
+             }
+     }
+Space Complexity
+
+Array-Function
+
+                              Code
+
+
+     int addarray(int arr[], int n ){
+                                                          arr[]
+                                            Input space           O(n)
+         int sum=0;                                       n
+
+         for(int i=0; i<n; i++){
+
+                                                          sum
+             sum = sum + arr[i];        Auxiliary space           O(1)
+             }                                            i
+             return sum;
+     }
+Space Complexity
+
+Array-Function
+
+                              Code
+
+
+     int addarray(int arr[], int n ){
+                                        Total space = Input space + Auxiliary space
+         int sum=0;
+                                                   = O(n) + O(1)
+         for(int i=0; i<n; i++){
+                                                   = O(n)
+
+             sum = sum + arr[i];
+             }
+             return sum;                        Total space = O(n)
+     }
+Analyzing Algorithm Efﬁciency
+
+Key Takeaways
+
+
+
+     ●   Space Complexity – Refers to how much memory an
+         algorithm uses, including input space and extra
+         (auxiliary) space.
+
+     ●   Efﬁciency Focus – We compare algorithms based on
+         how they scale, not exact values, to choose the most
+         optimal one for large inputs.
+THANK YOU
+ALL THE BEST
+

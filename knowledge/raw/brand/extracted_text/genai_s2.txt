@@ -1,0 +1,665 @@
+WELCOME
+Exploring Gen AI
+  Capabilities
+    Think of a task or problem
+you faced recently where you think
+ Gen AI could have been helpful
+Let’s explore the most practical
+   and powerful capabilities
+we can start using immediately
+Agenda for Today’s Session
+
+Exploring Gen AI Capabilities
+
+
+
+
+                                   Deep                      Voice               Comparing
+        Search                    Research                Interaction           Different LLMs
+
+                                  Conducting
+    Getting real-time,                                    Having natural
+                               comprehensive,                                  Understanding when to
+   accurate information                                conversations through
+                            multi-source research in                             use which models
+  faster than ever before                                   your voice
+                            minutes instead of hours
+Model Context Protocol
+
+
+
+
+              Search Web Browsing)
+    Search (Web Browsing)
+
+
+
+
+Modern LLMs like ChatGPT, Claude, and
+Gemini can search for recent or
+real-time information on the internet
+Search (Web Browsing)
+
+
+   Helpful for questions about current events, unfamiliar
+    topics, or when you want source-backed responses
+
+
+
+
+        Current          Unfamiliar       Source-backed
+        Events            Topics            Response
+Gen AI Capabilities - Deep Research
+
+Search - ChatGPT
+Trending Reels
+
+
+  Type your text here           | Generate
+
+
+
+
+ What are the trending Instagram reel
+ challenges right now?
+Local Recommendations
+
+
+ Type your text here         | Generate
+
+
+
+
+ Show me the best restaurants near me
+Top AI Tools
+
+
+  Type your text here         | Generate
+
+
+
+
+ What are the top 3 AI tools launched
+ this week?
+Financial Updates
+
+
+  Type your text here        | Generate
+
+
+
+
+ How has Apple's stock performed
+ over the last week?
+  Search (Web Browsing)
+
+
+
+
+The LLM response will contain
+inline citations, and we can hover over
+the citations to learn more
+                                          Learn More
+Search
+
+Using Across Domains
+
+         Agriculture                    Sports
+         To ﬁnd crop care tips,         For live scores, player stats,
+         pest control methods, and      and upcoming match
+         weather forecasts              schedules
+
+
+
+         Education                      Fashion
+         For the latest course          For the latest trends,
+         materials or tutorial videos   and brand comparisons
+         on speciﬁc subjects            in online stores
+
+
+                                                           …many more
+Think about use cases where
+you can use the search feature
+Agenda for Today’s Session
+
+Exploring Gen AI Capabilities
+
+
+
+
+                                   Deep                      Voice               Comparing
+        Search                    Research                Interaction           Different LLMs
+
+                                  Conducting
+    Getting real-time,                                    Having natural
+                               comprehensive,                                  Understanding when to
+   accurate information                                conversations through
+                            multi-source research in                             use which models
+  faster than ever before                                   your voice
+                            minutes instead of hours
+    Deep Research
+
+
+
+
+Sometimes a quick search isn't enough
+  Deep Research
+
+
+
+
+For complex decisions or in-depth
+understanding, we need comprehensive
+research that explores multiple sources
+and presents a complete picture
+Deep Research
+
+        Designed to perform in-depth, multi-step
+           research using data from the web
+
+
+
+
+       Search      Extract     Analyze     Summarize
+Deep Research as a Team of Researchers
+
+
+
+
+                      Analyzing Information
+
+
+
+
+    Reading Through                           Comparing Different
+       Webpages                                  Viewpoints
+    Deep Research
+
+
+
+
+It is great for people who need to ﬁnd
+detailed and accurate information
+from various websites
+Let’s say you want to buy a laptop
+Gen AI Capabilities - Deep Research
+
+Buying a Laptop
+                  Instead of spending hours comparing specs across:
+
+
+
+
+            Different Websites            Reading Reviews           Checking Prices
+
+
+
+
+                                 We can use deep research feature
+Gen AI Capabilities - Deep Research
+
+Deep Research - Chat GPT
+  Deep Research for Purchasing
+
+
+     Type your text here                | Generate
+
+
+
+
+I am planning to buy a new laptop and need a
+detailed comparison to make the right decision. My
+budget is ₹60,000 to ₹80,000, and I will mainly use
+it for web development and occasional video
+editing. Please suggest 3–5 laptops that are best
+suited for this use case
+ Deep Research for Career Planning
+
+
+     Type your text here                | Generate
+
+
+
+I am a computer science student interested in
+AI/ML careers. Can you do deep research on:
+
+1. The current job market for AI engineers in India
+
+2. Skills and certiﬁcations most in demand
+
+3. Average starting salaries
+
+4. Growth prospects over the next 5 years
+
+5. Companies hiring the most AI engineers in India
+    Deep Research
+
+
+
+
+Deep research typically completes
+a query within 5 to 30 minutes,
+depending on its complexity
+Quick Note
+
+
+
+
+       NOTE   There will be a daily limit for using the
+               search and deep research features
+
+
+              Try using Claude, Gemini, and Llama
+Use Cases for Deep Research
+
+
+                     Career or
+                     Education
+                     Planning
+          Academic               Investment
+          Research                Research
+
+
+
+
+   Major
+                                          Travel
+  Purchase
+                                         Planning
+  Decisions
+                      Fashion
+                                   Health Care
+   Education
+
+
+               Can you think of use cases where
+                 deep research can be used in
+Finance
+                     different industries?
+
+
+
+
+                    Agriculture
+  Social Media
+Agenda for Today’s Session
+
+Exploring Gen AI Capabilities
+
+
+
+
+                                   Deep                      Voice                Types of AI
+        Search                    Research                Interaction               Models
+
+                                  Conducting
+    Getting real-time,                                    Having natural
+                               comprehensive,                                  Understanding when to
+   accurate information                                conversations through
+                            multi-source research in                             use which models
+  faster than ever before                                   your voice
+                            minutes instead of hours
+Model Context Protocol
+
+
+
+
+              Voice Input and Output
+   Voice Input
+
+
+
+
+Modern LLMs can understand natural speech
+and respond with human-like voices,
+making interactions more intuitive and accessible
+Voice Input
+
+   They can accept voice input, allowing us to speak directly,
+   with our speech being converted into text for processing
+
+
+
+
+             Speech                           Text
+Voice Input - Voice to Text
+
+
+
+
+  Type your text here           | Generate
+
+
+
+  Hey, Can you suggest the best places
+  to visit in India?
+Quick Note
+
+
+
+
+               There will be a daily limit for using
+       NOTE
+                     the deep research and
+                advanced voice mode features
+
+
+              Try using Claude, Gemini, and Llama
+Voice Input - Advanced Voice Mode
+
+
+
+
+  Type your text here             | Generate
+
+
+
+ Act as my best friend who cares about me a lot.
+ Let’s role-play a conversation
+Practice Speaking and Listening
+
+
+  AI Assistant
+
+
+
+
+                    Type your text here                   Generate
+
+
+
+
+             Can you teach me English by having a conversation with me?
+             Please ask me questions in between and correct my mistakes
+Speaking Practice
+
+
+ AI Assistant
+
+
+
+
+                       Type your text here                   Generate
+
+
+
+
+            I need to practice my presentation speech for tomorrow. Can
+                you listen and give me feedback? My topic is Generative AI
+Preparing for Interview(mock interview)
+
+
+  AI Assistant
+
+
+
+
+                    Type your text here                    Generate
+
+
+
+
+                 Hey, I want to prepare for an AI Engineer fresher
+                      Role? Can we have a mock interview?
+  Chat GPT Voice Mode
+
+
+
+
+During a voice chat, we can ask ChatGPT
+to search for something and it will provide
+us with fast, timely answers
+In what use cases would voice
+interaction be most helpful?
+Model Context Protocol
+
+
+
+
+            Screen Sharing Capability
+     Screen Sharing Capability
+
+
+
+
+We can also share the screen and ask
+questions. This feature allows LLMs to see
+what’s on your screen
+Use Cases
+
+
+
+
+Code Debugging   Filling Complex       Resume/
+  and Review           Forms       Document Review
+    Screen Sharing Capability
+
+
+
+
+Screen sharing is currently in the
+experimental phase within ChatGPT's
+Advanced Voice Mode
+Let’s use the Google AI Studio’s
+     screen share feature
+Screen Sharing Capability
+
+
+
+
+      Google AI Studio is a platform
+ where we can access and experiment with
+   Google's AI models, including Gemini
+     Example
+
+
+
+
+Let’s say you are creating or editing a PPT
+for your project presentation,
+and you don't know how to insert an image
+While Creating PPT
+
+
+ Google AI Studio
+
+
+
+
+                     Type your text here                    Generate
+
+
+
+
+             Hey, I am working on this slide. Can you guide me with the
+                     steps on on how to insert an image on it?
+Debugging Code
+
+
+Google AI Studio
+
+
+
+
+                   Type your text here                   Generate
+
+
+
+
+       I am getting an error in my Python code. Can you look at my screen
+
+                     and help me ﬁgure out what's wrong?
+Applying to Job
+
+
+ Google AI Studio
+
+
+
+
+                     Type your text here                   Generate
+
+
+
+
+        What does ‘Stream’ mean here? Should I select ‘IT’ or ‘Engineering’?
+
+             I want to apply for the AI Engineer role, and I am from CSE
+Think of the use cases where the screen
+   sharing feature would be helpful
+Agenda for Today’s Session
+
+Exploring Gen AI Capabilities
+
+
+
+
+                                   Deep                      Voice               Comparing
+        Search                    Research                Interaction           Different LLMs
+
+                                  Conducting
+    Getting real-time,                                    Having natural
+                               comprehensive,                                  Understanding when to
+   accurate information                                conversations through
+                            multi-source research in                             use which models
+  faster than ever before                                   your voice
+                            minutes instead of hours
+       Understanding Different AI Models
+
+
+
+
+Just as we would not use a hammer for every
+task in a toolbox, different types of AI models
+are optimized for different kinds of tasks
+Most Common Model Categories
+
+
+                      Reasoning Models
+
+                      Flash Models
+
+                      Coding Specialists
+
+                      General Purpose
+
+                      Cost-Efﬁcient
+
+                      Small Language Models
+     Reasoning Models
+
+
+
+
+Reasoning models are helpful
+in handling complex logical tasks
+through step-by-step thinking processes
+Reasoning Models
+
+
+
+         Breaking down multi-step problems
+         into smaller components
+
+
+         Following logical chains of thought
+
+
+         Supporting deeper analysis and more thorough
+         consideration of problems
+Top Reasoning Models
+
+
+
+
+               o3         Claude Opus 4 Gemini 2.5 Pro   DeepSeek R1
+
+
+
+
+                    What is the next number in the series?
+     Example
+                    2, 6, 12, 20, 30, ___?
+Most Common Model Categories
+
+
+                      Reasoning Models
+
+                      Flash Models
+
+                      Coding Specialists
+
+                      General Purpose
+
+                      Cost-Efﬁcient
+
+                      Small Language Models
+    Flash Models
+
+
+
+Flash models (sometimes called "fast"
+models) are optimized for speed and
+efﬁciency, rather than deep reasoning
+Flash Models
+
+
+
+          Quick responses to straightforward queries
+
+
+          Efﬁcient processing of routine tasks
+
+
+          Lower computational resource requirements
+
+
+          Handling high volumes of interactions
+Most Common Model Categories
+
+Top Flash Models
+
+
+
+
+         OpenAI            Anthropic
+                                           Gemini 2.5 Flash-Lite   DeepSeek-V3
+       GPT-4.1 nano     Claude 3.5 Haiku
+
+
+
+                      Create a simple weekly workout plan
+       Example
+                      for a beginner
+Models
+
+
+Specialized in Coding          General Purpose:        Cost Efﬁcient
+                               For day-to-day Use
+ →   Anthropic Claude Opus 4                            →   DeepSeek(all models)
+ →   OpenAI GPT-4.1             →   GPT-4o,             →   Llama 4
+ →   DeepSeek-Coder-V2          →   GPT-4o-mini         →   Gemma 3n
+ →   Meta Code Llama            →   Claude Sonnet 4     →   Phi-3-mini
+                                →   Gemini 2.5 Flash
+                                →   Llama 4 Maverick
+Choosing an LLM
+
+
+
+
+ Make sure you choose the ‘best’ LLM
+ depending on your needs..!
+Exploring Gen AI Capabilities
+
+Key Takeaways
+
+
+       ●   Search (Web Browsing)
+       ●   Deep Research
+       ●   Voice Input and Output
+       ●   Understanding Different AI Models
+Practice
+Feedback
+THANK YOU
+ALL THE BEST
+

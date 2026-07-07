@@ -1,0 +1,1543 @@
+WELCOME
+C++ STL: Map, Multi Map,
+    Unordered Map
+Agenda
+
+C++ STL
+
+
+
+
+          Map   Multi Map   Unordered Map
+C++ STL
+
+Map
+
+
+
+                                  Map
+
+
+
+          A map is a data structure that stores key-value pairs,
+          where each key is unique and maps to a speciﬁc value.
+Map
+
+Use Case Example
+
+
+
+                   The government of India
+                   has to maintain a list of
+                   all the citizens of India.
+
+
+
+                    Let’s see how we can
+                      store it in a Map.
+Map
+
+Use Case Example
+
+                  Data
+       Name       Gender   Place of Birth
+
+      G Sashank    Male     Hyderabad
+                                            Can we use Name as key
+       B Rani     Female     Mumbai
+                                            and other parameters as
+       A Rahul     Male        Delhi        value to store this data
+      D Avinash    Male     Bangalore             in a map?
+
+
+
+      G Sashank    Male      Chennai
+Map
+
+Use Case Example
+
+                  Data
+       Name       Gender   Place of Birth
+
+      G Sashank    Male     Hyderabad       There might be a lot of people
+       B Rani     Female     Mumbai             with common names.
+                                            That means name is not unique
+       A Rahul     Male        Delhi
+                                              so it can’t be used as Key.
+      D Avinash    Male     Bangalore
+
+
+
+      G Sashank    Male      Chennai
+Map
+
+Use Case Example
+
+                           Data
+                              Place of      Aadhaar        For each person, we can store
+       Name       Gender
+                               Birth        Number
+                                                           their Aadhaar number as key
+  G Sashank        Male      Hyderabad    1254 8754 6915   and rest of the ﬁelds as value.
+
+       B Rani     Female      Mumbai      2548 7415 6954
+
+
+       A Rahul     Male           Delhi   3644 1589 7458
+
+
+      D Avinash    Male       Bangalore   3258 7459 8216
+                                                             Aadhaar number cannot be
+                                                              the same for two people.
+
+  G Sashank        Male       Chennai     3045 2424 8569
+C++ STL
+
+Map Container
+
+
+
+
+                              Aadhar
+
+
+
+
+                Now, If we want to search a single
+                person, we can search quickly with
+                      their Aadhar number.
+Map Container
+
+Example
+
+      Key                       Value
+                                                     Map container → Key - Value pair
+     Aadhaar         Name       Gender    Place of
+     Number                                Birth
+
+   1254 8754 6915   G Sashank    Male    Hyderabad   This way, we can store data in
+   2548 7415 6954    B Rani     Female    Mumbai        a Map, enabling faster
+                                                      lookups using the Aadhar
+   3644 1589 7458    A Rahul     Male      Delhi
+                                                               number.
+   3258 7459 8216   D Avinash    Male    Bangalore
+
+
+
+   3045 2424 8569   G Sashank    Male     Chennai
+C++ STL
+
+Map Container
+
+
+          ✓ Each entry in the map consists of a unique key
+                        and its associated value.
+
+
+
+
+                Key , Value   ,   Key , Value   ,   Key , Value
+Map Container
+
+Declarations
+                                  map< datatype1 , datatype2 > m;
+
+
+
+
+                         Key                                             Value
+
+   ➢   Datatypes which supports “<” comparator
+       operator can be used as key.                 ➢   Values can be of any datatype, including
+                                                        primitive types, strings, vectors, sets,
+   ➢   All primitive data types(except bool) ,          maps, and custom structs.
+       Strings, Pairs.
+                                                    ➢   Supports complex structures, enabling
+   ➢   For Custom Structures/Classes to be used         nested maps, nested pairs etc.
+       as key it must implement operator “<”.
+Map Container
+
+Some Example Declarations
+
+
+     map<int,int> m;                       map<map<int,int>,string> m;
+
+
+
+     map<pair<int,int>, map<int,int>> m;   map<bool,int> m;
+
+
+
+     map<string,vector<int> > m;           map<vector<int>, int> m;
+
+
+
+     map<char,stack<int>> m;               map<stack<int>,int> m
+Map
+
+Declaration and Initialization
+
+
+
+                              C++
+
+                                                                     A map that has a key
+ map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+                                                                     of type int and a value
+                                                                         of type string.
+Map
+
+Declaration and Initialization
+
+
+
+                              C++
+
+                                                                             {1: "Alice"},
+ map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+
+                                                                     mp =   {2: "Charlie"},
+
+                                                                              {3: "Bob"}
+
+
+              Initializing with key-value pairs.
+Map
+
+Inserting Elements
+
+
+
+                              C++
+                                                                             {1: "Alice"},
+
+ map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};          {2: "Charlie"},
+ mp.insert({4, "David"});
+                                                                     mp =
+
+                                                                              {3: "Bob"}
+
+                                                                            {4: "David"}
+
+             Inserting elements using insert( ).
+Map
+
+Inserting Elements
+
+
+
+                              C++                                            {1: "Alice"},
+
+                                                                            {2: "Charlie"},
+ map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+ mp.insert({4, "David"});
+ mp[5] = "Eve";
+                                                                     mp =     {3: "Bob"}
+
+                                                                            {4: "David"}
+
+                                                                              {5: "Eve"}
+            Inserting elements using operator[].
+Map
+
+Inserting Elements
+
+
+
+                               C++                                                {1: "Alice"},
+
+                                                                            {2: "Charlie_updated"},
+ map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+ mp.insert({4, "David"});
+ mp[5] = "Eve";
+                                                                     mp =         {3: "Bob"}
+ mp[2] = "Charlie_updated";
+
+                                                                                 {4: "David"}
+
+                                                                                  {5: "Eve"}
+       If the key exists, the operator [] updates the
+                  value associated with that key.
+Map
+
+Checking if a Key Exists
+
+
+
+                                   C++                               mp.ﬁnd(3) searches for key 3 in
+                                                                     the map and returns an iterator
+ map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};   to it.
+ if ( mp.find(3) != mp.end()) {
+      cout << "Key 3 exists";                                         ➔       If the key exists, the iterator
+ } else {
+      cout << "Key 3 not found";                                              points to the key-value pair.
+ }
+                                                                      ➔       If the key is not found, it
+                                                                              returns mp.end().
+Map
+
+Checking if a Key Exists
+
+
+
+                                   C++
+
+ map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};           {1: "Alice"},
+ if ( mp.find(3) != mp.end()) {
+      cout << "Key 3 exists";                                        mp =   {2: "Charlie"},
+ } else {
+      cout << "Key 3 not found";
+ }                                                                            {3: "Bob"}
+Map
+
+Checking if a Key Exists
+
+
+
+                                   C++
+
+ map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+ if ( mp.find(3) != mp.end()) {                                        Output
+      cout << "Key 3 exists";
+ } else {
+                                                                     Key 3 exists
+      cout << "Key 3 not found";
+ }
+Map
+
+Removing Elements
+
+
+
+                              C++
+
+                                                                             {1: "Alice"},
+                                                                                               {1: "Alice"},
+ map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};   mp =   {2: "Charlie"},
+ mp.erase(3);
+                                                                                              {2: "Charlie"}
+                                                                              {3: "Bob"}
+Map
+
+Getting the Size of the Map
+
+
+
+                              C++
+
+                                                                             {1: "Alice"},
+
+ map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};   mp =   {2: "Charlie"},
+ cout << mp.size();
+
+
+                                                                              {3: "Bob"}
+
+
+      Outputs the number of key-value pairs in the map.
+Map
+
+Getting the Size of the Map
+
+
+
+                              C++
+
+
+                                                                     Output
+ map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+ cout << mp.size();
+                                                                        3
+
+
+
+
+      Outputs the number of key-value pairs in the map.
+Iterating Over a Map
+
+Using Range-Based For Loop
+
+
+
+                                C++
+
+                                                                              {1: "Alice"},
+  map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+
+  for (auto element : mp) {                                           mp =   {2: "Charlie"},
+      cout << element.first << " : " << element.second << endl;
+  }
+                                                                               {3: "Bob"}
+Iterating Over a Map
+
+Using Range-Based For Loop
+
+
+
+                                C++
+
+
+  map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};   element.ﬁrst refers to the
+  for (auto element : mp) {                                           key of each element in the
+      cout << element.first << " : " << element.second << endl;
+  }
+                                                                      map during iteration.
+Iterating Over a Map
+
+Using Range-Based For Loop
+
+
+
+                                C++
+
+
+  map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};   element.second refers to the
+  for (auto element : mp) {                                           value of each element in the
+      cout << element.first << " : " << element.second << endl;
+  }
+                                                                      map during iteration.
+Iterating Over a Map
+
+Using Range-Based For Loop
+
+
+
+                                C++
+                                                                         Output
+
+  map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+                                                                      1 : Alice
+  for (auto element : mp) {                                           2 : Charlie
+      cout << element.first << " : " << element.second << endl;       3 : Bob
+  }
+Map
+
+Clearing the Map
+
+
+
+                              C++
+
+                                                                             {1: "Alice"},
+ map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+                                                                     mp =   {2: "Charlie"},
+ mp.clear();
+
+                                                                              {3: "Bob"}
+Map
+
+Clearing the Map
+
+
+
+                              C++
+                                                                             {1: "Alice"},
+
+ map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};   mp =   {2: "Charlie"},
+ mp.clear();
+
+                                                                              {3: "Bob"}
+Map
+
+Checking If the Map is Empty
+
+
+
+                                C++
+
+
+ map<int, string> mp;
+
+ if (mp.empty()) {                    mp =
+      cout << "Map is empty";
+ }
+Map
+
+Checking If the Map is Empty
+
+
+
+                                C++
+                                        Output
+
+ map<int, string> mp;
+
+ if (mp.empty()) {                    Map is empty
+      cout << "Map is empty";
+ }
+Map
+
+Swapping Two Maps
+
+
+
+                         C++
+
+
+                                                                {1: "One"},           {3: "Three"},
+  map<int, string> mp1 = {{1, "One"}, {2, "Two"}};                            mp2 =
+                                                        mp1 =
+  map<int, string> mp2 = {{3, "Three"}, {4, "Four"}};
+                                                                {2: "Two"}            {4: "Four"}
+Map
+
+Swapping Two Maps
+
+
+
+                         C++
+
+
+                                                                {1: "One"},           {3: "Three"},
+  map<int, string> mp1 = {{1, "One"}, {2, "Two"}};                            mp2 =
+                                                        mp1 =
+  map<int, string> mp2 = {{3, "Three"}, {4, "Four"}};
+  mp1.swap(mp2);
+                                                                {2: "Two"}            {4: "Four"}
+Map
+
+Swapping Two Maps
+
+
+
+                         C++
+
+
+                                                                {3: "Three"},           {1: "One"},
+  map<int, string> mp1 = {{1, "One"}, {2, "Two"}};                              mp2 =
+                                                        mp1 =
+  map<int, string> mp2 = {{3, "Three"}, {4, "Four"}};
+  mp1.swap(mp2);
+                                                                {4: "Four"}             {2: "Two"}
+Quiz Time!
+Multimap
+C++ Multimap
+
+Multimap
+
+
+
+                                   Multi Map
+
+
+
+
+               A multimap is a modiﬁed version of map that allows
+                 duplicate keys while maintaining sorted order.
+Multimap
+
+Declaration and Initialization
+
+
+
+                                      C++
+
+
+
+ multimap<int, string> mm = {{1, "Alice"}, {2, "Bob"}, {2, "Charlie"}, {3, "David"}};
+                                                                                        mm =
+                                                                                                 {1: "Alice"},{2: "Bob"},
+                                                                                               {2: "Charlie"}, {3: "David"}
+
+
+
+                          Duplicate key, allowed.
+Multimap
+
+Inserting Elements
+
+
+
+                                      C++
+
+
+
+ multimap<int, string> mm = {{1, "Alice"}, {2, "Bob"}, {2, "Charlie"}, {3, "David"}};
+                                                                                        mm =
+                                                                                               {1: "Alice"},{2: "Bob"},{2: "Charlie"},
+                                                                                                       {3: "David"}, {3: "Eve"}
+ mm.insert({3, "Eve"});
+
+
+
+
+           Insert using insert( ), duplicate keys allowed.
+Multimap
+
+Checking if a Key Exists
+
+
+                                      C++
+
+ multimap<int, string> mm = {{1, "Alice"}, {2, "Bob"}, {2, "Charlie"}, {3, "David"}};
+                                                                                                {1: "Alice"},
+ if ( mm.find(2) ! = mm.end()) {
+                                                                                        mm =
+                                                                                                 {2: "Bob"},
+     cout << "Key 2 exists";
+ } else {                                                                                      {2: "Charlie"},
+ }
+     cout << "Key 2 not found";
+                                                                                                {3: "David"}
+
+
+              In a multimap, mp.ﬁnd(x) searches for key x.
+
+              🔹 If the key exists, returns the iterator pointing to the ﬁrst matching key-value pair.
+              🔹 If the key is not found, returns mp.end().
+Multimap
+
+Checking if a Key Exists
+
+
+
+                                      C++
+
+ multimap<int, string> mm = {{1, "Alice"}, {2, "Bob"}, {2, "Charlie"}, {3, "David"}};
+                                                                                          Output
+ if ( mm.find(2) ! = mm.end()) {
+     cout << "Key 2 exists";
+ } else {                                                                               Key 2 exists
+     cout << "Key 2 not found";
+ }
+Multimap
+
+Removing all occurrence of a key
+
+
+
+                                      C++                                                    mm               mm
+
+
+                                                                                         {1: "Alice"},
+ multimap<int, string> mm = {{1, "Alice"}, {2, "Bob"}, {2, "Charlie"}, {3, "David"}};
+                                                                                          {2: "Bob"},     {1: "Alice"},
+                                                                                        {2: "Charlie"},   {3: "David"}
+ mm.erase(2);
+                                                                                         {3: "David"}
+
+
+
+ mm.erase(x) in multimap - Removes all key-value pairs with key x.
+Multimap
+
+Removing ﬁrst occurrence of a key
+
+
+
+                                      C++                                                    mm
+
+                                                                                         {1: "Alice"},
+                                                                                         {2: "Bob"},
+ multimap<int, string> mm = {{1, "Alice"}, {2, "Bob"}, {2, "Charlie"}, {3, "David"}};
+
+
+ auto it = mm.find(2);
+                                                                                        {2: "Charlie"},
+                                                                                        {3: "David"}
+
+
+                   Finds the ﬁrst occurrence of key 2.
+Multimap
+
+Removing ﬁrst occurrence of a key
+
+
+
+                                      C++                                                    mm                mm
+
+
+                                                                                         {1: "Alice"},
+ multimap<int, string> mm = {{1, "Alice"}, {2, "Bob"}, {2, "Charlie"}, {3, "David"}};                      {1: "Alice"},
+                                                                                          {2: "Bob"},
+                                                                                                          {2: "Charlie"},
+ auto it = mm.find(2);
+                                                                                        {2: "Charlie"},
+ if (it != mm.end()) {
+                                                                                                           {3: "David"}
+     mm.erase(it);                                                                       {3: "David"}
+ }
+
+
+
+
+                     Finds the ﬁrst occurrence of key 2.
+Multimap
+
+Counting Elements
+
+
+
+                                      C++
+                                                                                        Output
+
+
+ multimap<int, string> mm = {{1, "Alice"}, {2, "Bob"}, {2, "Charlie"}, {3, "David"}};
+                                                                                           2
+
+ mm.count(2);
+
+
+
+
+                The count function in a multimap can be used to count the
+                             number of elements with a speciﬁc key.
+Multimap
+
+Size of the Multimap
+
+
+
+                                      C++                                                   mm
+
+
+                                                                                         {1: "Alice"},
+                                                                                          {2: "Bob"},
+ multimap<int, string> mm = {{1, "Alice"}, {2, "Bob"}, {2, "Charlie"}, {3, "David"}};
+                                                                                        {2: "Charlie"},
+ cout << mm.size();
+                                                                                         {3: "David"}
+
+
+
+              Outputs the number of key-value
+                      pairs in the multimap.
+Multimap
+
+Size of the Multimap
+
+
+
+                                      C++
+
+
+                                                                                        Output
+ multimap<int, string> mm = {{1, "Alice"}, {2, "Bob"}, {2, "Charlie"}, {3, "David"}};
+
+
+ cout << mm.size();
+                                                                                           4
+
+
+
+
+              Outputs the number of key-value
+                      pairs in the multimap.
+Multimap
+
+Using Range-Based For Loop
+
+
+
+                                       C++                                                  mm
+
+
+                                                                                         {1: "Alice"},
+                                                                                          {2: "Bob"},
+ multimap<int, string> mm = {{1, "Alice"}, {2, "Bob"}, {2, "Charlie"}, {3, "David"}};
+
+
+ for (auto element : mm) {
+     cout << element.first << ": " << element.second << endl;
+                                                                                        {2: "Charlie"},
+ }                                                                                       {3: "David"}
+Multimap
+
+Using Range-Based For Loop
+
+
+
+                                       C++
+                                                                                           Output
+
+ multimap<int, string> mm = {{1, "Alice"}, {2, "Bob"}, {2, "Charlie"}, {3, "David"}};   1: Alice
+                                                                                        2: Bob
+ for (auto element : mm) {
+     cout << element.first << ": " << element.second << endl;
+                                                                                        2: Charlie
+ }                                                                                      3: David
+Multimap
+
+Clearing the Multimap
+
+
+
+                                      C++                                                    mm           mm
+
+
+                                                                                         {1: "Alice"},
+ multimap<int, string> mm = {{1, "Alice"}, {2, "Bob"}, {2, "Charlie"}, {3, "David"}};     {2: "Bob"},
+ mm.clear();
+                                                                                        {2: "Charlie"},
+                                                                                         {3: "David"}
+
+
+
+                      Removes all key-value pairs.
+Multimap
+
+Checking If the Multimap is Empty
+
+
+
+                                    C++                                                  mm
+
+
+
+ multimap<int, string> mm;
+
+
+ if ( mm.empty()) {
+     cout << "Multimap is empty";
+ }
+
+
+
+
+                      mm.empty() returns 1 if the multimap is empty; otherwise, it returns 0.
+Multimap
+
+Checking If the Multimap is Empty
+
+
+
+                                    C++
+                                           Output
+
+ multimap<int, string> mm;
+                                          Multimap is
+ if ( mm.empty()) {
+     cout << "Multimap is empty";           empty
+ }
+Multimap
+
+Swapping Two Multimaps
+
+
+
+                                  C++
+                                                                                     {1: "One"},
+                                                                           mm1 =     {2: "Two"},
+                                                                                   {2: "Duplicate"}
+ multimap<int, string> mm1 = {{1, "One"}, {2, "Two"}, {2, "Duplicate"}};
+ multimap<int, string> mm2 = {{3, "Three"}, {4, "Four"}};
+
+                                                                           mm2 =
+                                                                                   {3: "Three"},
+                                                                                    {4: "Four"}
+Multimap
+
+Swapping Two Multimaps
+
+
+
+                                  C++
+                                                                                     {1: "One"},
+                                                                           mm1 =     {2: "Two"},
+                                                                                   {2: "Duplicate"}
+ multimap<int, string> mm1 = {{1, "One"}, {2, "Two"}, {2, "Duplicate"}};
+ multimap<int, string> mm2 = {{3, "Three"}, {4, "Four"}};
+ mm1.swap(mm2);
+                                                                           mm2 =
+                                                                                   {3: "Three"},
+                                                                                    {4: "Four"}
+Multimap
+
+Swapping Two Multimaps
+
+
+
+                                  C++
+
+                                                                           mm1 =
+                                                                                      {3: "Three"},
+                                                                                       {4: "Four"}
+ multimap<int, string> mm1 = {{1, "One"}, {2, "Two"}, {2, "Duplicate"}};
+ multimap<int, string> mm2 = {{3, "Three"}, {4, "Four"}};
+ mm1.swap(mm2);
+                                                                                     {1: "One"},
+                                                                           mm2 =     {2: "Two"},
+                                                                                   {2: "Duplicate"}
+Quiz Time!
+Unordered Map
+Unordered Map
+
+unordered_map
+
+
+
+                                    unordered_map
+
+
+
+
+                   An unordered_map is a data structure that stores
+                key-value pairs in no particular order with unique keys .
+Unordered Map
+
+Declaration and Initialization
+
+
+
+                                   C++
+                                                                                      ump
+
+                                                                                  {3: "Bob"},
+  unordered_map<int, string> ump = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+
+                                                                                  {1: "Alice"},
+                                                                                 {2: "Charlie"}
+
+
+                 Initializing with key-value pairs.
+Unordered Map
+
+Inserting Elements
+
+
+                                                                                      ump
+                                   C++
+
+                                                                                  {3: "Bob"},
+  unordered_map<int, string> ump = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+  ump.insert({4, "David"});
+                                                                                  {1: "Alice"},
+                                                                                 {2: "Charlie"},
+                                                                                  {4: "David"}
+
+
+                 Inserting elements using insert().
+Unordered Map
+
+Inserting Elements
+
+
+                                                                                      ump
+                                   C++
+                                                                                  {3: "Bob"},
+  unordered_map<int, string> ump = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};    {1: "Alice"},
+  ump.insert({4, "David"});
+  ump[5] = "Eve";
+                                                                                 {2: "Charlie"},
+                                                                                  {4: "David"},
+
+                                                                                  {5: "Eve"}
+                Inserting elements using operator[ ].
+Unordered Map
+
+Inserting Elements
+
+
+                                                                                           ump
+                                   C++
+                                                                                       {3: "Bob"},
+  unordered_map<int, string> ump = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};         {1: "Alice"},
+  ump.insert({4, "David"});
+  ump[5] = "Eve";
+  ump[2] = "Charlie_updated";
+                                                                                 {2: "Charlie_updated"},
+                                                                                      {4: "David"},
+
+                                                                                       {5: "Eve"}
+                    Updates existing key-value pair.
+Unordered Map
+
+Checking if a Key Exists
+
+
+                                                                                                   ump
+                                    C++
+
+  unordered_map<int, string> ump = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+                                                                                               {3: "Bob"},
+  if (ump.find(3) != ump.end()) {
+      cout << "Key 3 exists";                                                                  {1: "Alice"},
+  } else {
+
+                                                                                             {2: "Charlie"}
+      cout << "Key 3 not found";
+  }
+
+
+
+
+         In an unordered_map, mp.ﬁnd(x) searches for key x.
+         🔹 If the key exists, returns the iterator pointing to the corresponding key-value pair.
+         🔹 If the key is not found, returns mp.end().
+Unordered Map
+
+Checking if a Key Exists
+
+
+
+                                    C++
+
+  unordered_map<int, string> ump = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+                                                                                   Output
+  if (ump.find(3) != ump.end()) {
+      cout << "Key 3 exists";
+  } else {                                                                       Key 3 exists
+      cout << "Key 3 not found";
+  }
+Unordered Map
+
+Removing Elements
+
+
+                                                                                      ump             ump
+                                   C++
+
+
+                                                                                  {3: "Bob"},
+  unordered_map<int, string> ump = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};                     {1: "Alice"},
+                                                                                  {1: "Alice"},
+  ump.erase(3);                                                                                   {2: "Charlie"}
+                                                                                 {2: "Charlie"}
+
+
+
+
+                             Removes key 3.
+Unordered Map
+
+Size of the Unordered_map
+
+
+
+                                   C++
+                                                                                     ump
+
+
+
+  unordered_map<int, string> ump = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};    {3: "Bob"},
+  cout << ump.size();
+                                                                                  {1: "Alice"},
+                                                                                 {2: "Charlie"}
+
+
+         Outputs the number of key-value pairs in the
+                      unordered_map.
+Unordered Map
+
+Size of the Unordered_map
+
+
+
+                                   C++
+
+
+                                                                                 Output
+  unordered_map<int, string> ump = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+
+
+  cout << ump.size();                                                               3
+
+
+
+
+         Outputs the number of key-value pairs in the
+                      unordered_map.
+Unordered Map
+
+Using Range-Based For Loop
+
+
+
+                                    C++
+                                                                                      ump
+
+
+  unordered_map<int, string> ump = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+                                                                                 {2: "Charlie"},
+  for (auto element : ump) {
+      cout << element.first << ": " << element.second << endl;
+                                                                                   {3 "Bob"},
+  }                                                                                {1: "Alice"}
+Unordered Map
+
+Using Range-Based For Loop
+
+
+
+                                    C++
+                                                                                  Output
+
+  unordered_map<int, string> ump = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+                                                                                 2: Charlie
+  for (auto element : ump) {                                                     3: Bob
+      cout << element.first << ": " << element.second << endl;                   1: Alice
+  }
+Unordered Map
+
+Clearing the Unordered_map
+
+
+
+                                   C++
+                                                                                      ump          ump
+
+
+
+  unordered_map<int, string> ump = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};   {2: "Charlie"},
+  ump.clear();
+                                                                                   {3 "Bob"},
+                                                                                   {1: "Alice"}
+
+
+                   Removes all key-value pairs.
+Unordered Map
+
+Checking If the Unordered Map is Empty
+
+
+
+                                     C++
+                                                                     ump
+
+
+  unordered_map<int, string> ump;
+
+
+  if (ump.empty()) {
+      cout << "Unordered map is empty";
+  }
+
+
+
+
+              ump.empty() returns 1 if the unordered_map is empty;
+                                    otherwise, it returns 0.
+Unordered Map
+
+Checking If the Unordered Map is Empty
+
+
+
+                                    C++
+
+
+  unordered_map<int, string> ump;                Output
+
+  if (ump.empty()) {
+      cout << "Unordered map is empty";   Unordered map is empty
+  }
+Unordered Map
+
+Swapping Two Unordered Maps
+
+
+
+                              C++
+
+                                                                   ump1 =
+                                                                            {1: "One"},
+                                                                            {2: "Two"}
+  unordered_map<int, string> ump1 = {{1, "One"}, {2, "Two"}};
+  unordered_map<int, string> ump2 = {{3, "Three"}, {4, "Four"}};
+
+
+                                                                   ump2 =
+                                                                            {4: "Four"},
+                                                                            {3: "Three"}
+Unordered Map
+
+Swapping Two Unordered Maps
+
+
+
+                              C++
+
+                                                                   ump1 =
+                                                                            {1: "One"},
+                                                                            {2: "Two"}
+  unordered_map<int, string> ump1 = {{1, "One"}, {2, "Two"}};
+  unordered_map<int, string> ump2 = {{3, "Three"}, {4, "Four"}};
+  ump1.swap(ump2);
+                                                                   ump2 =
+                                                                            {4: "Four"},
+                                                                            {3: "Three"}
+Unordered Map
+
+Swapping Two Unordered Maps
+
+
+
+                              C++
+
+                                                                   ump1 =
+                                                                            {4: "Four"},
+                                                                            {3: "Three"}
+  unordered_map<int, string> ump1 = {{1, "One"}, {2, "Two"}};
+  unordered_map<int, string> ump2 = {{3, "Three"}, {4, "Four"}};
+  ump1.swap(ump2);
+                                                                   ump2 =
+                                                                            {1: "One"},
+                                                                            {2: "Two"}
+Quiz Time!
+C++ STL - Map
+
+Key Takeaways
+
+
+   →   Map
+       stores unique key-value pairs in sorted order and
+       allows fast lookups using keys.
+
+   →   Multimap
+       allows duplicate keys and maintains sorted order
+       for all key-value pairs.
+C++ STL - Map
+
+Key Takeaways
+
+
+   →   Unordered Map
+       stores unique keys with faster access but no
+       speciﬁc order.
+
+   →   Common operations
+       insert(), ﬁnd(), erase(), size(), clear(), and looping
+       using range or iterators.
+THANK YOU
+ALL THE BEST
+Iterating Over a Map
+
+Using Iterators
+
+
+
+                                C++
+
+                                                                              {1: "Alice"},
+  map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+
+  for (auto it = mp.begin(); it ! = mp.end(); it++) {                 mp =   {2: "Charlie"},
+      cout << it->first << " : " << it->second << endl;
+  }
+                                                                               {3: "Bob"}
+Iterating Over a Map
+
+Using Iterators
+
+
+
+                                C++
+                                                                      it->ﬁrst gives the key
+  map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};    of the current map
+  for (auto it = mp.begin(); it ! = mp.end(); it++) {                   element during
+      cout << it->first << " : " << it->second << endl;
+  }                                                                         iteration.
+Iterating Over a Map
+
+Using Iterators
+
+
+
+                                C++
+                                                                      it->second gives the
+  map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};   value of the current
+  for (auto it = mp.begin(); it ! = mp.end(); it++) {                 map element during
+      cout << it->first << " : " << it->second << endl;
+  }                                                                        iteration.
+Iterating Over a Map
+
+Using Iterators
+
+
+
+                                C++
+                                                                         Output
+
+  map<int, string> mp = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+                                                                      1 : Alice
+  for (auto it = mp.begin(); it ! = mp.end(); it++) {                 2 : Charlie
+      cout << it->first << " : " << it->second << endl;               3 : Bob
+  }
+Multimap
+
+Iterating Over a Multimap
+
+
+
+                                       C++                                                  mm
+
+
+                                                                                         {1: "Alice"},
+                                                                                          {2: "Bob"},
+ multimap<int, string> mm = {{1, "Alice"}, {2, "Bob"}, {2, "Charlie"}, {3, "David"}};
+
+
+ for (auto it = mm.begin(); it != mm.end(); it++) {
+     cout << it->first << ": " << it->second << endl;
+                                                                                        {2: "Charlie"},
+ }                                                                                       {3: "David"}
+Multimap
+
+Iterating Over a Multimap
+
+
+
+                                       C++
+                                                                                           Output
+
+ multimap<int, string> mm = {{1, "Alice"}, {2, "Bob"}, {2, "Charlie"}, {3, "David"}};   1: Alice
+                                                                                        2: Bob
+ for (auto it = mm.begin(); it != mm.end(); it++) {
+     cout << it->first << ": " << it->second << endl;
+                                                                                        2: Charlie
+ }                                                                                      3: David
+Unordered Map
+
+Iterating Over an Unordered Map
+
+
+
+                                    C++
+                                                                                      ump
+
+
+  unordered_map<int, string> ump = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+                                                                                 {2: "Charlie"},
+  for (auto it = ump.begin(); it != ump.end(); it++) {
+      cout << it->first << ": " << it->second << endl;
+                                                                                   {3 "Bob"},
+  }                                                                                {1: "Alice"}
+Unordered Map
+
+Iterating Over an Unordered Map
+
+
+
+                                    C++
+                                                                                  Output
+
+  unordered_map<int, string> ump = {{1, "Alice"}, {3, "Bob"}, {2, "Charlie"}};
+                                                                                 2: Charlie
+  for (auto it = ump.begin(); it != ump.end(); it++) {                           3: Bob
+      cout << it->first << ": " << it->second << endl;                           1: Alice
+  }
+Multimap
+
+Inserting Elements
+
+
+
+                                      C++
+                                                                                                 {1: "Alice"},
+                                                                                                 {2: "Bob"},
+ multimap<int, string> mm = {{1, "Alice"}, {2, "Bob"}, {2, "Charlie"}, {3, "David"}};          {2: "Charlie"},
+ mm.insert({3, "Eve"});                                                                 mm =
+ mm[2] = "Frank";                                                                               {2: "Frank"},
+                                                                                                {3: "David"},
+                                                                                                  {3: "Eve"}
+
+                          Duplicate keys, allowed.
+Word Frequency Counter
+
+Problem Statement
+
+
+
+        You are building a word frequency counter.
+        Given a paragraph of text, you need to count
+        how many times each word appears.
+Word Frequency Counter
+
+Example
+
+
+                    Input                     Output
+
+                                            brown-1
+                                            dog-1
+                                            fox-2
+      "the quick brown fox jumps over the   jumps-1
+            lazy dog the quick fox"         lazy-1
+                                            over-1
+                                            quick-2
+                                            the-3
+Word Frequency Counter
+
+Example
+
+            ["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog",
+                                    "the", "quick", "fox"].
+
+                             Count the frequency of each word:
+
+                     Brown : 1 occurrences          lazy : 1 occurrence
+
+                     dog : 1 occurrences            over : 1 occurrence
+
+                     fox : 2 occurrence             quick : 2 occurrence
+
+                     jumps : 1 occurrences          the : 3 occurrence
+Word Frequency Counter
+
+Code
+
+                                         C++
+     #include<bits/stdc++.h>
+     using namespace std;
+     class WordFrequencyCounter {
+     public:
+          void countWords(map<string, int>& wordCount, string& paragraph) {
+              stringstream ss(paragraph);
+              string word;
+              while (ss >> word) {
+                  wordCount[word]++;
+              }
+              for (auto& pair : wordCount) {
+                  cout << pair.first << " - " << pair.second << endl;
+              }
+          }
+     };
+Multimap Operations
+
+Problem Statement
+
+
+   You are given a multimap that stores key-value pairs. Your task is to perform following
+   operations on it:
+
+    →   Insertion: Add a key-value pair to the multimap.
+
+    →   Find: Check if a key exists in the multimap. Print "Found" if found, otherwise
+        print "Not Found".
+
+    →   Count: Get the number of values associated with a given key and return the count.
+
+    →   Erase: Remove all occurrences of a key from the multimap.
+Multimap Operations
+
+Example
+
+
+                             Input                                           Output
+
+
+
+       Multimap:
+       [(apple, 18), (banana, 28), (banana, 30), (cherry, 48)]
+                                                                 Not Found
+       Operations:                                               3
+       insert banana 50
+       ﬁnd mango
+       count banana
+       erase banana
+Multimap Operations
+
+Example
+
+
+
+
+      →   Insert adds (banana    , 50), keeping the order intact.
+      →   Find searches for "mango      " and returns "Not Found".
+      →   Count returns 3 as "banana" appears three times.
+      →   Erase removes all "banana" entries, leaving only "apple" and "cherry".
+Multimap Operations
+
+Code
+
+                                   C++
+
+
+
+    #include <bits/stdc++.h>
+    using namespace std;
+
+
+    class MultiMap {
+    public:
+       multimap<string, int> mm;
+       void insert(multimap<string, int> &mm, string& key, int value) {
+           mm.insert({key, value});
+       }
+Multimap Operations
+
+Code
+
+                                      C++
+
+       void find(multimap<string, int> &mm, string& key) {
+          if (mm.find(key) != mm.end()) {
+              cout << "Found" << endl;
+          }
+          else {
+              cout << "Not Found" << endl;
+          }
+       }
+       void count(multimap<string, int> &mm, string& key) {
+          cout << mm.count(key);
+       }
+       void erase(multimap<string, int> &mm, string& key) {
+          mm.erase(key);
+       }
+       };
+Unordered Map
+
+Problem Statement
+
+
+      You're given an unordered map where the key represents the
+      number and the value represents its frequency. Your task is to
+      perform the following operations:
+
+       →   Insertion: Add/Update element into the unordered_map
+           with a frequency.
+
+       →   Erase: Remove an element from the unordered map.
+
+       →   Find: Search key in the unordered map and print
+           “Found” if present, “Not Found” otherwise.
+Unordered Map
+
+Problem Statement
+
+
+                         Input                                 Output
+
+
+
+
+       unordered_map: [1, 1, 2, 2, 2, 3, 4, 4, 4, 4]
+
+
+       Operations:
+                                                       Found
+       Insert 5 with frequency 3
+       Erase 2
+       Find 3
+Unordered Map
+
+Explanation
+
+
+
+    Insertion adds 5 with             Erase removes all           Find checks if 3 exists in
+          frequency 3.                occurrences of 2.            the unordered_map.
+
+              Result                        Result                          Result
+
+    {1: 2, 2: 3, 3: 1, 4: 5, 5: 3}.   {1: 2, 3: 1, 4: 5, 5: 3}.            Found
+Unordered Map
+
+Code
+
+                                                C++
+        #include <bits/stdc++.h>
+        using namespace std;
+        class UnorderedMap {
+        public:
+             void insertElement(unordered_map<int, int> &ump, int value, int frequency) {
+                 ump[value] += frequency;
+             }
+             void eraseElement(unordered_map<int, int> &ump, int value) {
+                 ump.erase(value);
+             }
+             bool findElement(unordered_map<int, int> &ump, int value) {
+                  return ump.find(value) != ump.end();
+             }
+        };
+

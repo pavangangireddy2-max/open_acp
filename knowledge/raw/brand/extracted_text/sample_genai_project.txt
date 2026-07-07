@@ -1,0 +1,122 @@
+WELCOME
+Your Learning Journey
+  From AI-curious to AI-conﬁdent
+World is changing
+ Fast --> Rapidly
+AI in Everyday Life
+
+        Technological advancements enhancing our daily life
+Model Context Protocol
+
+
+
+
+               Career Impact with AI
+The Career Impact Reality
+
+
+
+     22% of all Jobs Face Disruption by 2030
+     (World Economic Forum 2025) : World Economic Forum
+
+
+
+
+                     Workers without new AI skills face high job loss risk.
+Model Context Protocol
+
+
+
+
+                Your Path to Excellence
+Your Learning Journey
+
+Concepts You Will Learn
+
+          Advanced Gen AI Capabilities
+
+
+
+          Master AI tools that save hours of work weekly
+
+
+
+          Build complete AI workﬂows visually
+
+
+
+          Build functional apps without coding
+
+
+
+          Understand agent architectures and advanced concepts like MCP
+Projects You Will Build
+
+AI-Powered Social Media Content Automation
+
+                          1                     2
+
+                          Listing the    Summariz-
+                            articles       ation
+
+
+                                                            3
+                                                     Generate
+                                                     Platform-
+                                                      Speciﬁc
+                                                      Content
+
+
+
+
+                          Auto-Post to     Asset
+                          Social Media    Handling
+
+                                   5             4
+Projects You Will Build
+
+Build Your Own AI News Summarizer
+
+
+    Fetches AI news
+
+
+                          Summarize with Gemini AI   Deliver newsletter to your email
+
+
+  Collects tech updates
+Projects You Will Build
+
+Building A Learning Path Generator
+
+
+
+          Takes your                       Creates a                              Schedules
+          learning goal                    structured day                         each day as a
+          as input                         wise learning path                     calendar event
+
+
+
+
+                          Researches and                        Generates a
+                          ﬁnds learning                         Google Doc with
+                          resources                             complete plan
+ Projects You Will Build
+
+AI Shopping Assistant on Telegram
+
+
+  Text-based                               Real-time                                  Instant Telegram
+product search                           Amazon scraping                                  responses
+
+Type your request                         Fetch live product                            Receive top 5
+and ﬁnd products                         data with prices and                         products directly
+    instantly         Voice message            ratings              AI styling             in chat
+                         support                                recommendations
+
+                           Speak your                            Get personalized
+                      query instead of                          fashion advice from
+                             typing                                 Gemini AI
+THANK YOU
+ALL THE BEST
+

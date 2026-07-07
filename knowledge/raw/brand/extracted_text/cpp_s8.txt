@@ -1,0 +1,1167 @@
+WELCOME
+C++ STL Sets
+Agenda
+
+C++ Bridge Course
+
+
+
+
+            Set     Multi set   Unordered Set
+Set
+
+Introduction
+
+
+         A set is a data structure that stores unique elements
+                   while maintaining sorted order.
+
+
+
+
+               1      2       3       4       5       6
+Set
+
+Declaration and Initialization
+
+
+
+                      C++
+
+
+      set<int> s = {5, 10, 15, 20, 25, 30};
+                                                          s=     5 , 10 , 15 , 20 , 25 , 30
+
+
+
+
+                              Initializing with unique values.
+Set
+
+Inserting Elements
+
+
+
+                      C++
+
+
+      set<int> s = {5, 10, 15, 20, 25, 30};
+      s.insert(35);                                        s=    5 , 10 , 15 , 20 , 25 , 30 , 35
+
+
+
+
+                               Insert element (35) in the set.
+Set
+
+Inserting Elements
+
+
+
+                      C++
+
+
+      set<int> s = {5, 10, 15, 20, 25, 30};
+      s.insert(35);                                     s=       5 , 10 , 15 , 20 , 25 , 30 , 35
+      s.insert(10);
+
+
+
+
+                            Duplicate will NOT be added twice.
+Set
+
+Inserting Elements
+
+
+
+                      C++
+
+
+      set<int> s = {5, 10, 15, 20, 25, 30};
+      s.insert(35);                                    s=      5 , 10 , 15 , 20 , 22 , 25 , 30 , 35
+      s.insert(10);
+      s.insert(22);
+
+
+
+                            s.insert(x) - inserts element x to set
+Set
+
+Checking if an Element Exists
+
+
+
+                              C++
+      set<int> s = {5, 10, 15, 20, 25, 30};
+      .
+      .
+      .
+      if (s.find(25) != s.end()) {                               s=        5 , 10 , 15 , 20 , 22 , 25 , 30 , 35
+          cout << "25 is present";
+      } else {
+          cout << "25 is not found";
+      }
+
+
+                            s.ﬁnd(x) returns a pointer to element x in set if present.
+                                         Else, return pointer to s.end()
+Set
+
+Checking if an Element Exists
+
+
+
+                              C++
+      set<int> s = {5, 10, 15, 20, 25, 30};
+      .                                         Output
+      .
+      .
+      if (s.find(25) != s.end()) {
+                                              25 is present
+          cout << "25 is present";
+      } else {
+          cout << "25 is not found";
+      }
+Set
+
+Removing Element
+
+
+
+                      C++
+                                                           s=     5 , 10 , 15 , 20 , 22 , 25 , 30 , 35
+      set<int> s = {5, 10, 15, 20, 25, 30};
+      .
+      .
+      s.erase(15);
+                                                           s=       5 , 10 , 20 , 22 , 25 , 30 , 35
+
+
+
+
+                       s.erase(x) - erases the element x if present in set
+Set
+
+Removing Elements
+
+
+
+                         C++
+
+      set<int> s = {5, 10, 15, 20, 25, 30};
+      .
+      .
+      auto it1 = s.find(20);
+                                                                s=        5 , 10 , 20 , 22 , 25 , 30 , 35
+
+
+
+
+                erase(it1, it2) removes all elements from it1 to it2, excluding it2 itself.
+Set
+
+Removing Elements
+
+
+
+                         C++
+
+      set<int> s = {5, 10, 15, 20, 25, 30};
+      .
+      .
+      auto it1 = s.find(20);
+                                                                s=        5 , 10 , 20 , 22 , 25 , 30 , 35
+
+      auto it2 = s.find(35);
+
+
+
+
+                erase(it1, it2) removes all elements from it1 to it2, excluding it2 itself.
+Set
+
+Removing Elements
+
+
+
+                         C++
+                                                               s=        5 , 10 , 20 , 22 , 25 , 30 , 35
+      set<int> s = {5, 10, 15, 20, 25, 30};
+      .
+      .
+      auto it1 = s.find(20);
+                                                                          s=     5 , 10 , 35
+      auto it2 = s.find(35);
+      s.erase(it1, it2);
+
+
+                erase(it1, it2) removes all elements from it1 to it2, excluding it2 itself.
+Set
+
+Size of Set
+
+
+
+                      C++
+                                                                    s=   5 , 10 , 35
+      set<int> s = {5, 10, 15, 20, 25, 30};
+      .
+      auto it1 = s.find(20);
+                                                                         Output
+      auto it2 = s.find(35);
+      s.erase(it1, it2);
+                                                                            3
+      cout << s.size();
+
+
+                            s.size() returns count of elements in set
+Set
+
+Printing All Elements
+
+
+
+                            C++
+                                                         s=   5 , 10 , 35
+      set<int> s = {5, 10, 15, 20, 25, 30};
+      .
+      .
+      .                                                       Output
+      for (auto it = s.begin(); it != s.end(); it++) {
+          cout << *it << " ";
+      }                                                       5 10 35
+Set
+
+Removing All Elements
+
+
+
+                      C++
+      set<int> s = {5, 10, 15, 20, 25, 30};                         s=   5 , 10 , 35
+      .
+      .
+      .
+      s.clear();
+                                                               s=
+
+
+
+
+                            s. clear() removes all elements from set
+Set
+
+Checking if the Set is Empty
+
+
+
+                         C++
+      set<int> s = {5, 10, 15, 20, 25, 30};                          s=
+      .
+      .
+      .                                                                        Output
+      if (s.empty()) {
+          cout << "Set is empty";                                           Set is empty
+      }
+
+
+                         s.empty(x) - returns 1 if set is empty. Else, returns 0
+Set
+
+Swapping Two Sets
+
+
+
+                      C++
+
+                                 s1 =   1, 2 , 3
+
+      set<int> s1 = {1, 2, 3};
+      set<int> s2 = {4, 5, 6};   s2 =   4, 5 , 6
+Set
+
+Swapping Two Sets
+
+
+
+                      C++
+
+                                 s1 =   1, 2 , 3
+
+      set<int> s1 = {1, 2, 3};
+      set<int> s2 = {4, 5, 6};   s2 =   4, 5 , 6
+      s1.swap(s2);
+Set
+
+Swapping Two Sets
+
+
+
+                      C++
+
+                                 s1 =   4, 5 , 6
+
+      set<int> s1 = {1, 2, 3};
+      set<int> s2 = {4, 5, 6};   s2 =   1, 2 , 3
+      s1.swap(s2);
+Set Operations
+
+Problem Statement
+
+
+          Implement these functionality on a set -
+
+         add x : Inserts element x into set s.
+
+         print : Prints all elements of set s, space-separated.
+
+         remove x : Removes element x from set s.
+
+         check x : Prints 1 if x is present in s, otherwise prints -1.
+
+         length : Prints the size of set s.
+Set Operations
+
+Problem Statement
+
+
+                       Input           Output
+
+
+                 Queries = add 1
+                           add 2
+                           print      1 2
+                           remove 2
+                           check 3    -1
+                           check 1     1
+                           length      1
+Set Operations
+
+Explanation
+
+
+     →   add 1 → Inserts 1 into the set → Set: {1}
+     →   add 2 → Inserts 2 into the set → Set: {1, 2}
+     →   print → Prints the set contents: 1 2
+     →   remove 2 → Removes 2 from the set → Set: {1}
+     →   check 3 → Checks if 3 is present in the set → Output: -1 (since 3 is not in the set)
+     →   check 1 → Checks if 1 is present in the set → Output: 1 (since 1 is in the set)
+     →   length → Prints the size of the set → Output: 1 (since set contain only 1 element)
+Set Operations
+
+Code
+
+                           C++
+
+     #include <bits/stdc++.h>
+     using namespace std;
+     class SetOperations {
+     public:
+         set<int> s;
+        void insert(int x) {
+             s.insert(x);
+         }
+        void print_contents() {
+             for (int element : s) {
+                 cout << element << " ";
+             }
+             cout << endl;
+         }
+     ...
+Set Operations
+
+Code
+
+                                C++
+          void erase(int x) {
+              s.erase(x);
+          }
+          void find(int x) {
+              if (s.find(x) != s.end()) {
+                  cout << 1 << endl;
+              } else {
+                    cout << -1 << endl;
+              }
+          }
+          void size() {
+              cout << s.size() << endl;
+          }
+     };
+Quiz Time!
+Multi set
+Multi set
+
+Introduction
+
+
+            A Multiset is a modiﬁed version of set that allows duplicate
+                    elements while maintaining sorted order.
+
+
+
+
+                    1       2        2       4        4       6
+Multi set
+
+Declaration and Initialization
+
+
+
+                    C++
+
+
+   multiset<int> ms = {10, 5, 20, 15, 10};
+                                                          ms =     5 , 10 , 10 , 15 , 20
+
+
+
+
+                     Stored in sorted order (With Duplicates Allowed).
+Multi set
+
+Inserting Elements
+
+
+
+                    C++
+
+
+   multiset<int> ms = {10, 5, 20, 15, 10};
+   ms.insert(25);                                         ms =    5 , 10 , 10 , 15 , 20 , 25
+
+
+
+
+                          Insert element (25) in the multi set.
+Multi set
+
+Inserting Elements
+
+
+
+                      C++
+
+
+   multiset<int> ms = {10, 5, 20, 15, 10};
+   ms.insert(25);                                             ms =     5 , 10 , 10 , 10 , 15 , 20 , 25
+   ms.insert(10);
+
+
+
+
+                    Insert element (10) in the multi set (duplicates allowed).
+Multi set
+
+Inserting Elements
+
+
+
+                    C++
+
+
+   multiset<int> ms = {10, 5, 20, 15, 10};
+   ms.insert(25);                                         ms =    5 , 10 , 10 , 10 , 15 , 20 , 25, 30
+   ms.insert(10);
+   ms.insert(30);
+
+
+
+                          Insert element (30) in the multi set.
+Multi set
+
+Checking if an Element Exists
+
+
+
+                            C++
+       multiset<int> ms = {10, 5, 20, 15, 10};
+       .
+       .
+       .
+       if (ms.find(10) != ms.end()) {                                 ms =      5 , 10 , 10 , 10 , 15 , 20 , 25, 30
+            cout << "10 is present";
+       } else {
+            cout << "10 is not found";
+       }
+
+
+                  ms.ﬁnd(x) returns an iterator pointing to the ﬁrst occurrence of x in the
+                        multi set. If x is not found, it returns an iterator to ms.end().
+Multi set
+
+Checking if an Element Exists
+
+
+
+                            C++
+       multiset<int> ms = {10, 5, 20, 15, 10};
+       .                                           Output
+       .
+       .
+       if (ms.find(10) != ms.end()) {
+            cout << "10 is present";
+                                                 10 is present
+       } else {
+            cout << "10 is not found";
+       }
+Multi set
+
+Count function of multi set
+
+
+
+   →    The count() function returns the number of
+        occurrences of a particular element in the multiset.   Syntax:
+
+   →    It checks how many times the given                     ms.count(element);
+        element is present in the multiset.
+Multi set
+
+Count Function
+
+
+
+                             C++                           Explanation:
+                                                           →   The element 10 appears 3 times in
+      #include<bits/stdc++.h>
+      using namespace std;                                     the multiset.
+                                                           →   So, ms.count(10) returns 3.
+      int main() {
+            multiset<int> ms = {10, 20, 10, 30, 20, 10};                  Output
+            cout << ms.count(10);
+      }
+                                                                               3
+Multi set
+
+Removing Elements
+
+
+
+                         C++
+   multiset<int> ms = {10, 5, 20, 15, 10};
+   .
+   .
+   .                                                         ms =     5 , 10 , 10 , 10 , 15 , 20 , 25, 30
+   auto it = ms.find(10);
+
+
+
+
+                                   Finds the ﬁrst occurrence of 10.
+Multi set
+
+Removing Elements
+
+
+
+                           C++
+   multiset<int> ms = {10, 5, 20, 15, 10};
+                                                             ms =     5 , 10 , 10 , 10 , 15 , 20 , 25, 30
+   .
+   .
+   .
+   auto it = ms.find(10);
+   if (it != ms.end()) {
+       ms.erase(it);                                           ms =     5 , 10 , 10 , 15 , 20 , 25 , 30
+   }
+
+
+
+
+                       ms.erase(it) - deletes the element pointed by iterator it.
+Multi set
+
+Removing Elements
+
+
+
+                     C++
+                                                        ms =     5 , 10 , 10 , 15 , 20 , 25 , 30
+   multiset<int> ms = {10, 5, 20, 15, 10};
+   .
+   .
+   .
+   ms.erase(10);
+                                                             ms =     5 , 15 , 20 , 25 , 30
+
+
+
+
+                    ms.erase(value) - deletes all elements equal to value
+Multi set
+
+Getting the Size of the Multi set
+
+
+
+                     C++
+                                                              ms =    5 , 15 , 20 , 25 , 30
+   multiset<int> ms = {10, 5, 20, 15, 10};
+   .
+   .
+   .                                                                   Output
+   cout << ms.size();
+                                                                           5
+
+
+
+                  ms.size() returns the number of elements in the multi set.
+Multi set
+
+Clearing the Multi set
+
+
+
+                     C++
+                                                         ms =   5 , 15 , 20 , 25 , 30
+
+   multiset<int> ms = {10, 5, 20, 15, 10};
+   .
+   .
+   .
+   ms.clear();
+                                                         ms =
+
+
+
+                                 Removes all elements.
+Multi set
+
+Checking if the Multi set is Empty
+
+
+
+                      C++
+                                                                 ms =     5 , 15 , 20 , 25 , 30
+   multiset<int> ms = {10, 5, 20, 15, 10};
+   .
+   .
+   .                                                                       Output
+   if (ms.empty()) {
+       cout << "Multiset is empty";
+                                                                      Multiset is empty
+   }
+
+
+
+                    ms.empty() returns 1 if multi set is empty. Else, return 0.
+Multi set
+
+Swapping Two Multi sets
+
+
+
+                     C++
+
+                                       ms1 =   1, 2 , 3 , 3
+
+   multiset<int> ms1 = {1, 2, 3, 3};
+   multiset<int> ms2 = {4, 5, 6};      ms2 =    4, 5 , 6
+Multi set
+
+Swapping Two Multi sets
+
+
+
+                     C++
+
+                                       ms1 =   1, 2 , 3 , 3
+
+   multiset<int> ms1 = {1, 2, 3, 3};
+   multiset<int> ms2 = {4, 5, 6};      ms2 =    4, 5 , 6
+   ms1.swap(ms2);
+Multi set
+
+Swapping Two Multi sets
+
+
+
+                     C++
+
+                                       ms1 =    4, 5 , 6
+
+   multiset<int> ms1 = {1, 2, 3, 3};
+   multiset<int> ms2 = {4, 5, 6};      ms2 =   1, 2 , 3 , 3
+   ms1.swap(ms2);
+Multi set
+
+Problem Statement
+
+       You're given a list of operations and a multiset. Your task is to perform the following
+       operations on multi set:
+
+            →   Insertion: Add elements to the multi set.
+
+            →   Erase: Remove elements from the multi set.
+
+            →   Find: Locate an element in the multi set and print "Found" if present,
+                "Not Found" otherwise.
+
+            →   Count: Prints the occurrences of a speciﬁc element.
+
+            →   Erase First Occurrence: Remove ﬁrst instance of an element from multiset.
+Multi set
+
+Problem Statement
+
+
+                           Input                              Output
+
+
+
+            Multiset 1: [1, 2, 2, 3, 4]
+            Operations:                   After Insertion: [1, 2, 2, 3, 4, 5]
+            - insert 5                    After Erasing 2: [1, 3, 4, 5]
+            - erase 2                     Find 3: Found
+            - ﬁnd 3                       Count of 2: 0
+            - count 2                     After Erasing the ﬁrst Occurrence of 3: [1, 4, 5]
+            - eraseFirstOccurrence 3
+Multi set
+
+Problem Statement
+
+ Insertion: Add 5 to the multi set     Erase: Remove all occurrences of      Find: Search for 3 in the multi set
+ while maintaining sorted order.              2 from the multi set.              and conﬁrms its presence.
+
+
+        [ 1, 2, 2, 3, 4, 5 ]                     [ 1, 3, 4, 5 ]                         "Found"
+
+
+
+        Count: Determine the number of times              Erase First Occurrence: Remove only the
+            2 appears in the multi set, returning 0.       ﬁrst occurrence of 3 from the multi set.
+
+
+
+                        "Count of 2: 0"                                   [ 1, 4, 5 ]
+Multi set
+
+Code
+
+                                  C++
+
+            #include <bits/stdc++.h>
+            using namespace std;
+            class MultiSetOperations {
+            public:
+               multiset<int> ms;
+              void insert(int value) {
+                      ms.insert(value);
+               }
+              void erase(int value) {
+                      ms.erase(value);
+               }
+Multi set
+
+Code
+
+                                   C++
+
+       void findElement(int value) {
+            auto it = ms.find(value);
+            if (it ! = ms.end()) cout << "Found\n";
+            else cout << "Not Found\n";
+       }
+       void countOccurrences(int value) {
+            cout << "Count " << ms.count(value) << endl;
+       }
+       void eraseFirstOccurrence(int value) {
+            auto it = ms.find(value);
+            if(it ! = ms.end()) ms.erase(it);
+       }
+       };
+Quiz Time!
+Unordered Set
+Unordered Set
+
+Introduction
+
+
+                An unordered_set is a data structure that stores
+                   unique elements in no particular order.
+
+
+
+
+                  6       9        1       7       8        5
+Unordered Set
+
+Declaration and Initialization
+
+
+
+                        C++
+
+
+   unordered_set<int> us = {5, 10, 15, 20, 25, 30};
+
+                                                              us =   10, 5 , 25 , 30 , 15 , 20
+
+
+
+
+                        Initializing with unique values (order is arbitrary).
+Unordered Set
+
+Inserting Elements
+
+
+
+                        C++
+
+
+   unordered_set<int> us = {5, 10, 15, 20, 25, 30};
+   us.insert(35);
+                                                             us =   10, 5 , 25 , 30 , 15 , 20 , 35
+
+
+
+
+                              Insert element (35) in the unordered_set.
+Unordered Set
+
+Inserting Elements
+
+
+
+                        C++
+
+
+   unordered_set<int> us = {5, 10, 15, 20, 25, 30};
+   us.insert(35);
+   us.insert(10);
+                                                           us =    10, 5 , 25 , 30 , 15 , 20 , 35
+
+
+
+
+                                 Duplicate will NOT be inserted.
+Unordered Set
+
+Inserting Elements
+
+
+
+                        C++
+
+
+   unordered_set<int> us = {5, 10, 15, 20, 25, 30};
+   us.insert(35);
+   us.insert(10);
+                                                             us =   10, 5 , 25 , 30 , 15 , 20 , 35 , 40
+   us.insert(40);
+
+
+
+
+                              Insert element (40) in the unordered_set.
+Unordered Set
+
+Checking if an Element Exists
+
+
+
+                           C++
+   unordered_set<int> us = {5, 10, 15, 20, 25, 30};
+   .
+   .
+   .
+   if (us.find(25) != us.end()) {                                  us =    10, 5 , 25 , 30 , 15 , 20 , 35 , 40
+       cout << "25 is present";
+   } else {
+       cout << "25 is not found";
+   }
+
+
+                    us.ﬁnd(x) returns an iterator pointing to x in the unordered_set.
+                            If x is not found, it returns an iterator to us.end().
+Unordered Set
+
+Checking if an Element Exists
+
+
+
+                           C++
+   unordered_set<int> us = {5, 10, 15, 20, 25, 30};
+   .                                                    Output
+   .
+   .
+   if (us.find(25) != us.end()) {
+       cout << "25 is present";
+                                                      25 is present
+   } else {
+       cout << "25 is not found";
+   }
+Unordered Set
+
+Removing One Element
+
+
+
+                        C++
+
+                                                            us =      10, 5 , 25 , 30 , 15 , 20 , 35 , 40
+
+   unordered_set<int> us = {5, 10, 15, 20, 25, 30};
+   .
+   .
+   .
+   us.erase(15);
+                                                               us =     10, 5 , 25 , 30 , 20 , 35 , 40
+
+
+
+                     us.erase(x) deletes x from the unordered_set, if present.
+Unordered Set
+
+Size of the Unordered Set
+
+
+
+                        C++
+                                                              us =   10, 5 , 25 , 30 , 20 , 35 , 40
+
+   unordered_set<int> us = {5, 10, 15, 20, 25, 30};
+   .
+   .                                                                         Output
+   .
+   cout << us.size();
+                                                                                7
+
+
+                  us.size() returns the number of elements in the unordered_set.
+Unordered Set
+
+Clearing the Unordered Set
+
+
+
+                        C++
+                                                              us =   10, 5 , 25 , 30 , 20 , 35 , 40
+
+   unordered_set<int> us = {5, 10, 15, 20, 25, 30};
+   .
+   .
+   .
+   us.clear();                                                us =
+
+
+
+
+                      us.clear() deletes all elements from the unordered_set
+Unordered Set
+
+Checking if the Unordered Set is Empty
+
+
+
+                          C++
+
+   unordered_set<int> us = {5, 10, 15, 20, 25, 30};
+   .
+   .
+   .
+   if (us.empty()) {                                              us =
+       cout << "Unordered set is empty";
+   }
+
+
+
+
+                us.empty() returns 1 if the unordered_set is empty; otherwise, returns 0.
+Unordered Set
+
+Checking if the Unordered Set is Empty
+
+
+
+                         C++
+                                                      us =
+   unordered_set<int> us = {5, 10, 15, 20, 25, 30};
+   .
+   .
+   .                                                                Output
+   if (us.empty()) {
+       cout << "Unordered set is empty";
+   }                                                         Unordered set is empty
+Unordered Set
+
+Swapping Two Unordered Sets
+
+
+
+                    C++
+
+                                         us1 =   1, 2 , 3
+
+   unordered_set<int> us1 = {1, 2, 3};
+   unordered_set<int> us2 = {4, 5, 6};   us2 =   4, 5 , 6
+Unordered Set
+
+Swapping Two Unordered Sets
+
+
+
+                    C++
+
+                                         us1 =   1, 2 , 3
+
+   unordered_set<int> us1 = {1, 2, 3};
+   unordered_set<int> us2 = {4, 5, 6};   us2 =   4, 5 , 6
+   us1.swap(us2);
+Unordered Set
+
+Swapping Two Unordered Sets
+
+
+
+                    C++
+
+                                         us1 =   4, 5 , 6
+
+   unordered_set<int> us1 = {1, 2, 3};
+   unordered_set<int> us2 = {4, 5, 6};   us2 =   1, 2 , 3
+   us1.swap(us2);
+Quiz Time!
+Unordered Set
+
+Code
+
+                             C++
+
+      #include <bits/stdc++.h>
+      using namespace std;
+
+
+      class UnorderedSetOperations {
+      public:
+         unordered_set<int> us;
+
+
+         void insert(int value) {
+             us.insert(value);
+         }
+Unordered Set
+
+Code
+
+                             C++
+      void erase(int value) {
+           us.erase(value);
+      }
+      void findElement(int value) {
+           if(us.find(value) ! = us.end())
+                  cout << "Present\n";
+           else
+                  cout << "Not Present\n";
+      }
+      };
+C++ STL - Set
+
+Key Takeaways
+
+
+    →   Set
+        Stores unique elements in sorted order, supports
+        operations like insert(), erase(), ﬁnd(), size(), and
+        swap().
+
+    →   Multiset
+        Similar to set, but allows duplicate elements
+        while maintaining sorted order. Provides count()
+        for duplicate occurrences.
+C++ STL - Set
+
+Key Takeaways
+
+
+    →   Unordered Set
+        Stores unique elements in an arbitrary order,
+        offering generally faster insertions and lookups
+        compared to set.
+
+    →   Operations
+        All sets support insertion, deletion, iteration,
+        checking existence, clearing, swapping, and size
+        retrieval.
+THANK YOU
+ALL THE BEST
+Unordered Set
+
+Iterating Over an Unordered Set
+
+
+
+                         C++
+                                                      us =   10, 5 , 25 , 30 , 20 , 35 , 40
+   unordered_set<int> us = {5, 10, 15, 20, 25, 30};
+   .
+   .
+   .
+   for (auto it = us.begin(); it != us.end(); it++)                  Output
+   {
+       cout << *it << " ";                                   10 5 25 30 20 35 40
+   }
+Multi set
+
+Iterating Over a Multi set
+
+
+
+                             C++
+                                                        ms =    5 , 15 , 20 , 25 , 30
+   multiset<int> ms = {10, 5, 20, 15, 10};
+   .
+   .
+   .
+                                                                Output
+   for (auto it = ms.begin(); it != ms.end(); it++) {
+       cout << *it << " ";
+   }                                                           5 15 20 25 30
+Unordered Set
+
+Problem Statement
+
+
+
+      Your task is to perform the following operations on an unordered set:
+
+       →   Insertion: Add elements to the unordered set.
+
+       →   Erase: Remove elements from the unordered set.
+
+       →   Find: Locate an element in the unordered set and print “Present” if it is present;
+           otherwise, print “Not Present”.
+Unordered Set
+
+Problem Statement
+
+
+                       Input                                      Output
+
+
+
+
+           Unordered Set 1: [1, 2, 2, 3, 4]   After Insertion: [1, 2, 3, 4, 5]
+           Operations:
+                                              After Erasing 2: [1, 3, 4, 5]
+           insert 5
+           erase 2                            Find 3: Present
+
+           ﬁnd 3
+ Unordered Set
+
+ Problem Statement
+
+
+                                                                    Find locates 3 in the
+Insertion adds 5 to the unordered   Erase removes 2 from the
+                                                               unordered set and conﬁrms its
+set, keeping only unique values          unordered set.
+                                                                         presence.
+
+
+            Result:                         Result:                       Result:
+
+        [ 1, 2, 3, 4, 5 ]                  [1, 3, 4, 5]                  Present
+

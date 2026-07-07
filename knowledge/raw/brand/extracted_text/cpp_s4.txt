@@ -1,2 +1,544 @@
-# cpp_s4 (0 pages, 0 with text)
+WELCOME
+  C++
+Functions
+Agenda
 
+C++ Bridge Course
+
+
+
+
+                         Pass by        Practice
+         Functions
+                     value/reference   Questions
+Functions
+
+
+   v/s
+Functions
+
+Introduction
+
+
+            A function is a predeﬁned set of instructions that takes input,
+            performs a speciﬁc task, and returns an output, enabling an
+                   efﬁcient way to reuse code for repetitive tasks.
+
+
+                                           Syntax
+
+                      return_type function_name(data_type parameter)
+                      {
+                          // Function code or instructions
+                          return result;
+                      }
+Functions
+
+Example
+
+
+                         C++
+
+
+            #include <iostream>
+            using namespace std;
+            int sum(int a, int b){
+                int c;
+                c = a+b;
+                return c;
+            }
+Functions
+
+Example
+
+
+
+                      C++           Input
+
+                                       5
+            int main() {
+                                       10
+                int a,b;
+                cin >> a >> b;
+                cout << sum(a,b);   Output
+
+                return 0;
+                                       15
+            }
+Functions
+
+Comparison with Python:
+
+
+                         C++
+                          Code             Python
+                                              Code
+
+     #include <iostream>
+     using namespace std;
+                                 def add(a, b):
+     int add(int a, int b) {      return a + b
+         return a + b;
+     }
+                                 print(add(5, 3))
+     int main() {
+         cout << add(5, 3);
+         return 0;
+     }
+
+                      Output
+                     Output                  Output
+                                            Output
+
+                           8                      8
+Functions
+
+Function Declaration (Prototype)
+
+
+                           C++                                                       Python
+
+   int add(int, int); // Function prototype
+
+
+   int main() {
+       cout << add(5, 3);
+       return 0;
+   }
+   int add(int a, int b) {
+       return a + b;
+   }
+
+
+  In C++, a function must be declared before use to specify its     Python lacks function declarations, so a function
+ return type and parameters, allowing calls before its deﬁnition.             must be deﬁned before use.
+Functions
+
+Types of Functions
+
+
+
+                 1     Built-in Functions
+
+
+
+
+                 2   User-deﬁned Functions
+Functions
+
+Types of Functions
+
+                                     Built-in Functions
+
+
+
+                   C++                                           Python
+
+
+
+
+   sqrt(), pow(), abs(), max(), min()             abs(), pow(), sorted(), sum()
+
+
+
+  These are few of the predeﬁned functions        Python's built-in functions are available
+    provided by the C++ Standard Library.            by default; no imports are needed.
+Functions
+
+Types of Functions
+
+                                               User-deﬁned Functions
+
+
+                           C++                                                   Python
+
+    #include <iostream>
+    using namespace std;
+                                                                def add(a, b):
+    int add(int a, int b) {
+        return a + b;
+                                                                  return a + b
+    }
+    int main() {                                                num1 = int(input())
+        int num1, num2;
+                                                                num2 = int(input())
+        cin >> num1 >> num2;
+        cout << "Sum: " << add(num1, num2) << endl;
+        return 0;                                               print("Sum: ", add(num1, num2))
+    }
+
+
+
+                                         Functions created by the programmer.
+Functions
+
+Why do we use functions?
+
+
+                              We use functions to break down a
+                             program into smaller, reusable parts,
+                           making it easier to understand, maintain,
+                                  and avoid repeating code.
+
+
+
+                Why
+Quiz Time!
+Functions
+
+Passing Parameters to Functions
+
+
+
+                                  Pass by Value
+
+            Pass by value is a parameter passing method where a copy of the
+            actual argument is passed to the function. Changes made inside
+                    the function do not affect the original variable.
+Passing Parameters to Functions by Value
+
+Example
+
+
+                            C++
+           void passByvalue(int a)
+           {
+           a = a + 2;                                Output
+           cout<<"Function: a = "<< a << endl;
+           }                                     Function: a = 4
+           int main(){
+                                                 Main: a = 2
+               int a = 2;
+               passByvalue(a);
+               cout<<”Main: a = “<< a << endl;
+               return 0;
+           }
+Functions
+
+Passing Parameters to Functions
+
+
+
+                                Pass by Reference
+
+            Pass by reference is a parameter-passing method where a function
+            receives a reference to the actual argument, allowing modiﬁcations
+                     inside the function to affect the original variable.
+Passing Parameters to Functions by Reference
+
+Example
+
+
+                            C++
+           void passByReference(int &a)
+           {
+           a = a + 2;                                Output
+           cout<<"Function: a = "<< a << endl;
+           }                                     Function: a = 4
+           int main(){
+                                                 Main: a = 4
+               int a = 2;
+               passByReference(a);
+               cout<<"Main: a = "<< a << endl;
+               return 0;
+           }
+Functions
+
+Passing Array to Function
+
+
+            In C++, when passing an array to a function, you only provide the
+             array's name, which decays into a pointer to its ﬁrst element,
+                        effectively making it pass by reference.
+
+
+                                        Syntax
+
+
+
+                 return_type function_name(array_type array_name[]){}
+                 //passing array to function
+Passing Array to Function
+
+Example
+
+
+                              C++
+            void passingArray(int arr[], int len){
+                arr[1] = arr[3];
+                arr[0] = arr[4];
+            }                                        This will update the main array
+                int main(){
+                                                        as it is always passed by
+                int arr[] = {10,20,30,40,50};
+                                                               reference.
+                passingArray(arr, 5);
+                for(int i = 0; i < 5; i++){
+                cout << arr[i] << " ";
+                }
+                return 0;
+            }
+Passing Array to Function
+
+Example
+
+
+                              C++
+            void passingArray(int arr[], int len){
+                arr[1] = arr[3];
+                arr[0] = arr[4];                        Output
+            }
+                int main(){
+                int arr[] = {10,20,30,40,50};        50 40 30 40 50
+                passingArray(arr, 5);
+                for(int i = 0; i < 5; i++){
+                cout << arr[i] << " ";
+                }
+                return 0;
+            }
+Passing Array to Function
+
+Comparison of Functions: C++ vs Python
+
+
+          Feature                      C++ Syntax                           Python Syntax
+     Function Declaration   int add(int, int);                        No separate declaration available.
+
+     Function Deﬁnition     int add(int a, int b) { return a + b; }   def add(a, b): return a + b
+
+
+     Function Calling       sum = add(5, 10);                         sum = add(5, 10)
+
+     Pass by Value          Default                                   Default
+
+                                                                      Use mutable objects (lists, dicts) or
+     Pass by Reference      Use & (e.g., void modify(int &x))
+                                                                      global keyword
+Quiz Time!
+C++
+
+Key Takeaways
+
+  ●   Functions
+       Reusable code blocks that take inputs, process them,
+       and return outputs.
+
+
+  ●   Parameter Passing:
+       Pass by Value: Changes inside the function don’t affect
+       the original variable.
+
+       Pass by Reference: Changes inside the function affect
+       the original variable.
+THANK YOU
+ALL THE BEST
+Practice Problems
+
+
+       v/s
+Practice Problems
+
+Swap Two Numbers
+
+
+
+
+               Write a program to swap two numbers
+                                                        3   5
+                using a function. The function should
+                use pass-by-reference to ensure that
+                    the original values are modiﬁed.
+Swap Two Numbers
+
+Code
+
+
+                          C++
+                           Code                     Python
+                                                       Code
+
+     #include <iostream>
+     using namespace std;
+     void interchange(int &a, int &b) {   def interchange(a, b):
+         int temp = a;                      return b, a
+         a = b;
+         b = temp;                        x, y = 5, 10
+     }
+                                          x, y = interchange(x, y)
+     int main() {
+         int x = 5, y = 10;               print(x, y)
+         interchange(x, y);
+         cout << x << " " << y;
+     }
+
+
+
+                          Output
+                         Output                          Output
+                                                        Output
+
+                            10 5                          10 5
+Practice Problems
+
+Find Maximum
+
+
+
+
+             Write a function, ﬁndMax, that takes three
+                                                              5
+              integers as input and returns the largest           4
+                                                          3
+
+             among them. Implement this function and
+                    call it within the main() function.
+Find Maximum
+
+Code
+                        C++
+                         Code                         Python
+                                                         Code
+
+    #include<bits/stdc++.h>
+    using namespace std;
+    int findMax(int a, int b, int c) {   def findMax(a, b, c):
+        if (a >= b && a >= c) {
+                                           if a >= b and a >= c:
+            return a;
+                                               return a
+        } else if (b >= a && b >= c) {
+            return b;                      elif b >= a and b >= c:
+        } else {                               return b
+            return c;                      else:
+        }                                      return c
+    }
+    int main() {
+                                         if __name__ == "__main__":
+        int x, y, z;
+        cin >> x >> y >> z;                 x, y, z = map(int, input().split())
+        int max = findMax(x, y, z);         max_value = findMax(x, y, z)
+        cout << max << endl;               print(max_value)
+        return 0;
+    }
+Practice Problems
+
+Sum of Digits
+
+
+
+
+                         +
+             +       +       +       Write a function SumOfDigits that takes
+                 +               +
+                                     an integer n as a parameter and returns
+           + +                       the sum of the digits of the given number.
+                                 +
+                                     Implement this function and use it in the
+                                                 main() function.
+Sum of Digits
+
+Code
+                        C++
+                         Code                            Python
+                                                            Code
+
+     #include<bits/stdc++.h>
+     using namespace std;
+     int SumOfDigits(int n) {             def SumOfDigits(n):
+         int sum = 0;
+                                            sum = 0
+         while (n != 0) {
+                                            while n != 0:
+             sum += n % 10;
+             n /= 10;
+                                                sum += n % 10
+         }                                       n //= 10
+         return sum;                        return sum
+     }
+     int main() {
+                                          if __name__ == "__main__":
+         int num;
+                                             num = int(input())
+         cin >> num;
+         int result = SumOfDigits(num);
+                                             result = SumOfDigits(num)
+         cout <<result<< endl;              print(result)
+         return 0;
+     }
+Practice Problems
+
+Calculator
+
+
+
+                                    Design a simple calculator that performs
+                        +
+             *      *       -       Addition, Subtraction, Multiplication, and
+                                *      Division operations. Implement the
+           + -                      functionality using separate functions for
+                                +
+                                     each operation. The calculator should
+                                     take two numbers and an operation as
+                                           input and return the result.
+Calculator
+
+Code
+                               C++
+                                Code                             int main() {
+                                                                     double num1, num2;
+                                                                     char op;
+     #include<bits/stdc++.h>
+                                                                     cout << "Enter first number: ";
+     using namespace std;
+                                                                     cin >> num1;
+     double add(double a, double b) {
+                                                                     cout << "Enter an operator (+, -, *, /): ";
+         return a + b;                                               cin >> op;
+     }                                                               cout << "Enter second number: ";
+     double subtract(double a, double b) {                           cin >> num2;
+         return a - b;                                               double result;
+                                                                     if (op == '+') {
+     }
+                                                                         result = add(num1, num2);
+     double multiply(double a, double b) {
+                                                                     } else if (op == '-') {
+         return a * b;
+                                                                         result = subtract(num1, num2);
+     }                                                               } else if (op == '*') {
+     double divide(double a, double b) {                                 result = multiply(num1, num2);
+         if (b != 0) {                                               } else if (op == '/') {
+             return a / b;                                               result = divide(num1, num2);
+                                                                     } else {
+         } else {
+                                                                         cout << "Invalid operator!" << endl;
+             cout << "Error! Division by zero." << endl;
+                                                                         return 1;
+             return 0;
+                                                                     }
+         }                                                           cout << "The result is: " << result << endl;
+     }                                                               return 0;
+                                               Code continues…   }
+Calculator
+
+Code
+                         Python
+                            Code
+
+     def add(a, b):
+       return a + b
+     def subtract(a, b):                                    if op == "+":
+       return a - b                                              result = add(num1, num2)
+     def multiply(a, b):                                    elif op == "-":
+       return a * b                                              result = subtract(num1, num2)
+     def divide(a, b):                                      elif op == "*":
+       if b != 0:                                                result = multiply(num1, num2)
+             return a / b                                   elif op == "/":
+       else:                                                     result = divide(num1, num2)
+             return "Error! Division by zero."              else:
+     def main():                                                 result = "Invalid operator!"
+        num1 = float(input("Enter first number: "))         print(f"The result is: {result}")
+        op = input("Enter an operator (+, -, *, /): ")    if __name__ == "__main__":
+        num2 = float(input("Enter second number: "))         main()
+
+                                        Code continues…
+

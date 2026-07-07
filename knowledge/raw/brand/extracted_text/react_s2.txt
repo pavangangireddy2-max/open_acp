@@ -1,0 +1,248 @@
+WELCOME
+Introduction to
+    React JS
+React JS
+MERN Stack
+
+React JS
+
+MERN stands for MongoDB, Express JS, React JS and Node JS
+MERN Stack
+
+Application Flow
+
+
+          React JS
+                                 Node JS
+
+
+
+
+     Client-side/Frontend   Server-side/Backend   Database
+Topics to be Covered
+
+React JS
+
+     ●   Introduction to React & JSX
+     ●   Components and Props
+     ●   Lists and Keys
+     ●   State and Events
+     ●   Handling Side Effects
+     ●   Routing using react-router
+     ●   Authentication & Context
+Agenda for Today’s Session
+
+Introduction to React JS
+
+                               Nesting Elements
+                             Embedding Expressions
+
+
+
+
+                                      JSX
+Introduction
+
+React JS
+
+
+
+
+    React JS is an open-source JavaScript library
+    used to build user interfaces
+JSX
+
+Babel
+
+
+      A JS compiler that will translate JSX into regular JavaScript
+Create a Heading Element using React JS
+
+Changing Type Attribute
+                                                              HTML
+  <head>
+    ...
+    <script src="https://unpkg.com/@babel/standalone@7.27.1/babel.js"></script>
+  </head>
+  <body>
+    ...
+    <script type="module">
+    <script type="text/babel" data-type="module">
+      const elementProps = { className: "greeting"};...
+      const element = React.createElement(elementType, elementProps, childrenContent);
+      const root = ReactDOMClient.createRoot(document.getElementById("root"));
+      root.render(element);
+    </script>
+  </body>
+Create a Heading Element using React JS
+
+Using JSX
+                                                                HTML
+  ...
+  <body>
+    ...
+    <script type="text/babel" data-type="module">...
+        const elementProps = { className: "greeting"};
+        const childrenContent = "Hello World!";
+        const elementType = "h1";
+        const element = React.createElement(elementType, elementProps, childrenContent );
+        const element = <h1 className="greeting">Hello World!</h1>;
+        const root = ReactDOMClient.createRoot(document.getElementById("root"));
+        root.render(element);
+    </script>
+  </body>
+Create a Heading Element using React JS
+
+Output
+JSX
+
+class in HTML and className in JSX
+
+
+                               HTML                                    JSX
+
+
+
+  <h1 class ="heading"></h1>          <h1 className ="heading"></h1>
+Creating a Heading Element
+
+Summary
+
+
+
+
+    document.createElement()           React.createElement()                 <h1>Hello World!</h1>
+
+    rootElement.appendChild()   ReactDOMClient.createRoot().render()   ReactDOMClient.createRoot().render()
+Embedding Variables
+and Expressions in JSX
+Embedding Variables in JSX
+
+Using { }
+                                                              HTML
+  <body>
+    ...
+    <div id="root"></div>
+    <script type="text/babel" data-type="module">...
+      const name = "Rahul";
+      const className = "greeting";
+      const element = <h1 className="greeting">Hello World!</h1>;
+      const element = <h1 className={className}>Hello {name}!</h1>;
+      const root = ReactDOMClient.createRoot(document.getElementById("root"));
+      root.render(element);
+    </script>
+  </body>
+Embedding Variables in JSX
+
+Output
+Embedding Expressions in JSX
+
+Using { }
+                                                              HTML
+  <body>
+    ...
+    <div id="root"></div>
+    <script type="text/babel" data-type="module">...
+      const fullName = user => user.firstName + " " + user.lastName;
+      const user = { firstName: "Rahul ", lastName: "Attuluri" };
+      const element = <h1 className={className}> Hello, {fullName(user)}!</h1>;
+      const root = ReactDOMClient.createRoot(document.getElementById("root"));
+      root.render(element);
+    </script>
+  </body>
+Embedding Expressions in JSX
+
+Output
+Nesting JSX elements
+Nesting JSX elements
+
+Example
+                                                                 HTML
+  <body>
+    ...
+    <script type="text/babel" data-type="module">...
+      const element = (
+          <div>
+            <h1 className="greeting">Hello!</h1>
+                                                       ReactDOMClient.createRoot().render()
+            <p>Good to see you here.</p>               returns only one element in render
+          </div>
+      );
+      const root = ReactDOMClient.createRoot(document.getElementById("root"));
+      root.render(element);
+    </script>
+  </body>
+Embedding Expressions in JSX
+
+Output
+Including External JS File in HTML
+External JS File
+
+index.js
+                                                            index.js
+     import React from 'https://esm.sh/react@19.1.1/?dev'
+     import ReactDOMClient from 'https://esm.sh/react-dom@19.1.1/client?dev'
+
+
+     const element = (
+         <div>
+          <h1 className='greeting'>Hello!</h1>
+          <p>Good to see you here.</p>
+         </div>
+     )
+
+
+     const root = ReactDOMClient.createRoot(document.getElementById('root'))
+     root.render(element)
+Including External JS File in HTML
+
+Syntax
+
+
+                                                                 HTML
+
+
+      <script type="TYPE_OF_SCRIPT" src="PATH_TO_JS_FILE" ></script>
+HTML
+
+Including External JS File
+
+
+                                                                     HTML
+
+   <body>
+     ...
+     <script type="text/babel" data-type="module" src="index.js"></script>
+   </body>
+Including External JS File
+
+Output
+Including External JS File in HTML
+
+Use only one method
+                                                                 HTML
+ <script type="text/babel" data-type="module" src="index.js"></script>
+
+
+
+                                     OR
+                                                                             HTML
+ <script type="text/babel" data-type="module">
+   ...
+   const element = <h1 className="greeting">Hello!</h1>
+   const root = ReactDOMClient.createRoot(document.getElementById('root'))
+   root.render(element)
+ </script>
+Introduction to React JS
+
+Key Takeaways
+
+       ●   JSX
+            ○    Embedding Expressions
+            ○    Nesting elements
+Practice
+     Next Session
+Components & Props
+THANK YOU
+ALL THE BEST
+

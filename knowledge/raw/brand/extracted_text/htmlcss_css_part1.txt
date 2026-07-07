@@ -1,0 +1,373 @@
+WELCOME
+Introduction to CSS
+Recap
+
+Leveraging Gen AI for accelerated learning
+
+        ●   Learning a Concept
+        ●   Clarifying a Concept
+        ●   Testing your Knowledge
+        ●   Understanding Code
+        ●   AI Tools
+             ○   Perplexity
+             ○   NotebookLM
+Compatibility
+
+< 1% of you may face an issue
+
+     99%+ of you won’t face any issues
+
+
+     If at all you face an issue, it will be
+     because of device and software
+     compatibility
+
+
+     Be up to date with software versions
+    Compatibility
+
+    Google Chrome is a Must
+
+
+
+
+     ~ 89.1 %
+Browser Market Share in India
+
+
+
+
+                        Source: gs.statcounter
+Agenda
+
+Introduction to CSS
+            Ruleset
+            Selector                    Container Element (div)
+         Property, Value                   Class Attribute
+
+
+
+
+                             CSS              Combining
+          CSS Syntax
+                           Properties        HTML & CSS
+
+
+
+
+                           text-align
+     How to Center the
+Heading, Paragraph, & Button
+   Elements Horizontally?
+Example - Tourism Website
+
+Parts of The Section
+
+
+
+                            Image
+
+
+
+
+ Main Heading
+                            Paragraph
+          Button
+Purpose
+
+CSS - Cascading Style Sheets
+
+
+
+          The main purpose of CSS :
+
+           ●   To Style Web Pages
+Syntax
+
+CSS - Cascading Style Sheets
+
+    A CSS File will be created.
+    It is a list of RuleSets.
+    Each Ruleset looks like:
+
+
+                                selector   {
+                                               property1: value1;
+             Ruleset
+                                               property2: value2;
+                                           }
+Syntax
+
+Selector - Name
+
+     First, decide a suitable name
+     for the selector and use it
+
+     Ex: h-center
+         horizontal-center
+         horizontal
+         center
+         horizontal_center
+         HorizontalCenter, etc.
+Syntax
+
+CSS Ruleset - To Center Elements
+
+             SELECTOR
+
+
+
+         .h-center {
+             text-align: center;
+         }
+
+
+               PROPERTY   VALUE
+Quiz Time!
+Syntax
+
+Combining HTML & CSS
+
+
+                        HTML                       CSS
+
+   <body>
+                               .h-center {
+         <h1>Tourism</h1>
+                                   text-align: center;
+         ...
+                               }
+   </body>
+ With the help of Attribute,
+we can combine HTML and CSS
+HTML
+
+Attribute
+
+
+       Attributes provide
+       additional information about
+       the HTML element
+
+       Ex: Color, Text Size, Shape,
+       Underlines, etc.
+Syntax
+
+HTML Element
+
+                        Element
+
+
+
+         <tag>       Content (Text) </tag>
+
+         Start tag      Content     End tag
+Syntax
+
+HTML Attribute
+
+                                 Element
+
+
+
+   <tag attribute = “value” > Content </tag>
+         Syntax Name of
+                               Attribute Value   Content   End Tag
+          the Attribute
+
+
+
+                   Start Tag
+Syntax
+
+Attribute - In Each Element
+
+
+                   Element - Main Heading
+
+
+
+              <h1> Tourism </h1>
+
+               Start tag   Content      End Tag
+Syntax
+
+Class Attribute - In Each Element
+
+                               Element - Main Heading
+
+
+
+     <h1 class = “h-center” > Tourism </h1>
+         Syntax Name of
+                                      Attribute Value   Content   End Tag
+          the Attribute
+
+
+
+                          Start Tag
+Syntax
+
+Class Attribute
+
+
+           Make sure the class name used in the HTML and
+           the Selector name in CSS must be the same, then
+               only the styling will be applied correctly
+Adjusting the Style
+
+All The Elements At Once
+                                                       HTML
+                         <body>
+
+                           <h1>Tourism</h1>
+    Main Heading,         <p>
+    Paragraph & Button       Plan your trip wherever
+    - All at Once!           you want to go
+                          </p>
+                          <button>Get Started</button>
+
+                         </body>
+Deﬁnition
+
+Wrapping
+                                                       HTML
+                         <body>
+
+                           <h1>Tourism</h1>
+     Grouping all the     <p>
+     required elements       Plan your trip wherever
+     at one place            you want to go
+                          </p>
+                          <button>Get Started</button>
+
+                         </body>
+Deﬁnition
+
+Container
+                                                          HTML
+                            <body>
+
+        To wrap all the       <h1>Tourism</h1>
+        required elements    <p>
+        at one place,           Plan your trip wherever
+        we use                  you want to go
+        container element    </p>
+                             <button>Get Started</button>
+
+                            </body>
+Real World Example
+
+Container
+Syntax
+
+Container Element - div
+
+                     Element
+
+
+         <div> Other Elements </div>
+         Start tag   Content   End tag
+HTML Element
+
+Adding Div
+                                     HTML
+  <body>
+    <div>
+
+      <h1>Tourism</h1>
+      <p>
+           Plan your trip wherever
+           you want to go
+      </p>
+      <button>Get Started</button>
+
+    </div>
+  </body>
+       Let's use CSS
+  to Center the Elements
+in the Container Horizontally
+Syntax - Class Attribute
+
+For All The Elements in The Container
+                                              Element
+
+
+
+     <div class = “h-center” > Content </div>
+               Syntax Name of
+                                        Attribute Value   Content   End Tag
+                the Attribute
+
+
+
+                            Start Tag
+Alignment
+
+Horizontal Center
+                                         HTML
+  <body>
+    <div class="h-center" >
+
+       <h1>Tourism</h1>
+       <p>
+            Plan your trip wherever
+            you want to go
+       </p>
+       <button>Get Started</button>
+
+    </div>
+  </body>                             * Refer
+HTML Element
+
+Adding Div
+                                       HTML
+  <body>
+    <div>
+
+      <h1>Tourism</h1>
+      <p>
+           Plan your trip wherever
+           you want to go
+      </p>
+      <button>Get Started</button>
+
+    </div>              Standard Practices
+  </body>                    **Indent
+Quiz Time!
+Introduction to CSS
+
+Key Takeaways
+
+         ●   CSS Syntax
+              ○   Ruleset
+              ○   Selector
+              ○   Property
+              ○   Value
+         ●   Container Element (div)
+         ●   Combining HTML & CSS
+              ○   Class Attribute
+    Next Session
+
+Introduction to CSS
+       | Part 2
+THANK YOU
+ALL THE BEST
+Agenda
+
+Introduction to CSS
+            Ruleset
+            Selector                    Container Element (div)
+         Property, Value                   Class Attribute
+
+
+
+
+                             CSS             Combining
+         CSS Syntax
+                           Properties       HTML & CSS
+
+
+
+                           text-align
+

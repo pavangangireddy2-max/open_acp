@@ -1,0 +1,232 @@
+WELCOME
+Introduction to HTML
+Recap
+
+Getting Started with Frontend
+
+        ●   Importance of Frontend
+             ○   MNC Requirement Salaries
+        ●   Fundamentals
+             ○   Browser
+             ○   Syntax
+             ○   Debugging
+             ○   Tweaking code
+Agenda
+
+Introduction to HTML
+
+
+          h1 Element                button Element
+
+
+
+
+         Main Heading   Paragraph       Button
+
+
+
+
+                        p Element
+Example - Website
+
+Tourism
+Fundamental in Programming
+
+Breaking down into small parts
+
+
+     ●   Pick one small part
+          ○   Write the code
+                                               Image
+          ○   Test your output
+     ●   Then, go to the next part
+         and repeat the same
+
+                                     Heading
+                                               Paragraph
+
+                                      Button
+Compatibility
+
+< 1% of you may face an issue
+
+         If you are facing any issues
+         to view or access the features
+         provided during the session,
+
+
+         kindly check your device and
+         software compatibility
+
+
+
+      Be up to date with software versions
+
+
+          Google Chrome (Recommended)
+Code Playground
+
+Desktop Preview
+Code Playground
+
+Mobile Preview
+Syntax
+
+HTML Basic Structure
+                                         HTML
+
+
+                <!DOCTYPE html>
+                <html>
+                 <head></head>
+                 <body>
+                   Your code goes here
+                  </body>
+                </html>
+  How to add
+Heading in HTML
+Syntax
+
+HTML Element
+
+                         Element
+
+
+
+         <tag>       Content (Text)   </tag>
+
+         Start tag       Content       End tag
+Syntax
+
+HTML Element
+
+                      Element
+
+
+
+         <tag>       Elements   </tag>
+
+         Start tag    Content   End tag
+HTML Element
+
+Main Heading
+
+
+
+                   Image
+
+
+
+
+    Main Heading
+                   Paragraph
+
+          Button
+HTML Element
+
+Main Heading
+
+
+
+
+    Main Heading
+HTML Element
+
+Main Heading
+
+                           Element
+
+
+
+               <h1> Tourism </h1>
+
+               Start tag   Content   End tag
+HTML Element
+
+Adding Main Heading
+
+                            HTML
+
+
+
+       <body>
+         <h1>Tourism</h1>
+       </body>
+   How to add
+Paragraph in HTML
+HTML Element
+
+Paragraph
+
+                         Element
+
+
+
+    <p>    Plan your trip wherever you want to go    </p>
+
+
+
+  Start tag               Content                   End tag
+HTML Element
+
+Adding Paragraph To The Previous Code
+                               HTML
+
+     <body>
+       <h1>Tourism</h1>
+       <p>
+         Plan your trip wherever
+         you want to go
+       </p>
+     </body>
+ How to add
+Button in HTML
+HTML Element
+
+Button
+
+
+
+
+               Let’s Add a Button
+HTML Element
+
+Button
+
+                      Element
+
+
+
+       <button> Get Started </button>
+
+          Start tag   Button text   End tag
+HTML Element
+
+Adding Button
+                                   HTML
+
+   <body>
+      <h1> Tourism </h1>
+      <p>
+              Plan your trip wherever
+              you want to go
+       </p>
+      <button> Get Started </button>
+   </body>
+Introduction to HTML
+
+Key Takeaways
+
+              ●   HTML Syntax
+              ●   HTML Basic Structure
+              ●   HTML Elements
+                   ○   Heading
+                   ○   Paragraph
+                   ○   Button
+Practice
+     Next Session
+
+Introduction to CSS
+THANK YOU
+ALL THE BEST
+

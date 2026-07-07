@@ -1,0 +1,1845 @@
+WELCOME
+Building Social Media
+Content Automation
+      Workﬂow
+Recap
+
+Large Language Model (LLM)
+
+
+
+  It is an advanced type of AI model trained
+                                                    Super Intelligent Model
+  on vast amounts of text data to understand,
+                                                Large   Language      Model
+  generate, and process human language
+Generative AI
+
+Prompt
+                       The natural language text, which describes the task
+                           that an AI should perform, is called a prompt
+
+
+
+                                      Describe the country “India” in two lines
+
+
+
+
+      India is a vast South Asian country known for its incredibly diverse
+      culture, languages, and religions. It is also the world's most populous
+      democracy, characterized by a rich history and rapid economic growth
+Recap
+
+Prompt Engineering
+
+
+
+  Prompt engineering is the art of creating
+  prompts that help an LLM generate
+  more accurate and higher quality answers
+Fundamentals
+
+Structuring Prompt
+               We can structure a prompt using three different roles
+
+
+                                Sets the overall behavior, guidelines,
+                                and context for the AI
+                     System
+
+
+
+                                Provides the questions or tasks to
+
+                      User      the AI
+
+
+
+                                The AI's response based on the
+                                user’s instructions
+                    Assistant
+Fundamentals
+
+Basic Prompt Structure
+
+
+
+         R - Role                 A - Action/Task                T - Tone
+
+
+               >        >               >               >           >
+
+
+
+
+                    C - Context                     F - Format
+Prompting Techniques
+
+Prompting Techniques
+
+   Some well-known prompting techniques are
+
+
+         ●   Zero-shot
+
+         ●   One-shot
+
+         ●   Few-shot
+                         Many more ...
+Agenda
+
+AI Workﬂows & Automation
+
+          Introduction
+           Use Cases
+
+
+
+
+                         AI-Powered Social Media
+          AI Workﬂows
+                           Content Automation
+Introduction
+
+Quick Question
+
+
+
+
+    ?          Have you ever spent too much time posting
+                   on social media about your learning
+                      progress/edu/career updates?
+
+               (writing explanations, adding tech hashtags,
+                         formatting, posting, etc)
+Introduction
+
+Quick Question
+
+
+
+
+                 What if you had a system that could
+                 handle all of this stuff automatically?
+AI-Powered Social Media Content Automation
+
+
+                     1                     2
+
+                     Listing the    Summariz-
+                       articles       ation
+
+
+                                                       3
+                                                Generate
+                                                Platform-
+                                                 Speciﬁc
+                                                 Content
+
+
+
+
+                     Auto-Post to     Asset
+                     Social Media    Handling
+
+                              5             4
+AI Workﬂows
+Introduction
+
+AI Workﬂows
+
+
+
+
+  AI workﬂows are predeﬁned sequences
+   of steps that use artiﬁcial intelligence
+      to complete tasks automatically
+Introduction
+
+Automated Workﬂow
+
+
+
+
+           Input   Task 1   ....   Output
+Introduction
+
+AI Automated Workﬂow
+
+
+                        Carried out by AI
+
+
+
+
+    Input      Task 1       Task 2          ....   Output
+AI Workﬂows - Example
+
+AI-Powered Social Media Content Automation
+
+                        1                     2
+
+                        Listing the    Summariz-
+                          articles       ation
+
+
+                                                          3
+                                                   Generate
+                                                   Platform-
+                                                    Speciﬁc
+                                                    Content
+
+
+
+
+                        Auto-Post to    Asset
+                        Social Media   Handling
+
+
+                                 5             4
+Workﬂow vs Manual Process
+
+Manual Process
+
+
+          Read article                  Write                            Create
+           manually                 LinkedIn post                   Instagram Post
+
+
+
+
+            Repeat                    Post on all                       Create
+          consistently                platforms                     Twitter version
+
+
+
+                            Total Time: 30–45 minutes per article
+Workﬂow vs Manual Process
+
+Workﬂow Process
+
+
+          Add article                Auto-generate                Post everywhere
+           to sheet                     content                    simultaneously
+
+
+
+
+                                         Send
+                                     conﬁrmations
+
+
+
+                            Total Time: < 2 min of human effort
+AI Workﬂows - Applications
+
+Customer Service
+
+                                Send personalized responses
+                                   to common questions
+
+
+
+Route customer inquiries to                                     Schedule follow-up calls
+the appropriate department                                           when needed
+
+
+
+
+                              Ex: Zendesk, Atlassian, HubSpot
+AI Workﬂows - Applications
+
+Social Media Content Creation & Scheduling
+
+
+
+
+   Blog/article                      Create simple                        Analyze likes, ,
+                                        visuals                          and comments
+     content
+
+
+
+
+                  platform-speciﬁc                Schedule posts to LinkedIn,
+
+                      captions                       Facebook, and Instagram
+AI Workﬂows - Applications
+
+E-Commerce Operations
+
+
+                             Update     Generate             Send
+   New Order
+                         Inventory    Shipping Label   Order Conﬁrmation
+AI Workﬂows
+
+AI Workﬂows
+
+
+                 Predeﬁned Paths         Human Decision-Making
+
+
+
+                                       Humans must manually
+              The workﬂow follows a
+                                         adjust or iterate the
+              ﬁxed sequence of steps
+                                       workﬂow if the output is
+                  set by humans
+                                            unsatisfactory
+Summary
+          1.   AI Workﬂows
+
+          2.   Applications of AI Workﬂows
+Quiz Time!
+Let’s Build AI-Powered Social Media
+Content Automation Workﬂow
+AI Workﬂows - Example
+
+AI-Powered Social Media Content Automation
+
+                        1                     2
+
+                        Listing the    Summariz-      LLMs
+                          articles       ation
+
+
+                                                          3
+                                                   Generate
+                                                   Platform-   LLMs
+                                                    Speciﬁc
+                                                    Content
+
+
+
+
+                        Auto-Post to     Asset
+                        Social Media    Handling
+
+                                 5             4
+AI Workﬂows
+
+Building AI Workﬂows
+
+
+
+
+                                                         Power
+                                        Zapier          Automate
+
+
+
+                                                                       …many more
+
+              Each of these platforms allows us to build AI workﬂows
+
+                            using a no-code approach
+AI Workﬂows
+
+Using n8n
+
+
+
+
+                                                      Power
+                                      Zapier         Automate
+
+
+
+                                                                    …many more
+
+
+
+              Let’s see how can we build AI workﬂow using n8n.com
+AI Workﬂows
+
+Using n8n
+
+
+
+
+                 n8n is a workﬂow automation platform
+              that enables users to automate tasks with ease
+AI Workﬂows
+
+Using n8n
+
+
+
+
+              It also allows us to connect with popular services
+       like Google Sheets, Slack, Twitter, GitHub, and hundreds more
+Building Blocks
+Building Blocks of n8n
+
+Nodes
+
+
+
+
+               Each step in the workﬂow is represented by
+               a node that performs speciﬁc actions such
+               as retrieving, transforming, or sending data
+Building Blocks of n8n
+
+Nodes
+
+
+
+                                        Social Media                SplitInBatches
+          Chat Trigger
+                                           Nodes
+
+
+        Initiates workﬂows           Manage and interact        Divides a large set of data
+     based on user interactions   with social media platforms     into smaller batches,
+
+                                                                                   …many more
+Building Blocks of n8n
+
+Nodes
+
+
+
+         Google Sheets              Gmail, Slack,          HTTP Request
+            Trigger                  Notion, etc
+
+
+     Reads from and writes data   Manage and interact    Used to make API calls
+          to Google Sheets        with these platforms    to external services
+
+                                                                         …many more
+Building Blocks of n8n
+
+Connections
+
+
+
+
+                   A connection establishes a link between
+                  nodes to route data through the workﬂow
+Quiz Time!
+Creating an AI Workﬂow for
+  Social Media Content Automation
+Building Social Media Content Automation Workﬂow
+
+Pre-requisites
+
+
+            →   Google Account
+
+            →   LinkedIn Account
+
+            →   X Account (formerly Twitter)
+AI News Summarizer
+
+Open n8n
+Building Social Media Content Automation Workﬂow
+
+Note
+
+                                    IMPORTANT UPDATE
+
+
+                      X (formerly Twitter) Developer Portal has been updated
+
+                        to a pay-for-use model. New developer accounts
+
+                          now require a paid plan to access API features,
+
+                          which results in a "Payment Required" error
+
+                                   during workﬂow execution
+Building Social Media Content Automation Workﬂow
+
+Note
+
+
+
+                                         IMPACT
+
+
+
+                                 Posting to X is not possible
+
+                            with newly created developer accounts
+Steps to be Followed
+
+     12   Add Google Sheets Trigger
+
+
+          Summarize the Article
+     2
+     3
+          Using Gemini model
+
+
+     31   Generate Platform-Speciﬁc Content
+
+
+
+     4
+     3    Auto-Post to Social Media
+Social Media Content Automation
+
+Adding Trigger - Google Sheets
+
+
+     This is the starting point that initiates our workﬂow
+
+      1.   Prepare a Google Sheet and add article links
+
+     2.    Add Google Sheets trigger in n8n
+
+      3.   Conﬁgure the node
+Social Media Content Automation
+
+Adding Trigger - Google Sheets
+
+
+                                  Gmail Account: Use gmail.com domain
+
+                                  OAuth Redirect URL:
+                                  https://workﬂow.ccbp.in/rest/oauth2-credential/callback
+
+
+           Note                   Authorized domains: ccbp.in
+Steps to be Followed
+
+     12   Add Trigger
+
+
+          Summarize the Article
+     2
+     3
+          Using Gemini
+
+
+     31   Generate Platform-Speciﬁc Content
+
+
+
+     4
+     3    Auto-Post to Social Media
+Social Media Content Automation
+
+Summarize the Article Using Gemini
+
+
+      1.   Add Basic LLM Chain Node
+
+     2.    Deﬁne a Prompt for Generating Summary
+
+      3.   Search and Add Google Gemini Chat Model
+
+     4.    Choose models/gemini-2.5-ﬂash and Execute the Node
+Summarizing the Artical Using Gemini
+Note
+
+                                          IMPORTANT
+
+
+
+
+                      As the models are on the free tier, we may experience
+
+                        rate limit issues during usage. Use an alternate API
+
+                          key for continuation when limits are reached.
+Summarize the Article Using Gemini
+
+Advanced Prompt You Can Try
+
+   System: "You are a social media strategist with expertise in content adaptation"
+
+   User: "Analyze this article and create a summary that:
+   1. Captures the 3 most important insights
+   2. Includes any actionable advice or tips
+   3. Maintains the original tone and perspective
+   4. Highlights implications for the target audience
+   5. Stays under 200 words for social media adaptation
+
+   Article: {{$json.text}}
+Steps to be Followed
+
+     12   Add Trigger
+
+
+          Summarize the Article
+     2
+     3
+          Using Gemini
+
+
+     31   Generate Platform-Speciﬁc Content
+
+
+
+     4
+     3    Auto-Post to Social Media
+Social Media Content Automation
+
+Why Platform Speciﬁc Content?
+
+
+
+                  LinkedIn: Professional, detailed, business-focused
+
+
+                  Twitter: Concise, engaging, conversation-starting
+
+
+                 Instagram: Visual, inspirational, hashtag-optimized
+Generating Platform Speciﬁc Content
+
+Generating the LinkedIn Post Content
+
+
+1.   Add Another LLM Chain Node
+
+2.   Deﬁne Prompt for Creating LinkedIn Post Content
+
+3.   Search and Add Google Gemini Chat Model
+
+4.   Choose models/gemini-2.5-ﬂash and Execute the Node
+Generating LinkedIn Post Content
+
+Prompt for LinkedIn Post
+
+ Assume the role of an industry expert and draft a LinkedIn post discussing key
+ points from a news article relevant to artiﬁcial intelligence. The post should provide
+ insightful analysis, connect with current industry trends, and encourage
+ professional engagement or discussion. Highlight any notable implications for the
+ industry. Since LinkedIn supports detailed posts, ensure it is informative and
+ structured. Include a professional call to action. Here's a summary of the article:
+ {ADD PREVIOUS NODE’S OUTPUT}
+Social Media Content Automation
+
+Auto-Post to LinkedIn
+
+       1.   Add LinkedIn Node
+
+      2.    Select "Create a Post"
+
+      3.    Authenticate Using Your LinkedIn Credentials
+
+      4.    Select Username and Fill in the Text to Be Posted
+
+      5.    Execute the workﬂow
+
+                   NOTE
+
+                 Save and Reload the workﬂow after connecting to linkedIn
+Generating Platform Speciﬁc Content
+
+Generating the X(Twitter) Post Content
+
+
+
+    1.   Add Another LLM Chain Node
+
+    2.   Deﬁne Prompt for Creating
+         X (formerly Twitter) Post Content
+    3.   Search and Add Google Gemini Chat Model
+
+    4.   Choose models/gemini-2.5-ﬂash and
+
+         Execute the Node
+Social Media Manager
+
+Prompt for X(Twitter) Post
+
+   Draft an X post as an AI industry expert analyzing a key news article. The post should:
+
+
+   Deliver sharp insights on the article's main points
+   Connect to current AI trends
+   Spark discussion with a thought-provoking question
+   Be punchy and engaging
+   End with a clear call to action
+   Length: Within 30 words
+
+
+   Focus: What matters most to the AI community. Make every word count.
+   Article summary:
+Warning
+
+Don’t Make Post Too Lengthy
+
+
+
+    You may sometimes encounter
+    a 402 error if your post is too long
+
+    Make sure the length doesn't exceed
+    the allowed limit
+Steps to be Followed
+
+     12   Add Trigger
+
+
+          Summarize the Article
+     2
+     3
+          Using Gemini
+
+
+     31   Generate Platform-Speciﬁc Content
+
+
+
+     4
+     3    Auto-Post to Social Media
+Building Social Media Content Automation Workﬂow
+
+Note
+
+                                    IMPORTANT UPDATE
+
+
+
+
+                      X (formerly Twitter) Developer Portal has been updated
+
+                       to a pay-for-use model. Posting to X is not possible
+
+                             with newly created developer accounts
+Social Media Content Automation
+
+Auto-Post to X(Twitter)
+
+
+      1.   Add X (Twitter) Node
+
+      2.   Authenticate to Your X Account
+
+      3.   Create Your X API Credentials for
+           Client ID and Secret Key
+
+      4.   Fill in the Text to Be Posted
+AI Workﬂows - Example
+
+AI-Powered Social Media Content Automation
+
+                        1                     2
+
+                        Listing the    Summariz-      LLMs
+                          articles       ation
+
+
+                                                          3
+                                                   Generate
+                                                   Platform-   LLMs
+                                                    Speciﬁc
+                                                    Content
+
+
+
+
+                        Auto-Post to     Asset
+                        Social Media    Handling
+
+                                 5             4
+AI-Powered Social Media Content Automation
+
+Workﬂow Testing
+
+
+
+      ➢   Trigger Testing
+           ○   Add test article to Google Sheet
+           ○   Execute the workﬂow
+           ○   Check data passes between nodes
+AI-Powered Social Media Content Automation
+
+Workﬂow Testing
+
+
+
+      ➢   Content Quality Testing
+           ○   Review AI-generated summaries
+           ○   Verify platform-speciﬁc adaptations
+           ○   Check character limits and formatting
+AI-Powered Social Media Content Automation
+
+Workﬂow Testing
+
+
+
+       ➢   End-to-End Testing
+            ○   Complete workﬂow execution
+            ○   Verify posts appear on platforms
+            ○   Conﬁrm success notiﬁcations
+Workﬂow Automation using n8n
+
+Common Issues you may Encounter
+
+
+
+
+                   402 Errors            Authentication Failures
+            Content length exceeds the        API credentials
+            maximum characters allowed      expired or incorrect
+Workﬂow Automation using n8n
+
+Common Issues you may Encounter
+
+
+
+
+                 Rate Limiting            Content Quality
+               Too many API calls in   Prompts need reﬁnement
+                 short timeframe           for better output
+Setting the Scheduler
+ to Run Every Week
+Setting the Scheduler in n8n
+
+Common Scheduling Options
+
+
+              1                        2                      3
+
+       Manual Trigger          Time-based Schedule       Event-based
+
+
+
+      Run on-demand             Every 15 minutes,    Triggered by external
+        for testing               hourly, daily           webhooks
+Setting the Scheduler in n8n
+
+Time Based Schedule
+
+
+              The time-based schedule                            The workﬂow runs
+                   triggers the node                             only if the trigger's
+              at the speciﬁed interval or                       Compress
+                                                                 conditionsthem
+                                                                              areinto
+                                                                                  met
+                       exact time                                    a ZIP ﬁle
+
+
+                          01                     02                      03
+
+
+
+
+                                         At the trigger time,
+                                         the node checks for
+                                        new or updated rows
+                                         since the last check
+Setting the Scheduler in n8n
+
+Time Based Schedule
+
+
+
+      n8n triggers the workﬂow only for new
+      or updated rows since the last check,
+      not for every row in the sheet
+Building Social Media Content Automation Workﬂow
+
+Automating the Execution
+
+
+
+
+                                               Try automating the execution of our
+                                               workﬂow every week at a speciﬁc time
+Automation with n8n
+
+Workﬂow Should be in Active State
+
+
+                      To ensure your workﬂow is automated and triggers
+                        as expected, make sure the workﬂow is active
+n8n Workﬂow Publishing Update
+
+Button Updation by n8n
+
+
+
+
+                     Before                                                   After
+
+
+           The “Active” button has been updated to “Publish”, allowing you to publish your
+           workﬂows. Kindly note that the Publish feature is restricted to a limited number
+                                        of uses on the portal
+Building Social Media Content Automation Workﬂow
+
+Key Takeaways
+
+
+
+                     AI Workﬂows                   Creating an AI Workﬂow
+
+
+             ●   Applications                      Creating an AI Workﬂow
+             ●   Tools for building AI Workﬂows           Using n8n
+Quiz Time!
+Practice
+Feedback
+THANK YOU
+ALL THE BEST
+ Article Summarization and Social Media Posting
+
+ Creating an AI Workﬂow
+
+
+Step 1     Sign up and create a new scenario.
+
+
+
+
+     Create a free account                   Click            You'll see a blank canvas
+        on make.com                "Create a new scenario"   where your workﬂow is built
+ Article Summarization and Social Media Posting
+
+ Creating an AI Workﬂow
+
+
+Step 2     Adding Trigger.
+
+
+
+                        The trigger is what starts your workﬂow
+
+
+
+                                        workﬂow
+                                                       Trigger
+ Article Summarization and Social Media Posting
+
+ Creating an AI Workﬂow
+
+
+Step 2     Adding Trigger.
+
+                         Here, let’s add all of our articles in the google sheets
+                         LLM should read this articles and generate summary
+
+
+                   What it does:
+
+                    ★   Monitors a sheet for new rows.
+
+                    ★   Each row contains an article (either link or raw text).
+
+                    ★   Triggers the automation when a new article is added.
+ Article Summarization and Social Media Posting
+
+ Adding a Trigger
+
+
+Step 2
+                 Click the "+"                            Connect your
+              button to add ﬁrst                         Google account.
+                   module.
+
+                      01                   02                  03                  04
+
+
+
+
+                                    Search for "Google
+                                    Sheets" and select                     Select spreadsheet.
+                                   "Watch New Rows".
+Article Summarization and Social Media Posting
+
+Adding a Trigger
+Article Summarization and Social Media Posting
+
+Adding a Trigger
+
+
+
+                                         IMPORTANT
+
+                           If you manually paste data into an old row
+
+                        or modify an existing row: It will not trigger the
+
+                       workﬂow unless: You reset the starting point using
+
+                             “Choose where to start” in Make.com.
+Steps to be Followed
+
+     1    Create a scenario
+
+
+     2    Add Trigger
+
+
+     3    Summarize the Article Using AI
+
+
+
+     41   Route to Different Social Platforms
+
+
+     5
+     3    Generate Platform-Speciﬁc Content
+
+
+
+    61    Auto Post to Social Media
+ AI Workﬂows
+
+ Creating an AI Workﬂow
+
+
+Step 3   Summarize the Article Using AI.
+
+
+
+         ★   The article will be sent to an AI module (Groq) to summarize the
+             content.
+
+         ★   The AI will process the article and return a brief, concise summary,
+             making it suitable for sharing on social media.
+Popular LLM Examples
+
+
+
+
+    GPT-3, GPT-4o
+                       LLAMA
+Creating an AI Workﬂow
+
+Summarizing the Article Using AI
+
+
+                                                 Connect your AI
+      Click "+" after your                                                                     Click on
+                                                account and enter
+        Google Sheets                                                                     “Run Once” to run
+                                                  your API key.
+           module.                                                                          the workﬂow.
+
+              01                   02                  03                   04                   05
+
+
+
+
+                        Search for any AI tool and
+                                                                       Conﬁgure the
+                             select "Create
+                                                                        prompt for
+                           Chat Completion".
+                                                                    generating Summary.
+Creating an AI Workﬂow
+
+Summarizing the Article Using AI
+Steps to be Followed
+
+     1    Create a scenario
+
+
+     2    Add Trigger
+
+
+     3    Summarize the Article Using AI
+
+
+
+     41   Route to Different Social Platforms
+
+
+     5
+     3    Generate Platform-Speciﬁc Content
+
+
+
+    61    Auto Post to Social Media
+ AI Workﬂows
+
+ Creating an AI Workﬂow
+
+
+Step 4       Adding Router to Different Social Platforms
+
+
+
+         →   Using a router module, we will split the workﬂow into multiple paths:
+
+             LinkedIn, Facebook, Instagram
+
+         →   Each platform should get a customized version of the post, based on its
+
+             speciﬁc format and tone
+AI Workﬂows
+
+Adding Router to Different Social Platforms
+
+
+
+                                                     Click the "+" on each
+              Click "+" to add
+                                                         route to add a
+              Route module.
+                                                           summary.
+
+
+                    01                  02                    03
+
+
+
+
+                                 Search for Router
+                                   and select it.
+Steps to be Followed
+
+     1    Create a scenario
+
+
+     2    Add Trigger
+
+
+     3    Summarize the Article Using AI
+
+
+
+     41   Route to Different Social Platforms
+
+
+     5
+     3    Generate Platform-Speciﬁc Content
+
+
+
+    61    Auto Post to Social Media
+AI Workﬂows
+
+Adding Router for Different Platforms
+ AI Workﬂows
+
+ Creating an AI Workﬂow
+
+
+Step 5   Generate Platform-Speciﬁc Content
+
+          For each platform, create a speciﬁc prompt, like:
+
+
+           1.   For LinkedIn: Professional summary with business insights
+
+          2.    For Facebook: More conversational content with call to action
+
+          3.    For Instagram: Visual-focused description with hashtags
+AI Workﬂows
+
+Generate Platform-Speciﬁc Content
+
+
+                                                         Select any AI Tool and
+          Select any AI Tool and
+                                                            add prompt for
+             add prompt for
+                                                            Instagram post.
+              LinkedIn post.
+
+
+                    01                     02                     03
+
+
+
+
+                                    Select any AI Tool
+                                   and add prompt for
+                                     Facebook post.
+AI Workﬂows
+
+Generate Platform-Speciﬁc Content
+Steps to be Followed
+
+     1    Create a scenario
+
+
+     2    Add Trigger
+
+
+     3    Summarize the Article Using AI
+
+
+
+     41   Route to Different Social Platforms
+
+
+     5
+     3    Generate Platform-Speciﬁc Content
+
+
+
+    61    Auto Post to Social Media
+ AI Workﬂows
+
+ Creating an AI Workﬂow
+
+
+Step 6   Auto Posting to Social Media
+
+
+
+
+          Finally, we will use platform-speciﬁc modules to automatically post the
+                generated content to the selected social media platforms.
+Make.com
+
+Note for Instagram Post
+
+
+
+
+                Make.com             Make.com do not
+           allows posting only if    allows posting if
+
+           ✓   Business or
+               professional type
+                                        It is normal
+           ✓   Linked to a          Instagram account
+               Facebook page
+Make.com
+
+Note for Facebook Post
+
+
+
+
+                                    Make.com allow you to publish, update, or
+                                    monitor posts, photos, and videos only on
+                Make.com
+           allows posting only if   Facebook Pages where you are an admin.
+              You are an
+                admin
+AI Workﬂows
+
+Auto Posting to Social Media
+
+
+
+       Click "+" after the                         Search and Conﬁgure
+           AI module.                               Facebook Module.
+
+
+               01                    02                    03                   04
+
+
+
+
+                             Search and Conﬁgure                         Search and Conﬁgure
+                              Linkedin Module.                            Instagram Module.
+AI Workﬂows
+
+Prompt for LinkedIn Post
+
+
+  Assume the role of an Industry expert and draft a Linkedin post discussing key points
+  from a news article relevant to artificial intelligence. The post should provide insightful
+  analysis, connect with current industry trends, and encourage professional engagement
+  or discussions. Highlight any notable implications for the industry. Linkedin supports
+  detailed posts, so ensure it is informative and structured. Add a professional call to
+  action. Here's a summary of the article:
+AI Workﬂows
+
+Generate Platform-Speciﬁc Content
+AI Workﬂows
+
+Prompt for Facebook Post
+
+
+  Act as a social media manager and write a Facebook post. The post should be concise,
+  impactful, and highlight an important aspect or benefit. Include an element of curiosity.
+  Keep within Facebook's 280-character limit. Use relevant hashtags for greater visibility:
+  [#Hashtag1, #Hashtag2.
+  Here's a summary of the article that I want you to turn into a Facebook post:
+AI Workﬂows
+
+Prompt for Instagram Post
+
+
+  As a digital marketing specialist, create a n Instagram post about the following artificial
+  intelligence article. Ensure the content is visually appealing and includes an inspirational
+  message. Use emojis to enhance engagement. Suggest relevant hashtags:
+  [#Hashtag1, #Hashtag2.
+  Here's a summary of the article that I want you to turn into an instagram post:
+Understanding LLMs
+
+Example
+
+
+          Prompt
+
+          By how many runs did England win the world cup ﬁnal?         Generate
+
+
+
+
+           England won the world cup ﬁnal in 2019 by defeating New Zealand.
+          England was declared the winner based on the number of boundaries
+           scored throughout the match. England scored 26 boundaries (4s and
+                     6s) in total, while New Zealand scored 17 boundaries
+Understanding LLMs
+
+Example
+
+
+          Prompt
+
+               Describe the city of Hyderabad in two lines            Generate
+
+
+
+
+            Hyderabad, known as the "City of Pearls," seamlessly blends its rich
+           historical heritage with a vibrant, modern urban landscape, offering a
+                          taste of both the past and the present
+AI Workﬂows
+
+Step-by-Step Workﬂow
+
+            1                  2
+
+                        Summariz-
+              Trigger     ation
+
+
+     6                                   3    Trigger :
+                                   Caption
+   Conﬁrmation                                You upload or paste
+                                   Creation
+                                              the article.
+
+
+             Post        Asset
+          Automation    Handling
+
+                    5          4
+AI Workﬂows
+
+Step-by-Step Workﬂow
+
+            1                  2
+
+                        Summariz-
+              Trigger     ation
+
+
+     6                                   3    Summarization :
+                                   Caption
+   Conﬁrmation                                LLM reads and
+                                   Creation
+                                              summarizes the article.
+
+
+             Post        Asset
+          Automation    Handling
+
+                    5          4
+AI Workﬂows
+
+Step-by-Step Workﬂow
+
+            1                  2
+
+                        Summariz-
+              Trigger     ation
+
+
+     6                                   3    Caption Creation :
+                                   Caption
+   Conﬁrmation                                LLM creates
+                                   Creation
+                                              platform-speciﬁc
+                                              captions with hashtags.
+             Post        Asset
+          Automation    Handling
+
+                    5          4
+AI Workﬂows
+
+Step-by-Step Workﬂow
+
+            1                  2
+
+                        Summariz-
+              Trigger     ation
+
+
+     6                                   3    Asset Handling :
+                                   Caption
+   Conﬁrmation                                Auto-generates an image
+                                   Creation
+                                              via Canva or DALL·E
+
+
+             Post        Asset
+          Automation    Handling
+
+                    5          4
+AI Workﬂows
+
+Step-by-Step Workﬂow
+
+            1                  2
+
+                        Summariz-
+              Trigger     ation
+
+
+     6                                   3    Post Automation :
+                                   Caption    ●   Uses LinkedIn API to post to your
+   Conﬁrmation
+                                   Creation
+                                                  proﬁle or page.
+                                              ●   Uses Instagram API to upload a
+
+             Post        Asset
+                                                  carousel/story.
+          Automation    Handling              ●   Uses X (Facebook) API to tweet it.
+                    5          4
+AI Workﬂows
+
+Step-by-Step Workﬂow
+
+            1                  2
+
+                        Summariz-
+              Trigger     ation
+
+
+     6                                   3    Conﬁrmation :
+                                   Caption
+   Conﬁrmation
+                                   Creation
+                                               Sends you a message like
+
+                                                  "✅ Posted on all 3
+
+             Post        Asset
+                                                     platforms!"
+          Automation    Handling
+
+                    5          4
+AI Workﬂows
+
+Summarizing an Article and Posting
+
+                    1                   2
+
+                   Listing the   Summariz-
+                                   ation
+                     articles
+
+                                               3
+                                        Generate
+                                        Platform-
+                                         Speciﬁc
+                                         Content
+
+
+
+                  Auto Post to    Asset
+                  Social Media   Handling
+
+                           5            4
+AI Workﬂows - Applications
+
+Social Content Creation & Scheduling
+
+
+
+
+                             Marketing teams often spend hours
+                             creating, scheduling, and analyzing
+                             social posts.
+ AI Workﬂows
+
+ Creating an AI Workﬂow
+
+
+Step 2        Addding trigger - Google Sheets
+
+
+
+         1.   Click the "+" button to add your ﬁrst module.
+         2.   Search for "Google Sheets" and select "Watch Rows".
+               ●   The “Watch Rows” module checks for new rows added to your selected
+                   Google Sheet.
+         3.   Connect your Google account when prompted.
+         4.   Select the spreadsheet and worksheet where articles will be pasted.
+Introduction
+
+AI Workﬂows
+
+
+
+     AI Workﬂows are predeﬁned sequences of steps that combine AI with
+     other digital tools to accomplish speciﬁc tasks
+
+
+     Think of it like creating a recipe for the AI to follow:
+      1.   You decide all the ingredients and steps in advance
+      2.   The AI executes the predeﬁned steps precisely when needed
+AI Workﬂows
+
+Customer Service
+
+
+    ��                       ��                           ��
+                            Generate
+   Blog Post                                              Analyze
+                           post Content
+
+
+
+
+                                            Schedule
+               Summarize
+                                          Followup call
+
+
+
+                ��                          ��
+ AI Workﬂows
+
+ Creating an AI Workﬂow
+
+
+Step 3        Add your trigger - Google Sheets
+
+
+         4.   Conﬁgure the prompt:
+
+
+                 Create a concise summary of the following article in 200 words or less.
+                 Include the main points while maintaining the article's key message.
+                 Article: {{1.column_with_article_text}}
+
+
+
+         4.   Click on “Run Once” to run the workﬂow
+What you will learn?
+
+
+            Investments,
+   Applications & Demonstrations                         make.com
+
+
+
+
+           Generative AI
+                                   Understanding LLMs   AI Workflows
+            Landscape
+ AI Workﬂows
+
+ Creating an AI Workﬂow
+
+
+Step 6     Conﬁgure LinkedIn, Instagram, Facebook Publishing Modules
+
+         Conﬁgure a prompt: Instagram
+
+
+               As a digital marketing specialist, create a n Instagram post about the
+               following artiﬁcial intelligence article. Ensure the content is visually
+               appealing and includes an inspirational message. Use emojis to enhance
+               engagement. Suggest relevant hashtags: [#Hashtag1, #Hashtag2].
+               Here's a summary of the article that I want you to turn into an instagram
+               post:
+ AI Workﬂows
+
+ Creating an AI Workﬂow
+
+
+Step 6     Conﬁgure LinkedIn, Instagram, Facebook Publishing Modules
+
+         Conﬁgure a prompt: Facebook
+
+
+               Act as a social media manager and write a Facebook post about artiﬁcial
+               intelligence. The tweet should be concise, impactful, and highlight an
+               important aspect or beneﬁt. Include an element of curiosity. Keep within
+               Facebook's 280-character limit. Use relevant hashtags for greater visibility:
+               [# Hashtag1, #Hashtag2].
+               Here's a summary of the article that Iwa nt you to turn into a Facebook post:
+AI Workﬂows
+
+Setting the Scheduler
+
+
+      1.   In the scenario editor, click on the "Every 15 minutes" option
+           in the toolbar.
+
+      2.   The Schedule settings panel will appear.
+
+      3.   Ensure the "At regular intervals" option is selected.
+
+      4.   Set the interval to 15 minutes.
+
+      5.   Click "Save" to apply the changes
+Next Session
+Limitations of LLMs
+
+Have Limited Knowledge
+
+
+
+      Despite being trained on vast amounts of
+      data, LLMs have limited knowledge of
+      proprietary information.
+
+      Ex: personal information or internal company data.
+Tech Giants Make Massive
+Investments into Generative AI
+
+Microsoft adds $10 billion to investment
+in ChatGPT maker OpenAI
+Introduction
+
+AI Workﬂows
+
+
+
+       AI Workﬂows are predeﬁned sequences
+     of steps that combine AI with other digital
+          tools to accomplish speciﬁc tasks.
+Building Blocks of Make.com
+
+Basic Building Blocks - Modules
+
+
+               Modules can perform various tasks, such as retrieving data,
+                     transforming information, or executing actions.
+
+
+            Retrieve                   Transform                    Execute
+             Data                         Data                      Actions
+
+
+         Eg: Databases etc.                                Eg: Send Emails / Updates etc.
+Building Blocks of Make.com
+
+Basic Building Blocks - Modules
+
+
+                  Modules are categorized based on their roles within a scenario.
+
+
+
+
+                                                                                    Universal
+    Triggers                 Actions             Searches         Tools             Modules
+
+
+    Receiving a         Creating, updating, or     Retrieve     Handle data     Allow custom
+    new email               deleting data        speciﬁc data   manipulation       API calls
+Building Blocks of Make.com
+
+Scenario
+
+
+
+
+                        A scenario is a complete
+                        automation workﬂow
+                        composed of interconnected
+                        modules
+Hallucination
+
+
+          Input Data            Incorrect Information      Factual Accuracy
+
+
+
+
+                                                            Factual Accuracy is
+     Data lacks sufﬁcient or     AI generated Content
+                                                               compromised
+      accurate information          lacking support
+                                                             due to data errors
+
+
+
+
+                               AI can generate incorrect or nonsensical
+                               information that isn't supported by the
+                               input data or factual accuracy
+AI Workﬂows
+
+Important Considerations
+
+
+    1.   Polling Trigger: The "Watch Rows" module in Google Sheets is a polling
+         trigger, meaning it checks for new data at the intervals you've set. It
+         doesn't respond instantly to changes in the sheet.
+
+    2.   Manual Execution: If you want to test your scenario or run it immediately,
+         you can use the "Run once" button. However, this won't affect the
+         scheduled execution; it's only for manual testing.
+AI Workﬂow using make.com
+
+Scenarios
+
+
+
+
+                        By default, Make.com scenarios are
+                        set to run on demand or
+                        immediately.
+Building AI workﬂows
+
+AI Workﬂows
+
+
+
+   LLMs only execute those
+   predeﬁned actions, without trying to
+   decide what should happen next
+AI Workﬂows
+
+Prompt for Instagram Post
+
+
+  As a digital marketing specialist, create a n Instagram post about the following artificial
+  intelligence article. Ensure the content is visually appealing and includes an inspirational
+  message. Use emojis to enhance engagement. Suggest relevant hashtags:
+  [#Hashtag1, #Hashtag2.
+  Here's a summary of the article that I want you to turn into an instagram post:
+Introduction to AI workﬂows
+
+Introduction
+
+
+                      AI Workﬂows                  Creating an AI Workﬂow
+
+
+                                                   Creating an AI Workﬂow
+              ●   Applications
+                                                          Using n8n
+              ●   Tools for building AI Workﬂows
+Building AI workﬂows
+
+AI Workﬂows
+
+
+
+   By specifying the actions, we reduce
+   the chances of the LLM generating
+   irrelevant or incorrect information
+Creating AI Workﬂow using Make
+
+Hands on of Make.com
+
+
+
+
+   https://www.youtube.com/watch?v=H0YRniHh2tg
+Agent Fundamentals
+
+Example - Sending an Email
+
+                     The LLM processes your request
+
+
+
+      Input                      LLM                  Output
+                                                      Output
+AI-Powered Social Media
+Content Creator & Publisher
+
+                1
+                                         2
+
+                Listing the
+                  articles      Summariz-
+                                  ation
+
+
+
+                                                3
+                                         Generate
+                                         Platform-
+                                          Speciﬁc
+                                          Content
+
+
+
+
+                               Asset
+                              Handling
+
+
+                                    4
+Introduction
+
+Workﬂow
+
+
+
+  A workﬂow is a pre-deﬁned
+  sequence of steps for completing a task
+AI Workﬂows
+
+Example
+
+
+
+
+              Imagine you want to Build a social
+              media manager that "Summarizes
+              an Article and Post it on LinkedIn,
+                  X(twitter), and Facebook"
+Introduction
+
+Quick Question
+
+
+
+
+                 Can LLM do this?
+AI Workﬂows
+
+Setting the Scheduler
+
+
+
+
+       Explore and try to run your
+       workﬂow every 15 minutes.
+Social Media Manager
+
+Prompt for Summarizing the Content
+
+
+   Assume the role of an Industry expert and draft a Linkedin post discussing key points
+   from a news article relevant to artificial intelligence. The post should provide insightful
+   analysis, connect with current industry trends, and encourage professional engagement
+   or discussions. Highlight any notable implications for the industry. Linkedin supports
+   detailed posts, so ensure it is informative and structured. Add a professional call to
+   action. Here's a summary of the article:
+Introduction
+
+Automated Workﬂow
+
+
+                            Carried out by AI
+
+
+
+
+           Input   Task 1       Task 2          Output
+For Instructor
+Social Media Content Automation
+
+Note
+
+
+
+
+                    402 Errors            Authentication Failures
+             Content length exceeds the        API credentials
+             maximum characters allowed      expired or incorrect
+

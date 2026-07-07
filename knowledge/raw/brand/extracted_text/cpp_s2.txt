@@ -1,2 +1,978 @@
-# cpp_s2 (0 pages, 0 with text)
+WELCOME
+    C++ Operators,
+  Type conversion &
+Conditional Statements
+Agenda
 
+C++ Bridge Course
+
+
+
+
+                       Type       Conditional    Practice
+         Operators
+                     Conversion   Statements    Questions
+Operators
+
+
+   v/s
+Operators
+
+Logical Operators
+
+
+                        Logical Operators
+
+
+
+             Operator       Python          C++
+
+               AND            and           &&
+
+
+               OR              or            ||
+
+
+               NOT            not            !
+Operators
+
+Logical Operators
+
+
+                          C++                    Python
+
+     #include<bits/stdc++.h>
+     using namespace std;
+
+
+     int main() {                    x = True
+         bool x = true;              y = False
+         bool y = false;             print(x and y)
+         cout << (x && y) << endl;
+         return 0;
+     }
+
+
+                     Output                      Output
+
+                           0                          False
+Operators
+
+Arithmetic Operators
+
+                             Arithmetic Operators
+
+
+             Operator             Python            C++
+
+              Addition                +             +
+
+
+             Subtraction              -              -
+
+            Multiplication            *             *
+
+
+               Division               /              /
+
+
+              Modulus                 %             %
+Operators
+
+Relational Operators
+
+                                    Relational Operators
+
+
+                Operator                 Python            C++
+
+                Greater than                 >             >
+
+
+                 Less than                   <             <
+
+                 Not equal                   !=            !=
+
+
+                   Equal                    ==             ==
+
+
+            Greater than or equal           >=             >=
+
+
+             Less than or equal             <=             <=
+Operators
+
+Assignment Operators
+
+                                  Assignment Operators
+
+
+                Operator               Python            C++
+
+               Assignment                  =             =
+
+
+              Add and assign              +=             +=
+
+            Subtract and assign            -=            -=
+
+
+            Multiply and assign            *=            *=
+
+
+             Divide and assign             /=            /=
+
+
+            Modulus and assign            %=             %=
+Operators
+
+Key Differences
+
+
+            Exponent Operator:
+
+
+
+               →   Python: e.g., 2 ** 3 for 23.
+
+
+               →   C++: No exponent operator.
+                   Use pow() from <cmath> (e.g., pow(2, 3)).
+Operators
+
+Key Differences
+
+
+            Logical Operators
+
+
+
+
+              →   Python uses and, or, not.
+
+              →   C++ uses && , || , !
+Operators
+
+Key Differences
+
+
+            Output for Boolean
+
+
+
+
+               →   Python: Prints True or False.
+
+               →   C++: Prints 1 or 0.
+Quiz Time!
+Type Conversion
+C++
+
+Type Conversion
+
+
+
+                                                 int
+      The process of converting the value of
+      one data type (int, char, ﬂoat, etc.) to         long
+      another data type.
+C++
+
+Type Conversion in C++
+
+
+
+      C++ provides two major types of type conversions
+      for primitive data types:
+
+
+       →   Explicit Type Conversion (Type Casting)
+
+
+       →   Implicit Type Conversion
+C++
+
+Type Conversion in C++
+
+
+
+      C++ provides two major types of type conversions
+      for primitive data types:
+
+
+       →   Explicit Type Conversion (Type Casting)
+
+
+       →   Implicit Type Conversion
+C++
+
+Explicit Type Conversion
+
+
+
+      In Explicit Type Conversion, programmers
+      explicitly change the data type of a value
+      to the desired data type. This type of conversion
+      is also called Type Casting.
+Explicit Type Conversion
+
+double → int
+
+
+                       C++
+
+        #include <bits/stdc++.h>
+        using namespace std;
+        int main() {
+              double x = 5.6;      After conversion, the decimal portion
+              int y = (int)x;         of the double value is trimmed,
+              cout << y << endl;        which results in y value 5.
+        return 0;
+        }
+Explicit Type Conversion
+
+double → int
+
+                                   Output
+                       C++
+
+        #include <bits/stdc++.h>
+        using namespace std;                Output
+        int main() {
+              double x = 5.6;
+                                               5
+              int y = (int)x;
+              cout << y << endl;
+        return 0;
+        }
+Explicit Type Conversion
+
+char → int
+
+
+                       C++
+
+        #include <bits/stdc++.h>
+        using namespace std;
+        int main() {
+              char c = 'A';        A character returns its ASCII value
+              int d = (int)c;       when converted into an integer.
+              cout << d << endl;         Here, 'A' is 65 in ASCII.
+          return 0;
+        }
+Explicit Type Conversion
+
+ASCII Table
+ Dec   Hex   Char     Dec   Hex   Char   78   4E   N   Dec   Hex   Char   110   6E   n
+ 48     30    0        65   41     A     79   4F   O   97    61     a     111   6F   o
+ 49     31    1        66   42     B     80   50   P   98    62     b     112   70   p
+ 50     32    2        67   43     C     81   51   Q   99    63     c     113   71   q
+ 51     33    3        68   44     D     82   52   R   100   64     d     114   72   r
+ 52     34    4        69   45     E     83   53   S   101   65     e     115   73   s
+ 53     35    5        70   46     F     84   54   T   102   66     f     116   74   t
+ 54     36    6        71   47     G     85   55   U   103   67     g     117   75   u
+ 55     37    7        72   48     H     86   56   V   104   68     h     118   76   v
+ 56     38    8        73   49     I     87   57   W   105   69     i     119   77   w
+ 57     39    9        74   4A     J     88   58   X   106   6A     j     120   78   x
+                       75   4B     K     89   59   Y   107   6B     k     121   79   y
+                       76   4C     L     90   5A   Z   108   6C     l     122   7A   z
+                       77   4D     M                   109   6D     m
+Explicit Type Conversion
+
+char → int
+
+                                   Output
+                       C++
+
+        #include <bits/stdc++.h>
+        using namespace std;                Output
+        int main() {
+              char c = 'A';
+                                              65
+              int d = (int)c;
+              cout << d << endl;
+          return 0;
+        }
+Explicit Type Conversion
+
+int → char
+
+                                   Output
+                       C++
+
+        #include <bits/stdc++.h>
+        using namespace std;
+        int main() {                   The integer 65 is converted into a
+              int m = 65;             character, which corresponds to 'A'
+              char n = (char)m;                    in ASCII.
+              cout << n << endl;
+          return 0;
+        }
+Explicit Type Conversion
+
+int → char
+
+                                   Output
+                       C++
+
+        #include <bits/stdc++.h>
+        using namespace std;                Output
+        int main() {
+              int m = 65;
+                                              A
+              char n = (char)m;
+              cout << n << endl;
+          return 0;
+        }
+C++
+
+Type Conversion in C++
+
+
+
+      C++ provides two major types of type conversions
+      for primitive data types:
+
+
+           Explicit Type Conversion (Type Casting)
+
+
+       →   Implicit Type Conversion
+C++
+
+Implicit Type Conversion
+
+
+
+
+      The C++ compiler automatically converts
+                                                                   C++
+      one primitive data type to another when a
+      value is assigned to a variable of a different type.   int x = 10;
+                                                             long long y = x;
+      This process is called Implicit Type Conversion.
+C++
+
+Implicit Type Conversion
+
+      Data Type   Bits Acquired
+
+      bool        8 bits (1 byte)
+
+      char        8 bits (1 byte)
+                                      This conversion happens without the need for
+      short       16 bits (2 bytes)
+                                        explicit casting by the programmer and is
+      int         32 bits (4 bytes)    done in cases where the conversion is safe
+
+      long long   64 bits (8 bytes)   and doesn't result in loss of data or precision.
+
+      ﬂoat        32 bits (4 bytes)
+
+      double      64 bits (8 bytes)
+Implicit Type Conversion
+
+int -> long long
+
+                                   Output
+                        C++
+
+        #include <bits/stdc++.h>
+        using namespace std;
+        int main() {                    The int value is automatically
+
+            int x = 10;                 converted to long long without
+
+            long long y = x;                   explicit casting.
+
+            cout << y << endl;
+            return 0;
+        }
+Implicit Type Conversion
+
+int -> long long
+
+                                   Output
+                        C++
+
+        #include <bits/stdc++.h>
+        using namespace std;                Output
+
+        int main() {
+            int x = 10;                       10
+            long long y = x;
+            cout << y << endl;
+            return 0;
+        }
+C++
+
+Implicit Type Conversion
+
+          int         long long
+
+      32 (4 byte)    64 (8 bytes)
+
+
+
+          int           ﬂoat
+                                    Similarly, int can be implicitly
+      32 (4 bytes)   32 (4 bytes)
+                                    converted to ﬂoat or double.
+
+          int         double
+
+      32 (4 bytes)   64 (8 bytes)
+Implicit Type Conversion
+
+char → int
+
+
+                        C++
+
+        #include <bits/stdc++.h>
+        using namespace std;          Output
+
+        int main() {
+            char ch = 'B';              66
+            int number = ch;
+            cout << number << endl;
+            return 0;
+        }
+Implicit Type Conversion
+
+short → char
+
+
+                        C++
+
+        #include <bits/stdc++.h>
+        using namespace std;       Output
+
+        int main() {
+            short number = 65;       A
+            char ch = number;
+            cout << ch << endl;
+            return 0;
+        }
+Implicit Type Conversion
+
+short → char
+
+
+                        C++
+
+        #include <bits/stdc++.h>
+        using namespace std;                  Output
+
+        int main() {
+            short number = 300;                  ,
+            char ch = number;
+            cout << ch << endl;
+                                   ASCII Value of comma ‘ , ’: 44
+            return 0;
+        }
+Implicit Type Conversion
+
+Binary Representation
+
+
+                        C++
+
+        #include <bits/stdc++.h>
+        using namespace std;       Unlike the previous cases, C++
+        int main() {               implicitly converting an int to a
+            short number = 300;
+                                   char leads to data loss after a
+            char ch = number;
+                                            certain range.
+            cout << ch << endl;
+            return 0;
+        }
+char → int
+
+short → char
+
+
+
+                          Binary Representation of 300 as short (2 byte)
+
+
+
+             0   0   0    0    0     0   0     1     0     0    1    0     1    1    0     0
+
+
+                         Data loss                 The last 1 byte corresponds to char data type
+                                                       ASCII value of comma - 44 (decimal)
+Type Conversion
+
+Implicit vs Explicit
+
+                        Explicit Type Conversion              Implicit Type Conversion
+
+                  Manual conversion done by the      Automatic conversion done by the
+   Deﬁnition      programmer.                        compiler.
+
+   Syntax         Uses type casting (type) value.    No additional syntax required.
+
+                  Controlled by the programmer to    Possible when converting larger types to
+   Data Loss      avoid unintended data loss.        smaller types.
+
+                  Requires explicit casting by the   Fully handled by the compiler.
+   Control
+                  programmer.
+
+   Example        int x = 10;                        int x = 10;
+                  long long y = (long long)x;        long long y = x;
+Type Conversion Methods
+Type Conversion Methods
+
+Primitive Data Types to String
+
+
+
+
+                                                     double     string
+      In C++, we use the to_string() function for
+      converting primitive data types to strings.      int      string
+
+
+                                                    long long   string
+
+
+                                                      ﬂoat      string
+Primitive Data Types to String
+
+int → string
+
+
+                        C++
+
+         #include <bits/stdc++.h>
+         using namespace std;                   Output
+         int main() {
+              int number = 3;
+              string str = to_string(number);
+                                                   3
+              cout << str << endl;
+         return 0;
+         }
+Primitive Data Types to String
+
+to_string function
+
+
+        short num1 = 10;                long long num2 = 12345678912;
+        string str = to_string(num1);   string str = to_string(num2);
+
+
+
+
+        float num3 = 10.4;              double num4 = 5.46;
+        string str = to_string(num3);   string str = to_string(num4);
+String.valueOf()
+
+char → String
+
+
+                         C++
+
+         #include <bits/stdc++.h>
+         using namespace std;       Creates a string of length 1
+         int main() {               containing the character stored in
+             char ch = 'a';         ch, then prints the string using
+             string str(1, ch);     cout.
+             cout << str << endl;
+             return 0;
+         }
+String.valueOf()
+
+char → String
+
+
+                         C++
+
+         #include <bits/stdc++.h>
+         using namespace std;       Output
+         int main() {
+             char ch = 'a';
+             string str(1, ch);
+                                       a
+             cout << str << endl;
+             return 0;
+         }
+Type Conversion Methods
+
+String to Primitive
+
+
+         In C++, we use functions like stoi(), stof(), stod(),
+         and stoll() to convert strings into primitive data types.
+
+
+                                            string
+
+
+
+              stoi                stof                stod             stoll
+
+
+              int                ﬂoat                double          long long
+String to Primitive
+
+string → int
+
+
+                         C++
+
+         #include <bits/stdc++.h>
+         using namespace std;       Output
+         int main() {
+             string s = "123";
+                                     123
+             int num = stoi(s);
+             cout << num << endl;
+             return 0;
+         }
+String to Primitive
+
+string → double
+
+
+                         C++
+
+         #include <bits/stdc++.h>
+         using namespace std;        Output
+         int main() {
+             string s = "3.14159";
+                                     3.14159
+             double d = stod(s);
+             cout << d << endl;
+             return 0;
+         }
+String to Primitive
+
+string → ﬂoat
+
+
+                         C++
+
+         #include <bits/stdc++.h>
+         using namespace std;       Output
+         int main() {
+             string s = "3.14";
+                                     3.14
+             float f = stof(s);
+             cout << f << endl;
+             return 0;
+         }
+String to Primitive
+
+string → long long
+
+
+                         C++
+
+         #include <bits/stdc++.h>
+         using namespace std;              Output
+         int main() {
+             string s = "123456789";
+                                         123456789
+             long long num = stoll(s);
+             cout << num << endl;
+             return 0;
+         }
+Quiz Time!
+Conditional Statements
+
+
+          v/s
+Syntax: C++ Vs Python
+
+Conditional Statements
+
+      if (condition) {   if condition:
+
+
+
+
+      }
+Syntax: C++ Vs Python
+
+if Statement
+
+
+
+                   C++                           Python
+
+
+
+
+     if (score < 0) {                  if score < 0:
+         cout << "Negative" << endl;     print("Negative")
+     }
+if Statement
+
+Example
+
+
+                       C++
+
+       #include<bits/stdc++.h>
+       using namespace std;                   Output
+       int main() {
+           int score = -10;
+                                             Negative
+           if (score < 0) {
+               cout << "Negative" << endl;
+           }
+           return 0;
+       }
+Syntax: C++ Vs Python
+
+if-else Statement
+
+
+
+                   C++                          Python
+
+
+     if (score < 0) {
+         cout << "Negative" << endl;   if score < 0:
+     }                                  print("Negative")
+     else {                            else:
+         cout << "Positive" << endl;    print("Positive")
+     }
+if-else Statement
+
+Example
+
+                        C++
+       #include<bits/stdc++.h>
+       using namespace std;
+       int main() {
+           int score = 25;                    Output
+           if (score < 0) {
+               cout << "Negative" << endl;
+           }
+                                             Positive
+           else {
+               cout << "Positive" << endl;
+           }
+           return 0;
+       }
+Syntax: C++ Vs Python
+
+nested if-else
+
+
+                         C++                                                    Python
+if (score < 0) {
+    cout << "Score is negative" << " ";                     if score < 0:
+    if (score < -20) {                                       print("Score is negative", end = " ")
+         cout << "and score is less than -20." << endl;
+                                                             if score < -20:
+    }
+                                                                    print("and score is less than -20.")
+}
+                                                            else:
+else {
+    cout << "Score is positive" << " ";                      print("Score is positive", end = " ")
+    if (score > 20) {                                        if score > 20:
+         cout << "and score is greater than 20." << endl;           print("and score is greater than 20.")
+    }
+}
+Nested if-else
+
+Example
+                                   C++
+      #include<bits/stdc++.h>
+      using namespace std;
+      int main() {
+          int score = 25;
+          if (score < 0) {
+              cout << "Score is negative" << " ";                             Output
+              if (score < -20) {
+                   cout << "and score is less than -20." << endl;
+              }                                                        Score is positive and
+          }
+          else {
+                                                                      score is greater than 20
+              cout << "Score is positive" << " ";
+              if (score > 20) {
+                   cout << "and score is greater than 20." << endl;
+              }
+          }
+          return 0;
+      }
+Syntax: C++ Vs Python
+
+if-else-if Ladder
+
+
+                    C++                                Python
+
+    if (score < 0) {
+         cout << "Negative" << endl;   if score < 0:
+    }                                  print("Negative")
+    else if(score > 0){                elif score > 0:
+        cout<< "Positive" << endl;     print("Positive")
+    }                                  else:
+    else {                             print("Zero")
+         cout << "Zero" << endl;
+     }
+if-else-if Ladder
+
+Example
+                              C++
+       #include<bits/stdc++.h>
+       using namespace std;
+       int main() {
+           int score = 0;
+           if (score < 0) {
+                                          Output
+            cout << "Negative" << endl;
+       }
+       else if(score > 0){                 Zero
+           cout<< "Positive" << endl;
+       }
+       else {
+            cout << "Zero" << " ";
+       }
+           return 0;
+       }
+Syntax: C++ Vs Python
+
+switch statement
+
+                                                                       C++
+
+                                                         int inputValue = 3;
+                                                         switch (inputValue) {
+     ●   A switch case in C++ is a conditional control   case 1:
+                                                             cout << "A" << endl; break;
+         statement that evaluates an expression and
+                                                         case 2:
+         executes the matching case block, using             cout << "B" << endl; break;
+         break to prevent fall-through.                  case 3:
+                                                             cout << "C" << endl; break;
+                                                         default:
+                                                             cout << "D" << endl;
+                                                         }
+switch statement
+
+Example
+                                C++
+      #include <bits/stdc++.h>
+      using namespace std;
+      int main() {
+          int inputValue = 1;                 ➢   break stops execution after a matched
+          switch (inputValue) {
+              case 1:
+                                                  case. Without break, all cases below the
+                cout << "A" << endl;              match execute (fall-through).
+              case 2:
+                cout << "B" << endl; break;   ➢   Use fall-through only when needed (e.g.,
+              case 3:
+                cout << "C" << endl; break;       grouping cases).
+              default:
+                cout << "D" << endl;
+          }
+          return 0;
+      }
+switch statement
+
+Example
+                                C++
+      #include <bits/stdc++.h>
+      using namespace std;
+      int main() {
+          int inputValue = 1;
+          switch (inputValue) {
+                                              Output
+              case 1:
+                cout << "A" << endl;
+              case 2:
+                                                 A
+                cout << "B" << endl; break;      B
+              case 3:
+                cout << "C" << endl; break;
+              default:
+                cout << "D" << endl;
+          }
+          return 0;
+      }
+Quiz Time!
+C++
+
+Key Takeaways
+
+      ●   Operators
+            →   Logical, Arithmetic, Relational and Assignment
+                operator
+
+      ●   Type Conversion
+            →   Implicit & explicit type conversion
+
+      ●   Type conversion Method
+
+            →   Primitive data types to string & string to
+                primitive.
+C++
+
+Key Takeaways
+
+
+
+  ●       Conditional Statements
+
+            →   if, if-else, nested if-else, if-else ladder,
+                switch statements.
+
+
+      ●   Practice Problems
+THANK YOU
+ALL THE BEST
+Practice Question
+Practice Question
+
+Larger of Two Numbers
+
+
+
+                                                              int
+
+                                                        int
+
+                    You’re given two integers, and
+                    your task is to ﬁnd the larger of
+                           the two numbers.
+Larger of Two Numbers
+
+Code
+
+                           C++
+                            Code                                     Python
+                                                                        Code
+
+    #include <bits/stdc++.h>
+    using namespace std;
+                                                     a = int(input())
+    int main() {
+        int a, b;                                    b = int(input())
+        cin >> a >> b;                               if a > b:
+        if (a > b) {
+                                                      print("a is larger")
+            cout << "a is larger" << endl;
+        }                                            else:
+        else {                                        print("b is larger")
+            cout << "b is larger" << endl;
+        }
+        return 0;
+    }
+
+
+            Input                     Output                 Input             Output
+
+                 10 5                  a is larger            10 5             a is larger
+

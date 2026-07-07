@@ -1,0 +1,245 @@
+WELCOME
+Components and Props
+Recap
+
+Introduction to React JS
+
+        ●   MERN Stack
+            ○     Introduction to React JS
+        ●   React
+            ○     React.createElement()
+            ○     ReactDOMClient.createRoot()
+            ○     root.render()
+        ●   JSX
+            ○     Embedding Expressions
+            ○     Nesting elements
+Agenda for Today’s Session
+
+Components and Props
+                        Composability
+                          Reusability
+                    Creating a Component
+
+
+
+
+                         Components            Props
+
+
+
+
+                                            Passing Props
+                                           Accessing Props
+Introduction to React JS
+
+Session Initial Setup
+Components
+React
+
+Component
+
+
+ A Component is a JS Function that returns a JSX Element
+
+
+                                                              JS
+
+
+ const Welcome = () => <h1 className="message">Hello, User</h1>
+Component
+
+Naming Convention
+
+ Component name should always start with a Capital letter
+                                                                       JS
+ ...
+ <script type="text/babel" data-type="module">
+   import React from "https://esm.sh/react@19.1.1/?dev";
+   import ReactDOMClient from "https://esm.sh/react-dom@19.1.1/client?dev";
+
+
+   const Welcome = () => <h1 className="message">Hello, User</h1>
+   const root = ReactDOMClient.createRoot(document.getElementById("root"));
+   root.render(<Welcome/>);
+ </script>
+ ...
+Creating a Component
+
+Output
+What if a Component name
+ starts with LowerCase?
+Component
+
+Naming Convention
+
+React treats components starting with lowercase letters
+as HTML Elements
+                                                                       JS
+ ...
+ <script type="text/babel" data-type="module">
+   ...
+   const welcome = () => <h1 className="message">Hello, User</h1>
+   const root = ReactDOMClient.createRoot(document.getElementById("root"));
+   root.render(<welcome/>);
+ </script>
+ ...
+Component Name with Lowercase
+
+Element Panel Output
+Component Name with Lowercase
+
+Console Output
+Properties (Props)
+React Component
+
+Properties (Props)
+
+
+
+
+      React allows us to pass information
+                                            props
+      to a Component using props
+                                                    Component
+React Component
+
+Passing Props
+
+ We can pass props to any Component
+ as we declare attributes for any HTML tag
+
+
+
+  <Component propName1="propValue1" propName2="propValue2" />
+React Component
+
+Passing Props
+
+                                                                      JS
+
+ ...
+ const Welcome = () => <h1 className="message">Hello, User</h1>
+ const root = ReactDOMClient.createRoot(document.getElementById("root"));
+ root.render(<Welcome name="Rahul" greeting="Hello" />);
+ ...
+React Component
+
+Accessing Props
+
+
+                                                                   JS
+     Components accept props
+                                const Component = ( props ) => {
+     as parameters and can be    // We can access props here
+     accessed directly          }
+React Component
+
+Accessing Props
+
+                                                       JS
+
+ ...
+ const Welcome =( props ) => {
+   console.log(props);
+   return <h1 className="message">Hello, User</h1>;
+ };
+ const root =
+ ReactDOMClient.createRoot(document.getElementById("root"));
+ root.render(<Welcome name="Rahul" greeting="Hello" />);
+ ...
+React Component
+
+Accessing Props
+
+                                                       JS
+
+ ...
+ const Welcome =( props ) => {
+   const { name, greeting } = props;
+   return <h1 className="message">{greeting}, {name}</h1>;
+ };
+ const root =
+ ReactDOMClient.createRoot(document.getElementById("root"));
+ root.render(<Welcome name="Rahul" greeting="Hello" />);
+ ...
+Accessing Props
+
+Output
+React Component
+
+Reusable
+
+
+
+    A Component is a piece of
+    reusable code that can be used
+    in various parts of an application
+React Component
+
+Reusable
+                                                              JS
+ ...
+ const Welcome =( props ) => {
+   const { name, greeting } = props;
+   return <h1 className="message">{greeting}, {name}</h1>;
+ };
+ const root = ReactDOMClient.createRoot(document.getElementById("root"));
+ root.render(
+   <div>
+       <Welcome name="Rahul" greeting="Hello" />
+       <Welcome name="Ram" greeting="Hi" />
+   </div>
+ );
+ ...
+React Component
+
+Output
+React Component
+
+Composable
+
+
+
+      Components are composable
+
+      We can include a component   Component 1   Component 2
+
+      inside another component
+React Component
+
+Composable
+                                                                  JS
+  ...
+  const Welcome = (props) => {
+      const { name, greeting } = props;
+      return (<h1 className="message">{greeting}, {name}</h1>);
+  }
+  const Greetings = () => (
+      <div>
+        <Welcome name="Rahul" greeting="Hello" />
+        <Welcome name="Ram" greeting="Hi" />
+      </div>
+  )
+  const root = ReactDOMClient.createRoot(document...("root"));
+  root.render(<Greetings/>);
+  ...
+React Component
+
+Output
+Components and Props
+
+Key Takeaways
+
+      ●   Components
+          ○   Creating a Component
+          ○   Reusable Components
+          ○   Composable Components
+      ●   Props
+          ○   Passing Props
+          ○   Accessing Props
+Practice
+ Next Session
+Lists & Keys
+THANK YOU
+ALL THE BEST
+

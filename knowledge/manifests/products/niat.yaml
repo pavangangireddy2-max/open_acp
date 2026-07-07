@@ -10,9 +10,12 @@ focus_priority: active
 feature_flags:
   recorded_videos_included: true
   live_sessions_included: false
-  ai_tutor_enabled: false
+  ai_tutor_enabled: true
   summary_cheatsheet_required: false
   offline_delivery_required: true
+
+product_only_courses: []
+course_variant_overrides: {}
 
 pedagogy:
   default:
@@ -110,6 +113,7 @@ target_audience_sources:
   - knowledge/sources/products/niat/target_audience/niat_target_audience_profile.md
 
 notes:
+  - AI tutor confirmed live for all questions, enabled at course level (platform owner, 2026-07-07); flag corrected from false.
   - NIAT is a university collaboration product with batch, university, branch, BOS, and implementation layers.
   - Architecture focus is on B2, B3, and B4.
   - Product context should support offline campus delivery with a learning portal for recorded assets.

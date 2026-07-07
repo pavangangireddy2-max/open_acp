@@ -35,3 +35,5 @@ genai_s2|1CXGaJUwv7RkGx0dwi8YzNnyr71MdCiRvyqKXC3B30s8|NEW
 genai_s3|1miLne283zjhq_UBs372x11EJ41ja1hMqcD6Ww7GRDo4|NEW
 genai_s4|10qr298PFvuBuDEFORbRPkVoR0ywZQhH7ko_OTQR9Or0|NEW
 genai_s5|1bIpAmU6KCPv2YKu6qwhgIw9eVLH9Qth6cm596gshFWY|NEW
+# CSS Part 1 recovered from user-provided file (no Drive ID captured)
+htmlcss_css_part1|LOCAL_FILE_NO_DRIVE_ID|DONE

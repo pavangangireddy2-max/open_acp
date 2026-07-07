@@ -1,0 +1,1232 @@
+WELCOME
+Prompt Engineering
+   Fundamentals
+Agenda for Today’s Session
+
+Prompt Engineering Fundamentals
+                             Be Clear & Direct
+
+
+
+
+                                                       Basic Prompt
+        Prompt Engineering   Fundamentals
+                                                         Structure
+
+
+
+                                                 Role, Context, Action/Task,
+                                                       Format & Tone
+Prompt Engineering Fundamentals
+
+Question
+
+
+
+
+    ?                      Have you ever asked an LLM
+                             a question and received
+                       a confusing or unhelpful response?
+Prompt Engineering Fundamentals
+
+Better Prompt… Better Results..!
+
+
+
+         You must have noticed that the
+         difference is likely dependent on   !?
+
+         how you asked the question
+Generative AI
+
+Prompt
+                         The natural language text, which describes the task
+                            that an LLM should perform, is called a prompt
+
+
+
+
+                                              Describe the country “India” in two lines
+
+
+
+
+      India is a vast South Asian country known for its incredibly diverse culture,
+      languages, and religions. It is also the world's most populous democracy,
+      characterized by a rich history and rapid economic growth
+Generative AI
+
+Prompt - Example
+
+
+
+
+                              What is generative AI?
+
+
+
+
+                   Chat GPT      Gemini    LLAMA 3     Claude
+Generative AI
+
+Prompt
+
+
+
+                              I’m a ﬁrst-year B.Tech student.
+                              Can you explain what generative AI is in simple terms, with examples of
+                              how it’s used in apps like ChatGPT?
+
+
+
+
+      An explanation including what generative AI means,
+      AI models that create new content (like text, images, or music) based on
+      learning patterns from data, with examples
+Prompt
+
+Example 2
+
+
+
+
+                       How to prepare for exams?
+
+
+
+
+            Chat GPT        Gemini   LLAMA 3       Claude
+Prompt
+
+Example 2
+
+
+
+                             I'm a ﬁrst-year B.Tech student with exams in two weeks. Can you
+                             recommend a study plan that includes revision strategies, breaks, and
+                             how to handle difﬁcult subjects?
+
+
+
+
+     A detailed study plan suggests dividing the syllabus by days,
+     active recall techniques, regular short breaks, focusing extra time on tough
+     subjects, and sleep importance.
+Prompt Engineering Fundamentals
+
+Observation
+
+
+
+   If you observe carefully, the LLM response
+   depends on
+   how the question is asked
+Prompt Engineering Fundamentals
+
+Prompt
+
+
+
+     Better Prompts Lead To Better Results!
+
+   The clearer and more detailed your prompt is,
+   the better the model output will be
+Prompt Engineering
+Prompt Engineering Fundamentals
+
+Prompt Engineering
+
+
+
+   Prompt engineering is the art of creating
+   prompts that help an LLM generate more
+   accurate and higher-quality answers
+Prompt Engineering
+
+Why Prompt Engineering?
+
+                  Saves time                   Better results
+
+          Get what you need                    More accurate, relevant, and
+            in less iterations                 useful responses
+
+
+
+                                   Prompt
+                                 Engineering
+            Avoid confusion                    Consistency
+
+       A clear prompt prevents                 Well-engineered prompts
+        the model from making                  produce reliable results
+         incorrect assumptions                 each time
+Fundamentals
+Fundamentals
+
+Be Clear and Direct
+
+
+
+
+     Think of an LLM like   Doesn’t know what to do   Needs detailed instructions
+        a new Intern          unless you explain         to perform correctly
+Fundamentals
+
+Be Clear and Direct
+
+
+
+                      The more clearly and speciﬁcally you explain
+                               what you want to the LLM,
+                      the better and more accurate response will be
+Fundamentals
+
+Be Clear and Direct
+
+
+                      Write a resume.
+?
+Can you try Improvising the Prompt?
+Fundamentals
+
+Improvised Prompt
+
+
+
+                Can you help me create a professional resume for a BTech CSE student?
+               Include sections like personal details, education, skills, internships, projects,
+               and achievements. Please provide tips for each section to make the resume
+                                     stand out to potential employers
+Prompting Frameworks
+Prompt Engineering Fundamentals
+
+Different Prompting Frameworks
+
+
+                 RCAFT      Role, Context, Action, Format, Tone
+
+
+
+                  STAR      Situation, Task, Action, Result
+
+
+
+                  RISEN     Role, Input, Steps, End Goal, Narrowing
+Fundamentals
+
+RCAFT Framework - CRAFT (easy to remember)
+
+
+
+         R - Role                 A - Action/Task                T - Tone
+
+
+               >        >               >               >           >
+
+
+
+
+                    C - Context                     F - Format
+Basic Prompt Structure
+
+Role
+
+
+
+          R - Role                     A - Action/Task                T - Tone
+
+
+             >               >               >               >           >
+
+
+
+
+                         C - Context                     F - Format
+Basic Prompt Structure
+
+Role
+
+
+      ➢   It is sometimes important to prompt the LLM
+          to take on a speciﬁc role
+
+      ➢   This technique is known as role prompting        Role
+
+      ➢   The more detail you provide about the role and
+          context, the better the results
+Basic Prompt Structure
+
+Role
+
+
+      ➢   Priming an LLM with a speciﬁc role can
+          enhance its performance across various
+          tasks, from writing to coding to summarizing
+                                                         LLMs   LLMs
+      ➢   It's like how humans can sometimes be
+          helped when told to "think like a ______"
+Basic Prompt Structure
+
+Role
+
+
+
+
+      ➢   Role prompting can also change the style,          style   tone
+                                                      LLMs
+          tone, and manner of the LLM’s response                manner
+Role
+
+Examples
+
+
+       1   You are a professional chef with 20 years of experience in Italian cuisine
+
+
+       2   Act like a stand-up comedian from New York
+
+
+       3   You are a senior software engineer specializing in frontend development
+   Can you write a prompt
+that you would give to any LLM
+    to help you plan a trip?
+Role
+
+Example
+
+
+
+          Act as an experienced travel consultant who specializes in
+          budget-friendly trips and has personally visited over 50
+          destinations
+
+
+
+
+                     Chat GPT     Gemini     LLAMA 3      Claude
+Basic Prompt Structure
+
+Context
+
+
+
+          R - Role                     A - Action/Task                T - Tone
+
+
+             >               >               >               >           >
+
+
+
+
+                         C - Context                     F - Format
+Basic Prompt Structure
+
+Context
+
+
+
+      ➢   Context tells the LLM who it's helping, what
+          the situation is, and any limitations
+
+      ➢   Good context helps the LLM understand
+          your speciﬁc needs
+Context
+
+Examples
+
+          1   Personal situation ("I'm planning a trip to Japan")
+
+
+          2   Audience information ("This is for high school students")
+
+
+          3   Project details ("We're launching a new product next month")
+
+
+          4   Constraints ("We have a limited budget")
+
+
+          5   Prior knowledge ("I have no experience with coding")
+Now letʼs provide the context
+  to our travel consultant
+Context
+
+Example
+
+          Act as an experienced travel consultant who specializes in
+          budget-friendly trips and has personally visited over 50 destinations
+
+
+
+           I'm a 22-year-old college student planning my ﬁrst solo trip. I
+           have a budget of 20,000, 10 days to travel in June, and I'm
+           interested in both outdoor activities and experiencing local
+           culture. I'm somewhat adventurous but also concerned about
+           safety as a solo traveler.
+Context
+
+Example
+
+
+          "I'm planning a surprise birthday party for my spouse
+          who loves hiking and 80s music"
+
+
+
+
+          "I'm preparing for a job interview at a tech startup and
+          need to practice answering common questions"
+Basic Prompt Structure
+
+Action/Task
+
+
+
+          R - Role                     A - Action/Task                T - Tone
+
+
+             >               >               >               >           >
+
+
+
+
+                         C - Context                     F - Format
+Basic Prompt Structure
+
+Action/Task
+
+
+
+      ➢   The speciﬁc action or task you want the
+          LLM to perform
+
+      ➢   This is the "verb" of your prompt - the
+          speciﬁc action you want the LLM to take
+Action/Task
+
+Examples
+              1   Explain/teach ("Explain Generative AI")
+
+
+              2   Create/generate ("Create a marketing plan")
+
+
+              3   Analyze/evaluate ("Analyze this paragraph")
+
+
+              4   Summarize ("Summarize this research paper")
+
+
+              5   Compare/contrast ("Compare these two approaches")
+
+
+              6   Brainstorm ("Brainstorm names for my startup")
+Action
+
+Example
+
+          Act as an experienced travel consultant ...
+          I'm a 22-year-old college student planning my ﬁrst solo trip...
+
+
+
+           Recommend 2 speciﬁc destinations that would be ideal for
+           my situation, and for each destination, suggest a 10-day
+           itinerary that balances cultural experiences, outdoor
+           activities, and relaxation.
+Basic Prompt Structure
+
+Format
+
+
+
+          R - Role                     A - Action/Task                T - Tone
+
+
+             >               >               >               >           >
+
+
+
+
+                         C - Context                     F - Format
+Basic Prompt Structure
+
+Format
+
+
+
+
+      ➢   Format tells the LLM how you want your
+          answer organized and presented
+Format
+
+Examples
+           1   Bullet points or numbered lists
+
+
+           2   Table or chart
+
+
+           3   Step-by-step guide
+
+
+           4   FAQ style (question and answer)
+
+
+           5   Timeline
+
+
+           6   Markdown formatting with headers and subheaders
+Format
+
+Example
+
+          Act as an experienced travel consultant ...
+          I'm a 22-year-old college student ...
+          Recommend 2 speciﬁc destinations ...
+
+          Format:
+            1.    For each destination, create a section that includes:
+                    ●    A brief overview (3-5 sentences)
+                    ●    An Estimated cost breakdown (accommodation, food, activities, transport)
+                    ●    Safety considerations for solo travelers
+            2.    Then provide a day-by-day itinerary in a table format with the following columns for:
+                    ●    Day #
+                    ●    Morning activity
+                    ●    Afternoon activity
+                    ●    Evening activity
+                    ●    Accommodation
+            3.    End with a pros/cons list for each destination
+Basic Prompt Structure
+
+Tone
+
+
+
+          R - Role                     A - Action/Task                T - Tone
+
+
+             >               >               >               >           >
+
+
+
+
+                         C - Context                     F - Format
+Basic Prompt Structure
+
+Tone
+
+
+
+      ➢   The style, voice, or emotional quality
+          you want the LLM to use in its response
+
+      ➢   This affects how the message feels to
+          the reader
+Tone
+
+Examples
+
+       1   Formal or academic            5   Enthusiastic and energetic
+
+
+       2   Friendly and conversational   6   Cautious and balanced
+
+
+       3   Encouraging and supportive    7   Simple and easy to understand
+
+
+       4   Direct and concise
+Tone
+
+Example
+          Act as an experienced travel consultant ...
+          I'm a 22-year-old college student ...
+          Recommend 2 speciﬁc destinations ...
+          Format:
+          For each destination, create a section with:
+          A brief overview (3-5 sentences) ...
+          Then provide a day-by-day itinerary in a table format with columns for:
+          Day #
+          Morning activity ...
+          End with a pros/cons list for each destination
+
+
+          Include some humor where appropriate, and write as if you're a slightly older friend
+          who wants to make sure I have an amazing but safe experience. Use casual
+          language but don't skimp on important details.
+Example: Personal Study Assistant
+
+         Role; You are an experienced academic advisor who has helped hundreds of students choose their
+         career paths and specializations.
+         Context: I'm a ﬁrst-year BTech CSE student trying to decide which technical domain to specialize in. I'm
+         interested in AI/ML, web development, cybersecurity, and data science, but I'm confused about career
+         prospects, required skills, and market demand for each ﬁeld.
+         Action: Provide a detailed comparison of these four technical domains to help me make an informed
+         decision about my specialization
+         Format:
+         Create a comparison table with the following columns:
+           ●    Domain Name
+           ●    Required Core Skills
+           ●    Average Starting Salary (India)
+           ●    Job Market Demand (High/Medium/Low)
+           ●    Major Companies Hiring
+           ●    Typical Career Progression (5-year outlook)
+           ●    Learning Difﬁculty (1-10 scale)
+           ●    Future Growth Potential
+Prompt Engineering Fundamentals
+
+Prompting is an Iterative Process
+
+
+                                  The best way to prompt engineering
+                                  is to iterate
+
+                                  By changing persona, changing parameters,
+         AS YOU
+                                  adding relevant examples
+         NOTICE
+Prompt Engineering Fundamentals
+
+Prompting Techniques
+
+
+                                  When you got it to a point where it looks good,
+                                  create a template
+
+                                  So that, next time we don’t need to go through
+         AS YOU
+                                  these iterations
+         NOTICE
+Example Prompt Templates
+Example Prompt Templates
+
+Interview Preparation
+              Template: "You're an experienced career counselor. I have an upcoming {{INTERVIEW_TYPE}} interview for a
+              {{JOB_ROLE}} position. Provide me with 8-10 targeted practice questions I should prepare for, along with
+              strategic tips for answering them effectively. Present this as a clear study guide with practical examples I can
+              practice."
+              Inputs:
+                ●       {{INTERVIEW_TYPE}}: "technical" / "behavioral" / "panel" / "phone screening" / "ﬁnal round"
+                ●       {{JOB_ROLE}}: "software engineer" / "marketing manager" / "data analyst" / "sales representative" /
+                        "project manager”
+
+
+               Final Prompt:
+               "You're an experienced career counselor helping job seekers succeed. I have an upcoming technical interview
+               for a software engineer position. Provide me with 8-10 targeted practice questions I should prepare for,
+               along with strategic tips for answering them effectively. Present this as a clear study guide with practical
+               examples I can practice."
+Example Prompt Templates
+
+Summarizing an Article
+              Template: "You're a research assistant skilled at distilling complex information. I need to quickly understand
+              the key insights from {{ARTICLE_TOPIC}}. Read through the content and create a concise summary that
+              captures the main arguments, supporting evidence, and conclusions. Format this as bullet points with the
+              most important takeaways ﬁrst, using clear and objective language."
+              Inputs:
+                ●       {{ARTICLE_TOPIC}}: "climate change research paper" / "new technology trends report" / "healthcare
+                        policy analysis" / "market research study" / "historical analysis piece"
+
+
+
+              Final Prompt:
+              "You're a research assistant skilled at distilling complex information. I need to quickly understand the key
+              insights from climate change research paper. Read through the content and create a concise summary that
+              captures the main arguments, supporting evidence, and conclusions. Format this as bullet points, placing the
+              most important takeaways ﬁrst, using clear and objective language."
+Quiz Time!
+Prompt Engineering Fundamentals
+
+Key Takeaways
+
+      ●   Prompt Engineering
+      ●   Prompt Structure
+           ○   Role
+           ○   Context
+           ○   Action/Task
+           ○   Format
+           ○   Tone
+      ●   Prompt Template
+Practice
+THANK YOU
+ALL THE BEST
+Basic Prompt Structure
+
+Format
+
+
+
+
+      ➢   Format tells the LLM how you want your
+          answer organized and presented
+Format
+
+Examples
+           1   Bullet points or numbered lists
+
+
+           2   Table or chart
+
+
+           3   Step-by-step guide
+
+
+           4   FAQ style (question and answer)
+
+
+           5   Timeline
+
+
+           6   Markdown formatting with headers and subheaders
+Letʼs update the prompt such that
+our travel consultant will provide a
+  day wise plan in a table format
+Format
+
+Example
+
+          Act as an experienced travel consultant ...
+          I'm a 22-year-old college student ...
+          Recommend 2 speciﬁc destinations ...
+
+          Format:
+            1.    For each destination, create a section that includes:
+                    ●    A brief overview (3-5 sentences)
+                    ●    An Estimated cost breakdown (accommodation, food, activities, transport)
+                    ●    Safety considerations for solo travelers
+            2.    Then provide a day-by-day itinerary in a table format with the following columns for:
+                    ●    Day #
+                    ●    Morning activity
+                    ●    Afternoon activity
+                    ●    Evening activity
+                    ●    Accommodation
+            3.    End with a pros/cons list for each destination
+Basic Prompt Structure
+
+Tone
+
+
+
+          R - Role                     A - Action/Task                T - Tone
+
+
+             >               >               >               >           >
+
+
+
+
+                         C - Context                     F - Format
+Basic Prompt Structure
+
+Tone
+
+
+
+      ➢   The style, voice, or emotional quality
+          you want the LLM to use in its response
+
+      ➢   This affects how the message feels to
+          the reader
+Tone
+
+Examples
+
+       1   Formal or academic            5   Enthusiastic and energetic
+
+
+       2   Friendly and conversational   6   Cautious and balanced
+
+
+       3   Encouraging and supportive    7   Simple and easy to understand
+
+
+       4   Direct and concise
+Tone
+
+Example
+          Act as an experienced travel consultant ...
+          I'm a 22-year-old college student ...
+          Recommend 2 speciﬁc destinations ...
+          Format:
+          For each destination, create a section with:
+          A brief overview (3-5 sentences) ...
+          Then provide a day-by-day itinerary in a table format with columns for:
+          Day #
+          Morning activity ...
+          End with a pros/cons list for each destination
+
+
+
+          Include some humor where appropriate, and write as if you're a slightly older friend
+          who wants to make sure I have an amazing but safe experience. Use casual
+          language but don't skimp on important details.
+Example: Personal Study Assistant
+
+         Role; You are an experienced academic advisor who has helped hundreds of students choose their
+         career paths and specializations.
+         Context: I'm a ﬁrst-year BTech CSE student trying to decide which technical domain to specialize in. I'm
+         interested in AI/ML, web development, cybersecurity, and data science, but I'm confused about career
+         prospects, required skills, and market demand for each ﬁeld.
+         Action: Provide a detailed comparison of these four technical domains to help me make an informed
+         decision about my specialization
+         Format:
+         Create a comparison table with the following columns:
+           ●    Domain Name
+           ●    Required Core Skills
+           ●    Average Starting Salary (India)
+           ●    Job Market Demand (High/Medium/Low)
+           ●    Major Companies Hiring
+           ●    Typical Career Progression (5-year outlook)
+           ●    Learning Difﬁculty (1-10 scale)
+           ●    Future Growth Potential
+Prompt Engineering Fundamentals
+
+Prompting is an Iterative Process
+
+
+                                  The best way to prompt engineering
+                                  is to iterate
+
+                                  By changing persona, changing parameters,
+         AS YOU
+                                  adding relevant examples
+         NOTICE
+Prompt Engineering Fundamentals
+
+Prompting Techniques
+
+
+                                  When you got it to a point where it looks good,
+                                  create a template
+
+                                  So that, next time we don’t need to go through
+         AS YOU
+                                  these iterations
+         NOTICE
+Example Prompt Templates
+Example Prompt Templates
+
+Interview Preparation
+              Template: "You're an experienced career counselor. I have an upcoming {{INTERVIEW_TYPE}} interview for a
+              {{JOB_ROLE}} position. Provide me with 8-10 targeted practice questions I should prepare for, along with
+              strategic tips for answering them effectively. Present this as a clear study guide with practical examples I can
+              practice."
+              Inputs:
+                ●       {{INTERVIEW_TYPE}}: "technical" / "behavioral" / "panel" / "phone screening" / "ﬁnal round"
+                ●       {{JOB_ROLE}}: "software engineer" / "marketing manager" / "data analyst" / "sales representative" /
+                        "project manager”
+
+
+               Final Prompt:
+               "You're an experienced career counselor helping job seekers succeed. I have an upcoming technical interview
+               for a software engineer position. Provide me with 8-10 targeted practice questions I should prepare for,
+               along with strategic tips for answering them effectively. Present this as a clear study guide with practical
+               examples I can practice."
+Example Prompt Templates
+
+Summarizing an Article
+              Template: "You're a research assistant skilled at distilling complex information. I need to quickly understand
+              the key insights from {{ARTICLE_TOPIC}}. Read through the content and create a concise summary that
+              captures the main arguments, supporting evidence, and conclusions. Format this as bullet points with the
+              most important takeaways ﬁrst, using clear and objective language."
+              Inputs:
+                ●       {{ARTICLE_TOPIC}}: "climate change research paper" / "new technology trends report" / "healthcare
+                        policy analysis" / "market research study" / "historical analysis piece"
+
+
+
+              Final Prompt:
+              "You're a research assistant skilled at distilling complex information. I need to quickly understand the key
+              insights from climate change research paper. Read through the content and create a concise summary that
+              captures the main arguments, supporting evidence, and conclusions. Format this as bullet points, placing the
+              most important takeaways ﬁrst, using clear and objective language."
+Prompt Engineering Fundamentals
+
+Additional Exploration
+
+
+                             Open AI
+                              ● https://platform.openai.com/docs/examples
+                              ● https://cookbook.openai.com/
+
+                             For Cross-Platform Exploration
+                              ● https://cloud.google.com/vertex-ai/generative-ai/docs/pro
+                                   mpt-gallery
+
+                              ●   https://github.com/microsoft/prompts-for-edu/tree/main/St
+                                  udents/Prompts
+Prompting Techniques
+Prompt Engineering Fundamentals
+
+Prompting Techniques
+
+
+
+ Prompting engineering techniques allow us to
+ perform more complex tasks and enhance the
+ reliability and performance of LLMs
+Prompt Engineering Fundamentals
+
+Prompting Techniques
+
+   Some well-known prompting techniques are
+
+
+         ●   Zero-shot
+
+         ●   One-shot
+
+         ●   Few-shot
+                         Many more ...
+Prompting Techniques
+
+Zero-shot
+
+   Some well-known prompting techniques are
+
+
+         ●   Zero-shot
+
+         ●   One-shot
+
+         ●   Few-shot
+                         Many more ...
+Prompting Techniques
+
+Zero-shot
+
+
+
+      Zero-shot prompting is a technique
+      that instructs an LLM to perform a task
+      without providing any examples
+Zero-shot
+
+Example
+
+            Summarize the following paragraph about Generative AI:
+
+
+            Generative AI refers to artiﬁcial intelligence systems capable of
+            creating new content, such as text, images, music, and videos that
+            resemble human-created work. Unlike traditional AI, which focuses on
+            analysis and prediction, generative AI can produce original outputs
+            based on patterns learned from training data. Popular examples
+            include GPT models for text, DALL-E for images, and MusicLM for
+            music creation. These systems have sparked discussions about
+            creativity, copyright, and the future of human-machine collaboration in
+            creative ﬁelds."
+Zero-shot
+
+Example
+
+            Classify this review as positive or negative:
+
+
+            The restaurant was incredible, best meal I've had all year.
+
+
+
+
+            Response: Positive
+Prompting Techniques
+
+One-shot
+
+   Some well-known prompting techniques are
+
+
+         ●   Zero-shot
+
+         ●   One-shot
+
+         ●   Few-shot
+                         Many more ...
+Prompting Techniques
+
+One-shot
+
+
+
+      Providing a single example to the model
+      so it has something to imitate in order to
+      complete the task more effectively
+One-shot
+
+Example
+
+
+           "Write a birthday message for my best friend who loves bikes"
+
+           Example:
+           ‘Happy birthday, bro! May your love for bikes grow even faster than
+           your age.
+
+           Now write a similar message for my other friend who loves Marvel
+           movies
+One-shot
+
+Example
+
+
+              Review: Food was cold and service slow.
+              Sentiment: Negative
+
+
+              Review: The desserts were heavenly.
+              Sentiment:
+
+
+
+
+           Response: Positive
+Prompting Techniques
+
+Few-shot
+
+   Some well-known prompting techniques are
+
+
+         ●   Zero-shot
+
+         ●   One-shot
+
+         ●   Few-shot
+                         Many more ...
+Prompting Techniques
+
+Few-shot
+
+
+
+
+             Providing multiple examples
+             to the model
+Prompting Techniques
+
+Few-shot
+
+
+
+     It is similar to one-shot, but we provide
+     multiple examples of the desired pattern
+     which increases the chance that the model
+     follows the pattern
+Few shot
+
+Example
+
+
+
+
+           A is for Apple, a fruit that’s sweet
+           B is for Banana, the best lunch treat
+Few-shot
+
+Example
+
+
+           Classify by sentiment (positive/negative/neutral):
+           Review: Food was cold.
+           Sentiment: Negative
+
+           Review: 'Great atmosphere!
+           Sentiment: Positive
+
+           Review: Restaurant was busy.
+           Sentiment: Neutral
+
+           Review: The prices were reasonable.
+           Sentiment:
+Prompting Techniques
+
+Examples
+
+         Prompting Techniques                           When it is best
+
+                                ●   The task is straightforward
+        Zero-shot prompting     ●   The AI likely has seen similar examples during training
+                                ●   You need a quick response
+
+                                ●   You need a specific format
+        One-shot prompting
+                                ●   The pattern is simple but needs an example
+
+                                ●   The task involves a more complex pattern
+        Few-shot prompting      ●   You need consistent formatting across multiple outputs
+                                ●   The task requires specialized or domain-specific knowledge
+Tricks and Tips
+Tricks and Tips
+
+Separating Data from Instructions
+
+
+
+
+ Instead of writing a new prompt each time,
+ you can create a reusable prompt template and
+ that can be reused with different data each time
+Tricks and Tips
+
+Separating Data from Instructions
+
+
+
+
+ This is especially useful when you need
+ the LLM to perform the same task repeatedly
+ but with different input data
+Tricks and Tips
+
+Example 1: Simple Template
+
+
+
+
+                  I will tell you the name of an animal. Please respond with
+
+                  the sound that animal makes. {{ANIMAL}}
+Tricks and Tips
+
+Why Separate Data from Instructions
+
+
+
+
+         Reusability                 Consistency                      Clarity
+
+   Create once, use multiple     Same task structure        Keeps instructions separate
+   times with different data   ensures consistent results      from variable content
+Tricks and Tips
+
+Example
+
+                  Template: "Translate the following text to Spanish: {{TEXT}}"
+
+                  Input: "Hello, how are you today?"
+                  Input: "The weather is beautiful today"
+                  Input: "I love learning new languages"
+
+
+
+                  Final Prompt:
+                  "Translate the following text to Spanish: Hello, how are you today?"
+Tricks and Tips
+
+Example
+
+                  Template: "Explain {{CONCEPT}} at a {{LEVEL}} level with examples."
+                  Inputs:
+                    ●   {{CONCEPT}}: "recursion in programming" / "object-oriented
+                        programming" / "Ohm’s Law"
+                    ●   {{LEVEL}}: "high school" / "ﬁrst year btech student" / "intermediate"
+                        / "advanced”
+
+
+
+                  Final Prompt:
+                  "Explain recursion in programming at a high school level with examples."
+Quiz Time!
+Example Prompt Templates
+
+Interview Preparation
+
+              Template: "You're an experienced career counselor helping job seekers succeed. I have an upcoming
+              {{INTERVIEW_TYPE}} interview for a {{JOB_ROLE}} position. Provide me with 8-10 targeted practice questions
+              I should prepare for, along with strategic tips for answering them effectively. Present this as a clear study
+              guide with practical examples I can practice."
+              Inputs:
+                ●       {{INTERVIEW_TYPE}}: "technical" / "behavioral" / "panel" / "phone screening" / "ﬁnal round"
+                ●       {{JOB_ROLE}}: "software engineer" / "marketing manager" / "data analyst" / "sales representative" /
+                        "project manager"
+              Final Prompt: "You're an experienced career counselor helping job seekers succeed. I have an upcoming
+              technical interview for a software engineer position. Provide me with 8-10 targeted practice questions I
+              should prepare for, along with strategic tips for answering them effectively. Present this as a clear study guide
+              with practical examples I can practice."
+Example Prompt Templates
+
+Summarizing an Article
+
+
+              Template: "You're a research assistant skilled at distilling complex information. I need to quickly understand
+              the key insights from {{ARTICLE_TOPIC}}. Read through the content and create a concise summary that
+              captures the main arguments, supporting evidence, and conclusions. Format this as bullet points with the
+              most important takeaways ﬁrst, using clear and objective language."
+              Inputs:
+                ●       {{ARTICLE_TOPIC}}: "climate change research paper" / "new technology trends report" / "healthcare
+                        policy analysis" / "market research study" / "historical analysis piece"
+              Final Prompt: "You're a research assistant skilled at distilling complex information. I need to quickly
+              understand the key insights from climate change research paper. Read through the content and create a
+              concise summary that captures the main arguments, supporting evidence, and conclusions. Format this as
+              bullet points, placing the most important takeaways ﬁrst, using clear and objective language."
+Tricks and Tips
+
+Example
+
+
+
+                  Template: "Translate the following text to Spanish: {{TEXT}}"
+
+                  Input: "Hello, how are you today?"
+                  Input: "The weather is beautiful today"
+                  Input: "I love learning new languages"
+
+                  Final Prompt: "Translate the following text to Spanish: Hello, how are you
+                  today?"
+Feedback
+  Next Session
+Introduction to
+ AI workﬂows
+Structuring Prompt
+
+System Prompt
+
+
+
+ A system prompt is a way to provide
+ context, instructions, and guidelines to the
+ LLM before you ask a question
+Structuring Prompt
+
+System Prompt
+
+
+
+     "Your response should always be a series of
+     critical thinking questions that advance the
+                                                    Why is the sky blue?
+     conversation
+     Do not directly answer the user’s question"
+                                                          Prompt
+
+                     System Prompt
+Prompt Engineering Fundamentals
+
+Prompt Engineering
+
+
+          Think of it like this
+
+
+           ●   If an LLM is like a highly knowledgeable
+               intern on their ﬁrst day
+
+           ●   Prompt engineering is the skill of giving that
+               intern clear, detailed instructions
+Prompt
+
+Example 2
+
+
+
+                             I'm a ﬁrst-year B.Tech student with exams in two weeks. Can you
+                             recommend a study plan that includes revision strategies, breaks, and how
+                             to handle difﬁcult subjects?
+
+
+
+
+     A detailed study plan suggests dividing the syllabus by days,
+     active recall techniques, regular short breaks, focusing extra time on tough
+     subjects, and sleep importance.
+
