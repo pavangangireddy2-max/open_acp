@@ -1,10 +1,10 @@
 """Echo CLI + web server.
 
-  echo ask "your question"     # answer in the terminal
-  echo serve                   # launch the simple web frontend
+  echo ask "your question"     # streamed grounded answer in the terminal
+  echo search "your query"     # instant ranked passages, no LLM
+  echo serve                   # launch the web frontend (Ask + Search)
 
-Registered as the `echo` console script. The web server uses only the stdlib
-(http.server), so Echo adds no new dependencies.
+Registered as the `echo` console script. The web server uses only the stdlib.
 """
 
 from __future__ import annotations
@@ -18,13 +18,16 @@ from rich.markdown import Markdown
 from rich.panel import Panel
 
 from open_acp.echo.ask import ask as ask_echo
+from open_acp.echo.ask import ask_stream
+from open_acp.echo.search import search as search_echo
+from open_acp.echo.webui import PAGE
 
-app = typer.Typer(name="echo", help="Ask questions about the Open ACP intelligence layer.", no_args_is_help=True)
+app = typer.Typer(name="echo", help="Ask the Open ACP intelligence layer.", no_args_is_help=True)
 console = Console()
 
 
 @app.command()
-def ask(question: str = typer.Argument(..., help="The question to answer from the docs.")) -> None:
+def ask(question: str = typer.Argument(..., help="Question to answer from the docs.")) -> None:
     """Answer a question grounded in the intelligence corpus, with citations."""
     with console.status("[bold]Echo is thinking..."):
         answer = ask_echo(question)
@@ -33,44 +36,20 @@ def ask(question: str = typer.Argument(..., help="The question to answer from th
     console.print(f"[dim]provider: {answer.provider}[/dim]")
 
 
-_PAGE = """<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Echo</title>
-<style>
-  :root { --bg:#0f1115; --card:#1a1d24; --gold:#d4af37; --teal:#3fb6b2; --tx:#e6e6e6; --dim:#8a8f98; }
-  * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--tx); font:16px/1.6 -apple-system,Segoe UI,Roboto,sans-serif; }
-  .wrap { max-width:820px; margin:0 auto; padding:40px 20px; }
-  h1 { color:var(--gold); font-weight:600; letter-spacing:.5px; margin:0 0 4px; }
-  .sub { color:var(--dim); margin:0 0 28px; }
-  form { display:flex; gap:10px; margin-bottom:24px; }
-  input { flex:1; padding:12px 14px; border-radius:8px; border:1px solid #333; background:var(--card); color:var(--tx); font-size:16px; }
-  button { padding:12px 20px; border-radius:8px; border:0; background:var(--teal); color:#06201f; font-weight:600; cursor:pointer; }
-  button:disabled { opacity:.5; cursor:wait; }
-  .answer { background:var(--card); border:1px solid #2a2e37; border-radius:10px; padding:20px; white-space:pre-wrap; }
-  .sources { margin-top:16px; color:var(--dim); font-size:14px; }
-  .sources b { color:var(--tx); }
-  .empty { color:var(--dim); }
-</style></head>
-<body><div class="wrap">
-  <h1>Echo</h1>
-  <p class="sub">Ask the Open ACP intelligence layer. Answers are grounded in the repo docs, with citations.</p>
-  <form id="f"><input id="q" placeholder="e.g. What is the FIB grading rule?" autofocus autocomplete="off">
-  <button id="b" type="submit">Ask</button></form>
-  <div id="out" class="answer empty">Ask a question to begin.</div>
-  <div id="src" class="sources"></div>
-</div>
-<script>
-const f=document.getElementById('f'),q=document.getElementById('q'),b=document.getElementById('b'),
-out=document.getElementById('out'),src=document.getElementById('src');
-f.onsubmit=async(e)=>{e.preventDefault();const question=q.value.trim();if(!question)return;
-b.disabled=true;out.className='answer';out.textContent='Thinking...';src.textContent='';
-try{const r=await fetch('/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question})});
-const d=await r.json();out.textContent=d.text||'(no answer)';
-src.innerHTML=d.sources&&d.sources.length?'<b>Sources:</b><br>'+d.sources.map(s=>'&bull; '+s).join('<br>'):'';
-}catch(err){out.textContent='Error: '+err;}finally{b.disabled=false;}};
-</script></body></html>"""
+@app.command()
+def search(
+    query: str = typer.Argument(..., help="Find relevant passages (no LLM)."),
+    top_k: int = typer.Option(8, help="Number of passages to return."),
+) -> None:
+    """Instant passage search over the corpus — embedding similarity, no LLM."""
+    with console.status("[bold]Searching..."):
+        hits = search_echo(query, top_k=top_k)
+    if not hits:
+        console.print("[dim]No passages matched.[/dim]")
+        return
+    for h in hits:
+        head = f" · {h.heading}" if h.heading else ""
+        console.print(Panel(h.snippet, title=f"{h.source_key}{head}  [{h.score:.2f}]", border_style="cyan"))
 
 
 def _make_handler():
@@ -82,42 +61,81 @@ def _make_handler():
             self.end_headers()
             self.wfile.write(body)
 
+        def _read_json(self) -> dict:
+            length = int(self.headers.get("Content-Length", 0))
+            try:
+                return json.loads(self.rfile.read(length) or b"{}")
+            except (ValueError, TypeError):
+                return {}
+
         def do_GET(self) -> None:  # noqa: N802
             if self.path in ("/", "/index.html"):
-                self._send(200, _PAGE.encode("utf-8"), "text/html; charset=utf-8")
+                self._send(200, PAGE.encode("utf-8"), "text/html; charset=utf-8")
             else:
                 self._send(404, b"not found", "text/plain")
 
         def do_POST(self) -> None:  # noqa: N802
-            if self.path != "/ask":
+            if self.path == "/search":
+                self._handle_search()
+            elif self.path == "/ask":
+                self._handle_ask_stream()
+            else:
                 self._send(404, b"not found", "text/plain")
-                return
-            length = int(self.headers.get("Content-Length", 0))
-            try:
-                payload = json.loads(self.rfile.read(length) or b"{}")
-                question = (payload.get("question") or "").strip()
-            except (ValueError, TypeError):
-                self._send(400, b'{"text":"bad request"}', "application/json")
-                return
+
+        def _handle_search(self) -> None:
+            question = (self._read_json().get("question") or "").strip()
             if not question:
-                self._send(400, b'{"text":"empty question"}', "application/json")
+                self._send(400, b'{"hits":[]}', "application/json")
                 return
             try:
-                answer = ask_echo(question)
-                body = json.dumps({"text": answer.text, "sources": [s.key for s in answer.cited_sources]})
-            except Exception as exc:  # surface errors to the UI instead of 500-crashing
-                body = json.dumps({"text": f"Echo error: {exc}", "sources": []})
+                hits = search_echo(question)
+                body = json.dumps({"hits": [
+                    {"source_key": h.source_key, "heading": h.heading, "score": h.score, "snippet": h.snippet}
+                    for h in hits
+                ]})
+            except Exception as exc:
+                body = json.dumps({"hits": [], "error": str(exc)})
             self._send(200, body.encode("utf-8"), "application/json")
 
-        def log_message(self, *args) -> None:  # quiet the default request logging
+        def _handle_ask_stream(self) -> None:
+            question = (self._read_json().get("question") or "").strip()
+            self.send_response(200)
+            self.send_header("Content-Type", "text/event-stream")
+            self.send_header("Cache-Control", "no-cache")
+            self.end_headers()
+            try:
+                for event in ask_stream(question):
+                    self.wfile.write(f"data: {json.dumps(event)}\n\n".encode("utf-8"))
+                    self.wfile.flush()
+            except (BrokenPipeError, ConnectionResetError):
+                pass  # client navigated away mid-stream
+            except Exception as exc:
+                try:
+                    self.wfile.write(f'data: {json.dumps({"type": "error", "text": str(exc)})}\n\n'.encode("utf-8"))
+                except OSError:
+                    pass
+
+        def log_message(self, *args) -> None:
             return
 
     return Handler
 
 
 @app.command()
-def serve(host: str = "127.0.0.1", port: int = 8000) -> None:
-    """Launch the simple web frontend."""
+def serve(host: str = "127.0.0.1", port: int = 8000, warm: bool = True) -> None:
+    """Launch the Echo web frontend (Ask + Search)."""
+    if warm:
+        # Build the index AND run one real query so the encoder is fully loaded — otherwise
+        # the first user query pays the model-load cost (~10s). After this, search is <0.5s.
+        with console.status("[bold]Warming Echo (embedding index + model)..."):
+            try:
+                from open_acp.echo.embeddings import build_index
+                from open_acp.echo.search import search as _s
+                idx = build_index()
+                _s("warmup", top_k=1)  # forces the encoder to load now
+                console.print(f"[dim]index ready: {len(idx.passages)} passages, model warm[/dim]")
+            except Exception as exc:
+                console.print(f"[yellow]warmup skipped: {exc}[/yellow]")
     server = ThreadingHTTPServer((host, port), _make_handler())
     console.print(f"[cyan]Echo[/cyan] serving at [bold]http://{host}:{port}[/bold]  (Ctrl+C to stop)")
     try:

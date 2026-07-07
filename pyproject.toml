@@ -32,6 +32,13 @@ dev = [
     "pytest>=8.0.0",
     "pytest-asyncio>=0.23.0",
 ]
+# Echo search/retrieval uses local embeddings. Heavy (pulls torch), so it's optional:
+# without it, Echo's Ask still works (retrieve falls back to handoff+pedagogy docs) and
+# search mode is unavailable. Install with: uv pip install -e ".[echo]"
+echo = [
+    "sentence-transformers>=3.0.0",
+    "numpy>=1.26.0",
+]
 
 [project.scripts]
 oacp = "open_acp.cli.main:app"

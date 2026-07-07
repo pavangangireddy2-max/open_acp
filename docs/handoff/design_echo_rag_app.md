@@ -22,8 +22,13 @@ a read-only Q&A UI.
 | **Ask** — answer questions grounded in the handoff docs + manifests | No | **Build now** |
 | **Refresh** — weekly ingest portal usage → propose doc updates → HITL → commit | Yes | **Stub the seam now, implement when MCP exists** |
 
-Decision (2026-07-08): v0 = **design only**; retrieval = **whole-doc into context** (no
-embeddings — the corpus is ~250KB); lives in-repo at **`src/open_acp/echo/`**.
+Decision (2026-07-08): v0 built at **`src/open_acp/echo/`**. Retrieval upgraded from
+whole-doc-load to **local embeddings** (sentence-transformers `all-MiniLM-L6-v2`, cosine
+rank over an in-memory NumPy matrix, disk-cached; no vector DB) after the corpus grew past
+the whole-load budget with raw sources added. This removed the LLM selection round-trip.
+Added a **search mode** (ranked passages, zero LLM, ~0.4s warm) and **streaming** answers,
+and an impeccable-designed web UI (Ask + Search). sentence-transformers is an optional
+extra (`.[echo]`); without it Ask still works via a handoff+pedagogy fallback.
 
 ## 2. Retrieval: whole-doc into context (no vector DB)
 
