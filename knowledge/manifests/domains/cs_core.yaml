@@ -1,0 +1,12 @@
+domain_id: cs_core
+version: 1
+display_name: CS Core
+poc: Chanakya
+stacks:
+  - cs_core
+review_ownership:
+  content_review_queue: cs_core_review_queue
+  domain_lead: Chanakya
+related_domains:
+  - programming
+  - fullstack

@@ -148,6 +148,74 @@ def test_update_product_context_creates_runtime_product_summary(monkeypatch):
     assert "Structure profile: niat_university_structure" in captured["create_kwargs"]["content"]
 
 
+def test_derive_skill_outcomes_digest_persists_artifact(tmp_path, monkeypatch):
+    monkeypatch.setattr(nodes, "_get_project_root", lambda: tmp_path)
+
+    result = nodes.derive_skill_outcomes_digest(
+        {
+            "domain": "genai",
+            "cycle_id": "cycle_skill_digest",
+            "signal_batch": _build_signal_batch(),
+            "detected_patterns": [{"description": "RAG is now baseline knowledge."}],
+        }
+    )
+
+    digest = result["skill_outcomes_signal_digest"]
+    assert digest["dimension_id"] == "dimension_1_job_outcomes"
+    assert "ml_engineer_requirements.md" in digest["source_refs"]
+    assert digest["unresolved_inputs"]
+    artifact_path = Path(result["skill_outcomes_digest_artifact_path"])
+    assert artifact_path.exists()
+    assert artifact_path.name == "skill_outcomes_signal_digest.yaml"
+
+
+def test_derive_market_and_community_digest_persists_artifact(tmp_path, monkeypatch):
+    monkeypatch.setattr(nodes, "_get_project_root", lambda: tmp_path)
+
+    signal_batch = SignalBatch(
+        batch_id="batch_market",
+        signals=[
+            RawSignal(
+                signal_id="sig_market",
+                channel_category=ChannelCategory.INDUSTRY_MARKET,
+                channel_name="sources",
+                content="Vector databases and RAG are mainstream.",
+                timestamp="2026-04-16T00:00:00+00:00",
+                signal_type=ChannelType.PROACTIVE,
+                metadata={"filename": "ml_engineering_trends_2026.md"},
+            ),
+            RawSignal(
+                signal_id="sig_comp",
+                channel_category=ChannelCategory.INDUSTRY_MARKET,
+                channel_name="competitors",
+                content="Competitors are still weak on deployment realism.",
+                timestamp="2026-04-16T00:00:00+00:00",
+                signal_type=ChannelType.PROACTIVE,
+                metadata={"filename": "competitor_courses.md"},
+            ),
+        ],
+        ingested_at="2026-04-16T00:00:00+00:00",
+        source_domain="genai",
+    )
+
+    result = nodes.derive_market_and_community_digest(
+        {
+            "domain": "genai",
+            "cycle_id": "cycle_market_digest",
+            "signal_batch": signal_batch,
+            "detected_patterns": [{"description": "Productionization is a competitive gap."}],
+        }
+    )
+
+    digest = result["market_and_community_digest"]
+    assert digest["dimension_id"] == "dimension_9_market_and_community"
+    assert "ml_engineering_trends_2026.md" in digest["source_refs"]
+    assert "competitor_courses.md" in digest["source_refs"]
+    artifact_path = Path(result["market_and_community_digest_artifact_path"])
+    assert artifact_path.exists()
+    assert artifact_path.name == "market_and_community_digest.yaml"
+
+
 def test_ingest_signals_requires_manifest_backed_inputs_when_strict():
     with pytest.raises(ValueError, match="No stack manifest was found"):
         nodes.ingest_signals(

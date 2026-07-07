@@ -6,6 +6,8 @@ curriculum_container_kind: standard_curriculum
 default_packaging_profile_id: default_learning_packaging
 focus_priority: deferred
 variant_strategy: audience_specific_course_variants
+product_only_courses: []
+course_variant_overrides: {}
 
 feature_flags:
   recorded_videos_included: true

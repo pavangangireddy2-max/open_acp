@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Domain Definition",
+  "type": "object",
+  "required": ["domain_id", "display_name", "stacks"],
+  "properties": {
+    "domain_id": {"type": "string", "minLength": 1},
+    "version": {"type": "integer", "minimum": 1},
+    "display_name": {"type": "string", "minLength": 1},
+    "poc": {"type": "string"},
+    "stacks": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "review_ownership": {
+      "type": "object",
+      "properties": {
+        "content_review_queue": {"type": "string"},
+        "domain_lead": {"type": "string"}
+      }
+    },
+    "related_domains": {"type": "array", "items": {"type": "string"}},
+    "updated_at": {"type": "string"}
+  }
+}

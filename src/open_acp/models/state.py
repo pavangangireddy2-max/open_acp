@@ -40,12 +40,25 @@ class LoopAState(BaseModel):
     pattern_detection_status: str = "not_started"
     pattern_detection_note: Optional[str] = None
     drift_score: float = 0.0
+    skill_outcomes_signal_digest: Optional[dict] = None
+    skill_outcomes_digest_artifact_path: Optional[str] = None
+    market_and_community_digest: Optional[dict] = None
+    market_and_community_digest_artifact_path: Optional[str] = None
     product_context: Optional[dict] = None
     structure_profile: Optional[dict] = None
     wiki_entries_created: list[str] = []
     wiki_entries_updated: list[str] = []
     stack_profiles_created: list[str] = []
     stack_profiles_updated: list[str] = []
+    # v9 abstract artifacts
+    domain_definition: Optional[dict] = None
+    domain_definition_artifact_path: Optional[str] = None
+    stack_skill_graph: Optional[dict] = None
+    stack_skill_graph_artifact_path: Optional[str] = None
+    stack_curriculum_abstract: Optional[dict] = None
+    stack_curriculum_abstract_artifact_path: Optional[str] = None
+    activity_types_library: Optional[dict] = None
+    activity_types_library_artifact_path: Optional[str] = None
     gate_g1_outcome: Optional[GateOutcome] = None
 
 
@@ -60,7 +73,16 @@ class LoopBState(BaseModel):
     strict_domain_inputs: bool = False
     skill_graph: Optional[SkillGraph] = None
     learner_model: Optional[LearnerModel] = None
+    skill_outcomes_signal_digest: Optional[dict] = None
+    market_and_community_digest: Optional[dict] = None
     curriculum_source_context: str = ""
+    skill_outcomes_context: str = ""
+    market_and_community_context: str = ""
+    # v9 abstract inputs
+    domain_definition: Optional[dict] = None
+    stack_abstracts: Optional[dict] = None  # stack_id -> StackCurriculumAbstract dict
+    track_abstract: Optional[dict] = None
+    coverage_policy: Optional[dict] = None  # stack_id -> {include_tags, include_levels}
     product_context: Optional[dict] = None
     structure_profile: Optional[dict] = None
     design_priority_profile: Optional[dict] = None

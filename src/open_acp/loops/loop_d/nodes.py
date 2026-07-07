@@ -150,12 +150,12 @@ def route_fixes(state: dict) -> dict:
         },
         FixType.DESIGN_FIX.value: {
             "target_loop": "B",
-            "target_nodes": ["generate_curriculum"],
+            "target_nodes": ["compose_product_specific_curriculum_container"],
             "gate": "G2",
         },
         FixType.CURRICULUM_FIX.value: {
             "target_loop": "A->B",
-            "target_nodes": ["update_skill_graph", "generate_curriculum"],
+            "target_nodes": ["update_skill_graph", "compose_product_specific_curriculum_container"],
             "gate": "G4",
         },
         FixType.PEDAGOGY_FIX.value: {

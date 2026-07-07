@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stack Curriculum Abstract",
+  "type": "object",
+  "required": ["stack_id", "domain_ref", "modules"],
+  "properties": {
+    "stack_id": {"type": "string", "minLength": 1},
+    "domain_ref": {"type": "string", "minLength": 1},
+    "version": {"type": "integer", "minimum": 1},
+    "interview_intelligence_ref": {"type": "string"},
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["module_id", "title", "tags"],
+        "properties": {
+          "module_id": {"type": "string", "minLength": 1},
+          "title": {"type": "string", "minLength": 1},
+          "tags": {
+            "type": "array",
+            "items": {"type": "string", "enum": ["C1", "C2", "C3", "L1", "L2", "L3"]},
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "estimated_hours_range": {
+            "type": "object",
+            "properties": {
+              "min": {"type": "number", "minimum": 0},
+              "max": {"type": "number", "minimum": 0}
+            }
+          },
+          "default_pedagogy_profile": {"type": "string"},
+          "skill_ids": {"type": "array", "items": {"type": "string"}},
+          "prerequisite_modules": {"type": "array", "items": {"type": "string"}},
+          "prerequisite_external_skills": {"type": "array", "items": {"type": "string"}},
+          "concepts": {"type": "array", "items": {"type": "string"}},
+          "interview_frequency": {"type": "string", "enum": ["high", "medium", "low"]}
+        }
+      }
+    },
+    "external_prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from_stack", "required_skill_ids"],
+        "properties": {
+          "from_stack": {"type": "string"},
+          "required_skill_ids": {"type": "array", "items": {"type": "string"}},
+          "kind": {"type": "string", "enum": ["hard_prereq", "soft_prereq"]}
+        }
+      }
+    },
+    "updated_at": {"type": "string"}
+  }
+}

@@ -87,7 +87,7 @@ def test_loop_review_runner_resumes_next_stage(monkeypatch, tmp_path):
     )
 
     assert result["stage_id"] == "detect_patterns"
-    assert result["next_stage_id"] == "update_skill_graph"
+    assert result["next_stage_id"] == "derive_skill_outcomes_digest"
     assert "drift score 0.42" in result["review_packet"]["summary"]
     assert "genai_120hr_curriculum.md" in result["review_packet"]["key_decisions"][0]
 
@@ -141,7 +141,7 @@ def test_loop_review_runner_detect_patterns_fallback_wording(monkeypatch, tmp_pa
     assert "fallback placeholder pattern" in result["review_packet"]["key_decisions"][2].lower()
 
 
-def test_loop_review_runner_generate_curriculum_fallback_wording(monkeypatch, tmp_path):
+def test_loop_review_runner_compose_product_specific_curriculum_container_fallback_wording(monkeypatch, tmp_path):
     runner = LoopReviewRunner(output_dir=str(tmp_path))
 
     def fake_callable(loop_id, stage_id):
@@ -235,16 +235,16 @@ def test_loop_review_runner_generate_curriculum_fallback_wording(monkeypatch, tm
     monkeypatch.setattr(runner, "_load_stage_callable", fake_callable)
 
     base_state = {"domain": "genai", "cycle_id": "cycle_curriculum", "content_type": "concept_explainer"}
-    for _ in range(8):
+    for _ in range(9):
         runner.execute_review_stage(loop_id="loop_b", base_state=base_state)
     result = runner.execute_review_stage(
         loop_id="loop_b",
         base_state=base_state,
     )
 
-    assert result["stage_id"] == "generate_curriculum"
+    assert result["stage_id"] == "compose_product_specific_curriculum_container"
     assert result["next_stage_id"] == "compare_curriculum_changes"
-    assert "Curriculum generation parse failed" in result["review_packet"]["summary"]
+    assert "Curriculum-container composition parse failed" in result["review_packet"]["summary"]
     assert "empty fallback curriculum draft" in result["review_packet"]["key_decisions"][0]
 
 
@@ -257,6 +257,7 @@ def test_load_raw_sources_prefers_manifest_for_genai():
     assert "competitor_courses.md" in filenames
     assert "ml_engineer_requirements.md" in filenames
     assert all("knowledge/sources/" in path for path in paths)
+    assert all("knowledge/sources/shared/" not in path for path in paths)
 
 
 def test_build_bootstrap_warnings_flags_generic_domain_coverage():

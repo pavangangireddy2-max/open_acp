@@ -1,0 +1,121 @@
+stack_id: fullstack
+domain_ref: fullstack
+version: 1
+interview_intelligence_ref: ii_fullstack_2026_q1
+
+external_prerequisites:
+  - from_stack: python
+    required_skill_ids: [py_functions, py_oop_basics]
+    kind: hard_prereq
+
+modules:
+  - module_id: fs_m1
+    title: "HTML Fundamentals"
+    tags: [C1, L1]
+    estimated_hours_range: {min: 4, max: 6}
+    default_pedagogy_profile: project_build_along
+    skill_ids: [html_fundamentals]
+    prerequisite_modules: []
+    concepts: [html_tags, semantic_html, forms, tables, accessibility]
+    interview_frequency: high
+
+  - module_id: fs_m2
+    title: "CSS and Responsive Design"
+    tags: [C1, L1]
+    estimated_hours_range: {min: 5, max: 7}
+    default_pedagogy_profile: project_build_along
+    skill_ids: [css_fundamentals, responsive_design]
+    prerequisite_modules: [fs_m1]
+    concepts: [selectors, box_model, flexbox, grid, media_queries, responsive]
+    interview_frequency: high
+
+  - module_id: fs_m3
+    title: "JavaScript Fundamentals"
+    tags: [C1, L1]
+    estimated_hours_range: {min: 6, max: 8}
+    default_pedagogy_profile: concept_progression
+    skill_ids: [js_fundamentals, js_functions]
+    prerequisite_modules: [fs_m2]
+    prerequisite_external_skills: [py_functions]
+    concepts: [variables, functions, arrays, objects, dom, events, async_await]
+    interview_frequency: high
+
+  - module_id: fs_m4
+    title: "JavaScript Advanced Patterns"
+    tags: [C1, L2]
+    estimated_hours_range: {min: 5, max: 7}
+    default_pedagogy_profile: concept_progression
+    skill_ids: [js_closures, js_async_await, js_es6]
+    prerequisite_modules: [fs_m3]
+    concepts: [closure, promise, async_await, destructuring, spread, module_system]
+    interview_frequency: high
+
+  - module_id: fs_m5
+    title: "React Components and State"
+    tags: [C1, L2]
+    estimated_hours_range: {min: 6, max: 8}
+    default_pedagogy_profile: project_build_along
+    skill_ids: [react_components, react_state]
+    prerequisite_modules: [fs_m4]
+    concepts: [component, jsx, props, state, hooks, useEffect, conditional_rendering]
+    interview_frequency: high
+
+  - module_id: fs_m6
+    title: "Node.js and REST APIs"
+    tags: [C1, L2]
+    estimated_hours_range: {min: 6, max: 8}
+    default_pedagogy_profile: project_build_along
+    skill_ids: [node_rest_apis, express]
+    prerequisite_modules: [fs_m4]
+    concepts: [node, express, routing, middleware, rest_api, request_response]
+    interview_frequency: high
+
+  - module_id: fs_m7
+    title: "MongoDB and Data Modeling"
+    tags: [C1, L2]
+    estimated_hours_range: {min: 4, max: 6}
+    default_pedagogy_profile: project_build_along
+    skill_ids: [mongodb_basics, data_modeling]
+    prerequisite_modules: [fs_m6]
+    concepts: [document, collection, crud, schema_design, indexing, aggregation]
+    interview_frequency: high
+
+  - module_id: fs_m8
+    title: "Authentication and Security"
+    tags: [C2, L2]
+    estimated_hours_range: {min: 4, max: 6}
+    default_pedagogy_profile: project_build_along
+    skill_ids: [auth_security]
+    prerequisite_modules: [fs_m6]
+    concepts: [jwt, session, oauth, bcrypt, cors, helmet, input_validation]
+    interview_frequency: medium
+
+  - module_id: fs_m9
+    title: "React Advanced Patterns"
+    tags: [C2, L2]
+    estimated_hours_range: {min: 4, max: 6}
+    default_pedagogy_profile: project_build_along
+    skill_ids: [react_hooks, react_context, react_routing]
+    prerequisite_modules: [fs_m5]
+    concepts: [custom_hooks, context_api, react_router, state_management, performance]
+    interview_frequency: medium
+
+  - module_id: fs_m10
+    title: "Deployment and DevOps Basics"
+    tags: [C2, L2]
+    estimated_hours_range: {min: 3, max: 5}
+    default_pedagogy_profile: project_build_along
+    skill_ids: [deployment, devops_basics]
+    prerequisite_modules: [fs_m6, fs_m7]
+    concepts: [docker, ci_cd, cloud_deploy, environment_variables, monitoring]
+    interview_frequency: medium
+
+  - module_id: fs_m11
+    title: "GraphQL and Advanced APIs"
+    tags: [C3, L3]
+    estimated_hours_range: {min: 4, max: 6}
+    default_pedagogy_profile: concept_progression
+    skill_ids: [graphql, advanced_apis]
+    prerequisite_modules: [fs_m6, fs_m5]
+    concepts: [graphql_schema, resolver, mutation, subscription, api_gateway]
+    interview_frequency: low

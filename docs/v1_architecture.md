@@ -127,7 +127,7 @@ This keeps Git clean while preserving compounding intelligence.
   - pedagogy profile
   - brief generation
 - Loop B uses a course-native curriculum contract:
-  - `generate_curriculum` emits packaged `courses`
+  - `compose_product_specific_curriculum_container` emits packaged `courses`
   - explicit `levels` are not a required output shape
   - topic placement is deferred to later design stages
 - Loop B is moving from a coarse curriculum step into a richer curriculum-design chain:

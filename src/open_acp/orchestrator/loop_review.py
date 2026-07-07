@@ -16,14 +16,20 @@ _LOOP_STAGE_ORDER = {
     "loop_a": [
         "ingest_signals",
         "detect_patterns",
+        "derive_skill_outcomes_digest",
+        "derive_market_and_community_digest",
+        "produce_domain_definition",
         "update_skill_graph",
+        "materialize_stack_skill_graph",
         "update_learner_model",
-        "update_competitor_map",
+        "produce_stack_curriculum_abstract",
+        "produce_activity_types_library",
         "update_product_context",
         "update_wiki_index",
     ],
     "loop_b": [
         "load_wiki_context",
+        "load_stack_abstracts",
         "resolve_product_context",
         "resolve_structure_profile",
         "resolve_packaging_profile",
@@ -31,7 +37,7 @@ _LOOP_STAGE_ORDER = {
         "resolve_time_budget_context",
         "resolve_pedagogy_profile",
         "generate_brief",
-        "generate_curriculum",
+        "compose_product_specific_curriculum_container",
         "compare_curriculum_changes",
         "design_courses",
         "design_modules",
@@ -183,6 +189,8 @@ class LoopReviewRunner:
                     "drift_score",
                     "pattern_detection_status",
                     "pattern_detection_note",
+                    "skill_outcomes_signal_digest",
+                    "market_and_community_digest",
                     "product_family",
                     "product_version",
                     "require_product_context",
@@ -369,20 +377,34 @@ class LoopReviewRunner:
                 ],
             )
 
+        if stage_id == "derive_skill_outcomes_digest":
+            digest = state.get("skill_outcomes_signal_digest", {}) or {}
+            return (
+                "Derived Dimension 1 skill-outcomes digest.",
+                [
+                    f"Source refs: {', '.join(digest.get('source_refs', [])) or 'none'}.",
+                    f"Pattern highlights: {' | '.join(digest.get('pattern_highlights', [])[:3]) or 'none'}.",
+                    f"Unresolved inputs: {', '.join(digest.get('unresolved_inputs', [])) or 'none'}.",
+                ],
+            )
+
+        if stage_id == "derive_market_and_community_digest":
+            digest = state.get("market_and_community_digest", {}) or {}
+            return (
+                "Derived Dimension 9 market-and-community digest.",
+                [
+                    f"Source refs: {', '.join(digest.get('source_refs', [])) or 'none'}.",
+                    f"Pattern highlights: {' | '.join(digest.get('pattern_highlights', [])[:3]) or 'none'}.",
+                    f"Unresolved inputs: {', '.join(digest.get('unresolved_inputs', [])) or 'none'}.",
+                ],
+            )
+
         if stage_id == "update_learner_model":
             created = [item for item in updates.get("wiki_entries_created", []) if item.startswith("audience_segment_")]
             updated = [item for item in updates.get("wiki_entries_updated", []) if item.startswith("audience_segment_")]
             return (
                 f"Learner model updates complete: {len(created)} created, {len(updated)} updated.",
                 [f"Audience segments touched: {', '.join((created + updated)[:6]) or 'none'}."],
-            )
-
-        if stage_id == "update_competitor_map":
-            created = [item for item in updates.get("wiki_entries_created", []) if item.startswith("competitor_")]
-            updated = [item for item in updates.get("wiki_entries_updated", []) if item.startswith("competitor_")]
-            return (
-                f"Competitor map updates complete: {len(created)} created, {len(updated)} updated.",
-                [f"Competitor entities touched: {', '.join((created + updated)[:6]) or 'none'}."],
             )
 
         if stage_id == "update_product_context":
@@ -422,12 +444,19 @@ class LoopReviewRunner:
             skill_lines = sum(1 for line in (state.get("skill_graph_context", "")).splitlines() if line.startswith("- **"))
             learner_lines = sum(1 for line in (state.get("learner_context", "")).splitlines() if line.startswith("- **"))
             pattern_count = len(state.get("detected_patterns", []) or [])
+            skill_digest = state.get("skill_outcomes_signal_digest", {}) or {}
+            market_digest = state.get("market_and_community_digest", {}) or {}
             return (
                 "Loaded wiki-derived context for curriculum design.",
                 [
-                    f"Skill and competitor bullets loaded: {skill_lines}.",
+                    f"Skill bullets loaded: {skill_lines}.",
                     f"Learner segment bullets loaded: {learner_lines}.",
                     f"Loop A patterns available to this stage: {pattern_count}.",
+                    (
+                        "Digest refs available: "
+                        f"Dimension 1={len(skill_digest.get('source_refs', []) or [])}, "
+                        f"Dimension 9={len(market_digest.get('source_refs', []) or [])}."
+                    ),
                 ],
             )
 
@@ -531,12 +560,17 @@ class LoopReviewRunner:
                     f"Primary audience: {', '.join(audience) or 'none'}.",
                     f"Default pedagogy: {(brief.get('pedagogy') or {}).get('default_profile', 'unknown')}.",
                     f"Packaging profile ref: {brief.get('packaging_profile_ref', 'unknown')}.",
+                    (
+                        "Digest context: "
+                        f"Dimension 1 refs={len((state.get('skill_outcomes_signal_digest', {}) or {}).get('source_refs', []) or [])}, "
+                        f"Dimension 9 refs={len((state.get('market_and_community_digest', {}) or {}).get('source_refs', []) or [])}."
+                    ),
                     f"Stack learning outcomes: {' | '.join(outcomes[:5]) or 'none'}.",
                     f"Artifact path: {artifact_path or 'not saved'}.",
                 ],
             )
 
-        if stage_id == "generate_curriculum":
+        if stage_id == "compose_product_specific_curriculum_container":
             curriculum = state.get("curriculum_map", {}) or {}
             courses = curriculum.get("courses", []) or []
             course_titles = [course.get("title", "Untitled") for course in courses[:6]]
@@ -556,14 +590,19 @@ class LoopReviewRunner:
                     preview = " ".join(raw_response.split())[:300]
                     decisions.append(f"Raw response preview: {preview}")
                 return (
-                    "Curriculum generation parse failed; using an empty fallback curriculum draft.",
+                    "Curriculum-container composition parse failed; using an empty fallback curriculum draft.",
                     decisions,
                 )
             return (
-                f"Generated domain curriculum with {len(courses)} course seeds and total hours {curriculum.get('total_hours', 0)}.",
+                f"Composed product-specific curriculum container with {len(courses)} course seeds and total hours {curriculum.get('total_hours', 0)}.",
                 [
                     f"Brief ref: {(state.get('brief') or {}).get('brief_id', 'none')}.",
                     f"Packaging profile ref: {curriculum.get('packaging_profile_ref', 'unknown')}.",
+                    (
+                        "Digest context: "
+                        f"Dimension 1 refs={len((state.get('skill_outcomes_signal_digest', {}) or {}).get('source_refs', []) or [])}, "
+                        f"Dimension 9 refs={len((state.get('market_and_community_digest', {}) or {}).get('source_refs', []) or [])}."
+                    ),
                     f"Course-seed flow: {' | '.join(course_titles) if course_titles else 'none'}.",
                     (
                         "Hours validation: "

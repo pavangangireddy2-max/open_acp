@@ -1,0 +1,13 @@
+domain_id: ds_ml
+version: 1
+display_name: DS/ML
+poc: Manvish
+stacks:
+  - ds_ml
+  - ds_algo
+review_ownership:
+  content_review_queue: ds_ml_review_queue
+  domain_lead: Manvish
+related_domains:
+  - genai
+  - programming

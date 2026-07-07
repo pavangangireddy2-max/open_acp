@@ -1,0 +1,10 @@
+domain_id: english
+version: 1
+display_name: English
+poc: Tejaswini
+stacks:
+  - english
+review_ownership:
+  content_review_queue: english_review_queue
+  domain_lead: Tejaswini
+related_domains: []

@@ -1,0 +1,335 @@
+version: 1
+manifest_id: dimension_11a_curated_market_genai
+description: Curated source list for D11a — Curated Market & Tech Intelligence, GenAI stack scope.
+
+cadence_policy:
+  rss: daily
+  x: every_3_days
+  youtube: every_3_days
+  leaderboards: weekly
+  scraped: weekly
+
+sources:
+  org_blogs:
+    - name: OpenAI Academy
+      url: https://academy.openai.com/public/content
+      ingestion: scrape
+    - name: Anthropic Engineering
+      url: https://www.anthropic.com/engineering
+      ingestion: scrape
+    - name: Google DeepMind
+      url: https://deepmind.google/discover/blog
+      ingestion: scrape
+    - name: Microsoft Research
+      url: https://www.microsoft.com/en-us/research/blog/
+      rss: https://www.microsoft.com/en-us/research/feed/
+      ingestion: rss
+    - name: Meta AI
+      url: https://ai.meta.com/blog
+      ingestion: scrape
+    - name: DeepSeek
+      url: https://deepseek.com
+      ingestion: scrape
+    - name: Alibaba Qwen
+      url: https://qwenlm.github.io
+      rss: https://qwenlm.github.io/feed.xml
+      ingestion: rss
+    - name: Mistral AI News
+      url: https://mistral.ai/news
+      ingestion: scrape
+    - name: Hugging Face Blog
+      url: https://huggingface.co/blog
+      rss: https://huggingface.co/blog/feed.xml
+      ingestion: rss
+    - name: Zai_org
+      url: https://x.com/Zai_org
+      ingestion: x
+      x_signal_types: [News]
+
+  curated_x_accounts:
+    - handle: akshay_pachaar
+      url: https://x.com/akshay_pachaar
+      ingestion: x
+      x_signal_types: [LearningResources]
+    - handle: _avichawla
+      url: https://x.com/_avichawla
+      ingestion: x
+      x_signal_types: [LearningResources]
+    - handle: aaditsh
+      url: https://x.com/aaditsh
+      ingestion: x
+      x_signal_types: [LearningResources]
+    - handle: victor_explore
+      url: https://x.com/victor_explore
+      ingestion: x
+      x_signal_types: [LearningResources]
+    - handle: omarsar0
+      url: https://x.com/omarsar0
+      ingestion: x
+      x_signal_types: [ResearchPapers]
+    - handle: chipro
+      url: https://x.com/chipro
+      ingestion: x
+      x_signal_types: [SystemDesign]
+    - handle: gkcs_
+      url: https://x.com/gkcs_
+      ingestion: x
+      x_signal_types: [SystemDesign]
+    - handle: dr_cintas
+      url: https://x.com/dr_cintas
+      ingestion: x
+      x_signal_types: [News]
+    - handle: hasantoxr
+      url: https://x.com/hasantoxr
+      ingestion: x
+      x_signal_types: [News]
+    - handle: TheTuringPost
+      url: https://x.com/TheTuringPost
+      ingestion: x
+      x_signal_types: [News]
+    - handle: AiBreakfast
+      url: https://x.com/AiBreakfast
+      ingestion: x
+      x_signal_types: [News]
+    - handle: Sumanth_077
+      url: https://x.com/Sumanth_077
+      ingestion: x
+      x_signal_types: [Tools]
+    - handle: tom_doerr
+      url: https://x.com/tom_doerr
+      ingestion: x
+      x_signal_types: [Tools]
+    - handle: lmarena_ai
+      url: https://x.com/lmarena_ai
+      ingestion: x
+      x_signal_types: [ModelAnalysis]
+    - handle: ArtificialAnlys
+      url: https://x.com/ArtificialAnlys
+      ingestion: x
+      x_signal_types: [ModelAnalysis]
+    - handle: mervenoyann
+      url: https://x.com/mervenoyann
+      ingestion: x
+      x_signal_types: [OpenSource]
+    - handle: PawelHuryn
+      url: https://x.com/PawelHuryn
+      ingestion: x
+      x_signal_types: [Tips]
+    - handle: iannuttall
+      url: https://x.com/iannuttall
+      ingestion: x
+      x_signal_types: [Tips]
+    - handle: minchoi
+      url: https://x.com/minchoi
+      ingestion: x
+      x_signal_types: [Tips]
+    - handle: itsPaulAi
+      url: https://x.com/itsPaulAi
+      ingestion: x
+      x_signal_types: [Tips]
+    - handle: Alex_Prompter
+      url: https://x.com/Alex_Prompter
+      ingestion: x
+      x_signal_types: [Prompting]
+    - handle: natolambert
+      url: https://x.com/natolambert
+      ingestion: x
+      x_signal_types: [Evaluation]
+    - handle: justinskycak
+      url: https://x.com/justinskycak
+      ingestion: x
+      x_signal_types: [PersonalisedLearning]
+    - handle: karpathy
+      url: https://x.com/karpathy
+      ingestion: x
+      x_signal_types: [Founders]
+    - handle: addyosmani
+      url: https://x.com/addyosmani
+      ingestion: x
+      x_signal_types: [Founders]
+    - handle: AndrewYNg
+      url: https://x.com/AndrewYNg
+      ingestion: x
+      x_signal_types: [Founders]
+    - handle: demishassabis
+      url: https://x.com/demishassabis
+      ingestion: x
+      x_signal_types: [Founders]
+    - handle: ilyasut
+      url: https://x.com/ilyasut
+      ingestion: x
+      x_signal_types: [Founders]
+    - handle: DarioAmodei
+      url: https://x.com/DarioAmodei
+      ingestion: x
+      x_signal_types: [Founders]
+    - handle: _philschmid
+      url: https://x.com/_philschmid
+      ingestion: x
+      x_signal_types: [Founders]
+
+  notable_x_threads:
+    - description: Manus AI recap
+      url: https://x.com/manusai/status/2008916707503460619
+      ingestion: x
+    - description: AI Engineer Interviews Cheatsheet
+      url: https://x.com/pvergadia/status/2001117645933043781
+      ingestion: x
+    - description: LLM Cheatsheet
+      url: https://x.com/_vmlops/status/2030864564867469376
+      ingestion: x
+    - description: Agentic System Workflow Patterns
+      url: https://x.com/aurimas_gr/status/1991159044346728833
+      ingestion: x
+    - description: Interview Q&A
+      url: https://x.com/krishnasagrawal/status/1984865556143439958
+      ingestion: x
+
+  youtube_channels:
+    - name: AI Engineer
+      url: https://www.youtube.com/@aiDotEngineer
+      ingestion: scrape
+    - name: Varun Mayya
+      url: https://www.youtube.com/@VarunMayya
+      ingestion: scrape
+    - name: AI Search
+      url: https://www.youtube.com/@aisearch
+      ingestion: scrape
+    - name: Jeff Su
+      url: https://www.youtube.com/@JeffSu
+      ingestion: scrape
+    - name: Gaurav Sen
+      url: https://www.youtube.com/@gkcs
+      ingestion: scrape
+    - name: Yannic Kilcher
+      url: https://www.youtube.com/@YannicKilcher
+      ingestion: scrape
+    - name: Two Minute Papers
+      url: https://www.youtube.com/@TwoMinutePapers
+      ingestion: scrape
+    - name: Riley Brown
+      url: https://www.youtube.com/@rileybrown_ai
+      ingestion: scrape
+
+  podcasts:
+    - name: Lex Fridman Podcast
+      url: https://lexfridman.com/podcast
+      rss: https://lexfridman.com/feed/podcast/
+      ingestion: rss
+    - name: Greg Isenberg / Startup Ideas
+      url: https://www.gregisenberg.com
+      ingestion: scrape
+
+  newsletters:
+    - name: LLM Watch
+      url: https://www.llmwatch.com/
+      rss: https://www.llmwatch.com/feed
+      ingestion: rss
+    - name: Import AI (Jack Clark)
+      url: https://jack-clark.net/
+      rss: https://jack-clark.net/feed/
+      ingestion: rss
+    - name: The Batch (DeepLearning.AI)
+      url: https://www.deeplearning.ai/the-batch/
+      ingestion: scrape
+    - name: Latent Space
+      url: https://www.latent.space/
+      rss: https://www.latent.space/feed
+      ingestion: rss
+
+  leaderboards_benchmarks:
+    - name: Open LLM Leaderboard
+      url: https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard
+      ingestion: scrape
+    - name: LMArena Leaderboard
+      url: https://huggingface.co/spaces/lmarena-ai/lmarena-leaderboard
+      ingestion: scrape
+    - name: LLM Stats
+      url: https://llm-stats.com/
+      ingestion: scrape
+
+  competitor_courses:
+    - name: DeepLearning.AI
+      url: https://learn.deeplearning.ai/
+      ingestion: scrape
+    - name: Vizuara AI
+      url: https://vizuara.ai/courses
+      ingestion: scrape
+    - name: Maven
+      url: https://maven.com/
+      ingestion: scrape
+    - name: Analytics Vidhya Pinnacle+
+      url: https://www.analyticsvidhya.com/pinnacleplus/
+      ingestion: scrape
+    - name: 100x Engineers
+      url: https://www.100xengineers.com/
+      ingestion: scrape
+    - name: Growth School
+      url: https://growthschool.io/
+      ingestion: scrape
+
+  product_launches:
+    - name: Product Hunt
+      url: https://www.producthunt.com
+      ingestion: scrape
+    - name: Indie Hackers
+      url: https://www.indiehackers.com
+      ingestion: scrape
+    - name: Y Combinator Companies
+      url: https://www.ycombinator.com/companies
+      ingestion: scrape
+
+  longform_blogs:
+    - name: Addy Osmani
+      url: https://addyosmani.com/blog/
+      rss: https://addyosmani.com/blog/feed/index.xml
+      ingestion: rss
+    - name: Anthropic Engineering (longform)
+      url: https://www.anthropic.com/engineering
+      ingestion: scrape
+    - name: PromptHub
+      url: https://prompthub.substack.com/
+      rss: https://prompthub.substack.com/feed
+      ingestion: rss
+    - name: IBM Think Prompt Engineering
+      url: https://www.ibm.com/think/prompt-engineering
+      ingestion: scrape
+    - name: Prompting Guide
+      url: https://www.promptingguide.ai/
+      ingestion: scrape
+
+  certifications:
+    - name: Claude Certified Architect Foundations
+      url: https://anthropic.skilljar.com/claude-certified-architect-foundations-access-request
+      ingestion: scrape
+
+  community_links:
+    - name: r/MachineLearning
+      url: https://reddit.com/r/MachineLearning
+      ingestion: deferred
+      note: Belongs to D11b community chatter; included here only as reference.
+    - name: r/LocalLLaMA
+      url: https://reddit.com/r/LocalLLaMA
+      ingestion: deferred
+    - name: r/artificial
+      url: https://reddit.com/r/artificial
+      ingestion: deferred
+    - name: AI Engineering from Scratch (GitHub)
+      url: https://github.com/rohitg00/ai-engineering-from-scratch
+      ingestion: scrape
+    - name: LinkedIn agentic-AI design patterns post
+      url: https://www.linkedin.com/posts/shreyshahh_agentic-ai-design-patterns-activity-7382320238790479873-sJNI/
+      ingestion: deferred
+
+  instagram:
+    - name: Analytics Vidhya
+      url: https://www.instagram.com/analyticsvidhya/
+      ingestion: deferred
+
+notes:
+  - URLs marked ingestion=rss are slice-1 targets (RSS-backed).
+  - URLs marked ingestion=scrape need bespoke HTML extraction; deferred to slice 3.
+  - URLs marked ingestion=x require X API or login flows; deferred to slice 4.
+  - URLs marked ingestion=deferred map to D11b (community chatter) and are out of scope for v1.
+  - x_signal_types reflects the curated tag from the user-supplied URL list and is used by the digest reducer for dimension weighting.
+  - Some declared RSS endpoints (Microsoft Research, Qwen, Hugging Face, Lex Fridman, LLM Watch, Import AI, Latent Space, Addy Osmani, PromptHub) have not been validated against the live web yet; the rss_ingestor will surface fetch errors when run.

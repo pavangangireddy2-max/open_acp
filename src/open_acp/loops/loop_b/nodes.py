@@ -279,7 +279,16 @@ def _assessment_question_types_for_topic(topic: dict, units_for_topic: list[dict
     return _unique_preserve_order(question_types)
 
 
-def _assessment_difficulty(topic_sequence: int, topic_count: int) -> str:
+def _assessment_difficulty(topic_sequence: int, topic_count: int, tags: list[str] | None = None) -> str:
+    """Determine assessment difficulty from sequence position and C/L tags."""
+    # v9: L-tag overrides when available
+    if tags:
+        for tag in tags:
+            if tag == "L3":
+                return "hard"
+            if tag == "L1" and topic_sequence == 1:
+                return "easy"
+
     if topic_count <= 1:
         return "medium"
     if topic_sequence == 1:
@@ -333,6 +342,72 @@ def _packaging_summary(packaging_profile: dict) -> str:
             f"- Learning unit types: {', '.join(packaging_profile.get('allowed_learning_unit_types', [])) or 'none'}",
         ]
     )
+
+
+def _stack_course_abstract_summary(domain: str) -> str:
+    stack_manifest = load_stack_manifest(domain)
+    abstract_ref = stack_manifest.get("stack_curriculum_abstract_ref")
+    if abstract_ref:
+        abstract_path = _find_project_root() / abstract_ref
+        if abstract_path.exists():
+            payload = yaml.safe_load(abstract_path.read_text(encoding="utf-8")) or {}
+            return yaml.safe_dump(payload, sort_keys=False, allow_unicode=False)
+
+    canonical_titles = stack_manifest.get("canonical_course_titles", []) or []
+    course_variants = stack_manifest.get("course_variants", []) or []
+
+    sections = [
+        f"- Catalog label: {stack_manifest.get('catalog_label', domain.title())}",
+        f"- Canonical course titles: {', '.join(canonical_titles) or 'none'}",
+    ]
+    if course_variants:
+        sections.append("### Canonical Course Variants")
+        for variant in course_variants[:8]:
+            if isinstance(variant, dict):
+                variant_id = variant.get("course_variant_id") or variant.get("variant_id") or "unknown_variant"
+                base_course = variant.get("canonical_course_id") or variant.get("base_course_id") or "unknown_course"
+                audience = variant.get("audience") or variant.get("product_family") or "unspecified"
+                sections.append(f"- {variant_id}: base={base_course}, audience={audience}")
+            else:
+                sections.append(f"- {variant}")
+    else:
+        sections.append("### Canonical Course Variants\n- none declared")
+
+    return "\n".join(sections)
+
+
+def _product_course_overlay_summary(product_context: dict) -> str:
+    product_only_courses = product_context.get("product_only_courses", []) or []
+    course_variant_overrides = product_context.get("course_variant_overrides", {}) or {}
+
+    sections = [
+        f"- Product label: {product_context.get('product_label', 'Stack-only default')}",
+        f"- Variant strategy: {product_context.get('variant_strategy', 'none') or 'none'}",
+        "### Product-only Courses",
+    ]
+    if product_only_courses:
+        for course in product_only_courses[:8]:
+            course_id = course.get("course_id", "unknown_course")
+            title = course.get("title", course_id)
+            placement = course.get("insertion", course.get("placement", "append"))
+            hours = course.get("estimated_hours", course.get("default_hours", "unknown"))
+            sections.append(f"- {course_id}: {title} (placement={placement}, hours={hours})")
+    else:
+        sections.append("- none declared")
+
+    sections.append("### Course Variant Overrides")
+    if course_variant_overrides:
+        for canonical_course_id, override in list(course_variant_overrides.items())[:12]:
+            if isinstance(override, dict):
+                variant_id = override.get("course_variant_id", "unspecified_variant")
+                reason = override.get("reason", "not provided")
+                sections.append(f"- {canonical_course_id}: {variant_id} ({reason})")
+            else:
+                sections.append(f"- {canonical_course_id}: {override}")
+    else:
+        sections.append("- none declared")
+
+    return "\n".join(sections)
 
 
 def _extract_total_hours_from_curriculum_source(curriculum_source_context: str) -> float | None:
@@ -396,6 +471,89 @@ def _build_time_budget_summary(context: dict) -> str:
     )
 
 
+def _build_skill_outcomes_digest_summary(digest: dict) -> str:
+    if not digest:
+        return "- No skill-outcomes digest available."
+
+    target_roles = digest.get("target_roles", []) or []
+    role_lines = []
+    for role in target_roles[:5]:
+        if isinstance(role, dict):
+            role_id = role.get("role_id") or role.get("title") or "unknown_role"
+            priority = role.get("priority") or role.get("evidence_strength")
+            if priority is not None:
+                role_lines.append(f"- {role_id} ({priority})")
+            else:
+                role_lines.append(f"- {role_id}")
+        else:
+            role_lines.append(f"- {role}")
+
+    clusters = digest.get("skill_priority_clusters", []) or []
+    cluster_lines = []
+    for cluster in clusters[:5]:
+        if isinstance(cluster, dict):
+            cluster_id = cluster.get("cluster_id") or cluster.get("title") or "unknown_cluster"
+            skill_ids = ", ".join(cluster.get("skill_ids", [])[:5]) or "none"
+            cluster_lines.append(f"- {cluster_id}: {skill_ids}")
+        else:
+            cluster_lines.append(f"- {cluster}")
+
+    pattern_highlights = digest.get("pattern_highlights", []) or []
+    unresolved_inputs = digest.get("unresolved_inputs", []) or []
+    source_refs = digest.get("source_refs", []) or []
+
+    sections = [
+        "## Skill Outcomes Digest",
+        f"- Digest id: {digest.get('digest_id', 'unknown')}",
+        f"- Source refs: {', '.join(source_refs) or 'none'}",
+        "### Target Roles",
+        "\n".join(role_lines) if role_lines else "- none",
+        "### Skill Priority Clusters",
+        "\n".join(cluster_lines) if cluster_lines else "- none",
+        "### Pattern Highlights",
+        "\n".join(f"- {highlight}" for highlight in pattern_highlights[:5]) if pattern_highlights else "- none",
+        "### Unresolved Inputs",
+        "\n".join(f"- {item}" for item in unresolved_inputs[:5]) if unresolved_inputs else "- none",
+    ]
+    return "\n".join(sections)
+
+
+def _build_market_and_community_digest_summary(digest: dict) -> str:
+    if not digest:
+        return "- No market-and-community digest available."
+
+    source_refs = digest.get("source_refs", []) or []
+    competitor_refs = digest.get("competitor_signal_refs", []) or []
+    market_refs = digest.get("market_signal_refs", []) or []
+    pressures = digest.get("competitive_pressures", []) or digest.get("market_pressures", []) or []
+    pattern_highlights = digest.get("pattern_highlights", []) or []
+    unresolved_inputs = digest.get("unresolved_inputs", []) or []
+
+    pressure_lines = []
+    for pressure in pressures[:5]:
+        if isinstance(pressure, dict):
+            label = pressure.get("pressure_id") or pressure.get("title") or "unknown_pressure"
+            summary = pressure.get("summary") or pressure.get("notes") or ""
+            pressure_lines.append(f"- {label}: {summary}".rstrip(": "))
+        else:
+            pressure_lines.append(f"- {pressure}")
+
+    sections = [
+        "## Market And Community Digest",
+        f"- Digest id: {digest.get('digest_id', 'unknown')}",
+        f"- Source refs: {', '.join(source_refs) or 'none'}",
+        f"- Competitor refs: {', '.join(competitor_refs) or 'none'}",
+        f"- Market refs: {', '.join(market_refs) or 'none'}",
+        "### Competitive And Market Pressures",
+        "\n".join(pressure_lines) if pressure_lines else "- none",
+        "### Pattern Highlights",
+        "\n".join(f"- {highlight}" for highlight in pattern_highlights[:5]) if pattern_highlights else "- none",
+        "### Unresolved Inputs",
+        "\n".join(f"- {item}" for item in unresolved_inputs[:5]) if unresolved_inputs else "- none",
+    ]
+    return "\n".join(sections)
+
+
 def _extract_source_refs(curriculum_source_context: str) -> list[str]:
     refs = re.findall(r"^### Source: (.+)$", curriculum_source_context or "", flags=re.MULTILINE)
     return _unique_preserve_order([ref.strip() for ref in refs if ref.strip()])
@@ -435,6 +593,22 @@ def _extract_markdown_bullets(section_text: str, limit: int = 8) -> list[str]:
     return _unique_preserve_order(bullets)
 
 
+def _default_coverage_policy(domain: str, track_abstract: dict | None) -> dict:
+    """Build default coverage_policy_per_stack from track abstract or sensible defaults."""
+    if track_abstract:
+        policy = {}
+        for cs in track_abstract.get("contributing_stacks", []):
+            if isinstance(cs, dict):
+                stack_id = cs.get("stack_id", domain)
+                policy[stack_id] = {
+                    "include_tags": cs.get("include_tags", ["C1", "C2"]),
+                    "include_levels": cs.get("include_levels", ["L1", "L2"]),
+                }
+        if policy:
+            return policy
+    return {domain: {"include_tags": ["C1", "C2"], "include_levels": ["L1", "L2"]}}
+
+
 def _default_allowed_local_overrides(profile: str) -> list[str]:
     mapping = {
         "project_build_along": ["concept_progression", "tool_workflow"],
@@ -468,6 +642,77 @@ def _fallback_stack_learning_outcomes(domain: str, pedagogy_profile: str, curric
         f"Apply core {domain} concepts in realistic scenarios",
         f"Demonstrate observable {domain} skills through guided outputs",
     ]
+
+
+def load_stack_abstracts(state: dict) -> dict:
+    """Load stack curriculum abstracts, track abstract, and domain definition into state.
+
+    Sources (in priority order):
+    1. Loop A artifacts from storage/intelligence/{domain}/{cycle_id}/
+    2. Seed manifests from knowledge/manifests/
+    """
+    domain = state.get("domain", "unknown")
+    cycle_id = state.get("cycle_id", "cycle_1")
+    project_root = _find_project_root()
+
+    # --- Domain definition ---
+    domain_def = None
+    # Try Loop A artifact first
+    artifact_path = project_root / "storage" / "intelligence" / domain / cycle_id / "domain_definition.yaml"
+    if artifact_path.exists():
+        domain_def = yaml.safe_load(artifact_path.read_text(encoding="utf-8"))
+    if not domain_def:
+        # Fall back to seed manifest
+        seed_path = project_root / "knowledge" / "manifests" / "domains" / f"{domain}.yaml"
+        if seed_path.exists():
+            domain_def = yaml.safe_load(seed_path.read_text(encoding="utf-8"))
+
+    # --- Stack curriculum abstract ---
+    stack_abstracts = {}
+    # Try Loop A artifact
+    abstract_artifact = project_root / "storage" / "intelligence" / domain / cycle_id / "stack_curriculum_abstract.yaml"
+    if abstract_artifact.exists():
+        abstract = yaml.safe_load(abstract_artifact.read_text(encoding="utf-8"))
+        if abstract:
+            stack_id = abstract.get("stack_id", domain)
+            stack_abstracts[stack_id] = abstract
+    if not stack_abstracts:
+        # Fall back to seed abstract
+        seed_abstract = project_root / "knowledge" / "manifests" / "stacks" / f"{domain}_curriculum_abstract.yaml"
+        if seed_abstract.exists():
+            abstract = yaml.safe_load(seed_abstract.read_text(encoding="utf-8"))
+            if abstract:
+                stack_abstracts[abstract.get("stack_id", domain)] = abstract
+
+    # --- Track abstract ---
+    track_abstract = None
+    # Check if domain definition points to tracks, try to load matching track
+    if domain_def:
+        stacks = domain_def.get("stacks", [])
+        # Search for any track that lists these stacks as contributing
+        tracks_dir = project_root / "knowledge" / "manifests" / "tracks"
+        if tracks_dir.exists():
+            for track_file in sorted(tracks_dir.glob("*.yaml")):
+                track_data = yaml.safe_load(track_file.read_text(encoding="utf-8")) or {}
+                contributing_stacks = [
+                    cs.get("stack_id") if isinstance(cs, dict) else cs
+                    for cs in track_data.get("contributing_stacks", [])
+                ]
+                if domain in contributing_stacks or any(s in contributing_stacks for s in stacks):
+                    track_abstract = track_data
+                    break  # Take the first matching track
+
+    abstract_count = sum(len(a.get("modules", [])) for a in stack_abstracts.values())
+    print(
+        f"  Stack abstracts loaded: {len(stack_abstracts)} stack(s), "
+        f"{abstract_count} total module(s), "
+        f"track={'yes' if track_abstract else 'none'}"
+    )
+    return {
+        "domain_definition": domain_def,
+        "stack_abstracts": stack_abstracts if stack_abstracts else None,
+        "track_abstract": track_abstract,
+    }
 
 
 def resolve_design_priority_profile(state: dict) -> dict:
@@ -544,6 +789,8 @@ def load_wiki_context(state: dict) -> dict:
     """Load skill graph and learner model from wiki entities."""
     wiki = WikiEngine()
     domain = state.get("domain", "ml-engineering")
+    skill_outcomes_digest = state.get("skill_outcomes_signal_digest", {}) or {}
+    market_and_community_digest = state.get("market_and_community_digest", {}) or {}
 
     # Gather skill entities
     skills = wiki.list_entities(entity_type="skill")
@@ -571,20 +818,16 @@ def load_wiki_context(state: dict) -> dict:
         if entity:
             learner_context += f"- **{l['title']}**: {entity['content'][:300]}\n"
 
-    # Gather competitor entities
-    competitors = wiki.list_entities(entity_type="competitor")
-    competitor_context = "## Competitors\n"
-    for c in competitors:
-        entity = wiki.get_entity("competitor", c["entity_id"])
-        if entity:
-            competitor_context += f"- **{c['title']}**: {entity['content'][:300]}\n"
-
     curriculum_source_context = _load_curriculum_sources(domain)
+    skill_outcomes_context = _build_skill_outcomes_digest_summary(skill_outcomes_digest)
+    market_and_community_context = _build_market_and_community_digest_summary(market_and_community_digest)
 
-    print(f"  Wiki context loaded: {len(skills)} skills, {len(learners)} learner segments, {len(competitors)} competitors")
+    print(f"  Wiki context loaded: {len(skills)} skills, {len(learners)} learner segments")
     return {
-        "skill_graph_context": skill_context + "\n" + competitor_context,
+        "skill_graph_context": skill_context,
         "learner_context": learner_context,
+        "skill_outcomes_context": skill_outcomes_context,
+        "market_and_community_context": market_and_community_context,
         "curriculum_source_context": curriculum_source_context,
     }
 
@@ -641,7 +884,13 @@ def generate_brief(state: dict) -> dict:
     pedagogy_rationale = state.get("pedagogy_rationale", "content-type default")
     skill_context = state.get("skill_graph_context", "")
     learner_context = state.get("learner_context", "")
+    skill_outcomes_context = state.get("skill_outcomes_context", "")
+    market_and_community_context = state.get("market_and_community_context", "")
     curriculum_source_context = state.get("curriculum_source_context") or state.get("program_context", "")
+
+    # v9: stack abstract context for coverage policy
+    stack_abstracts = state.get("stack_abstracts", {}) or {}
+    track_abstract = state.get("track_abstract")
 
     product_summary = _product_summary(product_context)
     structure_summary = _structure_summary(structure_profile)
@@ -652,6 +901,33 @@ def generate_brief(state: dict) -> dict:
     source_hours_declared = time_budget_context.get("source_total_hours")
     source_vs_packaging_conflict = bool(time_budget_context.get("source_vs_packaging_conflict", False))
     default_stack_name = _default_stack_name(domain, curriculum_source_context)
+
+    # Build abstract module catalog summary for the prompt
+    abstract_summary_lines: list[str] = []
+    for stack_id, abstract in stack_abstracts.items():
+        modules = abstract.get("modules", []) or []
+        if not modules:
+            continue
+        abstract_summary_lines.append(f"\n### Stack: {stack_id} ({len(modules)} modules)")
+        for mod in modules[:15]:
+            tags = mod.get("tags", [])
+            hours = mod.get("estimated_hours_range", {})
+            hr_str = f"{hours.get('min', '?')}-{hours.get('max', '?')}h" if isinstance(hours, dict) else str(hours)
+            abstract_summary_lines.append(
+                f"- {mod.get('module_id', '?')}: {mod.get('title', '?')} "
+                f"[{', '.join(tags)}] {hr_str} freq={mod.get('interview_frequency', '?')}"
+            )
+        if len(modules) > 15:
+            abstract_summary_lines.append(f"  ... and {len(modules) - 15} more")
+    abstract_context = "\n".join(abstract_summary_lines) if abstract_summary_lines else "No stack curriculum abstracts available."
+
+    # Track abstract context
+    track_context = ""
+    if track_abstract:
+        track_context = f"\n## Track Abstract: {track_abstract.get('display_name', track_abstract.get('track_id', '?'))}"
+        for cs in track_abstract.get("contributing_stacks", []):
+            if isinstance(cs, dict):
+                track_context += f"\n- {cs.get('stack_id', '?')}: tags={cs.get('include_tags', [])}, levels={cs.get('include_levels', [])}"
 
     claude = ClaudeClient()
     prompt = f"""Create a Stage 0 curriculum brief for the "{domain}" stack.
@@ -674,11 +950,21 @@ def generate_brief(state: dict) -> dict:
 ## Time Budget Context
 {time_budget_summary}
 
+## Skill Outcomes Digest
+{skill_outcomes_context or "No explicit skill-outcomes digest provided."}
+
+## Market And Community Digest
+{market_and_community_context or "No explicit market/community digest provided."}
+
 ## Skill Context
 {skill_context or "No explicit skill context provided."}
 
 ## Learner Context
 {learner_context or "No explicit learner context provided."}
+
+## Stack Curriculum Abstract (C/L Tagged Module Catalog)
+{abstract_context}
+{track_context}
 
 Decide only the Stage 0 brief:
 1. Stack name
@@ -711,7 +997,13 @@ Return JSON:
   ],
   "source_refs": {json.dumps(source_refs)},
   "source_hours_declared": {json.dumps(source_hours_declared)},
-  "source_vs_packaging_conflict": {json.dumps(source_vs_packaging_conflict)}
+  "source_vs_packaging_conflict": {json.dumps(source_vs_packaging_conflict)},
+  "coverage_policy_per_stack": {{
+    "{domain}": {{
+      "include_tags": ["C1", "C2"],
+      "include_levels": ["L1", "L2"]
+    }}
+  }}
 }}
 
 Important constraints:
@@ -720,6 +1012,8 @@ Important constraints:
 - Use the resolved pedagogy profile unless the sources clearly justify a different default.
 - Do not design courses, modules, topics, or content yet.
 - Do not introduce success metrics, differentiation strategy, or hour allocation into this artifact.
+- If stack curriculum abstracts are available, decide which C-tags (C1/C2/C3) and L-tags (L1/L2/L3) to include per stack in `coverage_policy_per_stack`. Default: C1+C2, L1+L2.
+- If a track abstract specifies coverage scope, prefer its tags/levels unless overridden by product context.
 - Keep this brief compact and structural.
 
 Return ONLY the JSON object."""
@@ -765,6 +1059,7 @@ Return ONLY the JSON object."""
             "source_refs": source_refs,
             "source_hours_declared": source_hours_declared,
             "source_vs_packaging_conflict": source_vs_packaging_conflict,
+            "coverage_policy_per_stack": _default_coverage_policy(domain, track_abstract),
         }
 
     brief.setdefault("brief_id", f"brief_{_slugify(domain)}")
@@ -796,6 +1091,7 @@ Return ONLY the JSON object."""
     brief.setdefault("source_refs", source_refs)
     brief.setdefault("source_hours_declared", source_hours_declared)
     brief.setdefault("source_vs_packaging_conflict", source_vs_packaging_conflict)
+    brief.setdefault("coverage_policy_per_stack", _default_coverage_policy(domain, track_abstract))
     brief["pedagogy"].setdefault("default_profile", pedagogy_profile)
     brief["pedagogy"].setdefault("allowed_local_overrides", _default_allowed_local_overrides(pedagogy_profile))
 
@@ -822,6 +1118,7 @@ Return ONLY the JSON object."""
         "brief": brief,
         "brief_artifact_path": artifact_path,
         "design_artifact_paths": artifact_paths,
+        "coverage_policy": brief.get("coverage_policy_per_stack"),
     }
 
 
@@ -858,24 +1155,88 @@ def resolve_pedagogy_profile(state: dict) -> dict:
     }
 
 
-def generate_curriculum(state: dict) -> dict:
-    """Generate packaged course structure from the approved brief and source curriculum."""
+def compose_product_specific_curriculum_container(state: dict) -> dict:
+    """Compose the product-specific curriculum container from brief, stack abstract, and overlays."""
+    from open_acp.loops.loop_b.coverage import apply_coverage_policy, verify_cross_stack_prerequisites
+
     domain = state.get("domain", "ml-engineering")
     brief = _load_design_artifact(state, artifact_key="brief", state_key="brief", filename="brief.yaml")
     if not brief:
-        raise ValueError("Missing brief artifact. Run generate_brief successfully before generate_curriculum.")
+        raise ValueError(
+            "Missing brief artifact. Run generate_brief successfully before compose_product_specific_curriculum_container."
+        )
     curriculum_source_context = state.get("curriculum_source_context") or state.get("program_context", "")
     content_type = state.get("content_type", "concept_explainer")
     structure_profile = state.get("structure_profile", {}) or {}
     packaging_profile = state.get("packaging_profile", {}) or {}
     time_budget_context = state.get("time_budget_context", {}) or {}
+    skill_outcomes_context = state.get("skill_outcomes_context", "")
+    market_and_community_context = state.get("market_and_community_context", "")
     structure_summary = _structure_summary(structure_profile)
     packaging_summary = _packaging_summary(packaging_profile)
+    stack_course_abstract_summary = _stack_course_abstract_summary(domain)
+    product_course_overlay_summary = _product_course_overlay_summary(state.get("product_context", {}) or {})
     brief_json = json.dumps(brief, indent=2)
     pedagogy_profile = ((brief.get("pedagogy") or {}).get("default_profile")) or state.get("pedagogy_profile", "concept_progression")
     total_hours = time_budget_context.get("target_total_hours", packaging_profile.get("total_hours", 20.0))
     stack_name = brief.get("stack_name", _default_stack_name(domain, curriculum_source_context))
     packaging_profile_ref = brief.get("packaging_profile_ref", packaging_profile.get("packaging_profile_id"))
+
+    # v9: Apply coverage policy to stack abstracts when available
+    stack_abstracts = state.get("stack_abstracts", {}) or {}
+    coverage_policy = state.get("coverage_policy") or brief.get("coverage_policy_per_stack", {}) or {}
+    all_selected_modules: list[dict] = []
+    composition_trace_data: dict = {
+        "contributing_stacks": [],
+        "modules_selected_per_stack": {},
+        "modules_dropped": [],
+        "coverage_cells_selected_per_stack": {},
+        "refreshers_added": [],
+        "addons_injected": [],
+        "cross_stack_prereq_verification": {},
+        "abstract_versions_pinned": {},
+    }
+    coverage_context_lines: list[str] = []
+
+    if stack_abstracts:
+        for stack_id, abstract in stack_abstracts.items():
+            policy = coverage_policy.get(stack_id, {})
+            include_tags = policy.get("include_tags")
+            include_levels = policy.get("include_levels")
+
+            result = apply_coverage_policy(abstract, include_tags, include_levels)
+            selected = result["selected"]
+            dropped = result["dropped"]
+            selected_cells = result["selected_cells"]
+
+            all_selected_modules.extend(selected)
+            composition_trace_data["contributing_stacks"].append(stack_id)
+            composition_trace_data["modules_selected_per_stack"][stack_id] = [
+                m.get("module_id", "?") for m in selected
+            ]
+            composition_trace_data["modules_dropped"].extend(dropped)
+            composition_trace_data["coverage_cells_selected_per_stack"][stack_id] = selected_cells
+            composition_trace_data["abstract_versions_pinned"][stack_id] = abstract.get("version", 1)
+
+            coverage_context_lines.append(
+                f"\n### {stack_id}: {len(selected)} modules selected, {len(dropped)} dropped"
+            )
+            for mod in selected[:10]:
+                tags = mod.get("tags", [])
+                coverage_context_lines.append(
+                    f"- {mod.get('module_id', '?')}: {mod.get('title', '?')} [{', '.join(tags)}]"
+                )
+            if len(selected) > 10:
+                coverage_context_lines.append(f"  ... and {len(selected) - 10} more")
+
+        # Verify cross-stack prerequisites
+        prereq_report = verify_cross_stack_prerequisites(all_selected_modules, stack_abstracts)
+        composition_trace_data["cross_stack_prereq_verification"] = {
+            "verified": prereq_report["verified"],
+            "checks": prereq_report["checks"][:20],
+        }
+
+    coverage_context = "\n".join(coverage_context_lines) if coverage_context_lines else ""
 
     claude = ClaudeClient()
     prompt = f"""Design a curriculum structure for "{domain}" using the approved brief artifact.
@@ -892,19 +1253,39 @@ def generate_curriculum(state: dict) -> dict:
 ## Packaging Context
 {packaging_summary}
 
+## Canonical Stack Course Abstract
+{stack_course_abstract_summary}
+
+## Product Course Overlay
+{product_course_overlay_summary}
+
+## Coverage-Policy Selected Modules (from Stack Curriculum Abstracts)
+{coverage_context or "No stack curriculum abstracts available — design courses from scratch."}
+
+## Skill Outcomes Digest
+{skill_outcomes_context or "No explicit skill-outcomes digest provided."}
+
+## Market And Community Digest
+{market_and_community_context or "No explicit market/community digest provided."}
+
 Use backward design and keep this stage structural:
 1. Start with terminal outcomes (what can learners DO after?)
 2. Select which packaged courses belong in this curriculum based on:
    - time budget
    - priority skill requirements
    - product-linked skill-assessment expectations
+   - canonical stack course titles and any declared canonical course variants
+   - product-only course additions and any declared product course-variant overrides
 3. Map prerequisites between packaged courses.
 4. Estimate duration per course.
 5. Use source-defined levels, phases, or tracks only as ordering cues or title hints; do not emit explicit level output at this stage.
 6. Use the packaging profile to decide how coarse or fine the packaged course boundaries should be.
 7. If breadth/depth packaging scope is known, reflect it in course scope or course title rather than inventing a separate level object.
 8. Do not decide topic allocation here. Topic-to-course assignment belongs to later design stages and should eventually be informed by channel-analysis inputs.
-9. Keep this stage structural and compact rather than fully expanded.
+9. If a course must be designed differently for a different audience or product, prefer a declared `course_variant_id` over silently reusing the base course.
+10. Product-only additions such as induction should be emitted as `course_kind: "product_only_course"` when canonically declared.
+11. Keep this stage structural and compact rather than fully expanded.
+12. If coverage-policy selected modules are available, group them into courses. Each course's modules trace back via `source_modules` entries with `stack`, `abstract_ref` (module_id), and `tags`.
 
 Return JSON:
 {{
@@ -925,7 +1306,12 @@ Return JSON:
       "estimated_hours": 1.5,
       "prerequisite_courses": [],
       "content_types": ["{content_type}"],
-      "skill_ids": ["skill_id"]
+      "skill_ids": ["skill_id"],
+      "canonical_course_id": "canonical_course_id",
+      "course_variant_id": null,
+      "course_kind": "stack_course",
+      "course_variant_reason": null,
+      "source_modules": [{{"stack": "{domain}", "abstract_ref": "module_id", "tags": ["C1", "L1"]}}]
     }}
   ],
   "capstone_project": {{}},
@@ -951,6 +1337,9 @@ Important constraints:
 - Keep each objective statement under 18 words.
 - Use stable snake_case wiki skill IDs when referencing skills, not display titles.
 - Prefer 4-8 packaged courses total for this stage unless the source clearly requires more.
+- `course_kind` must be either `stack_course` or `product_only_course`.
+- Use `canonical_course_id` whenever the course maps to a known canonical stack course.
+- Use `course_variant_id` only when a declared canonical course variant or product override applies.
 
 Return ONLY the JSON object."""
 
@@ -970,12 +1359,12 @@ Return ONLY the JSON object."""
         curriculum_generation_status = "fallback_non_json"
         if _looks_like_truncated_json(response):
             curriculum_generation_note = (
-                "Curriculum generation response could not be parsed as JSON and appears to have been cut off mid-output. "
+                "Curriculum container composition response could not be parsed as JSON and appears to have been cut off mid-output. "
                 "Using an empty fallback curriculum draft."
             )
         else:
             curriculum_generation_note = (
-                "Curriculum generation response could not be parsed as JSON. "
+                "Curriculum container composition response could not be parsed as JSON. "
                 "Using an empty fallback curriculum draft."
             )
         curriculum_generation_raw_response = response[:4000]
@@ -1000,7 +1389,7 @@ Return ONLY the JSON object."""
         time_budget_context=time_budget_context,
     )
     if curriculum_generation_status != "fallback_non_json" and not validation_report["within_tolerance"]:
-        repair_prompt = f"""Repair this Stage 1 curriculum JSON so its hours accounting is valid.
+        repair_prompt = f"""Repair this Stage 1 product-specific curriculum container JSON so its hours accounting is valid.
 
 ## Brief Artifact
 {brief_json}
@@ -1029,7 +1418,7 @@ Hard requirements:
 - Return ONLY the corrected JSON object."""
         repair_response = claude.generate(
             prompt=repair_prompt,
-            system="You are repairing a Stage 1 curriculum artifact to satisfy strict time-budget validation.",
+            system="You are repairing a Stage 1 curriculum-container artifact to satisfy strict time-budget validation.",
             model_tier="strong",
             max_tokens=8000,
         )
@@ -1063,12 +1452,23 @@ Hard requirements:
         "capstone": float((data.get("capstone_project") or {}).get("estimated_hours", 0) or 0),
         "grand_quiz": float((data.get("grand_quiz") or {}).get("estimated_hours", 0) or 0),
     }
+    # v9: Attach composition_trace when abstracts were used
+    if stack_abstracts and composition_trace_data.get("contributing_stacks"):
+        data["composition_trace"] = composition_trace_data
+        data.setdefault("composition_mode", "multi_stack" if len(stack_abstracts) > 1 else "single_stack")
+
     if curriculum_generation_status == "fallback_non_json":
         print("  Curriculum generation parse failed; using empty fallback curriculum draft.")
     elif curriculum_generation_status == "validated_after_repair":
         print("  Curriculum validated after one repair pass.")
     else:
-        print(f"  Curriculum: {len(courses)} courses, {data.get('total_hours', 0)} hours")
+        trace_msg = ""
+        if data.get("composition_trace"):
+            trace = data["composition_trace"]
+            total_selected = sum(len(v) for v in trace.get("modules_selected_per_stack", {}).values())
+            total_dropped = len(trace.get("modules_dropped", []))
+            trace_msg = f" (from abstracts: {total_selected} selected, {total_dropped} dropped)"
+        print(f"  Curriculum: {len(courses)} courses, {data.get('total_hours', 0)} hours{trace_msg}")
 
     artifact_path, artifact_paths = _persist_design_artifact(
         state=state,
@@ -1076,6 +1476,23 @@ Hard requirements:
         filename="curriculum.yaml",
         payload=data,
     )
+
+    # v9: Persist abstract version registry when abstracts were consumed
+    if composition_trace_data.get("abstract_versions_pinned"):
+        version_registry = {
+            "curriculum_id": data.get("curriculum_id"),
+            "cycle_id": state.get("cycle_id", "cycle_1"),
+            "abstract_versions": composition_trace_data["abstract_versions_pinned"],
+            "domain_definition_version": (state.get("domain_definition") or {}).get("version"),
+            "track_abstract_version": (state.get("track_abstract") or {}).get("version"),
+        }
+        _, artifact_paths = _persist_design_artifact(
+            state=state,
+            artifact_key="abstract_versions",
+            filename="abstract_versions.yaml",
+            payload=version_registry,
+        )
+
     return {
         "curriculum_generation_status": curriculum_generation_status,
         "curriculum_generation_note": curriculum_generation_note,
@@ -1185,6 +1602,13 @@ def design_courses(state: dict) -> dict:
                 ],
                 "outcomes": _course_objective_statements(seed),
                 "skill_ids": seed.get("skill_ids", []) or _course_skill_ids(seed),
+                "canonical_course_id": seed.get("canonical_course_id"),
+                "course_variant_id": seed.get("course_variant_id"),
+                "course_kind": seed.get("course_kind", "stack_course"),
+                "course_variant_reason": seed.get("course_variant_reason"),
+                "source_modules": seed.get("source_modules", []),
+                "domain_rollup": seed.get("domain_rollup", []),
+                "origin": seed.get("origin"),
             }
         )
 
@@ -1206,33 +1630,84 @@ def design_courses(state: dict) -> dict:
     return {"course_design": course_design, "design_artifact_paths": artifact_paths, "course_design_artifact_path": artifact_path}
 
 
+def _build_abstract_module_index(state: dict) -> dict[str, dict]:
+    """Build a lookup from abstract module_id to its full dict across all stack abstracts."""
+    index: dict[str, dict] = {}
+    for abstract in (state.get("stack_abstracts") or {}).values():
+        for mod in abstract.get("modules", []) or []:
+            mid = mod.get("module_id")
+            if mid:
+                index[mid] = mod
+    return index
+
+
 def design_modules(state: dict) -> dict:
-    """Expand each course into packaging-shaped modules."""
+    """Expand each course into packaging-shaped modules, inheriting C/L tags from abstract modules."""
     course_design = _load_design_artifact(state, artifact_key="course_design", state_key="course_design", filename="courses/index.yaml")
     courses = (course_design or {}).get("courses", [])
     packaging_profile = state.get("packaging_profile", {}) or {}
     phase_labels = _module_phase_labels(packaging_profile)
     module_rule = packaging_profile.get("module_count_per_course", {})
 
+    # Build abstract module index for C/L tag inheritance
+    abstract_index = _build_abstract_module_index(state)
+
     modules = []
     for course in courses:
-        module_count = _resolve_configured_count(float(course.get("estimated_hours", 0) or 0), module_rule)
-        hours_per_module = round(float(course.get("estimated_hours", 0) or 0) / module_count, 2) if module_count else 0
+        source_modules = course.get("source_modules", []) or []
 
-        for index in range(module_count):
-            phase_label = phase_labels[index % len(phase_labels)]
-            modules.append(
-                {
-                    "module_id": f"{course['course_id']}_m{index + 1}",
-                    "course_id": course["course_id"],
-                    "title": f"{course['title']} — {phase_label}",
-                    "sequence_within_course": index + 1,
-                    "estimated_hours": hours_per_module,
-                    "skill_ids": course.get("skill_ids", []),
-                    "focus_outcomes": course.get("outcomes", [course["title"]])[:2],
-                    "module_quiz_required": packaging_profile.get("module_quiz_required", True),
-                }
-            )
+        if source_modules and abstract_index:
+            # v9 path: one design module per source abstract module
+            for index, sm in enumerate(source_modules):
+                abstract_ref = sm.get("abstract_ref", "")
+                abstract_mod = abstract_index.get(abstract_ref, {})
+                tags = sm.get("tags", []) or abstract_mod.get("tags", [])
+                hours_range = abstract_mod.get("estimated_hours_range", {})
+                est_hours = (float(hours_range.get("min", 0)) + float(hours_range.get("max", 0))) / 2 if hours_range else 0
+                if not est_hours:
+                    est_hours = round(float(course.get("estimated_hours", 0) or 0) / max(len(source_modules), 1), 2)
+
+                modules.append(
+                    {
+                        "module_id": f"{course['course_id']}_m{index + 1}",
+                        "course_id": course["course_id"],
+                        "title": abstract_mod.get("title", f"{course['title']} — Module {index + 1}"),
+                        "sequence_within_course": index + 1,
+                        "estimated_hours": round(est_hours, 2),
+                        "skill_ids": abstract_mod.get("skill_ids", course.get("skill_ids", [])),
+                        "focus_outcomes": course.get("outcomes", [course["title"]])[:2],
+                        "module_quiz_required": packaging_profile.get("module_quiz_required", True),
+                        "tags": tags,
+                        "concepts": abstract_mod.get("concepts", []),
+                        "interview_frequency": abstract_mod.get("interview_frequency"),
+                        "abstract_ref": abstract_ref,
+                        "pedagogy_profile": abstract_mod.get("default_pedagogy_profile"),
+                    }
+                )
+        else:
+            # Legacy path: generate modules from packaging rules
+            module_count = _resolve_configured_count(float(course.get("estimated_hours", 0) or 0), module_rule)
+            hours_per_module = round(float(course.get("estimated_hours", 0) or 0) / module_count, 2) if module_count else 0
+
+            for index in range(module_count):
+                phase_label = phase_labels[index % len(phase_labels)]
+                modules.append(
+                    {
+                        "module_id": f"{course['course_id']}_m{index + 1}",
+                        "course_id": course["course_id"],
+                        "title": f"{course['title']} — {phase_label}",
+                        "sequence_within_course": index + 1,
+                        "estimated_hours": hours_per_module,
+                        "skill_ids": course.get("skill_ids", []),
+                        "focus_outcomes": course.get("outcomes", [course["title"]])[:2],
+                        "module_quiz_required": packaging_profile.get("module_quiz_required", True),
+                        "tags": [],
+                        "concepts": [],
+                        "interview_frequency": None,
+                        "abstract_ref": None,
+                        "pedagogy_profile": None,
+                    }
+                )
 
     module_design = {
         "total_module_count": len(modules),
@@ -1262,21 +1737,31 @@ def design_topics(state: dict) -> dict:
 
     topics = []
     for module in modules:
+        concepts = module.get("concepts", []) or []
         topic_count = _resolve_configured_count(float(module.get("estimated_hours", 0) or 0), topic_rule)
         minutes_per_topic = round((float(module.get("estimated_hours", 0) or 0) * 60) / topic_count, 1) if topic_count else 0
 
         for index in range(topic_count):
             phase_label = phase_labels[index % len(phase_labels)]
+            # Use abstract concepts for topic titles when available
+            if concepts and index < len(concepts):
+                concept_title = concepts[index].replace("_", " ").title()
+                topic_title = f"{module['title']} — {concept_title}"
+            else:
+                topic_title = f"{module['title']} — {phase_label}"
+
             topics.append(
                 {
                     "topic_id": f"{module['module_id']}_t{index + 1}",
                     "module_id": module["module_id"],
                     "course_id": module["course_id"],
-                    "title": f"{module['title']} — {phase_label}",
+                    "title": topic_title,
                     "sequence_within_module": index + 1,
                     "estimated_minutes": minutes_per_topic,
                     "skill_ids": module.get("skill_ids", []),
                     "focus_outcomes": module.get("focus_outcomes", []),
+                    "tags": module.get("tags", []),
+                    "concept": concepts[index] if index < len(concepts) else None,
                 }
             )
 
@@ -1383,13 +1868,18 @@ def design_practice(state: dict) -> dict:
         else:
             practice_type = "guided_reflection"
 
+        # v9: C1 topics get 30% practice time, C2/C3 get 20%
+        tags = topic.get("tags", []) or []
+        practice_ratio = 0.30 if "C1" in tags else 0.20 if tags else 0.25
         practice_items.append(
             {
                 "topic_id": topic["topic_id"],
                 "module_id": topic["module_id"],
                 "practice_type": practice_type,
-                "estimated_minutes": max(10, round(float(topic.get("estimated_minutes", 0) or 0) * 0.25)),
+                "estimated_minutes": max(10, round(float(topic.get("estimated_minutes", 0) or 0) * practice_ratio)),
                 "goal": f"Reinforce {topic['title']}",
+                "tags": tags,
+                "interview_frequency": topic.get("interview_frequency"),
             }
         )
 
@@ -1452,8 +1942,10 @@ def design_learning_assessments(state: dict) -> dict:
                 "difficulty": _assessment_difficulty(
                     topic["sequence_within_module"],
                     max(1, len([candidate for candidate in topics if candidate.get("module_id") == topic["module_id"]])),
+                    tags=topic.get("tags"),
                 ),
                 "concept_tags": topic.get("skill_ids", []),
+                "tags": topic.get("tags", []),
             }
         )
 

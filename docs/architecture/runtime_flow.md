@@ -23,6 +23,13 @@ Loop A consumes these inputs primarily through stack manifests, not by blindly s
 That means the manifest decides which raw files are canonical for a run, and strict mode can reject runs
 that do not have manifest-backed domain inputs.
 
+Stack manifests now point to explicit `source_family_manifests` rather than the older
+shared-manifest pattern.
+Those source-family manifests describe reusable evidence families such as:
+
+- Dimension 1 job-outcome bootstrap signals
+- Dimension 9 market and community bootstrap signals
+
 Loop B also reads some of these raw inputs directly, especially stack curriculum source files such as
 `curriculum_sources`.
 
@@ -50,7 +57,10 @@ See also:
 - [Source And Guidance Model](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/source_and_guidance_model.md)
 - [Feedback Channels](/Users/pavangangireddy/Desktop/projects/open_acp/docs/architecture/feedback_channels.md)
 
-Bootstrap mode is allowed in Loop A for market, hiring, and competitor signals: if stack-specific inputs are thin or missing, the loop can continue with shared and generic seed sources, surface explicit coverage warnings, and let the runtime knowledge store compound from those inputs instead of blocking execution.
+Bootstrap mode is allowed in Loop A for market, hiring, and competitor signals: if stack-specific inputs are thin or missing, the loop can continue with reusable dimension-family seed sources, surface explicit coverage warnings, and let the runtime knowledge store compound from those inputs instead of blocking execution.
+
+Here, "shared" means the **source family is reusable across stacks**.
+It does not mean the evidence cannot still carry stack identifiers or stack-specific exports.
 
 Important exception:
 
@@ -78,21 +88,15 @@ The current intended Loop A flow is:
 
 1. ingest signals
 2. detect patterns
-3. update skill graph
-4. update learner model
-5. update competitor map
-6. update product context
-7. update wiki index
+3. derive skill outcomes digest
+4. derive market and community digest
+5. update skill graph
+6. update learner model
+7. update product context
+8. update wiki index
 
-Planned evolution:
-
-1. ingest signals
-2. detect patterns
-3. derive dimension digests
-4. update canonical/shared runtime entities
-5. update stack-scoped overlays
-6. update product summaries
-7. rebuild wiki views
+Market and competitor signals are now expected to influence Loop A primarily through
+`market_and_community_digest`, not through a standalone competitor-entity update stage.
 
 Product note:
 
@@ -141,6 +145,10 @@ This layer should decide the educational shape of the output before content gene
 The current intended Loop B flow is:
 
 1. load wiki context
+   - wiki skill summaries
+   - learner summaries
+   - Dimension 1 digest summary
+   - Dimension 9 digest summary
 2. resolve product context
 3. resolve structure profile
 4. resolve packaging profile
@@ -163,12 +171,17 @@ The current intended Loop B flow is:
 Brief-first note:
 
 - `generate_brief` should be the first true design artifact in Loop B
-- `generate_curriculum` should consume that brief plus structural inputs, not directly redo all upstream interpretation work
+- `compose_product_specific_curriculum_container` should consume that brief plus structural inputs, not directly redo all upstream interpretation work
+- `generate_brief` and `compose_product_specific_curriculum_container` should consume both:
+  - wiki-derived skill / learner context
+  - synthesized dimension digests such as `skill_outcomes_signal_digest` and `market_and_community_digest`
 - downstream design stages should keep inheriting from the brief and curriculum artifacts instead of re-reading raw context
-- `generate_curriculum` now emits packaged `courses` as its native structure output
-- `generate_curriculum` should output packaged course structure, not explicit level objects
+- `compose_product_specific_curriculum_container` now emits packaged `courses` as its native structure output
+- `compose_product_specific_curriculum_container` should output packaged course structure, not explicit level objects
 - source-defined levels or phases should act as ordering and scope cues for courses, not as mandatory output fields
 - topic placement should be decided later and should eventually be informed by channel-analysis digests
+- `compose_product_specific_curriculum_container` should read canonical stack course definitions plus any declared
+  `course_variants`, `product_only_courses`, and `course_variant_overrides`
 - `brief.yaml` and `curriculum.yaml` should be persisted under `storage/design/<domain>/<cycle_id>/`
 - downstream course/module/topic/unit stages should persist:
   - `courses/index.yaml` and `course.<id>.yaml`

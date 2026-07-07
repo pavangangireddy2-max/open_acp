@@ -26,14 +26,11 @@ signals, interview patterns, and placement expectations.
 
 Covers:
 
-- placement readiness
+- target roles and role-skill expectations
+- shared hiring summaries and role-demand signals
 - interview intelligence
-- written tests
-- take-home projects
 - skill assessment performance
 - interview assessment performance
-- recruiter first-hand insights about learner and role readiness
-- corporate skill assessments
 
 ### 2. Student Learning Outcomes
 
@@ -216,17 +213,35 @@ Each dimension should eventually have:
 The design goal is to keep raw evidence canonical and versioned, while the runtime wiki
 stores synthesized operating knowledge rather than becoming the source of truth.
 
+Important source-model note:
+
+- many canonical source families are shared across stacks
+- a "shared" family means the evidence category and storage pattern are common
+- individual files or exports may still be stack-scoped or stack-filtered inside that shared family
+- interview intelligence, hiring, competitor, and market evidence should be treated as shared
+  source families even when a given export is produced for one stack such as `genai`
+
 ### Dimension 1: Job / Placement Outcomes
 
 - Canonical sources:
-  - stack-level target roles
-  - role-skill expectations
-  - interview intelligence
-  - recruiter feedback about learner and role readiness
-  - skill-assessment patterns
+  - stack-level target roles and role-skill expectations
+  - shared hiring summaries and role-demand signals under `knowledge/sources/dimension_1_job_outcomes/hiring/`
+  - interview-intelligence aggregated exports such as:
+    - `role_opportunity_summary`
+    - `skill_opportunity_summary`
+    - `course_opportunity_summary`
+    - `topic_relevance_summary`
+    - `topic_sequencing_summary`
+    - `question_type_distribution`
+    - `question_depth_summary`
+    - `package_band_summary`
+    - `recency_retirement_summary`
+  - skill-assessment patterns and performance summaries
+  - interview-assessment performance summaries
 - Channel-contract note:
-  - interview intelligence should be treated as a first-class channel contract
+  - interview intelligence is one first-class shared Dimension 1 channel, not the entire dimension
   - high-volume question collections should prefer canonical aggregated exports or normalized snapshots instead of direct raw-event ingestion in the first wave
+  - other Dimension 1 channels such as placement-readiness and skill-assessment-performance feeds should later add their own canonical source families and runtime digests
 - Planned runtime digests:
   - `skill_outcomes_signal_digest`
   - `role_profile` runtime entities
@@ -351,9 +366,8 @@ stores synthesized operating knowledge rather than becoming the source of truth.
 ### Dimension 9: Market And Community Signals
 
 - Canonical sources:
-  - competitor snapshots
-  - public signal collections
-  - tech-shift notes
+  - shared competitor summaries under `knowledge/sources/dimension_9_market_and_community/competitors/`
+  - shared market and trend summaries under `knowledge/sources/dimension_9_market_and_community/market/`
 - Planned runtime digests:
   - `market_and_community_digest`
 - Primary Loop B influence:

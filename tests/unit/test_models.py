@@ -137,6 +137,8 @@ def test_course():
     assert course.sequence == 1
     dumped = course.model_dump()
     assert dumped["title"] == "Introduction to Algorithms"
+    assert dumped["course_kind"] == "stack_course"
+    assert dumped["canonical_course_id"] is None
 
 
 def test_curriculum_map():

@@ -1,6 +1,7 @@
 """Skill graph models: nodes, edges, and the full skill graph."""
 
 from enum import Enum
+from typing import Optional
 
 from pydantic import BaseModel, Field
 
@@ -37,3 +38,5 @@ class SkillGraph(BaseModel):
     domain: str
     version: int
     updated_at: str
+    stack_id: Optional[str] = None
+    domain_ref: Optional[str] = None

@@ -76,7 +76,7 @@ For this channel:
 - those outputs should enrich:
   - skill entities
   - stack skill profiles
-  - competitor entities
+  - market and community digests
   - product summaries
 
 The canonical contract for this channel lives at:

@@ -1,0 +1,17 @@
+track_id: python_fullstack
+version: 1
+display_name: Python FullStack
+career_outcome: Full-stack web developer (Python/Django stack)
+contributing_stacks:
+  - stack_id: python
+    role: core
+    include_tags: [C1, C2]
+    include_levels: [L1, L2]
+  - stack_id: fullstack
+    role: core
+    include_tags: [C1, C2]
+    include_levels: [L1, L2]
+  - stack_id: dsa
+    role: supplementary
+    include_tags: [C1]
+    include_levels: [L1]

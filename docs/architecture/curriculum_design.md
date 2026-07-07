@@ -35,6 +35,50 @@ Definitions:
     - MCQ practice unit
     - coding practice unit
 
+## Canonical Stack Abstract vs Runtime Design Docs
+
+`stack_curriculum_abstract` should be treated as a **canonical stack-design asset**,
+not as the same thing as the per-run Loop B design docs.
+
+What it should mean:
+
+- stack name / stack identity
+- base packaged course set for that stack
+- canonical course-package intent such as breadth and depth coverage
+- references to course-package matrices such as `C1/C2/C3` and `L1/L2/L3`
+- stable stack-level outcomes and structural notes
+
+What it should **not** mean:
+
+- the product-specific `brief.yaml`
+- the product-specific `curriculum.yaml`
+- generated `course.<id>.yaml`, `module.<id>.yaml`, `topic.<id>.yaml`, or `unit.<id>.yaml`
+
+So the separation is:
+
+```text
+canonical stack_curriculum_abstract
+  -> informs product-specific Loop B design
+  -> brief.yaml
+  -> curriculum.yaml
+  -> course/module/topic/unit design docs
+```
+
+In other words:
+
+- `stack_curriculum_abstract` is the reusable base design asset for a stack
+- Loop B design docs are run-specific artifacts for one product / version / cycle
+
+Product-specific extension rule:
+
+- product curriculum design may:
+  - select only a subset of stack courses
+  - add product-only courses such as induction or onboarding
+  - add product-only modules, topics, or units where packaging or delivery requires them
+- when the same course name must be designed differently for a different audience or product
+  (for example Launchpad OS vs NIAT OS), that should be modeled as a separate canonical
+  `course_variant`, not as a small runtime patch on one shared course definition
+
 ## Guidance Connection
 
 At runtime, Loop C should not treat all "content types" as one flat axis.
@@ -172,7 +216,7 @@ The current Loop B flow is:
 6. `resolve_time_budget_context`
 7. `resolve_pedagogy_profile`
 8. `generate_brief`
-9. `generate_curriculum`
+9. `compose_product_specific_curriculum_container`
 10. `compare_curriculum_changes`
 11. `design_courses`
 12. `design_modules`
@@ -187,7 +231,7 @@ The current Loop B flow is:
 
 ## Course-Native Output
 
-`generate_curriculum` writes a native `curriculum_map.courses` array.
+`compose_product_specific_curriculum_container` writes a native `curriculum_map.courses` array.
 
 That current meaning is:
 
@@ -197,7 +241,7 @@ That current meaning is:
 
 Clarification:
 
-- `generate_curriculum` should not emit a separate `levels` structure just because a source document uses levels or phases
+- `compose_product_specific_curriculum_container` should not emit a separate `levels` structure just because a source document uses levels or phases
 - source-defined levels, phases, or tracks should mainly shape:
   - course ordering
   - course titles
@@ -206,7 +250,13 @@ Clarification:
   - time-budget constraints
   - priority skill requirements
   - product-linked skill-assessment expectations
-- topic allocation belongs to later design stages, not to `generate_curriculum`
+- `compose_product_specific_curriculum_container` should also read:
+  - canonical stack course titles and declared `course_variants`
+  - product overlays such as `product_only_courses` and `course_variant_overrides`
+- product-only additions should be emitted as `course_kind: product_only_course`
+- audience- or product-specific redesign of the "same" course should prefer a canonical
+  `course_variant_id` instead of silently reusing one shared course definition
+- topic allocation belongs to later design stages, not to `compose_product_specific_curriculum_container`
 
 ## Brief-First Transition
 
@@ -217,11 +267,24 @@ Loop B is moving toward a stricter artifact chain:
 3. generate curriculum structure from that brief
 4. expand into course, module, topic, and learning-unit design
 
+That context now includes two layers:
+
+- wiki-derived runtime knowledge
+  - skills
+  - stack skill profiles
+  - learner segments
+- synthesized dimension digests
+  - `skill_outcomes_signal_digest`
+  - `market_and_community_digest`
+
+The design stages should increasingly prefer those synthesized digests over raw free-text
+channel evidence when making structural decisions.
+
 This keeps the responsibilities cleaner:
 
 - `generate_brief`
   - picks stack identity, audience focus, default pedagogy, stack learning outcomes, and the downstream product context minimum
-- `generate_curriculum`
+- `compose_product_specific_curriculum_container`
   - turns the brief plus source curriculum into a structural course-seed map using packaging-owned time constraints
 - downstream design stages
   - expand that structure without re-deciding the Brief
@@ -260,7 +323,7 @@ storage/design/<domain>/<cycle_id>/
 Near-term rule:
 
 - `generate_brief` persists `brief.yaml`
-- `generate_curriculum` persists `curriculum.yaml`
+- `compose_product_specific_curriculum_container` persists `curriculum.yaml`
 - `design_courses`, `design_modules`, `design_topics`, and `design_learning_units` now persist stage collections and per-item docs
 - `design_practice`, `design_learning_assessments`, `resolve_skill_assessment_requirements`, and `align_learning_with_skill_assessments` now persist their own stage artifacts
 
@@ -317,7 +380,7 @@ canonical inputs -> ad hoc state dicts -> Loop C generation
 
 The first strict validator in this design chain is the curriculum-hours check.
 
-At `generate_curriculum` time, the system should verify:
+At `compose_product_specific_curriculum_container` time, the system should verify:
 
 - sum of packaged course hours
 - curriculum total hours

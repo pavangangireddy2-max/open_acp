@@ -1,0 +1,97 @@
+stack_id: python
+domain_ref: programming
+version: 1
+interview_intelligence_ref: ii_python_2026_q1
+
+external_prerequisites: []
+
+modules:
+  - module_id: py_m1
+    title: "Variables, Data Types, and I/O"
+    tags: [C1, L1]
+    estimated_hours_range: {min: 4, max: 6}
+    default_pedagogy_profile: concept_progression
+    skill_ids: [py_syntax_basics, py_variables]
+    prerequisite_modules: []
+    concepts: [variable, data_type, string, number, boolean, input, output, type_casting]
+    interview_frequency: high
+
+  - module_id: py_m2
+    title: "Control Flow and Loops"
+    tags: [C1, L1]
+    estimated_hours_range: {min: 4, max: 6}
+    default_pedagogy_profile: concept_progression
+    skill_ids: [py_control_flow]
+    prerequisite_modules: [py_m1]
+    concepts: [if_else, for_loop, while_loop, break, continue, nested_loop]
+    interview_frequency: high
+
+  - module_id: py_m3
+    title: "Functions and Scope"
+    tags: [C1, L1]
+    estimated_hours_range: {min: 5, max: 7}
+    default_pedagogy_profile: concept_progression
+    skill_ids: [py_functions]
+    prerequisite_modules: [py_m2]
+    concepts: [function, parameter, return, scope, default_arg, args_kwargs, lambda]
+    interview_frequency: high
+
+  - module_id: py_m4
+    title: "Collections: Lists, Tuples, Dicts, Sets"
+    tags: [C1, L1]
+    estimated_hours_range: {min: 5, max: 7}
+    default_pedagogy_profile: concept_progression
+    skill_ids: [py_collections]
+    prerequisite_modules: [py_m3]
+    concepts: [list, tuple, dict, set, comprehension, slicing, iteration]
+    interview_frequency: high
+
+  - module_id: py_m5
+    title: "OOP Basics: Classes and Objects"
+    tags: [C1, L2]
+    estimated_hours_range: {min: 5, max: 7}
+    default_pedagogy_profile: concept_progression
+    skill_ids: [py_oop_basics]
+    prerequisite_modules: [py_m3, py_m4]
+    concepts: [class, object, constructor, method, self, inheritance, encapsulation]
+    interview_frequency: high
+
+  - module_id: py_m6
+    title: "Exception Handling and File I/O"
+    tags: [C1, L2]
+    estimated_hours_range: {min: 4, max: 5}
+    default_pedagogy_profile: concept_progression
+    skill_ids: [py_exceptions, py_file_io]
+    prerequisite_modules: [py_m4]
+    concepts: [try_except, raise, custom_exception, file_read, file_write, context_manager]
+    interview_frequency: high
+
+  - module_id: py_m7
+    title: "Modules, Packages, and Virtual Environments"
+    tags: [C2, L1]
+    estimated_hours_range: {min: 3, max: 4}
+    default_pedagogy_profile: concept_progression
+    skill_ids: [py_modules]
+    prerequisite_modules: [py_m3]
+    concepts: [import, module, package, pip, venv, requirements]
+    interview_frequency: medium
+
+  - module_id: py_m8
+    title: "Decorators and Iterators"
+    tags: [C2, L2]
+    estimated_hours_range: {min: 4, max: 6}
+    default_pedagogy_profile: concept_progression
+    skill_ids: [py_decorators, py_iterators]
+    prerequisite_modules: [py_m5]
+    concepts: [decorator, closure, generator, yield, iterator_protocol]
+    interview_frequency: medium
+
+  - module_id: py_m9
+    title: "Metaclasses and Advanced OOP"
+    tags: [C3, L3]
+    estimated_hours_range: {min: 4, max: 6}
+    default_pedagogy_profile: concept_progression
+    skill_ids: [py_advanced_oop]
+    prerequisite_modules: [py_m5, py_m8]
+    concepts: [metaclass, descriptor, abc, mixin, multiple_inheritance]
+    interview_frequency: low

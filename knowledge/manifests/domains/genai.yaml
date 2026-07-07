@@ -1,0 +1,12 @@
+domain_id: genai
+version: 1
+display_name: GenAI
+poc: PushpaLatha
+stacks:
+  - genai
+review_ownership:
+  content_review_queue: genai_review_queue
+  domain_lead: PushpaLatha
+related_domains:
+  - ds_ml
+  - programming

@@ -1,0 +1,12 @@
+domain_id: system_design
+version: 1
+display_name: System Design
+poc: PushpaLatha
+stacks:
+  - system_design
+review_ownership:
+  content_review_queue: system_design_review_queue
+  domain_lead: PushpaLatha
+related_domains:
+  - fullstack
+  - cs_core

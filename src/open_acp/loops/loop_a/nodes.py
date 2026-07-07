@@ -3,10 +3,12 @@
 Nodes:
 1. ingest_signals — load raw sources and create SignalBatch
 2. detect_patterns — compare new signals against existing wiki knowledge
-3. update_skill_graph — create/update skill entities in wiki
-4. update_learner_model — create/update audience segment entities in wiki
-5. update_competitor_map — create/update competitor entities in wiki
-6. update_wiki_index — rebuild index.md and append to log.md
+3. derive_skill_outcomes_digest — aggregate Dimension 1 runtime intelligence
+4. derive_market_and_community_digest — aggregate Dimension 9 runtime intelligence
+5. update_skill_graph — create/update skill entities in wiki
+6. update_learner_model — create/update audience segment entities in wiki
+7. update_product_context — create/update product summary entities in wiki
+8. update_wiki_index — rebuild index.md and append to log.md
 """
 import json
 import os
@@ -32,6 +34,11 @@ from open_acp.config.curriculum_context import (
 def _get_sources_root() -> Path:
     """Get the canonical knowledge/sources/ directory path."""
     return _get_project_root() / "knowledge" / "sources"
+
+
+def _get_intelligence_storage_root() -> Path:
+    """Get the runtime intelligence artifact directory."""
+    return _get_project_root() / "storage" / "intelligence"
 
 
 def _get_project_root() -> Path:
@@ -206,7 +213,7 @@ def _load_manifest_sources(
     product_family: str | None = None,
     product_version: str | None = None,
 ) -> list[dict]:
-    """Load raw inputs from stack, shared signal, and product manifests when available."""
+    """Load raw inputs from stack, source-family, and product manifests when available."""
     project_root = _get_project_root()
     manifest = load_stack_manifest(domain)
     manifest_path_str = manifest.get("_manifest_path")
@@ -216,15 +223,15 @@ def _load_manifest_sources(
 
     resolved_paths: list[Path] = []
 
-    shared_signal_manifest = manifest.get("shared_signal_manifest")
-    if shared_signal_manifest:
-        shared_manifest_path = (manifest_path.parent / shared_signal_manifest).resolve()
-        if shared_manifest_path.exists():
-            with open(shared_manifest_path, encoding="utf-8") as f:
-                shared = yaml.safe_load(f) or {}
-            for paths in (shared.get("seed_inputs", {}) or {}).values():
-                for path_str in paths or []:
-                    resolved_paths.append((project_root / path_str).resolve())
+    for source_family_ref in manifest.get("source_family_manifests", []) or []:
+        source_family_path = (manifest_path.parent / source_family_ref).resolve()
+        if not source_family_path.exists():
+            continue
+        with open(source_family_path, encoding="utf-8") as f:
+            source_family = yaml.safe_load(f) or {}
+        for paths in (source_family.get("seed_inputs", {}) or {}).values():
+            for path_str in paths or []:
+                resolved_paths.append((project_root / path_str).resolve())
 
     for key in ["curriculum_sources", "competitor_sources"]:
         for path_str in manifest.get(key, []) or []:
@@ -336,10 +343,9 @@ def _load_raw_sources(
         domain_root = sources_root / "domains" / domain
         fallback_dirs.extend(
             [
-                (sources_root / "shared" / "learner", "learner"),
-                (sources_root / "shared" / "hiring", "job_postings"),
-                (sources_root / "shared" / "competitors", "competitors"),
-                (sources_root / "shared" / "market", "sources"),
+                (sources_root / "dimension_1_job_outcomes" / "hiring", "job_postings"),
+                (sources_root / "dimension_9_market_and_community" / "competitors", "competitors"),
+                (sources_root / "dimension_9_market_and_community" / "market", "sources"),
                 (domain_root, "sources"),
             ]
         )
@@ -360,6 +366,90 @@ def _load_raw_sources(
                 "source_origin": "filesystem_fallback",
             })
     return sources
+
+
+def _intelligence_artifact_dir(domain: str, cycle_id: str) -> Path:
+    path = _get_intelligence_storage_root() / domain / cycle_id
+    path.mkdir(parents=True, exist_ok=True)
+    return path
+
+
+def _persist_digest(domain: str, cycle_id: str, artifact_name: str, payload: dict[str, Any]) -> str:
+    path = _intelligence_artifact_dir(domain, cycle_id) / artifact_name
+    with open(path, "w", encoding="utf-8") as f:
+        yaml.safe_dump(payload, f, sort_keys=False, allow_unicode=False)
+    return str(path)
+
+
+def _build_skill_outcomes_signal_digest(
+    domain: str,
+    cycle_id: str,
+    signal_batch: SignalBatch | None,
+    detected_patterns: list[dict],
+) -> dict[str, Any]:
+    source_refs = _extract_signal_source_refs(signal_batch, allowed_channels=("job_postings",))
+    interview_intelligence_refs: list[str] = []
+    pattern_highlights = [pattern.get("description", "pattern") for pattern in (detected_patterns or [])[:4]]
+
+    return {
+        "digest_id": f"skill_outcomes_{domain}_{cycle_id}",
+        "dimension_id": "dimension_1_job_outcomes",
+        "stack": domain,
+        "source_refs": source_refs,
+        "interview_intelligence_refs": interview_intelligence_refs,
+        "target_roles": [],
+        "skill_priority_clusters": [],
+        "question_type_patterns": [],
+        "difficulty_patterns": [],
+        "packaging_implications": [],
+        "sequencing_implications": [],
+        "pattern_highlights": pattern_highlights,
+        "unresolved_inputs": [
+            "target_roles",
+            "role_skill_expectations",
+            "skill_assessment_performance",
+            "interview_assessment_performance",
+        ],
+        "notes": [
+            "First-wave digest currently aggregates hiring bootstrap signals and detected patterns.",
+            "Richer Dimension 1 digests should be driven by canonical source families such as interview_intelligence exports and assessment-performance summaries.",
+        ],
+        "generated_at": datetime.now(UTC).isoformat(),
+    }
+
+
+def _build_market_and_community_digest(
+    domain: str,
+    cycle_id: str,
+    signal_batch: SignalBatch | None,
+    detected_patterns: list[dict],
+) -> dict[str, Any]:
+    source_refs = _extract_signal_source_refs(signal_batch, allowed_channels=("competitors", "sources"))
+    competitor_refs = _extract_signal_source_refs(signal_batch, allowed_channels=("competitors",))
+    market_refs = _extract_signal_source_refs(signal_batch, allowed_channels=("sources",))
+    pattern_highlights = [pattern.get("description", "pattern") for pattern in (detected_patterns or [])[:4]]
+
+    return {
+        "digest_id": f"market_and_community_{domain}_{cycle_id}",
+        "dimension_id": "dimension_9_market_and_community",
+        "stack": domain,
+        "source_refs": source_refs,
+        "competitor_signal_refs": competitor_refs,
+        "market_signal_refs": market_refs,
+        "competitive_pressures": [],
+        "market_pressures": [],
+        "retire_or_refresh_signals": [],
+        "pattern_highlights": pattern_highlights,
+        "unresolved_inputs": [
+            "public_community_signal_exports",
+            "stack_specific_competitor_exports",
+        ],
+        "notes": [
+            "First-wave digest currently aggregates market and competitor bootstrap signals plus detected patterns.",
+            "Richer Dimension 9 digests should later consume canonical competitor and community exports rather than only shared markdown summaries.",
+        ],
+        "generated_at": datetime.now(UTC).isoformat(),
+    }
 
 
 def ingest_signals(state: dict) -> dict:
@@ -532,6 +622,42 @@ Return ONLY the JSON object."""
         "pattern_detection_status": pattern_detection_status,
         "pattern_detection_note": pattern_detection_note,
         "drift_score": drift_score,
+    }
+
+
+def derive_skill_outcomes_digest(state: dict) -> dict:
+    """Aggregate first-wave Dimension 1 runtime intelligence from current signals and patterns."""
+    domain = state.get("domain", "unknown")
+    cycle_id = state.get("cycle_id", "cycle_1")
+    digest = _build_skill_outcomes_signal_digest(
+        domain=domain,
+        cycle_id=cycle_id,
+        signal_batch=state.get("signal_batch"),
+        detected_patterns=state.get("detected_patterns", []) or [],
+    )
+    artifact_path = _persist_digest(domain, cycle_id, "skill_outcomes_signal_digest.yaml", digest)
+    print(f"  Derived skill outcomes digest from {len(digest.get('source_refs', []))} source(s)")
+    return {
+        "skill_outcomes_signal_digest": digest,
+        "skill_outcomes_digest_artifact_path": artifact_path,
+    }
+
+
+def derive_market_and_community_digest(state: dict) -> dict:
+    """Aggregate first-wave Dimension 9 runtime intelligence from current signals and patterns."""
+    domain = state.get("domain", "unknown")
+    cycle_id = state.get("cycle_id", "cycle_1")
+    digest = _build_market_and_community_digest(
+        domain=domain,
+        cycle_id=cycle_id,
+        signal_batch=state.get("signal_batch"),
+        detected_patterns=state.get("detected_patterns", []) or [],
+    )
+    artifact_path = _persist_digest(domain, cycle_id, "market_and_community_digest.yaml", digest)
+    print(f"  Derived market/community digest from {len(digest.get('source_refs', []))} source(s)")
+    return {
+        "market_and_community_digest": digest,
+        "market_and_community_digest_artifact_path": artifact_path,
     }
 
 
@@ -773,85 +899,336 @@ Return ONLY the JSON array."""
     print(f"  Learner segments — created: {len(created)}, updated: {len(updated)}")
     return {"wiki_entries_created": created, "wiki_entries_updated": updated}
 
+def produce_domain_definition(state: dict) -> dict:
+    """Load or synthesize a domain definition and persist as a versioned artifact."""
+    domain = state.get("domain", "unknown")
+    cycle_id = state.get("cycle_id", "cycle_1")
 
-def update_competitor_map(state: dict) -> dict:
-    """Create or update competitor entities in the wiki."""
-    signal_batch: SignalBatch = state.get("signal_batch")
-    domain = state.get("domain", "ml-engineering")
+    project_root = _get_project_root()
+    manifest_path = project_root / "knowledge" / "manifests" / "domains" / f"{domain}.yaml"
+
+    if manifest_path.exists():
+        with open(manifest_path, encoding="utf-8") as f:
+            domain_def = yaml.safe_load(f) or {}
+        domain_def.setdefault("domain_id", domain)
+        domain_def.setdefault("version", 1)
+        domain_def.setdefault("display_name", domain.replace("_", " ").title())
+        print(f"  Domain definition loaded from manifest: {domain_def.get('display_name')}")
+    else:
+        # Synthesize a minimal definition from available context
+        stack_manifest = load_stack_manifest(domain)
+        domain_def = {
+            "domain_id": domain,
+            "version": 1,
+            "display_name": stack_manifest.get("catalog_label", domain.replace("_", " ").title()),
+            "stacks": [domain],
+            "review_ownership": {},
+            "related_domains": [],
+        }
+        print(f"  Domain definition synthesized (no manifest): {domain_def['display_name']}")
+
+    artifact_path = _persist_digest(domain, cycle_id, "domain_definition.yaml", domain_def)
+    return {
+        "domain_definition": domain_def,
+        "domain_definition_artifact_path": artifact_path,
+    }
+
+
+def materialize_stack_skill_graph(state: dict) -> dict:
+    """Collect skill wiki entities into a versioned SkillGraph artifact."""
+    domain = state.get("domain", "unknown")
+    cycle_id = state.get("cycle_id", "cycle_1")
 
     wiki = WikiEngine()
-    created = []  # Only NEW entries this node creates (reducer will merge)
-    updated = []
+    skill_entities = wiki.list_entities(entity_type="skill")
 
-    competitor_content = ""
-    if signal_batch:
-        for sig in signal_batch.signals:
-            if sig.channel_name == "competitors":
-                competitor_content += sig.content[:2000] + "\n\n"
+    nodes = []
+    edges = []
+    for entity in skill_entities:
+        skill_id = entity.get("entity_id", "")
+        # Load the full entity to get cross_references and content
+        full_entity = wiki.get_entity("skill", skill_id)
+        cross_refs = []
+        prerequisites = []
+        if full_entity:
+            cross_refs = full_entity.get("cross_references", []) or []
+            # Check stack profile for richer prerequisite data
+            stack_profile = wiki.get_stack_profile(
+                stack_id=domain, entity_type="skill", entity_id=skill_id
+            )
+            if stack_profile:
+                prerequisites = stack_profile.get("prerequisite_skills", []) or []
+                downstream = stack_profile.get("downstream_skills", []) or []
+            else:
+                prerequisites = []
+                downstream = [ref.replace("skill_", "") for ref in cross_refs if ref.startswith("skill_")]
 
-    if not competitor_content:
-        return {"wiki_entries_created": created, "wiki_entries_updated": updated}
+        durability = entity.get("durability", "unknown")
+        if durability not in ("durable", "perishable", "unknown"):
+            durability = "unknown"
+
+        nodes.append({
+            "skill_id": skill_id,
+            "name": entity.get("title", skill_id),
+            "domain": domain,
+            "demand_score": min(max(float(entity.get("confidence", 0.5)), 0.0), 1.0),
+            "durability": durability,
+            "prerequisites": prerequisites,
+            "related_skills": downstream if 'downstream' in dir() else [],
+            "confidence": min(max(float(entity.get("confidence", 0.5)), 0.0), 1.0),
+            "last_updated": entity.get("updated_at", datetime.now(UTC).isoformat()),
+        })
+
+        # Create edges from prerequisites
+        for prereq in prerequisites:
+            edges.append({
+                "from_skill": prereq,
+                "to_skill": skill_id,
+                "relationship": "prerequisite",
+                "weight": 1.0,
+            })
+
+    skill_graph = {
+        "graph_id": f"sg_{domain}_{cycle_id}",
+        "nodes": nodes,
+        "edges": edges,
+        "domain": domain,
+        "stack_id": domain,
+        "domain_ref": domain,
+        "version": 1,
+        "updated_at": datetime.now(UTC).isoformat(),
+    }
+
+    artifact_path = _persist_digest(domain, cycle_id, "stack_skill_graph.yaml", skill_graph)
+    print(f"  Materialized stack skill graph: {len(nodes)} nodes, {len(edges)} edges")
+    return {
+        "stack_skill_graph": skill_graph,
+        "stack_skill_graph_artifact_path": artifact_path,
+    }
+
+
+def produce_stack_curriculum_abstract(state: dict) -> dict:
+    """Generate or load a stack curriculum abstract with C/L-tagged modules.
+
+    Prefers a seed abstract from knowledge/manifests/stacks/{domain}_curriculum_abstract.yaml
+    when available. Otherwise generates one from the skill graph and signal context.
+    """
+    domain = state.get("domain", "unknown")
+    cycle_id = state.get("cycle_id", "cycle_1")
+    skill_graph = state.get("stack_skill_graph", {}) or {}
+    detected_patterns = state.get("detected_patterns", []) or []
+
+    project_root = _get_project_root()
+
+    # 1. Check for seed abstract
+    seed_path = project_root / "knowledge" / "manifests" / "stacks" / f"{domain}_curriculum_abstract.yaml"
+    if seed_path.exists():
+        with open(seed_path, encoding="utf-8") as f:
+            abstract = yaml.safe_load(f) or {}
+        abstract.setdefault("stack_id", domain)
+        abstract.setdefault("domain_ref", domain)
+        abstract.setdefault("version", 1)
+        artifact_path = _persist_digest(domain, cycle_id, "stack_curriculum_abstract.yaml", abstract)
+        print(f"  Stack curriculum abstract loaded from seed: {len(abstract.get('modules', []))} modules")
+        return {
+            "stack_curriculum_abstract": abstract,
+            "stack_curriculum_abstract_artifact_path": artifact_path,
+        }
+
+    # 2. Generate from skill graph + signals via LLM
+    nodes = skill_graph.get("nodes", [])
+    if not nodes:
+        # Minimal fallback — produce an empty abstract
+        abstract = {
+            "stack_id": domain,
+            "domain_ref": domain,
+            "version": 1,
+            "modules": [],
+            "external_prerequisites": [],
+            "updated_at": datetime.now(UTC).isoformat(),
+        }
+        artifact_path = _persist_digest(domain, cycle_id, "stack_curriculum_abstract.yaml", abstract)
+        print("  Stack curriculum abstract: empty (no skills available)")
+        return {
+            "stack_curriculum_abstract": abstract,
+            "stack_curriculum_abstract_artifact_path": artifact_path,
+        }
+
+    # Build skill context for the prompt
+    skill_lines = []
+    for node in nodes[:20]:
+        skill_lines.append(
+            f"- {node.get('name', node.get('skill_id', '?'))}: "
+            f"demand={node.get('demand_score', 0.5):.2f}, "
+            f"durability={node.get('durability', 'unknown')}, "
+            f"prereqs={node.get('prerequisites', [])}"
+        )
+    skill_context = "\n".join(skill_lines)
+
+    pattern_lines = [p.get("description", "") for p in detected_patterns[:5] if p.get("description")]
+    pattern_context = "\n".join(f"- {line}" for line in pattern_lines) if pattern_lines else "None detected."
+
+    # Load canonical course titles from stack manifest for grounding
+    stack_manifest = load_stack_manifest(domain)
+    canonical_titles = stack_manifest.get("canonical_course_titles", []) or []
+    canonical_context = "\n".join(f"- {t}" for t in canonical_titles) if canonical_titles else "None declared."
 
     claude = ClaudeClient()
-    prompt = f"""From this competitor analysis for "{domain}", extract competitor profiles.
+    prompt = f"""Design a stack curriculum abstract for the "{domain}" stack.
 
-{competitor_content[:4000]}
+## Skills Available
+{skill_context}
 
-Return a JSON array:
-[
-  {{
-    "competitor_id": "datacamppro",
-    "name": "DataCampPro",
-    "description": "Profile description",
-    "strengths": ["large library"],
-    "weaknesses": ["shallow depth"],
-    "skills_covered": ["python", "pandas"],
-    "skills_missing": ["mlops", "llms"]
-  }}
-]
+## Detected Market Patterns
+{pattern_context}
 
-Return ONLY the JSON array."""
+## Canonical Course Titles (for reference)
+{canonical_context}
 
-    response = claude.generate(prompt=prompt, system="You are a competitive intelligence analyst.", model_tier="cheap", max_tokens=4096)
+Generate a module catalog. Each module should:
+- Have a unique module_id (format: {domain[:3]}_m1, {domain[:3]}_m2, etc.)
+- Be tagged with exactly one C-tag and one L-tag:
+  C1 = 80% interview-frequent, must-cover
+  C2 = 20% interview-relevant, should-cover
+  C3 = extensions beyond interview, nice-to-cover
+  L1 = Entry, L2 = Intermediate, L3 = Advanced
+- The C x L matrix should be SPARSE — not every cell needs modules
+- List prerequisite_modules (within this stack) and skill_ids
+
+Return a JSON object:
+{{
+  "modules": [
+    {{
+      "module_id": "{domain[:3]}_m1",
+      "title": "Module Title",
+      "tags": ["C1", "L1"],
+      "estimated_hours_range": {{"min": 4, "max": 6}},
+      "default_pedagogy_profile": "concept_progression",
+      "skill_ids": ["skill_id_1"],
+      "prerequisite_modules": [],
+      "concepts": ["concept1", "concept2"],
+      "interview_frequency": "high"
+    }}
+  ],
+  "external_prerequisites": [
+    {{
+      "from_stack": "python",
+      "required_skill_ids": ["py_functions"],
+      "kind": "hard_prereq"
+    }}
+  ]
+}}
+
+Generate 6-12 modules. Return ONLY the JSON object."""
+
+    response = claude.generate(
+        prompt=prompt,
+        system="You are a curriculum architect designing module catalogs with coverage/difficulty tagging.",
+        model_tier="strong",
+        max_tokens=4096,
+    )
 
     try:
         cleaned = response.strip()
         if cleaned.startswith("```"):
-            cleaned = cleaned[cleaned.index("\n")+1:]
+            cleaned = cleaned[cleaned.index("\n") + 1:]
         if cleaned.endswith("```"):
             cleaned = cleaned[:-3]
-        competitors = json.loads(cleaned.strip())
+        data = json.loads(cleaned.strip())
     except (json.JSONDecodeError, ValueError):
-        competitors = []
+        data = {"modules": [], "external_prerequisites": []}
 
-    for comp in competitors:
-        comp_id = comp.get("competitor_id", "").replace(" ", "_").lower()
-        if not comp_id:
-            continue
+    abstract = {
+        "stack_id": domain,
+        "domain_ref": domain,
+        "version": 1,
+        "modules": data.get("modules", []),
+        "external_prerequisites": data.get("external_prerequisites", []),
+        "updated_at": datetime.now(UTC).isoformat(),
+    }
 
-        existing = wiki.get_entity("competitor", comp_id)
-        skill_refs = [f"skill_{s}" for s in comp.get("skills_covered", [])[:5]]
+    artifact_path = _persist_digest(domain, cycle_id, "stack_curriculum_abstract.yaml", abstract)
+    print(f"  Stack curriculum abstract generated: {len(abstract['modules'])} modules")
+    for mod in abstract["modules"][:4]:
+        print(f"    {mod.get('module_id', '?')}: {mod.get('title', '?')} {mod.get('tags', [])}")
+    if len(abstract["modules"]) > 4:
+        print(f"    ... and {len(abstract['modules']) - 4} more")
 
-        if existing:
-            wiki.update_entity(
-                entity_id=comp_id, entity_type="competitor",
-                content_delta=f"Updated analysis: {comp.get('description', '')}",
-                reason="Competitor signal update",
-            )
-            updated.append(f"competitor_{comp_id}")
-        else:
-            wiki.create_entity(
-                entity_type="competitor", entity_id=comp_id,
-                title=comp.get("name", comp_id),
-                content=f"# {comp.get('name', comp_id)}\n\n{comp.get('description', '')}\n\n**Strengths:** {', '.join(comp.get('strengths', []))}\n\n**Weaknesses:** {', '.join(comp.get('weaknesses', []))}\n\n**Covers:** {', '.join(comp.get('skills_covered', []))}\n\n**Missing:** {', '.join(comp.get('skills_missing', []))}",
-                confidence=0.7,
-                durability="perishable",
-                cross_references=skill_refs,
-            )
-            created.append(f"competitor_{comp_id}")
+    return {
+        "stack_curriculum_abstract": abstract,
+        "stack_curriculum_abstract_artifact_path": artifact_path,
+    }
 
-    print(f"  Competitors — created: {len(created)}, updated: {len(updated)}")
-    return {"wiki_entries_created": created, "wiki_entries_updated": updated}
+
+def produce_activity_types_library(state: dict) -> dict:
+    """Produce a per-stack activity types library based on pedagogy and module levels.
+
+    Maps content types and practice patterns to the stack's curriculum abstract,
+    so downstream Loop B design stages know which activity types are relevant.
+    """
+    domain = state.get("domain", "unknown")
+    cycle_id = state.get("cycle_id", "cycle_1")
+    abstract = state.get("stack_curriculum_abstract", {}) or {}
+    modules = abstract.get("modules", []) or []
+
+    stack_manifest = load_stack_manifest(domain)
+    pedagogy_default = "concept_progression"
+    pedagogy_config = stack_manifest.get("pedagogy", {}) or {}
+    if isinstance(pedagogy_config, dict):
+        default_block = pedagogy_config.get("default", {})
+        if isinstance(default_block, dict):
+            pedagogy_default = default_block.get("pedagogy_profile", pedagogy_default)
+
+    # Determine which activity types are relevant based on modules and pedagogy
+    has_l1 = any("L1" in (m.get("tags", []) or []) for m in modules)
+    has_l2 = any("L2" in (m.get("tags", []) or []) for m in modules)
+    has_l3 = any("L3" in (m.get("tags", []) or []) for m in modules)
+    has_project_pedagogy = pedagogy_default == "project_build_along" or any(
+        m.get("default_pedagogy_profile") == "project_build_along" for m in modules
+    )
+
+    session_types = ["concept_explainer"]
+    if has_project_pedagogy:
+        session_types.append("project_building")
+    if has_l1:
+        session_types.append("learning_support")
+
+    written_types = ["reading_material"]
+    if has_l2 or has_l3:
+        written_types.append("summary_cheatsheet")
+
+    practice_types = ["mcq_practice"]
+    if has_project_pedagogy or has_l2:
+        practice_types.append("coding_practice")
+
+    assessment_types = ["classroom_quiz", "module_quiz"]
+    if has_l2 or has_l3:
+        assessment_types.append("skill_assessment")
+
+    library = {
+        "stack_id": domain,
+        "version": 1,
+        "default_pedagogy_profile": pedagogy_default,
+        "session_types": session_types,
+        "written_types": written_types,
+        "practice_types": practice_types,
+        "assessment_types": assessment_types,
+        "module_count": len(modules),
+        "level_distribution": {
+            "L1": sum(1 for m in modules if "L1" in (m.get("tags", []) or [])),
+            "L2": sum(1 for m in modules if "L2" in (m.get("tags", []) or [])),
+            "L3": sum(1 for m in modules if "L3" in (m.get("tags", []) or [])),
+        },
+        "generated_at": datetime.now(UTC).isoformat(),
+    }
+
+    artifact_path = _persist_digest(domain, cycle_id, "activity_types_library.yaml", library)
+    total_types = len(session_types) + len(written_types) + len(practice_types) + len(assessment_types)
+    print(f"  Activity types library: {total_types} types across 4 families")
+    return {
+        "activity_types_library": library,
+        "activity_types_library_artifact_path": artifact_path,
+    }
 
 
 def update_product_context(state: dict) -> dict:
@@ -929,6 +1306,25 @@ def update_product_context(state: dict) -> dict:
             durability="versioned",
         )
         created.append(entity_key)
+
+    # v9: Persist formal product abstract artifact
+    cycle_id = state.get("cycle_id", "cycle_1")
+    product_abstract = {
+        "product_family": product_context.get("product_family", "default"),
+        "product_version": product_context.get("product_version"),
+        "product_label": product_context.get("product_label", "Stack-only default"),
+        "product_category": product_context.get("product_category", "standard_product"),
+        "curriculum_container_kind": product_context.get("curriculum_container_kind", "standard_curriculum"),
+        "delivery_mode": product_context.get("delivery_mode"),
+        "focus_priority": product_context.get("focus_priority", "default"),
+        "structure_profile_id": structure_profile.get("structure_profile_id"),
+        "feature_flags": product_context.get("feature_flags", {}),
+        "variant_strategy": product_context.get("variant_strategy"),
+        "product_only_courses": product_context.get("product_only_courses", []),
+        "is_explicit_product": product_context.get("is_explicit_product", False),
+        "generated_at": datetime.now(UTC).isoformat(),
+    }
+    product_abstract_path = _persist_digest(domain, cycle_id, "product_abstract.yaml", product_abstract)
 
     return {
         "product_context": product_context,

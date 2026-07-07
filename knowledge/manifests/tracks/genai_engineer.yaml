@@ -1,0 +1,17 @@
+track_id: genai_engineer
+version: 1
+display_name: GenAI Engineer
+career_outcome: GenAI / LLM application developer
+contributing_stacks:
+  - stack_id: python
+    role: core
+    include_tags: [C1]
+    include_levels: [L1, L2]
+  - stack_id: genai
+    role: core
+    include_tags: [C1, C2]
+    include_levels: [L1, L2, L3]
+  - stack_id: ds_ml
+    role: supplementary
+    include_tags: [C1]
+    include_levels: [L1]

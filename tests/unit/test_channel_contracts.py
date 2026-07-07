@@ -21,7 +21,7 @@ def test_interview_intelligence_contract_loads():
     assert any(d.digest_id == "skill_outcomes_signal_digest" for d in contract.runtime_digests)
     assert any(t.target_id == "role_profile" for t in contract.knowledge_targets)
     assert any(t.target_id == "skill_entities" for t in contract.knowledge_targets)
-    assert any(t.stage_id == "generate_curriculum" for t in contract.backprop_targets)
+    assert any(t.stage_id == "compose_product_specific_curriculum_container" for t in contract.backprop_targets)
 
 
 def test_channel_contract_registry_lists_interview_intelligence():

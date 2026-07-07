@@ -1,0 +1,13 @@
+domain_id: programming
+version: 1
+display_name: Programming
+poc: Chanakya
+stacks:
+  - python
+  - cpp
+review_ownership:
+  content_review_queue: programming_review_queue
+  domain_lead: Chanakya
+related_domains:
+  - dsa
+  - fullstack

@@ -1,0 +1,13 @@
+domain_id: fullstack
+version: 1
+display_name: FullStack
+poc: Chanakya
+stacks:
+  - fullstack
+  - reactjs
+review_ownership:
+  content_review_queue: fullstack_review_queue
+  domain_lead: Chanakya
+related_domains:
+  - programming
+  - cs_core

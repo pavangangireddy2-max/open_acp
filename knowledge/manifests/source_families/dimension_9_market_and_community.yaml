@@ -1,0 +1,13 @@
+version: 1
+manifest_id: dimension_9_market_and_community
+description: Canonical source-family manifest for Dimension 9 shared market and competitor bootstrap signals.
+
+seed_inputs:
+  market_signals:
+    - knowledge/sources/dimension_9_market_and_community/market/ml_engineering_trends_2026.md
+  competitor_signals:
+    - knowledge/sources/dimension_9_market_and_community/competitors/competitor_courses.md
+
+notes:
+  - This manifest holds shared competitor and market bootstrap inputs.
+  - Stack-specific market/community exports should later enrich this source family rather than replace it.

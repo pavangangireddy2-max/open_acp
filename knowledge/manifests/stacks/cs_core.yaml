@@ -12,8 +12,9 @@ canonical_course_titles:
   - Github & Linux 101
   - React Projects
   - MERN Projects
-shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
+source_family_manifests:
+  - ../source_families/dimension_1_job_outcomes.yaml
+  - ../source_families/dimension_9_market_and_community.yaml
 notes:
   - Top-level CS Core stack from the base course abstract.
   - This stack mixes theory-heavy foundations with project-oriented BTP tracks.
-

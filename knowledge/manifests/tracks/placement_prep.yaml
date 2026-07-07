@@ -1,0 +1,21 @@
+track_id: placement_prep
+version: 1
+display_name: Placement Prep
+career_outcome: Interview readiness for software engineering roles
+contributing_stacks:
+  - stack_id: dsa
+    role: core
+    include_tags: [C1, C2]
+    include_levels: [L1, L2, L3]
+  - stack_id: cs_core
+    role: core
+    include_tags: [C1]
+    include_levels: [L1, L2]
+  - stack_id: aptitude
+    role: supplementary
+    include_tags: [C1]
+    include_levels: [L1, L2]
+  - stack_id: english
+    role: supplementary
+    include_tags: [C1]
+    include_levels: [L1]

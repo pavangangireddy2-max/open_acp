@@ -1,6 +1,8 @@
 version: 1
 domain: python
-shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
+source_family_manifests:
+  - ../source_families/dimension_1_job_outcomes.yaml
+  - ../source_families/dimension_9_market_and_community.yaml
 
 pedagogy:
   default:
@@ -31,7 +33,7 @@ external_slide_sources:
   - https://docs.google.com/presentation/d/1jq0YoLpDT4ZlB2yF3mtZ7jkF1YcUD7KjPaHxf0Z6R6M/edit
 
 competitor_sources:
-  - knowledge/sources/shared/competitors/competitor_courses.md
+  - knowledge/sources/dimension_9_market_and_community/competitors/competitor_courses.md
 
 notes:
   - Python sessions emphasize progressive code reveal and bridge from previously known syntax when applicable.

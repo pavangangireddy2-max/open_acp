@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Composition Trace",
+  "type": "object",
+  "required": ["contributing_stacks"],
+  "properties": {
+    "contributing_stacks": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "modules_selected_per_stack": {
+      "type": "object",
+      "additionalProperties": {"type": "array", "items": {"type": "string"}}
+    },
+    "modules_dropped": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "stack": {"type": "string"},
+          "module": {"type": "string"},
+          "reason": {"type": "string"}
+        }
+      }
+    },
+    "coverage_cells_selected_per_stack": {
+      "type": "object",
+      "additionalProperties": {"type": "array", "items": {"type": "string"}}
+    },
+    "refreshers_added": {"type": "array", "items": {"type": "string"}},
+    "addons_injected": {"type": "array"},
+    "cross_stack_prereq_verification": {"type": "object"},
+    "abstract_versions_pinned": {
+      "type": "object",
+      "additionalProperties": {"type": "integer"}
+    }
+  }
+}

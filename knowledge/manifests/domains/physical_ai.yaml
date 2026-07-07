@@ -1,0 +1,12 @@
+domain_id: physical_ai
+version: 1
+display_name: Physical AI
+poc: Sai Teja
+stacks:
+  - physical_ai
+review_ownership:
+  content_review_queue: physical_ai_review_queue
+  domain_lead: Sai Teja
+related_domains:
+  - genai
+  - ds_ml

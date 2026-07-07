@@ -9,7 +9,9 @@ canonical_course_titles:
   - Course 2  (Yet to Confirm Names)
   - Course 3  (Yet to Confirm Names)
   - Course 4  (Yet to Confirm Names)
-shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
+source_family_manifests:
+  - ../source_families/dimension_1_job_outcomes.yaml
+  - ../source_families/dimension_9_market_and_community.yaml
 notes:
   - Top-level Physical AI stack from the base course abstract.
   - Canonical course names are placeholders until confirmed.

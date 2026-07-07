@@ -1,0 +1,101 @@
+stack_id: genai
+domain_ref: genai
+version: 1
+interview_intelligence_ref: ii_genai_2026_q1
+
+external_prerequisites:
+  - from_stack: python
+    required_skill_ids: [py_functions, py_oop_basics, py_file_io]
+    kind: hard_prereq
+
+modules:
+  - module_id: gen_m1
+    title: "GenAI Landscape and Foundations"
+    tags: [C1, L1]
+    estimated_hours_range: {min: 5, max: 7}
+    default_pedagogy_profile: concept_progression
+    skill_ids: [genai_foundations, transformer_intuition]
+    prerequisite_modules: []
+    concepts: [llm, transformer, tokenization, prompt, inference]
+    interview_frequency: high
+
+  - module_id: gen_m2
+    title: "Prompt Engineering and API Usage"
+    tags: [C1, L1]
+    estimated_hours_range: {min: 4, max: 6}
+    default_pedagogy_profile: project_build_along
+    skill_ids: [prompt_engineering, api_usage]
+    prerequisite_modules: [gen_m1]
+    prerequisite_external_skills: [py_functions]
+    concepts: [system_prompt, few_shot, chain_of_thought, api_call, token_budget]
+    interview_frequency: high
+
+  - module_id: gen_m3
+    title: "RAG and Document Grounding"
+    tags: [C1, L2]
+    estimated_hours_range: {min: 6, max: 8}
+    default_pedagogy_profile: project_build_along
+    skill_ids: [rag_pipeline, vector_db, embedding]
+    prerequisite_modules: [gen_m2]
+    concepts: [retrieval, embedding, vector_store, chunking, reranking, context_window]
+    interview_frequency: high
+
+  - module_id: gen_m4
+    title: "Tool Use and Function Calling"
+    tags: [C1, L2]
+    estimated_hours_range: {min: 4, max: 6}
+    default_pedagogy_profile: project_build_along
+    skill_ids: [tool_use, function_calling]
+    prerequisite_modules: [gen_m2]
+    concepts: [tool_schema, function_calling, structured_output, agent_loop]
+    interview_frequency: high
+
+  - module_id: gen_m5
+    title: "Evaluation and Observability"
+    tags: [C2, L2]
+    estimated_hours_range: {min: 4, max: 6}
+    default_pedagogy_profile: concept_progression
+    skill_ids: [llm_evaluation, observability]
+    prerequisite_modules: [gen_m3]
+    concepts: [eval_metric, human_eval, automated_eval, tracing, cost_tracking]
+    interview_frequency: medium
+
+  - module_id: gen_m6
+    title: "Agent Architecture and Multi-Step Reasoning"
+    tags: [C1, L2]
+    estimated_hours_range: {min: 6, max: 8}
+    default_pedagogy_profile: project_build_along
+    skill_ids: [agent_architecture, multi_step_reasoning]
+    prerequisite_modules: [gen_m4]
+    concepts: [agent, planning, reflection, memory, multi_agent]
+    interview_frequency: high
+
+  - module_id: gen_m7
+    title: "Fine-Tuning and Model Customization"
+    tags: [C2, L3]
+    estimated_hours_range: {min: 5, max: 7}
+    default_pedagogy_profile: concept_progression
+    skill_ids: [fine_tuning, model_customization]
+    prerequisite_modules: [gen_m3, gen_m5]
+    concepts: [lora, qlora, dataset_preparation, training_loop, evaluation]
+    interview_frequency: medium
+
+  - module_id: gen_m8
+    title: "Production Deployment and Scaling"
+    tags: [C2, L2]
+    estimated_hours_range: {min: 4, max: 6}
+    default_pedagogy_profile: project_build_along
+    skill_ids: [llm_deployment, scaling]
+    prerequisite_modules: [gen_m5]
+    concepts: [inference_optimization, caching, rate_limiting, monitoring, cost_management]
+    interview_frequency: medium
+
+  - module_id: gen_m9
+    title: "Advanced Retrieval and Knowledge Systems"
+    tags: [C3, L3]
+    estimated_hours_range: {min: 5, max: 7}
+    default_pedagogy_profile: project_build_along
+    skill_ids: [advanced_retrieval, knowledge_graph]
+    prerequisite_modules: [gen_m3, gen_m6]
+    concepts: [graph_rag, hybrid_search, query_routing, multi_modal_retrieval]
+    interview_frequency: low

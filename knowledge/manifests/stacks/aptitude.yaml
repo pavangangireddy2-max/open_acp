@@ -9,7 +9,8 @@ canonical_course_titles:
   - Numerical Ability
   - Logical Reasoning
   - Advanced Aptitude
-shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
+source_family_manifests:
+  - ../source_families/dimension_1_job_outcomes.yaml
+  - ../source_families/dimension_9_market_and_community.yaml
 notes:
   - Top-level aptitude stack from the base course abstract.
-

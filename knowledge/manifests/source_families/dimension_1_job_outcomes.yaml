@@ -1,0 +1,11 @@
+version: 1
+manifest_id: dimension_1_job_outcomes
+description: Canonical source-family manifest for Dimension 1 shared hiring and job-outcome bootstrap signals.
+
+seed_inputs:
+  hiring_signals:
+    - knowledge/sources/dimension_1_job_outcomes/hiring/ml_engineer_requirements.md
+
+notes:
+  - This manifest holds shared hiring and role-demand bootstrap inputs.
+  - Stack-specific role expectations, placement signals, and interview-intelligence exports should layer on top of this source family.

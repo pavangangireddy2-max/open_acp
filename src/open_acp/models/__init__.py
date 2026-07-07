@@ -4,9 +4,30 @@ from open_acp.models.content_types import ContentType, PipelineFamily
 from open_acp.models.curriculum import (
     Assessment,
     BloomLevel,
+    CompositionTrace,
     Course,
     CurriculumMap,
+    DroppedModule,
     LearningObjective,
+    LearningPath,
+    LearningPhase,
+    ParallelTrack,
+    SourceModule,
+    StackProgression,
+    WeeklyLoadEntry,
+)
+from open_acp.models.domain_definition import DomainDefinition, ReviewOwnership
+from open_acp.models.stack_curriculum_abstract import (
+    AbstractModule,
+    CTag,
+    ExternalPrerequisite,
+    HoursRange,
+    LTag,
+    StackCurriculumAbstract,
+)
+from open_acp.models.track_abstract import (
+    StackCoverageScope,
+    TrackAbstract,
 )
 from open_acp.models.delivery import (
     AssessmentNature,
@@ -70,9 +91,30 @@ __all__ = [
     # curriculum
     "Assessment",
     "BloomLevel",
+    "CompositionTrace",
     "Course",
     "CurriculumMap",
+    "DroppedModule",
     "LearningObjective",
+    "LearningPath",
+    "LearningPhase",
+    "ParallelTrack",
+    "SourceModule",
+    "StackProgression",
+    "WeeklyLoadEntry",
+    # domain_definition
+    "DomainDefinition",
+    "ReviewOwnership",
+    # stack_curriculum_abstract
+    "AbstractModule",
+    "CTag",
+    "ExternalPrerequisite",
+    "HoursRange",
+    "LTag",
+    "StackCurriculumAbstract",
+    # track_abstract
+    "StackCoverageScope",
+    "TrackAbstract",
     # delivery
     "AssessmentNature",
     "AssessmentSystem",

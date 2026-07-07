@@ -102,7 +102,7 @@ knowledge/
     products/
     structure_profiles/
     packaging/
-    shared/
+    source_families/
 
   catalogs/
     niat/
@@ -111,9 +111,9 @@ knowledge/
     certifications/
 
   sources/
-    shared/
-      learner/
+    dimension_1_job_outcomes/
       hiring/
+    dimension_9_market_and_community/
       competitors/
       market/
     domains/
@@ -168,6 +168,9 @@ It answers questions like:
 - which source files should be used?
 - which packaging profile should be applied?
 
+It can also define reusable **source families** that multiple stacks reference,
+such as shared hiring or market evidence families.
+
 This layer should stay declarative and version-controlled.
 
 ### 2. `knowledge/catalogs`
@@ -200,6 +203,15 @@ Examples:
 - product-specific academic notes
 
 This is the canonical home for what Loop A and Loop B ingest directly.
+
+Current note:
+
+- reusable source families should live under explicit dimension-oriented paths such as:
+  - `knowledge/sources/dimension_1_job_outcomes/...`
+  - `knowledge/sources/dimension_9_market_and_community/...`
+- this is a source-family notion, not a claim that the evidence lacks stack specificity
+- some channel catalogs, such as interview intelligence, are better kept shared at the
+  catalog level with a `stack` field inside the exports rather than separate per-stack folders
 
 ### 4. `knowledge/corpus`
 
@@ -439,10 +451,8 @@ So the target split is:
 
 - `knowledge/sources/domains/...`
   - future: `knowledge/sources/domains/...`
-- `knowledge/sources/shared/hiring/...`
-  - future: `knowledge/sources/shared/hiring/...`
-- `knowledge/sources/shared/competitors/...`
-  - future: `knowledge/sources/shared/competitors/...`
+- `knowledge/sources/dimension_1_job_outcomes/hiring/...`
+- `knowledge/sources/dimension_9_market_and_community/competitors/...`
 - `knowledge/sources/products/...`
   - canonical home for product-specific target-audience inputs and other product-scoped evidence
 

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Learning Path",
+  "type": "object",
+  "properties": {
+    "total_duration_weeks": {"type": "integer", "minimum": 1},
+    "target_weekly_hours": {"type": "number", "minimum": 1},
+    "max_concurrent_courses": {"type": "integer", "minimum": 1},
+    "phases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["phase_id", "title", "sequence"],
+        "properties": {
+          "phase_id": {"type": "string"},
+          "title": {"type": "string"},
+          "sequence": {"type": "integer", "minimum": 1},
+          "duration_weeks": {"type": "number"},
+          "courses": {"type": "array", "items": {"type": "string"}},
+          "units": {"type": "array", "items": {"type": "string"}},
+          "parallelism": {"type": "string", "enum": ["sequential", "partial", "na"]},
+          "parallel_tracks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "courses": {"type": "array", "items": {"type": "string"}},
+                "weekly_hours": {"type": "number"},
+                "active_weeks": {"type": "array", "items": {"type": "integer"}}
+              }
+            }
+          },
+          "transition_gate": {"type": "string"},
+          "purpose": {"type": "string"}
+        }
+      }
+    },
+    "stack_progression": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["stack_id", "enters_phase", "exits_phase"],
+        "properties": {
+          "stack_id": {"type": "string"},
+          "enters_phase": {"type": "string"},
+          "exits_phase": {"type": "string"},
+          "role": {"type": "string"}
+        }
+      }
+    },
+    "weekly_load_profile": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "week": {"type": "integer"},
+          "hours": {"type": "number"},
+          "active_courses": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

@@ -74,9 +74,9 @@ knowledge_targets:
   - target_id: stack_skill_profiles
     target_type: stack_profile
     update_mode: enrich
-  - target_id: competitor_entities
-    target_type: runtime_entity
-    update_mode: enrich
+  - target_id: market_and_community_digest
+    target_type: cycle_artifact
+    update_mode: derive
   - target_id: product_summaries
     target_type: product_summary
     update_mode: enrich
@@ -93,7 +93,7 @@ loop_b_influence:
 
 backprop_targets:
   - loop_id: loop_b
-    stage_id: generate_curriculum
+    stage_id: compose_product_specific_curriculum_container
     rationale: New role and skill-cluster demand can create or remove course-level curriculum requirements.
   - loop_id: loop_b
     stage_id: design_topics
@@ -112,4 +112,5 @@ notes:
   - Raw CRM workflows, interview recordings, and multi-team tagging steps remain outside Open ACP.
   - Open ACP should prefer canonical aggregated exports rather than raw question streams when monthly volume is high.
   - The denominator rule and recency window used in external analysis should be preserved in the exported snapshot metadata.
+  - This channel covers only the interview-intelligence contribution to Dimension 1, not the full Dimension 1 source model.
   - skill_outcomes_signal_digest should be a runtime aggregate over the canonical source families above, not an independently invented signal layer.

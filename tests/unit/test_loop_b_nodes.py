@@ -85,6 +85,8 @@ def test_generate_brief_uses_resolved_inputs_and_reports_fallback(monkeypatch, t
             "pedagogy_rationale": "Project-centered stack.",
             "skill_graph_context": "## Skills in Wiki\n- **Python Programming**",
             "learner_context": "## Learner Segments\n- **Career Switcher**",
+            "skill_outcomes_context": "## Skill Outcomes Digest\n- Digest id: skill_outcomes_genai\n### Pattern Highlights\n- RAG is baseline",
+            "market_and_community_context": "## Market And Community Digest\n- Digest id: market_genai\n### Pattern Highlights\n- Competitors emphasize deployment",
             "curriculum_source_context": "### Source: stack curriculum seed",
             "product_context": {
                 "product_label": "NIAT B3",
@@ -128,6 +130,9 @@ def test_generate_brief_uses_resolved_inputs_and_reports_fallback(monkeypatch, t
 
     assert "## Design Priority Profile" in captured["prompt"]
     assert "## Time Budget Context" in captured["prompt"]
+    assert "## Skill Outcomes Digest" in captured["prompt"]
+    assert "## Market And Community Digest" in captured["prompt"]
+    assert "## Canonical Stack Course Abstract" not in captured["prompt"]
     assert "Target total hours: 120.0" in captured["prompt"]
     assert result["brief_generation_status"] == "fallback_non_json"
     assert "deterministic fallback brief" in result["brief_generation_note"]
@@ -143,7 +148,7 @@ def test_generate_brief_uses_resolved_inputs_and_reports_fallback(monkeypatch, t
     assert yaml.safe_load(artifact_path.read_text(encoding="utf-8"))["brief_id"] == result["brief"]["brief_id"]
 
 
-def test_generate_curriculum_uses_brief_artifact_and_reports_probable_truncation(monkeypatch, tmp_path):
+def test_compose_product_specific_curriculum_container_uses_brief_artifact_and_reports_probable_truncation(monkeypatch, tmp_path):
     class FakeClaudeClient:
         def generate(self, prompt, system, model_tier, max_tokens):
             return '{"curriculum_id": "cur_genai", "courses": ['
@@ -167,12 +172,15 @@ def test_generate_curriculum_uses_brief_artifact_and_reports_probable_truncation
         encoding="utf-8",
     )
 
-    result = nodes.generate_curriculum(
+    result = nodes.compose_product_specific_curriculum_container(
         {
             "domain": "genai",
             "cycle_id": "cycle_curriculum",
             "design_artifact_paths": {"brief": str(brief_path)},
             "curriculum_source_context": "### Source: stack curriculum seed",
+            "skill_outcomes_context": "## Skill Outcomes Digest\n- Digest id: skill_outcomes_genai",
+            "market_and_community_context": "## Market And Community Digest\n- Digest id: market_genai",
+            "product_context": {"product_label": "NIAT B3", "product_only_courses": [], "course_variant_overrides": {}},
             "packaging_profile": {"packaging_profile_id": "genai_stack_packaging"},
             "time_budget_context": {"target_total_hours": 120.0},
             "content_type": "concept_explainer",
@@ -188,7 +196,7 @@ def test_generate_curriculum_uses_brief_artifact_and_reports_probable_truncation
     assert curriculum_path.exists()
 
 
-def test_generate_curriculum_raises_on_hours_validation_failure(monkeypatch, tmp_path):
+def test_compose_product_specific_curriculum_container_raises_on_hours_validation_failure(monkeypatch, tmp_path):
     class FakeClaudeClient:
         def generate(self, prompt, system, model_tier, max_tokens):
             return json.dumps(
@@ -236,7 +244,7 @@ def test_generate_curriculum_raises_on_hours_validation_failure(monkeypatch, tmp
     )
 
     with pytest.raises(ValueError, match="Curriculum hours validation failed"):
-        nodes.generate_curriculum(
+        nodes.compose_product_specific_curriculum_container(
             {
                 "domain": "genai",
                 "cycle_id": "cycle_invalid",
@@ -252,7 +260,7 @@ def test_generate_curriculum_raises_on_hours_validation_failure(monkeypatch, tmp
         )
 
 
-def test_generate_curriculum_repairs_hours_validation_once(monkeypatch, tmp_path):
+def test_compose_product_specific_curriculum_container_repairs_hours_validation_once(monkeypatch, tmp_path):
     class FakeClaudeClient:
         def __init__(self):
             self.calls = 0
@@ -350,7 +358,7 @@ def test_generate_curriculum_repairs_hours_validation_once(monkeypatch, tmp_path
         encoding="utf-8",
     )
 
-    result = nodes.generate_curriculum(
+    result = nodes.compose_product_specific_curriculum_container(
         {
             "domain": "genai",
             "cycle_id": "cycle_repair",
@@ -388,6 +396,8 @@ def test_resolve_product_and_structure_profile_from_manifest():
     assert product_context["product_family"] == "NIAT"
     assert product_context["product_version"] == "B3"
     assert product_context["structure_profile_id"] == "niat_university_structure"
+    assert product_context["product_only_courses"] == []
+    assert product_context["course_variant_overrides"] == {}
 
     structure_state = nodes.resolve_structure_profile(product_state)
     structure_profile = structure_state["structure_profile"]
@@ -528,7 +538,7 @@ def test_resolve_pedagogy_profile_refreshes_stale_product_context():
     assert result["pedagogy_source"] == "product_version_domain:NIAT:B3:genai"
 
 
-def test_generate_curriculum_uses_brief_artifact_and_reports_fallback(monkeypatch):
+def test_compose_product_specific_curriculum_container_uses_brief_artifact_and_reports_fallback(monkeypatch):
     captured: dict = {}
 
     class FakeClaudeClient:
@@ -538,7 +548,7 @@ def test_generate_curriculum_uses_brief_artifact_and_reports_fallback(monkeypatc
 
     monkeypatch.setattr(nodes, "ClaudeClient", FakeClaudeClient)
 
-    result = nodes.generate_curriculum(
+    result = nodes.compose_product_specific_curriculum_container(
         {
             "domain": "genai",
             "brief": {
@@ -548,6 +558,9 @@ def test_generate_curriculum_uses_brief_artifact_and_reports_fallback(monkeypatc
                 "pedagogy": {"default_profile": "project_build_along"},
             },
             "curriculum_source_context": "### Source: stack curriculum seed",
+            "skill_outcomes_context": "## Skill Outcomes Digest\n- Digest id: skill_outcomes_genai",
+            "market_and_community_context": "## Market And Community Digest\n- Digest id: market_genai",
+            "product_context": {"product_label": "NIAT B3", "product_only_courses": [], "course_variant_overrides": {}},
             "structure_profile": {
                 "structure_profile_id": "niat_university_structure",
                 "hierarchy": ["batch_curriculum_grid_template", "university", "branch"],
@@ -568,9 +581,15 @@ def test_generate_curriculum_uses_brief_artifact_and_reports_fallback(monkeypatc
     assert "## Brief Artifact" in captured["prompt"]
     assert '"brief_id": "brief_genai_niat_b3"' in captured["prompt"]
     assert '"stack_name": "GenAI Stack Curriculum"' in captured["prompt"]
+    assert "## Canonical Stack Course Abstract" in captured["prompt"]
+    assert "## Product Course Overlay" in captured["prompt"]
+    assert "## Skill Outcomes Digest" in captured["prompt"]
+    assert "## Market And Community Digest" in captured["prompt"]
     assert "Respect the resolved target total hours" in captured["prompt"]
     assert "do not emit explicit level output" in captured["prompt"]
     assert "Do not decide topic allocation here" in captured["prompt"]
+    assert "course_kind" in captured["prompt"]
+    assert "course_variant_id" in captured["prompt"]
     assert result["curriculum_generation_status"] == "fallback_non_json"
     assert "empty fallback curriculum draft" in result["curriculum_generation_note"]
     assert result["curriculum_generation_raw_response"] == "This is not valid JSON."
@@ -599,6 +618,9 @@ def test_design_stages_persist_course_module_topic_and_unit_artifacts(monkeypatc
                     "title": "GenAI Foundations",
                     "sequence": 1,
                     "pedagogy_profile": "project_build_along",
+                    "canonical_course_id": "introduction_to_genai",
+                    "course_variant_id": None,
+                    "course_kind": "stack_course",
                     "objectives": [
                         {
                             "id": "obj_1",

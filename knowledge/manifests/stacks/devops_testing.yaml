@@ -7,7 +7,8 @@ tracks:
 canonical_course_titles:
   - Cloud Computing Foundations
   - Testing With Selenium
-shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
+source_family_manifests:
+  - ../source_families/dimension_1_job_outcomes.yaml
+  - ../source_families/dimension_9_market_and_community.yaml
 notes:
   - Top-level DevOps & Testing stack from the base course abstract.
-

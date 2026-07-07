@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Track Abstract",
+  "type": "object",
+  "required": ["track_id", "display_name", "contributing_stacks"],
+  "properties": {
+    "track_id": {"type": "string", "minLength": 1},
+    "display_name": {"type": "string", "minLength": 1},
+    "career_outcome": {"type": "string"},
+    "contributing_stacks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["stack_id"],
+        "properties": {
+          "stack_id": {"type": "string"},
+          "role": {"type": "string", "enum": ["core", "supplementary", "elective"]},
+          "include_tags": {"type": "array", "items": {"type": "string", "enum": ["C1", "C2", "C3"]}},
+          "include_levels": {"type": "array", "items": {"type": "string", "enum": ["L1", "L2", "L3"]}}
+        }
+      },
+      "minItems": 1
+    },
+    "version": {"type": "integer", "minimum": 1},
+    "updated_at": {"type": "string"}
+  }
+}

@@ -1,0 +1,10 @@
+domain_id: aptitude
+version: 1
+display_name: Aptitude
+poc: Prudhvi
+stacks:
+  - aptitude
+review_ownership:
+  content_review_queue: aptitude_review_queue
+  domain_lead: Prudhvi
+related_domains: []

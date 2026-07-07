@@ -6,7 +6,9 @@ canonical_course_titles:
   - Data Structures and Algorithms
   - Advanced Data Structures and Algorithms
   - Problem Solving Techniques
-shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
+source_family_manifests:
+  - ../source_families/dimension_1_job_outcomes.yaml
+  - ../source_families/dimension_9_market_and_community.yaml
 
 pedagogy:
   default:
@@ -29,7 +31,7 @@ external_slide_sources:
   - https://docs.google.com/presentation/d/1AePiMEWD_wj37Q0ZDX_aVQ_DGn1M_69KFxwyou1yHkg/edit
 
 competitor_sources:
-  - knowledge/sources/shared/competitors/competitor_courses.md
+  - knowledge/sources/dimension_9_market_and_community/competitors/competitor_courses.md
 
 notes:
   - DSA sessions should favor visual models, analogy-first explanations, and application-driven motivation.

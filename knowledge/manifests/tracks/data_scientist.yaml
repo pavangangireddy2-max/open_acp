@@ -1,0 +1,17 @@
+track_id: data_scientist
+version: 1
+display_name: Data Scientist
+career_outcome: Data scientist / ML engineer
+contributing_stacks:
+  - stack_id: python
+    role: core
+    include_tags: [C1, C2]
+    include_levels: [L1, L2]
+  - stack_id: ds_ml
+    role: core
+    include_tags: [C1, C2]
+    include_levels: [L1, L2, L3]
+  - stack_id: ds_algo
+    role: supplementary
+    include_tags: [C1]
+    include_levels: [L1, L2]

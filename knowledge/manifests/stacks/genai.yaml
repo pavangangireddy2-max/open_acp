@@ -14,7 +14,9 @@ canonical_course_titles:
   - AI For HR
   - Base 44 Mastery
   - OpenAI Workshop
-shared_signal_manifest: ../shared/shared_intelligence_sources.yaml
+source_family_manifests:
+  - ../source_families/dimension_1_job_outcomes.yaml
+  - ../source_families/dimension_9_market_and_community.yaml
 pedagogy:
   default:
     pedagogy_profile: project_build_along
@@ -39,7 +41,7 @@ external_slide_sources:
   - https://docs.google.com/presentation/d/1bIpAmU6KCPv2YKu6qwhgIw9eVLH9Qth6cm596gshFWY/edit
 
 competitor_sources:
-  - knowledge/sources/shared/competitors/competitor_courses.md
+  - knowledge/sources/dimension_9_market_and_community/competitors/competitor_courses.md
 curriculum_sources:
   - knowledge/sources/domains/genai/curriculum_refs/genai_120hr_curriculum.md
 

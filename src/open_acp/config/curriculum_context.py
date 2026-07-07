@@ -161,6 +161,8 @@ def resolve_product_context(
         ),
         "supported_domains": resolved.get("supported_domains", []),
         "variant_strategy": resolved.get("variant_strategy"),
+        "product_only_courses": resolved.get("product_only_courses", []) or [],
+        "course_variant_overrides": resolved.get("course_variant_overrides", {}) or {},
         "packaging_layers": {
             "product_default": packaging_manifest.get("default", {}) or {},
             "product_domain": domain_packaging or {},

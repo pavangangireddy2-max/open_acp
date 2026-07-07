@@ -1,0 +1,11 @@
+domain_id: dsa
+version: 1
+display_name: DS & Algo
+poc: Pavan Teja
+stacks:
+  - dsa
+review_ownership:
+  content_review_queue: dsa_review_queue
+  domain_lead: Pavan Teja
+related_domains:
+  - programming

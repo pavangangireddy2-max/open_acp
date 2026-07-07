@@ -1,8 +1,8 @@
 """Loop A — Intelligence & Signals — LangGraph state machine.
 
-Flow: ingest_signals → detect_patterns → update_skill_graph →
-      update_learner_model → update_competitor_map → update_product_context →
-      update_wiki_index → END
+Flow: ingest_signals → detect_patterns → derive_skill_outcomes_digest →
+      derive_market_and_community_digest → update_skill_graph →
+      update_learner_model → update_product_context → update_wiki_index → END
 
 Uses a TypedDict with reducer annotations so each node can return
 partial updates that MERGE into state (rather than replacing it).
@@ -16,9 +16,14 @@ from langgraph.graph import StateGraph, END
 from open_acp.loops.loop_a.nodes import (
     ingest_signals,
     detect_patterns,
+    derive_skill_outcomes_digest,
+    derive_market_and_community_digest,
+    produce_domain_definition,
     update_skill_graph,
+    materialize_stack_skill_graph,
     update_learner_model,
-    update_competitor_map,
+    produce_stack_curriculum_abstract,
+    produce_activity_types_library,
     update_product_context,
     update_wiki_index,
 )
@@ -47,12 +52,25 @@ class LoopAGraphState(TypedDict, total=False):
     pattern_detection_status: Annotated[str, _replace]
     pattern_detection_note: Annotated[Any, _replace]
     drift_score: Annotated[float, _replace]
+    skill_outcomes_signal_digest: Annotated[Any, _replace]
+    skill_outcomes_digest_artifact_path: Annotated[Any, _replace]
+    market_and_community_digest: Annotated[Any, _replace]
+    market_and_community_digest_artifact_path: Annotated[Any, _replace]
     product_context: Annotated[Any, _replace]
     structure_profile: Annotated[Any, _replace]
     wiki_entries_created: Annotated[list, _merge_list]
     wiki_entries_updated: Annotated[list, _merge_list]
     stack_profiles_created: Annotated[list, _merge_list]
     stack_profiles_updated: Annotated[list, _merge_list]
+    # v9 abstract artifacts
+    domain_definition: Annotated[Any, _replace]
+    domain_definition_artifact_path: Annotated[Any, _replace]
+    stack_skill_graph: Annotated[Any, _replace]
+    stack_skill_graph_artifact_path: Annotated[Any, _replace]
+    stack_curriculum_abstract: Annotated[Any, _replace]
+    stack_curriculum_abstract_artifact_path: Annotated[Any, _replace]
+    activity_types_library: Annotated[Any, _replace]
+    activity_types_library_artifact_path: Annotated[Any, _replace]
     gate_g1_outcome: Annotated[Any, _replace]
 
 
@@ -62,19 +80,29 @@ def build_loop_a_graph() -> StateGraph:
 
     graph.add_node("ingest_signals", ingest_signals)
     graph.add_node("detect_patterns", detect_patterns)
+    graph.add_node("derive_skill_outcomes_digest", derive_skill_outcomes_digest)
+    graph.add_node("derive_market_and_community_digest", derive_market_and_community_digest)
+    graph.add_node("produce_domain_definition", produce_domain_definition)
     graph.add_node("update_skill_graph", update_skill_graph)
+    graph.add_node("materialize_stack_skill_graph", materialize_stack_skill_graph)
     graph.add_node("update_learner_model", update_learner_model)
-    graph.add_node("update_competitor_map", update_competitor_map)
+    graph.add_node("produce_stack_curriculum_abstract", produce_stack_curriculum_abstract)
+    graph.add_node("produce_activity_types_library", produce_activity_types_library)
     graph.add_node("update_product_context", update_product_context)
     graph.add_node("update_wiki_index", update_wiki_index)
 
     graph.set_entry_point("ingest_signals")
 
     graph.add_edge("ingest_signals", "detect_patterns")
-    graph.add_edge("detect_patterns", "update_skill_graph")
-    graph.add_edge("update_skill_graph", "update_learner_model")
-    graph.add_edge("update_learner_model", "update_competitor_map")
-    graph.add_edge("update_competitor_map", "update_product_context")
+    graph.add_edge("detect_patterns", "derive_skill_outcomes_digest")
+    graph.add_edge("derive_skill_outcomes_digest", "derive_market_and_community_digest")
+    graph.add_edge("derive_market_and_community_digest", "produce_domain_definition")
+    graph.add_edge("produce_domain_definition", "update_skill_graph")
+    graph.add_edge("update_skill_graph", "materialize_stack_skill_graph")
+    graph.add_edge("materialize_stack_skill_graph", "update_learner_model")
+    graph.add_edge("update_learner_model", "produce_stack_curriculum_abstract")
+    graph.add_edge("produce_stack_curriculum_abstract", "produce_activity_types_library")
+    graph.add_edge("produce_activity_types_library", "update_product_context")
     graph.add_edge("update_product_context", "update_wiki_index")
     graph.add_edge("update_wiki_index", END)
 

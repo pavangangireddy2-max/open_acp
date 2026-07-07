@@ -20,6 +20,8 @@ class LoopBGraphState(TypedDict, total=False):
     drift_score: Annotated[Any, _replace]
     skill_graph_context: Annotated[str, _replace]
     learner_context: Annotated[str, _replace]
+    skill_outcomes_context: Annotated[str, _replace]
+    market_and_community_context: Annotated[str, _replace]
     curriculum_source_context: Annotated[str, _replace]
     program_context: Annotated[str, _replace]
     product_context: Annotated[Any, _replace]
@@ -59,12 +61,18 @@ class LoopBGraphState(TypedDict, total=False):
     skill_assessment_requirements_artifact_path: Annotated[Any, _replace]
     assessment_alignment_report: Annotated[Any, _replace]
     assessment_alignment_report_artifact_path: Annotated[Any, _replace]
+    # v9 abstract inputs
+    domain_definition: Annotated[Any, _replace]
+    stack_abstracts: Annotated[Any, _replace]
+    track_abstract: Annotated[Any, _replace]
+    coverage_policy: Annotated[Any, _replace]
     gate_g2_outcome: Annotated[Any, _replace]
 
 
 def build_loop_b_graph() -> StateGraph:
     from open_acp.loops.loop_b.nodes import (
         load_wiki_context,
+        load_stack_abstracts,
         resolve_product_context,
         resolve_structure_profile,
         resolve_packaging_profile,
@@ -72,7 +80,7 @@ def build_loop_b_graph() -> StateGraph:
         resolve_time_budget_context,
         resolve_pedagogy_profile,
         generate_brief,
-        generate_curriculum,
+        compose_product_specific_curriculum_container,
         compare_curriculum_changes,
         design_courses,
         design_modules,
@@ -86,6 +94,7 @@ def build_loop_b_graph() -> StateGraph:
 
     graph = StateGraph(LoopBGraphState)
     graph.add_node("load_wiki_context", load_wiki_context)
+    graph.add_node("load_stack_abstracts", load_stack_abstracts)
     graph.add_node("resolve_product_context", resolve_product_context)
     graph.add_node("resolve_structure_profile", resolve_structure_profile)
     graph.add_node("resolve_packaging_profile", resolve_packaging_profile)
@@ -93,7 +102,7 @@ def build_loop_b_graph() -> StateGraph:
     graph.add_node("resolve_time_budget_context", resolve_time_budget_context)
     graph.add_node("resolve_pedagogy_profile", resolve_pedagogy_profile)
     graph.add_node("generate_brief", generate_brief)
-    graph.add_node("generate_curriculum", generate_curriculum)
+    graph.add_node("compose_product_specific_curriculum_container", compose_product_specific_curriculum_container)
     graph.add_node("compare_curriculum_changes", compare_curriculum_changes)
     graph.add_node("design_courses", design_courses)
     graph.add_node("design_modules", design_modules)
@@ -105,15 +114,16 @@ def build_loop_b_graph() -> StateGraph:
     graph.add_node("align_learning_with_skill_assessments", align_learning_with_skill_assessments)
 
     graph.set_entry_point("load_wiki_context")
-    graph.add_edge("load_wiki_context", "resolve_product_context")
+    graph.add_edge("load_wiki_context", "load_stack_abstracts")
+    graph.add_edge("load_stack_abstracts", "resolve_product_context")
     graph.add_edge("resolve_product_context", "resolve_structure_profile")
     graph.add_edge("resolve_structure_profile", "resolve_packaging_profile")
     graph.add_edge("resolve_packaging_profile", "resolve_design_priority_profile")
     graph.add_edge("resolve_design_priority_profile", "resolve_time_budget_context")
     graph.add_edge("resolve_time_budget_context", "resolve_pedagogy_profile")
     graph.add_edge("resolve_pedagogy_profile", "generate_brief")
-    graph.add_edge("generate_brief", "generate_curriculum")
-    graph.add_edge("generate_curriculum", "compare_curriculum_changes")
+    graph.add_edge("generate_brief", "compose_product_specific_curriculum_container")
+    graph.add_edge("compose_product_specific_curriculum_container", "compare_curriculum_changes")
     graph.add_edge("compare_curriculum_changes", "design_courses")
     graph.add_edge("design_courses", "design_modules")
     graph.add_edge("design_modules", "design_topics")

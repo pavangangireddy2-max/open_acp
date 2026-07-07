@@ -1,0 +1,88 @@
+channel_id: curated_market_intelligence_genai
+label: Curated Market & Tech Intelligence (GenAI)
+channel_category: industry_market
+unit_of_data: one_published_item_one_entry
+owning_dimensions: [11]
+keep_raw_analysis_external: false
+preferred_ingest_mode: normalized_entries
+
+canonical_source_families:
+  - source_family_id: org_blogs
+    description: Official engineering and research blogs from foundation labs and frontier AI orgs.
+    expected_location: knowledge/catalog/curated_market_genai/org_blogs/
+    preferred_granularity: normalized_snapshot
+  - source_family_id: curated_x_accounts
+    description: Vetted X accounts grouped by signal_type (Research / News / SystemDesign / Tools / ModelAnalysis / Prompting / Eval / Founders).
+    expected_location: knowledge/catalog/curated_market_genai/x/
+    preferred_granularity: normalized_snapshot
+  - source_family_id: youtube_channels
+    description: Curated YouTube channels covering AI engineering, research summaries, and product walkthroughs.
+    expected_location: knowledge/catalog/curated_market_genai/youtube/
+    preferred_granularity: normalized_snapshot
+  - source_family_id: podcasts
+    description: Long-form podcasts surfacing founder-level and research-level GenAI discussion.
+    expected_location: knowledge/catalog/curated_market_genai/podcasts/
+    preferred_granularity: normalized_snapshot
+  - source_family_id: newsletters
+    description: Editorialized GenAI newsletters that aggregate research, releases, and tooling on a weekly cadence.
+    expected_location: knowledge/catalog/curated_market_genai/newsletters/
+    preferred_granularity: normalized_snapshot
+  - source_family_id: leaderboards_benchmarks
+    description: Public leaderboards and benchmark dashboards reflecting comparative model capability.
+    expected_location: knowledge/catalog/curated_market_genai/leaderboards/
+    preferred_granularity: normalized_snapshot
+  - source_family_id: competitor_courses
+    description: Catalogs of competitor learning offerings used for market awareness and curriculum differentiation.
+    expected_location: knowledge/catalog/curated_market_genai/competitor_courses/
+    preferred_granularity: normalized_snapshot
+  - source_family_id: product_launches
+    description: Aggregators surfacing new GenAI products, launches, and ecosystem moves.
+    expected_location: knowledge/catalog/curated_market_genai/product_launches/
+    preferred_granularity: normalized_snapshot
+  - source_family_id: longform_blogs
+    description: Long-form blogs and prompting/engineering reference resources outside the org-blog category.
+    expected_location: knowledge/catalog/curated_market_genai/longform_blogs/
+    preferred_granularity: normalized_snapshot
+
+canonical_vocabularies:
+  - vocabulary_id: x_signal_type_vocabulary
+    description: Curated tags applied to X accounts indicating dominant signal_type (Research / News / SystemDesign / Tools / ModelAnalysis / Prompting / Eval / Founders / LearningResources / Tips / OpenSource / PersonalisedLearning).
+    owner: curriculum_team
+  - vocabulary_id: source_family_vocabulary
+    description: Canonical list of D11a source families used to group ingest pipelines and digest reducers.
+    owner: curriculum_team
+
+runtime_digests:
+  - digest_id: curated_market_intelligence_digest
+    purpose: Roll up cross-source themes (releases, capability shifts, tooling moves, competitor course updates) for D11a per cycle.
+
+knowledge_targets:
+  - target_id: market_and_community_digest
+    target_type: cycle_artifact
+    update_mode: derive
+  - target_id: skill_entities
+    target_type: runtime_entity
+    update_mode: enrich
+
+loop_b_influence:
+  - brief
+  - curriculum_pressure_test
+  - course_design
+  - topic_design
+
+backprop_targets:
+  - loop_id: loop_b
+    stage_id: design_topics
+    rationale: Capability shifts and tooling moves should retire or add topic coverage in the GenAI stack.
+  - loop_id: loop_b
+    stage_id: design_practice
+    rationale: Newly relevant tools or patterns should appear in practice scaffolding.
+  - loop_id: loop_d
+    stage_id: classify_insights
+    rationale: Curated-market signals are a primary input to the gap_analyser.
+
+notes:
+  - This channel covers the curated, vetted-source half of D11; D11b covers open community chatter and is deferred.
+  - owning_dimensions=[11] uses the post-refinement 13-dimension numbering; existing manifests still use the doc-era D9 for the same conceptual area and will need reconciliation later.
+  - Cadence guidance is RSS daily, X every 3 days, YouTube every 3 days, leaderboards weekly, scrape weekly.
+  - The curated source list itself lives in the source-family manifest at knowledge/manifests/source_families/dimension_11a_curated_market_genai.yaml.

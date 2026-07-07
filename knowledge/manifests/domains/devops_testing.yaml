@@ -1,0 +1,12 @@
+domain_id: devops_testing
+version: 1
+display_name: DevOps & Testing
+poc: Chanakya
+stacks:
+  - devops_testing
+review_ownership:
+  content_review_queue: devops_testing_review_queue
+  domain_lead: Chanakya
+related_domains:
+  - fullstack
+  - cs_core

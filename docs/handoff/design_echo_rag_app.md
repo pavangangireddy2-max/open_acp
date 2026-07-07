@@ -113,14 +113,25 @@ useful; the daily-driver surface over all the handoff work.
 `FixtureUsageSource` so the loop is demonstrable on a manual export, and the MCP adapter is a
 drop-in when the portal team ships it.
 
-## 7. Open questions for review
+## 7. Decisions (confirmed 2026-07-08)
 
-1. **Chat frontend** — v0 is a CLI (`echo ask`). Do you want a simple web frontend (the
-   "ask questions about docs" UI) in v0, or is CLI enough until the Ask half proves useful?
-2. **Commit policy on refresh** — should Echo auto-commit approved doc edits, or only write to the
-   working tree and let a human commit? (Leaning: write-only, human commits.)
-3. **Scope of "docs" Echo reads** — handoff docs + manifests + pedagogy YAML only, or also the
-   `docs/architecture/` internal design docs and the Central Stack Catalogue?
-4. Pre-req: the ~1,400 lines of uncommitted `src/` engineering should be committed/stashed before
-   Echo lands in `src/open_acp/echo/`, to avoid tangling commits.
+1. **Frontend:** v0 ships a **simple web frontend** (ask box + answer with citations), not just a
+   CLI. A minimal FastAPI/Flask endpoint wrapping `ask.py` + a single-page UI; the CLI stays as a
+   thin alternate entrypoint.
+2. **Commit policy:** **write-only.** Echo (Refresh half) writes approved doc edits to the working
+   tree; **the human commits.** Echo never runs git.
+3. **Corpus scope:** Echo reads **handoff docs + manifests + pedagogy YAML + `docs/architecture/`
+   + raw sources** (`knowledge/raw/**` incl. extracted deck text and corpora). The user wants to
+   query raw content inside the RAG, so `corpus.py` registers the raw text sources too. Note: raw
+   PDFs aren't directly readable as text — Echo indexes the **`extracted_text/` `.txt`** versions
+   and CSVs, not the binaries.
+4. **Corpus-size consequence:** adding raw extracted text (~24 decks) pushes the corpus well past
+   the ~250KB handoff set. Load-all-into-context no longer fits for raw queries → the
+   **document-selection step (§2) becomes required, not optional**, for raw-source questions. The
+   handoff-only queries can still load all `context_*.md`.
+
+## 8. Pre-req
+
+The ~1,400 lines of uncommitted `src/` engineering (task #6) should be committed/stashed before
+Echo lands in `src/open_acp/echo/`, to avoid tangling commits.
 ```
