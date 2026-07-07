@@ -35,6 +35,7 @@ dev = [
 
 [project.scripts]
 oacp = "open_acp.cli.main:app"
+echo = "open_acp.echo.cli:app"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/open_acp"]
