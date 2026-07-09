@@ -62,13 +62,17 @@ From the mining work, we already hold labeled data most teams have to fabricate:
 - **Truth lives in git** — eval definitions, golden sets, judge prompts, thresholds are
   files in this repo; any platform consumes them **config-as-code** via API/CLI. If a gate
   exists only in a platform UI, it will drift from the docs and the skill. Non-negotiable.
-- **Agenta** (self-hosted, prompt registry, eval runs, human annotation queues) is a
-  reasonable pick for the judge slice + reviewer annotation + dashboards. Evaluate against
-  two lighter alternatives before committing: **Promptfoo** (pure config-as-code, CI-native —
-  best fit for the EOD loop and git-truth; weakest annotation UI) and **Langfuse**
-  (open-source tracing + evals — best if we also want to trace Forge generation runs).
-  Decision criteria in order: config-as-code fidelity → annotation queue quality (reviewer
-  workflow) → self-host → DSPy interop (all fine via API).
+- **DECISION (2026-07-09): Promptfoo now, Langfuse later, Agenta skipped.**
+  - **Promptfoo (now):** offline evals in CI — config-as-code YAML in-repo, no server,
+    runs deterministic Python asserts + LLM-rubric judges in one config, diffs across
+    prompt/model versions; slots into the EOD loop as a run step.
+  - **Langfuse (when Forge runs in production):** tracing of multi-step generation
+    pipelines (DSPy programs), datasets, score joins (judge + reviewer + ELP empirical),
+    human annotation queues as the interim reviewer UI until the custom Forge review
+    interface exists. Mature self-host.
+  - **Agenta (skip unless a need appears):** its center of gravity is prompt-playground
+    management — our prompts/programs live in git (DSPy + skills), so that surface is
+    unused; its eval/annotation halves are covered better by the other two at each end.
 - What a platform is NOT for here: the deterministic gates (in-repo harness), the docs
   (git), the skill (git), or prompt "management" of Forge's generator (that's the DSPy
   program + its gold demonstrations, versioned in-repo).
