@@ -87,9 +87,9 @@ From the mining work, we already hold labeled data most teams have to fabricate:
 2. **Judge slice:** write judge prompts from the rubrics; score golden sets; measure
    judge-vs-reviewer agreement once review verdicts start flowing; tune until agreement is
    acceptable (fixed threshold per gate).
-3. **Platform adoption:** when reviewer annotation volume + dashboard needs are real, stand
-   up Agenta (or Promptfoo+Langfuse) reading the repo's eval files. EOD loop gains a step:
-   run suite → digest regressions.
+3. **Platform adoption:** Promptfoo config lands with step 1–2 (it runs the suite in CI);
+   Langfuse comes when Forge generation traffic + reviewer annotation are real, reading the
+   repo's eval files. EOD loop gains a step: run suite → digest regressions.
 4. **DSPy optimization** (per the Forge thread) uses this same stack as its metric —
    nothing new to invent.
 5. Same pattern later for pedagogy/session generation (E-series) and Echo answer quality.
