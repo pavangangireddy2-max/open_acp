@@ -3,7 +3,7 @@
 > **Purpose:** let any agent (Claude Code, OpenRouter-Claude in Cline/Roo/Continue, or a
 > fresh claude.ai thread) pick up the Open ACP intelligence program with zero prior chat
 > context. Every doc in this folder is standalone — no other files or conversations needed.
-> Read this file first, then the docs relevant to your task. Last updated: 2026-07-07.
+> Read this file first, then the docs relevant to your task. Last updated: 2026-07-09 (structure v2).
 
 ## The program in one paragraph
 
@@ -16,20 +16,39 @@ behaviour) is commissioned to the data team. Items are generated **born-tagged**
 retrofitted. The Python course ("Programming Foundations" in the UI, course of the
 Programming & Algorithms stack) is the pilot.
 
+## Layout (structure v2 — scope-first)
+
+```
+program/        the why/how of the whole program (agent family, Echo, ops, plans)
+intelligence/   ALWAYS-CURRENT TRUTH — Echo's corpus, EOD-maintained
+  global/         cross-stack: products, pedagogy, question craft, platform
+  stacks/<stack>/courses/<course>/   per-course intelligence (question, behaviour, registry notes)
+  products/<product>/                per-product streams (delivery quality, rhythm)
+workbench/      point-in-time artifacts: proposals/ reviews/ requests/ addenda/
+digests/        EOD digests · CHANGELOG.md · SLUGS.md (canonical slug table)
+```
+
+Scope rule: `<stack>/<course>` is the same address in `knowledge/raw/corpora/`,
+`knowledge/registries/`, and `intelligence/stacks/`. Slugs: [SLUGS.md](SLUGS.md).
+
 ## Doc index (read in this order for full context)
 
 | doc | what it holds |
 |---|---|
-| [context_agent_family_architecture.md](context_agent_family_architecture.md) | **The system map** — the full 10-agent family (Canon/Crux/Loop/Relay/Forge/Lens/Radar/Panel/Prism/Docket + Compass), how they connect, locked cross-thread concepts (cuts, GRIT shadow ladder, born-tagging), and where every other doc plugs in. Read after this README for the whole circuit |
-| [context_products_all.md](context_products_all.md) | All product families (NIAT/Academy/Intensive/GRIT/Launchpad/default), structure profiles, packaging, resolution semantics — fully inlined |
-| [context_pedagogy_intelligence.md](context_pedagogy_intelligence.md) | The deck-mined pedagogy: universal principles (inlined YAML v4), stack overlays, E01–E20 eval set, session flows |
-| [context_question_intelligence_python.md](context_question_intelligence_python.md) | The HOW rail for Forge: 4,963-question corpus mine, ~310-entry misconception bank, item anatomy per axis, mechanical rungs, C01–C25 gates, format contracts, do-not-port defects |
-| [intake_spec_question_intelligence_per_stack.md](intake_spec_question_intelligence_per_stack.md) | Intake spec to extend question intelligence to **all stacks**: the per-stack input bundle, join rules, stack-list disambiguation, delivery checklist. Read before gathering non-Python corpora |
-| [design_echo_rag_app.md](design_echo_rag_app.md) | Design spec for **Echo** — the Agentic-RAG surface over the intelligence layer (ask-questions-about-docs now; weekly Portal-MCP refresh w/ HITL later). Whole-doc-into-context retrieval, lives at `src/open_acp/echo/` |
-| [context_platform_student_experience.md](context_platform_student_experience.md) | How the platform actually behaves (UI, grading, completion, players) + all 16 owner-confirmed answers |
-| [proposal_forge_review_and_adaptive_experience.md](proposal_forge_review_and_adaptive_experience.md) | Our proposals: Forge reviewer UX (coverage matrix, gate-evidence cards) + student adaptive walk (node rail, mastery map) |
-| [review_adaptive_coding_prd.md](review_adaptive_coding_prd.md) | Simulation-backed review of the product team's IRT/Elo adaptive PRD (verdict: fix math, add node outer-loop) |
-| [data_request_learner_behaviour_intelligence.md](data_request_learner_behaviour_intelligence.md) | The 41-question data request delegated to DA/DE (NIAT B3, AY 2025-26) |
+| [program/agent_family_architecture.md](program/agent_family_architecture.md) | **The system map** — the full 10-agent family (Canon/Crux/Loop/Relay/Forge/Lens/Radar/Panel/Prism/Docket + Compass), how they connect, locked cross-thread concepts, and where every other doc plugs in |
+| [intelligence/global/products.md](intelligence/global/products.md) | All product families (NIAT/Academy/Intensive/GRIT/Launchpad/default), structure profiles, packaging, resolution semantics — fully inlined |
+| [intelligence/global/pedagogy_universal.md](intelligence/global/pedagogy_universal.md) | The deck-mined pedagogy: universal principles (inlined YAML v4), stack overlays, E01–E20 eval set, session flows |
+| [intelligence/stacks/programming_algorithms/courses/python/question_intelligence.md](intelligence/stacks/programming_algorithms/courses/python/question_intelligence.md) | The HOW rail for Forge (Python): corpus mine, ~310-entry misconception bank, item anatomy per axis, mechanical rungs, C01–C25 gates, format contracts, do-not-port defects |
+| [intelligence/stacks/programming_algorithms/courses/python/learner_behaviour.md](intelligence/stacks/programming_algorithms/courses/python/learner_behaviour.md) | Learner-behaviour intelligence (Python): ELP analytics → registry-knob map, exposure caveats, co-failure ask |
+| [intelligence/global/platform_student_experience.md](intelligence/global/platform_student_experience.md) | How the platform actually behaves (UI, grading, completion, players) + all 16 owner-confirmed answers |
+| [program/echo_design.md](program/echo_design.md) | Design spec for **Echo** — the Agentic-RAG surface over this corpus |
+| [workbench/requests/intake_per_stack_question_intelligence.md](workbench/requests/intake_per_stack_question_intelligence.md) | Intake spec to extend question intelligence to all stacks |
+| [workbench/proposals/forge_review_and_adaptive_experience.md](workbench/proposals/forge_review_and_adaptive_experience.md) | Proposals: Forge reviewer UX + student adaptive walk |
+| [workbench/proposals/context_operations.md](workbench/proposals/context_operations.md) | Context-ops: skills/agents/EOD-automation design (structure v2 assumed) |
+| [workbench/reviews/adaptive_coding_prd.md](workbench/reviews/adaptive_coding_prd.md) | Simulation-backed review of the product team's IRT/Elo adaptive PRD |
+| [workbench/requests/learner_behaviour_data.md](workbench/requests/learner_behaviour_data.md) | The 41-question data request delegated to DA/DE (NIAT B3, AY 2025-26) |
+| [workbench/requests/item_cofailure_python.md](workbench/requests/item_cofailure_python.md) | Net-new DE ask: item co-failure clustering (+ [addendum](workbench/addenda/cofailure_pilot_scope.md)) |
+| [program/plans/ai_credits_niat_100cr.md](program/plans/ai_credits_niat_100cr.md) | ₹100 Cr AI-credit consumption plan (NIAT) |
 
 Related repo canon: `knowledge/analyses/pedagogy/universal_principles.yaml` (v4),
 `knowledge/manifests/products/*.yaml` (NIAT `ai_tutor_enabled: true` corrected 2026-07-07),

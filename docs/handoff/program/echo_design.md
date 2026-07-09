@@ -3,7 +3,7 @@
 > **Design doc, not code.** Echo is the standalone Agentic-RAG surface over the intelligence
 > layer: ask questions about the handoff docs / Canon today, and (later) weekly-refresh the
 > measured layer from the Learning Portal MCP behind an HITL gate. This spec is for review
-> before any implementation. See [context_agent_family_architecture.md](context_agent_family_architecture.md)
+> before any implementation. See [agent_family_architecture.md](agent_family_architecture.md)
 > for where Echo sits in the family.
 >
 > Last updated: 2026-07-08.

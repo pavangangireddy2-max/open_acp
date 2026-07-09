@@ -2,7 +2,7 @@
 
 > **Purpose:** define exactly what data to supply for each stack so a fresh agent can mine it
 > into a `context_question_intelligence_<stack>.md` doc at the same depth as the Python pilot
-> ([context_question_intelligence_python.md](context_question_intelligence_python.md)). Read
+> ([question_intelligence.md](../../intelligence/stacks/programming_algorithms/courses/python/question_intelligence.md)). Read
 > that doc to see the target output; read this one to gather the inputs.
 >
 > **Decision locked (2026-07-07):** user supplies the full input bundle for *all* stacks
@@ -111,7 +111,7 @@ name + its NxtWave course title(s):
   in place, it's mineable — you don't have to wait for all stacks if you'd rather I start the
   ready ones. (Current plan is to wait for the full set; this is the escape hatch.)
 - **Output:** one `context_question_intelligence_<stack>.md` per stack + an index row added to
-  [README.md](README.md). Batch mining uses parallel analysts (one per stack/chunk), same as
+  [README.md](../../README.md). Batch mining uses parallel analysts (one per stack/chunk), same as
   the Python + deck-recovery runs.
 
 ---

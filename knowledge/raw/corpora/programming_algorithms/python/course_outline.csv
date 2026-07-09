@@ -1,0 +1,7016 @@
+Course Id,Course Name,Module Name,Session No.,Session ID,Session Name,Key Takeaways,Outline,Session PPT,Reading Material id,Reading Material Content,Recorded Session Transcript
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Introduction to Python,1,837f23cb-d3be-4f96-877f-b76f7defe3e2,Programming with Python,"Introduction to Programming
+* Programming, Code, Syntax
+Displaying a Message
+* Hello World!
+Calculations with Python
+* Arithmetic Operators",Define software. Define programming. Define code. Differentiate syntax from natural grammar. Justify why Python is beginner-friendly. List at least 3 applications of Python. Identify at least 3 Python-related career paths. Successfully write and run Hello World in Python. Identify and correct beginner mistakes. Distinguish between text vs evaluated results. Perform addition in Python. Perform subtraction in Python. Perform multiplication in Python. Perform division in Python.,https://docs.google.com/presentation/d/e/2PACX-1vR6P8kLux5kdc7qg6K5u2daOxPlcH0Om9_xTjsZWRY55eCe5bboJPdNNCgswObCcWdlXOvVAyHnyy44/embed?start=false&loop=false&delayms=3000,e57497b0-cccd-4ec6-bd44-5c791468d4f0,"# Intro to Programming with Python
+
+**Software**
+
+Software is a set of instructions to the hardware.
+
+**Programming**
+
+Programming means writing the instructions to create a software.
+
+**Code**
+
+The instructions that we write to create software is called **Code**.
+
+**Syntax**
+
+Similar to Grammar rules in English, Hindi, each programming language has a unique set of rules. These rules are called the **Syntax** of a Programming Language.
+
+## Why Python
+Python is an easy to learn, powerful programming language. With Python, it is possible to create programs with minimal amount of code. Look at the code in Java and Python used for printing the message **""Hello World""**
+
+**Java:**
+
+```java
+class Main {
+    public static void main(String[] args) {
+        System.out.println(""Hello World"");
+    }
+}
+```
+
+**Python:**
+
+```python
+print(""Hello World"")
+```
+
+### Applications of Python
+
+Python is a versatile language which has applications in almost every field
+
+-   Artificial intelligence (AI)
+-   Machine Learning (ML)
+-   Big Data
+-   Smart Devices/Internet of Things (IoT)
+-   Cyber Security
+-   Game Development
+-   Backend Development, etc.
+
+### Career Opportunities
+Python developers have plenty of opportunities across the world
+
+-   DevOps Engineer
+-   Software Developer
+-   Data Analyst
+-   Data Scientist
+-   Machine Learning (ML) Engineer
+-   AI Scientist, etc.
+
+## Hello World Program in Python
+
+Here is a simple Python code that you can use to display the message **""Hello World""**
+
+#### Code
+
+```python
+print(""Hello World!"")
+```
+
+#### Output
+
+
+```
+
+Hello World! 
+```
+
+### Possible Mistakes
+
+Possible mistakes you may make while writing Python code to display the message ""Hello World""
+
+- Spelling Mistake in print 
+
+```python
+prnt(""Hello World!"")
+```
+
+- Uppercase ‘P’ in Print
+
+```python
+Print(""Hello World!"")
+```
+
+- Missing quotes 
+
+```python
+print(Hello World!)
+```
+
+- Missing parentheses
+
+```python
+print(""Hello World!""
+```
+
+## Printing Without Quotes
+
+If we want to print the numerical result of 2 + 5, we do not add quotes.
+
+#### Code
+
+```python
+print(2 + 5) 
+```
+#### Output
+
+```
+
+7 
+```
+If we want to print the exact message ""2 + 5"", then we add the quotes.
+
+#### Code
+
+```python
+print(""2 + 5"") 
+```
+
+#### Output
+
+```
+
+2 + 5 
+```
+
+## Calculations with python
+
+**Addition**
+
+Addition is denoted by `+` sign.
+It gives the sum of two numbers.
+
+#### Code
+
+```python
+print(2 + 5) 
+print(1 + 1.5) 
+```
+
+#### Output
+
+```
+7 
+2.5 
+```
+
+**Subtraction**
+
+Subtraction is denoted by `-` sign.
+It gives the difference between two numbers.
+
+#### Code
+
+```python
+print(5 - 2) 
+```
+
+#### Output
+
+```
+
+3
+```
+
+**Multiplication**
+
+Multiplication is denoted by `*` sign.
+
+#### Code
+
+```python
+print(2 * 5)
+print(5 * 0.5)
+```
+
+#### Output
+
+```
+10
+2.5
+```
+
+**Division**
+
+Division is denoted by `/` sign.
+
+#### Code
+
+```python
+print(5 / 2)
+print(4/2)
+```
+
+#### Output
+
+```
+2.5
+2.0
+```",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/08d134ef-f523-44d6-8e5d-c7f1475325ac_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Introduction to Python,2,f2a6cdec-7135-4db4-9466-d80aa26999fd,Coding Practice Walkthrough | Part 1,,,,,,https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/9491e95b-47b6-4b14-be33-e22a3288787a_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Introduction to Python,3,e89439e9-5e5e-4d4e-8f63-c55e4f81fd01,Leveraging Gen AI for Accelerated learning,"Al-powered Learning
+* Maximize your learning with Al
+Code Explanation
+Generation
+* Generating Code
+* Quiz Generation
+* Coding Problem Generation",,https://docs.google.com/presentation/d/e/2PACX-1vSd7udD4wdXdeGV09en08k82I_PDpIcUe_Mxzsoj-UqJZsijNmBq1gu4r-6AIZssiUCnzxe8m6osQgM/pubembed?start=false&loop=false&delayms=3000,,,https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/9b1ee0ec-466d-4f41-86a5-58638ada03dd_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Introduction to Python,4,60a0f780-6133-4e84-9c62-32a99d1ec7a0,Variables and Data Types,"Variables
+Data types
+* Integer
+* Float
+* String
+* Boolean
+Assigning Value to Variable
+* Assignment Operator","Define variables and understand their role in programs. Values are stored in variables. Assign values to variables in Python. Identify different data types like String, Integer, Float, Boolean. Work with string data in Python. Work with integers in Python. Work with floating-point numbers in Python. Understand Boolean logic in Python.",https://docs.google.com/presentation/d/e/2PACX-1vQnD9Fk2z3_4Rut11HJ4pJW5L9KaZ2SYROrwDs8jj59dhPgP1k8v4oULLl8yf0CbzwtVtrUN9eQdIeD/embed?start=false&loop=false&delayms=3000,32aa5427-e439-4305-be93-7dc294eb495b,"# Variables and Data Types
+
+**Variables**
+
+Variables are like containers for storing values.
+Values in the variables can be changed.
+
+**Values**
+
+Consider that variables are like containers for storing information.
+In context of programming, this information is often referred to as value.
+
+## Data Type
+
+In programming languages, every value or data has an associated type to it known as data type.
+Some commonly used data types
+
+- String
+- Integer
+- Float
+- Boolean
+
+This data type determines how the value or data can be used in the program. For example, mathematical operations can be done on Integer and Float types of data.
+
+**String**
+
+A String is a stream of characters enclosed within quotes.
+Stream of Characters
+
+- Capital Letters ( A – Z )
+- Small Letters ( a – z )
+- Digits ( 0 – 9 )
+- Special Characters (~ ! @ # $ % ^ . ?,)
+- Space
+
+
+Some Examples
+
+- `""Hello World!""`
+- `""some@example.com""`
+- `""1234""`
+
+<MultiLineNote>
+The Stream of characters enclosed within quotes (**Both single quotes and Double quotes**) are considered as **strings**.
+
+* 'hello'
+* ""hello""
+</MultiLineNote>
+
+
+**Integer**
+
+All whole numbers (positive, negative and zero) without any fractional part come under Integers.
+Examples
+
+` ...-3, -2, -1, 0, 1, 2, 3,...`
+
+
+**Float**
+
+Any number with a decimal point
+`24.3, 345.210, -321.86`
+
+**Boolean**
+
+In a general sense, anything that can take one of two possible values is considered a Boolean. Examples include the data that can take values like 
+
+- `True or False`
+- `Yes or No`
+- `0 or 1` 
+- `On or Off`, etc.
+
+As per the Python Syntax, `True` and `False` are considered as Boolean values.
+Notice that both start with a capital letter.
+
+### Assigning Value to Variable
+
+The following is the syntax for assigning an integer value `10` to a variable `age`
+
+```python
+age = 10
+```
+
+Here the equals to `=` sign is called as **Assignment Operator** as it is used to assign values to variables.",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_beta/media/transcripts/f2ae236b-bee0-4235-9dac-767cdde65360_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Sequence of Instructions,5,90eaf231-9992-4c58-9015-c9d5312bb2eb,Sequence of Instructions,"Variables
+* Printing, Assigning
+* Common Mistakes
+* Spacing in Python
+Expressions
+* BODMAS",Define variables in Python. Print variables and their values. Understand the difference between variable names and their values. Understand the importance of defining variables before use. Indentation affects Python syntax. Change the value of a variable. Assign values using expressions. Create and evaluate expressions. Understand the order of operations in expressions. Python evaluates expressions.,https://docs.google.com/presentation/d/e/2PACX-1vQFdHYHvsaQznbXBmhQ0pg0lWJj8qNWAdr3u9jOCdl6U5ZoLOivkadsBDzPL1zW5WUh6fzrnherqy5c/embed?start=false&loop=false&delayms=3000,7f36724e-216f-4adc-8a37-d2c56dbec018,"# Sequence of Instructions
+
+**Program**
+A program is a sequence of instructions given to a computer.
+
+## Defining a Variable
+A variable gets created when you assign a value to it for the first time.
+
+#### Code
+
+```python
+age = 10
+```
+
+### Printing Value in a Variable
+
+#### Code
+
+```python
+age = 10
+print(age)
+```
+
+#### Output
+
+```
+
+10
+```
+
+#### Code
+
+```python
+age = 10
+print(""age"")
+```
+
+#### Output
+
+```
+
+age
+```
+
+Variable name enclosed in quotes will print variable rather than the value in it.
+If you intend to print value, do not enclose the variable in quotes.
+
+## Order of Instructions
+
+Python executes the code line-by-line.
+
+#### Code
+
+```python
+print(age)
+age = 10
+```
+
+#### Output
+
+```
+
+NameError: name 'age' is not defined
+```
+
+Variable `age` is not created by the time we tried to print.
+
+### Spacing in Python
+
+Having spaces at the beginning of line causes errors.
+
+#### Code
+
+```python
+a = 10 * 5
+b = 5 * 0.5
+ b = a + b
+```
+
+#### Output
+
+```
+File ""main.py"", line 3
+    b = a + b
+    ^
+IndentationError: unexpected indent
+```
+
+### Variable Assignment
+Values in the variables can be changed.
+
+#### Code
+
+```python
+a = 1
+print(a)
+a = 2
+print(a)
+```
+
+#### Output
+
+```
+1
+2
+```
+
+**Examples of Variable Assignment**
+
+#### Code
+
+```python
+a = 2
+print(a)
+a = a + 1
+print(a)
+```
+
+#### Output
+
+```
+2
+3
+```
+
+
+#### Code
+
+```python
+a = 1
+b = 2
+a = b + 1
+print(a)
+print(b)
+```
+
+#### Output
+
+```
+3
+2
+```
+
+
+## Expression
+An expression is a valid combination of values, variables and operators.
+
+*Examples* 
+    a \* b
+    a + 2
+    5 \* 2 + 3 \* 4
+
+
+**BODMAS**
+The standard order of evaluating an expression
+
+- *Brackets* (B)
+- *Orders* (O)
+- *Division* (D)
+- *Multiplication* (M)
+- *Addition* (A)
+- *Subtraction* (S)
+
+*Step by Step Explanation*
+
+```
+(5 * 2) + (3 * 4)
+(10) + (12)
+22
+```
+
+#### Code
+
+```python
+print(10 / 2 + 3)
+print(10 / (2 + 3))
+```
+
+#### Output
+
+```
+8.0
+2.0
+```",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/536355e6-1285-44e3-8cf5-696b7406a12c_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Sequence of Instructions,6,c3c48270-5880-4187-bd0c-6716a94cb99d,Input and Output Basics,"Strings
+* String Concatenation
+* String Repetition
+Reading Input
+Indexing",Combine strings in Python. Understand the errors that occur when concatenating different types. Repeat strings using the * operator. Find the length of a string. Take input from users. Handle user input for string concatenation. Access specific characters in a string. Handle out-of-range indexing errors. Slice strings based on indices.,https://docs.google.com/presentation/d/e/2PACX-1vQYjvfsahesPTX_3-In1wTkwsCfSDcFIQLQsIpDpwu-Q5yfJKEqEkQOCbrQCfou0lgpW3vEh38lAgZm/embed?start=false&loop=false&delayms=3000,115d5b6e-cd8c-4925-9f68-5be66507aab4,"# Inputs and Outputs Basics
+
+## Working with Strings
+
+## String Concatenation
+Joining strings together is called string concatenation.
+
+#### Code
+
+```python
+a = ""Hello"" + "" "" + ""World""
+print(a)
+```
+
+#### Output
+
+```
+Hello World
+```
+
+## Concatenation Errors
+
+String Concatenation is possible only with strings.
+
+#### Code
+
+```python
+a = ""*"" + 10
+print(a)
+```
+
+#### Output
+
+```
+File ""main.py"", line 1
+    a = ""*"" + 10
+    ^
+TypeError: 
+can only concatenate str (not ""int"") to str
+```
+
+## String Repetition
+
+`*` operator is used for repeating strings any number of times as required.
+
+#### Code
+
+```python
+a = ""*"" * 10
+print(a)
+```
+
+#### Output
+
+```
+**********
+```
+
+#### Code
+
+```python
+s = ""Python""
+s = (""* "" * 3) + s + ("" *"" * 3)
+print(s)
+```
+
+#### Output
+
+```
+* * * Python * * *
+```
+
+## Length of String
+`len()` returns the number of characters in a given string.
+
+#### Code
+
+```python
+username = input()
+length = len(username)
+print(length)
+```
+
+#### Input
+
+```
+Ravi
+```
+
+#### Output
+
+```
+4
+```
+
+## Take Input From User
+
+* `input()` allows flexibility to take the input from the user.
+* input() reads a line of input as a **string**.
+
+**Example - 1**:
+
+#### Code
+
+```python
+username = input()
+print(username)
+```
+
+#### Input
+
+```
+Ajay
+```
+
+#### Output
+
+```
+Ajay
+```
+
+**Example - 2**:
+
+#### Code
+
+```python
+username = input()
+age = input()
+print(username + "" is "" + age + "" years old"")
+```
+
+#### Input
+
+```
+Ravi
+10
+```
+
+#### Output
+
+```
+Ravi is 10 years old
+```
+
+<MultiLineNote>
+* Even though you **can't** directly **combine strings and integers**, the code works because `input()` returns a **string**. 
+* `input()` converts user-entered data (including numbers, booleans, etc) to string. You will learn more about this in further sessions.
+* In this case, ""10"" becomes a string, allowing it to Concatenate and be the part of the final message.
+</MultiLineNote>
+
+
+## String Indexing
+
+We can access an individual character in a string using their positions (which start from 0).
+These positions are also called as index.
+
+#### Code
+
+```python
+username = ""Ravi""
+first_letter = username[0]
+print(first_letter)
+```
+
+#### Output
+
+```
+R
+```
+
+### IndexError
+
+Attempting to use an index that is too large will result in an error:
+
+
+#### Code
+
+```python
+username = ""Ravi""
+print(username[4])
+```
+
+#### Output
+
+```
+IndexError: string index out of range
+```",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/81045cdb-bdb7-46d4-ac47-1524867e6b30_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Type Conversions,7,644bef74-d150-4442-ba7b-0e03acfe3544,How to debug your code?,,,https://docs.google.com/presentation/d/e/2PACX-1vRZpRiCyBpkIAdwuhpfHZhUOfOYd0bmjfwSzhTtFjrnFmeCBOTURVSML_YW3bFkUxtC9Msp0RQr8qq6/embed?start=false&loop=false&delayms=3000,,,https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/e9f84878-8368-440b-8f14-799ec22fa95a_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Type Conversions,8,dcc9159c-fe50-428b-8cc1-e3211b66d2ef,Type Conversions,"Strings
+* Slicing
+Type Conversions
+* type()
+* String to Integer
+* Integer to String",Slice strings up to the end. Slice strings from the start. Check the type of a variable. Convert strings to integers using int(). Handle errors when converting types. Add numbers after converting input to integers. Convert integers to strings using str(). Convert between different data types.,https://docs.google.com/presentation/d/e/2PACX-1vQ89E2Z1VeTZaehSbEHvX0JhtUXKov03kTSr56fS60LrJxB5jXmAcG1YrD1gQGiH89M3UiNOjj5fInZ/embed?start=false&loop=false&delayms=3000,5de624d9-3ae4-4a49-8049-4d691a378cec,"# Type Conversion
+
+## String Slicing
+
+Obtaining a part of a string is called string slicing.
+
+#### Code
+
+```python
+variable_name[start_index:end_index]
+```
+
+- Start from the `start_index` and stops at `end_index`
+- `end_index` is not included in the slice.
+
+
+
+#### Code
+
+```python
+message = ""Hi Ravi""
+part = message[3:7]
+print(part)
+```
+
+#### Output
+
+```
+
+Ravi
+```
+
+### Slicing to End
+
+If end index is not specified, slicing stops at the end of the string.
+
+#### Code
+
+```python
+message = ""Hi Ravi""
+part = message[3:]
+print(part)
+```
+
+#### Output
+
+```
+
+Ravi
+```
+
+
+### Slicing from Start
+
+If start index is not specified, slicing starts from the index 0.
+
+#### Code
+
+```python
+message = ""Hi Ravi""
+part = message[:2]
+print(part)
+```
+
+#### Output
+
+```
+
+Hi
+```
+
+## Checking Data Type
+
+Check the datatype of the variable or value using `type()` 
+
+**Printing Data Type**
+
+#### Code
+
+```python
+print(type(10))
+print(type(4.2))
+print(type(""Hi""))
+```
+
+#### Output
+
+```
+<class 'int'>
+<class 'float'>
+<class 'str'>
+```
+
+
+## Type Conversion
+
+Converting the value of one data type to another data type is called *Type Conversion* or *Type Casting*.
+We can convert
+
+- String to Integer
+- Integer to Float
+- Float to String and so on.
+
+### String to Integer
+`int()` converts valid data of any type to integer
+
+#### Code
+
+```python
+a = ""5""
+a = int(a)
+print(type(a))
+print(a)
+```
+
+#### Output
+
+```
+<class 'int'>
+5
+```
+
+
+### Invalid Integer Conversion
+
+#### Code
+
+```python
+a = ""Five""
+a = int(a)
+print(type(a))
+```
+
+#### Output
+
+```
+ValueError: 
+invalid literal for int() with base 10: 'Five'
+```
+
+#### Code
+
+```python
+a = ""5.0""
+a = int(a)
+print(type(a))
+```
+
+#### Output
+
+```
+
+invalid literal for int() with base 10: '5.0'
+```
+
+### Adding Two Numbers
+
+#### Code
+
+```python
+a = input()
+a = int(a)
+b = input()
+b = int(b)
+result = a + b
+print(result)
+```
+
+#### Input
+
+```
+2
+3
+```
+
+#### Output
+
+```
+
+5
+```
+
+### Integer to String
+
+`str()` converts data of any type to a string.
+
+#### Code
+
+```python
+a = input()
+a = int(a)
+b = input()
+b = int(b)
+result = a + b
+print(""Sum: "" + str(result))
+```
+
+#### Input
+
+```
+2
+3
+```
+
+#### Output
+
+```
+
+Sum: 5
+```
+
+## Summary
+1. `int()`  -> Converts to integer data type
+- `float()` -> Converts to float data type
+- `str()`   -> Converts to string data type
+- `bool()`  -> Converts to boolean data type",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/881434a3-19b9-4e5b-8b8c-f26f75d0c6d3_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Operators,9,4ed1f4cf-692d-404a-b1c3-ba0cd1863197,Relational Operators,"Comparing Numbers
+* Relational Operators (>, <, >=, <=, !=, ==)
+Comparing Strings
+* Equality",Compare values using relational operators. Avoid common relational operator mistakes. Compare numbers using relational operators. Compare integers and floats using relational operators. Compare strings using relational operators. Python handles case sensitivity in string comparisons. Compare different data types using relational operators.,https://docs.google.com/presentation/d/e/2PACX-1vQQ5qSVUFsRG0I7CDwpvyNR4b8fPamDXPA4lwoTxfBewHv5aYUvRkySj3sh7YUcBoJt4wTliFV91oOD/embed?start=false&loop=false&delayms=3000,e03da18b-8523-445e-81e9-8519b1c16a61,"# Relational Operators
+
+Relational Operators are used to compare values.    
+Gives `True` or `False` as the result of a comparison.    
+    
+These are different relational operators    
+
+| Operator | Name |  
+|-----------|-----|  
+| > | Is greater than  |  
+| < | Is less than  |  
+| == | Is equal to  |  
+| <= | Is less than or equal to |  
+| >= | Is greater than or equal to |    
+| != | Is not equal to  |  
+    
+#### Code  
+  
+```python  
+print(5 < 10)
+print(2 > 1)
+```  
+  
+#### Output  
+  
+```
+True
+True  
+```
+
+### Possible Mistakes
+
+**Mistake - 1**
+
+#### Code
+
+```python  
+print(3 = 3)  
+```
+
+#### Output
+
+```
+
+SyntaxError: expression cannot contain assignment, perhaps you meant ""==""?  
+```
+
+**Mistake - 2**
+  
+#### Code
+
+```python  
+print(2 < = 3)  
+```
+
+#### Output
+
+```  
+
+SyntaxError: invalid syntax  
+```
+
+Space between relational operators `==`, `>=`, `<=` , `!=` is not valid in Python.
+
+
+### Comparing Numbers
+
+#### Code  
+  
+```python  
+print(2 <= 3)  
+print(2.53 >= 2.55)  
+```
+  
+#### Output  
+  
+```
+True  
+False
+```
+
+### Comparing Integers and Floats
+
+#### Code  
+  
+```python  
+print(12 == 12.0)  
+print(12 == 12.1)  
+```
+  
+#### Output  
+  
+```
+True  
+False
+```
+
+
+### Comparing Strings
+
+#### Code  
+  
+```python  
+print(""ABC"" == ""ABC"")  
+print(""CBA"" != ""ABC"")  
+```
+  
+#### Output  
+  
+```
+True  
+True
+```
+
+
+### Case Sensitive
+
+#### Code  
+  
+```python  
+print(""ABC"" == ""abc"")  
+```
+  
+#### Output  
+  
+```
+
+False  
+```
+  
+Python is case sensitive. 
+It means `X` (Capital letter) and `x` (small letter) are not the same in Python.
+
+## Strings and Equality Operator
+
+#### Code  
+  
+```python  
+print(True == ""True"")  
+print(123 == ""123"")  
+print(1.1 == ""1.1"")  
+```
+
+#### Output  
+  
+```
+False  
+False
+False
+```",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/38bb1e81-7cc3-4bae-adda-dd12e129f3b4_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Operators,10,6ecba024-b99d-499e-8bdd-6791519ea5ae,Logical Operators,"Logical Operators
+* and
+* or
+* not
+Code Walkthrough",Use the and operator with boolean values. Evaluate complex conditions with and. Use the or operator with boolean values. Evaluate complex conditions with or. Use the not operator to invert boolean values. Invert boolean expressions using not. Recall the use and behavior of logical operators.,https://docs.google.com/presentation/d/e/2PACX-1vTegT9dg0bfsWAIcZUaQGohqldx6hH_91HRZaRvXP1tP60AktsR9c0RD6NZjPPvnYgayPRM0IXXmrMI/embed?start=false&loop=false&delayms=3000,35dfbabb-e989-46fd-8a1f-12f1a158cf84,"# Logical Operators
+
+The logical operators are used to perform logical operations on Boolean values.  
+Gives `True` or `False` as the result.  
+  
+Following are the logical operators  
+
+- `and`  
+- `or`  
+- `not`
+
+## Logical AND Operator
+
+Gives `True` if both the booleans are true else, it gives `False`
+  
+#### Code  
+  
+```python  
+print(True and True)  
+```
+  
+#### Output  
+  
+```
+
+True
+```
+
+**Examples of Logical AND**
+
+#### Code
+
+```python
+print((2 < 3) and (1 < 2))  
+```  
+
+*Step by Step Explanation*
+
+```
+(2 < 3) and (1 < 2)  
+True and (1 < 2)  
+True and True  
+```  
+  
+#### Output  
+  
+```
+
+True
+```
+
+## Logical OR Operator
+
+Gives `True` if any one of the booleans is true else, it gives `False`
+  
+#### Code  
+  
+```python  
+print(False or False)  
+```
+  
+#### Output  
+  
+```
+
+False
+```
+
+**Examples of Logical OR**
+
+#### Code  
+  
+```python  
+print((2 < 3) or (2 < 1))  
+```
+
+*Step by Step Explanation*
+
+```
+(2 < 3) or (2 < 1)  
+True or (2 < 1)  
+True or False  
+```
+
+#### Output  
+  
+```
+
+True
+```
+
+## Logical NOT Operator
+Gives the opposite value of the given boolean.
+  
+  
+#### Code  
+  
+```python  
+print(not(False))  
+```
+  
+#### Output  
+  
+```
+
+True
+```
+
+**Examples of Logical NOT**
+
+#### Code  
+  
+```python  
+print(not(2 < 3))  
+```
+
+
+*Step by Step Explanation*
+
+```
+not(2 < 3)  
+not(True)  
+False  
+```
+
+#### Output  
+  
+```
+
+False
+```
+
+### Summary
+
+1. Logical *AND* Operator gives `True` if all the booleans are true.  
+- Logical *OR* Operator gives `True` if any of the booleans are true.  
+- Logical *NOT* Operator gives the opposite value",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/4ce7de08-de7c-4ab5-b810-9854692d076d_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Conditional Statements,11,549b2c08-1b9f-4d52-822c-598ab9402494,Conditional Statements,"Conditions
+* If Statement
+* Indentation
+Possible Mistakes
+* If - Else Code Walkthrough",Understand what a block of code is. Define and use conditions. Use conditional statements to control execution. Understand the concept of conditional blocks. Indentation controls the scope of a block. Avoid indentation errors. Structure if-else statements. Check for conditions and use if-else. Avoid common mistakes in if-else statements.,https://docs.google.com/presentation/d/e/2PACX-1vTkINh7J0nvrzpPYVEiYoL0rhs6-09lQNjq0xYuuF7EwW_rswL4NYjNbNe_3TKh0m1KrnJySqdL4T0p/embed?start=false&loop=false&delayms=3000,0697ecbb-4f80-4cc1-ae05-7aa89881abec,"# Conditional Statements
+
+### Block of Code
+
+A sequence of instructions are called block of code.  
+Python executes code in a sequence.
+
+### Condition
+An expression that results in either `True` or `False`
+  
+*Examples* 
+
+i. 2 < 3  
+ii. a == b  
+iii. True
+
+## Conditional Statement
+
+Conditional Statement allows you to execute a block of code only when a specific condition is `True` 
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/68befdc2-4720-4f82-aa0f-c5659e3e3810.PNG)
+
+## Conditional Block
+Block of code which executes only if a condition is `True` is called **Conditional Block**.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/f4a247d2-392b-41d6-b8a6-790f9332bdd5.PNG)
+
+### Indentation
+
+- Space(s) in front of the conditional block is called *indentation*.
+- Indentation(spacing) is used to identify Conditional Block.  
+- Standard practice is to use *four spaces* for indentation.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/eb3959dc-719c-4a7d-b9a6-07279f419bfe.PNG)
+
+
+### Possible Mistakes
+
+Each statement inside a conditional block should have the same indentation (spacing).
+
+#### Wrong Code
+
+```python|UGLY|ITALIC 
+if True:
+    print(""If Block"")
+            print(""Inside If"")
+```
+
+#### Output
+
+```
+
+IndentationError: unexpected indent
+```
+
+#### Correct Code
+
+```python
+if True:
+    print(""If Block"")
+    print(""Inside If"")
+```
+
+## If - Else Syntax
+
+When If - Else conditional statement is used, Else block of code executes if the condition is `False`
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/70fbdab6-038e-4b6e-9eb1-a95f1182916b.PNG)
+
+### Using If-Else
+
+#### Code
+  
+```python  
+a = int(input())
+if a > 0:  
+    print(""Positive"")  
+else:  
+    print(""Not Positive"")  
+print(""End"")  
+```
+  
+#### Input
+  
+```
+
+2  
+```
+  
+#### Output  
+  
+```
+Positive  
+End
+```
+
+### Possible Mistakes in If-Else
+
+Else can only be used along with if condition. It is written below if conditional block  
+  
+#### Code
+  
+```python
+if False:
+    print(""If Block"")  
+print(""After If"")  
+else:  
+    print(""Else Block"")  
+print(""After Else"")  
+```
+
+
+#### Output  
+  
+```
+
+SyntaxError: invalid syntax  
+```
+  
+
+<SingleLineWarning>
+Note: No code is allowed in between if conditional block and else statement.
+</SingleLineWarning>",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/7c67abcd-f620-4b2c-aa08-f8dcfe373b01_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Conditional Statements,12,595fd9ac-95a9-4e1b-91cb-ae0d66006e30,Nested Conditional Statements,"Nested Conditions
+If-elif-else",Nested conditions work. Nested conditions are structured in Python. Use else with nested conditions. Use elif to handle multiple conditions. Add multiple elif statements. Python evaluates elif statements in order. Structure if-elif without the need for an else. Understand the correct sequence of conditional statements.,https://docs.google.com/presentation/d/e/2PACX-1vS722gabCjTJLGjABSEhNzzMUnREVR4zLUy8_nacA9tgSAtluhgE0CdWvZZLqyFyoGV4a7LawqC8Feh/embed?start=false&loop=false&delayms=30000,5bf28868-119e-4d0b-beb2-f3eb5a2f29f4,"# Nested Conditional Statements
+
+## Nested Conditions
+
+The conditional block inside another if/else conditional block is called as *nested conditional block*.
+In the below example, *Block 2* is nested conditional block and *condition B* is called nested conditional statement.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/f5dc9588-5ecf-4fa6-bed7-d1683b764b18.PNG)
+
+
+#### Code
+
+```python
+matches_won = int(input())
+goals = int(input())
+if matches_won > 8:
+    if goals > 20:
+        print(""Hurray"")
+    print(""Winner"")
+```
+
+#### Input
+
+```
+10
+22
+```
+
+#### Output
+
+```
+Hurray
+Winner
+```
+
+#### Input
+
+```
+10
+18
+```
+
+#### Output
+
+```
+
+Winner
+```
+
+## Nested Condition in Else Block
+
+
+We can also write nested conditions in Else Statement.
+
+In the below example *Block 2* is a nested conditional block.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/421a6a8d-d843-4990-8ec5-d10c0bf7bd9e.PNG)
+
+#### Code
+
+```python
+a = 2
+b = 3
+c = 1
+is_a_greatest = (a > b) and (a > c)
+if is_a_greatest:
+    print(a)
+else:
+	is_b_greatest = (b > c)
+    if is_b_greatest:
+        print(b)
+    else:
+        print(c)
+```
+
+#### Output
+
+```
+
+3
+```
+
+## Elif Statement
+
+
+Use the elif statement to have multiple conditional statements between if and else.
+
+The elif statement is optional.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/0fd2445f-711f-493e-9cd1-773e961097eb.PNG)
+
+## Multiple Elif Statements
+
+We can add any number of `elif` statements after `if` conditional block.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/7bca90d3-f681-46c8-8e19-781ab3708338.PNG)
+
+
+## Execution of Elif Statement
+
+Python will execute the elif block whose expression evaluates to true.  
+If multiple `elif` conditions are true, then only the first elif block which is True will be executed.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/c198ad24-ac97-40e8-a999-086acf71eee2.PNG)
+
+
+## Optional Else Statement
+
+Else statement is not compulsory after `if - elif` statements.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/01e43a8a-99e8-4da4-b159-f7b3d7fbf5ad.PNG)
+
+
+#### Code
+
+```python
+number = 5
+is_divisible_by_10 = (number % 10 == 0)
+is_divisible_by_5 = (number % 5 == 0)
+if is_divisible_by_10:
+    print(""Divisible by 10"")
+elif is_divisible_by_5:
+    print(""Divisible by 5"")
+else:
+   print(""Not Divisible by 10 or 5"")
+```
+
+#### Output
+
+```
+
+Divisible by 5
+```
+
+### Possible Mistake
+
+Cannot write an elif statement after `else` statement.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/51acf00f-218d-4439-b635-95603fb8e08d.PNG)",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/0edf3207-ce79-4466-b7a3-e94f860763a9_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Loops,13,3b64b5f7-1d85-4a83-8688-dc9d051d852f,Loops,"Loops
+While Loop
+* Syntax
+* Initialization
+* Termination Condition
+* Updation
+Common Mistakes and Errors
+Code Walkthrough",Use the while loop in Python. Implement a while loop that executes multiple times. Understand the importance of initializing variables before using them. Properly define termination conditions for loops. Update variables inside the loop to ensure proper loop termination.,https://docs.google.com/presentation/d/e/2PACX-1vQH6W1JQN44NvLNNqTTWROWE_XEa7DRw0jwxpwCtoddIEAjRtjO6Kz3zB8qxhF619Dz0Ou1EuPbdhWI/embed?start=false&loop=false&delayms=3000,44c34a16-eeb9-4a98-8ddc-d06f2eb8db56,"# Loops
+
+So far we have seen that Python executes code in a sequence and each block of code is executed once.  \n**Loops allow us to execute a block of code several times.**
+
+## While Loop
+
+Allows us to execute a block of code several times as long as the condition is `True`. 
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/0c0e9bb7-f459-46e5-9591-71f283e8869b.PNG)
+### While Loop Example
+
+The following code snippet prints the next three consecutive numbers after a given number.  
+
+\n#### Code
+
+```python\na = int(input())  \ncounter = 0  \nwhile counter < 3:  \n    a = a + 1  \n    print(a)  \n    counter = counter + 1  \n```  
+
+#### Input
+
+```
+
+4\n```\n  \n#### Output
+
+```\n5  \n6  \n7\n```
+### Possible Mistakes
+
+**1. Missing Initialization**\n  \n#### Code
+
+```python\na = int(input())  \nwhile counter < 3:  \n    a = a + 1  \n    print(a)  \n    counter = counter + 1  \nprint(\""End\"")  \n```\n  \n#### Input
+
+```
+
+5  \n```\n  \n#### Output
+
+```
+
+NameError: name 'counter' is not defined\n```
+**2. Incorrect Termination Condition**
+
+#### Code
+
+```python\na = int(input())  \ncounter = 0  \ncondition = (counter < 3)  \nwhile condition:  \n    a = a + 1  \n    print(a)  \n    counter = counter + 1  \n```
+
+#### Input
+
+```
+
+10  \n```\n  \n#### Output
+
+The above code runs into an infinite loop.
+
+While block will keep repeating as the value in condition variable is `True`.
+**3. Not Updating Counter Variable**
+
+#### Code
+
+```python\na = int(input())  \ncounter = 0  \nwhile counter < 3:  \n    a = a + 1  \n    print(a)  \nprint(\""End\"")  \n```\n  \n#### Input
+
+```
+
+10  \n```
+
+#### Output
+
+```
+
+Infinite Loop  \n```
+
+As the value of counter is not updating.",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/bb5b1fcb-efd2-42f9-960c-b8f3e6d15bbb_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Loops,14,48f61d2d-48ce-4d61-830f-df02062a43f4,Understanding Coding Question Formats,,,https://docs.google.com/presentation/d/e/2PACX-1vRO-K4n0RHKlUlDXsLgi3CJ_EHcc0oPb0nfHNKqGjR8AQ0Rfp6O0hTng6s8C41ZA3xwWdRnoVNtHWi_/embed?start=false&loop=false&delayms=3000,,,https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/3c70f718-52ec-439a-b494-99f73fcfcb6c_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Loops,15,f6a42c4e-cad0-4591-b363-afdd25e4b49f,For Loop,"Sequence
+For Loop
+* Iterating Over a Sequence
+Range
+* Sequence of Numbers
+Code Walkthrough 
+Possible Mistakes","Iterate through a sequence with for. Use for to iterate through characters. Use range() to generate integer sequences. Use range() with for loops. Use range(start, end) for custom ranges.",https://docs.google.com/presentation/d/e/2PACX-1vTB4iHHl3_YD3Up8NXQyOWCU1VSj-RIdjz7RX3ye7lQUPQ_HhmDGMemRl0u7Ys4f5S01tPi1WZrxCQ1/embed?start=false&loop=false&delayms=3000,384585b9-ff4a-43a6-884a-e918abf0eaeb,"## For Loop
+
+`for` statement iterates over each item of a sequence. 
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/8e5211d8-9b4c-41e7-a83c-74ffb35abeee.PNG)
+
+*Examples of sequences:*
+
+- Sequence of Characters (string)  
+- Sequence of numbers, etc.  
+
+### For Syntax
+
+#### Code
+
+```python
+word = ""Python""  
+for each_char in word:  
+    print(each_char)  
+```
+
+#### Output
+
+```
+P  
+y  
+t  
+h  
+o  
+n
+```
+
+## Range
+
+Generates a sequence of integers starting from 0.
+Syntax: `range(n)`
+Stops before n (n is not included).
+  
+#### Code
+
+```python
+for number in range(3):  
+    print(number)  
+```
+  
+#### Output
+
+```
+0  
+1  
+2
+```
+
+### Range with Start and End
+
+Generates a sequence of numbers starting from `start`  
+Syntax: `range(start, end)`
+Stops before `end` (end is not included).  
+  
+#### Code
+
+```python
+for number in range(5, 8):  
+    print(number)  
+```
+  
+#### Output
+
+```
+5  
+6  
+7
+```",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/2e4e8bb0-3309-47ef-88b1-776763fa1c35_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Strings Methods,16,fb1aa19b-d399-4c51-9ac0-2290d0e8f80d,String Methods,"Extended Slicing
+String Methods
+* Strip
+* Isdigit
+* Replace
+* Startswith
+* Endswith
+* Lower
+* Upper",Use extended slicing with step. Slice strings using the step value. Slice strings with different step values. Use isdigit() to check if a string contains only digits. Remove spaces from the beginning and end of a string. Remove specified characters from a string. Remove multiple characters from the string. Replace part of a string with a new value. Check if a string starts with a given prefix. Check if a string ends with a given suffix. Convert a string to uppercase. Convert a string to lowercase.,https://docs.google.com/presentation/d/e/2PACX-1vQK9TN-nJD4vFq67E724l59OeAuK-DTddV9DA4XwaX6p0u8lPb0Alce32yayvNv_1Pj5OFhE7BDQ4LG/embed?start=false&loop=false&delayms=3000,be114c5f-d4ee-45c6-9cea-bd09835e3429,"# Extended Slicing and String Methods
+
+## Extended Slicing
+
+It is an extension of slicing that you have learnt.
+
+#### Syntax: 
+
+`variable[start_index:end_index:step]`
+
+ Along with `start_index`, and `end_index` we will be providing `step`. The `step` determines the increment between each index for slicing.
+
+#### Code: 
+
+```python
+secret_message = ""-R-a-v-i-""
+print(secret_message[1:8:2])
+```
+
+<Img imageSrc=""https://s3.ap-south-1.amazonaws.com/new-assets.ccbp.in/frontend/content/programming-foundations/extended-slicing-1.png"" />
+
+#### Output
+
+```
+
+Ravi
+```
+
+
+
+#### Code
+
+```python
+a = ""Waterfall""  
+part = a[1:6:3]  
+print(part)  
+```
+
+<Img imageSrc=""https://s3.ap-south-1.amazonaws.com/new-assets.ccbp.in/frontend/content/programming-foundations/extended-slicing-2.png"" />
+
+#### Output
+
+```
+
+ar
+```
+
+
+
+## Methods
+
+Python has a set of built-in reusable utilities.
+They simplify the most commonly performed operations are: 
+  
+**String Methods**
+
+- `isdigit()`  
+- `strip()`
+- `lower()`  
+- `upper()`  
+- `startswith()`  
+- `endswith()`  
+- `replace()` and more...
+
+### Isdigit
+
+Syntax: `str_var.isdigit()`
+
+Gives `True` if all the characters are digits. Otherwise, `False`  
+  
+#### Code
+
+```python
+is_digit = ""4748"".isdigit()  
+print(is_digit)  
+```
+  
+#### Output
+
+```
+
+True
+```
+
+### Strip
+
+Syntax: `str_var.strip()`  
+  
+Removes all the leading and trailing spaces from a string.  
+  
+#### Code
+
+```python
+mobile = "" 9876543210 ""  
+mobile = mobile.strip()  
+print(mobile)  
+```
+  
+#### Output
+
+```
+
+9876543210
+```
+
+### Strip - Specific characters
+
+Syntax: `str_var.strip(chars)`  
+  
+We can also specify characters that need to be removed.  
+  
+#### Code
+
+```python
+name = ""Ravi.""  
+name = name.strip(""."")  
+print(name)  
+```
+  
+#### Output
+
+```
+
+Ravi
+```
+
+### Strip - Multiple Characters
+
+Removes all spaces, comma(,) and full stop(.) that lead or trail the string.  
+  
+#### Code
+
+```python
+name = "", .. ,, ravi ,, .. .""  
+name = name.strip("" ,."")  
+print(name)  
+```
+  
+#### Output
+
+```
+
+ravi
+```
+
+### Replace
+
+Syntax: `str_var.replace(old,new)`  
+  
+Gives a new string after replacing all the occurrences of the old substring with the new substring.  
+  
+#### Code
+
+```python
+sentence = ""teh cat and teh dog""  
+sentence = sentence.replace(""teh"",""the"")  
+print(sentence)  
+```
+  
+#### Output
+
+```
+
+the cat and the dog
+```
+
+### Startswith
+
+Syntax: `str_var.startswith(value)`  
+  
+Gives `True` if the string starts with the specified value. Otherwise, `False`  
+  
+#### Code
+
+```python
+url = ""https://onthegomodel.com""  
+is_secure_url = url.startswith(""https://"")  
+print(is_secure_url)  
+```
+  
+#### Output
+
+```
+
+True
+```
+
+### Endswith
+
+Syntax: `str_var.endswith(value)`  
+  
+Gives `True` if the string ends with the specified value. Otherwise, `False`  
+  
+#### Code
+
+```python
+gmail_id = ""rahul123@gmail.com""  
+is_gmail = gmail_id.endswith(""@gmail.com"")  
+print(is_gmail)  
+```
+  
+#### Output
+
+```
+
+True
+```
+
+### Upper
+
+Syntax: `str_var.upper()`  
+  
+Gives a new string by converting each character of the given string to uppercase.  
+  
+#### Code
+
+```python
+name = ""ravi""  
+print(name.upper())  
+```
+  
+#### Output
+
+```
+
+RAVI
+```
+
+### Lower
+
+Syntax: `str_var.lower()`  
+  
+Gives a new string by converting each character of the given string to lowercase.  
+  
+#### Code   
+
+```python
+name = ""RAVI""  
+print(name.lower())  
+```
+  
+#### Output
+
+```
+
+ravi
+```
+
+
+<MultiLineNote>
+The `upper()` and `lower()` methods in Python work only on **alphabetic characters** and on **special characters** (like punctuation marks, symbols, digits, etc.), these methods do **not have any effect**. 
+
+**For example**:
+
+```python
+s = ""Hello, John! 123""
+print(s.upper())  # Output: ""HELLO, JOHN! 123""
+print(s.lower())  # Output: ""hello, john! 123""
+```
+</MultiLineNote>",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/ea0e9d0b-8a8b-430e-9b72-7262b317d3b1_transcript.srt
+,,,,,,,,https://docs.google.com/presentation/d/e/2PACX-1vSeNa6RnbITuZ2FM6RKGSCAMGfuCmWWlt7D5DxSv6c0LDq1D-tHprw4rjvW3UEHttW8LkucynBWvh8X/embed?start=false&loop=false&delayms=3000,749e6b62-1b2d-4254-b4b3-e4bdc73da98e,"# More String Methods
+
+<Section>
+
+## Concepts
+
+<IndexList>\r\n  <IndexItem href=\""classificationMethods\"">\r\n      Classification Methods\r\n   </IndexItem>\r\n   <IndexList>\r\n   <IndexItem href=\""11-isalpha\"">\r\n    isalpha()\r\n   </IndexItem>\r\n   <IndexItem href=\""12-isdecimal\"">\r\n   isdecimal()\r\n   </IndexItem>\r\n   <IndexItem href=\""13-islower\"">\r\n   islower()\r\n   </IndexItem>\r\n   <IndexItem href=\""14-isupper\"">\r\n   isupper()\r\n   </IndexItem>\r\n   <IndexItem href=\""15-isalnum\"">\r\n   isalnum()\r\n   </IndexItem>\r\n   </IndexList>\r\n   <IndexItem href=\""caseConversionMethods\"">\r\n      Case Conversion Methods\r\n   </IndexItem>\r\n   <IndexList>\r\n   <IndexItem href=\""21-capitalize\"">\r\n   capitalize()\r\n   </IndexItem>\r\n   <IndexItem href=\""22-title\"">\r\n   title()\r\n   </IndexItem>\r\n   <IndexItem href=\""23-swapcase\"">\r\n   swapcase() \r\n   </IndexItem>\r\n   </IndexList>\r\n   <IndexItem href=\""countingAndSearchingMethods\"">\r\n        Counting and Searching Methods\r\n   </IndexItem>\r\n   <IndexList>\r\n   <IndexItem href=\""31-count\"">\r\n   count()\r\n   </IndexItem>\r\n   <IndexItem href=\""32-index\"">\r\n   index()\r\n   </IndexItem>\r\n   <IndexItem href=\""33-rindex\"">\r\n   rindex()\r\n   </IndexItem>\r\n   <IndexItem href=\""34-find\"">\r\n   find() \r\n   </IndexItem>\r\n   <IndexItem href=\""35-rfind\"">\r\n   rfind()\r\n   </IndexItem>\r\n   </IndexList>\r\n </IndexList>
+
+</Section>
+
+<Section id=\""classificationMethods\"">
+
+## 1. Classification Methods
+
+These methods are used to check the characteristics of individual characters in a string.
+
+### 1.1 Isalpha
+
+**Syntax:** `str_var.isalpha()`
+
+Gives `True` if all the characters are alphabets. Otherwise, `False`
+
+_Example 1:_
+
+#### Code
+
+```python\r\nis_alpha = \""Rahul\"".isalpha()\r\nprint(is_alpha)\r\n```
+
+#### Output
+
+```
+
+True\r\n```
+
+_Example 2:_
+
+#### Code
+
+```python\r\nis_alpha = \""Rahul@123\"".isalpha()\r\nprint(is_alpha)\r\n```
+
+#### Output
+
+```
+
+False\r\n```
+
+### 1.2 Isdecimal
+
+**Syntax:** `str_var.isdecimal()`
+
+Gives `True` if all the characters are decimals. Otherwise, `False`
+
+_Example 1:_
+
+#### Code
+
+```python\r\nis_decimal = \""9876543210\"".isdecimal()\r\nprint(is_decimal)\r\n```
+
+#### Output
+
+```
+
+True\r\n```
+
+_Example 2:_
+
+#### Code
+
+```python\r\nis_decimal = \""123.R\"".isdecimal()\r\nprint(is_decimal)\r\n```
+
+#### Output
+
+```
+
+False\r\n```
+
+### 1.3 Islower
+
+**Syntax:** `str_var.islower()`
+
+Gives `True` if all letters in the string are in lowercase. Otherwise, `False`
+
+_Example 1:_
+
+#### Code
+
+```python\r\nis_lower = \""hello ravi!\"".islower()\r\nprint(is_lower)\r\n```
+
+#### Output
+
+```
+
+True\r\n```
+
+_Example 2:_
+
+#### Code
+
+```python\r\nis_lower = \""Hello Ravi!\"".islower()\r\nprint(is_lower)\r\n```
+
+#### Output
+
+```
+
+False\r\n```
+
+### 1.4 Isupper
+
+**Syntax:** `str_var.isupper()`
+
+Gives `True` if all letters in the string are in uppercase. Otherwise, `False`
+
+_Example 1:_
+
+#### Code
+
+```python\r\nis_upper = \""HELLO RAVI!\"".isupper()\r\nprint(is_upper)\r\n```
+
+#### Output
+
+```
+
+True\r\n```
+
+_Example 2:_
+
+#### Code
+
+```python\r\nis_upper = \""hELLO rAVI!\"".isupper()\r\nprint(is_upper)\r\n```
+
+#### Output
+
+```
+
+False\r\n```
+
+### 1.5 Isalnum
+
+**Syntax:** `str_var.isalnum()`
+
+Gives `True` if the string is alphanumeric (a letter or a number). Otherwise, `False`
+
+_Example 1:_
+
+#### Code
+
+```python\r\nis_alnum = \""Rahul123\"".isalnum()\r\nprint(is_alnum)\r\n```
+
+#### Output
+
+```
+
+True\r\n```
+
+_Example 2:_
+
+#### Code
+
+```python\r\nis_alnum = \""Rahul\"".isalnum()\r\nprint(is_alnum)\r\n```
+
+#### Output
+
+```
+
+True\r\n```
+
+_Example 3:_
+
+#### Code
+
+```python\r\nis_alnum = \""Rahul@123\"".isalnum()\r\nprint(is_alnum)\r\n```
+
+#### Output
+
+```
+
+False\r\n```
+
+</Section>
+
+<Section id=\""caseConversionMethods\"">
+
+## 2. Case Conversion Methods
+
+These methods are used to change the case of a string.
+
+### 2.1 Capitalize
+
+**Syntax:** `str_var.capitalize()`
+
+Gives a new string after converting the first letter in the string to uppercase and all other letters to lowercase.
+
+#### Code
+
+```python\r\ncapitalized = \""the Planet Earth\"".capitalize()\r\nprint(capitalized)\r\n```
+
+#### Output
+
+```
+
+The planet earth\r\n```
+
+### 2.2 Title
+
+**Syntax:** `str_var.title()`
+
+Gives a new string after converting the first letter of every word to uppercase.
+
+If a word contains a number or a special character, the first letter after that is converted to uppercase.
+
+_Example 1:_
+
+#### Code
+
+```python\r\ntitle_case = \""the planet earth\"".title()\r\nprint(title_case)\r\n```
+
+#### Output
+
+```
+
+The Planet Earth\r\n```
+
+_Example 2:_
+
+#### Code
+
+```python\r\ntitle_case = \""my_name#is john1doe and i love python\"".title()\r\nprint(title_case)\r\n```
+
+#### Output
+
+```
+
+My_Name#Is John1Doe And I Love Python\r\n```
+
+### 2.3 Swapcase
+
+**Syntax:** `str_var.swapcase()`
+
+Gives a new string after converting the uppercase letters to lowercase and vice-versa.
+
+#### Code
+
+```python\r\nswapped = \""mY nAME IS rAVI\"".swapcase()\r\nprint(swapped)\r\n```
+
+#### Output
+
+```
+
+My Name is Ravi\r\n```
+
+</Section>
+
+<Section id=\""countingAndSearchingMethods\"">
+
+## 3. Counting and Searching Methods
+
+These methods are used to count the occurrences of a substring in a string and to find the position of a substring in a string.
+
+### 3.1 Count
+
+**Syntax:** `str_var.count(str, start_index, end_index)`
+
+Here, the `start_index` and the `end_index` are optional.
+
+The `count()` method gives the number of times the specified string `str` appears in the string. It searches the complete string as default.
+
+If `start_index` and `end_index` are provided, it searches between these indices. The `end_index` is not included.
+
+_Example 1:_
+
+#### Code
+
+```python\r\ntext = \""Hello, world!\""\r\nletter_count = text.count(\""l\"")\r\nprint(letter_count)\r\n```
+
+#### Output
+
+```
+
+3\r\n```
+
+_Example 2:_
+
+#### Code
+
+```python\r\ntext = \""Hello, world!\""\r\nletter_count = text.count(\""l\"", 2, 10)\r\nprint(letter_count)\r\n```
+
+#### Output
+
+```
+
+2\r\n```
+
+### 3.2 Index
+
+**Syntax:** `str_var.index(str, start_index, end_index)`
+
+Here, the `start_index` and the `end_index` are optional.
+
+The `index()` method gives the index at the first occurrence of the specified string `str`.
+
+It results in an error if the specified string `str` is not found.
+
+The `index()` method searches the complete string as default. If `start_index` and `end_index` are provided, it searches between these indices. The `end_index` is not included.
+
+_Example 1:_
+
+#### Code
+
+```python\r\ntext = \""I have a spare key, if I lose my key\""\r\nword_index = text.index(\""key\"")\r\nprint(word_index)\r\n```
+
+#### Output
+
+```
+
+15\r\n```
+
+_Example 2:_
+
+#### Code
+
+```python\r\ntext = \""coo coo\""\r\nword_index = text.index(\""co\"", 3, 6)\r\nprint(word_index)\r\n```
+
+#### Output
+
+```
+
+4\r\n```
+
+_Example 3:_
+
+#### Code
+
+```python\r\ntext = \""coo coo\""\r\nword_index = text.index(\""ha\"")\r\nprint(word_index)\r\n```
+
+#### Output
+
+```
+
+ValueError: substring not found\r\n```
+
+### 3.3 rIndex
+
+**Syntax:** `str_var.rindex(str, start_index, end_index)`
+
+Here, the `start_index` and the `end_index` are optional.
+
+The `rindex()` method gives the index at the last occurrence of the specified string `str`.
+
+It results in an error if the specified string `str` is not found.
+
+The `rindex()` method searches the complete string as default. If `start_index` and `end_index` are provided, it searches between these indices. The `end_index` is not included.
+
+_Example 1:_
+
+#### Code
+
+```python\r\ntext = \""I have a spare key, if I lose my key\""\r\nword_index = text.rindex(\""key\"")\r\nprint(word_index)\r\n```
+
+#### Output
+
+```
+
+33\r\n```
+
+_Example 2:_
+
+#### Code
+
+```python\r\ntext = \""coo coo coo\""\r\nword_index = text.rindex(\""co\"", 3, 10)\r\nprint(word_index)\r\n```
+
+#### Output
+
+```
+
+8\r\n```
+
+_Example 3:_
+
+#### Code
+
+```python\r\ntext = \""coo coo\""\r\nword_index = text.rindex(\""ha\"")\r\nprint(word_index)\r\n```
+
+#### Output
+
+```
+
+ValueError: substring not found\r\n```
+
+### 3.4 Find
+
+**Syntax:** `str_var.find(str, start_index, end_index)`
+
+Here, the `start_index` and the `end_index` are optional.
+
+The `find()` method gives the index at the first occurrence of the specified string `str`.
+
+If the specified string `str` is not found, it returns `-1`.
+
+The `find()` method searches the complete string as default. If `start_index` and `end_index` are provided, it searches between these indices. The `end_index` is not included.
+
+It works similarly to the `index()` method. The only difference is that the `index()` method results in an error if the specified string is not found, while `find()` does not.
+
+_Example 1:_
+
+#### Code
+
+```python\r\ntext = \""I have a spare key, if I lose my key\""\r\nword_index = text.find(\""key\"")\r\nprint(word_index)\r\n```
+
+#### Output
+
+```
+
+15\r\n```
+
+_Example 2:_
+
+#### Code
+
+```python\r\ntext = \""coo coo\""\r\nword_index = text.find(\""co\"", 3, 6)\r\nprint(word_index)\r\n```
+
+#### Output
+
+```
+
+4\r\n```
+
+_Example 3:_
+
+#### Code
+
+```python\r\ntext = \""coo coo\""\r\nword_index = text.find(\""ha\"")\r\nprint(word_index)\r\n```
+
+#### Output
+
+```
+
+-1\r\n```
+
+### 3.5 rFind
+
+**Syntax:** `str_var.rfind(str, start_index, end_index)`
+
+Here, the `start_index` and the `end_index` are optional.
+
+The `rfind()` method gives the index at the last occurrence of the specified string `str`.
+
+If the specified string `str` is not found, it returns `-1`.
+
+The `rfind()` method searches the complete string as default. If `start_index` and `end_index` are provided, it searches between these indices. The `end_index` is not included.
+
+It works similarly to the `rindex()` method. The only difference is that the `rindex()` method results in an error if the specified string is not found, while `rfind()` does not.
+
+_Example 1:_
+
+#### Code
+
+```python\r\ntext = \""I have a spare key, if I lose my key\""\r\nword_index = text.rfind(\""key\"")\r\nprint(word_index)\r\n```
+
+#### Output
+
+```
+
+33\r\n```
+
+_Example 2:_
+
+#### Code
+
+```python\r\ntext = \""coo coo coo\""\r\nword_index = text.rfind(\""co\"", 3, 10)\r\nprint(word_index)\r\n```
+
+#### Output
+
+```
+
+8\r\n```
+
+_Example 3:_
+
+#### Code
+
+```python\r\ntext = \""coo coo\""\r\nword_index = text.rfind(\""ha\"")\r\nprint(word_index)\r\n```
+
+#### Output
+
+```
+
+-1\r\n```
+
+</Section>",
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Nested Loops & Loop control Statements,17,8d5ed6e6-9538-402d-86bc-765b19d45f4c,Nested Loops,"Nested Loops
+* for loop inside for
+* while inside for
+* for inside while
+* while inside while",Create and use nested loops. The inner loop runs for every outer loop iteration. Identify the repeating block in nested loops. Nest a while loop inside a for loop. Use nested while loops.,https://docs.google.com/presentation/d/e/2PACX-1vSeNa6RnbITuZ2FM6RKGSCAMGfuCmWWlt7D5DxSv6c0LDq1D-tHprw4rjvW3UEHttW8LkucynBWvh8X/embed?start=false&loop=false&delayms=3000,0fd800ef-28b4-448d-b554-b707b34ac476,"# Nested Loops
+
+An inner loop within the repeating block of an outer loop is called Nested Loop.
+
+The **Inner Loop** will be executed one time for each iteration of the **Outer Loop.**
+
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/8eb1b96f-d188-4ef4-8d29-f270a945b489.png)
+  
+
+#### Code
+
+```python
+for i in range(2):
+  print(""Outer: "" + str(i))
+  for j in range(2):
+    print("" Inner: "" + str(j))
+```
+
+#### Output
+
+```
+Outer: 0
+ Inner: 0
+ Inner: 1
+Outer: 1
+ Inner: 0
+ Inner: 1
+ ```
+
+## Nested Repeating Block
+
+The one highlighted in the blue dotted line is the **repeating** block of the inner loop.
+
+  
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/f5d32b60-693e-4b2a-b65a-3b15c546cf5c.png)
+
+#### Code
+
+```python
+for i in range(2):
+  print(""Outer: "" + str(i))
+  for j in range(2):
+    print("" Inner: "" + str(j))
+print(""END"")
+```
+
+In the above example, the below line is the repeating block of the nested loop.
+
+#### Code
+```python
+print("" Inner: "" + str(j))
+```
+
+#### Output
+
+```
+Outer: 0
+ Inner: 0
+ Inner: 1
+Outer: 1
+ Inner: 0
+ Inner: 1
+END
+```
+
+## Examples - Nested Loops
+
+**Example - 1**: While loop inside a For loop
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/00845cd4-e8ca-4f52-b729-13de7fc86a72.png)
+
+**Example - 2**: While loop inside a while loop
+
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/b5bbe75b-d0f6-4dd6-ad18-dc7fea759518.png)",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/86123fde-029b-42ff-96ab-d659863685a7_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Nested Loops & Loop control Statements,18,b64b1f09-6c9f-436d-b8c2-0a9383cf6695,Loop Control Statements,"Loop Control Statements
+* Break
+* Continue
+* Pass
+Empty Conditions
+Empty Loops",Exit a loop early using break. Apply break to exit loops in practice. Break works inside nested loops. Use continue to skip loop iterations. Use continue to skip certain iterations. Use pass in loops for placeholders. Pass can be used for testing loop logic.,https://docs.google.com/presentation/d/e/2PACX-1vT1Gwjakth4hueuKX_R1vihGaKClJQe4alx_GsFKw22pMAEikid6q8ZiJSN0rMzk1bwNcNg-n0ZxU_8/embed?start=false&loop=false&delayms=3000,80733e22-6a70-4f88-8238-2d4b4522fde8,"# Loop Control Statements
+
+Control statements alter the sequential execution of a program.
+
+*Examples*
+
+-   **if-elif-else**
+-   **while, for**
+-   **break, continue**
+
+## Break
+
+Break statement makes the program exit a loop early.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/fb287ad2-ebb8-4d6f-b76e-3391d8c51d4e.png)
+
+## Using Break
+
+Generally, break is used to exit a loop when a condition is satisfied.
+  ![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/9d31dfba-d068-4bd6-a111-aa90d4310cda.png)
+
+In the below example, when the variable `i` value equals to `3` the `break` statement gets executed and stops the execution of the loop further.
+
+#### Code
+
+```python
+for i in range(5):
+  if i == 3:
+    break
+  print(i)
+print(""END"")
+```
+
+#### Output
+
+```
+0
+1
+2
+END
+```
+
+### Break in Nested Loop
+
+Break in inner loop stops the execution of the inner loop.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/998c6988-c47f-4762-89ce-06007436aba3.png)
+
+## Continue
+
+Continue makes the program skip the remaining statements in the current iteration and begin the next iteration.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/047babd7-7cb8-4c1a-9eec-ccc5940e583e.png)
+
+### Using Continue
+
+Generally, continue is used to skip the remaining statements in the current iteration when a condition is satisfied.
+
+  
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/fa8a8b5c-9f02-4cf7-9d31-3c278bb19b77.png)
+
+In the below example, when the variable `i` value equals to `3` the next statements in the loop body are skipped.
+
+#### Code
+
+```python
+for i in range(5):
+  if i == 3:
+    continue
+  print(i)
+print(""END"")
+```
+
+#### Output
+
+```
+0
+1
+2
+4
+END
+```
+
+## Pass
+
+Pass statement is used as a syntactic placeholder. When it is executed, nothing happens.
+
+Generally used when we have to test the code before writing the complete code.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/2a631d0f-b95d-42dc-ba55-b80eda1a1ee7.png)
+
+### Empty Loops
+
+We can use pass statements to test code written so far, before writing loop logic.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/a29bea25-3b7f-43e6-bfa1-cea157432c29.png)",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/68a3fa13-11a1-4843-8be6-51f635f7abca_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Comparing Strings & Naming Variables,19,3bd6dca9-56c1-4f84-aa23-a1d8a7396cf0,Comparing Strings & Naming Variables,"Comparing Strings 
+* Unicode ord(), chr()
+Rules for Naming Variables
+* Case Styles",Get the Unicode value of characters using ord(). Get the character corresponding to a Unicode value using chr(). Identify different ranges in Unicode. String comparison works in Python. Strings are compared character by character. Understand the best practices for naming variables. Identify Python keywords. Understand the different naming conventions in Python.,https://docs.google.com/presentation/d/e/2PACX-1vQTC1igKDamj_BP7Zl4yyCPRUjT-df0OqzITEwno3FyV_OTB71Gj2t-W8AVgSC1hCz-PyjgksGJoHLM/embed?start=false&loop=false&delayms=3000,ad93dc34-848d-4127-bdaa-890bda014c29,"# Comparing Strings
+
+Computer internally stores characters as numbers.
+
+Every character has a unique **Unicode** value.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/913f57a8-5308-47c2-8384-d6425cadd146.png)
+
+## Ord
+
+To find the Unicode value of a character, we use the `ord()`
+
+`ord(character)` gives unicode value of the character.
+
+#### Code
+
+```python
+unicode_value = ord(""A"")
+print(unicode_value)
+```
+
+#### Output
+
+```
+
+65
+```
+
+## chr
+
+To find the character with the given Unicode value, we use the `chr()`
+
+`chr(unicode)` gives character with the unicode value.  
+
+#### Code
+
+```python
+char = chr(75)
+print(char)
+```
+
+#### Output
+
+```
+
+K
+```
+
+## Unicode Ranges
+
+*48 - 57* -> Number Digits (0 - 9)
+
+*65 - 90* -> Capital Letters (A - Z)
+
+*97 - 122* -> Small Letters (a - z)
+
+*Rest* -> Special Characters, Other Languages
+
+
+## Printing Characters
+
+The below code will print the characters from `A` to `Z`
+
+#### Code
+
+```python
+for unicode_value in range(65,91):
+    print(chr(unicode_value))
+```
+
+#### Output
+
+```
+A
+B
+C
+D
+E
+F
+G
+H
+I
+J
+K
+L
+M
+N
+O
+P
+Q
+R
+S
+T
+U
+V
+W
+X
+Y
+Z
+```
+
+## Comparing Strings
+
+In Python, strings are compared considering unicode.
+
+#### Code
+
+```python
+print(""A"" < ""B"")
+```
+#### Output
+
+```
+
+True
+```
+
+As unicode value of `A` is 65 and `B` is 66, which internally compares `65 < 66` . So the output should be `True`
+
+## Character by Character Comparison
+
+In Python, String Comparison is done character by character.
+
+#### Code
+
+```python
+print(""BAD"" >= ""BAT"")
+```
+
+#### Output
+
+```
+
+False
+```
+
+#### Code
+
+```python
+print(""98"" < ""984"")
+```
+
+#### Output
+
+```
+
+True
+```
+
+# Best Practices
+
+### Naming Variables Rule #1
+
+Use only the below characters  
+
+- Capital Letters ( A – Z )  
+- Small Letters ( a – z )  
+- Digits ( 0 – 9 )  
+- Underscore(_)
+  
+*Examples:*  
+age, total_bill
+
+### Naming Variables Rule #2
+
+Below characters cannot be used  
+
+- Blanks ( )  
+- Commas ( , )  
+- Special Characters  
+	( ~ ! @ # $ % ^ . ?, etc. )
+
+### Naming Variables Rule #3
+
+Variable name must begin with  
+
+- Capital Letters ( A – Z )  
+- Small Letters ( a – z )  
+- Underscore( _ )  
+
+### Naming Variables Rule #4
+
+Cannot use Keywords, which are reserved for special meaning  
+
+- `int`  
+- `str`  
+- `print` etc.,  
+
+# Keywords
+
+Words which are reserved for special meaning  
+
+#### Code
+
+```python  
+help(""keywords"")
+```
+
+#### Output
+
+```
+Here is a list of the Python keywords.  Enter any keyword to get more help.
+
+False               break               for                 not
+None                class               from                or
+True                continue            global              pass
+__peg_parser__      def                 if                  raise
+and                 del                 import              return
+as                  elif                in                  try
+assert              else                is                  while
+async               except              lambda              with
+await               finally             nonlocal            yield
+
+None
+```
+
+
+## Case Styles
+
+- Camel case: **totalBill**
+- Pascal case: **TotalBill**
+- Snake case: **total_bill**
+
+Snake case is preferred for naming the variables in Python.",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/d1fb2f25-c4ce-45f4-af69-2c9fd5f6d1bc_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Lists,20,a489b3de-43e4-4b6f-825a-44619f8c7df7,Lists,"Creating a List
+Accessing List Items
+List Concatenation
+List Repetition
+Slicing and Extended Slicing
+Converting to Lists
+List and String Mutability",Create a list of lists. Use len() to find the length of a list. Access individual elements in a list. Iterate over a list. Concatenate lists. Add items to a list. Repeat a list multiple times. Slice a list to get a part of it. Extract alternate items using step. Convert other types into lists. Identify that lists can be modified after creation. Understand the immutability of strings in Python.,https://docs.google.com/presentation/d/e/2PACX-1vSPIwccokinIi6m6Qwivr38fIcLFIZG7U277PE3d-xUkmN2pP2CAxvpwxOs2suxaVIODZ44oMCV1Uk6/embed?start=false&loop=false&delayms=3000,81ae2511-eff0-4a26-aa12-c097cee0a2e3,"# Data Structures
+
+Data Structures allow us to store and organize data efficiently.
+This will allow us to easily access and perform operations on the data.
+
+In Python, there are four built-in data structures
+
+-   *List*
+-   *Tuple*
+-   *Set*
+-   *Dictionary*
+
+## List
+
+List is the most versatile python data structure.
+Holds an ordered sequence of items.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/20e76ccc-dfd5-43bd-9e1e-919eff41a2b6.PNG)
+
+### Creating a List
+
+Created by enclosing elements within [square] brackets.
+Each item is separated by a comma.
+
+
+#### Code
+
+```python
+a = 2
+list_a = [5, ""Six"", a, 8.2]
+print(type(list_a))
+print(list_a)
+```
+
+#### Output
+
+```
+<class 'list'>
+[5, 'Six', 2, 8.2]
+```
+
+### Creating a List of Lists
+
+#### Code
+
+```python
+a = 2
+list_a = [5, ""Six"", a, 8.2]
+list_b = [1, list_a]
+print(list_b)
+```
+
+#### Output
+
+```
+
+[1, [5, 'Six', 2, 8.2]]
+```
+
+### Length of a List
+
+#### Code
+
+```python
+a = 2
+list_a = [5, ""Six"", a, 8.2]
+print(len(list_a))
+```
+
+#### Output
+
+```
+
+4
+```
+
+### Accessing List Items
+
+To access elements of a list, we use Indexing.
+
+#### Code
+
+```python
+a = 2
+list_a = [5, ""Six"", a, 8.2]
+print(list_a[1])
+```
+
+#### Output
+
+```
+
+Six
+```
+
+### Iterating Over a List
+
+#### Code
+
+```python
+a = 2
+list_a = [5, ""Six"", a, 8.2]
+for item in list_a:
+    print(item)
+```
+
+#### Output
+
+```
+5
+Six
+2
+8.2
+```
+
+### List Concatenation
+
+Similar to strings, `+` operator concatenates lists.
+
+#### Code
+
+```python
+list_a = [1, 2, 3]
+list_b = [""a"", ""b"", ""c""]
+list_c = list_a + list_b
+print(list_c)
+```
+
+#### Output
+
+```
+
+[1, 2, 3, 'a', 'b', 'c']
+```
+
+### Adding Items to List
+
+#### Code
+
+```python
+list_a = []
+print(list_a)
+for i in range(1,4):
+    list_a += [i]
+print(list_a)
+```
+
+#### Output
+
+```
+[]
+[1, 2, 3]
+```
+
+#### Repetition
+
+`*` Operator repeats lists.
+
+#### Code
+
+```python
+list_a = [1, 2]
+list_b = list_a * 3
+print(list_b)
+```
+
+#### Output
+
+```
+
+[1, 2, 1, 2, 1, 2]
+```
+
+### List Slicing
+
+Obtaining a part of a list is called List Slicing.
+
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/b955282c-6b23-4bd9-aab0-9fc91876d9a6.PNG)
+
+  
+
+#### Code
+
+```python
+list_a = [5, ""Six"", 2, 8.2]
+list_b = list_a[:2]
+print(list_b)
+```
+
+#### Output
+
+```
+
+[5, 'Six']
+```
+
+### Extended Slicing
+
+Similar to string extended slicing, we can extract alternate items using step.
+
+#### Code
+
+```python
+list_a = [""R"", ""B"", ""G"", ""O"", ""W""]
+list_b = list_a[0:5:3]
+print(list_b)
+```
+
+#### Output
+
+```
+
+['R', 'O']
+```
+
+### Converting to List
+
+`list(sequence)` takes a sequence and converts it into list.
+
+#### Code
+
+```python
+color = ""Red""
+list_a = list(color)
+print(list_a)
+```
+
+#### Output
+
+```
+
+['R', 'e', 'd']
+```
+
+#### Code
+
+```python
+list_a = list(range(4))
+print(list_a)
+```
+
+#### Output
+
+```
+
+[0, 1, 2, 3]
+```
+
+### Lists are Mutable
+
+- Lists can be modified.
+- Items at any position can be updated.
+
+#### Code
+
+```python
+list_a = [1, 2, 3, 5]
+print(list_a)
+list_a[3] = 4
+print(list_a)
+```
+
+#### Output
+
+```
+[1, 2, 3, 5]
+[1, 2, 3, 4]
+```
+
+### Strings are Immutable
+
+Strings are Immutable (Can’t be modified).
+
+#### Code
+
+```python
+message = ""sea you soon""
+message[2] = ""e""
+print(message)
+```
+
+#### Output
+
+```
+
+TypeError: 'str' object does not support item assignment
+```",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/73b7658e-4e7a-42b2-9966-9175f2e162f5_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Lists,21,e932ecb8-f08c-44cc-a561-1f153b96786c,Working with Lists,"Object
+* Identity of an Object
+Modifying Lists",Retrieve the ID of an object. Use id() to find an object's identity. Modify lists by changing elements. Assignment affects lists in Python. Modifying one list affects another when they share the same reference. Reassignment affects list references. List concatenation creates new lists. Modify lists using +=. Modifying mutable objects affects lists. Changes in immutable objects do not affect lists.,https://docs.google.com/presentation/d/e/2PACX-1vQbTtZiS2usFWbHhAYMYvcOWZES5egqwlGftb02wPP16oD4GvOCpJQHcE3VdkRk6YgLX3V1ee1q6t-F/embed?start=false&loop=false&delayms=3000,bd2128ea-caf1-4937-9073-bcc71a76feab,"# Working with Lists
+
+**Object**
+
+In general, anything that can be assigned to a variable in Python is referred to as an object.
+
+*Strings, Integers, Floats, Lists etc.* are all objects.
+
+Examples
+
+-   ""A""
+-   1.25
+-   [1,2,3]
+
+## Identity of an Object
+
+Whenever an object is created in Python, it will be given a unique identifier (id).
+
+This unique id can be different for each time you run the program.
+
+Every object that you use in a Python Program will be stored in Computer Memory.
+
+The unique id will be related to the location where the object is stored in the Computer Memory.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/d8def327-1ad6-448e-9aac-d12eacd7bf8e.PNG)
+
+
+### Finding Id
+
+We can use the `id()` to find the id of a object.
+
+
+#### Code
+
+```python
+print(id(""Hello""))
+```
+
+#### Output
+
+```
+
+140589419285168
+```
+
+### Id of Lists
+
+```python
+list_a = [1, 2, 3]
+list_b = [1, 2, 3]
+print(id(list_a))
+print(id(list_b))
+```
+
+#### Output
+
+```
+139637858236800
+139637857505984
+```
+
+## Modifying Lists
+
+### Modifying Lists - 1
+
+
+When assigned an existing list both the variables `list_a` and `list_b` will be referring to the same object.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/7614082e-2bba-42e7-b4ff-fb8b5137cec5.PNG)
+
+#### Code
+
+```python
+list_a = [1, 2, 3]
+list_b = list_a
+print(id(list_a))
+print(id(list_b))
+```
+
+#### Output
+
+```
+140334087715264
+140334087715264
+```
+
+### Modifying Lists - 2
+
+When assigned an existing list both the variables `list_a` and `list_b` will be referring to the same object.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/8aaf5b5a-2ccd-42ae-ab6b-d083c8dc3276.PNG)
+
+
+#### Code
+
+```python
+list_a = [1, 2, 3, 5]
+list_b = list_a
+list_b[3] = 4
+print(""list a : "" + str(list_a))
+print(""list b : "" + str(list_b))
+```
+
+#### Output
+
+```
+list a : [1, 2, 3, 4]
+list b : [1, 2, 3, 4]
+```
+
+### Modifying Lists - 3
+
+The assignment will update the reference to new object.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/70270ed1-dbc2-4319-a22d-2291baecd15b.PNG)
+
+#### Code
+
+```python
+list_a = [1, 2]
+list_b = list_a
+list_a = [6, 7]
+print(""list a : "" + str(list_a))
+print(""list b : "" + str(list_b))
+```
+
+#### Output
+
+```
+list a : [6, 7]
+list b : [1, 2]
+```
+
+### Modifying Lists - 4
+
+The assignment will update the reference to a new object.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/bf7d1cc7-edbc-489f-adc2-3d08b98abe3e.PNG)
+
+  
+#### Code
+
+```python
+list_a = [1, 2]
+list_b = list_a
+list_a = list_a + [6, 7]
+print(""list a : "" + str(list_a))
+print(""list b : "" + str(list_b))
+```
+
+#### Output
+
+```
+list a : [1, 2, 6, 7]
+list b : [1, 2]
+```
+
+### Modifying Lists - 5
+
+Compound assignment will update the existing list instead of creating a new object.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/dea82eeb-2864-481d-8889-b4fdf0ce2822.PNG)
+
+#### Code
+
+```python
+list_a = [1, 2]
+list_b = list_a
+list_a += [6, 7]
+print(""list a : "" + str(list_a))
+print(""list b : "" + str(list_b))
+```
+
+#### Output
+
+```
+list a : [1, 2, 6, 7]
+list b : [1, 2, 6, 7]
+```
+
+
+### Modifying Lists - 6
+
+Updating mutable objects will also effect the values in the list, as the reference is changed.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/4c44ea2e-adfe-4ae3-b87e-ffd7373fc9f7.jpg)
+
+  
+#### Code
+
+```python
+list_a = [1,2]
+list_b = [3, list_a]
+list_a[1] = 4
+print(list_a)
+print(list_b)
+```
+
+#### Output
+
+```
+[1, 4]
+[3, [1, 4]]
+```
+
+### Modifying Lists - 7
+
+Updating immutable objects will not effect the values in the list, as the reference will be changed.  
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/49b64a51-d85a-4b19-8742-96a00cf96621.jpg)
+
+
+#### Code
+
+```python
+a = 2
+list_a = [1,a]
+print(list_a)
+a = 3
+print(list_a)
+```
+
+#### Output
+
+```
+[1, 2]
+[1, 2]
+```",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/a13b4d16-3ec2-4ec7-8508-b100406b2f1a_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Lists and Strings,22,9c5518b5-d5d2-4b52-a2a6-7c403b68b084,Lists and Strings,"Splitting a String
+Joining Strings
+Negative Indexing
+Negative Step
+Reversing",Split strings into lists. Split() handles multiple whitespaces. Specify custom separators in split(). Use space as a separator in split(). Use strings as separators in split(). Combine strings into one using join(). Identify the limitations of the join() method. Use negative indexes for reverse access. Reverse a list using negative indexing. Access items from the end of a list using negative indexes. Slice lists with negative indexes. Python handles out-of-bounds negative indices. Use negative step in slicing. Reverse a string using negative indexing. Use negative step to slice strings.,https://docs.google.com/presentation/d/e/2PACX-1vTWPX3yGcinYRcG-4H0OE3FW9dZkUBw6EVn3Q2UPvOPZQ2VUNDM49xzexIGI3gbJFXCEwl-VlycWPfy/embed?start=false&loop=false&delayms=3000,f734929b-223e-4f8d-acf5-b916379819d2,"# Lists and Strings
+
+## Splitting
+
+`str_var.split(separator)`
+
+Splits a string into a list at every specified separator.
+If no separator is specified, default separator is whitespace.
+
+#### Code
+
+```python
+nums = ""1 2 3 4""
+num_list = nums.split()
+print(num_list)
+```
+
+#### Output
+
+```
+
+['1', '2', '3', '4']
+```
+
+### Multiple WhiteSpaces
+
+Multiple whitespaces are considered as single when splitting.
+
+#### Code
+
+```python
+nums = ""1  2 3 4 ""
+num_list = nums.split()
+print(num_list)
+```
+
+#### Output
+
+```
+
+['1', '2', '3', '4']
+```
+
+New line `\n` and tab space `\t` are also whitespace.
+
+#### Code
+
+```python
+nums = ""1\n2\t3 4""
+num_list = nums.split()
+print(num_list)
+```
+
+#### Output
+
+```
+
+['1', '2', '3', '4']
+```
+
+### Using Separator
+
+Breaks up a string at the specified separator.
+
+*Example -1*
+
+#### Code
+
+```python
+nums = ""1,2,3,4""
+num_list = nums.split(',')
+print(num_list)
+```
+
+#### Output
+
+```
+
+['1', '2', '3', '4']
+```
+
+*Example -2*
+
+#### Code
+```python
+nums = ""1,2,,3,4,""
+num_list = nums.split(',')
+print(num_list)
+```
+
+#### Output
+
+```
+
+['1', '2', '', '3', '4', '']
+```
+
+## Space as Separator
+
+#### Code
+
+```python
+nums = ""1  2 3 4 ""
+num_list = nums.split("" "")
+print(num_list)
+```
+
+#### Output
+
+```
+
+['1', '', '2', '3', '4', '']
+```
+
+## String as Separator
+
+*Example - 1*
+
+#### Code
+
+```python
+string_a = ""Python is a programming language""
+list_a = string_a.split('a')
+print(list_a)
+```
+
+#### Output
+
+```
+
+['Python is ', ' progr', 'mming l', 'ngu', 'ge']
+```
+
+*Example - 2*
+
+```python
+string_a = ""step-by-step execution of code""
+list_a = string_a.split('step')
+print(list_a)
+```
+
+#### Output
+
+```
+
+['', '-by-', ' execution of code']
+```
+
+### Joining
+
+`str.join(sequence)` 
+
+Takes all the items in a sequence of strings and joins them into one string.
+
+#### Code
+
+```python
+list_a = ['Python is ', ' progr', 'mming l', 'ngu', 'ge']
+string_a = ""a"".join(list_a)
+print(string_a)
+```
+
+#### Output
+
+```
+
+Python is a programming language
+```
+
+### Joining Non String Values
+
+Sequence should not contain any non-string values.
+
+#### Code
+
+```python
+list_a = list(range(4))
+string_a = "","".join(list_a)
+print(string_a)
+```
+
+#### Output
+
+```
+
+TypeError: sequence item 0: expected str instance, int found
+```
+
+# Negative Indexing
+
+Using a negative index returns the nth item from the end of list.
+
+Last item in the list can be accessed with index `-1`
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/466f021b-8412-49dc-8548-1888dcca094d.PNG)
+
+
+### Reversing a List
+
+`-1` for step will reverse the order of items in the list.
+
+#### Code
+
+```python
+list_a = [5, 4, 3, 2, 1]
+list_b = list_a[::-1]
+print(list_b)
+```
+
+#### Output
+
+```
+
+[1, 2, 3, 4, 5]
+```
+
+### Accessing List Items
+
+*Example-1*
+
+#### Code
+
+```python
+list_a = [5, 4, 3, 2, 1]
+item = list_a[-1]
+print(item)
+```
+
+#### Output
+
+```
+
+1
+```
+
+*Example-2*
+
+#### Code
+
+```python
+list_a = [5, 4, 3, 2, 1]
+item = list_a[-4]
+print(item)
+```
+
+#### Output
+
+```
+
+4
+```
+
+### Slicing With Negative Index
+
+You can also specify negative indices while slicing a List.  
+
+#### Code
+
+```python
+list_a = [5, 4, 3, 2, 1]
+list_b = list_a[-3:-1]
+print(list_b)
+```
+
+#### Output
+
+```
+
+[3, 2]
+```
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/ec590213-ef64-4070-8f07-778fbf22eeee.PNG)
+
+
+### Out of Bounds Index
+
+While slicing, Index can go out of bounds.
+
+#### Code
+
+```python
+list_a = [5, 4, 3, 2, 1]
+list_b = list_a[-6:-2]
+print(list_b)
+```
+
+#### Output
+
+```
+
+[5, 4, 3]
+```
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/05591e59-a9bf-4a50-a7cd-11e35584c0f2.PNG)
+
+## Negative Step Size
+
+`variable[start:end:negative_step]`
+
+Negative Step determines the decrement between each index for slicing.
+
+Start index should be greater than the end index in this case
+
+ - start > end
+
+### Negative Step Size Examples
+
+*Example - 1*
+
+#### Code
+
+```python
+list_a = [5, 4, 3, 2, 1]
+list_b = list_a[4:2:-1]
+print(list_b)
+```
+
+#### Output
+
+```
+
+[1, 2]
+```
+
+*Example - 2*
+
+Negative step requires the start to be greater than end.
+
+#### Code
+
+```python
+list_a = [5, 4, 3, 2, 1]
+list_b = list_a[2:4:-1]
+print(list_b)
+```
+
+#### Output
+
+```
+
+[]
+```
+
+### Reversing a List
+
+`-1` for step will reverse the order of items in the list.
+
+```python
+list_a = [5, 4, 3, 2, 1]
+list_b = list_a[::-1]
+print(list_b)
+```
+
+#### Output
+
+```
+
+[1, 2, 3, 4, 5]
+```
+
+### Reversing a String
+
+`-1` for step will reverse the order of the characters.
+
+#### Code
+
+```python
+string_1 = ""Program""
+string_2 = string_1[::-1]
+print(string_2)
+```
+
+#### Output
+
+```
+
+margorP
+```
+
+### Negative Step Size - Strings
+
+#### Code
+
+```python
+string_1 = ""Program""
+string_2 = string_1[6:0:-2]
+print(string_2)
+```
+
+#### Output
+
+```
+
+mro
+```
+
+### Indexing & Slicing - Strings
+
+*Example - 1*
+
+#### Code
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/a9aceb27-ebb0-4973-b576-bbbe2dc13174.PNG)
+
+```python
+string_1 = ""Program""
+string_2 = string_1[-1]
+print(string_2)
+```
+
+#### Output
+
+```
+
+m
+```
+
+*Example - 2*
+
+#### Code
+
+```python
+string_1 = ""Program""
+string_2 = string_1[-4:-1]
+print(string_2)
+```
+
+#### Output
+
+```
+
+gra
+```",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/37289104-bc7c-423c-bc37-2450a07d9b22_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Functions,23,f32c7dfb-6685-4f54-a744-b41833093370,Functions,"Defining a Function
+Calling a Function
+Function Arguments
+Returning a Value",Reuse code using functions. Define a function in Python. Call a function after it is defined. Understand the importance of defining functions before calling them. Pass arguments into functions. Call functions with different arguments. Variables behave inside and outside functions. Return values from a function. Identify that return exits a function. Use Python’s built-in functions. Use *args to handle multiple arguments in functions. Unpack data for function calls using *.,https://docs.google.com/presentation/d/e/2PACX-1vQdfcq4h-Ksd3kyGBkFNsbPmhx2APKEAqeMJtS0-3Bi2fpCyKMFVcJxtIMaiWQ-QcWalmRZ7Clx9GL8/embed?start=false&loop=false&delayms=3000,28f1cdc5-4618-4fde-883b-db9953cdaacb,"# Functions
+
+Block of reusable code to perform a specific action.
+
+### Reusing Code
+
+Using an existing code without writing it every time we need.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/aa844695-76a0-4eef-ad78-a8184853263b.png)
+
+
+#### Code
+
+```python
+def greet():
+    print(""Hello"")
+
+name = input()
+print(name)
+```
+
+#### Input
+
+```
+
+Teja
+```
+
+#### Output
+
+```
+
+Teja
+```
+
+### Defining a Function
+
+Function is uniquely identified by the `function_name`
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/48867533-bc9e-45e5-9d94-22a077274bbc.png)
+
+
+#### Code
+
+```python
+def greet():
+    print(""Hello"")
+
+name = input()
+print(name)
+```
+
+#### Input
+
+```
+
+Teja
+```
+
+#### Output
+
+```
+
+Teja
+```
+
+### Calling a Function
+
+The functional block of code is executed only when the function is called.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/84ce001f-f30a-4f10-a5ef-d2c2faa29eae.png)
+
+
+#### Code
+
+```python
+def greet():
+    print(""Hello"")
+
+name = input()
+greet()
+print(name)
+```
+  
+
+#### Input
+
+```
+
+Teja
+```
+
+#### Output
+
+```
+Hello
+Teja
+```
+
+
+### Defining & Calling a Function
+
+A function should be defined before it is called.
+
+#### Code
+
+```python
+name = input()
+greet()
+print(name)
+
+def greet():
+    print(""Hello"")
+```
+
+#### Input
+
+```
+
+Teja
+```
+
+#### Output
+
+```
+
+NameError: name 'greet' is not defined
+```
+
+### Printing a Message
+
+Consider the following scenario, we want to create a function, that prints a custom message, based on some variable that is defined outside the function. In the below code snippet, we want to access the value in the variable `name` at line 2 in place of the `?`. 
+
+#### Code
+
+```python
+def greet():
+    msg = ""Hello "" + ? 
+    print(msg)
+
+name = input()
+greet()
+```
+
+#### Input
+
+```
+
+Teja
+```
+
+#### Desired Output
+
+```
+
+Hello Teja
+```
+We use the concept of Function Arguments for these types of scenarios.
+
+### Function With Arguments
+
+We can pass values to a function using an Argument.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/2ebf11e4-d01b-4605-a6c3-4447ec7d75ac.png)
+
+#### Code
+
+```python
+def greet(word):
+    msg = ""Hello "" + word
+    print(msg)
+
+name = input()
+greet(word=name)
+```
+
+#### Input
+
+```
+
+Teja
+```
+
+#### Output
+
+```
+
+Hello Teja
+```
+
+### Variables Inside a Function
+
+A variable created inside a function can only be used in it.
+
+#### Code
+
+```python
+def greet(word):
+    msg = ""Hello "" + word
+
+name = input()
+greet(word=name)
+print(msg)
+```
+
+#### Input
+
+```
+
+Teja
+```
+
+#### Output
+
+
+```
+
+NameError: name 'msg' is not defined
+```
+
+## Returning a Value
+
+To return a value from the function use `return` keyword.
+  
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/e951094a-3007-4bff-b2b8-2ce521dc72e7.png)
+
+Exits from the function when return statement is executed.
+
+#### Code
+
+```python
+def greet(word):
+    msg = ""Hello "" + word
+    return msg
+
+name = input()
+greeting = greet(word=name)
+print(greeting)
+```
+
+#### Input
+
+```
+
+Teja
+```
+
+#### Output
+
+```
+
+Hello Teja
+```
+
+Code written after `return` statement will not be executed.
+
+#### Code
+
+```python
+def greet(word):
+    msg = ""Hello ""+word
+    return msg
+    print(msg)
+
+name = input()
+greeting = greet(word=name)
+print(greeting)
+```
+
+#### Input
+
+```
+
+Teja
+```
+
+#### Output
+
+```
+
+Hello Teja
+```
+
+### Built-in Functions
+
+We are already using functions which are pre-defined in Python.
+Built-in functions are readily available for reuse
+
+ -  `print()`
+ - `int()`
+ - `str()`
+ - `len()`",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/adc68f42-933c-4c7b-9727-9a9d89add236_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Functions,24,3cdc557a-b412-4782-8bfb-2dcf2466334b,Function Arguments,"Positional Arguments
+Keyword Arguments
+Default Values
+* Default Arguments
+Passing Immutable Objects",Pass arguments by name. Avoid mistakes with keyword arguments. Pass arguments by position. Avoid mistakes with positional arguments. Use default arguments in functions. Use default arguments in practice. Avoid syntax errors with default arguments. Changes inside functions don’t affect immutable objects.,https://docs.google.com/presentation/d/e/2PACX-1vTo3iwKa0EXQlcPTo0qfo-DhrmuIAowZ-0LGs73IDmED_QiFyMb9gxruXkuo-QvQvTRGB4LDuKC70Oi/embed?start=false&loop=false&delayms=3000,1be601f8-b1a6-4772-8c6c-d593bb75a14d,"# Function Arguments
+
+A function can have more than one argument.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/4a6379b0-ee55-4759-b401-cb1f57186dfe.png)
+
+## Keyword Arguments
+
+Passing values by their names.
+
+#### Code
+
+```python
+def greet(arg_1, arg_2):
+  print(arg_1 + "" "" + arg_2)
+
+greeting = input()
+name = input()
+greet(arg_1=greeting,arg_2=name)
+```
+
+#### Input
+
+```
+Good Morning
+Ram
+```
+
+#### Output
+
+```
+
+Good Morning Ram
+```
+
+### Possible Mistakes - Keyword Arguments
+
+#### Code
+
+```python
+def greet(arg_1, arg_2):
+    print(arg_1 + "" "" + arg_2)
+
+greeting = input()
+name = input()
+greet(arg_2=name)
+```
+
+#### Input
+
+```
+Good Morning
+Ram
+```
+
+#### Output
+
+```
+
+TypeError: greet() missing 1 required positional argument: 'arg_1'
+```
+
+## Positional Arguments
+
+Values can be passed without using argument names.
+
+-   These values get assigned according to their position.
+-   Order of the arguments matters here.
+
+
+#### Code
+
+```python
+def greet(arg_1, arg_2):
+    print(arg_1 + "" "" + arg_2)
+
+greeting = input()
+name = input()
+greet(greeting,name)
+```
+
+#### Input
+
+```
+Good Morning
+Ram
+```
+
+#### Output
+
+```
+
+Good Morning Ram
+```
+
+### Possible Mistakes - Positional Arguments
+
+**Mistake - 1**
+
+#### Code
+
+```python
+def greet(arg_1, arg_2):
+ print(arg_1 + "" "" + arg_2)
+
+greeting = input()
+name = input()
+greet(greeting)
+```
+
+#### Input
+
+```
+Good Morning
+Ram
+```
+
+#### Output
+
+```
+
+TypeError: greet() missing 1 required positional argument: 'arg_2'
+```
+
+
+**Mistake - 2**
+
+#### Code
+
+```python
+def greet(arg_1, arg_2):
+ print(arg_1 + "" "" + arg_2)
+
+greeting = input()
+name = input()
+greet()
+```
+
+#### Input
+
+```
+Good Morning
+Ram
+```
+
+#### Output
+
+```
+
+TypeError: greet() missing 2 required positional arguments
+```
+
+### Default Values
+
+*Example - 1*
+
+#### Code
+
+```python
+def greet(arg_1=""Hi"", arg_2=""Ram""):
+    print(arg_1 + "" "" + arg_2)
+
+greeting = input()
+name = input()
+greet()
+```
+
+#### Input
+
+```
+Hello
+Teja
+```
+
+#### Output
+
+```
+
+Hi Ram
+```
+
+*Example - 2*
+
+#### Code
+
+```python
+def greet(arg_1=""Hi"", arg_2=""Ram""):
+    print(arg_1 + "" "" + arg_2)
+
+greeting = input()
+name = input()
+greet(greeting)
+```
+
+#### Input
+
+```
+Hello
+Teja
+```
+
+#### Output
+
+```
+
+Hello Ram
+```
+
+*Example - 3*
+
+#### Code
+
+```python
+def greet(arg_1=""Hi"", arg_2=""Ram""):
+    print(arg_1 + "" "" + arg_2)
+
+greeting = input()
+name = input()
+greet(name)
+```
+
+#### Input
+
+```
+Hello
+Teja
+```
+
+#### Output
+
+```
+
+Teja Ram
+```
+
+*Example - 4*
+
+#### Code
+
+```python
+def greet(arg_1=""Hi"", arg_2=""Ram""):
+    print(arg_1 + "" "" + arg_2)
+
+greeting = input()
+name = input()
+greet(arg_2=name)
+```
+
+#### Input
+
+```
+Hello
+Teja
+```
+
+#### Output
+
+```
+
+Hi Teja
+```
+
+*Example - 5*
+
+#### Code
+
+```python
+def greet(arg_1=""Hi"", arg_2):
+    print(arg_1 + "" "" + arg_2)
+
+greeting = input()
+name = input()
+greet(arg_2=name)
+```
+
+#### Input
+
+```
+Hello
+Teja
+```
+
+#### Output
+
+```
+
+SyntaxError:non-default argument follows default argument
+```
+
+Non-default arguments cannot follow default arguments.
+
+*Example - 6*
+
+#### Code
+
+```python
+def greet(arg_2, arg_1=""Hi""):
+    print(arg_1 + "" "" + arg_2)
+
+greeting = input()
+name = input()
+greet(arg_2=name)
+```
+
+#### Input
+
+```
+Hello
+Teja
+```
+
+#### Output
+
+```
+
+Hi Teja
+```
+
+## Passing Immutable Objects
+
+#### Code
+
+```python
+def increment(a):
+    a += 1
+    
+a = int(input())
+increment(a)
+print(a)
+```
+
+#### Input
+
+```
+
+5
+```
+
+#### Output
+
+```
+
+5
+```
+
+Even though variable names are same, they are referring to two different objects.
+Changing the value of the variable inside the function will not affect the variable outside.",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/e03f0c81-a52e-412e-a074-282966634f48_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Built-in Functions,25,8721e72a-cb65-45d6-8487-d657f921a230,Built-in Functions,"Passing Mutable Objects
+Built-in Functions
+* Min
+* Max
+* Sum
+Sorted
+Code Walkthrough",Mutable objects behave when passed into functions. Understand the behavior of immutable objects in functions. Use min() to find the smallest value. Use min() with strings. Use max() to find the largest value. Use sum() to add up the items in a sequence. Use sorted() to sort list items. Use sorted() with reverse ordering. Create an independent copy of a list. Reverse the list in place. Understand the usage of all() function. Check if any element in the sequence is True. Reverse the sequence (string or list). Use enumerate() to add indices to a sequence.,https://docs.google.com/presentation/d/e/2PACX-1vQZr-3Hro_QEFUwwNVV5zSIcYx2uggGa9GTmiGBPjjBdGnVgyhtbBEuu7gZqOuUS_3gII--fvm1McXo/embed?start=false&loop=false&delayms=3000,89f8c4be-5faa-4817-9a95-00807c23fd3a,"# Passing Mutable Objects
+
+The same object in the memory is referred by both `list_a` and `list_x`
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/8a95fb7f-09d8-4469-8efa-b7423bf530c1.png)
+
+
+#### Code
+
+```python
+def add_item(list_x):
+    list_x += [3]
+
+list_a = [1,2]
+add_item(list_a)
+print(list_a)
+```
+
+#### Output
+
+```
+
+[1, 2, 3]
+```
+
+#### Code
+
+```python
+def add_item(list_x):
+    list_x = list_x + [3]
+
+list_a = [1,2]
+add_item(list_a)
+print(list_a)
+```
+
+#### Output
+
+```
+
+[1, 2]
+```
+
+Default args are evaluated only once when the function is defined, not each time the function is called.
+
+
+#### Code
+
+```python
+def add_item(list_x=[]):
+    list_x += [3]
+    print(list_x)
+
+add_item()
+add_item([1,2])
+add_item()
+```
+
+#### Output
+
+```
+[3]
+[1, 2, 3]
+[3, 3]
+```
+
+# Built-in functions
+
+Built-in functions are readily available for reuse.
+
+We are already using functions which are pre-defined in Python
+
+-   `print()`
+-   `int()`
+-   `str()`
+-   `len()`
+
+### Finding Minimum
+
+`min()` returns the smallest item in a sequence or smallest of two or more arguments.
+
+```python
+min(sequence)
+min(arg1, arg2, arg3 ...)
+```
+
+*Example - 1*
+
+#### Code
+
+```python
+smallest= min(3,5,4)
+print(smallest)
+```
+
+Output
+
+```
+
+3
+```
+
+*Example - 2*
+
+#### Code
+
+```python
+smallest = min([1,-2,4,2])
+print(smallest)
+```
+
+#### Output
+
+```
+
+-2
+```
+
+### Minimum of Strings
+
+`min(str_1, str_2)`
+
+Strings are compared character by character using unicode values.
+
+-   P - 80(unicode)
+-   J - 74(unicode)
+
+  
+
+#### Code
+
+```python
+smallest = min(""Python"", ""Java"")
+print(smallest)
+```
+
+#### Output
+
+```
+
+Java
+```
+
+### Finding Maximum
+
+`max()` returns the largest item in a sequence or largest of two or more arguments.
+
+```python
+max(sequence)
+max(arg1, arg2, arg3 ...)
+```
+  
+*Example - 1*
+
+#### Code
+
+```python
+largest = max(3,5,4)
+print(largest)
+```
+
+`Ouput`
+
+
+```
+
+5
+```
+
+*Example - 2*
+
+#### Code
+
+```python
+largest = max([1,-2,4,2])
+print(largest)
+```
+
+#### Output
+
+```
+
+4
+```
+
+### Finding Sum
+
+`sum(sequence)` returns sum of items in a sequence.
+
+#### Code
+
+```python
+sum_of_numbers = sum([1,-2,4,2])
+print(sum_of_numbers)
+```
+
+#### Output
+
+```
+
+5
+```
+
+
+### Ordering List Items
+
+`sorted(sequence)` returns a new sequence with all the items in the given sequence ordered in increasing order.
+
+#### Code
+
+```python
+list_a = [3, 5, 2, 1, 4, 6]
+list_x = sorted(list_a)
+print(list_x)
+```
+
+#### Output
+
+```
+
+[1, 2, 3, 4, 5, 6]
+```
+
+### Ordering List Items - Reverse
+
+`sorted(sequence, reverse=True)` returns a new sequence with all the items in the given sequence ordered in decreasing order.
+
+#### Code
+
+```python
+list_a = [3, 5, 2, 1, 4, 6]
+list_x = sorted(list_a, reverse=True)
+print(list_x)
+```
+
+#### Output
+
+```
+
+[6, 5, 4, 3, 2, 1]
+```",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/39438bb9-64d0-4454-a57e-473b71a2adc8_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,List Methods and Tuples,26,2318a109-8e32-4c6b-a703-7cb2c57c8f18,List Methods,"List Methods
+Append
+Extend
+Insert
+Pop
+Remove
+Clear
+Index
+Count
+Sort
+",Add elements to a list. Add multiple elements to a list. Insert elements at a specific position. Remove elements from the list. Remove specific items from a list. Clear all items from a list. Find the index of an element in a list. Count occurrences of a value in a list. Sort a list in ascending order. Understand the difference between sort() and sorted().,https://docs.google.com/presentation/d/e/2PACX-1vRUmiPxqL-BkaoOztEYtas8yWXBEPnE2gFrMgFvUWkq6zV9Q21lt--Zn4fBs2QFdjR8SBvMysiHRfXK/embed?start=false&loop=false&delayms=3000,9e1703b3-e36e-4b05-b722-2df2f9df1215,"# List Methods
+
+Python provides list methods that allow us to work with lists.
+
+Let’s learn few among them
+
+-   append()
+-   extend()
+-   insert()
+-   pop()
+-   clear()
+-   remove()
+-   sort()
+-   index()
+
+### Append
+
+`list.append(value)` Adds an element to the end of the list.
+
+#### Code
+
+```python
+list_a = []
+for x in range(1,4):
+	list_a.append(x)
+print(list_a)
+```
+
+#### Output
+
+```
+
+[1, 2, 3]
+```
+
+### Extend
+
+`list_a.extend(list_b)`  Adds all the elements of a sequence to the end of the list.
+
+#### Code
+
+```python
+list_a = [1, 2, 3]
+list_b = [4, 5, 6]
+list_a.extend(list_b)
+print(list_a)
+```
+
+#### Output
+
+```
+
+[1, 2, 3, 4, 5, 6]
+```
+
+### Insert
+
+`list.insert(index,value)` Element is inserted to the list at specified index.
+
+#### Code
+
+```python
+list_a = [1, 2, 3]
+list_a.insert(1,4)
+print(list_a)
+```
+
+#### Output
+
+```
+
+[1, 4, 2, 3]
+```
+
+### Pop
+
+`list.pop()` Removes last element.
+
+
+#### Code
+
+```python
+list_a = [1, 2, 3]
+list_a.pop()
+print(list_a)
+```
+
+#### Output
+
+```
+
+[1, 2]
+```
+
+### Remove
+
+`list.remove(value)` Removes the first matching element from the list.
+
+#### Code
+
+```python
+list_a = [1, 3, 2, 3]
+list_a.remove(3)
+print(list_a)
+```
+
+#### Output
+
+```
+
+[1, 2, 3]
+```
+
+### Clear
+
+`list.clear()` Removes all the items from the list.
+
+#### Code
+
+```python
+list_a = [1, 2, 3]
+list_a.clear()
+print(list_a)
+```
+
+#### Output
+
+```
+
+[]
+```
+
+### Index
+
+`list.index(value)` Returns the index at the first occurrence of the specified value.
+
+#### Code
+
+```python
+list_a = [1, 3, 2, 3]
+index =list_a.index(3)
+print(index)
+```
+
+#### Output
+
+```
+
+1
+```
+
+### Count
+
+`list.count(value)`  Returns the number of elements with the specified value.
+
+#### Code
+
+```python
+list_a = [1, 2, 3]
+count = list_a.count(2)
+print(count)
+```
+
+#### Output
+
+```
+
+1
+```
+
+### Sort
+
+`list.sort()` Sorts the list.
+
+#### Code
+
+```python
+list_a = [1, 3, 2]
+list_a.sort()
+print(list_a)
+```
+
+
+#### Output
+
+```
+
+[1, 2, 3]
+```
+
+
+### Sort & Sorted
+
+`sort()`  Modifies the list
+
+#### Code
+
+```python
+list_a = [1, 3, 2]
+list_a.sort()
+print(list_a)
+```
+
+#### Output
+
+```
+
+[1, 2, 3]
+```
+
+`sorted()` Creates a new sorted list
+
+#### Code
+
+```python
+list_a = [1, 3, 2]
+sorted(list_a)
+print(list_a)
+```
+
+#### Output
+
+```
+
+[1, 3, 2]
+```",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/0dfc929a-235e-4b2f-9f3e-d7dbb8c15eb0_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,List Methods and Tuples,27,b90fb5d1-aef9-419c-8c35-dccc8c2920ed,Tuples & Sequences,"None
+Tuples
+Immutability of Tuples
+Membership Check
+* in & not in
+Packing & Unpacking",None is used in Python. Create tuples in Python. Create a tuple with a single item. Access elements of a tuple. Understand the concept of immutability in tuples. Identify operations that can be done with tuples. Convert other data types to tuples. Check membership in sequences. Pack and unpack tuples. Pack and unpack values with tuples.,https://docs.google.com/presentation/d/e/2PACX-1vSpagi-UkdT8eqPKRLXRqzjMHPSFGfHafTtzn1ki--j2VdHqWyB2MH25t5oxbFgFL2vDf7jXEdhHbbW/embed?start=false&loop=false&delayms=3000,92359bd4-f07e-4602-bf59-2b64dc5ba7ef,"# Tuples and Sequences
+
+## None
+`None` is an object which is a datatype of its own (NoneType).
+
+Used to define no value or nothing.
+
+#### Code
+
+```python
+var = None
+print(var)
+print(type(var))
+```
+
+#### Output
+
+```
+None
+<class 'NoneType'>
+```
+
+## Function Without Return
+
+Functions assigned to a variable, when function does not have a `return` statement, the variable will get the value `None`
+
+#### Code
+
+```python
+def increment(a):
+    a += 1
+    
+a = 55
+result = increment(a)
+print(result)
+```
+
+#### Output
+
+```
+
+None
+```
+
+## Function That Returns Nothing
+
+When a function returns no value, the default value will be `None`
+
+*Example - 1*
+
+#### Code
+
+```python
+def increment(a):
+    a += 1
+    return
+
+a = 55
+result = increment(a)
+print(result)
+```
+
+#### Output
+
+```
+
+None
+```
+  
+*Example - 2*
+
+#### Code
+
+```python
+def increment(a):
+    a += 1
+    return None
+
+a = 5
+result = increment(a)
+print(result)
+```
+
+#### Output
+
+```
+
+None
+```
+
+*Example - 3*
+
+#### Code
+
+```python
+result = print(""Hi"")
+print(result)
+```
+
+#### Output
+
+```
+Hi
+None
+```
+
+# Tuple
+
+- Holds an ordered sequence of items.
+- Tuple is immutable object, where as list is a mutable object.
+
+#### Code
+
+```python
+a = 2
+tuple_a = (5, ""Six"", a, 8.2)
+```
+
+### Creating a Tuple
+
+- Created by enclosing elements within (round) brackets.
+- Each item is separated by a comma.
+
+#### Code
+
+```python
+a = 2
+tuple_a = (5, ""Six"", a, 8.2)
+print(type(tuple_a))
+print(tuple_a)
+```
+
+#### Output
+
+```
+<class 'tuple'>
+(5, 'Six', 2, 8.2)
+```
+
+### Tuple with a Single Item
+
+#### Code
+
+```python
+a = (1,)
+print(type(a))
+print(a)
+```
+
+#### Output
+
+```
+<class 'tuple'>
+(1,)
+```
+
+### Accessing Tuple Elements
+
+Accessing Tuple elements is also similar to string and list accessing and slicing.
+
+#### Code
+
+```python
+a = 2
+tuple_a = (5, ""Six"", a, 8.2)
+print(tuple_a[1])
+```
+
+#### Output
+
+```
+
+Six
+```
+
+### Tuples are Immutable
+
+Tuples does not support modification.
+
+#### Code
+
+```python
+tuple_a = (1, 2, 3, 5)
+tuple_a[3] = 4
+print(tuple_a)
+```
+
+#### Output
+
+```
+
+TypeError: 'tuple' object does not support item assignment
+```
+
+### Operations can be done on Tuples
+
+- len()
+- Iterating
+- Slicing
+- Extended Slicing
+
+
+## Converting to Tuple
+
+`tuple(sequence)` Takes a sequence and converts it into tuple.
+
+
+### String to Tuple
+
+#### Code
+
+```python
+color = ""Red""
+tuple_a = tuple(color)
+print(tuple_a)
+```
+
+#### Output
+
+```
+
+('R', 'e', 'd')
+```
+
+### List to Tuple
+
+#### Code
+
+```python
+list_a = [1, 2, 3]
+tuple_a = tuple(list_a)
+print(tuple_a)
+```
+
+#### Output
+
+```
+
+(1, 2, 3)
+```
+
+### Sequence to Tuple
+
+#### Code
+
+```python
+tuple_a = tuple(range(4)) 
+print(tuple_a)
+```
+
+#### Output
+
+```
+
+(0, 1, 2, 3)
+```
+
+
+## Membership Check
+
+Check if given data element is part of a sequence or not.
+
+Membership Operators
+
+-   in
+-   not in
+
+*Example - 1*
+
+#### Code
+
+```python
+tuple_a = (1, 2, 3, 4)
+is_part = 5 in tuple_a
+print(is_part)
+```
+
+#### Output
+
+```
+
+False
+```
+
+*Example - 2*
+
+#### Code
+
+```python
+tuple_a = (1, 2, 3, 4)
+is_part = 1 not in tuple_a
+print(is_part)
+```
+
+#### Output
+
+```
+
+False
+```
+
+
+### List Membership
+
+#### Code
+
+```python
+list_a = [1, 2, 3, 4]
+is_part = 1 in list_a
+print(is_part)
+```
+
+#### Output
+
+
+```
+
+True
+```
+
+### String Membership
+
+#### Code
+
+```python
+word = 'Python'
+is_part = 'th' in word
+print(is_part)
+```
+
+#### Output
+
+```
+
+True
+```
+
+# Packing & Unpacking
+
+## Unpacking
+
+Values of any sequence can be directly assigned to variables.
+
+Number of variables in the left should match the length of sequence.
+
+#### Code
+
+```python
+tuple_a = ('R', 'e', 'd')
+(s_1, s_2, s_3) = tuple_a
+print(s_1)
+print(s_2)
+print(s_3)
+```
+
+#### Output
+
+```
+R
+e
+d
+```
+
+## Errors in Unpacking
+
+#### Code
+
+```python
+tuple_a = ('R', 'e', 'd')
+s_1, s_2 = tuple_a
+print(s_1)
+print(s_2)
+```
+
+#### Output
+
+```
+
+ValueError: too many values to unpack (expected 2)
+```
+
+#### Code
+
+```python
+tuple_a = ('R', 'e', 'd')
+s_1, s_2, s_3, s_4 = tuple_a
+print(s_1)
+```
+
+#### Output
+
+```
+
+ValueError: not enough values to unpack (expected 4, got 3)
+```
+
+## Tuple Packing
+
+`()` brackets are optional while creating tuples.
+
+In Tuple Packing, Values separated by commas will be packed into a tuple.
+
+#### Code
+
+```python
+a = 1, 2, 3
+print(type(a))
+print(a)
+```
+
+#### Output
+
+```
+<class 'tuple'>
+(1, 2, 3) 
+```
+
+#### Code
+
+```python
+a = 1,
+print(type(a))
+print(a)
+```
+
+#### Output
+
+```
+<class 'tuple'>
+(1,) 
+```
+
+#### Code
+
+```python
+a, = 1,
+print(type(a)) 
+print(a)
+
+```
+
+#### Output
+
+```
+<class 'int'>
+1
+```",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/0cb550f6-7a74-4c04-be26-2d0adaddb6ca_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Sets and Set Operations,28,0e50a0ea-32fe-409e-ab0d-77c582e45f45,Sets,"Sets
+Creating
+* Converting
+Mutability of Sets
+Add
+* Update
+* Discard
+
+Operations on Sets
+* Clear
+* Length
+* Iterating
+Membership Check",Create sets in Python. Sets handle duplicates. Understand the restriction of mutable objects in sets. Create an empty set. Convert sequences to sets. Identify why sets do not allow indexing. Add items to a set. Add multiple items to a set. Remove specific items from sets. Understand the difference between remove() and discard(). Identify other common operations for working with sets.,https://docs.google.com/presentation/d/e/2PACX-1vSAXP6tWbTIsvJ6Q_nVeO0dlllmlGgD-Ip7UnORg1QS4pHVGCihaFfLlARpxqjuDtYdioZvgXAzTq2P/embed?start=false&loop=false&delayms=3000,1135aca0-dfe6-4bf1-9ac2-4cc0f929d9c4,"# Sets
+
+Unordered collection of items.
+
+Every set element is
+
+-   Unique (no duplicates)
+-   Must be immutable
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/fee4f127-5199-4baf-9371-bf686d47f158.png)
+
+## Creating a Set
+
+- Created by enclosing elements within *{curly}* brackets.
+- Each item is separated by a comma.
+
+#### Code
+
+```python
+a = 2
+set_a = {5, ""Six"", a, 8.2}
+print(type(set_a))
+print(set_a)
+```
+
+
+#### Output
+
+```
+<class 'set'>
+{8.2, 2, 'Six', 5}
+```
+
+Need not be in the same order as defined.
+
+
+## No Duplicate Items
+
+Sets contain unique elements
+
+#### Code
+
+```python
+set_a = {""a"", ""b"", ""c"", ""a""}
+print(set_a)
+```
+
+#### Output
+
+```
+
+{'b', 'a', 'c'}
+```
+
+## Immutable Items
+
+Set items must be immutable.
+As List is mutable, Set cannot have list as an item.
+
+#### Code
+
+```python
+set_a = {""a"", [""c"", ""a""]}
+print(set_a)
+```
+
+#### Output
+
+```
+
+TypeError: unhashable type: 'list'
+```
+
+## Creating Empty Set
+
+We use `set()` to create an empty set.
+
+#### Code
+
+```python
+set_a = set()
+print(type(set_a))
+print(set_a)
+```
+
+#### Output
+
+```
+<class 'set'>
+set()
+```
+
+## Converting to Set
+
+`set(sequence)` takes any sequence as argument and converts to set, avoiding duplicates 
+
+### List to Set
+
+
+#### Code
+
+```python
+set_a = set([1,2,1])
+print(type(set_a))
+print(set_a)
+```
+
+#### Output
+
+```
+<class 'set'>
+{1, 2}
+```
+
+### String to Set
+
+#### Code
+
+```python
+set_a = set(""apple"")
+print(set_a)
+```
+
+#### Output
+
+```
+
+{'l', 'p', 'e', 'a'}
+```
+
+### Tuple to Set
+
+
+#### Code
+
+```python
+set_a = set((1, 2, 1))
+print(set_a)
+```
+
+#### Output
+
+```
+
+{1, 2}
+```
+
+## Accessing Items
+
+As sets are unordered, we cannot access or change an item of a set using 
+
+- Indexing
+- Slicing
+
+#### Code
+
+```python
+set_a = {1, 2, 3}
+print(set_a[1])
+print(set_a[1:3])
+```
+
+#### Output
+
+```
+
+TypeError: 'set' object is not subscriptable
+```
+
+## Adding Items
+
+`set.add(value)` adds the item to the set, if the item is not present already.
+
+#### Code
+
+```python
+set_a = {1, 3, 6, 2, 9}
+set_a.add(7)
+print(set_a)
+```
+
+#### Output
+
+```
+
+{1, 2, 3, 6, 7, 9}
+```
+
+## Adding Multiple Items
+`set.update(sequence)` adds multiple items to the set, and duplicates are avoided.
+
+#### Code
+
+```python
+set_a = {1, 3, 9}
+set_a.update([2, 3])
+print(set_a)
+```
+
+#### Output
+
+```
+
+{2, 1, 3, 9}
+```
+
+## Removing Specific Item
+
+`set.discard(value)` takes a single value and removes if present.
+
+#### Code
+
+```python
+set_a = {1, 3, 9}
+set_a.discard(3)
+print(set_a)
+```
+
+#### Output
+
+```
+
+{1, 9}
+```
+
+`set_a.remove(value)` takes a value and remove if it present or raise an error.
+
+#### Code
+
+```python
+set_a = {1, 3, 9}
+set_a.remove(5)
+print(set_a)
+```
+
+#### Output
+
+```
+KeyError: 5
+```
+
+## Operations on Sets
+
+You can perform the following operations on Sets
+
+- `clear()`
+- `len()`
+- Iterating
+- Membership Check",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/83ef83cf-548d-4b43-88b8-ef883cc716e4_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Sets and Set Operations,29,2877fa6d-132d-4872-8c7c-93ad6ad3de38,Set Operations,"Sets Operations
+Union
+Intersection
+Difference
+Symmetric Difference
+Set Comparisons
+Is Subset
+Is Superset
+Is Disjoint",Combine sets using union. Combine sets and other sequences. Find common elements between sets. Identify intersection with sequences. Find differences between sets. Perform set difference with sequences. Identify symmetric difference between sets. Identify symmetric difference between a set and a sequence. Check for subset relationships. Check if a sequence is a subset of a set. Check for superset relationships. Check for superset relationships with sequences. Check if sets are disjoint.,https://docs.google.com/presentation/d/e/2PACX-1vQP4iW35oHIXjq8-K8e9i0XO1JtcxW7c8wHg1QVfmAs6qIWp8Fd4l0KHs7uFhYKb4RxdwvV5CyG4_cK/embed?start=false&loop=false&delayms=3000,5a85d60c-630d-451c-82a0-b44e3c470c9e,"# Set Operations
+
+Set objects also support mathematical operations like union, intersection, difference, and symmetric difference.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/b246a55f-c34b-4e7f-aa1b-9ae1095274e6.png)
+
+## Union
+
+Union of two sets is a set containing all elements of both sets.
+
+`set_a | set_b`
+or
+`set_a.union(sequence)`
+
+`union()` converts sequence to a set, and performs the union.  
+
+#### Code
+
+```python
+set_a = {4, 2, 8}
+set_b = {1, 2}
+union = set_a | set_b
+print(union)
+```
+
+#### Output
+
+```
+
+{1, 2, 4, 8}
+```
+
+#### Code
+
+```python
+set_a = {4, 2, 8}
+list_a = [1, 2]
+union = set_a.union(list_a)
+print(union)
+```
+
+#### Output
+
+```
+
+{1, 2, 4, 8}
+```
+
+## Intersection
+
+Intersection of two sets is a set containing common elements of both sets.
+
+`set_a & set_b` 
+or
+`set_a.intersection(sequence)`
+
+`intersection()` converts sequence to a set, and perform the intersection. 
+
+#### Code
+
+```python
+set_a = {4, 2, 8}
+set_b = {1, 2}
+intersection = set_a & set_b
+print(intersection)
+```
+
+#### Output
+
+```
+
+{2}
+```
+
+#### Code
+
+```python
+set_a = {4, 2, 8}
+list_a = [1, 2]
+
+intersection = set_a.intersection(list_a)
+print(intersection)
+```
+
+#### Output
+
+```
+
+{2}
+```
+
+## Difference
+
+Difference of two sets is a set containing all the elements in the first set but not second.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/1c502d4f-a4d0-496c-b77b-1dc080ea2ef1.png)
+
+` set_a - set_b`
+or
+`set_a.difference(sequence)`
+
+`difference()` converts sequence to a set.
+
+#### Code
+
+```python
+set_a = {4, 2, 8}
+set_b = {1, 2}
+diff = set_a - set_b
+print(diff)
+```
+
+#### Output
+
+```
+
+{8, 4}
+```
+
+#### Code
+
+```python
+set_a = {4, 2, 8}
+tuple_a = (1, 2)
+diff = set_a.difference(tuple_a)
+print(diff)
+```
+
+#### Output
+
+```
+
+{8, 4}
+```
+
+## Symmetric Difference
+
+Symmetric difference of two sets is a set containing all elements which are not common to both sets.
+
+`set_a ^ set_b`
+or
+`set_a.symmetric_difference(sequence)`
+
+`symmetric_difference()` converts sequence to a set.
+
+#### Code
+
+```python
+set_a = {4, 2, 8}
+set_b = {1, 2}
+symmetric_diff = set_a ^ set_b
+print(symmetric_diff)
+```
+
+#### Output
+
+```
+
+{8, 1, 4}
+```
+
+#### Code
+
+```python
+set_a = {4, 2, 8}
+set_b = {1, 2}
+diff = set_a.symmetric_difference(set_b)
+print(diff)
+```
+
+#### Output
+
+```
+
+{8, 1, 4}
+```
+
+# Set Comparisons
+
+Set comparisons are used to validate whether one set fully exists within another
+
+-   issubset()
+-   issuperset()
+-   isdisjoint()
+
+## Subset
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/76c1b6db-9207-40c5-bbb9-a4859f2c9716.png)
+
+`set2.issubset(set1)` Returns `True` if all elements of second set are in first set. Else, `False`
+
+*Example - 1*
+  
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/008e7d8a-1cff-4e08-89e5-58a703e8b1f4.png)
+
+#### Code
+
+```python
+set_1 = {'a', 1, 3, 5}
+set_2 = {'a', 1}
+is_subset = set_2.issubset(set_1)
+print(is_subset)
+```
+
+#### Output
+
+```
+
+True
+```
+
+
+*Example - 2*
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/245a5fd8-be29-4d38-a7e9-18072e3e2f64.png)
+
+
+#### Code
+
+```python
+set_1 = {4, 6}
+set_2 = {2, 6}
+is_subset = set_2.issubset(set_1)
+print(is_subset)
+```
+
+#### Output
+
+```
+
+False
+```
+
+## SuperSet
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/c1428abd-455d-4a22-b54c-9b5427ff51dd.png)
+
+`set1.issuperset(set2)` Returns `True` if all elements of second set are in first set. Else, `False`
+
+
+*Example - 1*
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/1c5d388b-f7c2-4f31-820c-f8ef16d3bd43.png)
+
+
+#### Code
+
+```python
+set_1 = {'a', 1, 3, 5}
+set_2 = {'a', 1}
+is_superset = set_1.issuperset(set_2)
+print(is_superset)
+```
+
+#### Output
+
+```
+
+True
+```
+  
+
+*Example - 2*
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/4c705974-c8b9-40d6-b540-52cbce82396a.png)
+
+
+#### Code
+
+```python
+set_1 = {4, 6}
+set_2 = {2, 6}
+is_superset = set_1.issuperset(set_2)
+print(is_superset)
+```
+
+#### Output
+
+```
+
+False
+```
+
+## Disjoint Sets
+
+`set1.isdisjoint(set2)` Returns `True` when they have no common elements. Else, `False`
+
+#### Code
+
+```python
+set_a = {1, 2}
+set_b = {3, 4}
+is_disjoint = set_a.isdisjoint(set_b)
+print(is_disjoint)
+```
+
+#### Output
+
+```
+
+True
+
+```",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/07bb6730-6174-4cd9-830f-9fd5bcb7e673_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Dictionaries,30,954c6f8d-557f-43ee-ab13-dd634bedb1d5,Dictionaries,"Dictionary
+Key-Value Pairs
+Creating
+Accessing Items
+Operations on Dictionaries
+Dictionary Views
+Converting to Dictionary","Create and access key-value pairs in a dictionary. Understand the requirements for creating valid dictionary keys. Create an empty dictionary. Access dictionary values using keys. Safely access values using get() method. Handle missing keys safely using get() or try-except. Check the presence of a key in a dictionary. Dynamically add key-value pairs to a dictionary. Modify values for existing keys in a dictionary. Delete keys from a dictionary. Access dictionary keys, values, and items. Access keys from a dictionary using keys(). Access values from a dictionary using values(). Access key-value pairs from a dictionary using items(). Iterate over dictionary keys, values, and items. Convert dictionary views to lists. Iterate over both keys and values simultaneously. ",https://docs.google.com/presentation/d/e/2PACX-1vT-1emuxWN79SerRYrPLfdcWKIVmzYNLTVfTA8K9x3kCqXC4qLIowYuO9CmDp3Xm9Zr_mzTbe_iaL6F/embed?start=false&loop=false&delayms=3000,1a688226-2198-43fd-8eca-95f8b390261a,"# Dictionaries
+
+Unordered collection of items.
+
+Every dictionary item is a **Key-value** pair.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/650a9ae1-b12f-4a6f-bcb9-0b0dc834a217.png)
+
+## Creating a Dictionary
+
+Created by enclosing items within **{curly}** brackets
+
+Each item in dictionary has a key - value pair separated by a **comma**.
+
+  
+
+#### Code
+
+```python
+dict_a = {
+  ""name"": ""Teja"",
+  ""age"": 15 
+}
+```
+
+### Key - Value Pairs
+
+#### Code
+
+```python
+dict_a = {
+  ""name"": ""Teja"",
+  ""age"": 15 
+}
+```
+  
+
+In the above dictionary, the
+
+-   keys are `name` and `age`
+-   values are `Teja` and `15`
+
+### Collection of Key-Value Pairs
+
+#### Code
+
+```python
+dict_a = { ""name"": ""Teja"",
+            ""age"": 15 }
+print(type(dict_a))
+print(dict_a)
+```
+
+#### Output
+
+```
+<class 'dict'>
+{'name': 'Teja','age': 15}
+```
+
+## Immutable Keys
+Keys must be of immutable type and must be unique.
+
+Values can be of any data type and can repeat.
+
+#### Code
+
+```python
+dict_a = {
+  ""name"": ""Teja"",
+  ""age"": 15,
+  ""roll_no"": 15
+}
+```
+
+## Creating Empty Dictionary
+
+#### Code - 1
+
+```python
+dict_a = dict()
+print(type(dict_a))
+print(dict_a)
+```
+
+#### Output
+
+```
+<class 'dict'> 
+{}
+```
+
+#### Code - 2
+
+```python
+dict_a = {}
+print(type(dict_a))
+print(dict_a)
+```
+
+#### Output
+
+```
+<class 'dict'>
+{}
+```
+
+## Accessing Items
+
+To access the items in dictionary, we use square bracket `[ ]` along with the `key` to obtain its value.
+
+  
+
+#### Code
+
+```python
+dict_a = {
+  'name': 'Teja',
+  'age': 15
+}
+print(dict_a['name'])
+```
+
+#### Output
+
+```
+
+Teja
+```
+
+## Accessing Items - Get
+
+The `get()` method returns `None` if the key is not found.
+
+  
+
+#### Code
+
+```python
+dict_a = {
+  'name': 'Teja',
+  'age': 15
+}
+print(dict_a.get('name'))
+```
+
+#### Output
+
+```
+
+Teja
+```
+
+#### Code
+
+```python
+dict_a = {
+  'name': 'Teja',
+  'age': 15
+}
+print(dict_a.get('city'))
+```
+
+#### Output
+
+```
+
+None
+```
+
+### KeyError
+
+When we use the square brackets `[]` to access the key-value, **KeyError** is raised in case a key is not found in the dictionary.
+
+#### Code
+
+```python
+dict_a = {'name': 'Teja','age': 15 }
+print(dict_a['city'])
+```
+
+#### Output
+
+```
+
+KeyError: 'city'
+```
+
+<MultiLineQuickTip>
+If we use the square brackets `[]`, `KeyError` is raised in case a key is not found in the dictionary. On the other hand, the `get()` method returns `None` if the key is not found.
+</MultiLineQuickTip>
+
+
+### Membership Check
+
+Checks if the given key exists.
+
+  
+
+#### Code
+
+```python
+dict_a = {
+  'name': 'Teja',
+  'age': 15
+}
+result = 'name' in dict_a
+print(result)
+```
+
+#### Output
+
+```
+
+True
+```
+
+## Operations on Dictionaries
+
+We can update a dictionary by
+
+-   Adding a key-value pair
+-   Modifying existing items
+-   Deleting existing items
+
+
+### Adding a Key-Value Pair
+
+#### Code
+
+```python
+dict_a = {'name': 'Teja','age': 15 }
+dict_a['city'] = 'Goa'
+print(dict_a)
+```
+
+#### Output
+
+```
+
+{'name': 'Teja', 'age': 15, 'city': 'Goa'}
+```
+
+### Modifying an Existing Item
+
+As dictionaries are mutable, we can modify the values of the keys.
+
+#### Code
+
+```python
+dict_a = {
+    'name': 'Teja',
+    'age': 15
+}
+dict_a['age'] = 24
+print(dict_a)
+```
+
+#### Output
+
+```
+
+{'name': 'Teja', 'age': 24}
+```
+
+### Deleting an Existing Item
+
+We can also use the `del` keyword to remove individual items or the entire dictionary itself.
+
+#### Code
+
+```python
+dict_a = {
+  'name': 'Teja',
+  'age': 15
+}
+del dict_a['age']
+print(dict_a)
+```
+
+#### Output
+
+```
+
+{'name': 'Teja'}
+```
+
+## Dictionary Views
+
+They provide a dynamic view on the dictionary’s entries, which means that when the dictionary changes, the view reflects these changes.
+
+**Dictionary Methods**
+
+-   `dict.keys()` - returns dictionary Keys
+-   `dict.values()` - returns dictionary Values
+-   `dict.items()` - returns dictionary items(key-value) pairs
+
+The objects returned by`keys()` , `values()` & `items()` are **View Objects** .
+
+
+### Getting Keys
+
+The `keys()` method returns a view object of the type dict_keys that holds a list of all keys.
+
+  
+
+#### Code
+
+```python
+dict_a = {
+  'name': 'Teja',
+  'age': 15
+}
+print(dict_a.keys())
+```
+
+#### Output
+
+```
+
+dict_keys(['name', 'age'])
+```
+
+### Getting Values
+
+The `values()` method returns a view object that displays a list of all the values in the dictionary.
+
+  
+
+#### Code
+
+```python
+dict_a = {
+  'name': 'Teja',
+  'age': 15
+}
+print(dict_a.values())
+```
+
+#### Output
+
+```
+
+dict_values(['Teja', 15])
+```
+
+### Getting Items
+
+The `items()` method returns a view object that displays a list of dictionary's (key, value) tuple pairs.
+
+  
+
+#### Code
+
+```python
+dict_a = {
+  'name': 'Teja',
+  'age': 15
+}
+print(dict_a.items())
+```
+
+#### Output
+
+```
+
+dict_items([('name', 'Teja'), ('age', 15)])
+```
+
+### Iterate over Dictionary Views
+
+**Example - 1**
+
+#### Code
+
+```python
+dict_a = {
+    'name': 'Teja',
+    'age': 15
+}
+for key in dict_a.keys():
+   print(key)
+```
+
+#### Output
+
+```
+name
+age
+```
+
+
+**Example - 2**
+
+#### Code
+
+```python
+dict_a = {
+  'name': 'Teja',
+  'age': 15
+}
+keys_list = list(dict_a.keys())
+print(keys_list)
+```
+
+#### Output
+
+```
+
+['name', 'age']
+```
+  
+
+**Example - 3**
+
+#### Code
+
+```python
+dict_a = {
+  'name': 'Teja',
+  'age': 15
+}
+for value in dict_a.values():
+   print(value)
+```
+
+#### Output
+
+```
+Teja
+15
+```
+
+**Example - 4**
+
+#### Code
+
+```python
+dict_a = {
+  'name': 'Teja',
+  'age': 15
+}
+for key, value in dict_a.items():
+    pair = ""{} {}"".format(key,value)
+    print(pair)
+```
+
+#### Output
+
+```
+name Teja
+age 15
+```
+
+### Dictionary View Objects
+
+`keys()` , `values()` & `items()` are called Dictionary Views as they provide a dynamic view on the dictionary’s items.
+
+  
+
+#### Code
+
+```python
+dict_a = {
+	'name': 'Teja',
+	'age': 15 
+}
+view = dict_a.keys()
+print(view)
+dict_a['roll_no'] = 10
+print(view)
+```
+
+#### Output
+
+```
+dict_keys(['name', 'age'])
+dict_keys(['name', 'age', 'roll_no'])
+```
+
+## Converting to Dictionary
+
+`dict(sequence)` takes any number of key-value pairs and converts to dictionary.
+
+#### Code
+
+```python
+list_a = [ 
+    (""name"",""Teja""),
+    [""age"",15],
+    (""roll_no"",15)
+]
+dict_a = dict(list_a)
+print(dict_a)
+```
+
+#### Output
+
+```
+
+{'name': 'Teja', 'age': 15, 'roll_no': 15}
+```
+
+#### Code
+
+```python
+list_a = [""name"", ""Teja"", 15]
+dict_a = dict(list_a)
+print(dict_a)
+```
+
+#### Output
+
+```
+
+ValueError: dictionary update sequence element #0 has length 4; 2 is required
+```
+
+### Type of Keys
+
+A dictionary key must be of a type that is immutable.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/3e953f5a-c944-435f-98c1-7181e2b907ea.png)",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/a295b4dd-5acd-48c1-8430-4728cb57971b_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Dictionaries,31,ba84e1b2-13c7-4f53-be9f-911779168bb5,Working with Dictionaries,"Dictionary Methods
+Copy
+Clear
+Membership Check
+Arbitrary Function Arguments
+*args
+**kwargs","Understand that dictionaries are mutable and assignment does not create a new copy. Create a new dictionary with the same contents. Create a copy of a list. Identify dictionary operations like length, clearing and membership check. Iterate over dictionaries and perform actions.",https://docs.google.com/presentation/d/e/2PACX-1vTcKE3bSUEQ0sklNCpZATr62tHWPN5HQCGDjRZfTMvyD4rLMV8AKImNC5O1i1SBtYYXlvhudzR60XnP/embed?start=false&loop=false&delayms=3000,ed5b85a8-98ef-48e8-8ac3-b52ada55d9f8,"# Working with Dictionaries
+
+## Dictionary Methods
+
+Python provides dictionary methods that allow us to work with dictionaries.
+
+-   `copy()`
+-   `get()`
+-   `update()`
+-   `fromkeys()` and more..
+
+Let’s learn few among them
+
+## Referring Same Dictionary Object
+
+#### Code
+
+```python
+dict_a = {
+        'name': 'Teja',
+    'age': 15
+}
+dict_b = dict_a
+dict_b['age'] = 20
+print(dict_a)
+print(id(dict_a))
+print(id(dict_b))
+```
+
+#### Output
+
+```
+{'name':'Teja', 'age': 20}
+140170705626624
+140170705626624
+```
+
+### Copy of Dictionary
+
+`dict.copy()` returns copy of a dictionary.
+
+  
+
+#### Code
+
+```python
+dict_a = {
+  'name': 'Teja',
+  'age': 15
+}
+dict_b = dict_a.copy()
+dict_b['age'] = 20
+print(dict_a)
+print(id(dict_a))
+print(id(dict_b))
+```
+
+#### Output
+
+```
+{'name':'Teja',  'age': 15}
+140664418952704
+140664418952896
+```
+
+### Copy of List
+
+#### Code
+
+```python
+list_a = ['Teja', 15]
+list_b = list_a.copy()
+list_b.extend([20])
+print(list_a)
+print(id(list_a))
+print(id(list_b))
+```
+
+#### Output
+
+```
+['Teja', 15]
+139631861316032
+139631860589504
+```
+
+## Operations on Dictionaries
+
+
+-   `len()`
+-   `clear()`
+-   Membership Check
+
+  
+
+#### Code
+
+```python
+dict_a = {
+'name': 'Teja',
+'age': 15
+}
+print(len(dict_a))  # length of dict_a
+if 'name' in dict_a:  # Membership Check 
+        print(""True"")
+dict_a.clear()  # clearing dict_a
+print(dict_a)
+```
+
+#### Output
+
+```
+2
+True
+{}
+```
+
+##  Iterating
+
+Cannot add/remove dictionary keys while iterating the dictionary.
+
+  
+
+#### Code
+
+```python
+dict_a = {'name': 'Teja', 'age': 15}
+for k in dict_a.keys():
+    if k == 'name':
+        del dict_a[k]
+print(dict_a)
+```
+
+#### Output
+
+```
+
+RuntimeError: dictionary changed size during iteration
+```
+
+# Arbitrary Function Arguments
+
+## Passing Multiple Values
+
+We can define a function to receive any number of arguments.
+
+We have already seen such functions
+
+-   max(*args) max(1,2,3..)
+-   min(*args) min(1,2,3..)
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/3d7b4f86-19bd-41be-a9cb-abc2a31e32b9.png)
+
+## Variable Length Arguments
+
+Variable length arguments are packed as tuple.
+
+  
+
+#### Code
+
+```python
+def more_args(*args):
+  print(args)
+   
+more_args(1, 2, 3, 4)
+more_args()
+```
+
+#### Output
+
+```
+(1, 2, 3, 4)
+()
+```
+
+## Unpacking as Arguments
+
+If we already have the data required to pass to a function as a sequence, we can
+
+unpack it with `*` while passing.
+
+  
+
+#### Code
+
+```python
+def greet(arg1=""Hi"", arg2=""Ram""):
+    print(arg1 + "" "" + arg2)
+
+data = [""Hello"", ""Teja""]
+greet(*data)
+```
+
+#### Output
+
+```
+
+Hello Teja
+```
+
+
+## Multiple Keyword Arguments
+
+We can define a function to receive any number of keyword arguments.
+
+Variable length kwargs are packed as dictionary.
+
+  
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/df76ee0d-1581-4f34-8ab9-fda9170ed785.png)
+  
+
+#### Code
+
+```python
+def more_args(**kwargs):
+    print(kwargs)
+    
+more_args(a=1, b=2)
+more_args()
+```
+
+#### Output
+
+```
+{'a': 1, 'b': 2}
+{}
+```
+
+### Iterating
+
+**kwargs** is a dictionary. We can iterate over them like any other dictionary.
+
+#### Code
+
+```python
+def more_args(**kwargs):
+    for i, j in kwargs.items():
+      print('{}:{}'.format(i,j))
+ 
+more_args(a=1, b=2)
+```
+
+#### Output
+
+```
+a:1
+b:2
+```
+
+## Unpacking as Arguments
+
+#### Code - 1
+
+```python
+def greet(arg1=""Hi"", arg2=""Ram""):
+    print(arg1 + "" "" + arg2)
+
+data = {'arg1':'Hello', 'arg2':'Teja'}
+greet(**data)
+```
+
+#### Output
+
+```
+
+Hello Teja
+```
+  
+
+#### Code - 2
+
+```python
+def greet(arg1=""Hi"", arg2=""Ram""):
+  print(arg1 + "" "" + arg2)
+
+data = {'msg':'Hello', 'name':'Teja'}
+greet(**data)
+```
+
+#### Output
+
+```
+
+TypeError: greet() got an unexpected keyword argument 'msg'
+```",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/e9a46c17-928a-417d-8e53-d176ed6c7591_transcript.srt
+4b8803cc-8ecb-4284-9fcf-53c5afd2a93c,Computer Programming Using Python,Python Standard Library,32,6ae1c51c-fed4-40fb-b52d-4947ea1b8b60,Python Standard Library,"Python Standard Library
+Math
+Factorial
+Random
+Randint
+Choice
+Map, Filter & Reduce",Understand the utility of built-in functions in Python. Use math-related functions for computations. Generate random numbers or select random elements.,https://docs.google.com/presentation/d/e/2PACX-1vQdLNC7jb7O2cJzLsldH3JCKJFs1JSwyKMKu3V64fWxAK-yI28AbkI2CfmUBqjv4j8kaZP6SROKlz5j/embed?start=false&loop=false&delayms=3000,ff83d5e2-96b3-40a0-9b44-c47ba6a3f410,"# Standard Library
+
+## Built-in Functions
+
+Built-in functions are Readily available for reuse.
+
+Some of the built Functions are
+
+1. `print()`
+
+2. `max()`
+
+3. `min()`
+
+4. `len()` and many more..
+
+
+
+## Standard Library
+
+Python provides several such useful values (constants), classes and functions. 
+
+This collection of predefined utilities is referred as the **Python Standard Library**
+
+All these functionalities are organized into different modules.
+
+- In Python context, any file containing a Python code is called a **module**
+- These modules are further organized into folders known as **packages**
+
+Different modules are:
+
+1. collections
+
+2. random
+
+3. datetime
+
+4. math and many more..
+
+## Working with Standard Library
+
+To use a functionality defined in a module we need to import that module in our program.
+
+```python
+import module_name
+```
+
+## Math Module
+**math**  module provides us to access some common *math functions* and *constants*.
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/ae346c3f-1d3c-4f0a-954b-545d5c14f76c.png)
+
+#### Code
+```python
+import math
+print(math.factorial(5))
+print(math.pi)
+```
+
+#### Output
+``` 
+120
+3.141592653589793
+```
+
+### Importing module
+
+Importing a module and giving it a new name (aliasing)
+
+#### Code
+```python
+import math as m1
+print(m1.factorial(5))
+```
+
+#### Output
+
+```
+
+120
+```
+
+### Importing from a Module
+
+We can import just a specific definition from a module.
+
+#### Code
+
+```python
+from math import factorial
+print(factorial(5))
+```
+
+#### Output
+
+```
+
+120
+```
+
+### Aliasing Imports
+
+We can also import a specific definition from a module and alias it
+
+#### Code
+
+```python
+from math import factorial as fact
+print(fact(5))
+```
+
+#### Output
+
+```
+
+120
+```
+
+## Random module
+
+Randomness is useful in whenever uncertainty is required.  
+
+*For example*: Rolling a dice, flipping a coin, etc., 
+
+`random`  module provides us utilities to create randomness.
+ 
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/38f1f526-69d2-46c3-a8a5-f81b8afb0cd4.png)
+
+
+###Randint
+
+`randint()` is a function in random module which returns a random integer in the given interval.
+
+
+
+#### Code
+
+```python
+import random
+random_integer = random.randint(1, 10)
+print(random_integer)
+```
+
+#### Output
+```
+
+8
+```
+
+###Choice
+
+`choice()` is a function in random module which returns a random element from the sequence. 
+
+
+
+#### Code
+```python
+import random
+random_ele = random.choice([""A"",""B"",""C""])
+print(random_ele)
+```
+
+#### Output
+```
+
+B
+```
+
+To know more about **Python Standard Library**, go through the authentic python documentation 
+- [https://docs.python.org/3/library/](https://docs.python.org/3/library/)
+
+# Map, Filter and Reduce
+We worked with different sequences (list, tuples, etc.)
+
+To simplify working with sequences we can use `map()`, `filter()` and `reduce()` functions.
+
+
+## Map
+
+`map()` applies a given function to each item of a sequence (list, tuple etc.) and returns a sequence of the results.
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/59345dfd-6a48-438e-ad0f-31003dfb6b87.png)
+
+*Example - 1*
+
+#### Code
+```python
+def square(n):
+   return n * n
+numbers = [1, 2, 3, 4]
+result = map(square, numbers)
+numbers_square = list(result)
+print(numbers_square)
+```
+
+#### Output
+```
+
+[1, 4, 9, 16]
+```
+
+*Example - 2*
+
+#### Code
+```python
+numbers = list(map(int, input().split()))
+print(numbers)
+```
+
+#### Input
+
+```
+
+1 2 3 4
+```
+
+#### Output
+
+```
+
+[1, 2, 3, 4]
+```
+
+
+
+
+
+
+## Filter
+
+`filter()` method filters the elements of a given sequence based on the result of given function.
+
+The function should return True/False 
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/ca21fab4-3393-4b4d-86de-6041af026357.png)
+
+
+#### Code
+```python
+def is_positive_number(num):
+   return num > 0
+  
+list_a = [1, -2, 3, -4]
+positive_nums = filter(is_positive_number, list_a)
+print(list(positive_nums))
+```
+
+#### Output
+
+```
+
+[1, 3]
+```
+
+## Reduce
+
+`reduce()` function is defined in the functools module.
+
+![](https://res.cloudinary.com/learning-platform/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https://nkb-backend-ccbp-media-static.s3.ap-south-1.amazonaws.com/prod/media/profile_pic/card-notes-attachment/160cce75-5d0a-4120-8e27-037aadc2cb56.png)
+
+#### Code
+```python
+from functools import reduce
+
+def sum_of_num(a, b):
+   return a+b
+
+list_a = [1, 2, 3, 4]
+sum_of_list = reduce(sum_of_num, list_a)
+print(sum_of_list)
+```
+
+#### Output
+```
+
+10
+```",https://nkb-backend-ccbp-media-static.s3.amazonaws.com/ccbp_prod/media/transcripts/a432d09f-13ab-455e-8738-fc6648743620_transcript.srt
