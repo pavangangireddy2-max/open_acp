@@ -39,3 +39,8 @@ knowledge/graph/
 src/open_acp/knowledge/wiki/
 knowledge/raw/brand/.predownload_backup/
 .echo_cache/
+
+# track shared project skills (rest of .claude stays ignored)
+!.claude/
+.claude/*
+!.claude/skills/
