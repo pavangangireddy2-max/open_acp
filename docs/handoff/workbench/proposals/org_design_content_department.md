@@ -132,3 +132,10 @@ computes (or is being built to compute):
   into §3 with the system-computed subset marked.
 - Headcount/sizing pass once roles land (Ops is deliberately small + leveraged; stacks
   scale with course count; SLE scales with surface count).
+- **Actual team reality (2026-07-10, HOD):** Content 60 = Aptitude 7 · English 7 · DS&ML 10
+  · DS&Algo 10 · FullStack 12 · GenAI 4 · Systems & Infra (CSI) 7 · Pedagogy 3; plus
+  Product + DA 10 · Engineering 12 · Graphic Designers 9 — total 91. Mapping updates:
+  CSI ≈ cs_core + system_design + devops_testing; the Pedagogy team (3) stewards E-gates +
+  the verdict pass (sits with/behind Central Ops as calibration owners); Graphic Designers
+  are the deck rendering/asset layer (the owner the deck asset-contract gap was waiting
+  for); no Physical AI team yet. Companion: workbench/proposals/continuous_improvement_culture.md.
