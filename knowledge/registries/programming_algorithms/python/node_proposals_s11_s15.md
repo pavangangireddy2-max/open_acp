@@ -13,10 +13,18 @@
 
 | node | evidence | confidence |
 |---|---|---|
-| **N1 Indentation & block structure** (parse-time rules: expected block, unexpected indent, legal 1-space, if-False-still-parses) | community C1 — 11 items, 28 robust pairs, median phi 0.26; = bank families C-01/02/03/04; outline takeaway "Indentation" | **B+C** |
-| **N2 If/else execution scope** (what runs when; trailing unindented statements; else pairing) | C9 + C15 (+C10) — e.g. `if a>b: print(a-b)` then unindented `print(a+b)`; bank C-05/C-06 | **B+C** |
-| **N3 Conditions as booleans** (comparison → bool driving the branch; stored booleans `is_day = (t>=8) and (t<=15)`) | C2 + C4 — bank C-11/C-14/C-17; outline "Conditions" | **B+C** |
-| **N4 Sequential ifs vs ladder** (independent ifs all fire; else binds to nearest if) | C5 — the 4 grade-ladder TEXTUALs, highest-fail cluster in session (39–52%), phi 0.32; bank C-07 | **B+C** |
+| **N1 Indentation & block structure** (parse-time rules: expected block, unexpected indent, legal 1-space, if-False-still-parses) | C1+C17 (14 items; C1 = 11 items, 28 robust pairs, median phi 0.26) + legal-indent items in mixed C14/C16; bank C-01/02/03/04; outline "Indentation" | **B+C** |
+| **N2 If/else execution scope** (what runs when; trailing unindented statements; else pairing) | C3+C7+C9+C15 (17 items) — `if a>b: print(a-b)` then unindented `print(a+b)`; 9 robust pairs run ACROSS these 4 communities (one family, fragmented by clustering); bank C-05/C-06 | **B+C** |
+| **N3 Conditions as booleans** (comparison → bool driving the branch; stored booleans `is_day = (t>=8) and (t<=15)`) | C8+C11+C12 (+ stored-boolean items in mixed C2) — bank C-11/C-14/C-17; outline "Conditions" | **B+C** |
+| **N4 Sequential ifs vs ladder** (independent ifs all fire; else binds to nearest if) | C4+C5+C13 (12 items; C5 = the 4 grade-ladder TEXTUALs, highest-fail cluster, 39–52%, phi 0.32) + ladder items inside mixed C2/C6; bank C-07 | **B+C** |
+
+Derivation audit (2026-07-10, all 17 communities content-read): funnel = 174 items /
+142,617 attempts → 15,051 pairs → 351 robust (105 items) → 17 communities (75 items) →
+4 themes. Separation test: within-theme median phi 0.149 (34% of pairs robust) vs
+between-theme 0.085 (5%); closest theme pair N2×N4 at 0.105 — the fold candidate if a
+3-node registry is preferred. 5 mixed/seam communities (C2, C6, C10 FIB if-header
+writing, C14, C16) + the 69-item no-robust-pair tail are assigned by content during
+registry authoring, not by behaviour.
 
 Exemplar (N1, real items that co-fail): `21b57840` `if not(True):` + over-indented second
 print vs `72e4a338` unindented `else` body vs `f511e3fa` `if False:` + bad indent (still a
