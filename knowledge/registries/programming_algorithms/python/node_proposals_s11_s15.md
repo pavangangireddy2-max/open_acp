@@ -18,6 +18,20 @@
 | **N3 Conditions as booleans** (comparison → bool driving the branch; stored booleans `is_day = (t>=8) and (t<=15)`) | C8+C11+C12 (+ stored-boolean items in mixed C2) — bank C-11/C-14/C-17; outline "Conditions" | **B+C** |
 | **N4 Sequential ifs vs ladder** (independent ifs all fire; else binds to nearest if) | C4+C5+C13 (12 items; C5 = the 4 grade-ladder TEXTUALs, highest-fail cluster, 39–52%, phi 0.32) + ladder items inside mixed C2/C6; bank C-07 | **B+C** |
 
+Mixed-community adjudication (step-4 record, item level): **C2** splits 6→N3 (stored
+booleans `is_day`/`is_night`, ==/!= eval) + 3→N4 (`marks` sequential-if ladders 0a1d0356,
+102d40c4, 48706095 — same demand as C5's TEXTUALs, easier rung). **C6** splits three ways:
+1b9dd04a, ddbd17a4→N3 · 3bd498ec→N4 · 689112ed→N2 (case-sensitive compare + trailing
+print; two-demand item — the kind born-tagging avoids). **C10**: 781ca854→N2; the two
+FIB write-the-if-header items stay seam N3(condition construction)/N1(syntax) — registry
+author's call. **C14**: 27961bab, e5036f1d→N3; 458400aa→N1 (legal 3-space indent, C-03).
+**C16**: all → N3 (trailing-space `else:` is cosmetic; demand is eval). Merge arithmetic
+(why same-skill communities stayed apart at t=0.92): C3×C7 avg cross-distance 0.936,
+C9×C15 0.940, C1×C17 0.935, C4×C5 0.990 — non-robust cross-pairs (distance 1.0) dilute
+the average above the cut; fragmentation is the deliberate price of the strict pair filter,
+repaired by content reading. Single-pair noise exhibit: near-clones 0baf266e×8877aa15
+phi 0.006 — never trust one pair, trust clumps + content.
+
 Derivation audit (2026-07-10, all 17 communities content-read): funnel = 174 items /
 142,617 attempts → 15,051 pairs → 351 robust (105 items) → 17 communities (75 items) →
 4 themes. Separation test: within-theme median phi 0.149 (34% of pairs robust) vs
