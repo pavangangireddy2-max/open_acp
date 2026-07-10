@@ -1,0 +1,90 @@
+S. No.,Metric Category ,Product ,Audience ,"Metric Name 
+
+Learning Systems – Metrics Reference Sheet","KPI Name
+
+KPI Naming Convention Guide",Description,Unit,Frequency,Q1,,,,,,,,,,,
+,,,,,,,,,Apr'26,,,,May'26,,,,Jun'26,,,
+,,,,,,,,,Budgeted,Actual ,Variance ,Remarks,Budgeted,Actual ,Variance ,Remarks,Budgeted,Actual ,Variance ,Remarks
+1,Business Impact,All,,% Learners in Ideal Engagement Segment ,Business Impact:All::% Learners in Ideal Engagement Segment ,"% of active learners classified in the High Effort + High Value cell of the effort-value matrix. Learners are segmented monthly based on their LE score (effort) and CME highest concept level achieved (value). Serves as a leading indicator of learning outcomes.
+
+The full 3×3 matrix (Low/Medium/High Effort × Low/Medium/High Value) is a diagnostic tool — used to investigate when this number drops, not tracked as a KPI itself.",%,Monthly ,,,,,,,,,,,,
+2,Business Impact,All,,Summative Skill Assessment Achievement Rate,Business Impact:All::Summative Skill Assessment Achievement Rate,Students scoring above the defined passing threshold in summative skill assessments across owned domains. Passing threshold is set by the team based on domain context (default reference: 70%).,%,Quarterly ,,,,,,,,,,,,
+3,Business Impact,All,,Formative Skill Assessment Achievement Rate,Business Impact:All::Formative Skill Assessment Achievement Rate,Students scoring above the defined passing threshold in formative skill assessments across owned domains. Passing threshold is set by the team based on domain context (default reference: 70%).,%,Monthly ,,,,,,,,,,,,
+4,Business Impact,All,,Content-Assessment Alignment %,Business Impact:All::Content-Assessment Alignment %,"Delta between learning assessment scores and summative skill assessment scores. Smaller delta = better alignment between what is taught and what is tested.
+
+Formula: |Avg learning assessment score − Avg summative score|",%,Quarterly ,,,,,,,,,,,,
+5,Business Impact,NIAT,,Graded Assessment Achievement Rate,Business Impact:NIAT::Graded Assessment Achievement Rate,"Students scoring above the defined passing threshold in university-conducted graded assessments — Mid-1, Mid-2, and End Semester exams — delivered in collaboration with the university. Passing threshold aligned with university grading policy.
+
+Tracked per exam type and per semester.",%,Monthly ,,,,,,,,,,,,
+6,Business Impact,Launchpad,,Weekly Active Users,Business Impact:Launchpad::Weekly Active Users,"Total number of prospective learner leads generated in the period through content-driven channels (organic, referral, campaigns, partnerships). Tracks the top-of-funnel contribution of content and program visibility efforts.
+
+Source: CRM / marketing analytics. Tracked per product and channel.",Count ,"Monthly 
+
+(Tracked weekly
+,reported as 
+Monthly avg) ",,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+7,Content Effectiveness,All,,Learning Engagement Effort (LE),Content Effectiveness:All::Learning Engagement Effort (LE),"Measures how much a learner meaningfully engages with learning material, adjusted for effort intensity and persistence. Passive time (video, cheatsheets) weighted at 0.5. Active time (MCQs, coding questions, notes, AI tutor interactions) weighted at 1.0. Persistence signals — reattempting after failure (+0.25) and returning to an unfinished task (+0.25) — multiply the weighted time.
+
+Formula: LE = [(0.5 × Passive Time) + (1.0 × Active Time)] × (1 + Persistence Factor)
+
+Tracked weekly and monthly per product. Replaces DAU/WAU/MAU as the primary engagement metric.","Minutes 
+(weighted)",Monthly ,,,,,,,,,,,,
+8,Content Effectiveness,All,,Course Completion Rate,Content Effectiveness:All::Course Completion Rate,"% of enrolled learners who complete a course in full. Encompasses all unit types — video, practice, projects, and assessments. Serves as the primary completion signal; Learner Accessed Content Completion Rate and Practice Attempt-to-Completion Rate below act as diagnostic breakdowns when this number is low.
+
+Formula: (Learners who completed the course / Total enrolled learners) × 100.",%,Monthly ,,,,,,,,,,,,
+9,Content Effectiveness,All,,Pedagogy Initiative Impact,Content Effectiveness:All::Pedagogy Initiative Impact,Implemented pedagogy initiatives with measurable learning outcome improvement. Outcome baseline must be defined and agreed before the initiative is launched.,Count,Quarterly ,,,,,,,,,,,,
+10,Content Effectiveness,All,,Learner Accessed Content Completion Rate,Content Effectiveness:All::Learner Accessed Content Completion Rate,"Applies to video units. For each learner, % of video units they opened that they also completed. Final metric is the average across all learners. Excludes units with zero opens.
+
+Formula: Average of [(Video units completed / Video units opened) × 100] across all learners.",%,Monthly ,,,,,,,,,,,,
+11,Content Effectiveness,All,,Practice Attempt-to-Completion Rate,Content Effectiveness:All::Practice Attempt-to-Completion Rate,"Applies to practice units. For each learner, % of coding/project exercises attempted that they also completed. Surfaces environment friction (IDE, playground, cloud setup) vs. difficulty-related drop-off.
+
+Formula: Average of [(Exercises completed / Exercises attempted) × 100] across all learners.",%,Monthly ,,,,,,,,,,,,
+12,Content Effectiveness,All,,Learning Environment Satisfaction Score,Content Effectiveness:All::Learning Environment Satisfaction Score,"Average in-app satisfaction rating given by learners specifically on the coding environment, playground, or cloud IDE experience. Tracked separately from overall content satisfaction score.
+
+Source: Existing in-app rating data.",Score,Monthly ,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+13,Content Velocity ,All,,No. of presentations & Cheatsheets Delivered,Content Velocity :All::No. of presentations & Cheatsheets Delivered,"Total learning content hours created per month across all formats (video, text, interactive). Content serving multiple products counted once.",Hours,Monthly ,,,,,,,,,,,,
+14,Content Velocity ,All,,Vernacular Content Hours Delivered,Content Velocity :All::Vernacular Content Hours Delivered,"Total vernacular-language learning content hours created per month. Tracked separately from English content hours because the effort to produce one hour of vernacular content differs significantly from English — it involves translation, re-recording, and localization QA in addition to base content creation.",Hours,Monthly ,,,,,,,,,,,,
+15,Content Velocity ,All,,Practice & Assessment Content Pieces Delivered,Content Velocity :All::Practice & Assessment Content Pieces Delivered,"Total practice and assessment pieces delivered monthly across owned domains (MCQs, coding questions, projects, case studies).",Count,Monthly ,,,,,,,,,,,,
+16,Content Velocity ,All,,Branding Content Assets Delivered,Content Velocity :All::Branding Content Assets Delivered,"Total branded content pieces produced monthly (thumbnails, banners, promo assets).",Count,Monthly ,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+17,Content Efficiency,All,,Cost Per Presentation created,Content Efficiency:All::Cost Per Presentation created,"Average cost to produce one hour of learning content. Includes people, tools, and infra involved in content creation. Tracks creation efficiency — not delivery cost.",INR,Monthly ,,,,,,,,,,,,
+18,Content Efficiency,All,,Cost Per Cheatsheet created,Content Efficiency:All::Cost Per Cheatsheet created,"Average cost to produce one hour of vernacular-language content. Includes team bandwidth involved in content creation. Tracks creation efficiency — not delivery cost (Contract-basis, Tools & infrastructure).
+ 
+*CSI team- includes payroll (central tracking) and AI tooling costs attributed under non-payroll budget. CSI is expected to leverage AI tools to drive this cost down over time. Submitted to relevant regulatory frameworks as part of compliance reporting.",INR,Monthly ,,,,,,,,,,,,
+19,Content Efficiency,All,,Cost Per MCQ Generated,Content Efficiency:All::Cost Per MCQ Generated,"Average cost to develop one objective question, including both manual and AI-assisted production.",INR,Monthly ,,,,,,,,,,,,
+20,Content Efficiency,All,,Cost Per Other type of questions,Content Efficiency:All::Cost Per Other type of questions,"Average cost to develop one coding question, including test case design and evaluation engine configuration.",INR,Monthly ,,,,,,,,,,,,
+21,Content Efficiency,All,,Cost Per Branding Content Asset,Content Efficiency:All::Cost Per Branding Content Asset,Average cost to create one branded content piece.,INR,Monthly ,,,,,,,,,,,,
+22,Content Efficiency,All,,Platform Runtime Cost Per Active Learner,Content Efficiency:All::Platform Runtime Cost Per Active Learner,"Total platform delivery costs (cloud compute, code execution infra, cloud IDE hosting, GenAI API calls) divided by active learners in the period. Tracks delivery cost efficiency as usage scales. Infrastructure line items only — no salary data.
+
+Formula: Total platform runtime spend / Active learners in period.",INR,Monthly ,,,,,,,,,,,,
+23,Content Efficiency,All,,Feedback Resolution Efficiency,Content Efficiency:All::Feedback Resolution Efficiency,"Content issues resolved within SLA as a % of total issues received. Tracked per product to identify where unresolved load concentrates.
+
+Formula: (Issues resolved within SLA / Total issues received) × 100.",%,Monthly ,,,,,,,,,,,,
+24,Content Efficiency,All,,R&D Initiative Impact,Content Efficiency:All::R&D Initiative Impact,"Implemented R&D initiatives — including adoption of agentic AI solutions and automation pipelines — with measurable content production improvement. Covers initiatives that improve velocity, quality, or cost efficiency. Business impact (e.g. % reduction in cost per hour, % increase in output) must be defined and baselined before the initiative is launched.",Count,Quarterly ,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+25,Content Relevance,All,,Industry Update Adherence,Content Relevance:All::Industry Update Adherence,"Planned industry-driven content updates completed on schedule.
+
+Formula: (Updates completed on schedule / Total planned updates) × 100.",%,Monthly ,,,,,,,,,,,,
+26,Content Relevance,NIAT,,University Curriculum Compliance Rate,Content Relevance:NIAT::University Curriculum Compliance Rate,"% of NIAT curriculum units compliant with the approved BOS syllabus at time of delivery. Tracked per semester. Non-compliance is a university partnership risk.
+
+Formula: (BOS-compliant units delivered / Total units delivered) × 100.",%,Monthly ,,,,,,,,,,,,
+27,Content Relevance,All,,Tech Stack Freshness Rate,Content Relevance:All::Tech Stack Freshness Rate,"% of tools, frameworks, libraries, and environments referenced in content (and configured in IDEs, playgrounds, cloud setups) matching the current stable or LTS version at time of audit.
+
+Formula: (Current-version platforms / Total platforms audited) × 100.
+Recommended audit cadence: quarterly.",%,Monthly ,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+28,Stakeholder Alignment,All,,Stakeholder Content Request Fulfillment Rate,Stakeholder Alignment:All::Stakeholder Content Request Fulfillment Rate,"Requests from Sales, Placements, Program Ops, Assessments, and Instructors fulfilled within agreed timeframes across all products.
+
+Formula: (Requests fulfilled on time / Total requests received) × 100. Tag by product to identify where delays concentrate.",%,Monthly ,,,,,,,,,,,,
+29,Stakeholder Alignment,All,,Cross-functional Sprint Delivery Rate,Stakeholder Alignment:All::Cross-functional Sprint Delivery Rate,"% of committed tickets across Product, Pedagogy, Engineering, UI/UX, and DA/DE — scoped and approved by this team — delivered within the committed sprint. Measures how effectively allocated cross-function bandwidth is being directed.
+
+Formula: (Tickets delivered on time / Total tickets committed) × 100.
+Tracked per sprint, reported per cycle.",%,Monthly ,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+30,Executive Ops ,All,,Operations & Growth Cost,Executive Ops :All::Operations & Growth Cost,"Average cost across executive ops, operational efficiency, market analysis, and hiring activities. Tracked at team scope level, not per product.",INR,Monthly ,,,,,,,,,,,,
+31,Executive Ops ,All,,Creative Resource Utilisation Rate,Executive Ops :All::Creative Resource Utilisation Rate,"% of allocated Graphic Designer and Video Editor bandwidth utilised against planned branding and content asset deliverables within a cycle. Primarily tracked and managed by Project Managers. Low utilisation indicates planning gaps; over-utilisation indicates scope creep or under-resourcing.
+
+Formula: (Bandwidth consumed / Total allocated bandwidth) × 100.
+Outcomes tracked alongside Branding Content Assets Delivered metric.",%,Monthly ,,,,,,,,,,,,

@@ -1,0 +1,82 @@
+Format: [Product] [Audience] [Metric],,
+"Three parts, in order. No exceptions.",,
+"Product (always first): NIAT, Intensive, Academy, Launchpad",,
+,,
+Audience (product-specific):,,
+,,
+"NIAT: B1, B2, B3, B4, B5",,
+"Academy: 1.0, 1.5, 2.0",,
+"Intensive: 1.0, 2.0, 3.0, Offline",,
+Launchpad: skip this part entirely,,
+,,
+"Metric (last): full readable name, no abbreviations",,
+,,
+Examples:,,
+KPI Name,Category,
+NIAT: B4: Course Completion %,Content Effectiveness,
+NIAT: B5: Course Completion %,Content Effectiveness,
+Academy: 2.0: Course Completion %,Content Effectiveness,
+Intensive: Offline: Course Completion %,Content Effectiveness,
+Launchpad: Course Completion %,Content Effectiveness,
+,,
+,,
+"Edge case: If a metric is not audience-specific, drop the audience segment. NIAT: Content Velocity: is valid. NIAT: B4: Content Velocity implies the metric varies by batch. Only use audience if that distinction is real and tracked separately.",,
+,,
+Categories (7 total):,,
+,,
+Business Impact,,
+Content Effectiveness,,
+Content Velocity,,
+Content Efficiency,,
+Content Relevance,,
+Stakeholder Alignment,,
+Executive Ops,,
+,,
+Note: Category is not part of the KPI name. It is a classification tag. The name follows [Product] [Audience] [Metric]. The category tells you which bucket the KPI falls into.,,
+Business Impact,,
+,,
+Metric Name,Unit,Definition
+Summative Skill Assessment Achievement Rate,%,Students scoring >70% in summative skill assessments
+Formative Skill Assessment Achievement Rate,%,Students scoring >70% in formative skill assessments
+Content-Assessment Alignment %,%,Delta between learning assessment and skill assessment scores
+,,
+Content Effectiveness,,
+,,
+Metric Name,Unit,Definition
+Pedagogy Initiative Impact,Count,Implemented pedagogy initiatives with measurable learning outcome improvement
+Learner Accessed Content Completion Rate,%,"For each learner, percentage of units they opened that they also completed. Final metric is the average of this rate across all learners. Excludes units with zero opens per learner from individual calculations.
+Formula: Average of [(Units completed by learner / Units opened by learner) x 100] across all learners."
+,,
+Content Velocity,,
+,,
+Metric Name,Unit,Definition
+Learning Content Hours Delivered,Hours,Total learning content hours created per month
+Practice & Assessment Content Pieces Delivered,Count,Total practice and assessment pieces delivered monthly
+Branding Content Assets Delivered,Count,Total branded content pieces produced monthly
+,,
+Content Efficiency,,
+,,
+Metric Name,Unit,Definition
+Cost Per Learning Hour Produced,INR,Average cost to produce one hour of learning content
+Cost Per MCQ Generated,INR,Average cost to develop one objective question
+Cost Per Coding Question,INR,Average cost to develop one coding question
+Cost Per Branding Content Asset,INR,Average cost to create one branded content piece
+Feedback Resolution Efficiency,%,Content issues resolved within SLA / Total issues received x 100
+R&D Initiative Impact,Count,Implemented R&D initiatives with measurable Content Production improvement
+,,
+Content Relevance,,
+,,
+Metric Name,Unit,Definition
+Industry Update Adherence,%,Planned industry-driven content updates completed on schedule
+,,
+"Note: You labeled the unit as ""Count"" but the definition says ""percentage of planned updates."" I changed the unit to %. Verify this.",,
+,,
+Stakeholder Alignment,,
+,,
+Metric Name,Unit,Definition
+Stakeholder Content Request Fulfillment Rate,%,Stakeholder content requests fulfilled within agreed timeframes
+,,
+Executive Ops,,
+,,
+Metric Name,Unit,Definition
+Operations & Growth Cost,INR,"Average cost across executive ops, operational efficiency, market analysis, and hiring"

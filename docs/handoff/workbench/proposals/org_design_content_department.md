@@ -5,8 +5,9 @@
 > (stack curriculum + product overlay + packaging = delivered experience; born-tagged cells
 > as the production contract). Conway's law, used on purpose: every team owns a layer, every
 > seam between teams is a contract that already exists as an artifact.
-> Pending reconciliation: the HOD's earlier roles & KPIs artifact (file didn't upload —
-> re-share to fold in). Proposal v1 — 2026-07-10.
+> Reconciled 2026-07-10 with the HOD's career framework + KPI system (sources in
+> knowledge/raw/corpora/department/; reconciliation in kpi_system_v3_ownership.md).
+> Proposal v1.1 — 2026-07-10.
 
 ## 0. The one-line model
 
@@ -127,9 +128,11 @@ computes (or is being built to compute):
 
 ## 6. Pending
 
-- Reconcile with the HOD's earlier roles & KPIs artifact (re-share the file — upload
-  didn't land). Expected: role definitions slot into the five groups; KPI list merges
-  into §3 with the system-computed subset marked.
+- ✅ Reconciled (2026-07-10): career framework (SDE Learning Systems ladder, complexity
+  multipliers 1.0–2.5x, 4-pillar rating) + KPI naming convention + V2 tracker (31 KPIs).
+  Full ownership mapping + new product/engineering KPI lanes:
+  workbench/proposals/kpi_system_v3_ownership.md. Key adoption: Owner column (one team per
+  KPI), 8th category "Platform Engineering", targets normalized by complexity multipliers.
 - Headcount/sizing pass once roles land (Ops is deliberately small + leveraged; stacks
   scale with course count; SLE scales with surface count).
 - **Actual team reality (2026-07-10, HOD):** Content 60 = Aptitude 7 · English 7 · DS&ML 10
