@@ -255,3 +255,32 @@ pool sizes, and node boundaries on the draft.
   ELP `Yes`. Retain for the export-shape appendix and the ID-crosswalk landmines.
 - `docs/handoff/intelligence/stacks/programming_algorithms/courses/python/question_intelligence.md` — the HOW rail; the misconception
   bank this doc's option-distributions join to.
+
+
+---
+
+## Co-failure pilot — DELIVERED & ADJUDICATED (2026-07-10)
+
+The net-new ask landed (DE team, Sonnet 5 pipeline; delivery in `workbench/requests/
+cofailure check - share content/`, full review + content adjudication in
+`workbench/reviews/review_cofailure_pilot.md`). Headlines for this doc:
+
+- **Pilot scope:** 4,812 learners × 584 questions × 5 sessions (Conditional, Nested
+  Conditional, Loops, For Loop, Understanding Coding Question Formats); 170,236 pairs
+  computed; 71,891 delivered above floor. Pipeline is sound; N=300 confidence floor
+  empirically justified (75th pct of overlap; expected both-fail cell ≈ 12).
+- **No cross-session merges** — conclusion holds, but for the corrected reason: the
+  high-lift cross pairs (up to 7.85) are rare-item artifacts (all 28 lift>4 pairs involve a
+  <5%-fail item; median phi ≈ 0.11). Rank by **phi + both-fail cell ≥ 10**, never lift alone.
+- **One split candidate confirmed at content level:** a 6-item sub-cluster in the Loops
+  (while) session = *control-variable state reasoning*, whose seams map exactly to bank
+  families **LP-06** (uninitialized → NameError) and **LP-04** (runs-once). Not clones.
+  Registry consequence: s13 likely holds ≥2 nodes (trace/accumulation vs state/termination
+  semantics). First empirical proof that session ≠ node.
+- **`e4a74737` rare-item lesson:** its 0.8% fail is an answer-leak artifact (verbatim
+  NameError option + lint-marker leak) — rare-item screens must check for leak explanations.
+- **Full-scale gates (before the 3,849-question run):** content-hash on the question spine
+  (clone rate 19–34% would forge merge signals — critical path), defective-item exclusion
+  (do-not-port list handoff), phi+cell-floor ranking, sub-cluster detection cross-session
+  (not median rollups). `time_spent` was 100% null in this extract — rush filter needs a
+  source fix if wanted.

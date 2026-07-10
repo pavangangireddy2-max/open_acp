@@ -67,9 +67,11 @@ Related repo canon: `knowledge/analyses/pedagogy/universal_principles.yaml` (v4)
 2. **Incoming from the user:** re-export of all questions WITH difficulty tags + tutorials +
    explanations (→ calibrate the mechanical rungs; not all explanations exist); module-quiz
    JSON (repurposed content — context only, do not mine).
-3. **Delegated out:** the learner-behaviour data request is with the DE; when extracts
-   arrive, synthesize `context_learner_behaviour_intelligence.md` (the fifth doc) and feed
-   difficulty/discrimination/misconception frequencies back into the question doc.
+3. **Delegated out → co-failure pilot DELIVERED (2026-07-10):** reviewed + content-
+   adjudicated (workbench/reviews/review_cofailure_pilot.md): Loops split candidate
+   confirmed (maps to LP-04/LP-06 bank families; session ≠ node proven empirically);
+   full-scale run gated on **content-hash** + phi/cell-floor ranking + defect exclusion.
+   Remaining ELP extracts (difficulty, discrimination, option distributions) still to come.
 4. **PRD review** handed to the product owner — expect a revised adaptive PRD; hold them to
    the simulation acceptance tests and the node-coverage outer loop.
 5. **Pedagogy gaps (optional):** React state/lists/events decks, a DSA algorithm-technique
