@@ -269,14 +269,17 @@ cofailure check - share content/`, full review + content adjudication in
   Conditional, Loops, For Loop, Understanding Coding Question Formats); 170,236 pairs
   computed; 71,891 delivered above floor. Pipeline is sound; N=300 confidence floor
   empirically justified (75th pct of overlap; expected both-fail cell ≈ 12).
-- **No cross-session merges** — conclusion holds, but for the corrected reason: the
-  high-lift cross pairs (up to 7.85) are rare-item artifacts (all 28 lift>4 pairs involve a
-  <5%-fail item; median phi ≈ 0.11). Rank by **phi + both-fail cell ≥ 10**, never lift alone.
-- **One split candidate confirmed at content level:** a 6-item sub-cluster in the Loops
-  (while) session = *control-variable state reasoning*, whose seams map exactly to bank
-  families **LP-06** (uninitialized → NameError) and **LP-04** (runs-once). Not clones.
-  Registry consequence: s13 likely holds ≥2 nodes (trace/accumulation vs state/termination
-  semantics). First empirical proof that session ≠ node.
+- **Cross-session structure IS real — but it's prerequisite coupling, not session merges**
+  (raw re-run): 163 robust pairs (N≥300, phi≥0.2, cell≥10) survive, ability-tercile-stable
+  (not a weak-learner web); one 120-item component + pockets spanning Loops/For Loop/
+  Conditional. Registry reading: empirical **Depends_On** evidence and candidate
+  cross-session nodes. Lift-ranked "merge candidates" remain artifacts; medians remain the
+  wrong readout — filter→cluster is the instrument.
+- **Split candidate (Loops 6-item): content-plausible, behaviourally under-powered** (raw
+  re-run 2026-07-10 eve): its seams map exactly to bank families **LP-06/LP-04** and the
+  items are not clones — but **0/15 pairs clear phi≥0.2 + cell≥10** (top-phi pair IS the
+  LP-06 pair at 0.269, starved to a 2-learner cell by the e4a74737 answer-leak). Re-test at
+  full scale after leak fix. s13-holds-≥2-nodes remains the working hypothesis, not proven.
 - **`e4a74737` rare-item lesson:** its 0.8% fail is an answer-leak artifact (verbatim
   NameError option + lint-marker leak) — rare-item screens must check for leak explanations.
 - **Full-scale gates (before the 3,849-question run):** content-hash on the question spine

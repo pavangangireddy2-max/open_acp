@@ -136,3 +136,66 @@ two nodes — *while-loop trace & accumulation* vs *while-loop state & terminati
 (initialization/definition, runs-once, flag exit) — pending full-scale confirmation under
 content-hash + cell-floor guardrails. Behaviour has now challenged a session boundary
 exactly as the request intended; the registry is where the verdict lands.
+
+---
+
+## Addendum 2 (2026-07-10, evening) — Full independent re-run from RAW data (pilot_extract.csv)
+
+The HOD supplied the raw extract (542,021 attempt rows). I rebuilt the entire pipeline from
+source — matrix, all 170,236 pairs, co-attempted-restricted phi — and compared against the
+delivered file. **Result: numerically exact. All 71,891 delivered pairs (her floor: N≥150)
+match to machine precision (max diff 1e-15), including phi.** The DE's implementation is
+fully verified at the computation level. Base facts confirmed: 4,812×584×5; `time_spent`
+100% null; only 3 PARTIALLY_CORRECT rows; no duplicate (user,question) rows.
+
+### The median question, answered with numbers
+
+Conditional × Loops (the rollup's median lift 1.09, "nothing here"): p90 = 1.69, p95 = 2.09,
+p99 = 3.21, and a **robust pocket of 14 pairs at phi≥0.2 + both-fail cell≥10**. Medians
+over thousands of pairs can only detect wholesale shifts; a merge/split/prerequisite signal
+is a POCKET. The correct readout is filter (N≥300, phi≥0.2, cell≥10) → then cluster.
+
+### New finding — real cross-session structure the median (and lift-ranking) both missed
+
+Under robust criteria, **163 cross-session pairs survive** (of 33,838 at N≥300) — and the
+**ability-tercile test shows they are largely NOT a general-ability confound**: for 3 of the
+4 top pairs, phi persists within ability bands (e.g. 0.28 overall → 0.17–0.20 in every
+tercile; 0.27 → 0.14–0.34). These are genuine shared-skill couplings spanning sessions
+(loop-trace ability across Loops/For Loop/Conditional, conditional-evaluation across
+Conditional/Nested). Graph structure: one 120-item connected component + 14 small pockets.
+
+**Registry-relevant reading:** these are mostly NOT "merge the sessions" signals — they are
+**prerequisite/shared-latent-skill edges**, i.e. empirical `Depends_On` evidence and
+candidate cross-session nodes. Co-failure is discovering the dependency graph, not just
+checking session boundaries. This revises both the writeup's conclusion ("sessions test
+genuinely different things" — too strong) and Addendum-0's framing ("conclusion survives,
+artifacts" — the artifact screen was right about lift-ranked pairs, but phi+cell finds real
+structure lift-ranking drowned).
+
+### Correction to Addendum 1 — the Loops 6-item split candidate does NOT clear robust criteria
+
+**0 of its 15 pairs pass phi≥0.2 + cell≥10.** The highest-phi pair in the entire
+within-Loops set IS the LP-06 pair (dd4165ba↔e4a74737, phi 0.269) — but with a both-fail
+cell of 2, starved by e4a74737's answer-leak rarity; the well-celled pairs (cells 21–38) sit
+at phi ≈ 0.06–0.11. Honest status downgrade: **content-plausible (the LP-06/LP-04 mapping
+stands as content structure), behaviourally under-powered in this pilot.** The seam is
+probably real — the top-phi evidence points exactly at it — but this pilot cannot prove it.
+Re-test at full scale, ideally after the leak-artifact item is fixed. (Addendum 1 called it
+"directionally right, statistically fragile at the top"; the robust readout says fragile,
+full stop.)
+
+Also noted: under phi-ranking, **For Loop shows the highest robust within-session pocket
+rate** (135/1,919 pairs; 42 items) — the writeup's lift-median clustering called it "no
+split"; worth community detection at full scale.
+
+### Final method spec for the full-scale run (supersedes earlier gate lists)
+
+1. Floors: N≥300, **both-fail cell ≥10**, rank/threshold by **phi≥0.2** (lift reported, never ranked on).
+2. **Ability adjustment:** compute/report within-ability-tercile phi (or partial-out learner
+   fail rate) — separates skill coupling from ability web.
+3. Readout = **filter → community detection** on the surviving pair graph (within AND
+   cross-session); medians only as dashboard color.
+4. Interpret cross-session communities as **Depends_On edges / cross-session nodes** for the
+   registry, not automatic session merges.
+5. Unchanged and still blocking: content-hash on the spine, defective-item exclusion,
+   leak-artifact screen for rare items.
