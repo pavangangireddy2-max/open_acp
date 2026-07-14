@@ -50,8 +50,8 @@ anything runs.* The learners who miss one miss the others.
 | node | evidence | confidence |
 |---|---|---|
 | **N1 Boolean-gated nesting** (stored expression gates outer block; inner never checked when outer False) | C1 — 5 TEXTUALs, the session's hardest cluster (52–69% fail): `x=(True and False)… if x: … if y: … print("END")`; bank C-15/C-16 | **B+C** |
-| **N2 Nested gating with comparisons/types** (expression building inside nests, accumulation across levels) | C3–C7 small communities (`expression1=(36<16)`, type() equality gates) | B+C (thin) |
-| **N3 elif ladder semantics** (first-true-wins; elif-after-else illegal) | outline + bank C-08/C-09; no distinct robust community (items thin in pilot) | **C** |
+| **N2 Nested gating with comparisons/types** (expression building inside nests, accumulation across levels) | C3/C4/C6/C7 minus elif items (v2 SME-instrument pass moved cluster C5 + 4 elif items to N3) | B+C (thin) |
+| **N3 elif ladder semantics** (first-true-wins; both-false→nothing; elif needs a condition) | community C5 (3 elif-ladder items) + 5 elif items inside C2/C3/C4/C6/C7 — originally mislabeled under N2; corrected in SME instrument v2 (2026-07-14) | **B+C** |
 
 ## s13 — Loops (while) → propose 3 nodes  *(the session the 6-item candidate pointed at)*
 
