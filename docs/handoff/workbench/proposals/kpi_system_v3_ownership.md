@@ -166,3 +166,47 @@ Open flags: (a) **Launchpad WAU** — Launchpad is absent from PLE's stated prod
 LE** — assigned to Learning Platform as the engagement-system owner, product pods and
 HOD informed; flip to PLE if the HOD wants outcome ownership product-side. (c) CSI KPIs
 keep CSI as the executing team; the portfolio row is accountability, not execution.
+
+## 11. Org-level cascade (2026-08-11) — NIAT targets ↔ department KPIs
+
+NIAT organizational targets for Jul'27 received (archive: `knowledge/raw/corpora/
+department/niat_org_targets_jul2027.csv`): employability per batch, CSAT (academics 4.5,
+university relations 4 layers), NSPI bands, co-curricular counts (AI&Robotics 120, GSoC
+200, ICPC 120, GRIT Novice 5,000, hackathons 200), dropout <1.5%, DSO.
+
+**Four-tier architecture (proposed):**
+- **Tier 0 — Org outcomes** (NIAT targets, Jul'27 horizon): owned by the NIAT org; the
+  department is a *contributor*, never the owner.
+- **Tier 1 — Department KPI library** (the 36-KPI baseline + additions, 8 categories):
+  owned inside the department. Each KPI carries a **linkage tag** to Tier 0:
+  `drives` (causal), `guards` (risk containment), `leads` (leading indicator), or
+  `internal` (health metric with no org cascade — legitimate; forcing fake cascades is
+  how KPI systems rot).
+- **Tier 2 — Portfolio lanes** (§10): accountability for Tier-1 KPIs.
+- **Tier 3 — Initiative metrics** (monthly roadmaps): every roadmap item ships naming the
+  Tier-1 KPI it moves. (Developer Platform Aug roadmap pending — will populate its lane.)
+
+**Department ↔ org cross-map (the dept-relevant Tier-0 rows):**
+
+| NIAT target (Jul'27) | dept linkage | via (Tier-1 / portfolio) |
+|---|---|---|
+| Academics CSAT 4.5 | **drives** (dept-primary) | content satisfaction, LE, delivery-quality theme closure — LP + LD + PLE |
+| Employability B3 80% / B4 80% | drives, lagged | skill mastery chain: gold-tier rate, assessment achievement, adaptive lift — LD + LP |
+| NSPI bands (30/40/30) | drives | ⚑ definition/computation source needed before mapping |
+| GRIT Novice Badge 5,000 | **drives, direct** | PLE — literally its GRIT Practice roadmap item |
+| ICPC Regionals 120 | drives | LD (DS & Algo domain) |
+| AI & Robotics products 120 | drives | LD (Robotics domain) |
+| GSoC selects 200 | contributes | LD (MERN/Java/open-source readiness) |
+| Hackathons top-3 200 | contributes | LD (GenAI) + PLE |
+| University Relations CSAT L1–L3 | **guards** | CSI lane: BOS credit acceptance, delivery gap, issue TAT, curriculum compliance — PLE |
+| Student drop-off <1.5% | leads | LE / ideal-engagement segment as early-warning — LP |
+| Non-academics/Infra/Parents CSAT, DSO | out of dept scope | program ops / finance |
+
+Cadence bridge: Tier 0 is a 2-year target; Tier 1 is monthly. Quarterly review converts
+"are the monthly KPIs on the glidepath to the Jul'27 number" — glidepath columns belong in
+the tracker, not more KPIs.
+
+**Terminology note:** "portfolio" retained as the umbrella for the five lanes (see org
+doc §7 discussion) with the vocabulary rule: portfolio = accountability lane · product/
+capability = what it ships · initiative = monthly roadmap item · KPI = Tier-1 measure ·
+target = Tier-0 outcome.
