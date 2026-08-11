@@ -1,0 +1,137 @@
+Task,Description,Link,Priority,Status COmments,POD,Eng. needed,Buisness stakeholder,Anurag comments,Revanth discussion comments,Comment,PM,Status,Developers,
+"Deploy all the ~15 June, May Content Facing agentic Workflows With Auth, Production URL",,,-1,,,Yes,,,,,SME,,,"Functional Requirement, SME Led, L Size"
+Provide MCP Server to access content for each Course ,,,-1,,,Yes,,,,,Rajesh,In Progress,Priyanshu,"Functional Requirement, Dev Led, XL Size"
+Issue Observability & Alert when deviation from pedagogy happens from design - https://niat-ops-intelligence.streamlit.app/,,,-1,,,Yes,,,,,SME,,,"New Workflow, XL Size, SME Led"
+"Issue Routing Agent:
+ 
+Automating RCA Resolution process & arriving at timelines/fixes: https://claude.ai/public/artifacts/f12af56b-b2d5-47ec-96c2-4d5171f5e033
+Issues sheet: https://docs.google.com/spreadsheets/d/1EI85RX9uo7zrqwLuJ4Q34xuqJDx_hQTEaNw1kcFQAeI/edit?gid=855597069#gid=855597069",,,-1,,,Yes,,,,,SME,,,"New Feature, XL Size, SME Led"
+"Provide Platform Monitoring Dashboards (n8n license expired, react Ide - outdated packages being used in , n8n Ide reliability)","react ide - outdated packages being used in
+- keep a scheduler for 2 weeks once get all unique packages from question boilerplates and showing latest version for each in dashboard in desc order.
+- for test packages we can get from SMEs and use those as fixed.
+
+Adding alert when n8n licence expired and showing same in dashboard
+n8n ide reliability:
+- 
+
+",,-1,,,Yes,,,,,Rajesh,Completed,Narayana,"Dev Led, L Size, New Feature"
+MCQ Revamp,"Practice page suppresses learning via 9 UX gaps (no feedback on wrong answers, no progress indicator, flat difficulty, discouraging failure screen, etc.) — full PS1–PS9 breakdown + fixes in ClickUp/PRD.",https://app.clickup.com/t/86d23tjyu,0,,Common,Yes,,Aligned,,,Aryan,In Progress,Chandrika,"Enhancement, L Size, Product Led
+
+Adaptive MCQs was picked on a higher priority before this. 
+Will be completed in this month. "
+"Migrate to new compiler architecture across the entire platform (python, cpp, java)",Discussed,https://app.clickup.com/t/37446639/86d3gjy2f,0,,DSA,Yes,Pavan Teja,"Aligned, curriculum can push",,"Currently testing it across all the existing questions to ensure it produces the same output as before. For example, if a question previously resulted in TLE, we expect the same result now. Expected to get completedby this week",Rohan,Completed,Narayana,"Enhancement, M Size, Product Led"
+IDE Submission Time ,"Currently the IDE (React and Node) are taking more than 1 minute, it needs to be reduced to near 30 seconds",https://app.clickup.com/t/37446639/86d3hqyay ,0,Pushed to PROD,Fullstack,Yes,,Aligned,,Work in progress,Sarthak,Completed,Nokhalal,"Enhancement, L Size, Product Led"
+IDE code preview ,Currently the student cannot open and the see the previous submitted code of a question while solving another question. Need to have a option where the student can see the previous submitted code while solving another question. ,https://app.clickup.com/t/37446639/86d3h09m0 ,0,Pushed to PROD,Fullstack,Yes,,Aligned,,Work in progress,Sarthak,Completed,Ritesh,"Enhancement, L Size, Product Led"
+AI workflow - PPT generation,,,0,,Fullstack,Yes,,"Aligned, curriculum can push",,,SME,,Ritesh,"SME Led, New Workflow, XL size"
+AI Tutor at coding practice bug fixex - DSA,Fix the bug affecting the AI Tutor within the DSA coding practice experience so it responds correctly to learners.,https://app.clickup.com/t/37446639/86d2kfrb5,0,,DSA,Yes,,Aligned,,"DSA, Common",Lokeshwar,Completed,Nokhalal,"Enhancement, S Size, Product Led"
+AI workflow (coding Q generation) Improvements,,,0,,DSA,Yes,,"Aligned, curriculum can push",,,SME,,,
+"Learning portal has classroom quiz - with glitches, sometimes we will automatically be thrown out",,,0,,Common,Yes,,"Aligned, should be priority 0",,,Rajesh,In Progress,Narayana,"Added Logs in prod, narayana will check logs"
+Not able to Open reading material / tutorial when huge number of users use them,,https://app.clickup.com/t/37446639/86d3hr3d9 ,0,,Common,Yes,,"Aligned, should be priority 0",,,Lavanya,In Progress,Nokhalal,"Added logs in beta, Will be deployed to prod after testing"
+Able to Copy/Paste code snippets Through Safari browser,,,0,,Common,Yes,,"Aligned, should be priority 0",,Could not able to reproduce the issue,Lavanya,Blocked,,checked by chandravamshi. ISS-094 check this issue
+Deciding on integrity metrics,,https://docs.google.com/document/d/1XcbcPoWIIBa4pBf6xg4-72DmXm6RlGjZkqBG1nE8etw/edit?tab=t.0#heading=h.xhqrc9yc6jau,3,,Common,No,Anurag,"Aligned, should be priority 0",,,Anjali,Completed,,"exploring the way forward, will prpose the Revanth and Pavan the idea and get approval to work on in the next month"
+Programming Coach,"Embed the programming coach into the LP as a usable, adopted feature that guides students to answers via hints instead of giving them away.
+
+Define the feature — scope, UX, and trigger point in the LP; fix what caused non-adoption.
+Prompt Enhancements — sharpen the coaching prompts for quality, Socratic behavior, and no repetition.
+Offline Evals — test harness to score coach quality before release.
+Roll out plan — phased release, target cohorts, adoption metrics.",,0,,Common,No,,"Aligned, should be priority 0",,Common,Lokeshwar,Completed,,Launching it to more studetns & improving based on feedback - students are not using; finding out why.
+Automate the n8n workflow testing with a script.,"Build a script to automate testing of the n8n workflow, reducing manual testing effort and catching regressions early.",,0,,Genai,Yes,,"Aligned, curriculum can push",,GenAI,SME,In Progress,Hrithik,
+DS/ML questions replacement in Academy,Replace the existing DS/ML question bank in Academy with an updated set of questions to improve coverage and quality.,,0,,DS/ML,Yes,,"Aligned, curriculum can push",,DS/ML,SME,Completed,Hrithik,
+Replace the existing MCQs in the Prod Data Visualization courses,"The current MCQs (copied from Academy) don't have explanations, but NIAT requires explanations.",,0,,,Yes,,,,DS/ML -  Adhoc,SME,,,
+Remove GRIT courses from 'Other Courses' Tab,GRIT courses are incorrectly surfacing in the 'Other Courses' tab; remove them so they only appear in their intended GRIT section.,https://app.clickup.com/t/37446639/86d2wp01x,0,,Common,Yes,,"Aligned, should be priority 0",,,Aryan,Completed,Chandrika,
+IDE UI/UX revamp ,"Update the color, font, add timer and modernize the UI of the existing IDE.",https://app.clickup.com/t/37446639/86d3mmebb ,0,Pushed to PROD,Fullstack,Yes,,Aligned,, To be picked up - ready for development,Sarthak,Completed,Ritesh,
+Replace the existing MCQs & Coding quetsions in Prod with new questions,,,0,,,,,,,GEN-AI Adhoc,SME,,,
+Module Quiz Implementation should be changed as classroom quiz,"To make the module quiz onboarding work like the live quiz, we need to add a quiz code that users can enter to start the quiz.",https://app.clickup.com/t/37446639/86d3kc8av,1,,,Yes,Pavan G,,,"After discussing this with Rajesh, I found that we already have a similar feature that can address this requirement. I revalidated the approach",Rohan,Yet to start,,"Blockers are cleared , will be picked in next month as dev bandwidth is not available now"
+HTML element support in the Markdown,"Add support for HTML-formatted tutorials within the DS/ML curriculum for richer, better-structured content.",https://docs.google.com/document/d/1oi4BHoJomrtnzP4H0QG7yenzKJciiHhzoKP63AkfV0s/edit?usp=sharing,1,,Common,Yes,,Should be common rather than curriculum specific,"Pending approval
+Full change to HTML or just HTML blocks within markdown?
+
+Check if any existing features are lost and if actually there is a usecase for full HTML tutorials.",GenAI,Lokeshwar,Discarded,,Discarded. As curriculum agreed to use existing way of loading html files.
+HTML based simulation support at Session level,A feature to add sumulations at the session level.,https://docs.google.com/document/d/1D9FmdUUg-RDRzK7ZJpCVUejWz3ArCudrG6vF3WNf6Y4/edit?usp=sharing,1,,,Yes,,,,DS/ML&Math - Got more clariry after exploration,Lokeshwar,Testing in progress,,In Beta
+n8n IDE Exam support in LP/Topin,Add n8n IDE support for exam mode in the Learning Platform / Topin so students can be assessed within the LP/Topin,,1,,Genai,Yes,,"Aligned, curriculum can push",,GenAI - Lavanya (check with chandra vamsi),Lokeshwar,Blocked,,Blocked with Curriculum
+IDE health dashboard - v1,Need to monitor the logs of the fullstack IDE to keep a track over its working,,1,Completed,Fullstack,Yes,,Aligned,,Completed,Sarthak,Completed,Jatin,
+IDE health dashboard  - v2,Need to monitor the logs of the fullstack IDE to keep a track over its working,,1,Everything done except user-mapping; needs Data team's help (BigQuery),Fullstack,Yes,,Aligned,,Dependency on Big Query Tables,Sarthak,In Progress,Jatin,
+New Feature: Dark theme -> Entire coding,"Extend dark mode to remaining coding question types (Web, SQL, etc.) not yet covered; ~41% of students code at night.",https://app.clickup.com/t/37446639/86d2q3gad,1,,Common,Yes,,"Aligned, should be priority 0",,Needs to be continued by NK + Track current Metrics,Aryan,Completed,Nokhalal,In Testing
+"Adaptive MCQs 
+","We are replacing the current MCQ  pratice  with an adaptive system. The system continuously estimates how strong the student is and uses that estimate to pick the best possible next question — one that sits right at the edge of their current ability. Not too easy, not too hard.",https://app.clickup.com/t/37446639/86d2pajv3,1,,Common,Yes,Poojitha,"Aligned, but the implementation and release should be for all curriculums rather than just Aptitude",,"ready for development- dependency on MCQ revamp. 
+commited timelines:
+Adaptive Learning For MCQ's : 
+6th - 8th July : Developement
+9th - 10th July : Testing & Deployment",Anjali,In Progress,Jatin,
+GRIT - Recomended Questions after Contest,"After a GRIT contest, students get no targeted practice recommendations based on their contest performance.",https://app.clickup.com/t/37446639/86d3tjhe6,1,,Common,Yes ,,"Aligned, should be priority 0",,,Aryan,In Progress,,Picked up
+NxtTalk — reduce voice latency to <1s & scale for 25k,"Voice responses lag 30s–2min vs. ≤800ms benchmark, no instrumentation; need <1s latency + validated capacity for 25k-student scale.",https://app.clickup.com/t/86d3cqgc2,1,,English,Yes,,Aligned,"can launch fully for a institute and take decision on whether it is delivering impact or not
+also can take it ahead as a content type within course rather than a standalone product",,Aryan,Yet to start,,"Moved to Next sprint , Higher priority than new unit type.  "
+Question Bank Enhancements,"Redesign the question bank with improved filters, better navigation, and progress tracking features including daily streaks etc
+
+",https://app.clickup.com/t/37446639/86d3ph8nv,1,,Common,Yes,Feedbacks,Aligned,,,Rohan,Testing in progress,Hrithik,
+Adaptive Coding ,Discussed ,https://app.clickup.com/t/37446639/86d2myh56,1,To be pushed to PROD,Fullstack,Yes,,"Aligned but duplicate across curriculums
+
+Also, why push for agentic when 80% if impact can be achieved with 50% effort?
+Maybe a small agent can plug in within the entire algorithmic flow to add understanding of user code and which KP or skill is he/she lacking.",,"currently under discussion with Pavan, present across multiple curriculums",Sarthak,In Progress,"Jatin, Hrithik",
+IDE Reset code time,Currently the reset function of the IDE is taking 1-2 mins that also needs to be reduced under 1 minute,https://app.clickup.com/t/37446639/86d3tjtdz,1,Pushed to PROD,Fullstack,Yes,,Aligned,,to be picked,Sarthak,Completed,,Suresh
+Face ID not enabled for all students — investigate & fix,"Face ID reportedly missing for a subset of NIAT students despite full rollout; investigate root cause, enable, add monitoring safeguard.",https://app.clickup.com/t/86d3c9cvk,1,,Common,Yes,,Aligned,,"For face ID , Check if can be given to NIAT team. ",Aryan,Redirected,,Riderected to the central tech team
+Coding Question Generator - L3,,,1,,Genai,Yes,,"Aligned, curriculum can push",,,SME,,,
+Coding Evaluation Redesign,"Redesign the coding evaluation system to support subtask-level feedback for DSA questions.
+",https://app.clickup.com/t/37446639/86d2t1xhn,1,,Common,Yes,Pavan Teja,"Aligned, should be priority 1",,,Rohan,On hold,"Narayana, Ritesh",
+"New Feature: Search is not navigating to 'Food munch' links, content is not being searchable",,https://app.clickup.com/t/37446639/86d2dy58x,1,,Common,Yes,,"Aligned, should be priority 1",,"- The internal search functionality is working well for all topics that are included in the curriculum.
+- The """"Food Menu"""" unit belongs to the """"Build Your Own Responsive Website"""" topic. However, this topic is currently hidden from the curriculum section on the Aurora Learning Platform, which is why the unit does not appear there.",Anjali,Completed,,devs will pick it up based on bandwidth
+GPU Requirement for DS/ML questions,Currenlty when trying to run the capstone projects on CPU it's taking over 30 mins and getting timeout errors. The capstone projects require GPU to run - same question takes 2 mins to run,https://docs.google.com/document/d/1TbAdN8TbC20-KSr0p3lsOy1wpn5xkxj-5_I_UUtBliI/edit?usp=sharing,1,,DS/ML,Yes,,"Aligned, curriculum can push",,DS/ML,Lokeshwar,in progress by PM,,Blocked with Curriculum
+AI tutor enhancement - make it agentic and improve adoption and usage,"Make the AI Tutor agentic and drive higher adoption and usage through improved capabilities and engagement.
+
+Render the chat in markdown for better formatting
+Optimise the prompt for non repetitive answers
+Have a separate prompt for voice & chat
+Optimise for the follow up questions
+Hint based responses
+Tool to interact with IDE from the chat response
+Memory for student persona
+Simplify the prompt for friendliness(includes in the prompt changes)
+Observability (Live Eval Pipeline)",,2,,Common,Yes,,"Aligned, should be priority 0","Metrics - Report, Prompt & Observabliity",Common - Problem Level,Lokeshwar,In Progress,,
+SQL Redesign,"Redesign SQL coding question UX/interaction — current layout creates friction, inconsistent with the coding design system.",https://app.clickup.com/t/37446639/86d3p47a1,2,,Common,Yes,,"Aligned, should be priority 1",,,Aryan,Blocked,,Will Be picked up after design system
+Top Bar Redesign,Redesign the Learning Pod top navigation bar to reduce height and align with the design system.,https://app.clickup.com/t/37446639/86d31c4hc,2,,Common,Yes,,"Aligned, should be priority 1",,,Aryan,Blocked,,Will Be picked up after design system
+Track In-Class English Speaking Activities & Student Evaluations,"In-class speaking activities (debates/discussions) aren't tracked, causing disputes over whether they occurred and no evaluation data on student performance.",,3,,English,Yes,,Aligned,give instructor side tracking through teachOS or a live quiz like functionality for instructors in instructor LP,"In progress by pm , exploring a live quiz type functionality where students could enter a code provided by the teacher once the activity is complete to mark their activity as completed.",Anjali,Yet to start,,moving to next month
+KP Generation Enhancements,(Eng/Design not required),https://app.clickup.com/t/37446639/86d3tuu3k,2,,Common,No,,"Aligned, should be priority 0",,,Rohan,Completed,,
+n8n IDE perfomance monitoring - V2,"Set up version 2 of performance monitoring for the n8n IDE to track more data points (submissions latency, add more feedback Enums)",,2,,,Yes,,Aligned,,GenAI,Lokeshwar,In Progress,,Blocked due to Dev Bandwidth
+New question type- Match the following ,,https://app.clickup.com/t/37446639/86d3dbt8w,2,,Aptitude,Yes,Poojitha,"Not aligned with doing this, maybe if lower priority
+Why is match the following needed? We can use normal single correct MCQ
+
+- Push from Pavan, more Q types means more engagement, no boredom",Maybe if lower priority,UX being developed ,Anjali,In Progress,,Dev needed
+"New Feature: Reading material -> can make it Interactive -> by having voice form factor, to listen to like a podcast",Static reading material has no audio/listen-along option; explore if Cheatsheet AI Tutor can deliver a podcast-style experience.,Task Created ,2,,Common,Yes,,Can explore how to make Cheatsheet AI tutor satisfy this requirement,,,Aryan,in progress by PM,,"Problem statement clubbed with revision.  
+Being done 90% by PM.  "
+Preparatory Revision - v1,To introduce a new section that corresponds to revision only - Remaining part to be finalized,https://app.clickup.com/t/37446639/86d3tm0qm,2,"In Development — front-end (Conceptual + Practical Learning pages)
+To be built by vibe coding",Common,Yes,,"Aligned, should be priority 1",,,Sarthak,in progress by PM,,
+KP Generation Automation,"Automatically generate and tag Knowledge Points when a new question is loaded, eliminating manual KP assignment.
+
+",,2,,Common,Yes,,"Aligned, should be priority 1",,Will pick it once KP generation enhancements task is done,Rohan,Yet to start,,
+KP change management,To ensure and check while editing/updating any KP the system checks where it's used and ensures nothing breaks when the change is applied.,-,2,,Common,Yes,,"Aligned, should be priority 1",,We can update kps by loading the updated kps in admin panel without breaking any feature,Rohan,Completed,,
+Observability dashboard - Aptitude,,,2,,Aptitude,Yes,,"Aligned, curriculum can push",,,SME,,,
+Simplify the submission process in n8n,Students has to do 8 steps to submit the solutions in the n8n and switching between two tabs. Need to improve the experience.,,2,,Genai,Yes,,Aligned,,GenAI,Lokeshwar,In Progress,,Blocked Due to dev bandwidth
+Testcase based evaluation for n8n,"Currently, the n8n solutions are evaluated with LLMs, this is non deterministic way, we need to implement test-case based evaluation in n8n so submissions are graded automatically against defined test cases.",,2,,Genai,Yes,,"Aligned, curriculum can push",,GenAI,Lokeshwar,Blocked,,Blocked with Curriculum
+Need a way to revise content if a student is on leave / absent (recordings or revision material),Research Pending - TBD,,2,"Not started, worked upon the gamification feature first.
+Will pick in the week 3",Common,Yes,,"Aligned, should be priority 2",,,Sarthak,Completed,,NIAT team is picking it
+contest Coding  - Integrity,To make sure that the students are solving the questions without cheating or and have visibility around if that is happening,https://app.clickup.com/t/37446639/86d3tf31n,2,,,Yes,,Aligned,,,Anjali,In Progress,,Dev needed
+ROS 2 IDE Enhancements,Combine the Gazebo simulation environment and code editor into a single workspace.,https://app.clickup.com/t/37446639/86d318rwp,2,,Robotics,Yes,,"Aligned, curriculum can push",,,Rohan,Completed,Ritesh,
+New Feature: Need have My session understanding Notes at Consolidated view in portal,Bring the existing 'My Notebook' consolidated notes feature (live on Intensive/Academy) to NIAT; needs design adaptation. Origin: Aurora university feedback.,https://app.clickup.com/t/37446639/86d3bvyyv,2,,Common,Yes,,"Aligned, should be priority 1",,Notebook in LP,Aryan,Completed,,
+"Add ""Fill in the Blanks"" (Interactive Variants) as new question types in the practice unit",Add new English question types English Product Feature_June 2026,https://app.clickup.com/t/37446639/86d3ex4nc,2,,English,Yes,,"Aligned, curriculum can push",,https://app.clickup.com/t/37446639/86d3ex4nc,Anjali,Blocked,,Blocked due to dev bandwidth
+Provide features to teach finetuning for students,Provide platform features that help students learn and practice model finetuning hands-on. We need GPU time to run the opensource models.,,2,,Genai,Yes,,"Aligned, curriculum can push",,GenAI,Lokeshwar,Blocked,,Blocked with Curriculum
+Need a long term solution for LLM API Keys,"Establish a durable, long-term solution for managing and provisioning LLM API keys to the students as GEN AI course problem implementations are not working with free tiers.",,2,,Genai,Yes,,"Aligned, curriculum can push",,GenAI,Lokeshwar,Blocked,,Blocked with Curriculum
+Migrate coding files from the downloadable format to preview and edit directly in the VS Code environment.,"Curretnly are giving the implementation questions in a downloadable colab file - students download it and does implementation on their colab file, this is not giving us visiblitiy on weather students have solved the session related implementations or not. Now, we need to replace the files with VS Code format.",,3,,,,,"Aligned, curriculum can push",,DS/ML,SME,,,
+Need code snippets button in left/top nav bar directly instead of profile,Add a direct code-snippets shortcut to the left/top nav bar instead of nesting it under profile; impact assessment pending.,,3,,Common,Yes,,Need to check possible impact first,,Need to Validate the reasoning behind it. ,Aryan,Discarded,,"Could be a larger problem statement there depending on how actually snippets are being used.  The Usage is significant , but giveing an entrypoint on the topbar does not make sense. "
+New Feature: Dark theme -> Rest of the platform,Extend dark mode beyond coding question types to the remaining platform surfaces.,Task Created ,3,,Common,Yes,,,,,Aryan,Yet to start,Nokhalal,Needs Scope redifinition.  
+"Add ""Drag-and-Reorder (Horizontal)"" as a new question type in the practice unit",Add new English question types English Product Feature_June 2026,https://app.clickup.com/t/37446639/86d3qacyp,2,,English,Yes,,"Aligned, curriculum can push",,,Anjali,In Progress,Jatin,
+New Feature: Using NotebookLM -> Flash cards feature for exam prep,Students use NotebookLM's flashcard feature externally for revision; pain point and best in-platform solution still need scoping.,Task Created ,3,,Common,Yes,,"Aligned, but need to understand what is the pain point and if there is a better solution",,"The existing AI tutor does not solve the pain point, and this is a high-impact problem statement. There are some prerequisites if we want to solve it in an agentic way. We have to think of it like a subfeature of a much bigger something like a Global AI tutor that can interact with any course.",Aryan,in progress by PM,,"Problem statement clubbed with revision.  
+Being done 90% by PM.  "
+"New Feature: I am downloading slides, taking reading material content onto Notebook LM - mind mapping for my exam preparation. can we have something like this in learning portal.",Students manually move slides/reading material into NotebookLM to mind-map for exams; explore if AI Tutor Video can natively support this.,Task Created ,3,,Common,Yes,,Can explore how to make Video AI tutor satisfy this requirement,,"The existing AI tutor does not solve the pain point, and this is a high-impact problem statement. There are some prerequisites if we want to solve it in an agentic way. We have to think of it like a subfeature of a much bigger something like a Global AI tutor that can interact with any course.",Aryan,in progress by PM,,"Problem statement clubbed with revision.  
+Being done 90% by PM.  "
+Interview Intelligence System-Enhancements,"(Eng/Design not required)
+Add knowledge graph-based concept relationships, assessment and interview coverage analysis, autonomous fix recommendations, and trend/gap intelligence for deeper curriculum insights.
+
+",,3,,Common,No,,"Aligned, should be priority 0",,,Rohan,in progress by PM,,
+Build Data Visualization editor in LP & Topin,"Build a data visualization editor in the Learning Platform and Topin for creating and editing charts and visuals. This is a requirement from GRIT as well, to test students in the Data visualisation.",,3,,DS/ML,Yes,,"Aligned, curriculum can push",,DS/ML,Lokeshwar,On hold,,Topin team is picking this up
+Configure all current GA events in WebEngage,"Migrate all currently tracked GA events to WebEngage (replacing GA going forward) with full event properties, user mapping, and device_type on every event.",https://app.clickup.com/t/37446639/86d2unzdz,3,,Common,Yes,,"Aligned, should be priority 1",,Evalute Tools. ,Aryan,Backlog,,Move to next month roadmap
+Gamified practice sessions,,https://app.clickup.com/t/37446639/86d13k8rz,3,Development to be started in next sprint.,Common,Yes,,"Aligned, should be priority 1",,,Sarthak,In Progress,,
+New Feature: LeetCode-style competitive coding platform with point system and leaderboard,,,3,,DSA,-,,"Already exists, Lauchpad access should sort this out",,,Rohan,Discarded,,
+"Learning app - offline session downloads, on the go learning",,,3,,Common,,,"Aligned, should be priority 2",,,,,,
+"Fullstack AI IDE support in LP (learning, practice, exam)","Fullstack AI IDE support needed across learning, practice, and exam flows in the Learning Platform",,,,Genai,Yes,,Will get it done through new SDEs,,Common,Revanth,Yet to start,,
+NxtTalk | Migrate STT → AssemblyAI & TTS → InWorld AI,"Migrate NxtTalk's speech providers (STT→AssemblyAI, TTS→InWorld Founder Model) for ~5x cost reduction; validate quality parity before cutover.",https://app.clickup.com/t/86d3ey965,,,English,,,Lokeshwar,need not be done right now,,Aryan,Backlog,,Move to next Month roadmap
+Need to do coding practice while watching the video itself,Students want to code alongside video lessons instead of switching context; a loading issue from curriculum is already being fixed.,,,,Common,,,"Not tech task, config only",,"Loading issue from curriculum , Already informed and the fix is in progress. ",Aryan,Completed,,
+"Gamification features, leaderboards to compete within the university",,,,,Common,,,Overlapping with gamified practice,,,Sarthak,In Progress,,
