@@ -192,7 +192,7 @@ university relations 4 layers), NSPI bands, co-curricular counts (AI&Robotics 12
 |---|---|---|
 | Academics CSAT 4.5 | **drives** (dept-primary) | content satisfaction, LE, delivery-quality theme closure — LP + LD + PLE |
 | Employability B3 80% / B4 80% | drives, lagged | skill mastery chain: gold-tier rate, assessment achievement, adaptive lift — LD + LP |
-| NSPI bands (30/40/30) | drives | ⚑ definition/computation source needed before mapping |
+| NSPI/SPI bands (30/40/30) | **drives, dept-primary** | SPI = dept-authored assessments (classroom quiz 10% + module quiz 15% + skill assessments 25% + FSA 50%); gold-tier & mastery chain — LD + ACP + LP. ⚑ deprecation tension: Summative/Formative Achievement retire while SPI is 75%-weighted on them — keep an SPI-component view (decoded: corpora/products/niat/nspi_decoded.md) |
 | GRIT Novice Badge 5,000 | **drives, direct** | PLE — literally its GRIT Practice roadmap item |
 | ICPC Regionals 120 | drives | LD (DS & Algo domain) |
 | AI & Robotics products 120 | drives | LD (Robotics domain) |
@@ -210,3 +210,28 @@ the tracker, not more KPIs.
 doc §7 discussion) with the vocabulary rule: portfolio = accountability lane · product/
 capability = what it ships · initiative = monthly roadmap item · KPI = Tier-1 measure ·
 target = Tier-0 outcome.
+
+## 12. Developer Platform lane, sharpened (2026-08-11, from the Aug roadmap)
+
+Roadmap archive: `knowledge/raw/corpora/department/developer_platform_aug_roadmap.md`.
+The team's own category vocabulary (System Reliability / Performance / Efficiency & Cost /
+Issue Resolution TAT / Issue Recurrence / Engineering Delivery Efficiency) distills to
+seven durable Tier-1 KPIs — this supersedes §5's generic list for this lane:
+
+| # | KPI (Tier-1, monthly) | Aug Tier-3 evidence (targets) |
+|---|---|---|
+| DP1 | Learner-critical availability & saturation MTTD | 100% critical thresholds alerted; MTTD ≤10 min; Sentry criticals alerted in 5 min |
+| DP2 | **Tail-latency user-impact %** (per surface SLOs) | IDE launch/submit/publish/npm P99 <60s, affected-users 6.7/9.6/3.6/11.6% → 0%; compiler per-language avg/P95/P99 <10/15/25s; C++ P99 10.28→<5s |
+| DP3 | Observability & cost-attribution coverage | cost visibility 0→100% (per EnrollPlan/user/request/unit); IDE observability 100% |
+| DP4 | Platform cost per unit (runtime cost per active learner + per-unit dashboards) | IDE −$30–50 (1.8–3%); terminate-on-tab-close |
+| DP5 | Issue resolution TAT (user <2d; internal same-day) | feedback routing E2E; support-investigation agent; unclear feedback 32→<15% (input quality) |
+| DP6 | Issue recurrence rate → 0 | platform instance of the culture Repeat-Issue KPI; "launching improvements for upcoming issues" |
+| DP7 | Engineering delivery efficiency (NEW lane) | checkout 5–10min→0; cherry-pick ≤10min; agent plan-gen −20% + token usage; compiler CI/CD, no manual deploys |
+
+Notes: DP2's "% users affected by tail" formulation is better than §5's plain P95 — adopt
+it department-wide. DP7 is genuinely new (the portfolio's "engineering productivity"
+purpose made measurable) — recommend unit: engineer-hours reclaimed/month.
+**⚑ CRITICAL cross-link:** the n8n feedback fix "Course ID captured as Question ID" is a
+join-key-integrity defect on the learner-data spine (everything joins on question_id) —
+add to the contract-debt register and gate n8n-sourced analytics until fixed; also
+capture-missing-Workflow-ID = Data Sync Completeness work.
