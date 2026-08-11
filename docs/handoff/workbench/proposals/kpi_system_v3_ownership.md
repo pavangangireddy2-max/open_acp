@@ -373,12 +373,9 @@ targets carried per domain (Robotics 120 products, DS&Algo ICPC 120, GenAI/MERN 
 | Impact | R&D Initiative Impact (baselined improvements shipped) | ✓ |
 | Adoption/Delivery | Agentic Production Coverage (per-type, blended; target 90%) | ✓ NEW'd |
 | Adoption/Delivery | Practice & Assessment Pieces Delivered (approved-only refinement) | ✓ |
-| Adoption/Delivery | Coverage-Fill Velocity (approved items/week per cell) | (launch: work-order system) |
-| Quality | First-Pass Gate Rate (generator quality) | NEW |
-| Quality | Judge–Reviewer Agreement (LLM-judge calibration; Pedagogy team informs) | NEW |
+| Quality | First-Pass Gate Rate · Judge–Reviewer Agreement — the quality pair for Production Coverage ("coverage without quality is not coverage") | (launch: gate harness live; interim guard = Content Issue Recurrence + reviewer rejections) |
 | Quality | Content Issue Recurrence → 0 · Feedback Resolution Efficiency | ✓ |
 | Efficiency | Cost per MCQ · Cost per Coding Question (per APPROVED item, rejects in numerator) | ✓ |
-| Efficiency | Intelligence/Context Freshness ≤24h (EOD loop compliance) | NEW (ops) |
 
 ### Product Learning Experience
 | slot | KPI | status |
@@ -394,7 +391,9 @@ targets carried per domain (Robotics 120 products, DS&Algo ICPC 120, GenAI/MERN 
 | Relationship/Efficiency | BOS Credit Acceptance · Cost per BOS Approval | ✓ |
 | Parked | Launchpad WAU ⚑ (portfolio home unresolved) · GRIT badge glidepath + contest pass-rate 16→30% (initiative metrics) | ✓ |
 
-**Net-new across all three lanes: 7 rows** (gold-tier, capability-outcomes discipline,
-gate rate, judge agreement, coverage velocity, engagement spread, class-practice lag,
-theme closure — two of which are launch-gated). System closes at ~50 standing KPIs
-across 5 lanes + shared services; everything else was re-lensing existing rows.
+**Net-new standing rows after HOD prune (2026-08-12): 5** — gold-tier, capability-outcomes
+discipline, engagement spread, class-practice lag, theme closure. Launch-gated pair:
+gate rate + judge agreement (on gate-harness go-live). Removed: coverage-fill velocity
+(parked until work-order system), intelligence freshness (ops dashboard, not tracker).
+Ownership rule affirmed: KPI owner = lane; deliverable owner = per-item PM/Eng/SME
+(the July sheet's SME-Led/Dev-Led/Product-Led tags are the execution taxonomy).
