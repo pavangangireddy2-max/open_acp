@@ -270,3 +270,24 @@ course KPIs (content pieces, achievement, engagement). Keeps the KPI system clos
 Django) and + Compliance Courses (Physics, Chemistry, Engineering Drawing, Quantum
 Engineering…). Count now 12 tracks (HOD recalls 13 — candidate missing: Mathematics,
 which appears in the complexity reference but not the domain list — pending confirmation).
+
+### §13 revisions after HOD review (2026-08-12)
+- **DP-2 Engineering Delivery Efficiency moved OUT of the lane scorecard** → added to the
+  Head of Tech & Product cross-HOD ask ("Engineering Productivity incl. tooling
+  time-reclaimed"). Rationale: management metrics about engineers belong to the manager of
+  engineers; the lane keeps only what it ships to learners. Checkout/agent-planning numbers
+  stay as Tier-3 initiative evidence.
+- **Issue Resolution TAT confirmed under System Reliability** (not Business Impact).
+  Rule: a number that can improve before students feel anything is operational; one that
+  only moves when students feel it is impact. Renamed "Platform Issue Resolution TAT" to
+  avoid collision with CSI's Issue Resolution TAT.
+- **Developer Platform scorecard v1.1 (7 KPIs) APPROVED and live on the HOD one-pager**
+  as a 9th category band; tracker count 36 → 41 (2 moves in: Env Satisfaction,
+  Runtime Cost; 5 new: Availability & Saturation Detection, Tail-Latency User Impact,
+  Platform Issue TAT, Platform Issue Recurrence, Cost-Attribution Coverage).
+- **Second & third cross-HOD asks:** Graphic Design & Video Editing team heads (creative
+  delivery-management: on-time %, turnaround TAT, rework rate, quality acceptance,
+  utilisation, satisfaction); Head of Tech & Product scope narrowed to Product/Eng/Pedagogy.
+- Domains: 13 (SQL and CS Core split; Mathematics scoped inside DS/ML at Low complexity;
+  Compliance Courses added). Sub-departments section added to one-pager (7 direct-report
+  units); vernacular cost moved CSI → Content Efficiency.
