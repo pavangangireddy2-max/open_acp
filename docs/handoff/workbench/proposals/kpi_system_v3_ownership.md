@@ -347,3 +347,54 @@ notebook engagement) feed LP-2/LP-4, not new KPIs.
    (the bookmarks lesson — built first, 60% dead clicks discovered later).
 4. Anurag handover: fold New Initiatives/Further themes into the LP charter doc; corpus
    archived as the safety copy.
+
+## 16. Remaining lane scorecards — LD, ACP, PLE (v1 for HOD review, 2026-08-12)
+
+Completes all five lanes (DP §13, LP §15). Legend: ✓ = already on the one-pager ·
+NEW = proposed addition · (launch) = starts when its system goes live.
+
+### Learning Domains
+| slot | KPI | status |
+|---|---|---|
+| Impact | Summative & Formative Skill Assessment Achievement (SPI 50%+25%) | ✓ |
+| Impact | Content–Assessment Alignment | ✓ |
+| Impact | Module-Quiz Gold-Tier Rate per course (SPI 15% component) | NEW |
+| Delivery | Learning Content Hours · Vernacular Hours (CSI executes) | ✓ |
+| Quality | Industry Update Adherence · Tech Stack Freshness (incl. domain env versions) | ✓ |
+| Quality | Pedagogy Initiative Impact | ✓ |
+| Quality | Domain Capability Outcomes — anchored capabilities' pedagogy value (⚓DSA visualizer→mastery evidence, ⚓n8n eval validity), evidence-based per anchor; initiative-level, NOT a standing KPI per tool | NEW (lens model) |
+| Efficiency | Cost per Learning Hour · Cost per Vernacular Hour | ✓ |
+Notes: complexity multipliers (1.0–2.5x) normalize all LD targets; co-curricular org
+targets carried per domain (Robotics 120 products, DS&Algo ICPC 120, GenAI/MERN GSoC).
+
+### Agentic Content Platform
+| slot | KPI | status |
+|---|---|---|
+| Impact | R&D Initiative Impact (baselined improvements shipped) | ✓ |
+| Adoption/Delivery | Agentic Production Coverage (per-type, blended; target 90%) | ✓ NEW'd |
+| Adoption/Delivery | Practice & Assessment Pieces Delivered (approved-only refinement) | ✓ |
+| Adoption/Delivery | Coverage-Fill Velocity (approved items/week per cell) | (launch: work-order system) |
+| Quality | First-Pass Gate Rate (generator quality) | NEW |
+| Quality | Judge–Reviewer Agreement (LLM-judge calibration; Pedagogy team informs) | NEW |
+| Quality | Content Issue Recurrence → 0 · Feedback Resolution Efficiency | ✓ |
+| Efficiency | Cost per MCQ · Cost per Coding Question (per APPROVED item, rejects in numerator) | ✓ |
+| Efficiency | Intelligence/Context Freshness ≤24h (EOD loop compliance) | NEW (ops) |
+
+### Product Learning Experience
+| slot | KPI | status |
+|---|---|---|
+| Impact | NIAT Graded Assessment Achievement | ✓ |
+| Impact | University Engagement Spread (p90/p10 LE across ~40 campuses — spread, not average) | NEW |
+| Impact | Class-to-Practice Lag Median (needs teaching calendar) | NEW |
+| Delivery | Program Delivery Gap → 0% (CSI executes) | ✓ |
+| Delivery | Stakeholder Content Request Fulfillment | ✓ |
+| Quality/Compliance | University Curriculum Compliance · Framework Compliance | ✓ |
+| Quality/Compliance | Issue Resolution TAT (CSI first-pass) | ✓ |
+| Quality/Compliance | Delivery-Quality Theme Closure Rate (root-cause, 4-checkbox close) | NEW |
+| Relationship/Efficiency | BOS Credit Acceptance · Cost per BOS Approval | ✓ |
+| Parked | Launchpad WAU ⚑ (portfolio home unresolved) · GRIT badge glidepath + contest pass-rate 16→30% (initiative metrics) | ✓ |
+
+**Net-new across all three lanes: 7 rows** (gold-tier, capability-outcomes discipline,
+gate rate, judge agreement, coverage velocity, engagement spread, class-practice lag,
+theme closure — two of which are launch-gated). System closes at ~50 standing KPIs
+across 5 lanes + shared services; everything else was re-lensing existing rows.
