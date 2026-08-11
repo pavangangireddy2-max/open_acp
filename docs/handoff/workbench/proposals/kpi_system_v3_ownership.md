@@ -291,3 +291,59 @@ which appears in the complexity reference but not the domain list — pending co
 - Domains: 13 (SQL and CS Core split; Mathematics scoped inside DS/ML at Low complexity;
   Compliance Courses added). Sub-departments section added to one-pager (7 direct-report
   units); vernacular cost moved CSI → Content Efficiency.
+
+## 15. Learning Platform lane scorecard — v1 for HOD review (2026-08-12)
+
+Sources analysed (archived at `knowledge/raw/corpora/department/learning_platform/`):
+Anurag's LearningOutcomes roadmap (Mar–Oct'25: strategy themes + monthly sheets),
+Product↔Content Requirements workbook (the requirements seam), Jul+Aug'26 monthly
+roadmaps ("OldSheet"), product-cuts taxonomy (outcomes / features / user-flows).
+
+**Discrepancy log (multi-year, cross-lane):**
+1. Five taxonomies in play: product cuts ×3, roadmap Activity Tags (=lanes ✓), and roadmap
+   Metric Category free-text ("Effort & Value" = the LE×CME effort-value matrix →
+   secretly maps to % Ideal Engagement Segment / LE). Reconcile to: lane + 45-KPI name.
+2. The "monthly roadmap" is actually the whole-department roadmap: rows tag PLE (GRIT,
+   live quiz, mobile), Learning Domains (coding eval redesign, testcase 3–10x), Developer
+   Platform (all IDE/compiler/n8n blocks), ACP (July: 15 workflows, MCP server, PPT/coding
+   generators). LP-only view must be a filter, not a separate sheet.
+3. Same capability, different lanes across months (Revision: LP + PLE; NxtTalk: DP + PLE +
+   English; dark mode: Common/LP). Routing rule: capability=LP · product rollout/config=PLE
+   · infra=DP.
+4. Ad-hoc per-item metric targets with no standing KPI to roll into: bookmarks 50%
+   adoption target, GRIT pass 16→30%, AI tutor 24% weekly adoption, practice attempt ~20%,
+   notebook 400 DAU. → the Adoption slot below.
+5. Anurag's strategic themes (Video/Reading/MCQ/Coding/Evaluation + AI suites + "10-100
+   multiplier: Adaptive, Revision, AI Tutor") have no KPI home; his sheets are the LP
+   charter seed — fold before Senior-PM handover.
+6. Emerging integrity thread (integrity metrics doc, GPT-proof content, proctoring,
+   honeypots, contest integrity) — parked as candidate Assessment Integrity KPI (PLE/LP
+   seam, taxonomy's Assessments cut).
+7. Cross-lane dependency: adaptive quality depends on KP hygiene (KP tagging/generation/
+   change-management rows) — Learning Domains ask, ACP executes tooling.
+
+**Scorecard v1 (baselines from the live sheets):**
+
+| slot | # | KPI | unit · cadence | baseline → intent |
+|---|---|---|---|---|
+| Impact | LP-1 | % Learners in Ideal Engagement Segment *(owned)* | % · M | roadmap "Effort & Value" rows formalized here |
+| Impact | LP-2 | Learning Engagement Effort (LE) *(owned)* | wt-min · M | mobile 15% of sessions @20min avg — untapped surface |
+| Impact | LP-3 | Adaptive Learning Lift *(on launch)* | % · M | adaptive MCQs+coding, coach vs control cohort (Aug row's own framing) |
+| Adoption | LP-4 | **Capability Adoption Rate** (per capability × product) | % WAU · M | AI Tutor 24% wkly · bookmarks ~100 users/mo with 60% dead clicks · notebook 400 DAU low-engagement · practice attempt ~20% — the lane's central problem is adoption, not features |
+| Adoption | LP-5 | Adaptive Session Coverage | % · M | share of practice sessions running adaptive vs static |
+| Quality | LP-6 | Learning Feature Reliability (in-session failure rate) | % · M | live-quiz throw-outs, reading-material load failures at scale, classroom-quiz glitches → 0; in-quiz event capture = instrumentation. Boundary: DP owns infra, LP owns feature behaviour |
+
+Efficiency: none by design (runtime cost sits with Developer Platform). Diagnostic
+metrics (video completion, attempt-to-completion, course completion) already owned.
+Sub-signal under LP-4: dead-click rate. Initiative metrics (leaderboard→attempt rate,
+notebook engagement) feed LP-2/LP-4, not new KPIs.
+
+**Maintenance rules (the "best way forward"):**
+1. LP capability registry = the User-Flows cut (4 flows) as canonical grouping; feature
+   list as inventory (taxonomy archived).
+2. Roadmap hygiene: every row carries lane tag + Impacted KPI from the 45-name list
+   (Aug sheet is ~80% compliant; retire free-text metric categories).
+3. **Adoption gate:** no capability ships without an adoption target + instrumentation
+   (the bookmarks lesson — built first, 60% dead clicks discovered later).
+4. Anurag handover: fold New Initiatives/Further themes into the LP charter doc; corpus
+   archived as the safety copy.
