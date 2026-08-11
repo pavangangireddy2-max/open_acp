@@ -235,3 +235,38 @@ purpose made measurable) — recommend unit: engineer-hours reclaimed/month.
 join-key-integrity defect on the learner-data spine (everything joins on question_id) —
 add to the contract-debt register and gate n8n-sourced analytics until fixed; also
 capture-missing-Workflow-ID = Data Sync Completeness work.
+
+## 13. Developer Platform lane scorecard — v1 for HOD review (2026-08-12)
+
+First of the five lane scorecards (four-slot template: Impact / Adoption·Delivery /
+Quality·Reliability / Efficiency). Derived from the Aug roadmap per the agreed method.
+DP-8 is a commissioning metric — retires once it holds 100% for 2 consecutive months.
+The n8n Question-ID fix is a one-time deliverable (contract-debt), tracked to done, not a KPI.
+
+| slot | # | KPI | unit · cadence | current → target (Aug evidence) |
+|---|---|---|---|---|
+| Impact | DP-1 | Learning Environment Satisfaction *(moves from Content Effectiveness)* | Score/5 · M | baseline → up |
+| Adoption/Delivery | DP-2 | Engineering Delivery Efficiency (hours reclaimed via tooling/CI-CD) | Eng-hrs/mo · M | checkout 5–10min→0 · agent plan-gen −20% · cherry-pick ≤10min |
+| Quality | DP-3 | Learner-Critical Availability & Detection (MTTD) | % · min · M | 100% critical thresholds alerted · MTTD ≤10 min |
+| Quality | DP-4 | Tail-Latency User Impact (% users outside SLO) | % · M | IDE launch/submit/publish/npm P99 <60s (6.7/9.6/3.6/11.6% → 0%) · compiler <10/15/25s · C++ P99 10.28→<5s |
+| Quality | DP-5 | Issue Resolution TAT | Days · M | user <2 days · internal same-day |
+| Quality | DP-6 | Issue Recurrence | Count · M | → 0 (never-twice) |
+| Efficiency | DP-7 | Platform Runtime Cost per Active Learner *(moves from Content Efficiency)* | INR · M | per-unit dashboards; −$30–50 IDE (Aug) |
+| Efficiency | DP-8 | Observability & Cost-Attribution Coverage *(commissioning)* | % · M | 0 → 100% (per EnrollPlan/user/request) |
+
+## 14. Cross-HOD asks + workshops decision (2026-08-12)
+
+**Asks of other departments** — a new artifact class: measurable dependencies on peer
+teams, each tied to the department target it unblocks. Format: what we need · from ·
+target · unblocks. First ask: Placement Partnerships → ≥3 GenAI tool partnerships
+(n8n / Make / Base44) → enables tool workshops/hackathons inside academics → feeds SPI,
+co-curricular, employability. Section added to the HOD one-pager (§7).
+
+**Decision:** workshops/hackathons are NOT a new KPI type — each is delivered as a
+**short course inside the owning domain** (first case: GenAI), inheriting the existing
+course KPIs (content pieces, achievement, engagement). Keeps the KPI system closed.
+
+**Domain list update:** + Python Django (FullStack family = MERN · Java Spring · Python
+Django) and + Compliance Courses (Physics, Chemistry, Engineering Drawing, Quantum
+Engineering…). Count now 12 tracks (HOD recalls 13 — candidate missing: Mathematics,
+which appears in the complexity reference but not the domain list — pending confirmation).
