@@ -1,0 +1,541 @@
+ ,Metric Category ,Product ,Audience ,"Metric Name 
+
+Learning Systems – Metrics Reference Sheet","KPI Name
+
+KPI Naming Convention Guide",Description,Unit,Frequency,Q1,,,,,,,,,,,,,,,
+,,,,,,,,,Apr'26,,,,May'26,,,,Jun'26,,,,Jul'26,,,
+,,,,,,,,,Budgeted,Actual,Variance,Effort Summary/Remarks,Budgeted,Actual,Variance,Effort Summary/Remarks,Budgeted,Actual,Variance,Effort Summary/Remarks,Budgeted,Actual,Variance,Effort Summary/Remarks
+1,Business Impact,All,,% Learners in Ideal Engagement Segment ,Business Impact:All::% Learners in Ideal Engagement Segment ,"% of active learners classified in the High Effort + High Value cell of the effort-value matrix. Learners are segmented monthly based on their LE score (effort) and CME highest concept level achieved (value). Serves as a leading indicator of learning outcomes.
+
+The full 3×3 matrix (Low/Medium/High Effort × Low/Medium/High Value) is a diagnostic tool — used to investigate when this number drops, not tracked as a KPI itself.",%,Monthly ,,,0,,,,,,,,,,,,,
+2,Business Impact,All,,Summative Skill Assessment Achievement Rate,Business Impact:All::Summative Skill Assessment Achievement Rate,Students scoring above the defined passing threshold in summative skill assessments across owned domains. Passing threshold is set by the team based on domain context (default reference: 70%).,%,Quarterly ,35,,35,,35,,,,40,,,,40,,,
+3,Business Impact,All,,Formative Skill Assessment Achievement Rate,Business Impact:All::Formative Skill Assessment Achievement Rate,Students scoring above the defined passing threshold in formative skill assessments across owned domains. Passing threshold is set by the team based on domain context (default reference: 70%).,%,Monthly ,23,33.4,-10.4,"75% cap was considered for obtaining the actual % values, as that has been the standard cut-off followed by the Skill Assessment team on their tracker in their score evaluation processes, and so for the month of April 2026, the averages for each University (that had Skill Assessments conducted in the month) are as follows, combining the two subjects, Web App. Development II and DBMS:
+- AMET University : 10.3%
+- Annamacharya University : 38.8%
+- Chaitanya University(CDU) : 50.1%
+- Chalapathi Institute of Technology : 33.8%
+- NIAT - Chevella : 47.6%
+- NRI University : 50.6%
+- NSRIT : 19.8%
+- S-VYASA (Deemed to be University) : 10.4%
+- Sanjay Ghodawat University : 29.4%
+- Takshashila University : 51.9%
+- Vivekananda Global University : 34.1%
+- Yenepoya Mangalore Campus : 23.8%",23,,,,30,,,,30,,,
+4,Business Impact,All,,Content-Assessment Alignment %,Business Impact:All::Content-Assessment Alignment %,"Delta between learning assessment scores and summative skill assessment scores. Smaller delta = better alignment between what is taught and what is tested.
+
+Formula: |Avg learning assessment score − Avg summative score|",%,Quarterly ,15,,15,,15,,,,15,,,,15,,,
+5,Business Impact,NIAT,,Graded Assessment Achievement Rate,Business Impact:NIAT::Graded Assessment Achievement Rate,"Students scoring above the defined passing threshold in university-conducted graded assessments — Mid-1, Mid-2, and End Semester exams — delivered in collaboration with the university. Passing threshold aligned with university grading policy.
+
+Tracked per exam type and per semester.",%,Monthly ,,,0,,,,,,,,,,,,,
+6,Business Impact,Launchpad,,Weekly Active Users,Business Impact:Launchpad::Weekly Active Users,"Total number of prospective learner leads generated in the period through content-driven channels (organic, referral, campaigns, partnerships). Tracks the top-of-funnel contribution of content and program visibility efforts.
+
+Source: CRM / marketing analytics. Tracked per product and channel.",Count ,"Monthly 
+
+(Tracked 
+weekly
+,reported 
+as 
+Monthly 
+avg) ",,,0,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,
+7,Content Effectiveness,All,,Learning Engagement Effort (LE),Content Effectiveness:All::Learning Engagement Effort (LE),"Measures how much a learner meaningfully engages with learning material, adjusted for effort intensity and persistence. Passive time (video, cheatsheets) weighted at 0.5. Active time (MCQs, coding questions, notes, AI tutor interactions) weighted at 1.0. Persistence signals — reattempting after failure (+0.25) and returning to an unfinished task (+0.25) — multiply the weighted time.
+
+Formula: LE = [(0.5 × Passive Time) + (1.0 × Active Time)] × (1 + Persistence Factor)
+
+Tracked weekly and monthly per product. Replaces DAU/WAU/MAU as the primary engagement metric.","Minutes 
+(weighted)",Monthly ,,,0,,,,,,,,,,,,,
+8,Content Effectiveness,All,,Course Completion Rate,Content Effectiveness:All::Course Completion Rate,"% of enrolled learners who complete a course in full. Encompasses all unit types — video, practice, projects, and assessments. Serves as the primary completion signal; Learner Accessed Content Completion Rate and Practice Attempt-to-Completion Rate below act as diagnostic breakdowns when this number is low.
+
+Formula: (Learners who completed the course / Total enrolled learners) × 100.",%,Monthly ,,,0,,,,,,,,,,,,,
+9,Content Effectiveness,All,,Pedagogy Initiative Impact,Content Effectiveness:All::Pedagogy Initiative Impact,Implemented pedagogy initiatives with measurable learning outcome improvement. Outcome baseline must be defined and agreed before the initiative is launched.,Count,Quarterly ,,,0,,,,,,,,,,,,,
+10,Content Effectiveness,All,,Learner Accessed Content Completion Rate,Content Effectiveness:All::Learner Accessed Content Completion Rate,"Applies to video units. For each learner, % of video units they opened that they also completed. Final metric is the average across all learners. Excludes units with zero opens.
+
+Formula: Average of [(Video units completed / Video units opened) × 100] across all learners.",%,Monthly ,,,0,,,,,,,,,,,,,
+11,Content Effectiveness,All,,Practice Attempt-to-Completion Rate,Content Effectiveness:All::Practice Attempt-to-Completion Rate,"Applies to practice units. For each learner, % of coding/project exercises attempted that they also completed. Surfaces environment friction (IDE, playground, cloud setup) vs. difficulty-related drop-off.
+
+Formula: Average of [(Exercises completed / Exercises attempted) × 100] across all learners.",%,Monthly ,38,,38,,38,,,,38,,,,38,,,
+12,Content Effectiveness,All,,Learning Environment Satisfaction Score,Content Effectiveness:All::Learning Environment Satisfaction Score,"Average in-app satisfaction rating given by learners specifically on the coding environment, playground, or cloud IDE experience. Tracked separately from overall content satisfaction score.
+
+Source: Existing in-app rating data.",Score,Monthly ,,,0,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,
+13,Content Velocity ,All,,Learning Content Hours Delivered,Content Velocity :All::Learning Content Hours Delivered,"Total learning content hours created per month across all formats (video, text, interactive). Content serving multiple products counted once.",Hours,Monthly ,50,46,4,"Intensive Offline - Full Stack Java: [18]
+Interface 
+Functional Interface and Lambda Expression
+Encapsulation
+Equality & Ordering in Java
+Arrays in Java | 1D
+Arrays in Java | 2D
+Generic Class & Collection Framework
+ArrayList
+Iterator
+LinkedList
+Comparable and Comparator
+Understanding Java Set Collections
+HashMap
+Operations in HashMap
+LinkedHashMap & TreeMap
+Stack
+Queue and Deque
+Mastering Java Stream API
+
+Intensive Offline - Full Stack Python (Django)^: [5]
+Introduction to Backend Development
+Django Project Setup & Virtual Environment
+Django Project Structure & MVT Architecture
+Introduction to E-Commerce Backend Development 
+Introduction to Django ORM
+
+
+NIAT (Backend): [3]
+Filtering and Sorting
+Protected Routes with JWT Authentication
+Role-Based Authorization
+
+NIAT (Fundamentals): [8]
+Network Layer & IP Addressing
+DHCP & IP Address Assignment
+Packet Delivery Mechanisms
+Routing Algorithms
+Internet Scaling Mechanisms
+ICMP in Action
+Data Link Layer | Part I
+Data Link Layer | Part II
+
+10xIIT (Fundamentals)*: [5]
+M7V2
+M9V2; M9V3
+Wireless LANs – Cutting the Cord - Part 1
+Wireless LANs – Cutting the Cord - Part 2
+
+Academy 1.5 (TCS NQT Drive): [4]
+TCS NQT Phase 2 | Session 1 - Python Basics & Core Concepts
+TCS NQT Phase 2 | Session 2 - Loops, Functions & Strings
+TCS NQT Phase 2 | Session 3 - OOP in Python I – Class, Objects, Inheritance
+TCS NQT Phase 2 | Session 4 - OOP in Python II – Polymorphism, Encapsulation, Abstraction
+
+NIAT (GRIT) Reading-Materials#: [65]
+CS Fundamentals (L1 & L2) - 46
+Server-Side Tech(L1 & L2) - 13
+UI Tech(L2) - 6
+
+*Only review, PDA design work, video review, and sign-off were handled by us; hence, considered 1/2 of the total count towards the effort.
+^Sessions have been designed but not recorded; hence, they are not counted towards the total sessions created in April 2026.
+#Only reading-materials have been created, but for the topics uncovered in any of the existing courses, considered 1/6 of the total count towards the effort.""",50,42,8,"""Intensive Offline - Full Stack Java: [12]
+Java 8 Features: Method Reference & Optional
+Exception Handling in Java
+Types of Exceptions
+Advanced Exception Handling
+MultiThreading in Java | Part 1
+MultiThreading in Java | Part 2
+Race Conditions & Synchronization
+Inter-Thread Communication & Executor Framework
+Enum & Concurrent Collections
+File Handling and Serialization in Java
+Introduction to JDBC
+Establishing Connection
+
+Intensive Offline - Full Stack Python (Django)^: [7]
+Introduction to Backend Development
+Django Project Structure & MVT Architecture
+Introduction to E-Commerce Backend Development
+Introduction to Django ORM
+Django Forms | Part 1
+Django Forms | Part 2
+Django Forms | Part 3
+
+NIAT (Fundamentals): [7]
+Multiple Access Protocols
+Wired LANs
+Wireless LANs
+Physical Layer
+Transmission Media & Switching
+Network Troubleshooting & Real World
+Network Security Essentials
+
+10xIIT (Fundamentals) - SQL*: [35]
+Why SQL Exists & Database Fundamentals
+Workloads, Transactions & DBMS
+SQL History, Relational Model & Processing Types
+Data Types, Keys, NULL & Indexing Basics
+SQL Commands, Databases & Table Creation
+Keys, Constraints, DDL/DML & Query Lifecycle
+SELECT, Operators, ORDER BY & LIMIT
+WHERE Clause & Advanced Filtering
+Numeric Functions, NULL Handling & CASE Logic
+String Functions: CONCAT, CASE, TRIM, and LENGTH
+Substring, Search & Pattern Matching
+INSERT, UPSERT & UPDATE Operations
+DELETE, ALTER, TRUNCATE & DROP Comparison
+UNION, UNION ALL & Intersection
+INNER, LEFT & RIGHT Joins
+FULL OUTER, CROSS & IMPLICIT Joins
+Privileges: GRANT, REVOKE & Connections
+COMMIT, ROLLBACK & SAVEPOINT
+Transaction Internals (InnoDB) & Deadlocks
+Subqueries, EXISTS & NOT EXISTS
+Common Table Expressions (CTEs)
+Date Functions & Filtering
+Window Functions Intro: OVER, PARTITION BY, and ORDER BY
+Ranking & Offset Functions
+Window Frames, Value Functions & Real-Life Cases
+Working with JSON in SQL
+Data Modeling & Design Principles
+Schema Design, Entities & Relationships
+Keys, Relationships & Normalization
+Performance & Debugging Fundamentals
+Storage Internals & B+ Tree Mechanics
+Primary Key Impact & Index Strategy
+Scaling Reads, Sharding & Distributed IDs
+Zero-Downtime Changes & Partitioning
+Comprehensive Review & End-to-End Practice
+
+10xIIT (Fundamentals) - Operating Systems*: [4]
+OS Concepts and Functions
+Types of Operating Systems
+Kernel Architecture and User Modes
+User Interaction with OS
+
+Academy 1.5 (TCS NQT Drive)**: [8]
+DBMS Fundamentals & All Key
+SQL Queries – DDL, DML & DCL
+SQL Joins, Views, Triggers & Subqueries
+Normalization, ACID & Transactions
+DBMS & SQL Revision
+Operating System Concept
+Computer Networks
+Network Security & Java Fundamentals
+
+*TR Doc review, PPT review, video review, and sign-off would be handled by us along with KT sessions and initial review of the cheat sheets and practice content; hence, considered 1/3 of the total count towards the effort.
+**Only PPT, cheat sheets, and practice content were made for these and not any videos recorded; therefore, considered 2/3 of the total count towards the effort.
+^Sessions have been designed and partially recorded; hence, only 2/3 of the total effort is not counted towards the total sessions created in May 2026.""",50,47,3,"Intensive Offline - Full Stack Java: [8]
+Introduction to JDBC
+Establishing Connection
+Simple Statement
+Prepared Statement
+Mini-Project Demonstration
+Transaction Management
+ResultSet
+Web Architecture & Servlet Basics | Part 1
+
+Intensive Offline - Full Stack Python (Django)^: [6]
+Django Forms | Part 3
+Complete CRUD with ModelForm | Part 1
+Complete CRUD with ModelForm | Part 2
+Class-Based Views
+Introduction to REST APIs
+Introduction to Django REST Framework
+
+NIAT (Computer Networks): [1]
+Modern Internet Infrastructure
+
+NIAT (Operating Systems): [6]
+Understanding Binary System
+Introduction to Operating System
+OS Functions and Services
+OS Structures and Case Studies
+Process Concept, States & PCB
+Threads, Multithreading & Concurrency
+
+NIAT (Advanced DBMS): [3]
+Relational Algebra: Selection & Projection
+Relational-Algebra Expressions
+Set Operations & Cartesian Product
+
+10xIIT (Fundamentals) - SQL*: [15]
+Why SQL Exists & Database Fundamentals
+Workloads, Transactions & DBMS
+SQL History, Relational Model & Processing Types
+Data Types, Keys, NULL & Indexing Basics
+SQL Commands, Databases & Table Creation
+Keys, Constraints, DDL/DML & Query Lifecycle
+SELECT, Operators, ORDER BY & LIMIT
+WHERE Clause & Advanced Filtering
+Numeric Functions, NULL Handling & CASE Logic
+String Functions: CONCAT, CASE, TRIM, and LENGTH
+Substring, Search & Pattern Matching
+INSERT, UPSERT & UPDATE Operations
+DELETE, ALTER, TRUNCATE & DROP Comparison
+UNION, UNION ALL & Intersection
+INNER, LEFT & RIGHT Joins
+
+10xIIT (Fundamentals) - Operating Systems*: [4]
+OS Concepts and Functions
+Types of Operating Systems
+Kernel Architecture and User Modes
+User Interaction with OS
+
+Academy 2.0 Live Classes**: [21]
+Introduction to Shorthand Expressions
+Introduction to List Comprehensions
+Nested Lists & String Formatting
+Introduction to Matrices
+Function Call Stack & Recursion
+Understanding Recursion
+Introduction to Object Oriented Programming
+Object Oriented Programming - Part 2
+Classes & Objects
+Attributes and Methods
+Encapsulation
+Inheritance
+Inheritance - Part 2
+Abstraction
+Polymorphism
+Scope & Namespaces
+Errors & Exceptions
+Working with Dates & Times
+Python Setup & Coding in VS Code
+Introduction to Third Party Packages
+AI As Your Python Co-Developer: Build Apps Smarter
+
+*PPT review, video review, and sign-off would be handled by us along with KT sessions and initial review of the cheat sheets and practice content; hence, considered 1/2 of the total count towards the effort.
+**Only PPT have been worked on and modified as well as the course sequence was updated and sent for linking, and no new videos were recorded; therefore, considered only 2/3 of the total count towards the effort.
+^Sessions have been designed and partially recorded; hence, only 2/3 of the total effort is not counted towards the total sessions created in May 2026.",50,,50,
+14,Content Velocity ,All,,Vernacular Content Hours Delivered,Content Velocity :All::Vernacular Content Hours Delivered,"Total vernacular-language learning content hours created per month. Tracked separately from English content hours because the effort to produce one hour of vernacular content differs significantly from English — it involves translation, re-recording, and localization QA in addition to base content creation.",Hours,Monthly ,0,,0,,0,,0,,0,,0,,0,,0,
+15,Content Velocity ,All,,Practice & Assessment Content Pieces Delivered,Content Velocity :All::Practice & Assessment Content Pieces Delivered,"Total practice and assessment pieces delivered monthly across owned domains (MCQs, coding questions, projects, case studies).",Count,Monthly ,1600,1499,101,"CCBP Academy Full-Stack AI Live Projects:—4
+AI-Powered Doubt Solver for Students
+AI-Powered Recipe Generator
+AI-Powered NxtForm
+AI-Powered Thumbnail Generator
+
+NIAT Full-Stack Projects:—17
+- 17 new projects, but only 15 have been finalised and loaded to prod
+
+NIAT (MERN) - NextJS Coding Questions:—4
+Introduction to Next.js = 2
+Routing in Next.js = 2
+
+Intensive Offline - Full Stack Java^ Coding Questions:—120
+Inheritance = 8
+Polymorphism = 9
+Abstraction = 9
+Interface = 9
+Functional Interface and Lambda Expression = 7
+Encapsulation = 8
+Equality & Ordering in Java = 9
+Arrays in Java | 1D = 8
+Arrays in Java | 2D = 6
+Generic Class & Collection Framework = 6
+ArrayList = 6
+Iterator = 6
+LinkedList = 6
+Comparable and Comparator = 6
+Understanding Java Set Collections = 5
+Operations in HashMap = 5
+LinkedHashMap & TreeMap = 7
+
+Academy 1.5 (TCS NQT Drive) Coding Questions:—2
+TCS NQT Phase 2 | Session 1 - Python Basics & Core Concepts
+
+Intensive Offline - Full Stack Java^:—564
+- Functional Interface and Lambda Expression (Practice MCQ) = 20
+- Encapsulation (Practice MCQ) = 20
+- Equality & Ordering in Java (Practice MCQ) = 20
+- LinkedList (Practice MCQ) = 20
+- Comparable and Comparator (Practice MCQ) = 20
+- Understanding Java Set Collections (Practice MCQ) = 20
+- HashMap (Practice MCQ) = 20
+- Operations in HashMap (Practice MCQ) = 20
+- LinkedHashMap & TreeMap (Practice MCQ) = 20
+
+- Functional Interface and Lambda Expression (Classroom Quiz A & B) = 60
+- Encapsulation (Classroom Quiz A & B) = 55
+- Equality & Ordering in Java (Classroom Quiz) = 30
+- Comparable and Comparator (Classroom Quiz) = 30
+- Understanding Java Set Collections (Classroom Quiz A & B) = 59
+- HashMap (Classroom Quiz) = 30
+- Operations in HashMap (Classroom Quiz A & B) = 60
+- LinkedHashMap & TreeMap (Classroom Quizzes A & B) = 60
+
+Intensive Offline (MERN) - Frontend—140
+- Event Delegation (Practice MCQ) = 20
+- Event Propagation (Practice MCQ) = 20
+- HTML Tables & Lists (Practice MCQ) = 20
+- useMemo & useCallback (Practice MCQ) = 20
+- useRef & useReducer (Practice MCQ) = 20
+- Lazy Loading & Suspense (Practice MCQ) = 20
+- Logic Reuse Patterns (Practice MCQ) = 20
+(These have been utilised for GRIT program, too)
+
+NIAT (Fundamentals)^ - Computer Networks:—70
+- Network Layer & IP Addressing (Practice MCQ): 20
+- DHCP & IP Address Assignment (Practice MCQ): 20
+
+- SCTP & Quality of Service (Classroom Quiz A & B): 10
+- Network Layer & IP Addressing (Classroom Quiz A & B): 10
+- DHCP & IP Address Assignment (Classroom Quiz A & B): 10
+
+NIAT (GRIT) - Server-side Tech(L1):—80
+- PATCH Method (Practice MCQ): 20
+- REST Architecture & Constraints (Practice MCQ): 20
+- Authentication Architectures (Practice MCQ): 20
+- CORS (Practice MCQ): 20
+
+NIAT (GRIT) - UI Tech(L2):—80
+- useMemo & useCallback (Practice MCQ): 20
+- useRef & useReducer (Practice MCQ): 20
+- Lazy Loading & Suspense (Practice MCQ): 20
+- Logic Reuse Patterns (Practice MCQ): 20
+
+NIAT (MERN) - NextJS:—140
+- Introduction to Next.js (Practice MCQ) = 20
+- Routing in Next.js (Practice MCQ) = 20
+- Overview of Client and Server Components (Practice MCQ) = 20
+- Data Fetching in Next.js (Practice MCQ) = 20
+- Routing in Next.js | Part 2 (Practice MCQ) = 20
+- Building APIs with Next.js (Practice MCQ) = 20
+- Authentication in Next.js (Practice MCQ) = 20
+
+NIAT (MERN) - MongoDB Integration with NodeJS:—273
+- Introduction to MVC and Mongoose Models (Practice MCQ) = 15
+- Implementing CRUD Operations | Part 1 (Practice MCQ) = 15
+- Implementing CRUD Operations | Part 2 (Practice MCQ) = 20
+- Filtering and Sorting (Practice MCQ) = 15
+- Role-Based Authorization (Practice MCQ) = 15
+
+- Introduction to MVC and Mongoose Models (Classroom Quiz) = 41
+- Filtering and Sorting (Classroom Quiz A & B) = 68
+- Protected Routes with JWT Authentication (Classroom Quiz A & B) = 84
+
+^Content is ready to load or has already been loaded to Prod, but yet to be launched to Learners—due in May or later.",1000,990,10,"Intensive Offline - Full Stack Java (program yet to be launched): [470]
+- HashMap (Practice MCQ) = 20
+- Stack (Practice MCQ) = 20
+- Queue and Deque (Practice MCQ) = 20
+- Mastering Java Stream API (Practice MCQ) = 20
+- Java 8 Features: Method Reference & Optional (Practice MCQ) = 20
+- Exception Handling in Java (Practice MCQ) = 20
+- Types of Exceptions (Practice MCQ) = 20
+- Advanced Exception Handling (Practice MCQ) = 20
+
+- HashMap (Classroom Quiz) = 30
+- Stack (Classroom Quiz) = 30
+- Queue and Deque (Classroom Quiz A & B) = 45
+- Mastering Java Stream API (Classroom Quiz A & B) = 45
+- Java 8 Features: Method Reference & Optional (Classroom Quiz A & B) = 45
+- Exception Handling in Java (Classroom Quiz A & B) = 45
+- Types of Exceptions (Classroom Quiz) = 20
+- Advanced Exception Handling (Classroom Quiz A & B) = 50
+
+NIAT (Fundamentals) - Computer Networks: [300]
+- Packet Delivery Mechanisms (Practice MCQ): 20
+- Routing Algorithms (Practice MCQ): 20
+- Internet Scaling Mechanisms (Practice MCQ): 20
+- ICMP in Action (Practice MCQ): 20
+- Data Link Layer | Part I (Practice MCQ): 20
+- Data Link Layer | Part II (Practice MCQ): 20
+- Multiple Access Protocols (Practice MCQ): 20
+- Wired LANs (Practice MCQ): 20
+- Wireless LANs (Practice MCQ): 20
+- Physical Layer (Practice MCQ): 20
+
+- Packet Delivery Mechanisms (Classroom Quiz A & B): 10
+- Routing Algorithms (Classroom Quiz A & B): 10
+- Internet Scaling Mechanisms (Classroom Quiz A & B): 10
+- ICMP in Action (Classroom Quiz A & B): 10
+- Data Link Layer | Part I (Classroom Quiz A & B): 10
+- Data Link Layer | Part II (Classroom Quiz A & B): 10
+- Multiple Access Protocols (Classroom Quiz A & B): 10
+- Wired LANs (Classroom Quiz A & B): 10
+- Wireless LANs (Classroom Quiz A & B): 10
+- Physical Layer (Classroom Quiz A & B): 10",1000,1093,-93,"Intensive Offline - Full Stack Java (program yet to be launched): [620]
+- Java 8 Features: Method Reference & Optional (Practice MCQ) = 20
+- Exception Handling in Java (Practice MCQ) = 20
+- Types of Exceptions (Practice MCQ) = 20
+- Advanced Exception Handling (Practice MCQ) = 20
+- MultiThreading in Java | Part 1 (Practice MCQ) = 20
+- MultiThreading in Java | Part 2 (Practice MCQ) = 20
+- Race Conditions & Synchronization (Practice MCQ) = 20
+- Inter-Thread Communication & Executor Framework (Practice MCQ) = 20
+- Enum & Concurrent Collections (Practice MCQ) = 20
+- File Handling and Serialization in Java (Practice MCQ) = 20
+
+- Java 8 Features: Method Reference & Optional (Classroom Quiz A & B) = 45
+- Exception Handling in Java (Classroom Quiz A & B) = 45
+- Types of Exceptions (Classroom Quiz) = 20
+- Advanced Exception Handling (Classroom Quiz A & B) = 50
+- MultiThreading in Java | Part 1 (Classroom Quiz A & B) = 50
+- MultiThreading in Java | Part 2 (Classroom Quiz A & B) = 55
+- Race Conditions & Synchronization (Classroom Quiz A & B) = 30
+- Inter-Thread Communication & Executor Framework (Classroom Quiz A & B) = 45
+- Enum & Concurrent Collections (Classroom Quiz A & B) = 50
+- File Handling and Serialization in Java (Classroom Quiz A & B) = 30
+
+NIAT (Fundamentals) - Computer Networks: [180]
+- Wireless LANs (Practice MCQ): 20
+- Physical Layer (Practice MCQ): 20
+- Transmission Media & Switching (Practice MCQ): 20
+- Network Troubleshooting & Real World (Practice MCQ): 20
+- Network Security Essentials (Practice MCQ): 20
+- Modern Internet Infrastructure (Practice MCQ): 20
+
+- Wireless LANs (Classroom Quiz A & B): 10
+- Physical Layer (Classroom Quiz A & B): 10
+- Transmission Media & Switching (Classroom Quiz A & B): 10
+- Network Troubleshooting & Real World (Classroom Quiz A & B): 10
+- Network Security Essentials (Classroom Quiz A & B): 10
+- Modern Internet Infrastructure (Classroom Quiz A & B): 10
+
+Intensive Offline (Django & DRF for Backend Development): [293]
+- Introduction to Backend Development (Practice MCQ): 20
+- Django Project Setup & Virtual Environment (Practice MCQ): 20
+- Django Project Structure & MVT Architecture (Practice MCQ): 20
+- Introduction to E-Commerce Backend Development (Practice MCQ): 20
+
+- Introduction to Backend Development (Classroom Quiz A & B): 57
+- Django Project Structure & MVT Architecture (Classroom Quiz A & B): 79
+- Introduction to E-Commerce Backend Development (Classroom Quiz A & B): 77",1000,,1000,
+16,Content Velocity ,All,,Branding Content Assets Delivered,Content Velocity :All::Branding Content Assets Delivered,"Total branded content pieces produced monthly (thumbnails, banners, promo assets).",Count,Monthly ,0,,0,,0,,0,,0,,0,,0,,0,
+,,,,,,,,,,,,,,,,,,,,,,,,
+17,Content Efficiency,All,,Cost Per Learning Hour Produced,Content Efficiency:All::Cost Per Learning Hour Produced,"Average cost to produce one hour of learning content. Includes people, tools, and infra involved in content creation. Tracks creation efficiency — not delivery cost.",INR,Monthly ,10000,6803,3197,46 h of learning-content hours delivered across 4 different Products,10000,6208,3792,46 h of learning-content hours delivered across 4 different Products,10000,,10000,,10000,,10000,
+18,Content Efficiency,All,,Cost Per Vernacular Content Hour,Content Efficiency:All::Cost Per Vernacular Content Hour,"Average cost to produce one hour of vernacular-language content. Includes team bandwidth involved in content creation. Tracks creation efficiency — not delivery cost (Contract-basis, Tools & infrastructure).
+ 
+*CSI team- includes payroll (central tracking) and AI tooling costs attributed under non-payroll budget. CSI is expected to leverage AI tools to drive this cost down over time. Submitted to relevant regulatory frameworks as part of compliance reporting.",INR,Monthly ,0,0,0,,0,0,0,,0,0,0,,0,0,0,
+19,Content Efficiency,All,,Cost Per MCQ Generated,Content Efficiency:All::Cost Per MCQ Generated,"Average cost to develop one objective question, including both manual and AI-assisted production.",INR,Monthly ,40,26,14,"1,347 MCQs were composed across 2 Products",40,21,19,"1,347 MCQs were composed across 2 Products",40,,40,,40,,40,
+20,Content Efficiency,All,,Cost Per Coding Question,Content Efficiency:All::Cost Per Coding Question,"Average cost to develop one coding question, including test case design and evaluation engine configuration.",INR,Monthly ,400,163,237,131 coding-questions were composed across 3 Products,400,259,141,131 coding-questions were composed across 3 Products,400,,400,141 coding-questions were composed across 2 Products,400,,400,
+21,Content Efficiency,All,,Cost Per Branding Content Asset,Content Efficiency:All::Cost Per Branding Content Asset,Average cost to create one branded content piece.,INR,Monthly ,0,0,0,,0,0,0,,0,,0,,0,,0,
+22,Content Efficiency,All,,Platform Runtime Cost Per Active Learner,Content Efficiency:All::Platform Runtime Cost Per Active Learner,"Total platform delivery costs (cloud compute, code execution infra, cloud IDE hosting, GenAI API calls) divided by active learners in the period. Tracks delivery cost efficiency as usage scales. Infrastructure line items only — no salary data.
+
+Formula: Total platform runtime spend / Active learners in period.",INR,Monthly ,,,0,,,,0,,,,0,,,,0,
+23,Content Efficiency,All,,Feedback Resolution Efficiency,Content Efficiency:All::Feedback Resolution Efficiency,"Content issues resolved within SLA as a % of total issues received. Tracked per product to identify where unresolved load concentrates.
+
+Formula: (Issues resolved within SLA / Total issues received) × 100.",%,Monthly ,,25.6,-25.6,"Total issues received: 39 (33 NIAT, 6 CCBP Academy)
+Total issues resolved/addressed: 39
+Issues resolved within SLA (48 h): 10
+Reasons:
+- Most issues have been IDE-related, which had support dependencies with the Product team, who pick issues based on their own sprint plan amongst other parameters.
+- The new portal being used, named Zoho, also has improvements required to streamline the process.
+- Some tickets were inconsistently raised, without providing the fullest required information, particularly the screenshots or links, so the wait period for acquiring those made SLA breach in most cases.
+- Moreover, some tickets, particularly related to BOA support, like, module quiz scheduling and curriculum-related, as well as concerns of other teams, such as GenAI, have also been tagged as our team's content quality issues and forwarded to us; so, there is a real need to make the ticketing process more accurate and direct the tickets to their right destinations.",,,,"Total issues received: 39 (33 NIAT, 6 CCBP Academy)
+Total issues resolved/addressed: 39
+Issues resolved within SLA (48 h): 10
+Reasons:
+- Most issues have been IDE-related, which had support dependencies with the Product team, who pick issues based on their own sprint plan amongst other parameters.
+- The new portal being used, named Zoho, also has improvements required to streamline the process.
+- Some tickets were inconsistently raised, without providing the fullest required information, particularly the screenshots or links, so the wait period for acquiring those made SLA breach in most cases.
+- Moreover, some tickets, particularly related to BOA support, like, module quiz scheduling and curriculum-related, as well as concerns of other teams, such as GenAI, have also been tagged as our team's content quality issues and forwarded to us; so, there is a real need to make the ticketing process more accurate and direct the tickets to their right destinations.",,,,,,,,
+24,Content Efficiency,All,,R&D Initiative Impact,Content Efficiency:All::R&D Initiative Impact,"Implemented R&D initiatives — including adoption of agentic AI solutions and automation pipelines — with measurable content production improvement. Covers initiatives that improve velocity, quality, or cost efficiency. Business impact (e.g. % reduction in cost per hour, % increase in output) must be defined and baselined before the initiative is launched.",Count,Quarterly ,0,0,0,,0,0,0,,0,,0,,0,,0,
+,,,,,,,,,,,,,,,,,,,,,,,,
+25,Content Relevance,All,,Industry Update Adherence,Content Relevance:All::Industry Update Adherence,"Planned industry-driven content updates completed on schedule.
+
+Formula: (Updates completed on schedule / Total planned updates) × 100.",%,Monthly ,0,0,0,,0,0,0,,0,,0,,0,,0,
+26,Content Relevance,NIAT,,University Curriculum Compliance Rate,Content Relevance:NIAT::University Curriculum Compliance Rate,"% of NIAT curriculum units compliant with the approved BOS syllabus at time of delivery. Tracked per semester. Non-compliance is a university partnership risk.
+
+Formula: (BOS-compliant units delivered / Total units delivered) × 100.",%,Monthly ,100,80,20,Coding Practice in NextJS was deferred due to priorities in GRIT arriving at the time,100,80,20,Coding Practice in NextJS was deferred due to priorities in GRIT arriving at the time,100,,100,,100,,100,
+27,Content Relevance,All,,Tech Stack Freshness Rate,Content Relevance:All::Tech Stack Freshness Rate,"% of tools, frameworks, libraries, and environments referenced in content (and configured in IDEs, playgrounds, cloud setups) matching the current stable or LTS version at time of audit.
+
+Formula: (Current-version platforms / Total platforms audited) × 100.
+Recommended audit cadence: quarterly.",%,Monthly ,100,100,0,,100,100,0,,100,,100,,100,,100,
+,,,,,,,,,,,,,,,,,,,,,,,,
+28,Stakeholder Alignment,All,,Stakeholder Content Request Fulfillment Rate,Stakeholder Alignment:All::Stakeholder Content Request Fulfillment Rate,"Requests from Sales, Placements, Program Ops, Assessments, and Instructors fulfilled within agreed timeframes across all products.
+
+Formula: (Requests fulfilled on time / Total requests received) × 100. Tag by product to identify where delays concentrate.",%,Monthly ,90,90,0,,90,90,0,,90,,90,,90,,90,
+29,Stakeholder Alignment,All,,Cross-functional Sprint Delivery Rate,Stakeholder Alignment:All::Cross-functional Sprint Delivery Rate,"% of committed tickets across Product, Pedagogy, Engineering, UI/UX, and DA/DE — scoped and approved by this team — delivered within the committed sprint. Measures how effectively allocated cross-function bandwidth is being directed.
+
+Formula: (Tickets delivered on time / Total tickets committed) × 100.
+Tracked per sprint, reported per cycle.",%,Monthly ,100,100,0,,100,100,0,,100,,100,,100,,100,
+,,,,,,,,,,,,,,,,,,,,,,,,
+30,Executive Ops ,All,,Operations & Growth Cost,Executive Ops :All::Operations & Growth Cost,"Average cost across executive ops, operational efficiency, market analysis, and hiring activities. Tracked at team scope level, not per product.",INR,Monthly ,,300863,-300863,,,341196,-341196,,,,0,,,,0,
+31,Executive Ops ,All,,Creative Resource Utilisation Rate,Executive Ops :All::Creative Resource Utilisation Rate,"% of allocated Graphic Designer and Video Editor bandwidth utilised against planned branding and content asset deliverables within a cycle. Primarily tracked and managed by Project Managers. Low utilisation indicates planning gaps; over-utilisation indicates scope creep or under-resourcing.
+
+Formula: (Bandwidth consumed / Total allocated bandwidth) × 100.
+Outcomes tracked alongside Branding Content Assets Delivered metric.",%,Monthly ,,100,-100,"The allocated Graphic Designers and Video Editors were used effectively for the month and, in fact, at times there was even more requirement of Graphic Designers owing to the simultaneous content requirements across different Programs, particularly Academy, for the fulfilment of which we had to request an additional support resource on a temporary basis",,100,-100,"The allocated Graphic Designers and Video Editors were used effectively for the month and, in fact, at times there was even more requirement of Graphic Designers owing to the simultaneous content requirements across different Programs, particularly Academy, for the fulfilment of which we had to request an additional support resource on a temporary basis",,,0,,,,0,
