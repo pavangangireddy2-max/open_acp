@@ -40,13 +40,14 @@
 | Gamified practice sessions | building | ? | overlaps leaderboard — consolidate | Sarthak |
 | In-app code playgrounds (HTML/CSS/JS, Python, JS, Java, C++) | programming courses | via DP dashboards | usage vs IDE split unmeasured | — |
 | Cloud IDEs & plugins (React, Node, Spring Boot) | FullStack | via DP dashboards | reliability/latency = DP lane | Sarthak |
-| n8n learning environment | GenAI courses | partial | exam support blocked; 8-step submission friction; LLM-judge → testcase eval blocked | Lokeshwar |
+| n8n learning environment ⚓GenAI | GenAI courses | partial | exam support blocked; 8-step submission friction; LLM-judge → testcase eval blocked | Lokeshwar |
 | Public submissions · Publishing | web courses | ? | — | — |
 | Guiding Questions ⚑ | programming | — | LMS-simplification lists it among obsolete-feature candidates — **retire or re-launch, decide** | — |
-| NxtTalk (voice speaking practice) | English/NIAT | no | latency 30s–2min (DP fixing to <1s); activity unit-type integration planned | Aryan |
-| Interactive question types (English FIB variants, drag-reorder; match-the-following) | English, Aptitude | ? | in development | Anjali |
-| SQL environment | SQL courses | ? | redesign blocked on design system | Aryan |
-| DSA visualizer | DSA | ? | requirements-sheet item | — |
+| NxtTalk (voice speaking practice) ⚓English | English/NIAT | no | latency 30s–2min (DP fixing to <1s); activity unit-type integration planned | Aryan |
+| Interactive question types (FIB variants, drag-reorder; match-the-following) ⚓English/Aptitude | English, Aptitude | ? | in development | Anjali |
+| SQL environment ⚓SQL | SQL courses | ? | outcome case owned by SQL domain; LP keeps only design-system/dark-mode consistency | Aryan |
+| DSA visualizer ⚓DS&Algo | DSA | ? | outcome case owned by DS&Algo domain; LP lens = UX consistency + instrumentation | — |
+| ROS 2 IDE (Gazebo + editor workspace) ⚓Robotics | Robotics | ? | shipped Jul; domain-anchored | Rohan |
 
 ## Flow 4 — Assessment & Evaluation
 
@@ -63,6 +64,24 @@
 
 Dark mode (coding done — 41% code at night; rest of platform pending) · new design system ·
 top-bar redesign · mobile app experience (15% of sessions, 20-min avg) · offline downloads.
+
+## The lens model (v1.1 — capabilities are shared; metrics are lane-owned)
+
+One capability, up to four metric lenses — ownership attaches to the METRIC, never the
+object, so the one-owner rule holds:
+
+| lens | question it asks | owner of those metrics |
+|---|---|---|
+| Platform (LP) | is it adopted, engaging, consistent? | Learning Platform |
+| Domain (LD) | does it teach — valid evaluation, real upskilling? | the owning domain |
+| Infra (DP) | does it run — availability, latency, cost? | Developer Platform |
+| Product (PLE) | is it delivered/configured right per product? | Product Learning Experience |
+
+**⚓ Domain anchor**: a named anchor means the capability exists for one domain, which owns
+its outcome case (build-vs-retire, pedagogy value). Anchored rows stay in this registry —
+one registry, not per-domain lists — and LP's lens narrows to platform-wide concerns
+(design consistency, instrumentation). Unanchored rows are cross-domain platform surfaces
+where LP carries the full adoption case.
 
 ## Reading the registry
 
