@@ -142,3 +142,35 @@ computes (or is being built to compute):
   the verdict pass (sits with/behind Central Ops as calibration owners); Graphic Designers
   are the deck rendering/asset layer (the owner the deck asset-contract gap was waiting
   for); no Physical AI team yet. Companion: workbench/proposals/continuous_improvement_culture.md.
+
+## 7. ADOPTED structure (2026-08-11) — five portfolios, reconciled
+
+The HOD's org thread landed a five-portfolio structure (verbatim archive:
+`knowledge/raw/corpora/department/org_five_portfolios_kpi_baseline_2026-08.md`). It maps
+1:1 onto this proposal's five layers — same seams, new names, plus explicit PM ownership:
+
+| portfolio (adopted) | ≙ layer (this doc) | ownership | July roadmap |
+|---|---|---|---|
+| 🛠️ Developer Platform | Platform Engineering | SDE 3 eng-led | IDE improvements · Agentic IDE |
+| 🎓 Learning Platform | Student Learning Experience | **2 PMs** | Self Study · Revision · Practice Leaderboard · Adaptive Coding · Adaptive MCQs |
+| 🤖 Agentic Content Platform | Central Agentic Ops | SDE 1s eng-led | MCP Server · 15 agentic workflows |
+| 🚀 Product Learning Experience | Product pods (NIAT · Intensive · Academy) | **1 PM** | GRIT Practice |
+| 💡 Learning Domains | Content Stack teams | **2 PMs** | Programming Coach (Deep Coding) |
+
+Naming rationale (HOD): "Product Learning Experience" not "Program Experience"
+(GRIT/BRAVE/MINT are mini-products inside NIAT); "Agentic Content Platform" not "AI
+Platform" (scoped to content/curriculum ops); "Learning Domains" = MERN · Java FullStack ·
+Programming · SQL & CS Core · GenAI · DS/ML · Aptitude · English · DS & Algo · Robotics.
+
+Deltas this creates against earlier sections:
+1. **Domain list is now 10** (FullStack split into MERN + Java FullStack; Robotics ≈
+   Physical AI; SQL & CS Core ≈ cs_core) → the §1.1 team↔catalogue mapping in SLUGS.md
+   needs a re-pass.
+2. **Two portfolios are engineering-led (no PM)** — Developer Platform and Agentic Content
+   Platform. The seam-as-contract-artifact rule (§2) carries the coordination load there.
+3. **Senior PM (planned backfill)** provides cross-portfolio prioritization, roadmap
+   governance, and PM mentorship — the governance rhythm §4 assigned to HOD/PMO now has a
+   named role. PM org: Learning Platform 2 · PLE 1 · Learning Domains 2 = 5 PMs.
+4. **CSI is a team, not a portfolio**: its 6 new KPIs split execution-wise — program/BOS/
+   compliance → Product Learning Experience lane; vernacular production → Learning Domains
+   lane (see kpi_system_v3_ownership.md §10).

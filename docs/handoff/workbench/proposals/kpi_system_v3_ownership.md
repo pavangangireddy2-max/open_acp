@@ -127,3 +127,42 @@ is why engineering has no lane. Add one category; move #12 and #22 into it.
 3. Add §4–§6 rows with Q2'26 budgets; create the **Platform Engineering** category.
 4. Wire the system-computed subset (gate rates, repeat-issue, freshness, gold-tier) to
    auto-fill from dashboards as those land — hand-entry is interim, not the design.
+
+## 9. Baseline revision (2026-08-11) — deltas vs the v2 tracker
+
+The HOD's revised KPI library (archive: `knowledge/raw/corpora/department/
+org_five_portfolios_kpi_baseline_2026-08.md`) resolves items §3 flagged and adds a section:
+
+- **Deprecations pending:** #2 Summative and #3 Formative Skill Assessment (→ % Ideal
+  Engagement Segment), #8 Course Completion Rate (→ LE).
+- **Mismatch #6 resolved as WAU** — "unique learners engaging with ≥1 learning unit/week"
+  (opposite of §3's leads reading; the §4 "Launchpad: Content-Driven Leads" row is
+  therefore optional/future, not a replacement).
+- **Mismatch #13 resolved as hours** — renamed "Learning Content Hours Delivered".
+- **Mismatches #17–18 resolved by renaming** — "Cost Per Learning Hour Produced"; #18
+  superseded by CSI's "Cost Per Vernacular Content Hour".
+- **New CSI section (6 KPIs):** NIAT Program Delivery Gap Rate (target 0%) · NIAT BOS
+  Credit Acceptance Rate · Cost Per BOS Approval · Issue Resolution TAT · Cost Per
+  Vernacular Content Hour · Framework Compliance Rate (NHQRF/Woolf).
+- **Content-Assessment Alignment** redefined vs formative scores, attempted-both learners.
+
+## 10. Baseline library → five-portfolio mapping (the "next task")
+
+One owner-portfolio per KPI; execution notes where a central team does the work. The 20
+§4–§6 additions slot into these same lanes when adopted (noted in brackets). NIAT
+**organizational** KPIs are pending from the HOD — the cross-map to those is open.
+
+| portfolio | owns (from the 36-KPI baseline) |
+|---|---|
+| 💡 Learning Domains | Summative & Formative Achievement (until deprecated) · Content-Assessment Alignment · Pedagogy Initiative Impact · Learning Content Hours · Vernacular Content Hours (CSI executes) · Cost Per Learning Hour (ACP informed) · Cost Per Vernacular Hour (CSI executes) · Industry Update Adherence · Tech Stack Freshness (content-reference half) |
+| 🤖 Agentic Content Platform | Practice & Assessment Pieces Delivered (refine: approved-only) · Cost Per MCQ · Cost Per Coding Question · R&D Initiative Impact · Feedback Resolution Efficiency [+ First-Pass Gate Rate · Coverage-Fill Velocity · Repeat-Issue Rate · Root-Cause Closure · Judge–Reviewer Agreement · Doc Freshness] |
+| 🎓 Learning Platform | % Learners in Ideal Engagement Segment · Learning Engagement Effort (LE) · Course Completion (until deprecated) · Learner Accessed Content Completion · Practice Attempt-to-Completion [+ Adaptive-vs-Static Lift on launch] |
+| 🚀 Product Learning Experience | NIAT Graded Assessment Achievement · NIAT University Curriculum Compliance · Stakeholder Request Fulfillment · Launchpad WAU ⚑ · CSI program lane: Delivery Gap Rate · BOS Credit Acceptance · Cost Per BOS Approval · Issue Resolution TAT · Framework Compliance [+ Gold-Tier Rate · Class-to-Practice Lag · Engagement Spread · Theme Closure] |
+| 🛠️ Developer Platform | Learning Environment Satisfaction · Platform Runtime Cost Per Active Learner · Tech Stack Freshness (IDE/env half) [+ Availability · P95 Latency · Incidents/MTTR · Contract-Debt Burndown · Data Sync Completeness · AI Serving Cost] |
+| dept shared services | Designers/PMO: Branding Assets Delivered · Cost Per Branding Asset · Creative Utilisation. HOD/PMO: Cross-functional Sprint Delivery · Operations & Growth Cost |
+
+Open flags: (a) **Launchpad WAU** — Launchpad is absent from PLE's stated product list
+(NIAT/Intensive/Academy); confirm its portfolio home. (b) **% Ideal Engagement Segment +
+LE** — assigned to Learning Platform as the engagement-system owner, product pods and
+HOD informed; flip to PLE if the HOD wants outcome ownership product-side. (c) CSI KPIs
+keep CSI as the executing team; the portfolio row is accountability, not execution.
