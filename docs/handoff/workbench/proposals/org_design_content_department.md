@@ -159,8 +159,9 @@ The HOD's org thread landed a five-portfolio structure (verbatim archive:
 
 Naming rationale (HOD): "Product Learning Experience" not "Program Experience"
 (GRIT/BRAVE/MINT are mini-products inside NIAT); "Agentic Content Platform" not "AI
-Platform" (scoped to content/curriculum ops); "Learning Domains" = MERN · Java FullStack ·
-Programming · SQL & CS Core · GenAI · DS/ML · Aptitude · English · DS & Algo · Robotics.
+Platform" (scoped to content/curriculum ops); "Learning Domains" = FullStack (MERN · Java Spring · Python Django) ·
+Programming · SQL & CS Core · GenAI · DS/ML · Aptitude · English · DS & Algo · Robotics
+(2026-08-12: Python Django added; MERN/Java Spring/Python Django are tracks inside FullStack).
 
 Deltas this creates against earlier sections:
 1. **Domain list is now 10** (FullStack split into MERN + Java FullStack; Robotics ≈
