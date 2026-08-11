@@ -1,0 +1,105 @@
+S. No,Metric Category ,Product ,Audience ,"Metric Name 
+
+Learning Systems – Metrics Reference Sheet",Description,"KPI Name
+
+KPI Naming Convention Guide",Unit,Frequency,Q1,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,Apr'26,,,,May'26,,,,Jun'26,,,,JUL'26,,,,AUG'26,,,
+,,,,,,,,,Budgeted,Actual ,Variance ,Remarks,Budgeted,Actual ,Variance ,Remarks/Effort Summary,Budgeted,Actual ,Variance ,Remarks,Budgeted,Actual ,Variance ,Remarks,Budgeted,Actual ,Variance ,Remarks
+1,Business Impact ,NIAT ,,BOS Credit Acceptance Rate,"% of credits proposed by the CSI team to a university that were accepted and included in the approved Board of Studies (BOS) curriculum. Measured per university per approval cycle. Denominator resets each year as proposals are updated.
+
+Formula: (Credits accepted by university / Credits proposed by CSI team) × 100.
+Tracked across all 34 university partners in 2026.",Business Impact :NIAT ::BOS Credit Acceptance Rate,%,Quarterly ,,,,,100,100,0,"Total 1st ,2nd year Course Structure accepted 
+
+Total :13 Universities 
+25 Batch : 7 Universities 
+26 Batch: 6 Universities
+
+13 Universities 
+40 Credits Each
+13*40=520 Credits",100,100,0,"Total 1st ,2nd year Course Structure accepted
+
+Total :14 Universities 
+25 Batch : 8 Universities 
+26 Batch: 6 Universities
+
+14 Universities 
+40 Credits Each
+14*40=560 Credits",100,100,0,"Total 1st ,2nd year Course Structure accepted
+
+Total :23 Universities 
+25 Batch : 9 Universities 
+26 Batch: 14 Universities
+
+23 Universities 
+40 Credits Each
+23*40=920 Credits",,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2,System Effectiveness,NIAT,,Program Delivery Gap Rate,"% of planned NIAT program activities, covering both curriculum slots and co-curricular activities like tech workshops, that were not scheduled and executed in actual delivery. Planned activity count is set during curriculum design. Actual delivery count is tracked by the onground Program Ops team. CSI team is accountable for driving this to zero through live session solutioning and execution support.
+
+Formula: (Planned activities − Executed activities) / Planned activities × 100.",System Effectiveness:NIAT::Program Delivery Gap Rate,%,Monthly ,,,,,,,,,,,,,,,,,,,,
+3,System Effectiveness,Academy,All,Framework Compliance Rate,"% of Academy curriculum units compliant with applicable regulatory and quality frameworks such as NHQRF and Woolf at time of audit. Parallel metric to NIAT University Curriculum Compliance Rate but scoped to Academy and driven by external framework requirements rather than university BOS.
+
+Formula: (Framework-compliant units delivered / Total units delivered) × 100.
+Recommended audit cadence: per framework submission cycle.",System Effectiveness:Academy:All:Framework Compliance Rate,%,Quarterly ,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+4,System Efficiency ,NIAT ,,Cost Per BOS Approval,"Average cost incurred per approved BOS across university partners. Includes CSI team payroll costs and non-payroll costs (travel, liaison activities) attributed to BOS approval work. Excludes content production costs.
+
+Note: First-time approvals cost more than renewals. As you scale from 17 to 34 universities in 2026, track new approvals vs renewals separately to avoid skewing the average.",System Efficiency :NIAT ::Cost Per BOS Approval,INR,Quarterly ,,,,,14040,8640,[5400],"Total :13 Universities 
+25 Batch : 7 Universities 
+26 Batch: 6 Universities
+
+Considered 
+4 hrs 25 batch 
+4 hrs 26 Batch
+
+Budgeted- 
+25 Batch : 7*4*270= 7560
+26 Batch : 6*4*270= 6480
+Total : 14040
+
+Actual- 
+25 Batch : 7*2*270=3780
+26 Batch :6*3*270=4860
+Total: 8640",15120,9180,[5940],"Total :14 Universities 
+25 Batch : 8 Universities 
+26 Batch: 6 Universities
+
+
+Considered 
+4 hrs 25 batch 
+4 hrs 26 Batch
+
+Budgeted- 
+25 Batch : 8*4*270= 8640
+26 Batch : 6*4*270= 6480
+Total : 15120
+
+Actual- 
+""25 Batch : 8*2*270=4320
+26 Batch :6*3*270=4860
+Total: 9180""",24840,22410,[2430],"Total : 23 Universities 
+25 Batch : 9 Universities 
+26 Batch: 14 Universities
+
+
+Considered 
+4 hrs 25 batch 
+4 hrs 26 Batch
+
+Budgeted- 
+25 Batch : 9*4*270= 9720
+26 Batch : 14*4*270= 15120
+Total : 24840
+
+Actual- 
+25 Batch : 9*3*270= 7290
+26 Batch :14*4*270=15120
+Total: 22410",,,,
+5,System Efficiency ,"NIAT, Academy ",All,Issue Resolution TAT,"Average time taken by the CSI team to resolve or escalate issues raised by university partners or program teams. CSI handles first-pass solutioning before escalating to Content or Product teams. Measures speed of response, not volume. Complements Feedback Resolution Efficiency (which tracks SLA compliance) but is distinct — TAT is more relevant at the CSI layer where university escalations are unpredictable and speed matters more than SLA adherence.
+
+Tracked per issue category and per university.","System Efficiency :NIAT, Academy :All:Issue Resolution TAT",Hours/Days ,Monthly ,,,,,,,,,,,,,,,,,,,,
+6,System Efficiency ,"NIAT, Academy ",All,Cost Per Vernacular Content Hour,"Average cost to produce one hour of vernacular-language content, tracked centrally by the CSI team. Includes CSI team payroll costs and AI tooling costs attributed to vernacular production. CSI is expected to leverage AI tools to drive this cost down over time. Submitted to relevant regulatory frameworks as part of compliance reporting.
+
+Tracked monthly. ","System Efficiency :NIAT, Academy :All:Cost Per Vernacular Content Hour",INR ,Monthly ,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+7,Executive Ops ,All,,Operations & Growth Cost,"Average cost across executive ops, operational efficiency, market analysis, and hiring activities. Tracked at team scope level, not per product",Executive Ops :All::Operations & Growth Cost,INR ,Monthly ,,,,,,,,,,,,,,,,,,,,
