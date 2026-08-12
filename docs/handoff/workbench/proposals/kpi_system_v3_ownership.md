@@ -192,7 +192,7 @@ university relations 4 layers), NSPI bands, co-curricular counts (AI&Robotics 12
 |---|---|---|
 | Academics CSAT 4.5 | **drives** (dept-primary) | content satisfaction, LE, delivery-quality theme closure — LP + LD + PLE |
 | Employability B3 80% / B4 80% | drives, lagged | skill mastery chain: gold-tier rate, assessment achievement, adaptive lift — LD + LP |
-| NSPI/SPI bands (30/40/30) | **drives, dept-primary** | SPI = dept-authored assessments (classroom quiz 10% + module quiz 15% + skill assessments 25% + FSA 50%); gold-tier & mastery chain — LD + ACP + LP. ⚑ deprecation tension: Summative/Formative Achievement retire while SPI is 75%-weighted on them — keep an SPI-component view (decoded: corpora/products/niat/nspi_decoded.md) |
+| NSPI/SPI bands (30/40/30) | **drives, dept-primary** | SPI = classroom+module quizzes (25%, dept-authored) + skill assessments & FSA (75%, Assessments department, testing curriculum-taught skills); alignment & mastery chain — LD + ACP + LP. [authorship corrected 2026-08-12] ⚑ deprecation tension: Summative/Formative Achievement retire while SPI is 75%-weighted on them — keep an SPI-component view (decoded: corpora/products/niat/nspi_decoded.md) |
 | GRIT Novice Badge 5,000 | **drives, direct** | PLE — literally its GRIT Practice roadmap item |
 | ICPC Regionals 120 | drives | LD (DS & Algo domain) |
 | AI & Robotics products 120 | drives | LD (Robotics domain) |

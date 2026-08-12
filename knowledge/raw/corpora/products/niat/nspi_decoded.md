@@ -22,9 +22,10 @@ reset to fail, no retake that cycle.
 
 **Org target (Jul'27):** 30% of students ≥8.0 · 40% at 7.0–8.0 · 30% at 6.0–7.0.
 
-**Department linkage:** the score is 100% assessment-composed — classroom quiz items
-(A/B/C live slides), module quiz items, skill assessments are all department-authored
-instruments; mastery quality drives the 75% (SA+FSA) weight. Attendance/participation
+**Department linkage (corrected 2026-08-12):** classroom quizzes (10%) + module quizzes
+(15%) are Curriculum/Content-authored; skill assessments (25%) + FSA (50%) are authored
+and conducted by the ASSESSMENTS DEPARTMENT, testing curriculum-taught skills. The dept's
+lever on the 75% is curriculum quality + content-assessment alignment, not authorship. Attendance/participation
 gates are program-ops-owned. Note tension: dept KPI baseline marks Summative/Formative
 Achievement "pending deprecation," yet SPI is 75%-weighted on those assessments —
 deprecation should keep an SPI-component view (or gold-tier extends to cover SA/FSA).
