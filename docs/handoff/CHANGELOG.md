@@ -58,3 +58,4 @@ One line per change: date · doc · what · source.
 - 2026-08-12 · one-pager tree · second flow gate added after step 3 (only when 1–3 meet target does step 4 land); CDU sample metrics reviewed in chat (participation ~33%, conditional performance high — first-gate bottleneck)
 - 2026-08-12 · one-pager §6 · Student Drop-off target removed from tree + prose per HOD (finance call for now); LE/IES stay as KPIs, unmapped to org target
 - 2026-08-12 · corpora/department/bos_credit_acceptance_sem1_sem3.xlsx (new) + both artifacts · BOS targets set from data: 85% B3 (baseline 81.4%/17 univ) · 90% B4 (90.1%/36) replacing 100%; GRIT gains PLE upskilling branch; Employability mapping = yet-to-think placeholder
+- 2026-08-12 · one-pager §7 · 10th ask: credit parity for NIAT subjects (no zero-credit demotions; named victims AI-for-Finance 59%/WAD-1 81%/QA 85%) — makes the 85/90 BOS targets reachable
