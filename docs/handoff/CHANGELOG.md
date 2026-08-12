@@ -44,3 +44,4 @@ One line per change: date · doc · what · source.
 - 2026-08-12 · one-pager §7 · GenAI partnerships target 3→≥5/year with sales logic (20+ tools committed over 4-year program); tree tone-pass proposed for review
 - 2026-08-12 · one-pager · presentation tone pass applied (11 edits: neutral third person across tree + prose table; key-point punchline kept per recommendation)
 - 2026-08-12 · CORRECTION (HOD): SPI authorship — dept authors ONLY classroom quiz (10%) + module quiz (15%) = 25%; skill assessments (25%) + FSA (50%) = 75% authored/conducted by the ASSESSMENTS DEPARTMENT. Fixed: one-pager tree branch, key-point, prose row, §5 summative/formative rows; nspi_decoded.md; kpi_system_v3 §11
+- 2026-08-12 · one-pager §7 · 9th ask: Head of Assessments — blueprints/KPs per cycle + skill-assessment content changes ≥3 months ahead (content-production lead time); tree label synced to 'Learning Environment Satisfaction'
