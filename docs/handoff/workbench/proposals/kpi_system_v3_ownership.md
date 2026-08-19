@@ -397,3 +397,25 @@ gate rate + judge agreement (on gate-harness go-live). Removed: coverage-fill ve
 (parked until work-order system), intelligence freshness (ops dashboard, not tracker).
 Ownership rule affirmed: KPI owner = lane; deliverable owner = per-item PM/Eng/SME
 (the July sheet's SME-Led/Dev-Led/Product-Led tags are the execution taxonomy).
+
+## 17. Post-presentation revisions (2026-08-19)
+
+HOD-table feedback round: (1) realism pass — Content–Assessment Alignment target
+delta=0 → |delta| ≤10pp (≤5pp after 3 clean cycles, breach = blueprint-vs-content
+review); the three owned recurrence zeros (content/platform/product) → ≤2% of
+resolved issues per quarter, "never twice" kept as principle. (2) Summative &
+Formative Achievement reclassified as ORG outcomes (authored by Assessments,
+conducted by Program Ops) and removed from the dept list — dept contribution to
+SPI bands = Module-Quiz Score Bands + Content–Assessment Alignment alone.
+(3) % Ideal Engagement Segment → Engagement-Matrix Cell Migration (LP headline;
+3×3 = diagnostic, KPI = term-start cell-migration targets, SAMPLE 4→10% HE×HV /
+10→20% M×M until LE-dashboard baselines). (4) §6 restructured scoreboard-first.
+(5) PLE gains Journey Step Health (% of 11 journey steps green, per product) +
+Product Capability Configuration Coverage; LP/PLE boundary rule: capability
+numbers = LP, journey numbers = PLE. (6) University Communication TAT (CSI, NEW):
+ack ≤1 business day, answer per request-class TAT, ≥90%. (7) Resolved = fix live
++ students notified (silent fixes don't count); close-the-loop touchpoint
+standard in operating rules. (8) §7 challenges lead-in: module-quiz + skill-
+assessment conduction adherence very low (exact %s pending from HOD), attendance
+computation not canonical. KPI count 47 → 48 (−2 org, +3 new). Artifact HTMLs now
+live in docs/handoff/artifacts/ (scratchpad wipe recovery, 2026-08-19).

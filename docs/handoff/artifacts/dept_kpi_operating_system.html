@@ -51,6 +51,7 @@
     <tr><td><strong>Deliverable owner = per item</strong></td><td>Roadmap items are executed by PMs, engineers, or SMEs (the sheet's SME-Led / Dev-Led / Product-Led tags). One KPI is routinely moved by deliverables from different role types — no conflict with the rule above.</td></tr>
     <tr><td><strong>Lens model</strong></td><td>Capabilities are shared objects; metrics are lane-owned. Platform lens (LP): adopted, engaging, consistent? &middot; Domain lens (LD): does it teach — valid evaluation, real upskilling? &middot; Infra lens (DP): does it run? &middot; Product lens (PLE): delivered right per product?</td></tr>
     <tr><td><strong>&#9875; Domain anchor</strong></td><td>A capability existing for one domain (SQL env, DSA visualizer, n8n, NxtTalk, ROS&nbsp;2) is anchored: the domain owns its outcome case; Learning Platform keeps only design-consistency and instrumentation. One registry, no per-domain lists.</td></tr>
+    <tr><td><strong>Capability vs journey (the LP/PLE line)</strong></td><td>Learning Platform owns <em>capability</em> numbers, measured platform-wide — adoption, engagement, feature reliability. Product Learning Experience owns <em>journey</em> numbers, measured per product — right capability at the right step, configured right, on schedule. A number about a feature &rarr; LP; a number about a product's step &rarr; PLE.</td></tr>
     <tr><td><strong>Cascade rule</strong></td><td>A KPI may feed multiple NIAT targets (Program Delivery Gap → university CSAT + academics CSAT); ownership stays single.</td></tr>
     <tr><td><strong>Roadmap hygiene</strong></td><td>Every roadmap row carries: lane tag + impacted KPI (from the named list) + execution owner. Free-text metric categories retire.</td></tr>
   </table>
@@ -63,7 +64,7 @@
     <tr><td>Impact</td><td>Learning Environment Satisfaction</td><td>the category headline, target &ge;4.5/5 — reliability &amp; performance rows below are its drivers</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
     <tr><td>Reliability</td><td>Availability &amp; Saturation Detection</td><td>100% critical thresholds alerted &middot; MTTD &#8804;10 min</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
     <tr><td>Reliability</td><td>Platform Issue Resolution Efficiency</td><td>&ge;80% resolved within the fixed 2-day TAT (internal same-day)</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
-    <tr><td>Reliability</td><td>Platform Issue Recurrence</td><td>&rarr; 0, root-cause closes</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
+    <tr><td>Reliability</td><td>Platform Issue Recurrence</td><td>&le;2% of resolved/qtr, root-cause closes</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
     <tr><td>Reliability</td><td>Infrastructure &amp; Runtime Currency</td><td>run supported: runtimes, base images, patches in SLA</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
     <tr><td>Performance</td><td>Tail-Latency User Impact</td><td>IDE launch/submit/publish/npm P99 &lt;60s (6.7&ndash;11.6% affected &rarr; 0%) &middot; C++ P99 10.28&rarr;&lt;5s</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
     <tr><td>Efficiency</td><td>Platform Runtime Cost per Active Learner</td><td>per-unit dashboards; &minus;$30&ndash;50 Aug</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
@@ -73,7 +74,7 @@
   <h3>&#127891; Learning Platform — v1.1</h3>
   <table>
     <tr><th style="width:16%">Slot</th><th>KPI</th><th style="width:34%">Target / baseline</th><th style="width:12%">Status</th></tr>
-    <tr><td>Impact</td><td>% Learners in Ideal Engagement Segment</td><td>roadmap "Effort &amp; Value" rows formalized</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
+    <tr><td>Impact</td><td>Engagement-Matrix Cell Migration</td><td>term-start migration target on named 3&times;3 cells — SAMPLE: high-effort&times;high-value 4&rarr;10% or mid&times;mid 10&rarr;20%; real baselines from the LE dashboard; the full matrix stays the diagnostic. Replaces % Ideal Engagement Segment as the lane headline</td><td class="c"><span class="tag st-new">NEW</span></td></tr>
     <tr><td>Impact</td><td>Learning Engagement Effort (LE)</td><td>mobile 15% of sessions @20 min — untapped</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
     <tr><td>Impact</td><td>Adaptive Learning Lift</td><td>adaptive + coach vs control cohort</td><td class="c"><span class="tag st-gate">LAUNCH-GATED</span></td></tr>
     <tr><td>Adoption</td><td>Capability Adoption Rate (per capability &times; product)</td><td>reads off registry, instrumented rows only; anchored rows = platform lens. Baselines: tutor 24% wkly &middot; bookmarks ~100/mo, 60% dead clicks &middot; notebook 400 DAU &middot; practice attempt ~20%</td><td class="c"><span class="tag st-draft">DRAFT</span></td></tr>
@@ -85,8 +86,8 @@
   <h3>&#128161; Learning Domains — v1</h3>
   <table>
     <tr><th style="width:16%">Slot</th><th>KPI</th><th style="width:34%">Target / baseline</th><th style="width:12%">Status</th></tr>
-    <tr><td>Impact</td><td>Summative &amp; Formative Achievement (SPI 50% + 25%)</td><td>default pass 70%, per domain; formative spread 10&ndash;52% across universities = the risk to watch. Target (proposed): SPI-band-synced distribution — 30% at &ge;8.0 &middot; 40% at 7.0&ndash;8.0 &middot; 30% at 6.0&ndash;7.0, per batch; glidepath from current baseline</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
-    <tr><td>Impact</td><td>Content&ndash;Assessment Alignment</td><td>classroom + module quizzes vs formative, attempted-both; target delta = 0</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
+    <tr><td>Impact</td><td>Summative &amp; Formative Achievement <em>(org scoreboard — tracked, not owned)</em></td><td>org outcome: instruments authored by Assessments, conducted by Program Ops; SPI-band-synced 30/40/30 per batch; formative spread 10&ndash;52% across universities = the risk to watch. The lane's accountable pair is Module-Quiz Score Bands + Content&ndash;Assessment Alignment</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
+    <tr><td>Impact</td><td>Content&ndash;Assessment Alignment</td><td>classroom + module quizzes vs formative, attempted-both; target |delta| &le;10pp, &le;5pp after three clean cycles — breach = blueprint-vs-content review</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
     <tr><td>Impact</td><td>Module-Quiz Score Bands</td><td>&ge;8.0: 30% &middot; 7.0&ndash;8.0: 40% &middot; 5.0&ndash;7.0: 30% &middot; &lt;5.0 (skill debt): ~0% (quiz 10-point scale) — Content&ndash;Assessment Alignment is the honesty check</td><td class="c"><span class="tag st-new">NEW</span></td></tr>
     <tr><td>Delivery</td><td>Learning Content Hours &middot; Vernacular Hours</td><td>multi-product counted once; CSI executes vernacular</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
     <tr><td>Quality</td><td>Industry Update Adherence (Learning&ndash;GRIT delta &rarr; 0) &middot; Tech Stack Freshness</td><td>GRIT content = industry benchmark; delta = GRIT-tested skills not yet in course content. Freshness includes domain learning-env versions</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
@@ -102,7 +103,7 @@
     <tr><td>Impact</td><td>R&amp;D Initiative Impact</td><td>baselined improvements shipped</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
     <tr><td>Adoption</td><td>Agentic Production Coverage</td><td>90% target; per content-type + blended; registered workflows only; excludes on-camera/live work</td><td class="c"><span class="tag st-new">NEW</span></td></tr>
     <tr><td>Delivery</td><td>Practice &amp; Assessment Pieces Delivered</td><td>refine: approved / gate-passed only</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
-    <tr><td>Quality</td><td>Content Issue Recurrence &middot; Content Issue Resolution Efficiency</td><td>&rarr; 0 &middot; &ge;80% within the fixed 2-day TAT; post-triage content-owned only</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
+    <tr><td>Quality</td><td>Content Issue Recurrence &middot; Content Issue Resolution Efficiency</td><td>&le;2% of resolved/qtr &middot; &ge;80% within the fixed 2-day TAT; post-triage content-owned only</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
     <tr><td>Quality</td><td>First-Pass Gate Rate &middot; Judge&ndash;Reviewer Agreement</td><td>the quality pair for Production Coverage — interim guard: recurrence + reviewer rejections</td><td class="c"><span class="tag st-gate">LAUNCH-GATED</span></td></tr>
     <tr><td>Efficiency</td><td>Cost per MCQ &middot; Cost per Coding Question</td><td>per approved item; rejects in numerator</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
   </table>
@@ -114,13 +115,16 @@
     <tr><td>Impact</td><td>NIAT Graded Assessment Achievement</td><td>Mid-1 / Mid-2 / End-Sem, per exam type</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
     <tr><td>Impact</td><td>University Engagement Spread</td><td>p90/p10 LE across ~40 campuses — spread, not average</td><td class="c"><span class="tag st-draft">DRAFT</span></td></tr>
     <tr><td>Impact</td><td>Class-to-Practice Lag Median</td><td>needs teaching calendar</td><td class="c"><span class="tag st-draft">DRAFT</span></td></tr>
+    <tr><td>Impact</td><td>Journey Step Health (NIAT first)</td><td>% of the 11 journey steps (one-pager &sect;11) meeting inherited thresholds, per product — the assembled-experience rollup; the journey table is the diagnostic</td><td class="c"><span class="tag st-new">NEW</span></td></tr>
     <tr><td>Delivery</td><td>Program Delivery Gap &rarr; 0%</td><td>curriculum slots + co-curricular; CSI drives via live solutioning</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
     <tr><td>Delivery</td><td>Stakeholder Content Request Fulfillment</td><td>on-time %, tagged by product</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
+    <tr><td>Delivery</td><td>Product Capability Configuration Coverage</td><td>% of journey steps with the required capability live + configured per product — registry "live on" read per product; leading indicator for Journey Step Health</td><td class="c"><span class="tag st-new">NEW</span></td></tr>
     <tr><td>Compliance</td><td>University Curriculum Compliance &middot; Framework Compliance</td><td>BOS &middot; NHQRF/Woolf/AICTE/UGC, per submission cycle</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
-    <tr><td>Quality</td><td>Product Issue Resolution Efficiency (cross-departmental)</td><td>student-reported issues resolved end-to-end, per product — any owning department; PLE routes &amp; tracks to done; first-quarter baseline sets the TAT target</td><td class="c"><span class="tag st-new">NEW</span></td></tr>
-    <tr><td>Quality</td><td>Product Issue Recurrence (cross-departmental)</td><td>&rarr; 0 at the student-journey level</td><td class="c"><span class="tag st-new">NEW</span></td></tr>
+    <tr><td>Quality</td><td>Product Issue Resolution Efficiency (cross-departmental)</td><td>student-reported issues resolved end-to-end, per product — any owning department; PLE routes &amp; tracks to done; resolved = fix live + affected students notified (silent fixes don't count); first-quarter baseline sets the TAT target</td><td class="c"><span class="tag st-new">NEW</span></td></tr>
+    <tr><td>Quality</td><td>Product Issue Recurrence (cross-departmental)</td><td>&le;2% of resolved issues per quarter at the student-journey level — never twice as the principle</td><td class="c"><span class="tag st-new">NEW</span></td></tr>
     <tr><td>Compliance</td><td>Delivery-Quality Theme Closure Rate</td><td>feedback themes closed at root cause — the 4-checkbox close</td><td class="c"><span class="tag st-draft">DRAFT</span></td></tr>
     <tr><td>Relationship</td><td>BOS Credit Acceptance &middot; Cost per BOS Approval</td><td>targets 85% B3 &middot; 90% B4 (per-credit acceptance: Sem-3 81.4%, Sem-1 90.1%); structure-level acceptance ran 100% &times; 3 months, 920 credits by Jun</td><td class="c"><span class="tag st-live">LIVE</span></td></tr>
+    <tr><td>Relationship</td><td>University Communication TAT</td><td>ack &le;1 business day &middot; answered per request-class TAT (standard 3 days) &middot; target &ge;90% — month 1 builds the university-request log</td><td class="c"><span class="tag st-new">NEW</span></td></tr>
   </table>
   <div class="sectionlead" style="margin-top:-16px">Parked here: Launchpad WAU (portfolio home unresolved) &middot; GRIT feature KPIs — ask raised to GRIT owner (Sundar) to define; our activities plan against them once shared.</div>
 
@@ -128,21 +132,21 @@
   <div class="sectionlead">Five categories (v3, adopted 2026-08-12) — slot terminology, one question each. Who-categories (CSI, Developer Platform) retired: lane chips carry the who.</div>
   <table>
     <tr><th style="width:22%">Category</th><th style="width:36%">The question it answers</th><th>What lands here</th></tr>
-    <tr><td><strong>Business Impact</strong></td><td>Is the outcome moving?</td><td>SPI components, LE, engagement segment, graded assessment, env satisfaction, BOS acceptance, completion diagnostics</td></tr>
-    <tr><td><strong>Delivery</strong></td><td>Did we ship what we planned, on time?</td><td>content &amp; vernacular hours, pieces, branding assets, delivery gap, stakeholder fulfillment, sprint delivery</td></tr>
+    <tr><td><strong>Business Impact</strong></td><td>Is the outcome moving?</td><td>SPI components, LE, engagement-matrix migration, journey step health, graded assessment, env satisfaction, BOS acceptance, completion diagnostics</td></tr>
+    <tr><td><strong>Delivery</strong></td><td>Did we ship what we planned, on time?</td><td>content &amp; vernacular hours, pieces, branding assets, delivery gap, configuration coverage, stakeholder fulfillment, sprint delivery</td></tr>
     <tr><td><strong>Adoption</strong></td><td>Is what we built actually used?</td><td>capability adoption, adaptive session coverage, agentic production coverage, Launchpad WAU</td></tr>
-    <tr><td><strong>Quality &amp; Reliability</strong></td><td>Does it work, stay working, stay compliant?</td><td>recurrence &times;2, resolution &times;2, availability &amp; MTTD, tail latency, currency &amp; freshness, compliance &times;2, theme closure</td></tr>
+    <tr><td><strong>Quality &amp; Reliability</strong></td><td>Does it work, stay working, stay compliant?</td><td>recurrence &times;2, resolution &times;2, university communication TAT, availability &amp; MTTD, tail latency, currency &amp; freshness, compliance &times;2, theme closure</td></tr>
     <tr><td><strong>Efficiency &amp; Cost</strong></td><td>At what cost?</td><td>all cost rows, runtime cost, attribution coverage, utilisations, ops &amp; growth, R&amp;D impact</td></tr>
   </table>
   <table>
     <tr><th style="width:24%">KPI category</th><th class="c">Learning Domains</th><th class="c">Learning Platform</th><th class="c">Product Learning Experience</th><th class="c">Agentic Content Platform</th><th class="c">Developer Platform</th><th class="c">Shared / PMO</th></tr>
     <tbody>
-    <tr><td><strong>Business Impact</strong></td><td class="c">5</td><td class="c">5</td><td class="c">2</td><td class="c"></td><td class="c">1</td><td class="c"></td></tr>
-    <tr><td><strong>Delivery</strong></td><td class="c">2</td><td class="c"></td><td class="c">2</td><td class="c">1</td><td class="c"></td><td class="c">2</td></tr>
+    <tr><td><strong>Business Impact</strong></td><td class="c">3</td><td class="c">5</td><td class="c">3</td><td class="c"></td><td class="c">1</td><td class="c"></td></tr>
+    <tr><td><strong>Delivery</strong></td><td class="c">2</td><td class="c"></td><td class="c">3</td><td class="c">1</td><td class="c"></td><td class="c">2</td></tr>
     <tr><td><strong>Adoption</strong></td><td class="c"></td><td class="c"></td><td class="c">1</td><td class="c">1</td><td class="c"></td><td class="c"></td></tr>
-    <tr><td><strong>Quality &amp; Reliability</strong></td><td class="c">2</td><td class="c"></td><td class="c">4</td><td class="c">2</td><td class="c">5</td><td class="c"></td></tr>
+    <tr><td><strong>Quality &amp; Reliability</strong></td><td class="c">2</td><td class="c"></td><td class="c">5</td><td class="c">2</td><td class="c">5</td><td class="c"></td></tr>
     <tr><td><strong>Efficiency &amp; Cost</strong></td><td class="c">2</td><td class="c"></td><td class="c">1</td><td class="c">3</td><td class="c">2</td><td class="c">4</td></tr>
-    <tr style="background:#f0f0f0"><td><strong>Total (47 live)</strong></td><td class="c"><strong>11</strong></td><td class="c"><strong>5</strong></td><td class="c"><strong>10</strong></td><td class="c"><strong>7</strong></td><td class="c"><strong>8</strong></td><td class="c"><strong>6</strong></td></tr>
+    <tr style="background:#f0f0f0"><td><strong>Total (48 live)</strong></td><td class="c"><strong>9</strong></td><td class="c"><strong>5</strong></td><td class="c"><strong>13</strong></td><td class="c"><strong>7</strong></td><td class="c"><strong>8</strong></td><td class="c"><strong>6</strong></td></tr>
     </tbody>
   </table>
   <div class="sectionlead" style="margin-top:-16px">Live rows only; the 5 DRAFT rows enter on approval (&rarr; ~50 standing). The thin Adoption row (2 live) is honest — the Learning Platform adoption drafts fill it. Completion diagnostics counted under Business Impact with LE.</div>
@@ -210,6 +214,7 @@
     <tr><td><strong>Adoption gate</strong></td><td>No capability ships without a registry row, an adoption target, and instrumentation. The bookmarks lesson: built first, 60% dead clicks discovered later.</td></tr>
     <tr><td><strong>Instrumentation first</strong></td><td>Capability Adoption Rate reports only on instrumented rows — the mostly-"?" column is the first sprint of Learning Platform scorecard work.</td></tr>
     <tr><td><strong>Never orphaned</strong></td><td>Every roadmap row that ships a capability adds/updates a registry row; every KPI maps to a lane; every lane KPI names its NIAT-target linkage or is explicitly internal.</td></tr>
+    <tr><td><strong>Close the loop, visibly</strong></td><td>Student-facing issue lifecycles carry four communication touchpoints: acknowledge (hours) &middot; progress update (weekly once past TAT) &middot; fix notification (resolved = fix live + students told) &middot; re-open rate as the diagnostic that validates fixes. One standard, instantiated per audience — students, universities (University Communication TAT), instructors.</td></tr>
     <tr><td><strong>4-checkbox close</strong></td><td>An issue/theme is closed only when: instance fixed &middot; producing artifact changed &middot; tripwire added &middot; broadcast sent. Powers both Recurrence KPIs and Theme Closure.</td></tr>
     <tr><td><strong>Complexity multipliers</strong></td><td>1.0x (English/Aptitude/Maths) to 2.5x (System Design/DS&amp;Algo/DS-ML) normalize every velocity and cost target across domains.</td></tr>
     <tr><td><strong>Commissioning metrics retire</strong></td><td>Meters (Cost-Attribution Coverage) leave the scorecard once they hold 100% for 2 months — instruments aren't KPIs forever.</td></tr>
@@ -226,6 +231,6 @@
   </table>
 
   <div class="footnote">
-    Companion page: the HOD one-pager (presentation view). Sources: kpi_system_v3_ownership.md &sect;13&ndash;16, learning_platform_capability_registry.md, and the department corpus — all in the open_acp repo. Curriculum / Content Department &middot; 91 people &middot; 5 lanes &middot; 47 live + 4 draft KPIs &middot; 5 metric categories (v3).
+    Companion page: the HOD one-pager (presentation view). Sources: kpi_system_v3_ownership.md &sect;13&ndash;16, learning_platform_capability_registry.md, and the department corpus — all in the open_acp repo. Curriculum / Content Department &middot; 91 people &middot; 5 lanes &middot; 48 live + 4 draft KPIs &middot; 5 metric categories (v3).
   </div>
 </div>
