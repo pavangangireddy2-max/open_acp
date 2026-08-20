@@ -1,24 +1,24 @@
 <title>NIAT Org KPIs as KRAs — Department KPI Training Sheet</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #ffffff; padding: 40px 20px; color: #1a1a1a; line-height: 1.5;
-  }
-  .container { max-width: 1200px; margin: 0 auto; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #ffffff; padding: 40px 20px; color: #1a1a1a; line-height: 1.5; }
+  .container { max-width: 1320px; margin: 0 auto; }
   h1 { font-size: 2em; margin-bottom: 8px; font-weight: 700; }
   .subtitle { font-size: 1em; color: #666; margin-bottom: 30px; }
   h2 { font-size: 1.4em; margin: 40px 0 20px 0; padding-bottom: 8px; border-bottom: 2px solid #000; font-weight: 700; }
   .sectionlead { color: #666; font-size: 0.92em; margin: -12px 0 16px; }
-  table { width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 0.9em; }
-  th { background: #000; color: #fff; padding: 10px; text-align: left; font-weight: 600; border: 1px solid #000; }
-  td { padding: 10px; border: 1px solid #ccc; vertical-align: top; }
-  td.kra { background: #f0f0f0; font-weight: 600; width: 21%; }
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 0.85em; min-width: 1100px; }
+  th { background: #000; color: #fff; padding: 9px; text-align: left; font-weight: 600; border: 1px solid #000; }
+  td { padding: 9px; border: 1px solid #ccc; vertical-align: top; }
+  td.kra { background: #f0f0f0; font-weight: 600; }
   td.kra .num { display: block; margin-top: 4px; }
+  td.kra .lead { display: block; margin-top: 4px; font-weight: 400; }
   .num { font-variant-numeric: tabular-nums; font-weight: 600; }
-  .lead { color: #666; font-size: 0.9em; font-weight: 400; }
-  .team { display: inline-block; font-size: 0.78em; font-weight: 600; letter-spacing: .03em;
-    border: 1px solid #999; color: #555; padding: 1px 7px; border-radius: 3px; white-space: nowrap; }
+  .lead { color: #666; font-size: 0.95em; font-weight: 400; }
+  .team { display: inline-block; font-size: 0.82em; font-weight: 600; letter-spacing: .03em;
+    border: 1px solid #999; color: #555; padding: 1px 7px; border-radius: 3px; }
   .tag { display: inline-block; font-size: 0.72em; font-weight: 600; letter-spacing: .04em;
     padding: 1px 7px; border-radius: 3px; vertical-align: 1px; white-space: nowrap; }
   .tag-org { background: #1a1a1a; color: #fff; }
@@ -32,153 +32,61 @@
 </style>
 <div class="container">
   <h1>NIAT Org KPIs as KRAs — Department KPI Map</h1>
-  <div class="subtitle">Training sheet &middot; August 2026 &middot; one row per department KPI, grouped under the org KRA it moves</div>
+  <div class="subtitle">Training sheet &middot; August 2026 &middot; one row per department KPI, grouped under the org KRA it moves &middot; editable workbook: kra_training_sheet.xlsx</div>
 
-  <div class="key-point"><strong>How to read this sheet:</strong> a <strong>KRA</strong> (Key Result Area) is an organizational outcome NIAT is judged on — it carries the target. Each KRA is served by <strong>department KPIs</strong>: the measures our teams own and are trained on. <strong>KRA Team</strong> is the owning team inside Curriculum &amp; Content (Developer Platform, Learning Platform, Agentic Content Platform, Product Learning Experience, Learning Domains). Markers:
+  <div class="key-point"><strong>How to read this sheet:</strong> a <strong>KRA</strong> (Key Result Area) is an organizational outcome NIAT is judged on — it carries the target. Each KRA is served by <strong>department KPIs</strong> with their own targets. <strong>Lane (KPI owner)</strong> is an accountability grouping of KPIs, <em>not a team</em> — the lane lead answers for the number at review. <strong>Functions that move it</strong> are the real teams whose day job moves the KPI (Product, Engineering, Content SMEs, Pedagogy, DA/DE, CSI team) — training runs per function, and &sect;2 is the room-by-room cut. <strong>Triggers</strong> are the sub-metrics that compose or precede a KPI; the <strong>Funnel</strong> is the causal chain to the org KPI. Markers:
     <span class="tag tag-org">ORG</span> org-owned scoreboard, tracked not owned &middot;
     <span class="tag tag-xdept">CROSS-DEPT</span> resolved across departments, we route &middot;
-    <span class="tag tag-sample">SAMPLE</span> illustrative numbers until baselines land &middot;
-    <span class="tag tag-cascade">CASCADE</span> same KPI feeds more than one KRA.
+    <span class="tag tag-sample">SAMPLE</span> illustrative until baselines land &middot;
+    <span class="tag tag-cascade">CASCADE</span> same KPI feeds two KRAs.
   </div>
 
   <h2>1. KRA &rarr; KPI map</h2>
+  <div class="scroll">
   <table>
-    <tr><th style="width:21%">KRA — NIAT Org KPI &middot; target</th><th>Department KPI &middot; how it moves the KRA</th><th style="width:20%">KPI target</th><th style="width:11%">KRA Team</th><th style="width:12%">Metric category</th></tr>
+    <tr><th style="width:15%">KRA — NIAT Org KPI &middot; target</th><th style="width:13%">Department KPI</th><th style="width:19%">Triggers / sub-metrics</th><th style="width:13%">KPI target</th><th style="width:18%">Funnel &rarr; org KPI</th><th style="width:8%">Lane (KPI owner)</th><th style="width:9%">Functions that move it</th><th style="width:5%">Metric category</th></tr>
     <tbody>
-    <tr>
-      <td class="kra" rowspan="5">KRA 1 — SPI Bands<span class="num">30% at &ge;8.0 &middot; 40% at 7.0&ndash;8.0 &middot; 30% at 6.0&ndash;7.0, per batch</span><span class="lead">read as a flow: deliver &rarr; quiz &rarr; align &rarr; assess</span></td>
-      <td><strong>Program Delivery Gap</strong> <span class="tag tag-cascade">CASCADE</span><br><span class="lead">classes &amp; assessments happen as planned — the precondition; a quiz not conducted makes every downstream number incomputable</span></td>
-      <td class="num">0% deviation</td>
-      <td><span class="team">Product Learning Experience</span></td><td>Delivery</td>
-    </tr>
-    <tr>
-      <td><strong>Module-Quiz Score Bands</strong><br><span class="lead">the department-authored 15% of SPI, held one band stricter — buffers the external 75%</span></td>
-      <td class="num">&ge;8.0: 30% &middot; 7.0&ndash;8.0: 40% &middot; 5.0&ndash;7.0: 30% &middot; &lt;5.0: ~0% <span class="lead">(quiz 10-pt scale)</span></td>
-      <td><span class="team">Learning Domains</span></td><td>Business Impact</td>
-    </tr>
-    <tr>
-      <td><strong>Content&ndash;Assessment Alignment</strong><br><span class="lead">score delta between our quizzes and the skill assessments — teaching matches testing; breach = blueprint-vs-content review</span></td>
-      <td class="num">|delta| &le;10pp &rarr; &le;5pp <span class="lead">after 3 clean cycles</span></td>
-      <td><span class="team">Learning Domains</span></td><td>Business Impact</td>
-    </tr>
-    <tr>
-      <td><strong>Engagement-Matrix Cell Migration</strong> <span class="tag tag-sample">SAMPLE</span><br><span class="lead">leading indicator — students move up the 3&times;3 effort &times; value matrix before scores move</span></td>
-      <td class="num">HE&times;HV 4% &rarr; 10% <span class="lead">or</span> M&times;M 10% &rarr; 20% <span class="lead">per cycle (semester NIAT &middot; quarter rolling)</span></td>
-      <td><span class="team">Learning Platform</span></td><td>Business Impact</td>
-    </tr>
-    <tr>
-      <td><strong>Summative &amp; Formative Achievement</strong> <span class="tag tag-org">ORG</span><br><span class="lead">the org outcome the rows above protect — instruments authored by the Assessments department, conducted by Program Ops; our contribution ends at the three steps above</span></td>
-      <td class="num">same 30/40/30 on assessment scores, per batch</td>
-      <td><span class="lead">org scoreboard</span></td><td><span class="lead">— context</span></td>
-    </tr>
+    <tr><td class="kra" rowspan="5">KRA 1 — SPI Bands<span class="num">30% at &ge;8.0 &middot; 40% at 7.0&ndash;8.0 &middot; 30% at 6.0&ndash;7.0, per batch</span><span class="lead">read as a flow: deliver &rarr; quiz &rarr; align &rarr; assess</span></td><td><strong>Program Delivery Gap</strong> <span class="tag tag-cascade">CASCADE</span></td><td><span class="lead">lecture schedule adherence &middot; classroom-quiz conduction &amp; attendance &middot; practice release schedule &middot; module-quiz schedule adherence &amp; integrity &middot; skill-assessment schedule adherence (conducted by Program Ops) &middot; learning assets (PPT + recorded video) ready &amp; loaded &ge;1 month ahead</span></td><td class="num">0% deviation</td><td><span class="lead">designed schedule executed &rarr; students sit quizzes &amp; assessments &rarr; SPI components computable &rarr; SPI Bands</span></td><td><span class="team">Product Learning Experience</span></td><td>CSI team + Product (PLE PM) — counterparty: Program Ops</td><td>Delivery</td></tr>
+    <tr><td><strong>Module-Quiz Score Bands</strong></td><td><span class="lead">classroom-quiz attempts &amp; performance &middot; practice completion % &middot; module-quiz participation 100% (SPI eligibility)</span></td><td class="num">&ge;8.0: 30% &middot; 7.0&ndash;8.0: 40% &middot; 5.0&ndash;7.0: 30% &middot; &lt;5.0: ~0% (quiz 10-pt scale, one band stricter than org)</td><td><span class="lead">quiz conducted &rarr; attempted &rarr; scores band 30/40/30 &rarr; the authored 15% lands &rarr; SPI Bands</span></td><td><span class="team">Learning Domains</span></td><td>Content (SMEs) + Pedagogy + DA/DE</td><td>Business Impact</td></tr>
+    <tr><td><strong>Content&ndash;Assessment Alignment</strong></td><td><span class="lead">assessment blueprints visible &middot; &ge;3-month change notice honored &middot; content coverage of the blueprint</span></td><td class="num">|delta| &le;10pp, &le;5pp after 3 clean cycles</td><td><span class="lead">blueprints visible &rarr; content teaches what's tested &rarr; quiz scores ≈ assessment scores &rarr; the 75% lands &rarr; SPI Bands</span></td><td><span class="team">Learning Domains</span></td><td>Content (SMEs) + Pedagogy + DA/DE</td><td>Business Impact</td></tr>
+    <tr><td><strong>Engagement-Matrix Cell Migration</strong> <span class="tag tag-sample">SAMPLE</span></td><td><span class="lead">capability adoption (tutor, revision, leaderboard, adaptive) &middot; LE effort signals &middot; value signals</span></td><td class="num">HE&times;HV 4% &rarr; 10% or M&times;M 10% &rarr; 20%, per cycle (semester NIAT &middot; quarter rolling) — SAMPLE until LE baselines</td><td><span class="lead">capabilities adopted &rarr; effort &amp; value rise &rarr; cells migrate up &rarr; scores follow &rarr; SPI Bands (leading)</span></td><td><span class="team">Learning Platform</span></td><td>Product (LP PMs) + Engineering (LP) + DA/DE</td><td>Business Impact</td></tr>
+    <tr><td><strong>Summative &amp; Formative Achievement</strong> <span class="tag tag-org">ORG</span></td><td><span class="lead">steps above held &middot; assessments conducted on schedule (Program Ops) &middot; instruments authored (Assessments dept)</span></td><td class="num">same 30/40/30 on assessment scores, per batch</td><td><span class="lead">steps 1&ndash;3 held &rarr; assessments run &rarr; 30/40/30 on the 75% &rarr; SPI Bands</span></td><td><span class="lead">org scoreboard — tracked, not owned</span></td><td>—</td><td>— context</td></tr>
+    <tr><td class="kra" rowspan="10">KRA 2 — Academics CSAT<span class="num">4.5 / 5</span><span class="lead">content quality, fast visible fixes, issues that never repeat</span></td><td><strong>Content Issue Resolution Efficiency</strong></td><td><span class="lead">issue intake &amp; triage &middot; fix TAT 48 h &middot; student notified</span></td><td class="num">&ge;80% within the fixed 2-day TAT</td><td><span class="lead">issue reported &rarr; fixed in 48 h &rarr; trust in content &rarr; Academics CSAT</span></td><td><span class="team">Agentic Content Platform</span></td><td>Content (SMEs) + Engineering (ACP)</td><td>Quality &amp; Reliability</td></tr>
+    <tr><td><strong>Content Issue Recurrence</strong></td><td><span class="lead">root-cause close — 4-checkbox: instance fixed &middot; artifact changed &middot; tripwire added &middot; broadcast sent</span></td><td class="num">&le;2% of resolved issues / quarter</td><td><span class="lead">fixed once &rarr; closed at root cause &rarr; never twice &rarr; trust &rarr; Academics CSAT</span></td><td><span class="team">Agentic Content Platform</span></td><td>Content (SMEs) + Engineering (ACP)</td><td>Quality &amp; Reliability</td></tr>
+    <tr><td><strong>Learning Environment Satisfaction</strong></td><td><span class="lead">driven by the four rows below</span></td><td class="num">&ge;4.5 / 5, monthly</td><td><span class="lead">platform reliable &amp; fast &rarr; rating &ge;4.5 &rarr; Academics CSAT</span></td><td><span class="team">Developer Platform</span></td><td>Engineering (DP)</td><td>Business Impact</td></tr>
+    <tr><td><strong>Availability &amp; Saturation Detection</strong></td><td><span class="lead">critical services (IDE, compiler, workflows) &middot; alert thresholds &middot; detection time</span></td><td class="num">100% thresholds alerted &middot; detection &le;10 min</td><td><span class="lead">saturation detected &le;10 min &rarr; fixed before students feel it &rarr; LES &rarr; Academics CSAT</span></td><td><span class="team">Developer Platform</span></td><td>Engineering (DP)</td><td>Quality &amp; Reliability</td></tr>
+    <tr><td><strong>Tail-Latency User Impact</strong></td><td><span class="lead">IDE launch / submit / publish P99 &lt;60 s &middot; compiler per-language limits</span></td><td class="num">students beyond P99 limits &rarr; 0%</td><td><span class="lead">P99 within limits &rarr; coding feels instant &rarr; LES &rarr; Academics CSAT</span></td><td><span class="team">Developer Platform</span></td><td>Engineering (DP)</td><td>Quality &amp; Reliability</td></tr>
+    <tr><td><strong>Platform Issue Resolution Efficiency</strong></td><td><span class="lead">2-day TAT (internal same-day)</span></td><td class="num">&ge;80% within the fixed 2-day TAT</td><td><span class="lead">platform issue &rarr; fixed fast &rarr; LES &rarr; Academics CSAT</span></td><td><span class="team">Developer Platform</span></td><td>Engineering (DP)</td><td>Quality &amp; Reliability</td></tr>
+    <tr><td><strong>Platform Issue Recurrence</strong></td><td><span class="lead">root-cause close</span></td><td class="num">&le;2% of resolved issues / quarter</td><td><span class="lead">fixed &rarr; never twice &rarr; LES &rarr; Academics CSAT</span></td><td><span class="team">Developer Platform</span></td><td>Engineering (DP)</td><td>Quality &amp; Reliability</td></tr>
+    <tr><td><strong>Journey Step Health (NIAT first)</strong></td><td><span class="lead">the 11 journey steps — attendance &middot; class runs &middot; classroom quiz &middot; practice &middot; revision &middot; module quiz &middot; skill assessment … (one-pager §11)</span></td><td class="num">% of steps green, per product (baseline first quarter)</td><td><span class="lead">capabilities configured &rarr; 11 steps green &rarr; assembled experience works &rarr; Academics CSAT (+ SPI)</span></td><td><span class="team">Product Learning Experience</span></td><td>Product (PLE PM) + DA/DE + CSI team</td><td>Business Impact</td></tr>
+    <tr><td><strong>Product Issue Resolution Efficiency</strong> <span class="tag tag-xdept">CROSS-DEPT</span></td><td><span class="lead">routing to owning department &middot; fix live &middot; students notified (silent fixes don't count)</span></td><td class="num">first-quarter baseline sets the TAT target</td><td><span class="lead">any student issue &rarr; routed &rarr; fixed + notified &rarr; Academics CSAT</span></td><td><span class="team">Product Learning Experience</span></td><td>Product (PLE PM) + CSI team</td><td>Quality &amp; Reliability</td></tr>
+    <tr><td><strong>Product Issue Recurrence</strong> <span class="tag tag-xdept">CROSS-DEPT</span></td><td><span class="lead">student-journey-level recurrence watch</span></td><td class="num">&le;2% of resolved issues / quarter</td><td><span class="lead">resolved once &rarr; never twice at journey level &rarr; Academics CSAT</span></td><td><span class="team">Product Learning Experience</span></td><td>Product (PLE PM) + CSI team</td><td>Quality &amp; Reliability</td></tr>
+    <tr><td class="kra" rowspan="4">KRA 3 — University Relations CSAT<span class="num">4.5 &middot; 4.0 &middot; 4.0</span><span class="lead">BOS-compliant curriculum, delivered as approved, responsive partnership</span></td><td><strong>BOS Credit Acceptance</strong></td><td><span class="lead">per-credit acceptance per university &middot; curriculum finalisation (Bharath, PK Das, Visakha pending)</span></td><td class="num">B3 85% &middot; B4 90%</td><td><span class="lead">credits proposed &rarr; accepted first pass &rarr; university leadership confidence &rarr; Univ Relations CSAT</span></td><td><span class="team">Product Learning Experience</span></td><td>CSI team + Content (SMEs)</td><td>Business Impact</td></tr>
+    <tr><td><strong>Program Delivery Gap</strong> <span class="tag tag-cascade">CASCADE</span></td><td><span class="lead">same triggers as the KRA 1 row — one KPI feeding two KRAs</span></td><td class="num">0% deviation</td><td><span class="lead">delivered = approved plan &rarr; university trust &rarr; Univ Relations CSAT</span></td><td><span class="team">Product Learning Experience</span></td><td>CSI team + Product (PLE PM)</td><td>Delivery</td></tr>
+    <tr><td><strong>University Communication TAT</strong></td><td><span class="lead">ack &le;1 business day &middot; request-class TATs (standard 3 days, heavy artefacts pre-agreed) &middot; university-request log (month 1)</span></td><td class="num">&ge;90% answered within TAT</td><td><span class="lead">requests answered in TAT &rarr; partnership friction drops &rarr; Univ Relations CSAT</span></td><td><span class="team">Product Learning Experience</span></td><td>CSI team</td><td>Quality &amp; Reliability</td></tr>
+    <tr><td><strong>University Curriculum Compliance &middot; Framework Compliance</strong></td><td><span class="lead">delivery matches the approved BOS syllabus &middot; NHQRF / Woolf / AICTE / UGC audits</span></td><td class="num">compliant, every submission cycle</td><td><span class="lead">BOS &amp; frameworks kept &rarr; zero partnership risk &rarr; Univ Relations CSAT</span></td><td><span class="team">Product Learning Experience</span></td><td>CSI team + Content (SMEs)</td><td>Quality &amp; Reliability</td></tr>
+    <tr><td class="kra" rowspan="2">KRA 4 — GRIT Novice Badges<span class="num">5,000</span><span class="lead">classroom learning trains to contest level</span></td><td><strong>Industry Update Adherence (Learning&ndash;GRIT delta)</strong></td><td><span class="lead">GRIT-tested skills inventory vs live course content</span></td><td class="num">delta &rarr; 0</td><td><span class="lead">course content covers GRIT-tested skills &rarr; students contest-ready &rarr; Novice badges</span></td><td><span class="team">Learning Domains</span></td><td>Content (SMEs)</td><td>Quality &amp; Reliability</td></tr>
+    <tr><td><strong>GRIT-feature KPIs</strong> <span class="tag tag-org">ORG</span></td><td><span class="lead">ask raised to the GRIT owner (Sundar) to define</span></td><td class="num">pending definition</td><td><span class="lead">GRIT features drive practice &rarr; badges (mapping pending)</span></td><td><span class="lead">GRIT owner</span></td><td>—</td><td>— context</td></tr>
+    <tr><td class="kra" rowspan="1">KRA 5 — Employability<span class="num">B3 80% &middot; B4 80%</span><span class="lead">skill mastered this semester &rarr; offers next year</span></td><td><strong>Mapping yet to be thought through</strong></td><td><span class="lead">skill mastery is the long lever — adaptive practice, stronger question banks</span></td><td class="num">—</td><td><span class="lead">real skill rises &rarr; placements later (mapping deliberately not forced yet)</span></td><td><span class="lead">—</span></td><td>—</td><td>— placeholder</td></tr>
+    </tbody>
+  </table>
+  </div>
 
-    <tr>
-      <td class="kra" rowspan="10">KRA 2 — Academics CSAT<span class="num">4.5 / 5</span><span class="lead">content quality, fast visible fixes, issues that never repeat</span></td>
-      <td><strong>Content Issue Resolution Efficiency</strong><br><span class="lead">reported content issues fixed in 48 h — trust in content</span></td>
-      <td class="num">&ge;80% within the fixed 2-day TAT</td>
-      <td><span class="team">Agentic Content Platform</span></td><td>Quality &amp; Reliability</td>
-    </tr>
-    <tr>
-      <td><strong>Content Issue Recurrence</strong><br><span class="lead">never twice as the principle — every recurrence closed at root cause</span></td>
-      <td class="num">&le;2% of resolved issues / quarter</td>
-      <td><span class="team">Agentic Content Platform</span></td><td>Quality &amp; Reliability</td>
-    </tr>
-    <tr>
-      <td><strong>Learning Environment Satisfaction</strong><br><span class="lead">the platform rating, measured monthly — headline of the four driver rows below</span></td>
-      <td class="num">&ge;4.5 / 5</td>
-      <td><span class="team">Developer Platform</span></td><td>Business Impact</td>
-    </tr>
-    <tr>
-      <td><strong>Availability &amp; Saturation Detection</strong><br><span class="lead">issues caught before students feel them</span></td>
-      <td class="num">100% critical thresholds alerted &middot; detection &le;10 min</td>
-      <td><span class="team">Developer Platform</span></td><td>Quality &amp; Reliability</td>
-    </tr>
-    <tr>
-      <td><strong>Tail-Latency User Impact</strong><br><span class="lead">coding feels instant</span></td>
-      <td class="num">students beyond P99 limits &rarr; 0%</td>
-      <td><span class="team">Developer Platform</span></td><td>Quality &amp; Reliability</td>
-    </tr>
-    <tr>
-      <td><strong>Platform Issue Resolution Efficiency</strong><br><span class="lead">platform issues fixed fast — same grammar as the content twin</span></td>
-      <td class="num">&ge;80% within the fixed 2-day TAT</td>
-      <td><span class="team">Developer Platform</span></td><td>Quality &amp; Reliability</td>
-    </tr>
-    <tr>
-      <td><strong>Platform Issue Recurrence</strong><br><span class="lead">fixed forever, closed at root cause</span></td>
-      <td class="num">&le;2% of resolved issues / quarter</td>
-      <td><span class="team">Developer Platform</span></td><td>Quality &amp; Reliability</td>
-    </tr>
-    <tr>
-      <td><strong>Journey Step Health</strong> <span class="lead">(NIAT first)</span><br><span class="lead">% of the 11 student-journey steps meeting their thresholds — the assembled-experience number; the journey table is its diagnostic</span></td>
-      <td class="num">% of steps green, per product <span class="lead">(baseline first quarter)</span></td>
-      <td><span class="team">Product Learning Experience</span></td><td>Business Impact</td>
-    </tr>
-    <tr>
-      <td><strong>Product Issue Resolution Efficiency</strong> <span class="tag tag-xdept">CROSS-DEPT</span><br><span class="lead">every student-reported issue routed &amp; tracked to done, whichever department owns the fix — resolved = fix live <em>and</em> students notified</span></td>
-      <td class="num">first-quarter baseline sets the TAT target</td>
-      <td><span class="team">Product Learning Experience</span></td><td>Quality &amp; Reliability</td>
-    </tr>
-    <tr>
-      <td><strong>Product Issue Recurrence</strong> <span class="tag tag-xdept">CROSS-DEPT</span><br><span class="lead">measured at the student-journey level</span></td>
-      <td class="num">&le;2% of resolved issues / quarter</td>
-      <td><span class="team">Product Learning Experience</span></td><td>Quality &amp; Reliability</td>
-    </tr>
-
-    <tr>
-      <td class="kra" rowspan="4">KRA 3 — University Relations CSAT<span class="num">4.5 &middot; 4.0 &middot; 4.0</span><span class="lead">BOS-compliant curriculum, delivered as approved, responsive partnership</span></td>
-      <td><strong>BOS Credit Acceptance</strong><br><span class="lead">credits proposed per BOS cycle accepted into university curricula — targets set from past acceptance data (81.4% / 90.1%)</span></td>
-      <td class="num">B3 85% &middot; B4 90%</td>
-      <td><span class="team">Product Learning Experience</span></td><td>Business Impact</td>
-    </tr>
-    <tr>
-      <td><strong>Program Delivery Gap</strong> <span class="tag tag-cascade">CASCADE</span><br><span class="lead">the delivered program matches the approved plan — same KPI as KRA 1's precondition row</span></td>
-      <td class="num">0% deviation</td>
-      <td><span class="team">Product Learning Experience</span></td><td>Delivery</td>
-    </tr>
-    <tr>
-      <td><strong>University Communication TAT</strong><br><span class="lead">BOS docs, clarifications, compliance artefacts, exam coordination — paperwork speed protects the partnership rating</span></td>
-      <td class="num">ack &le;1 business day &middot; &ge;90% answered in request-class TAT</td>
-      <td><span class="team">Product Learning Experience</span></td><td>Quality &amp; Reliability</td>
-    </tr>
-    <tr>
-      <td><strong>University Curriculum Compliance &middot; Framework Compliance</strong><br><span class="lead">delivery matches the approved BOS syllabus; NHQRF / Woolf / AICTE / UGC kept</span></td>
-      <td class="num">compliant, every submission cycle</td>
-      <td><span class="team">Product Learning Experience</span></td><td>Quality &amp; Reliability</td>
-    </tr>
-
-    <tr>
-      <td class="kra" rowspan="2">KRA 4 — GRIT Novice Badges<span class="num">5,000</span><span class="lead">classroom learning trains to contest level</span></td>
-      <td><strong>Industry Update Adherence (Learning&ndash;GRIT delta)</strong><br><span class="lead">GRIT content is the industry benchmark; the delta is GRIT-tested skills not yet in course content</span></td>
-      <td class="num">delta &rarr; 0</td>
-      <td><span class="team">Learning Domains</span></td><td>Quality &amp; Reliability</td>
-    </tr>
-    <tr>
-      <td><strong>GRIT-feature KPIs</strong> <span class="tag tag-org">ORG</span><br><span class="lead">ask raised to the GRIT owner (Sundar) to define — our activities plan against them once shared</span></td>
-      <td class="num"><span class="lead">pending definition</span></td>
-      <td><span class="lead">GRIT owner</span></td><td><span class="lead">— context</span></td>
-    </tr>
-
-    <tr>
-      <td class="kra">KRA 5 — Employability<span class="num">B3 80% &middot; B4 80%</span><span class="lead">skill mastered this semester &rarr; offers next year</span></td>
-      <td><strong>Mapping yet to be thought through</strong><br><span class="lead">skill mastery is the long lever — adaptive practice and stronger question banks raise real skill, which shows up in placements later; the KPI mapping is deliberately not forced yet</span></td>
-      <td class="num"><span class="lead">—</span></td>
-      <td><span class="lead">—</span></td><td><span class="lead">— placeholder</span></td>
-    </tr>
+  <h2>2. Session index — by function (the training rooms)</h2>
+  <div class="sectionlead">Functions are where people actually sit; each function's session walks its own rows. The Functions column is a draft for red-pen — edit it in the workbook and the counts recompute.</div>
+  <table style="min-width:0">
+    <tr><th style="width:22%">Function (training room)</th><th>Your rows in the map</th><th class="c" style="width:12%">Row count</th></tr>
+    <tbody>
+    <tr><td><strong>Product (PMs)</strong></td><td>Program Delivery Gap (both KRAs) &middot; Engagement-Matrix Cell Migration &middot; Journey Step Health &middot; Product Issue Resolution + Recurrence</td><td class="c num">6</td></tr>
+    <tr><td><strong>Engineering</strong></td><td>LES + its four drivers (DP) &middot; Content Issue pair tooling/routing (ACP) &middot; Cell Migration build (LP)</td><td class="c num">8</td></tr>
+    <tr><td><strong>Content (SMEs)</strong></td><td>Module-Quiz Score Bands &middot; Content&ndash;Assessment Alignment &middot; Content Issue pair (fixes) &middot; BOS curriculum artifacts &middot; Compliance &middot; GRIT delta</td><td class="c num">7</td></tr>
+    <tr><td><strong>Pedagogy</strong></td><td>Module-Quiz Score Bands &middot; Content&ndash;Assessment Alignment</td><td class="c num">2</td></tr>
+    <tr><td><strong>DA/DE</strong></td><td>score analysis (bands, alignment) &middot; LE dashboard (cell migration) &middot; Journey Step Health instrumentation</td><td class="c num">4</td></tr>
+    <tr><td><strong>CSI team</strong></td><td>Program Delivery Gap (both KRAs) &middot; Journey Step Health &middot; Product Issue pair &middot; BOS &middot; University Communication TAT &middot; Compliance</td><td class="c num">8</td></tr>
     </tbody>
   </table>
 
-  <h2>2. Reading by team — session index</h2>
-  <div class="sectionlead">For running the training per team: which KRAs your numbers serve, and how many rows above are yours.</div>
-  <table>
-    <tr><th style="width:26%">KRA Team</th><th>Serves KRAs</th><th class="c" style="width:14%">KPI rows above</th></tr>
-    <tr><td><span class="team">Learning Domains</span></td><td>SPI Bands (Module-Quiz Score Bands, Content&ndash;Assessment Alignment) &middot; GRIT (Industry Update Adherence)</td><td class="c">3</td></tr>
-    <tr><td><span class="team">Learning Platform</span></td><td>SPI Bands — the leading indicator (Engagement-Matrix Cell Migration)</td><td class="c">1</td></tr>
-    <tr><td><span class="team">Developer Platform</span></td><td>Academics CSAT (Learning Environment Satisfaction + its four drivers)</td><td class="c">5</td></tr>
-    <tr><td><span class="team">Agentic Content Platform</span></td><td>Academics CSAT (content issue resolution + recurrence)</td><td class="c">2</td></tr>
-    <tr><td><span class="team">Product Learning Experience</span></td><td>SPI Bands (delivery gap) &middot; Academics CSAT (journey step health, product issue pair) &middot; University Relations (BOS, communication TAT, compliance, delivery gap cascade)</td><td class="c">8</td></tr>
-  </table>
-
   <div class="footnote">
-    Training companion to the HOD one-pager (&sect;6 scoreboard + mechanism trees carry the full detail) and the internal operating view (lane scorecards, thresholds, statuses). KPI targets shown are the accountable numbers as of Aug 2026; SAMPLE numbers pend LE-dashboard baselines; batch-vector targets (B3 &middot; B4) follow the batch convention. Curriculum / Content Department.
+    Training companion to the HOD one-pager (&sect;6 scoreboard + mechanism trees) and the internal operating view. Downloadable editable master: <strong>kra_training_sheet.xlsx</strong> (same three views: map &middot; session index &middot; legend). SAMPLE numbers pend LE-dashboard baselines; the function mapping is a draft for HOD red-pen. Curriculum / Content Department &middot; 2026-08-19.
   </div>
 </div>
