@@ -401,7 +401,7 @@ lg["B7"] = ("[ORG] org-owned scoreboard, tracked not owned · [CROSS-FUNCTION] r
             "[SAMPLE] illustrative numbers until baselines land · [CASCADE] same KPI feeds two KRAs.")
 lg["B4"] = ("The teams that actively build the learning system (HOD one-pager §2 key terms): Content, Engineering, "
             "Product Managers, Pedagogy Experts, DA/DEs, Graphic Designers, Video Editors, Product Designers, "
-            "Packaging Teams, SDIs — plus the CSI team on delivery- and university-facing rows. Draft for red-pen.")
+            "Packaging Teams (Content Systems & Infra), SDIs — plus the CSI team on delivery- and university-facing rows. Draft for red-pen.")
 lg["B8"] = ("Everything is editable. Cells most expected to change: Functions column (K on the tracker, draft for red-pen), "
             "SAMPLE budgets, blank Q1-baseline budgets.")
 lg["A17"] = "KPI Tracker FY26-27 (tab 1)"
@@ -427,9 +427,16 @@ lg["B22"] = ("Worked by (primary) — staffing, never ownership (col L stays the
              "Experience — CSI team + Product Managers + Pedagogy Experts (journey design) · Agentic Content Platform "
              "— Content–Central + DA/DEs · Developer Platform — Engineering · Shared/PMO — PMO. Program Ops, "
              "Instructors dept and Mentors are counterparties reached through asks (§7 / team-view Section C), not lane staff.")
+lg["A23"] = "Domain product boundary"
+lg["B23"] = ("Domain-specific product work — evaluation environments and domain-specific learning-platform capabilities, "
+             "incl. domain-specific learner-facing AI tutors/agents — is raised and accepted by domain SMEs, built by "
+             "Product Managers + Engineering, and its KPIs sit in the domain team's Section B under Domain Product "
+             "Enablement (Learning Domains accountability). Generic/reusable capabilities rest with the Learning Platform "
+             "lane, product-owned. ACP boundary: ACP = content-facing production pipelines · domain product work = "
+             "learner-facing systems. Section-B-first: an org-tracker row waits until the environment registry sets a baseline.")
 lg["A20"] = "Metric categories (col C)"
 lg["B20"] = ("Org Head-Abstract vocabulary — Business Impact · Content Effectiveness · Content Velocity · Content Efficiency · Content Relevance · Stakeholder Alignment · Executive Ops — plus three department extensions: Program Delivery · University Alignment · Platform Reliability. Category = what the KPI measures; Lane (col L) = who is accountable; Functions (col K) = who does the work.")
-for r in (1, 3, 4, 7, 8, 17, 18, 19, 20, 21, 22):
+for r in (1, 3, 4, 7, 8, 17, 18, 19, 20, 21, 22, 23):
     lg.cell(row=r, column=1).font = F(10, bold=True)
     lg.cell(row=r, column=1).alignment = Alignment(vertical="top", wrap_text=True)
     lg.cell(row=r, column=2).font = F(10)
@@ -570,6 +577,14 @@ TEAM_VIEWS = [
     "% of committed tickets across Product, Pedagogy, Engineering, UI/UX and DA/DE — scoped and approved by this team — delivered within the committed sprint.",
     "enabling → dept Stakeholder Alignment (§5)",
     "%", "Monthly", "Q1 Jul: B 100 · A 100."),
+   ("Domain Product Enablement", "Evaluation Environment Coverage",
+    "% of practice/assessment item types in this domain's live curriculum with a production-ready evaluation environment (code judges, test harnesses, notebook/cloud envs). Domain configuration — item types, test cases, judges — by this team's SMEs; platform build by Product Managers + Engineering.",
+    "enabling → Practice Attempt-to-Completion (environment-friction leg) + tracker Journey Step Health steps 6–7 + Learning Environment Satisfaction",
+    "%", "Quarterly", "Baseline first: build the item-type × environment registry, then set the budget (APC precedent)."),
+   ("Domain Product Enablement", "Domain Capability Delivery",
+    "Domain-specific learning-platform capabilities shipped vs committed per cycle. Raised and specified by this team's SMEs; built by Product Managers + Engineering; accountability stays here — the ask and the acceptance are domain-owned.",
+    "enabling → dept Platform Capability Configuration Coverage (§5) + the LP capability registry",
+    "%", "Quarterly", "Generic/reusable capabilities rest with the Learning Platform lane (product-owned), not here."),
    ("Executive Ops", "Operations & Growth Cost",
     "Average cost across executive ops, operational efficiency, market analysis and hiring activities. Tracked at team scope, not per product.",
     "hygiene — team run-cost guardrail; no org ladder by design",
@@ -584,6 +599,8 @@ TEAM_VIEWS = [
     "Skill-assessment blueprints + knowledge points shared before authoring each cycle; changes communicated — feeds Content–Assessment Alignment (§7 ask)."),
    ("Engagement & LE dashboards", "Learning Platform / DA-DEs",
     "Monthly LE + engagement-matrix cuts per domain — budgets for Cell Migration and module-quiz Bands come from here. Course-completion cuts included as a read-only view: completion is conduction-driven (Program Ops); the team's owned stickiness KPIs are Learner-Accessed Completion + Practice Attempt-to-Completion."),
+   ("Domain-specific capability build", "Learning Platform (PMs + Engineering)",
+    "Build slots for domain-raised capabilities and evaluation environments — SMEs here raise and accept; PMs + Engineering build. Boundary: generic/reusable capability = Learning Platform lane (product-owned) · domain-specific instance = KPI here, in Learning Domains · ACP = content-facing production pipelines, domain product work = learner-facing systems."),
    ("Classroom signal loop", "Instructors dept + Program Ops",
     "Structured instructor feedback + conduction context per module — feeds content iteration and Content Issue routing."),
   ]},

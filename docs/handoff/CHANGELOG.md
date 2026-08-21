@@ -148,3 +148,16 @@ Pending: FS Section B relevance review (LE, Course Completion, Pedagogy Initiati
 Role cards / career framework doc received (knowledge/raw/corpora/remixed-0bb5468a.html — "SDE Learning Systems Career Framework", Mar 2026): analysed this session, implementation plan proposed to Pavan — **no implementation yet** (his analyse→plan→approve rule). Open question posed by Pavan, discussion delivered, awaiting his call: domain-specific product work (evaluation environments, domain-specific LP capabilities) sits in content dept with no covering KPI — proposed generic→LP / domain-instance→LD rule + two candidate Section B rows (Evaluation Environment Coverage, Domain Capability Delivery), Section-B-first vs org-tracker-row question pending.
 
 Pending: operating view (📋) sync still deferred — owes lane/category/APC + §10 + these Section B changes.
+
+## 2026-08-21 — Domain Product Enablement: Section-B-first, boundary rulings recorded
+
+Pavan's rulings on the domain-product-work question, applied Section-B-first (org-tracker row waits for a registry baseline — APC precedent):
+- **FS view Section B — new category "Domain Product Enablement"** (before the Executive Ops tail), template for all future domain views:
+  - **Evaluation Environment Coverage** (% · Quarterly) — item types × production-ready eval envs; domain configuration by the team's SMEs, platform build by PMs + Engineering. Ladders → PAtC env-friction leg + JSH 6–7 + LES. Remark: registry first, then budget.
+  - **Domain Capability Delivery** (% · Quarterly) — domain-specific capabilities shipped vs committed; raised/accepted by SMEs, built by PMs + Engineering, accountability stays in the domain view. Ladders → PCCC + LP capability registry.
+- **FS view Section C — new ask "Domain-specific capability build"** of Learning Platform (PMs + Engineering), detail carries the boundary points verbatim.
+- **Legend row 23 "Domain product boundary"** — system-level record: domain-specific product work (incl. domain-specific learner-facing AI tutors/agents) = raised/accepted by domain SMEs, built by PMs + Engineering, KPIs in the domain's Section B under Learning Domains accountability · generic/reusable capability = Learning Platform lane, product-owned · ACP = content-facing production pipelines, domain product work = learner-facing systems · Section-B-first.
+- **Legend B4**: "Packaging Teams (Content Systems & Infra)" — Pavan's naming clarification.
+- FS view now **A 18 · B 25 · C 4**; 25 variance formulas; html byte-identical (team views are xlsx-only), so no artifact republish — URL content already current.
+
+Role-cards plan: Packaging-Teams question resolved; still open — title set confirmation, comp bands in/out of shared sheet, FS pilot first. Implementation waits on those.
