@@ -183,3 +183,20 @@ Role-cards plan: Packaging-Teams question resolved; still open — title set con
 - **Every embedded table wrapped in a scroll container** (.tscroll, 28 tables) — page never scrolls horizontally at any width (verified 0px overflow; 9 wrappers active at 723px).
 - Excluded: 📋 dept operating view — stale (owes lane/category/APC/§10 + both Section B rounds); joins the site after its sync.
 - Files: content_os.html + build_site.py (reads the four repo artifact copies + the xlsx).
+
+## 2026-08-21 — Content OS: site-only ladder edits + downloadable xlsx masters
+
+Same URL: https://claude.ai/code/artifact/ef86c2ad-4e52-494a-af7c-5416b579bde9
+
+**Ladder section (#ind) now deliberately DIVERGES from the standalone ladder artifact** (directives 21 Aug, site only — role_cards.html/xlsx and the 🪜 artifact unchanged):
+- All five "formerly …" sublines removed (regex, count-asserted = 5).
+- "What changed in v2" dialogue removed; replaced by a neutral "How to read the cards" chip legend (the mono-chip explanation is load-bearing for the matrix, so the legend survives without any version-history framing).
+- "AI Engineer 3 – [Domain Portfolio] Learning Systems" retitled **"Head of [Domain Portfolio] Learning Systems"** — card body opens "Directional for now — title and shape indicative, not finalized", example = "Head of FullStack & CS Core Learning Systems"; sectionlead + footnote level names follow (Associate / 1 / 2 / Lead / Head-of-domain (directional)); footnote's "in v2" phrasing dropped. Builder asserts no "AI Engineer 3" / "formerly" / v2 dialogue anywhere in the page.
+
+**Downloadable masters**: kra_training_sheet.xlsx (33,129 B) + role_cards.xlsx (18,788 B) base64-embedded (page 169→240 KB); 5 green ⬇ buttons (dept/team/ind bands + footer pair) saved via the viewer's `downloads` runtime capability — republished with capabilities={downloads:true}. Buttons ship hidden; script unhides only when claude.use("downloads") resolves (plain <a download> is inert in the artifact viewer). Save flow: confirm dialog → "saved ✓" / declined restores label / other errors show "couldn't save — try again"; button disabled during the one-at-a-time prompt.
+
+Verified over localhost: 0 page overflow, 28 tscroll wrappers intact, tracker toggle functional, no console errors, 5 buttons present + hidden on the null path, level titles Associate/1/2/Lead/Head-of.
+
+Queued from same directives: KPI rows for every rating pillar/area (one at a time, later); the standalone ladder artifact keeps formerly-lines/v2/AI Engineer 3 until a future sync is ordered.
+
+Files: build_site.py, content_os.html.

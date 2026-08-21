@@ -5,9 +5,17 @@
 #
 # Technique: each artifact's CSS is wrapped in its section id via native CSS
 # nesting (body{} hoisted out — all three share the identical family body).
-# The site's own chrome (nav, altitude map, level bands, Level 3) is authored
-# here. Comp bands are stripped from the embedded ladder: the site is meant for
-# wide sharing; comp stays in the standalone ladder artifact + xlsx.
+# The site's own chrome (nav, altitude map, level bands, Level 3, download
+# buttons) is authored here. The embedded ladder deliberately DIVERGES from the
+# standalone artifact (site = wide audience; directives 2026-08-21): comp bands
+# stripped, "formerly …" lines removed, "What changed in v2" dialogue replaced
+# by a neutral chip legend, level 5 retitled "Head of [Domain Portfolio]
+# Learning Systems" (directional, not finalized). Both master xlsx files are
+# base64-embedded and offered through the viewer's `downloads` runtime
+# capability (publish with capabilities={downloads: true}); the buttons stay
+# hidden wherever the capability is absent — including local preview.
+import base64
+import json
 import re
 from openpyxl import load_workbook
 
@@ -41,25 +49,48 @@ tr_css, tr_body, tr_scripts = load_artifact("kra_training_sheet.html")
 ld_css, ld_body, ld_scripts = load_artifact("role_cards.html")
 assert not op_scripts and not ld_scripts and len(tr_scripts) == 1
 
-# ---- ladder embed: strip comp bands (site = wide audience; comp stays in the
-# ---- standalone artifact + xlsx). Keep the experience years.
+# ---- ladder embed: site-only divergences from the standalone artifact ------
+# ---- (comp stripped; formerly-lines out; v2 dialogue out; level 5 retitled).
 ld_body = re.sub(r'<div class="lvl-comp">[^<|]*\|\s*([^<]*?)</div>',
                  r'<div class="lvl-comp">\1</div>', ld_body)
+ld_body, n_was = re.subn(r'<div class="was">formerly [^<]*</div>', "", ld_body)
+assert n_was == 5, n_was
 ld_body = sub1(ld_body,
     "Five levels, linear — AI Engineer 3 sits above Lead (30L+ vs 24&ndash;30L, org-wide "
     "scope); the progression matrix below deliberately stops at Lead. Comp bands included; strip this column before "
     "wide sharing if needed.",
-    "Five levels, linear — AI Engineer 3 sits above Lead (org-wide scope); the progression matrix below "
-    "deliberately stops at Lead. Comp bands are kept off this site — they live in the standalone ladder "
-    "artifact and role_cards.xlsx.")
+    "Five levels, linear — above Lead sits the head-of-domain role (directional for now); the progression "
+    "matrix below deliberately stops at Lead. Comp bands are kept off this site — they live in the standalone "
+    "ladder artifact and role_cards.xlsx.")
 ld_body = sub1(ld_body,
-    "Level content, comp bands and the rating weights are unchanged from the source framework.",
-    "Level content and rating weights are unchanged from the source framework; comp bands live in the "
-    "standalone ladder artifact + role_cards.xlsx, not on this site.")
+    '<div class="key-point"><strong>What changed in v2:</strong> titles renamed to the AI Engineer pattern; '
+    'every progression area and rating line is wired to named KPI rows — anything in a '
+    '<span class="kpi">mono chip</span> is a live row on the KPI tracker or the team view, so reviews read off '
+    'the sheets instead of impressions. Areas with no chip say so <em>by design</em>. Level content, comp bands '
+    'and the rating weights are unchanged from the source framework.</div>',
+    '<div class="key-point"><strong>How to read the cards:</strong> every progression area and rating line is '
+    'wired to named KPI rows — anything in a <span class="kpi">mono chip</span> is a live row on the KPI '
+    'tracker or the team view, so reviews read off the sheets instead of impressions. Areas with no chip say '
+    'so <em>by design</em>.</div>')
+ld_body = sub1(ld_body,
+    '<div class="t">AI Engineer 3 – [Domain Portfolio] Learning Systems</div>',
+    '<div class="t">Head of [Domain Portfolio] Learning Systems</div>')
+ld_body = sub1(ld_body,
+    'Example: "AI Engineer 3 – Portfolio (All Domains) Learning Systems". Sets org-wide',
+    '<em>Directional for now — title and shape indicative, not finalized.</em> '
+    'Example: "Head of FullStack &amp; CS Core Learning Systems". Sets org-wide')
 ld_body = sub1(ld_body,
     "Defaults taken pending red-pen: comp bands included (artifact is private; strip for wide sharing) &middot; ",
     "Defaults taken pending red-pen: comp bands kept off this site (standalone artifact + xlsx carry them) &middot; ")
+ld_body = sub1(ld_body,
+    "titles renamed and KPI wiring added in v2 (August 2026)",
+    "titles renamed and KPI wiring added (August 2026)")
+ld_body = sub1(ld_body,
+    "level names Associate / 1 / 2 / Lead / 3",
+    "level names Associate / 1 / 2 / Lead / Head-of-domain (directional)")
 assert "L to " not in ld_body and "30L+" not in ld_body   # no comp band survives on the site
+assert "formerly" not in ld_body and 'class="was"' not in ld_body
+assert "AI Engineer 3" not in ld_body and "What changed in v2" not in ld_body
 
 # ---- Level 3: FullStack & CS Core view, read from the master xlsx ----------
 wbf = load_workbook(ART + "kra_training_sheet.xlsx")          # formulas (A refs)
@@ -148,6 +179,38 @@ tm_css = """  * { margin: 0; padding: 0; box-sizing: border-box; }
   .ask-d { font-size: .87em; color: #333; }
   @media (max-width: 860px) { .asks { grid-template-columns: 1fr; } }"""
 
+# ---- downloadable masters: base64-embedded, saved via the viewer's
+# ---- `downloads` capability. Buttons ship hidden; the script unhides them
+# ---- only when claude.use("downloads") resolves (null → affordance absent).
+XLSX_B64 = {f: base64.b64encode(open(ART + f, "rb").read()).decode("ascii")
+            for f in ("kra_training_sheet.xlsx", "role_cards.xlsx")}
+
+def dlbtn(name):
+    return f'<button class="dlbtn" type="button" data-file="{name}" hidden>⬇ {name}</button>'
+
+DL_SCRIPT = """<script>
+(async () => {
+  const XLSX = """ + json.dumps(XLSX_B64) + """;
+  const dl = (window.claude && window.claude.use) ? await window.claude.use("downloads") : null;
+  if (!dl) return;               // this view can't save files — buttons stay hidden
+  document.querySelectorAll(".dlwrap").forEach(w => { w.hidden = false; });
+  document.querySelectorAll(".dlbtn").forEach(b => {
+    b.hidden = false;
+    b.addEventListener("click", async () => {
+      const name = b.dataset.file, label = b.textContent;
+      b.disabled = true;
+      try {
+        await dl.save({ filename: name, data: Uint8Array.from(atob(XLSX[name]), c => c.charCodeAt(0)) });
+        b.textContent = "saved \\u2713";
+      } catch (e) {
+        b.textContent = (e && e.code === "declined") ? label : "couldn't save \\u2014 try again";
+      }
+      setTimeout(() => { b.textContent = label; b.disabled = false; }, 1800);
+    });
+  });
+})();
+</script>"""
+
 # ---- site chrome -----------------------------------------------------------
 SITE_CSS = """  * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -193,6 +256,10 @@ SITE_CSS = """  * { margin: 0; padding: 0; box-sizing: border-box; }
   footer li { margin: 3px 0; }
   footer .mono { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: .92em; }
   footer a { color: #004085; }
+  .dlbtn { font: inherit; font-size: .82em; cursor: pointer; white-space: nowrap;
+    border: 1px solid #0e6e5c; border-radius: 3px; background: #0e6e5c; color: #fff; padding: 2px 9px; }
+  .dlbtn:hover, .dlbtn:focus-visible { background: #0b574a; border-color: #0b574a; outline: none; }
+  .dlbtn[disabled] { opacity: .65; cursor: default; }
   @media (max-width: 700px) { .fcard { grid-template-columns: 1fr; gap: 6px; } }"""
 
 LEVELS = [
@@ -220,6 +287,7 @@ def band(key, no, name, art, desc, meta, url, master):
         links.append(f'<a href="{url}" target="_blank" rel="noopener">standalone artifact ↗</a>')
     if master:
         links.append(f'<span class="chipfile">master: {master}</span>')
+        links.append(dlbtn(master))
     return (f'<div class="band" id="{key}-band"><div class="in">'
             f'<span class="lv">Level {no} · {name}</span><span class="nm">{art}</span>'
             f'<span class="links">{"".join(links)}</span>'
@@ -253,7 +321,7 @@ HERO.append('</div></div>')
 FOOTER = f"""<footer><div class="in">
 <h3>Behind this site</h3>
 <ul>
-<li>Editable masters: <span class="mono">kra_training_sheet.xlsx</span> (tracker + legend + CSI and FullStack &amp; CS Core team views) · <span class="mono">role_cards.xlsx</span> (ladder, 5 tabs) — in <span class="mono">docs/handoff/artifacts/</span> with the builders and CHANGELOG.</li>
+<li>Editable masters: <span class="mono">kra_training_sheet.xlsx</span> (tracker + legend + CSI and FullStack &amp; CS Core team views) · <span class="mono">role_cards.xlsx</span> (ladder, 5 tabs)<span class="dlwrap" hidden> — download: {dlbtn("kra_training_sheet.xlsx")} {dlbtn("role_cards.xlsx")}</span> — in <span class="mono">docs/handoff/artifacts/</span> with the builders and CHANGELOG.</li>
 <li>Standalone artifacts (updated in place; this site re-embeds them on republish): <a href="{LEVELS[0][6]}" target="_blank" rel="noopener">HOD one-pager</a> · <a href="{LEVELS[1][6]}" target="_blank" rel="noopener">KPI tracker</a> · <a href="{LEVELS[3][6]}" target="_blank" rel="noopener">AI Engineer Ladder</a>.</li>
 <li>Comp bands are deliberately kept off this site — they live in the standalone ladder artifact and <span class="mono">role_cards.xlsx</span>.</li>
 </ul>
@@ -294,9 +362,15 @@ page.append(band(*LEVELS[3]))
 page.append(f'<div class="site-section" id="ind">\n{ld_body}\n</div>')
 page.append(FOOTER)
 page.append(tr_scripts[0])
+page.append(DL_SCRIPT)
 
 out = "\n".join(page) + "\n"
+assert "AI Engineer 3" not in out and "formerly Associate SDE" not in out
+assert "What changed in v2" not in out
+assert out.count('class="dlbtn"') == 5          # dept + team + ind bands, footer ×2
 open("content_os.html", "w", encoding="utf-8").write(out)
 print("chars:", len(out), "| braces:", out.count("{") == out.count("}"),
       "| sections:", [k for k, *_ in LEVELS], "| A chips:", len(A_ROWS),
-      "| B rows:", len(B_ROWS), "| asks:", len(C_ROWS))
+      "| B rows:", len(B_ROWS), "| asks:", len(C_ROWS),
+      "| dlbtns:", out.count('class="dlbtn"'),
+      "| b64 chars:", {k: len(v) for k, v in XLSX_B64.items()})
