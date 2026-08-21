@@ -239,3 +239,19 @@ Files: build_site.py, content_os.html.
 - Org tracker rows byte-identical (28 rows, max S.No 28, Legend 24); FS/CSI views untouched (site asserts A19/B24/C4 pass).
 - Sync: training-sheet html subtitle + footnote now say 6 tabs (footnote's stale "3 tabs" fixed); site download
   card names all three team views; site xlsx b64 refreshed. 🧭 + 🗺️ republished to same URLs.
+
+## 2026-08-22 — Utilisation rows join Content–Central Section B (5 → 7)
+- Two owned rows added under **Business Ops — Shared Teams** (inserted after Spend vs Plan, category contiguous —
+  the category now reads: what landed · what it cost · how fully the people were used):
+  · **Creative Resource Utilisation — All Units** (%, Monthly) — GD & VE bandwidth across all sub-departments vs
+    planned deliverables; Central reads aggregate + skew, day-to-day stays with unit PMs; enabling → dept Creative
+    Resource Utilisation (§5, PMO lane). Domain slices stay (FS keeps its own row). Remark carries FS Q1 Jul
+    reference (A 100% — stretched).
+  · **Cross-functional Resource Utilisation — All Units** (%, Monthly) — embedded Engineering, Product, Pedagogy,
+    DA/DE, Product Design bandwidth vs committed work across every unit; enabling → dept Cross-functional Resource
+    Utilisation (§5, PMO lane).
+  Both §5 PMO-lane KPIs thereby land their team owner for the first time. Baseline-first remarks: Q1 allocation
+  register per unit; unit PMs supply reads, PMO manager collects, Business Ops lead owns the judgment.
+- Renumbering only below the insert: Shared Tool Adoption → 5, Check-ins Run → 6, Actions Closed → 7.
+- Untouched: org tracker (28 rows, Legend 24), CSI/FS views, one-pager (§5 rows already correct),
+  kra_training_sheet.html byte-identical (no 🧭 republish). Site xlsx b64 refreshed → 🗺️ republished same URL.

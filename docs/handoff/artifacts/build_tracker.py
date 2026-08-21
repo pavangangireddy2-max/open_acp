@@ -633,6 +633,22 @@ TEAM_VIEWS = [
     "enabling → dept Content Efficiency (§5) — the ₹ side of the shared-team delivery contract",
     "%", "Monthly", "Baseline first: plan numbers come from the allocation agreed with each function head; tolerance band "
     "set after one full cycle. Owned by the Business Ops lead."),
+   ("Business Ops — Shared Teams", "Creative Resource Utilisation — All Units",
+    "Of the Graphic Designer & Video Editor bandwidth allocated across all sub-departments, the % actually used against "
+    "planned deliverables in the cycle. Central reads the aggregate and the skew — which units are stretched, which "
+    "under-use; day-to-day management stays with unit PMs. Low = planning gaps · over = scope creep or under-resourcing.",
+    "enabling → dept Creative Resource Utilisation (§5, PMO lane) — the dept KPI lands its team owner here; domain views "
+    "keep their own slice (FS: Creative Resource Utilisation Rate)",
+    "%", "Monthly", "Baseline first: Q1 builds the allocation register per unit; unit PMs supply the reads, the PMO manager "
+    "collects at the check-in, the Business Ops lead owns the judgment. FS Q1 Jul reference: A 100% — fully utilised, at "
+    "times stretched."),
+   ("Business Ops — Shared Teams", "Cross-functional Resource Utilisation — All Units",
+    "Of the embedded function bandwidth (Engineering, Product, Pedagogy, DA/DEs, Product Design) allocated into units, the "
+    "% actually used on committed work in the cycle — across every sub-department and function. Read the same way: low = "
+    "planning gaps · over = scope creep or under-resourcing.",
+    "enabling → dept Cross-functional Resource Utilisation (§5, PMO lane) — the dept KPI lands its team owner here",
+    "%", "Monthly", "Baseline first: same allocation register; unit PMs supply the reads, the PMO manager collects at the "
+    "check-in, the Business Ops lead owns the judgment."),
    ("Agentic Content Platform", "Shared Tool Adoption",
     "% of shipped shared ACP tools (content-generation workflows, MCP servers, production pipelines built for all domains) "
     "that every learning-domain unit is publishing through within a month of shipping. Adopted = used in live production, "
