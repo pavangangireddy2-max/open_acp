@@ -110,9 +110,9 @@ for r in range(5, 24):
 assert len(A_ROWS) == 19 and all(n for _, n in A_ROWS), A_ROWS
 
 B_ROWS = [[ws.cell(r, c).value or "" for c in (1, 3, 4, 6, 7, 8, 9, 10, 14)]
-          for r in range(25, 49)]
-assert len(B_ROWS) == 24
-C_ROWS = [[ws.cell(r, c).value or "" for c in (3, 6, 7)] for r in range(50, 54)]
+          for r in range(25, 54)]
+assert len(B_ROWS) == 29
+C_ROWS = [[ws.cell(r, c).value or "" for c in (3, 6, 7)] for r in range(55, 59)]
 assert len(C_ROWS) == 4
 VIEW_TITLE = ws.cell(1, 1).value
 LANE_LINE = ws.cell(2, 1).value
@@ -122,7 +122,8 @@ L3.append(f'<h1>{esc(VIEW_TITLE)}</h1>')
 L3.append(f'<div class="subtitle">{esc(LANE_LINE)} &middot; pilot team view — the template every '
           'domain team copies &middot; live grid with budget/actual/variance columns: '
           '<strong>kra_training_sheet.xlsx</strong>, tab &ldquo;FullStack &amp; CS Core View&rdquo; '
-          '(second live view there: CSI team — A 8 &middot; B 3 &middot; C 3)</div>')
+          '(other live views there: CSI team — A 8 &middot; B 8 &middot; C 3 · Content&ndash;Central — '
+          'A 1 &middot; B 8 &middot; C 2)</div>')
 L3.append('<div class="key-point"><strong>Anatomy of a team view:</strong> '
           '<strong>Section A — inherited</strong>: the tracker rows above that this team works on through the '
           'Functions column; the number is answered for at department level. '

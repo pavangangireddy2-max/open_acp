@@ -255,3 +255,27 @@ Files: build_site.py, content_os.html.
 - Renumbering only below the insert: Shared Tool Adoption → 5, Check-ins Run → 6, Actions Closed → 7.
 - Untouched: org tracker (28 rows, Legend 24), CSI/FS views, one-pager (§5 rows already correct),
   kra_training_sheet.html byte-identical (no 🧭 republish). Site xlsx b64 refreshed → 🗺️ republished same URL.
+
+## 2026-08-22 — Team Ops & People replaces Executive Ops in the team views (the PM layer gets its metric set)
+- Approved in chat (talk-first design, then "Go"): the domain-view Section B category "Executive Ops" is renamed
+  **Team Ops & People** and rebuilt around the Project-Manager-per-unit role — KPIs cascade Lead → PM (PM reports
+  to the Lead). Applied to **FS & CS Core** and **CSI** tabs in one pass (both carried the category).
+- The old single "Operations & Growth Cost" row (ops + hiring + market analysis in one ₹) is replaced by six rows:
+  **Cost of Operations** (INR · Monthly — desc carries the full activity list: one-on-ones, Head-approved roadmap
+  reviews, standups & learning hours, check-in scheduling & documentation, team assets, ClickUp adoption & status
+  freshness, worklog capture, newsletters, outings, cycle appraisals + folded-in operational-efficiency/market-analysis;
+  worklog capture named load-bearing — it powers deliverable costing; FS remark keeps continuity: Jul A ₹300,863 spans
+  ops + hiring, worklogs split it) · **Roadmap Items Completion** (% · Monthly, cycle-anchored, Head-approved roadmap) ·
+  **Hires Made** (Count · Monthly) · **Cost per Hire** (INR · Monthly, split out of the old combined row) ·
+  **Team Retention Rate** (% · per appraisal cycle — trailing 12 months to smooth small-team noise; internal transfers
+  don't count against; regrettable exits flagged by the Lead) · **Power Performers Created** (Count · per appraisal
+  cycle — newly top-band; ladders to §5's "developing the best" intent; name converges with the ladder's existing
+  Develop-the-Best pillar evidence). FS keeps Creative Resource Utilisation Rate as the category's 7th row.
+- Content–Central PMO gains **Worklog & Status Hygiene — All Units** (% · Monthly), inserted before Check-ins Run so
+  the PMO block reads as a pipeline: fed → held → closed. Central B now 8 rows.
+- Counts: FS A 19 · B 29 · C 4 — CSI A 8 · B 8 · C 3 — Central A 1 · B 8 · C 2. Org tracker untouched (28 rows);
+  one-pager §5 untouched by agreement (re-split later if wanted); kra_training_sheet.html byte-identical → no 🧭
+  republish. build_site.py: B range/assert 24→29, C rows shift +5, subtitle now lists all three live views with counts.
+  🗺️ republished same URL (capabilities omitted).
+- Queued next surface (role cards 🪜): add the Project Manager role card (reports to Lead, carries this KPI set) and
+  fix the now-stale "Operations & Growth Cost" chip on the Best Practices pillar (→ Cost of Operations).

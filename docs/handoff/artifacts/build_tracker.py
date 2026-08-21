@@ -484,10 +484,45 @@ TEAM_VIEWS = [
     "Average cost to produce one hour of vernacular-language content, tracked centrally by the CSI team. Includes CSI payroll and AI tooling costs attributed to vernacular production.",
     "enabling → dept Cost per Vernacular Content Hour (§5 Content Efficiency) — central track; FS&CS Core carries the production-side twin",
     "INR", "Monthly", ""),
-   ("Executive Ops", "Operations & Growth Cost",
-    "Average cost across executive ops, operational efficiency, market analysis and hiring activities. Tracked at team scope, not per product.",
+   ("Team Ops & People", "Cost of Operations",
+    "Monthly cost of running the team's operating rhythm: manager–reportee one-on-ones, roadmap reviews (Head-approved), "
+    "standups & learning hours, monthly check-in scheduling & documentation, team assets (laptops, systems), ClickUp "
+    "adoption & status freshness, worklog capture, newsletters, team outings and cycle-wise appraisals — plus "
+    "operational-efficiency and market-analysis work. Worklog capture is the load-bearing activity: it is what makes "
+    "deliverable costing computable.",
     "hygiene — team run-cost guardrail; no org ladder by design",
-    "INR", "Monthly", ""),
+    "INR", "Monthly", "Replaces Operations & Growth Cost (no baseline yet) — worklog capture builds the first read. "
+    "Sub-metrics per activity (one-on-one coverage, status freshness…) get added as reads emerge. Run by the team's PM "
+    "(reports to the Lead; KPI cascades Lead → PM)."),
+   ("Team Ops & People", "Roadmap Items Completion",
+    "Of the roadmap items committed for the cycle — reviewed in the roadmap meetings the PM schedules and approved by the "
+    "Head — the % completed. The execution-predictability read for the team's own plan.",
+    "hygiene — execution-predictability guardrail; no org ladder by design",
+    "%", "Monthly", "Cycle-anchored: the commitment is the Head-approved cycle roadmap; the % is read monthly as items "
+    "land. Run by the team's PM."),
+   ("Team Ops & People", "Hires Made",
+    "Offers joined against the team's approved hiring plan for the period. Reads whether the team is growing at the "
+    "planned pace.",
+    "hygiene — hiring-plan guardrail; no org ladder by design",
+    "Count", "Monthly", "Budget = the approved hiring plan. Run by the team's PM; hiring decisions stay with the Lead."),
+   ("Team Ops & People", "Cost per Hire",
+    "Average cost per closed hire — sourcing, interview bandwidth and onboarding effort attributed to hiring for this "
+    "team.",
+    "hygiene — hiring-efficiency guardrail; no org ladder by design",
+    "INR", "Monthly", "Hiring cost split out of the old Operations & Growth Cost row — worklogs attribute the interview "
+    "bandwidth. Run by the team's PM."),
+   ("Team Ops & People", "Team Retention Rate",
+    "% of cycle-start team members still on the team at the appraisal cycle's end, on a trailing 12-month window. "
+    "Internal transfers don't count against the team; regrettable exits are flagged by the Lead in the remark.",
+    "hygiene — team-health guardrail; no org ladder by design",
+    "%", "Per appraisal cycle", "Trailing 12 months smooths small-team noise (one exit is a big % swing). Lead-driven "
+    "outcome; the PM carries the machinery and the number."),
+   ("Team Ops & People", "Power Performers Created",
+    "Team members newly reaching the top appraisal band in the cycle-wise appraisal. The direct metric for 'developing "
+    "the best (mentoring subordinates)'.",
+    "enabling → the §5 'developing the best (mentoring subordinates)' intent — its first direct metric",
+    "Count", "Per appraisal cycle", "Top band per the cycle-wise appraisal; mentoring by managers and the Lead is the "
+    "driver. Lead-driven outcome; the PM runs the appraisal machinery and carries the number."),
   ],
   "asks": [
    ("Conduction adherence", "Program Ops",
@@ -591,11 +626,46 @@ TEAM_VIEWS = [
     "Domain-specific learning-platform capabilities shipped vs committed per cycle. Raised and specified by this team's SMEs; built by Product Managers + Engineering; accountability stays here — the ask and the acceptance are domain-owned.",
     "enabling → dept Platform Capability Configuration Coverage (§5) + the LP capability registry",
     "%", "Quarterly", "Generic/reusable capabilities rest with the Learning Platform lane (product-owned), not here. Folds into the raised → accepted → delivered funnel with EEC when the trigger lands (see EEC remark + Legend)."),
-   ("Executive Ops", "Operations & Growth Cost",
-    "Average cost across executive ops, operational efficiency, market analysis and hiring activities. Tracked at team scope, not per product.",
+   ("Team Ops & People", "Cost of Operations",
+    "Monthly cost of running the team's operating rhythm: manager–reportee one-on-ones, roadmap reviews (Head-approved), "
+    "standups & learning hours, monthly check-in scheduling & documentation, team assets (laptops, systems), ClickUp "
+    "adoption & status freshness, worklog capture, newsletters, team outings and cycle-wise appraisals — plus "
+    "operational-efficiency and market-analysis work. Worklog capture is the load-bearing activity: it is what makes "
+    "deliverable costing computable.",
     "hygiene — team run-cost guardrail; no org ladder by design",
-    "INR", "Monthly", "Q1 Jul: A ₹300,863."),
-   ("Executive Ops", "Creative Resource Utilisation Rate",
+    "INR", "Monthly", "Replaces Operations & Growth Cost — Jul A ₹300,863 spans ops + hiring; worklog capture splits it "
+    "from next month. Sub-metrics per activity (one-on-one coverage, status freshness…) get added as reads emerge. Run by "
+    "the team's PM (reports to the Lead; KPI cascades Lead → PM)."),
+   ("Team Ops & People", "Roadmap Items Completion",
+    "Of the roadmap items committed for the cycle — reviewed in the roadmap meetings the PM schedules and approved by the "
+    "Head — the % completed. The execution-predictability read for the team's own plan.",
+    "hygiene — execution-predictability guardrail; no org ladder by design",
+    "%", "Monthly", "Cycle-anchored: the commitment is the Head-approved cycle roadmap; the % is read monthly as items "
+    "land. Run by the team's PM."),
+   ("Team Ops & People", "Hires Made",
+    "Offers joined against the team's approved hiring plan for the period. Reads whether the team is growing at the "
+    "planned pace.",
+    "hygiene — hiring-plan guardrail; no org ladder by design",
+    "Count", "Monthly", "Budget = the approved hiring plan. Run by the team's PM; hiring decisions stay with the Lead."),
+   ("Team Ops & People", "Cost per Hire",
+    "Average cost per closed hire — sourcing, interview bandwidth and onboarding effort attributed to hiring for this "
+    "team.",
+    "hygiene — hiring-efficiency guardrail; no org ladder by design",
+    "INR", "Monthly", "Hiring cost split out of the old Operations & Growth Cost row — worklogs attribute the interview "
+    "bandwidth. Run by the team's PM."),
+   ("Team Ops & People", "Team Retention Rate",
+    "% of cycle-start team members still on the team at the appraisal cycle's end, on a trailing 12-month window. "
+    "Internal transfers don't count against the team; regrettable exits are flagged by the Lead in the remark.",
+    "hygiene — team-health guardrail; no org ladder by design",
+    "%", "Per appraisal cycle", "Trailing 12 months smooths small-team noise (one exit is a big % swing). Lead-driven "
+    "outcome; the PM carries the machinery and the number."),
+   ("Team Ops & People", "Power Performers Created",
+    "Team members newly reaching the top appraisal band in the cycle-wise appraisal. The direct metric for 'developing "
+    "the best (mentoring subordinates)'.",
+    "enabling → the §5 'developing the best (mentoring subordinates)' intent — its first direct metric",
+    "Count", "Per appraisal cycle", "Top band per the cycle-wise appraisal; mentoring by managers and the Lead is the "
+    "driver. Lead-driven outcome; the PM runs the appraisal machinery and carries the number."),
+   ("Team Ops & People", "Creative Resource Utilisation Rate",
     "% of allocated Graphic Designer and Video Editor bandwidth utilised against planned branding and content-asset deliverables within a cycle. Primarily tracked and managed by Project Managers.",
     "hygiene — creative bandwidth guardrail (PM-managed); no org ladder by design",
     "%", "Monthly", "Q1 Jul: A 100% — fully utilised, at times stretched."),
@@ -656,6 +726,13 @@ TEAM_VIEWS = [
     "enabling → tracker Agentic Production Coverage — adoption is how all units reach the 90 bar",
     "%", "Monthly", "Bar: ALL learning domains within a month of shipping — an unadopted shared tool is shelfware. Owned by "
     "the Business Ops lead (ACP builder hat)."),
+   ("PMO", "Worklog & Status Hygiene — All Units",
+    "Of the ~10 units on the check-in calendar, the % entering the monthly check-in with complete worklogs and current "
+    "deliverable statuses (ClickUp). Check-ins Run says the meeting happened; this says it was fed — and complete "
+    "worklogs are what make deliverable costing computable in every unit.",
+    "hygiene — operating-rhythm guardrail (input side); no org ladder by design",
+    "%", "Monthly", "Unit PMs capture worklogs & statuses in their own Team Ops & People category; the PMO manager checks "
+    "completeness at collection. Baseline first: needs the unit-PM layer live."),
    ("PMO", "Check-ins Run",
     "% of scheduled monthly unit check-ins with the HOD held on schedule, with the pre-read circulated a day before. Covers "
     "every sub-department and embedded function on the check-in calendar (~10 units).",
