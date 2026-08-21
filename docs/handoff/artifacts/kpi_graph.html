@@ -1,0 +1,679 @@
+<meta charset="utf-8">
+<title>KPI Flow Map</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root { --fs:#0D9488; --csi:#B45309; --cc:#6D28D9; --ink:#1a1a1a; --sub:#666; --line:#d8d8d3; --bg:#ffffff; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--bg); color:var(--ink); padding:36px 20px 60px; line-height:1.5; }
+  .container { max-width:1660px; margin:0 auto; }
+  h1 { font-size:1.9em; font-weight:700; }
+  .subtitle { color:var(--sub); margin:4px 0 18px; max-width:72ch; }
+  .bar { display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center; margin-bottom:6px; }
+  .chip { border:1px solid var(--line); border-radius:999px; padding:4px 12px; font-size:.82em; font-weight:600; cursor:pointer; background:#fff; color:var(--ink); }
+  .chip .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:6px; vertical-align:1px; }
+  .chip.on { border-color:var(--ink); box-shadow:inset 0 0 0 1px var(--ink); }
+  .lg { font-size:.78em; color:var(--sub); display:flex; gap:16px; flex-wrap:wrap; align-items:center; margin-bottom:14px; }
+  .lg svg { vertical-align:middle; }
+  .hint { font-size:.82em; color:var(--sub); margin-bottom:10px; }
+  .wrap { overflow-x:auto; border:1px solid #eeeeea; border-radius:10px; background:#fff; }
+  svg#g { display:block; }
+  .colh { font-size:12.5px; font-weight:800; letter-spacing:.06em; fill:var(--ink); }
+  .colsub { font-size:10.5px; fill:var(--sub); }
+  .catlab { font-size:9.5px; font-weight:700; letter-spacing:.09em; fill:#8a8a84; }
+  .kgrplab { font-size:9.5px; font-weight:800; letter-spacing:.09em; fill:#8a8a84; }
+  .edge { fill:none; stroke-width:1.6; opacity:.38; transition:opacity .15s, stroke-width .15s; }
+  .node rect { fill:#fff; stroke:var(--line); stroke-width:1.2; transition:opacity .15s; cursor:pointer; }
+  .node text { pointer-events:none; }
+  .nk-team.tm-fs rect { stroke:var(--fs); } .nk-team.tm-csi rect { stroke:var(--csi); } .nk-team.tm-cc rect { stroke:var(--cc); }
+  .nk-team.hyg rect { stroke-dasharray:4 3; fill:#fcfcfa; }
+  .nk-cap rect { fill-opacity:.10; stroke:none; }
+  .nk-cap.tm-fs rect { fill:var(--fs); } .nk-cap.tm-csi rect { fill:var(--csi); } .nk-cap.tm-cc rect { fill:var(--cc); }
+  .nk-cap.tm-fs .ncap { fill:var(--fs); } .nk-cap.tm-csi .ncap { fill:var(--csi); } .nk-cap.tm-cc .ncap { fill:var(--cc); }
+  .ncap { font-size:11.5px; font-weight:700; }
+  .nk-dept rect { fill:#f5f5f2; stroke:#d2d2cc; }
+  .nk-org rect { fill:#fafaf8; }
+  .nk-kra rect { fill:var(--ink); stroke:var(--ink); }
+  .kname { fill:#fff; font-size:13px; font-weight:800; }
+  .ksub { fill:#fff; font-size:10.5px; font-weight:600; }
+  .ksub2 { fill:#bbb; font-size:9.5px; }
+  .nname { font-size:12px; font-weight:600; fill:var(--ink); }
+  .nsub { font-size:10px; fill:var(--sub); }
+  .nsub2 { font-size:9.5px; fill:#8a8a84; }
+  svg.sel .edge { opacity:.05; }
+  svg.sel .edge.hi { opacity:.95; stroke-width:2.4; }
+  svg.sel .node { opacity:.16; }
+  svg.sel .node.hi { opacity:1; }
+  svg.sel .node.hi rect { stroke-width:2; }
+  svg.tf .node[data-team]:not([data-team=""]):not(.tm-on) { opacity:.13; }
+  svg.tf .edge[data-m]:not(.m-on) { opacity:.04; }
+  svg.tf .node.dim { opacity:.13; }
+  #tip { position:fixed; z-index:9; max-width:380px; background:#fff; border:1px solid var(--ink); border-radius:8px; padding:10px 12px; font-size:.8em; box-shadow:0 6px 24px rgba(0,0,0,.14); display:none; pointer-events:none; }
+  #tip b { font-size:1.05em; }
+  .tteam { font-size:.85em; font-weight:700; margin-left:8px; padding:1px 7px; border-radius:999px; border:1px solid; }
+  .tfs { color:var(--fs); border-color:var(--fs); } .tcsi { color:var(--csi); border-color:var(--csi); } .tcc { color:var(--cc); border-color:var(--cc); }
+  .tcat { color:var(--sub); font-size:.9em; margin:2px 0 6px; }
+  .tdesc { margin-bottom:6px; }
+  .tmeta { color:var(--sub); font-size:.92em; }
+  .tsub { color:var(--sub); font-size:.92em; font-variant-numeric:tabular-nums; }
+  .tlad { margin-top:6px; padding-top:6px; border-top:1px dashed var(--line); font-style:italic; color:#444; }
+  .thyg { margin-top:6px; color:#8a6d00; }
+  .tflag { font-size:.78em; font-weight:700; border:1px solid var(--line); border-radius:4px; padding:0 4px; color:var(--sub); }
+  details { margin-top:22px; font-size:.86em; }
+  summary { cursor:pointer; font-weight:600; }
+  details table { border-collapse:collapse; margin-top:10px; width:100%; font-size:.95em; }
+  details td { border:1px solid var(--line); padding:5px 8px; }
+  .tscroll { overflow-x:auto; }
+  .foot { margin-top:22px; color:var(--sub); font-size:.8em; max-width:110ch; }
+  .foot p { margin-bottom:6px; }
+</style>
+<div class="container">
+  <h1>KPI Flow Map</h1>
+  <p class="subtitle">How every KPI connects — from the rows each team owns (Section B), through the department scoreboard (one-pager §5), into the org tracker and the five KRAs. Hover or click any box to light up everything it touches; click a team chip to see just that team's flows.</p>
+  <div class="bar" id="chips">
+    <span class="chip on" data-t="">All teams</span>
+    <span class="chip" data-t="fs"><span class="dot" style="background:var(--fs)"></span>FS &amp; CS Core</span>
+    <span class="chip" data-t="csi"><span class="dot" style="background:var(--csi)"></span>Content–CSI</span>
+    <span class="chip" data-t="cc"><span class="dot" style="background:var(--cc)"></span>Content–Central</span>
+  </div>
+  <div class="lg">
+    <span><svg width="34" height="10"><line x1="0" y1="5" x2="34" y2="5" stroke="#555" stroke-width="2"/></svg> ladders to (owned number feeds it)</span>
+    <span><svg width="34" height="10"><line x1="0" y1="5" x2="34" y2="5" stroke="#555" stroke-width="2" stroke-dasharray="6 4"/></svg> answers for (Section A mirror — same cell, not a separate number)</span>
+    <span><svg width="34" height="10"><line x1="0" y1="5" x2="34" y2="5" stroke="#9a9a94" stroke-width="2"/></svg> rolls into its KRA</span>
+    <span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="4" fill="#fcfcfa" stroke="#999" stroke-dasharray="4 3"/></svg> hygiene — deliberately no org ladder (PM-run)</span>
+  </div>
+  <div class="wrap"><svg id="g" width="1620" height="2734" viewBox="0 0 1620 2734" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="KPI flow map">
+<text x="14" y="34" class="colh">TEAM KPIs — Section B (owned)</text>
+<text x="14" y="50" class="colsub">FS &amp; CS Core · Content–CSI · Content–Central</text>
+<text x="566" y="34" class="colh">DEPT SCOREBOARD — §5</text>
+<text x="566" y="50" class="colsub">one-pager blocks &amp; rows</text>
+<text x="992" y="34" class="colh">ORG TRACKER — FY26-27</text>
+<text x="992" y="50" class="colsub">lane + functions on every row</text>
+<text x="1444" y="34" class="colh">ORG KRAs</text>
+<path id="e0" class="edge e-lad" d="M366,202 C851,202 959,692 1444,692" stroke="#0D9488" data-s="t_fs_0" data-t="k1"/>
+<path id="e1" class="edge e-lad" d="M366,246 C208,246 172,202 14,202" stroke="#0D9488" data-s="t_fs_1" data-t="t_fs_0"/>
+<path id="e2" class="edge e-lad" d="M366,246 C648,246 710,847 992,847" stroke="#0D9488" data-s="t_fs_1" data-t="o2"/>
+<path id="e3" class="edge e-lad" d="M366,290 C456,290 476,294 566,294" stroke="#0D9488" data-s="t_fs_2" data-t="d_bi"/>
+<path id="e4" class="edge e-lad" d="M366,334 C456,334 476,294 566,294" stroke="#0D9488" data-s="t_fs_3" data-t="d_bi"/>
+<path id="e5" class="edge e-lad" d="M366,402 C648,402 710,777 992,777" stroke="#0D9488" data-s="t_fs_4" data-t="o1"/>
+<path id="e6" class="edge e-lad" d="M366,402 C851,402 959,1288 1444,1288" stroke="#0D9488" data-s="t_fs_4" data-t="k2"/>
+<path id="e7" class="edge e-lad" d="M366,446 C648,446 710,917 992,917" stroke="#0D9488" data-s="t_fs_5" data-t="o3"/>
+<path id="e8" class="edge e-lad" d="M366,490 C648,490 710,1577 992,1577" stroke="#0D9488" data-s="t_fs_6" data-t="o12"/>
+<path id="e9" class="edge e-lad" d="M366,490 C648,490 710,1227 992,1227" stroke="#0D9488" data-s="t_fs_6" data-t="o7"/>
+<path id="e10" class="edge e-lad" d="M366,558 C456,558 476,606 566,606" stroke="#0D9488" data-s="t_fs_7" data-t="d_cv"/>
+<path id="e11" class="edge e-lad" d="M366,602 C456,602 476,606 566,606" stroke="#0D9488" data-s="t_fs_8" data-t="d_cv"/>
+<path id="e12" class="edge e-lad" d="M366,646 C456,646 476,606 566,606" stroke="#0D9488" data-s="t_fs_9" data-t="d_cv"/>
+<path id="e13" class="edge e-lad" d="M366,690 C456,690 476,606 566,606" stroke="#0D9488" data-s="t_fs_10" data-t="d_cv"/>
+<path id="e14" class="edge e-lad" d="M366,758 C456,758 476,1211 566,1211" stroke="#0D9488" data-s="t_fs_11" data-t="d_ce"/>
+<path id="e15" class="edge e-lad" d="M366,802 C456,802 476,1211 566,1211" stroke="#0D9488" data-s="t_fs_12" data-t="d_ce"/>
+<path id="e16" class="edge e-lad" d="M366,846 C456,846 476,1211 566,1211" stroke="#0D9488" data-s="t_fs_13" data-t="d_ce"/>
+<path id="e17" class="edge e-lad" d="M366,890 C456,890 476,1211 566,1211" stroke="#0D9488" data-s="t_fs_14" data-t="d_ce"/>
+<path id="e18" class="edge e-lad" d="M366,934 C456,934 476,1211 566,1211" stroke="#0D9488" data-s="t_fs_15" data-t="d_ce"/>
+<path id="e19" class="edge e-lad" d="M366,978 C456,978 476,1211 566,1211" stroke="#0D9488" data-s="t_fs_16" data-t="d_ce"/>
+<path id="e20" class="edge e-lad" d="M366,1046 C648,1046 710,2057 992,2057" stroke="#0D9488" data-s="t_fs_17" data-t="o18"/>
+<path id="e21" class="edge e-lad" d="M366,1114 C456,1114 476,1488 566,1488" stroke="#0D9488" data-s="t_fs_18" data-t="d_sa"/>
+<path id="e22" class="edge e-lad" d="M366,1158 C456,1158 476,1488 566,1488" stroke="#0D9488" data-s="t_fs_19" data-t="d_sa"/>
+<path id="e23" class="edge e-lad" d="M366,1226 C208,1226 172,490 14,490" stroke="#0D9488" data-s="t_fs_20" data-t="t_fs_6"/>
+<path id="e24" class="edge e-lad" d="M366,1226 C648,1226 710,1577 992,1577" stroke="#0D9488" data-s="t_fs_20" data-t="o12"/>
+<path id="e25" class="edge e-lad" d="M366,1226 C648,1226 710,1227 992,1227" stroke="#0D9488" data-s="t_fs_20" data-t="o7"/>
+<path id="e26" class="edge e-lad" d="M366,1270 C456,1270 476,1279 566,1279" stroke="#0D9488" data-s="t_fs_21" data-t="d_pccc"/>
+<path id="e27" class="edge e-lad" d="M366,1558 C456,1558 476,1806 566,1806" stroke="#0D9488" data-s="t_fs_27" data-t="d_dtb"/>
+<path id="e28" class="edge e-mir" d="M366,133 C648,133 710,777 992,777" stroke="#0D9488" stroke-dasharray="6 5" data-s="a_fs" data-t="o1"/>
+<path id="e29" class="edge e-mir" d="M366,133 C648,133 710,847 992,847" stroke="#0D9488" stroke-dasharray="6 5" data-s="a_fs" data-t="o2"/>
+<path id="e30" class="edge e-mir" d="M366,133 C648,133 710,917 992,917" stroke="#0D9488" stroke-dasharray="6 5" data-s="a_fs" data-t="o3"/>
+<path id="e31" class="edge e-mir" d="M366,133 C648,133 710,1017 992,1017" stroke="#0D9488" stroke-dasharray="6 5" data-s="a_fs" data-t="o4"/>
+<path id="e32" class="edge e-mir" d="M366,133 C648,133 710,1087 992,1087" stroke="#0D9488" stroke-dasharray="6 5" data-s="a_fs" data-t="o5"/>
+<path id="e33" class="edge e-mir" d="M366,133 C648,133 710,1157 992,1157" stroke="#0D9488" stroke-dasharray="6 5" data-s="a_fs" data-t="o6"/>
+<path id="e34" class="edge e-mir" d="M366,133 C648,133 710,1227 992,1227" stroke="#0D9488" stroke-dasharray="6 5" data-s="a_fs" data-t="o7"/>
+<path id="e35" class="edge e-mir" d="M366,133 C648,133 710,1817 992,1817" stroke="#0D9488" stroke-dasharray="6 5" data-s="a_fs" data-t="o15"/>
+<path id="e36" class="edge e-mir" d="M366,133 C648,133 710,1957 992,1957" stroke="#0D9488" stroke-dasharray="6 5" data-s="a_fs" data-t="o17"/>
+<path id="e37" class="edge e-mir" d="M366,133 C648,133 710,2057 992,2057" stroke="#0D9488" stroke-dasharray="6 5" data-s="a_fs" data-t="o18"/>
+<path id="e38" class="edge e-lad" d="M366,1758 C456,1758 476,1211 566,1211" stroke="#B45309" data-s="t_csi_0" data-t="d_ce"/>
+<path id="e39" class="edge e-lad" d="M366,1802 C456,1802 476,1211 566,1211" stroke="#B45309" data-s="t_csi_1" data-t="d_ce"/>
+<path id="e40" class="edge e-lad" d="M366,2090 C456,2090 476,1806 566,1806" stroke="#B45309" data-s="t_csi_7" data-t="d_dtb"/>
+<path id="e41" class="edge e-mir" d="M366,1689 C648,1689 710,707 992,707" stroke="#B45309" stroke-dasharray="6 5" data-s="a_csi" data-t="o0"/>
+<path id="e42" class="edge e-mir" d="M366,1689 C648,1689 710,1577 992,1577" stroke="#B45309" stroke-dasharray="6 5" data-s="a_csi" data-t="o12"/>
+<path id="e43" class="edge e-mir" d="M366,1689 C648,1689 710,1647 992,1647" stroke="#B45309" stroke-dasharray="6 5" data-s="a_csi" data-t="o13"/>
+<path id="e44" class="edge e-mir" d="M366,1689 C648,1689 710,1717 992,1717" stroke="#B45309" stroke-dasharray="6 5" data-s="a_csi" data-t="o14"/>
+<path id="e45" class="edge e-mir" d="M366,1689 C648,1689 710,1817 992,1817" stroke="#B45309" stroke-dasharray="6 5" data-s="a_csi" data-t="o15"/>
+<path id="e46" class="edge e-mir" d="M366,1689 C648,1689 710,1887 992,1887" stroke="#B45309" stroke-dasharray="6 5" data-s="a_csi" data-t="o16"/>
+<path id="e47" class="edge e-mir" d="M366,1689 C648,1689 710,1957 992,1957" stroke="#B45309" stroke-dasharray="6 5" data-s="a_csi" data-t="o17"/>
+<path id="e48" class="edge e-lad" d="M366,2246 C456,2246 476,1488 566,1488" stroke="#6D28D9" data-s="t_cc_0" data-t="d_sa"/>
+<path id="e49" class="edge e-lad" d="M366,2290 C456,2290 476,1211 566,1211" stroke="#6D28D9" data-s="t_cc_1" data-t="d_ce"/>
+<path id="e50" class="edge e-lad" d="M366,2334 C456,2334 476,2316 566,2316" stroke="#6D28D9" data-s="t_cc_2" data-t="d_cru"/>
+<path id="e51" class="edge e-lad" d="M366,2378 C456,2378 476,2384 566,2384" stroke="#6D28D9" data-s="t_cc_3" data-t="d_xru"/>
+<path id="e52" class="edge e-lad" d="M366,2446 C648,2446 710,1157 992,1157" stroke="#6D28D9" data-s="t_cc_4" data-t="o6"/>
+<path id="e53" class="edge e-mir" d="M366,2177 C648,2177 710,1157 992,1157" stroke="#6D28D9" stroke-dasharray="6 5" data-s="a_cc" data-t="o6"/>
+<path id="e54" class="edge e-kra" d="M1376,707 C1407,707 1413,692 1444,692" stroke="#9a9a94" data-s="o0" data-t="k1"/>
+<path id="e55" class="edge e-kra" d="M1376,707 C1407,707 1413,1592 1444,1592" stroke="#9a9a94" data-s="o0" data-t="k3"/>
+<path id="e56" class="edge e-kra" d="M1376,777 C1407,777 1413,692 1444,692" stroke="#9a9a94" data-s="o1" data-t="k1"/>
+<path id="e57" class="edge e-kra" d="M1376,847 C1407,847 1413,692 1444,692" stroke="#9a9a94" data-s="o2" data-t="k1"/>
+<path id="e58" class="edge e-kra" d="M1376,917 C1407,917 1413,692 1444,692" stroke="#9a9a94" data-s="o3" data-t="k1"/>
+<path id="e59" class="edge e-kra" d="M1376,1017 C1407,1017 1413,1288 1444,1288" stroke="#9a9a94" data-s="o4" data-t="k2"/>
+<path id="e60" class="edge e-kra" d="M1376,1087 C1407,1087 1413,1288 1444,1288" stroke="#9a9a94" data-s="o5" data-t="k2"/>
+<path id="e61" class="edge e-kra" d="M1376,1157 C1407,1157 1413,1288 1444,1288" stroke="#9a9a94" data-s="o6" data-t="k2"/>
+<path id="e62" class="edge e-kra" d="M1376,1227 C1407,1227 1413,1288 1444,1288" stroke="#9a9a94" data-s="o7" data-t="k2"/>
+<path id="e63" class="edge e-kra" d="M1376,1297 C1407,1297 1413,1288 1444,1288" stroke="#9a9a94" data-s="o8" data-t="k2"/>
+<path id="e64" class="edge e-kra" d="M1376,1367 C1407,1367 1413,1288 1444,1288" stroke="#9a9a94" data-s="o9" data-t="k2"/>
+<path id="e65" class="edge e-kra" d="M1376,1437 C1407,1437 1413,1288 1444,1288" stroke="#9a9a94" data-s="o10" data-t="k2"/>
+<path id="e66" class="edge e-kra" d="M1376,1507 C1407,1507 1413,1288 1444,1288" stroke="#9a9a94" data-s="o11" data-t="k2"/>
+<path id="e67" class="edge e-kra" d="M1376,1577 C1407,1577 1413,1288 1444,1288" stroke="#9a9a94" data-s="o12" data-t="k2"/>
+<path id="e68" class="edge e-kra" d="M1376,1647 C1407,1647 1413,1288 1444,1288" stroke="#9a9a94" data-s="o13" data-t="k2"/>
+<path id="e69" class="edge e-kra" d="M1376,1717 C1407,1717 1413,1288 1444,1288" stroke="#9a9a94" data-s="o14" data-t="k2"/>
+<path id="e70" class="edge e-kra" d="M1376,1817 C1407,1817 1413,1592 1444,1592" stroke="#9a9a94" data-s="o15" data-t="k3"/>
+<path id="e71" class="edge e-kra" d="M1376,1887 C1407,1887 1413,1592 1444,1592" stroke="#9a9a94" data-s="o16" data-t="k3"/>
+<path id="e72" class="edge e-kra" d="M1376,1957 C1407,1957 1413,1592 1444,1592" stroke="#9a9a94" data-s="o17" data-t="k3"/>
+<path id="e73" class="edge e-kra" d="M1376,2057 C1407,2057 1413,2057 1444,2057" stroke="#9a9a94" data-s="o18" data-t="k4"/>
+<g class="node nk-cap tm-fs" id="a_fs" data-team="fs" tabindex="0">
+<rect x="14" y="118" width="352" height="30" rx="7"/>
+<text x="26" y="137" class="ncap">Section A — answers for 10 org rows</text>
+</g>
+<text x="16" y="171" class="catlab" data-team="fs">BUSINESS IMPACT</text>
+<g class="node nk-team tm-fs" id="t_fs_0" data-team="fs" tabindex="0">
+<rect x="14" y="184" width="352" height="36" rx="7"/>
+<text x="26" y="199" class="nname">Summative Skill Assessment Achievement Rate</text>
+<text x="26" y="212" class="nsub">% · Quarterly</text>
+</g>
+<g class="node nk-team tm-fs" id="t_fs_1" data-team="fs" tabindex="0">
+<rect x="14" y="228" width="352" height="36" rx="7"/>
+<text x="26" y="243" class="nname">Formative Skill Assessment Achievement Rate</text>
+<text x="26" y="256" class="nsub">% · Monthly</text>
+</g>
+<g class="node nk-team tm-fs" id="t_fs_2" data-team="fs" tabindex="0">
+<rect x="14" y="272" width="352" height="36" rx="7"/>
+<text x="26" y="287" class="nname">Graded Assessment Achievement Rate</text>
+<text x="26" y="300" class="nsub">% · Monthly</text>
+</g>
+<g class="node nk-team tm-fs" id="t_fs_3" data-team="fs" tabindex="0">
+<rect x="14" y="316" width="352" height="36" rx="7"/>
+<text x="26" y="331" class="nname">Weekly Active Users</text>
+<text x="26" y="344" class="nsub">Count · Monthly (wkly avg)</text>
+</g>
+<text x="16" y="371" class="catlab" data-team="fs">CONTENT EFFECTIVENESS</text>
+<g class="node nk-team tm-fs" id="t_fs_4" data-team="fs" tabindex="0">
+<rect x="14" y="384" width="352" height="36" rx="7"/>
+<text x="26" y="399" class="nname">Pedagogy Initiative Impact</text>
+<text x="26" y="412" class="nsub">Count · Quarterly</text>
+</g>
+<g class="node nk-team tm-fs" id="t_fs_5" data-team="fs" tabindex="0">
+<rect x="14" y="428" width="352" height="36" rx="7"/>
+<text x="26" y="443" class="nname">Learner Accessed Content Completion Rate</text>
+<text x="26" y="456" class="nsub">% · Monthly</text>
+</g>
+<g class="node nk-team tm-fs" id="t_fs_6" data-team="fs" tabindex="0">
+<rect x="14" y="472" width="352" height="36" rx="7"/>
+<text x="26" y="487" class="nname">Practice Attempt-to-Completion Rate</text>
+<text x="26" y="500" class="nsub">% · Monthly</text>
+</g>
+<text x="16" y="527" class="catlab" data-team="fs">CONTENT VELOCITY</text>
+<g class="node nk-team tm-fs" id="t_fs_7" data-team="fs" tabindex="0">
+<rect x="14" y="540" width="352" height="36" rx="7"/>
+<text x="26" y="555" class="nname">Learning Content Hours Delivered</text>
+<text x="26" y="568" class="nsub">Hours · Monthly</text>
+</g>
+<g class="node nk-team tm-fs" id="t_fs_8" data-team="fs" tabindex="0">
+<rect x="14" y="584" width="352" height="36" rx="7"/>
+<text x="26" y="599" class="nname">Vernacular Content Hours Delivered</text>
+<text x="26" y="612" class="nsub">Hours · Monthly</text>
+</g>
+<g class="node nk-team tm-fs" id="t_fs_9" data-team="fs" tabindex="0">
+<rect x="14" y="628" width="352" height="36" rx="7"/>
+<text x="26" y="643" class="nname">Practice &amp; Assessment Content Pieces Delivered</text>
+<text x="26" y="656" class="nsub">Count · Monthly</text>
+</g>
+<g class="node nk-team tm-fs" id="t_fs_10" data-team="fs" tabindex="0">
+<rect x="14" y="672" width="352" height="36" rx="7"/>
+<text x="26" y="687" class="nname">Branding Content Assets Delivered</text>
+<text x="26" y="700" class="nsub">Count · Monthly</text>
+</g>
+<text x="16" y="727" class="catlab" data-team="fs">CONTENT EFFICIENCY</text>
+<g class="node nk-team tm-fs" id="t_fs_11" data-team="fs" tabindex="0">
+<rect x="14" y="740" width="352" height="36" rx="7"/>
+<text x="26" y="755" class="nname">Cost per Learning Hour Produced</text>
+<text x="26" y="768" class="nsub">INR · Monthly</text>
+</g>
+<g class="node nk-team tm-fs" id="t_fs_12" data-team="fs" tabindex="0">
+<rect x="14" y="784" width="352" height="36" rx="7"/>
+<text x="26" y="799" class="nname">Cost per Vernacular Content Hour</text>
+<text x="26" y="812" class="nsub">INR · Monthly</text>
+</g>
+<g class="node nk-team tm-fs" id="t_fs_13" data-team="fs" tabindex="0">
+<rect x="14" y="828" width="352" height="36" rx="7"/>
+<text x="26" y="843" class="nname">Cost per MCQ Generated</text>
+<text x="26" y="856" class="nsub">INR · Monthly</text>
+</g>
+<g class="node nk-team tm-fs" id="t_fs_14" data-team="fs" tabindex="0">
+<rect x="14" y="872" width="352" height="36" rx="7"/>
+<text x="26" y="887" class="nname">Cost per Coding Question</text>
+<text x="26" y="900" class="nsub">INR · Monthly</text>
+</g>
+<g class="node nk-team tm-fs" id="t_fs_15" data-team="fs" tabindex="0">
+<rect x="14" y="916" width="352" height="36" rx="7"/>
+<text x="26" y="931" class="nname">Cost per Branding Content Asset</text>
+<text x="26" y="944" class="nsub">INR · Monthly</text>
+</g>
+<g class="node nk-team tm-fs" id="t_fs_16" data-team="fs" tabindex="0">
+<rect x="14" y="960" width="352" height="36" rx="7"/>
+<text x="26" y="975" class="nname">Platform Runtime Cost per Active Learner</text>
+<text x="26" y="988" class="nsub">INR · Monthly</text>
+</g>
+<text x="16" y="1015" class="catlab" data-team="fs">CONTENT RELEVANCE</text>
+<g class="node nk-team tm-fs" id="t_fs_17" data-team="fs" tabindex="0">
+<rect x="14" y="1028" width="352" height="36" rx="7"/>
+<text x="26" y="1043" class="nname">Tech Stack Freshness Rate</text>
+<text x="26" y="1056" class="nsub">% · Monthly</text>
+</g>
+<text x="16" y="1083" class="catlab" data-team="fs">STAKEHOLDER ALIGNMENT</text>
+<g class="node nk-team tm-fs" id="t_fs_18" data-team="fs" tabindex="0">
+<rect x="14" y="1096" width="352" height="36" rx="7"/>
+<text x="26" y="1111" class="nname">Stakeholder Content Request Fulfillment Rate</text>
+<text x="26" y="1124" class="nsub">% · Monthly</text>
+</g>
+<g class="node nk-team tm-fs" id="t_fs_19" data-team="fs" tabindex="0">
+<rect x="14" y="1140" width="352" height="36" rx="7"/>
+<text x="26" y="1155" class="nname">Cross-functional Sprint Delivery Rate</text>
+<text x="26" y="1168" class="nsub">% · Monthly</text>
+</g>
+<text x="16" y="1195" class="catlab" data-team="fs">DOMAIN PRODUCT ENABLEMENT</text>
+<g class="node nk-team tm-fs" id="t_fs_20" data-team="fs" tabindex="0">
+<rect x="14" y="1208" width="352" height="36" rx="7"/>
+<text x="26" y="1223" class="nname">Evaluation Environment Coverage</text>
+<text x="26" y="1236" class="nsub">% · Quarterly</text>
+</g>
+<g class="node nk-team tm-fs" id="t_fs_21" data-team="fs" tabindex="0">
+<rect x="14" y="1252" width="352" height="36" rx="7"/>
+<text x="26" y="1267" class="nname">Domain Capability Delivery</text>
+<text x="26" y="1280" class="nsub">% · Quarterly</text>
+</g>
+<text x="16" y="1307" class="catlab" data-team="fs">TEAM OPS &amp; PEOPLE</text>
+<g class="node nk-team tm-fs hyg" id="t_fs_22" data-team="fs" tabindex="0">
+<rect x="14" y="1320" width="352" height="36" rx="7"/>
+<text x="26" y="1335" class="nname">Cost of Operations</text>
+<text x="26" y="1348" class="nsub">INR · Monthly · hygiene</text>
+</g>
+<g class="node nk-team tm-fs hyg" id="t_fs_23" data-team="fs" tabindex="0">
+<rect x="14" y="1364" width="352" height="36" rx="7"/>
+<text x="26" y="1379" class="nname">Roadmap Items Completion</text>
+<text x="26" y="1392" class="nsub">% · Monthly · hygiene</text>
+</g>
+<g class="node nk-team tm-fs hyg" id="t_fs_24" data-team="fs" tabindex="0">
+<rect x="14" y="1408" width="352" height="36" rx="7"/>
+<text x="26" y="1423" class="nname">Hires Made</text>
+<text x="26" y="1436" class="nsub">Count · Monthly · hygiene</text>
+</g>
+<g class="node nk-team tm-fs hyg" id="t_fs_25" data-team="fs" tabindex="0">
+<rect x="14" y="1452" width="352" height="36" rx="7"/>
+<text x="26" y="1467" class="nname">Cost per Hire</text>
+<text x="26" y="1480" class="nsub">INR · Monthly · hygiene</text>
+</g>
+<g class="node nk-team tm-fs hyg" id="t_fs_26" data-team="fs" tabindex="0">
+<rect x="14" y="1496" width="352" height="36" rx="7"/>
+<text x="26" y="1511" class="nname">Team Retention Rate</text>
+<text x="26" y="1524" class="nsub">% · Per appraisal cycle · hygiene</text>
+</g>
+<g class="node nk-team tm-fs" id="t_fs_27" data-team="fs" tabindex="0">
+<rect x="14" y="1540" width="352" height="36" rx="7"/>
+<text x="26" y="1555" class="nname">Power Performers Created</text>
+<text x="26" y="1568" class="nsub">Count · Per appraisal cycle</text>
+</g>
+<g class="node nk-team tm-fs hyg" id="t_fs_28" data-team="fs" tabindex="0">
+<rect x="14" y="1584" width="352" height="36" rx="7"/>
+<text x="26" y="1599" class="nname">Creative Resource Utilisation Rate</text>
+<text x="26" y="1612" class="nsub">% · Monthly · hygiene</text>
+</g>
+<g class="node nk-cap tm-csi" id="a_csi" data-team="csi" tabindex="0">
+<rect x="14" y="1674" width="352" height="30" rx="7"/>
+<text x="26" y="1693" class="ncap">Section A — answers for 7 org rows</text>
+</g>
+<text x="16" y="1727" class="catlab" data-team="csi">CONTENT EFFICIENCY</text>
+<g class="node nk-team tm-csi" id="t_csi_0" data-team="csi" tabindex="0">
+<rect x="14" y="1740" width="352" height="36" rx="7"/>
+<text x="26" y="1755" class="nname">Cost per BOS Approval</text>
+<text x="26" y="1768" class="nsub">INR · Quarterly</text>
+</g>
+<g class="node nk-team tm-csi" id="t_csi_1" data-team="csi" tabindex="0">
+<rect x="14" y="1784" width="352" height="36" rx="7"/>
+<text x="26" y="1799" class="nname">Cost per Vernacular Content Hour</text>
+<text x="26" y="1812" class="nsub">INR · Monthly</text>
+</g>
+<text x="16" y="1839" class="catlab" data-team="csi">TEAM OPS &amp; PEOPLE</text>
+<g class="node nk-team tm-csi hyg" id="t_csi_2" data-team="csi" tabindex="0">
+<rect x="14" y="1852" width="352" height="36" rx="7"/>
+<text x="26" y="1867" class="nname">Cost of Operations</text>
+<text x="26" y="1880" class="nsub">INR · Monthly · hygiene</text>
+</g>
+<g class="node nk-team tm-csi hyg" id="t_csi_3" data-team="csi" tabindex="0">
+<rect x="14" y="1896" width="352" height="36" rx="7"/>
+<text x="26" y="1911" class="nname">Roadmap Items Completion</text>
+<text x="26" y="1924" class="nsub">% · Monthly · hygiene</text>
+</g>
+<g class="node nk-team tm-csi hyg" id="t_csi_4" data-team="csi" tabindex="0">
+<rect x="14" y="1940" width="352" height="36" rx="7"/>
+<text x="26" y="1955" class="nname">Hires Made</text>
+<text x="26" y="1968" class="nsub">Count · Monthly · hygiene</text>
+</g>
+<g class="node nk-team tm-csi hyg" id="t_csi_5" data-team="csi" tabindex="0">
+<rect x="14" y="1984" width="352" height="36" rx="7"/>
+<text x="26" y="1999" class="nname">Cost per Hire</text>
+<text x="26" y="2012" class="nsub">INR · Monthly · hygiene</text>
+</g>
+<g class="node nk-team tm-csi hyg" id="t_csi_6" data-team="csi" tabindex="0">
+<rect x="14" y="2028" width="352" height="36" rx="7"/>
+<text x="26" y="2043" class="nname">Team Retention Rate</text>
+<text x="26" y="2056" class="nsub">% · Per appraisal cycle · hygiene</text>
+</g>
+<g class="node nk-team tm-csi" id="t_csi_7" data-team="csi" tabindex="0">
+<rect x="14" y="2072" width="352" height="36" rx="7"/>
+<text x="26" y="2087" class="nname">Power Performers Created</text>
+<text x="26" y="2100" class="nsub">Count · Per appraisal cycle</text>
+</g>
+<g class="node nk-cap tm-cc" id="a_cc" data-team="cc" tabindex="0">
+<rect x="14" y="2162" width="352" height="30" rx="7"/>
+<text x="26" y="2181" class="ncap">Section A — answers for 1 org row</text>
+</g>
+<text x="16" y="2215" class="catlab" data-team="cc">BUSINESS OPS — SHARED TEAMS</text>
+<g class="node nk-team tm-cc" id="t_cc_0" data-team="cc" tabindex="0">
+<rect x="14" y="2228" width="352" height="36" rx="7"/>
+<text x="26" y="2243" class="nname">Shared-Team Deliverables Landed</text>
+<text x="26" y="2256" class="nsub">% · Monthly</text>
+</g>
+<g class="node nk-team tm-cc" id="t_cc_1" data-team="cc" tabindex="0">
+<rect x="14" y="2272" width="352" height="36" rx="7"/>
+<text x="26" y="2287" class="nname">Shared-Team Spend vs Plan</text>
+<text x="26" y="2300" class="nsub">% · Monthly</text>
+</g>
+<g class="node nk-team tm-cc" id="t_cc_2" data-team="cc" tabindex="0">
+<rect x="14" y="2316" width="352" height="36" rx="7"/>
+<text x="26" y="2331" class="nname">Creative Resource Utilisation — All Units</text>
+<text x="26" y="2344" class="nsub">% · Monthly</text>
+</g>
+<g class="node nk-team tm-cc" id="t_cc_3" data-team="cc" tabindex="0">
+<rect x="14" y="2360" width="352" height="36" rx="7"/>
+<text x="26" y="2375" class="nname">Cross-functional Resource Utilisation — All Units</text>
+<text x="26" y="2388" class="nsub">% · Monthly</text>
+</g>
+<text x="16" y="2415" class="catlab" data-team="cc">AGENTIC CONTENT PLATFORM</text>
+<g class="node nk-team tm-cc" id="t_cc_4" data-team="cc" tabindex="0">
+<rect x="14" y="2428" width="352" height="36" rx="7"/>
+<text x="26" y="2443" class="nname">Shared Tool Adoption</text>
+<text x="26" y="2456" class="nsub">% · Monthly</text>
+</g>
+<text x="16" y="2483" class="catlab" data-team="cc">PMO</text>
+<g class="node nk-team tm-cc hyg" id="t_cc_5" data-team="cc" tabindex="0">
+<rect x="14" y="2496" width="352" height="36" rx="7"/>
+<text x="26" y="2511" class="nname">Worklog &amp; Status Hygiene — All Units</text>
+<text x="26" y="2524" class="nsub">% · Monthly · hygiene</text>
+</g>
+<g class="node nk-team tm-cc hyg" id="t_cc_6" data-team="cc" tabindex="0">
+<rect x="14" y="2540" width="352" height="36" rx="7"/>
+<text x="26" y="2555" class="nname">Check-ins Run</text>
+<text x="26" y="2568" class="nsub">% · Monthly · hygiene</text>
+</g>
+<g class="node nk-team tm-cc hyg" id="t_cc_7" data-team="cc" tabindex="0">
+<rect x="14" y="2584" width="352" height="36" rx="7"/>
+<text x="26" y="2599" class="nname">Actions Closed</text>
+<text x="26" y="2612" class="nsub">% · Monthly · hygiene</text>
+</g>
+<text x="994" y="659.0" class="kgrplab">KRA 1 — SPI BANDS</text>
+<g class="node nk-org" id="o0" data-team="" tabindex="0">
+<rect x="992" y="678.0" width="384" height="58" rx="7"/>
+<text x="1004" y="695.0" class="nname">Program Delivery Gap</text>
+<text x="1004" y="710.0" class="nsub">Lane: Product Learning Experience</text>
+<text x="1004" y="724.0" class="nsub2">Moved by: CSI team + Product Managers — counterparty: Program Ops · a…</text>
+</g>
+<g class="node nk-org" id="o1" data-team="" tabindex="0">
+<rect x="992" y="748.0" width="384" height="58" rx="7"/>
+<text x="1004" y="765.0" class="nname">Module-Quiz Score Bands</text>
+<text x="1004" y="780.0" class="nsub">Lane: Learning Domains</text>
+<text x="1004" y="794.0" class="nsub2">Moved by: Content + Pedagogy Experts + DA/DEs</text>
+</g>
+<g class="node nk-org" id="o2" data-team="" tabindex="0">
+<rect x="992" y="818.0" width="384" height="58" rx="7"/>
+<text x="1004" y="835.0" class="nname">Content–Assessment Alignment</text>
+<text x="1004" y="850.0" class="nsub">Lane: Learning Domains</text>
+<text x="1004" y="864.0" class="nsub2">Moved by: Content + Pedagogy Experts + DA/DEs</text>
+</g>
+<g class="node nk-org" id="o3" data-team="" tabindex="0">
+<rect x="992" y="888.0" width="384" height="58" rx="7"/>
+<text x="1004" y="905.0" class="nname">Engagement-Matrix Cell Migration</text>
+<text x="1004" y="920.0" class="nsub">Lane: Learning Platform</text>
+<text x="1004" y="934.0" class="nsub2">Moved by: Product Managers + Engineering + DA/DEs</text>
+</g>
+<text x="994" y="969.0" class="kgrplab">KRA 2 — ACADEMICS CSAT</text>
+<g class="node nk-org" id="o4" data-team="" tabindex="0">
+<rect x="992" y="988.0" width="384" height="58" rx="7"/>
+<text x="1004" y="1005.0" class="nname">Content Issue Resolution Efficiency</text>
+<text x="1004" y="1020.0" class="nsub">Lane: Learning Domains</text>
+<text x="1004" y="1034.0" class="nsub2">Moved by: Content + Engineering</text>
+</g>
+<g class="node nk-org" id="o5" data-team="" tabindex="0">
+<rect x="992" y="1058.0" width="384" height="58" rx="7"/>
+<text x="1004" y="1075.0" class="nname">Content Issue Recurrence</text>
+<text x="1004" y="1090.0" class="nsub">Lane: Learning Domains</text>
+<text x="1004" y="1104.0" class="nsub2">Moved by: Content + Engineering</text>
+</g>
+<g class="node nk-org" id="o6" data-team="" tabindex="0">
+<rect x="992" y="1128.0" width="384" height="58" rx="7"/>
+<text x="1004" y="1145.0" class="nname">Agentic Production Coverage</text>
+<text x="1004" y="1160.0" class="nsub">Lane: Agentic Content Platform</text>
+<text x="1004" y="1174.0" class="nsub2">Moved by: Content–Central + DA/DEs — pipelines &amp; production workflows…</text>
+</g>
+<g class="node nk-org" id="o7" data-team="" tabindex="0">
+<rect x="992" y="1198.0" width="384" height="58" rx="7"/>
+<text x="1004" y="1215.0" class="nname">Learning Environment Satisfaction</text>
+<text x="1004" y="1230.0" class="nsub">Lane: Developer Platform</text>
+<text x="1004" y="1244.0" class="nsub2">Moved by: Engineering</text>
+</g>
+<g class="node nk-org" id="o8" data-team="" tabindex="0">
+<rect x="992" y="1268.0" width="384" height="58" rx="7"/>
+<text x="1004" y="1285.0" class="nname">Availability &amp; Saturation Detection</text>
+<text x="1004" y="1300.0" class="nsub">Lane: Developer Platform</text>
+<text x="1004" y="1314.0" class="nsub2">Moved by: Engineering</text>
+</g>
+<g class="node nk-org" id="o9" data-team="" tabindex="0">
+<rect x="992" y="1338.0" width="384" height="58" rx="7"/>
+<text x="1004" y="1355.0" class="nname">Tail-Latency User Impact</text>
+<text x="1004" y="1370.0" class="nsub">Lane: Developer Platform</text>
+<text x="1004" y="1384.0" class="nsub2">Moved by: Engineering</text>
+</g>
+<g class="node nk-org" id="o10" data-team="" tabindex="0">
+<rect x="992" y="1408.0" width="384" height="58" rx="7"/>
+<text x="1004" y="1425.0" class="nname">Platform Issue Resolution Efficiency</text>
+<text x="1004" y="1440.0" class="nsub">Lane: Developer Platform</text>
+<text x="1004" y="1454.0" class="nsub2">Moved by: Engineering</text>
+</g>
+<g class="node nk-org" id="o11" data-team="" tabindex="0">
+<rect x="992" y="1478.0" width="384" height="58" rx="7"/>
+<text x="1004" y="1495.0" class="nname">Platform Issue Recurrence</text>
+<text x="1004" y="1510.0" class="nsub">Lane: Developer Platform</text>
+<text x="1004" y="1524.0" class="nsub2">Moved by: Engineering</text>
+</g>
+<g class="node nk-org" id="o12" data-team="" tabindex="0">
+<rect x="992" y="1548.0" width="384" height="58" rx="7"/>
+<text x="1004" y="1565.0" class="nname">Journey Step Health</text>
+<text x="1004" y="1580.0" class="nsub">Lane: Product Learning Experience</text>
+<text x="1004" y="1594.0" class="nsub2">Moved by: Product Managers + DA/DEs + CSI team + Pedagogy Experts (jo…</text>
+</g>
+<g class="node nk-org" id="o13" data-team="" tabindex="0">
+<rect x="992" y="1618.0" width="384" height="58" rx="7"/>
+<text x="1004" y="1635.0" class="nname">Product Issue Resolution Efficiency</text>
+<text x="1004" y="1650.0" class="nsub">Lane: Product Learning Experience</text>
+<text x="1004" y="1664.0" class="nsub2">Moved by: Product Managers + CSI team</text>
+</g>
+<g class="node nk-org" id="o14" data-team="" tabindex="0">
+<rect x="992" y="1688.0" width="384" height="58" rx="7"/>
+<text x="1004" y="1705.0" class="nname">Product Issue Recurrence</text>
+<text x="1004" y="1720.0" class="nsub">Lane: Product Learning Experience</text>
+<text x="1004" y="1734.0" class="nsub2">Moved by: Product Managers + CSI team</text>
+</g>
+<text x="994" y="1769.0" class="kgrplab">KRA 3 — UNIVERSITY RELATIONS CSAT</text>
+<g class="node nk-org" id="o15" data-team="" tabindex="0">
+<rect x="992" y="1788.0" width="384" height="58" rx="7"/>
+<text x="1004" y="1805.0" class="nname">BOS Credit Acceptance</text>
+<text x="1004" y="1820.0" class="nsub">Lane: Product Learning Experience</text>
+<text x="1004" y="1834.0" class="nsub2">Moved by: CSI team + Content</text>
+</g>
+<g class="node nk-org" id="o16" data-team="" tabindex="0">
+<rect x="992" y="1858.0" width="384" height="58" rx="7"/>
+<text x="1004" y="1875.0" class="nname">University Communication TAT</text>
+<text x="1004" y="1890.0" class="nsub">Lane: Product Learning Experience</text>
+<text x="1004" y="1904.0" class="nsub2">Moved by: CSI team</text>
+</g>
+<g class="node nk-org" id="o17" data-team="" tabindex="0">
+<rect x="992" y="1928.0" width="384" height="58" rx="7"/>
+<text x="1004" y="1945.0" class="nname">University Curriculum &amp; Framework Compliance</text>
+<text x="1004" y="1960.0" class="nsub">Lane: Product Learning Experience</text>
+<text x="1004" y="1974.0" class="nsub2">Moved by: CSI team + Content</text>
+</g>
+<text x="994" y="2009.0" class="kgrplab">KRA 4 — GRIT NOVICE BADGES</text>
+<g class="node nk-org" id="o18" data-team="" tabindex="0">
+<rect x="992" y="2028.0" width="384" height="58" rx="7"/>
+<text x="1004" y="2045.0" class="nname">Industry Update Adherence</text>
+<text x="1004" y="2060.0" class="nsub">Lane: Learning Domains</text>
+<text x="1004" y="2074.0" class="nsub2">Moved by: Content</text>
+</g>
+<g class="node nk-dept" id="d_bi" data-team="" tabindex="0">
+<rect x="566" y="271.0" width="300" height="46" rx="7"/>
+<text x="578" y="289.0" class="nname">Business Impact</text>
+<text x="578" y="304.0" class="nsub">§5 block — Graded Assessment Achievement · Weekly…</text>
+</g>
+<g class="node nk-dept" id="d_cv" data-team="" tabindex="0">
+<rect x="566" y="583.0" width="300" height="46" rx="7"/>
+<text x="578" y="601.0" class="nname">Content Velocity</text>
+<text x="578" y="616.0" class="nsub">§5 block — 4 delivery rows</text>
+</g>
+<g class="node nk-dept" id="d_ce" data-team="" tabindex="0">
+<rect x="566" y="1187.6666666666667" width="300" height="46" rx="7"/>
+<text x="578" y="1205.6666666666667" class="nname">Content Efficiency</text>
+<text x="578" y="1220.6666666666667" class="nsub">§5 block — matching cost-per-item rows</text>
+</g>
+<g class="node nk-dept" id="d_pccc" data-team="" tabindex="0">
+<rect x="566" y="1255.6666666666667" width="300" height="46" rx="7"/>
+<text x="578" y="1273.6666666666667" class="nname">Product Capability Configuration Coverage</text>
+<text x="578" y="1288.6666666666667" class="nsub">§5 row · Product Learning Experience lane</text>
+</g>
+<g class="node nk-dept" id="d_sa" data-team="" tabindex="0">
+<rect x="566" y="1465.0" width="300" height="46" rx="7"/>
+<text x="578" y="1483.0" class="nname">Stakeholder Alignment</text>
+<text x="578" y="1498.0" class="nsub">§5 block — request fulfillment · sprint delivery</text>
+</g>
+<g class="node nk-dept" id="d_dtb" data-team="" tabindex="0">
+<rect x="566" y="1783.0" width="300" height="46" rx="7"/>
+<text x="578" y="1801.0" class="nname">Develop the Best (mentoring)</text>
+<text x="578" y="1816.0" class="nsub">intent in §5 Executive Ops — not yet its own row</text>
+</g>
+<g class="node nk-dept" id="d_cru" data-team="" tabindex="0">
+<rect x="566" y="2293.0" width="300" height="46" rx="7"/>
+<text x="578" y="2311.0" class="nname">Creative Resource Utilisation</text>
+<text x="578" y="2326.0" class="nsub">§5 row · PMO lane</text>
+</g>
+<g class="node nk-dept" id="d_xru" data-team="" tabindex="0">
+<rect x="566" y="2361.0" width="300" height="46" rx="7"/>
+<text x="578" y="2379.0" class="nname">Cross-functional Resource Utilisation</text>
+<text x="578" y="2394.0" class="nsub">§5 row · PMO lane</text>
+</g>
+<g class="node nk-kra" id="k1" data-team="" tabindex="0">
+<rect x="1444" y="659.2" width="164" height="66" rx="7"/>
+<text x="1456" y="681.2" class="kname">KRA 1</text>
+<text x="1456" y="698.2" class="ksub">SPI Bands</text>
+<text x="1456" y="713.2" class="ksub2">weight 30%</text>
+</g>
+<g class="node nk-kra" id="k2" data-team="" tabindex="0">
+<rect x="1444" y="1254.5" width="164" height="66" rx="7"/>
+<text x="1456" y="1276.5" class="kname">KRA 2</text>
+<text x="1456" y="1293.5" class="ksub">Academics CSAT</text>
+</g>
+<g class="node nk-kra" id="k3" data-team="" tabindex="0">
+<rect x="1444" y="1559.0" width="164" height="66" rx="7"/>
+<text x="1456" y="1581.0" class="kname">KRA 3</text>
+<text x="1456" y="1598.0" class="ksub">University Relations CSAT</text>
+</g>
+<g class="node nk-kra" id="k4" data-team="" tabindex="0">
+<rect x="1444" y="2024.0" width="164" height="66" rx="7"/>
+<text x="1456" y="2046.0" class="kname">KRA 4</text>
+<text x="1456" y="2063.0" class="ksub">GRIT Novice Badges</text>
+</g>
+<g class="node nk-kra" id="k5" data-team="" tabindex="0">
+<rect x="1444" y="2150.0" width="164" height="66" rx="7"/>
+<text x="1456" y="2172.0" class="kname">KRA 5</text>
+<text x="1456" y="2189.0" class="ksub">Employability</text>
+<text x="1456" y="2204.0" class="ksub2">not forced — by design</text>
+</g>
+</svg></div>
+  <div id="tip"></div>
+  <details><summary>Every connection as a list (for checking)</summary>
+    <div class="tscroll"><table><tbody><tr><td>FS &amp; CS Core · Summative Skill Assessment Achievement Rate</td><td>ladders to</td><td>KRA 1 — SPI Bands</td></tr><tr><td>FS &amp; CS Core · Formative Skill Assessment Achievement Rate</td><td>ladders to</td><td>FS &amp; CS Core · Summative Skill Assessment Achievement Rate</td></tr><tr><td>FS &amp; CS Core · Formative Skill Assessment Achievement Rate</td><td>ladders to</td><td>Org · Content–Assessment Alignment</td></tr><tr><td>FS &amp; CS Core · Graded Assessment Achievement Rate</td><td>ladders to</td><td>§5 · Business Impact</td></tr><tr><td>FS &amp; CS Core · Weekly Active Users</td><td>ladders to</td><td>§5 · Business Impact</td></tr><tr><td>FS &amp; CS Core · Pedagogy Initiative Impact</td><td>ladders to</td><td>Org · Module-Quiz Score Bands</td></tr><tr><td>FS &amp; CS Core · Pedagogy Initiative Impact</td><td>ladders to</td><td>KRA 2 — Academics CSAT</td></tr><tr><td>FS &amp; CS Core · Learner Accessed Content Completion Rate</td><td>ladders to</td><td>Org · Engagement-Matrix Cell Migration</td></tr><tr><td>FS &amp; CS Core · Practice Attempt-to-Completion Rate</td><td>ladders to</td><td>Org · Journey Step Health</td></tr><tr><td>FS &amp; CS Core · Practice Attempt-to-Completion Rate</td><td>ladders to</td><td>Org · Learning Environment Satisfaction</td></tr><tr><td>FS &amp; CS Core · Learning Content Hours Delivered</td><td>ladders to</td><td>§5 · Content Velocity</td></tr><tr><td>FS &amp; CS Core · Vernacular Content Hours Delivered</td><td>ladders to</td><td>§5 · Content Velocity</td></tr><tr><td>FS &amp; CS Core · Practice &amp; Assessment Content Pieces Delivered</td><td>ladders to</td><td>§5 · Content Velocity</td></tr><tr><td>FS &amp; CS Core · Branding Content Assets Delivered</td><td>ladders to</td><td>§5 · Content Velocity</td></tr><tr><td>FS &amp; CS Core · Cost per Learning Hour Produced</td><td>ladders to</td><td>§5 · Content Efficiency</td></tr><tr><td>FS &amp; CS Core · Cost per Vernacular Content Hour</td><td>ladders to</td><td>§5 · Content Efficiency</td></tr><tr><td>FS &amp; CS Core · Cost per MCQ Generated</td><td>ladders to</td><td>§5 · Content Efficiency</td></tr><tr><td>FS &amp; CS Core · Cost per Coding Question</td><td>ladders to</td><td>§5 · Content Efficiency</td></tr><tr><td>FS &amp; CS Core · Cost per Branding Content Asset</td><td>ladders to</td><td>§5 · Content Efficiency</td></tr><tr><td>FS &amp; CS Core · Platform Runtime Cost per Active Learner</td><td>ladders to</td><td>§5 · Content Efficiency</td></tr><tr><td>FS &amp; CS Core · Tech Stack Freshness Rate</td><td>ladders to</td><td>Org · Industry Update Adherence</td></tr><tr><td>FS &amp; CS Core · Stakeholder Content Request Fulfillment Rate</td><td>ladders to</td><td>§5 · Stakeholder Alignment</td></tr><tr><td>FS &amp; CS Core · Cross-functional Sprint Delivery Rate</td><td>ladders to</td><td>§5 · Stakeholder Alignment</td></tr><tr><td>FS &amp; CS Core · Evaluation Environment Coverage</td><td>ladders to</td><td>FS &amp; CS Core · Practice Attempt-to-Completion Rate</td></tr><tr><td>FS &amp; CS Core · Evaluation Environment Coverage</td><td>ladders to</td><td>Org · Journey Step Health</td></tr><tr><td>FS &amp; CS Core · Evaluation Environment Coverage</td><td>ladders to</td><td>Org · Learning Environment Satisfaction</td></tr><tr><td>FS &amp; CS Core · Domain Capability Delivery</td><td>ladders to</td><td>§5 · Product Capability Configuration Coverage</td></tr><tr><td>FS &amp; CS Core · Power Performers Created</td><td>ladders to</td><td>§5 · Develop the Best (mentoring)</td></tr><tr><td>FS &amp; CS Core Section A — Section A — answers for 10 org rows</td><td>answers for (mirror)</td><td>Org · Module-Quiz Score Bands</td></tr><tr><td>FS &amp; CS Core Section A — Section A — answers for 10 org rows</td><td>answers for (mirror)</td><td>Org · Content–Assessment Alignment</td></tr><tr><td>FS &amp; CS Core Section A — Section A — answers for 10 org rows</td><td>answers for (mirror)</td><td>Org · Engagement-Matrix Cell Migration</td></tr><tr><td>FS &amp; CS Core Section A — Section A — answers for 10 org rows</td><td>answers for (mirror)</td><td>Org · Content Issue Resolution Efficiency</td></tr><tr><td>FS &amp; CS Core Section A — Section A — answers for 10 org rows</td><td>answers for (mirror)</td><td>Org · Content Issue Recurrence</td></tr><tr><td>FS &amp; CS Core Section A — Section A — answers for 10 org rows</td><td>answers for (mirror)</td><td>Org · Agentic Production Coverage</td></tr><tr><td>FS &amp; CS Core Section A — Section A — answers for 10 org rows</td><td>answers for (mirror)</td><td>Org · Learning Environment Satisfaction</td></tr><tr><td>FS &amp; CS Core Section A — Section A — answers for 10 org rows</td><td>answers for (mirror)</td><td>Org · BOS Credit Acceptance</td></tr><tr><td>FS &amp; CS Core Section A — Section A — answers for 10 org rows</td><td>answers for (mirror)</td><td>Org · University Curriculum &amp; Framework Compliance</td></tr><tr><td>FS &amp; CS Core Section A — Section A — answers for 10 org rows</td><td>answers for (mirror)</td><td>Org · Industry Update Adherence</td></tr><tr><td>Content–CSI · Cost per BOS Approval</td><td>ladders to</td><td>§5 · Content Efficiency</td></tr><tr><td>Content–CSI · Cost per Vernacular Content Hour</td><td>ladders to</td><td>§5 · Content Efficiency</td></tr><tr><td>Content–CSI · Power Performers Created</td><td>ladders to</td><td>§5 · Develop the Best (mentoring)</td></tr><tr><td>Content–CSI Section A — Section A — answers for 7 org rows</td><td>answers for (mirror)</td><td>Org · Program Delivery Gap</td></tr><tr><td>Content–CSI Section A — Section A — answers for 7 org rows</td><td>answers for (mirror)</td><td>Org · Journey Step Health</td></tr><tr><td>Content–CSI Section A — Section A — answers for 7 org rows</td><td>answers for (mirror)</td><td>Org · Product Issue Resolution Efficiency</td></tr><tr><td>Content–CSI Section A — Section A — answers for 7 org rows</td><td>answers for (mirror)</td><td>Org · Product Issue Recurrence</td></tr><tr><td>Content–CSI Section A — Section A — answers for 7 org rows</td><td>answers for (mirror)</td><td>Org · BOS Credit Acceptance</td></tr><tr><td>Content–CSI Section A — Section A — answers for 7 org rows</td><td>answers for (mirror)</td><td>Org · University Communication TAT</td></tr><tr><td>Content–CSI Section A — Section A — answers for 7 org rows</td><td>answers for (mirror)</td><td>Org · University Curriculum &amp; Framework Compliance</td></tr><tr><td>Content–Central · Shared-Team Deliverables Landed</td><td>ladders to</td><td>§5 · Stakeholder Alignment</td></tr><tr><td>Content–Central · Shared-Team Spend vs Plan</td><td>ladders to</td><td>§5 · Content Efficiency</td></tr><tr><td>Content–Central · Creative Resource Utilisation — All Units</td><td>ladders to</td><td>§5 · Creative Resource Utilisation</td></tr><tr><td>Content–Central · Cross-functional Resource Utilisation — All Units</td><td>ladders to</td><td>§5 · Cross-functional Resource Utilisation</td></tr><tr><td>Content–Central · Shared Tool Adoption</td><td>ladders to</td><td>Org · Agentic Production Coverage</td></tr><tr><td>Content–Central Section A — Section A — answers for 1 org row</td><td>answers for (mirror)</td><td>Org · Agentic Production Coverage</td></tr><tr><td>Org · Program Delivery Gap</td><td>rolls into</td><td>KRA 1 — SPI Bands</td></tr><tr><td>Org · Program Delivery Gap</td><td>rolls into</td><td>KRA 3 — University Relations CSAT</td></tr><tr><td>Org · Module-Quiz Score Bands</td><td>rolls into</td><td>KRA 1 — SPI Bands</td></tr><tr><td>Org · Content–Assessment Alignment</td><td>rolls into</td><td>KRA 1 — SPI Bands</td></tr><tr><td>Org · Engagement-Matrix Cell Migration</td><td>rolls into</td><td>KRA 1 — SPI Bands</td></tr><tr><td>Org · Content Issue Resolution Efficiency</td><td>rolls into</td><td>KRA 2 — Academics CSAT</td></tr><tr><td>Org · Content Issue Recurrence</td><td>rolls into</td><td>KRA 2 — Academics CSAT</td></tr><tr><td>Org · Agentic Production Coverage</td><td>rolls into</td><td>KRA 2 — Academics CSAT</td></tr><tr><td>Org · Learning Environment Satisfaction</td><td>rolls into</td><td>KRA 2 — Academics CSAT</td></tr><tr><td>Org · Availability &amp; Saturation Detection</td><td>rolls into</td><td>KRA 2 — Academics CSAT</td></tr><tr><td>Org · Tail-Latency User Impact</td><td>rolls into</td><td>KRA 2 — Academics CSAT</td></tr><tr><td>Org · Platform Issue Resolution Efficiency</td><td>rolls into</td><td>KRA 2 — Academics CSAT</td></tr><tr><td>Org · Platform Issue Recurrence</td><td>rolls into</td><td>KRA 2 — Academics CSAT</td></tr><tr><td>Org · Journey Step Health</td><td>rolls into</td><td>KRA 2 — Academics CSAT</td></tr><tr><td>Org · Product Issue Resolution Efficiency</td><td>rolls into</td><td>KRA 2 — Academics CSAT</td></tr><tr><td>Org · Product Issue Recurrence</td><td>rolls into</td><td>KRA 2 — Academics CSAT</td></tr><tr><td>Org · BOS Credit Acceptance</td><td>rolls into</td><td>KRA 3 — University Relations CSAT</td></tr><tr><td>Org · University Communication TAT</td><td>rolls into</td><td>KRA 3 — University Relations CSAT</td></tr><tr><td>Org · University Curriculum &amp; Framework Compliance</td><td>rolls into</td><td>KRA 3 — University Relations CSAT</td></tr><tr><td>Org · Industry Update Adherence</td><td>rolls into</td><td>KRA 4 — GRIT Novice Badges</td></tr></tbody></table></div>
+  </details>
+  <div class="foot">
+    <p><b>Hygiene rows (no ladder, by design):</b> FS &amp; CS Core: Cost of Operations · FS &amp; CS Core: Roadmap Items Completion · FS &amp; CS Core: Hires Made · FS &amp; CS Core: Cost per Hire · FS &amp; CS Core: Team Retention Rate · FS &amp; CS Core: Creative Resource Utilisation Rate · Content–CSI: Cost of Operations · Content–CSI: Roadmap Items Completion · Content–CSI: Hires Made · Content–CSI: Cost per Hire · Content–CSI: Team Retention Rate · Content–Central: Worklog &amp; Status Hygiene — All Units · Content–Central: Check-ins Run · Content–Central: Actions Closed.</p>
+    <p><b>Section C asks are not drawn</b> — they are asks on other teams, not KPIs: <b>FS &amp; CS Core</b>: Assessment blueprints per cycle, Engagement &amp; LE dashboards, Domain-specific capability build, Classroom signal loop &nbsp;·&nbsp; <b>Content–CSI</b>: Conduction adherence, Learning-assets SLA, University response windows &nbsp;·&nbsp; <b>Content–Central</b>: Execution-management KPI tracking, Creative delivery-management tracking.</p>
+    <p><b>KRA 5 — Employability (B3 80% · B4 80%):</b> no KPI is forced into it by design. <b>KRA 4</b> also waits on GRIT-feature KPIs (pending definition with the GRIT owner). Dept-scoreboard boxes stop at §5 on purpose — that column is the department's own scoreboard; the org tracker column is the formal KRA path.</p>
+    <p>Generated from kra_training_sheet.xlsx (org tracker + FS/CSI/Central team views) and the one-pager §5 · 22 Aug 2026.</p>
+  </div>
+</div>
+<script>
+const EDGES = [{"s": "t_fs_0", "t": "k1", "k": "lad", "m": "fs"}, {"s": "t_fs_1", "t": "t_fs_0", "k": "lad", "m": "fs"}, {"s": "t_fs_1", "t": "o2", "k": "lad", "m": "fs"}, {"s": "t_fs_2", "t": "d_bi", "k": "lad", "m": "fs"}, {"s": "t_fs_3", "t": "d_bi", "k": "lad", "m": "fs"}, {"s": "t_fs_4", "t": "o1", "k": "lad", "m": "fs"}, {"s": "t_fs_4", "t": "k2", "k": "lad", "m": "fs"}, {"s": "t_fs_5", "t": "o3", "k": "lad", "m": "fs"}, {"s": "t_fs_6", "t": "o12", "k": "lad", "m": "fs"}, {"s": "t_fs_6", "t": "o7", "k": "lad", "m": "fs"}, {"s": "t_fs_7", "t": "d_cv", "k": "lad", "m": "fs"}, {"s": "t_fs_8", "t": "d_cv", "k": "lad", "m": "fs"}, {"s": "t_fs_9", "t": "d_cv", "k": "lad", "m": "fs"}, {"s": "t_fs_10", "t": "d_cv", "k": "lad", "m": "fs"}, {"s": "t_fs_11", "t": "d_ce", "k": "lad", "m": "fs"}, {"s": "t_fs_12", "t": "d_ce", "k": "lad", "m": "fs"}, {"s": "t_fs_13", "t": "d_ce", "k": "lad", "m": "fs"}, {"s": "t_fs_14", "t": "d_ce", "k": "lad", "m": "fs"}, {"s": "t_fs_15", "t": "d_ce", "k": "lad", "m": "fs"}, {"s": "t_fs_16", "t": "d_ce", "k": "lad", "m": "fs"}, {"s": "t_fs_17", "t": "o18", "k": "lad", "m": "fs"}, {"s": "t_fs_18", "t": "d_sa", "k": "lad", "m": "fs"}, {"s": "t_fs_19", "t": "d_sa", "k": "lad", "m": "fs"}, {"s": "t_fs_20", "t": "t_fs_6", "k": "lad", "m": "fs"}, {"s": "t_fs_20", "t": "o12", "k": "lad", "m": "fs"}, {"s": "t_fs_20", "t": "o7", "k": "lad", "m": "fs"}, {"s": "t_fs_21", "t": "d_pccc", "k": "lad", "m": "fs"}, {"s": "t_fs_27", "t": "d_dtb", "k": "lad", "m": "fs"}, {"s": "a_fs", "t": "o1", "k": "mir", "m": "fs"}, {"s": "a_fs", "t": "o2", "k": "mir", "m": "fs"}, {"s": "a_fs", "t": "o3", "k": "mir", "m": "fs"}, {"s": "a_fs", "t": "o4", "k": "mir", "m": "fs"}, {"s": "a_fs", "t": "o5", "k": "mir", "m": "fs"}, {"s": "a_fs", "t": "o6", "k": "mir", "m": "fs"}, {"s": "a_fs", "t": "o7", "k": "mir", "m": "fs"}, {"s": "a_fs", "t": "o15", "k": "mir", "m": "fs"}, {"s": "a_fs", "t": "o17", "k": "mir", "m": "fs"}, {"s": "a_fs", "t": "o18", "k": "mir", "m": "fs"}, {"s": "t_csi_0", "t": "d_ce", "k": "lad", "m": "csi"}, {"s": "t_csi_1", "t": "d_ce", "k": "lad", "m": "csi"}, {"s": "t_csi_7", "t": "d_dtb", "k": "lad", "m": "csi"}, {"s": "a_csi", "t": "o0", "k": "mir", "m": "csi"}, {"s": "a_csi", "t": "o12", "k": "mir", "m": "csi"}, {"s": "a_csi", "t": "o13", "k": "mir", "m": "csi"}, {"s": "a_csi", "t": "o14", "k": "mir", "m": "csi"}, {"s": "a_csi", "t": "o15", "k": "mir", "m": "csi"}, {"s": "a_csi", "t": "o16", "k": "mir", "m": "csi"}, {"s": "a_csi", "t": "o17", "k": "mir", "m": "csi"}, {"s": "t_cc_0", "t": "d_sa", "k": "lad", "m": "cc"}, {"s": "t_cc_1", "t": "d_ce", "k": "lad", "m": "cc"}, {"s": "t_cc_2", "t": "d_cru", "k": "lad", "m": "cc"}, {"s": "t_cc_3", "t": "d_xru", "k": "lad", "m": "cc"}, {"s": "t_cc_4", "t": "o6", "k": "lad", "m": "cc"}, {"s": "a_cc", "t": "o6", "k": "mir", "m": "cc"}, {"s": "o0", "t": "k1", "k": "kra", "m": ""}, {"s": "o0", "t": "k3", "k": "kra", "m": ""}, {"s": "o1", "t": "k1", "k": "kra", "m": ""}, {"s": "o2", "t": "k1", "k": "kra", "m": ""}, {"s": "o3", "t": "k1", "k": "kra", "m": ""}, {"s": "o4", "t": "k2", "k": "kra", "m": ""}, {"s": "o5", "t": "k2", "k": "kra", "m": ""}, {"s": "o6", "t": "k2", "k": "kra", "m": ""}, {"s": "o7", "t": "k2", "k": "kra", "m": ""}, {"s": "o8", "t": "k2", "k": "kra", "m": ""}, {"s": "o9", "t": "k2", "k": "kra", "m": ""}, {"s": "o10", "t": "k2", "k": "kra", "m": ""}, {"s": "o11", "t": "k2", "k": "kra", "m": ""}, {"s": "o12", "t": "k2", "k": "kra", "m": ""}, {"s": "o13", "t": "k2", "k": "kra", "m": ""}, {"s": "o14", "t": "k2", "k": "kra", "m": ""}, {"s": "o15", "t": "k3", "k": "kra", "m": ""}, {"s": "o16", "t": "k3", "k": "kra", "m": ""}, {"s": "o17", "t": "k3", "k": "kra", "m": ""}, {"s": "o18", "t": "k4", "k": "kra", "m": ""}];
+const TIPS = {"a_fs": "<b>FS &amp; CS Core \u2014 Section A<\/b><div class=\"tdesc\">Live mirrors of the org tracker rows this team answers for (same cells, not separate numbers):<\/div><div class=\"tmeta\">Module-Quiz Score Bands \u00b7 Content\u2013Assessment Alignment \u00b7 Engagement-Matrix Cell Migration \u00b7 Content Issue Resolution Efficiency \u00b7 Content Issue Recurrence \u00b7 Agentic Production Coverage \u00b7 Learning Environment Satisfaction \u00b7 BOS Credit Acceptance \u00b7 University Curriculum &amp; Framework Compliance \u00b7 Industry Update Adherence<\/div>", "t_fs_0": "<b>Summative Skill Assessment Achievement Rate<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Business Impact \u00b7 Section B<\/div><div class=\"tdesc\">Students scoring above the defined passing threshold in summative skill assessments across owned domains. Passing threshold set by the team per domain context (default reference: 70%).<\/div><div class=\"tmeta\">% \u00b7 Quarterly<\/div><div class=\"tlad\">Sheet says: direct \u2192 org KRA 1 \u2014 the summative achievement number itself (org scoreboard; the tracker reads it via module-quiz Bands + Alignment)<\/div>", "t_fs_1": "<b>Formative Skill Assessment Achievement Rate<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Business Impact \u00b7 Section B<\/div><div class=\"tdesc\">Students scoring above the defined passing threshold in formative skill assessments across owned domains. Passing threshold set by the team per domain context (default reference: 70%).<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 Summative SA Achievement (row above) + tracker Content\u2013Assessment Alignment \u2014 the early-warning formative read<\/div>", "t_fs_2": "<b>Graded Assessment Achievement Rate<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Business Impact \u00b7 Section B<\/div><div class=\"tdesc\">Students scoring above the defined passing threshold in university-conducted graded assessments \u2014 Mid-1, Mid-2 and End Semester exams \u2014 delivered in collaboration with the university.<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Business Impact (\u00a75) \u2014 university-conducted exams: NIAT SPI &amp; university trust<\/div>", "t_fs_3": "<b>Weekly Active Users<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Business Impact \u00b7 Section B<\/div><div class=\"tdesc\">Total prospective learner leads generated in the period through content-driven channels (organic, referral, campaigns, partnerships).<\/div><div class=\"tmeta\">Count \u00b7 Monthly (wkly avg)<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Business Impact (\u00a75) \u2014 Launchpad top-of-funnel<\/div>", "t_fs_4": "<b>Pedagogy Initiative Impact<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Content Effectiveness \u00b7 Section B<\/div><div class=\"tdesc\">Implemented pedagogy initiatives with measurable learning-outcome improvement. Outcome baseline must be defined and agreed before the initiative is launched.<\/div><div class=\"tmeta\">Count \u00b7 Quarterly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 module-quiz Bands + org KRA 2 Academics CSAT \u2014 pedagogy initiatives move the learning numbers<\/div>", "t_fs_5": "<b>Learner Accessed Content Completion Rate<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Content Effectiveness \u00b7 Section B<\/div><div class=\"tdesc\">Video units: for each learner, % of video units they opened that they also completed; averaged across learners. Excludes units with zero opens.<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 tracker Engagement-Matrix Cell Migration \u2014 video-stickiness leg of the value axis; access-conditioned, so conduction effects are stripped<\/div>", "t_fs_6": "<b>Practice Attempt-to-Completion Rate<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Content Effectiveness \u00b7 Section B<\/div><div class=\"tdesc\">Practice units: for each learner, % of coding/project exercises attempted that they also completed. Surfaces environment friction (IDE, playground, cloud setup) vs difficulty-related drop-off.<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 tracker Journey Step Health steps 6\u20137 (practice return &amp; completion) + Learning Environment Satisfaction<\/div>", "t_fs_7": "<b>Learning Content Hours Delivered<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Content Velocity \u00b7 Section B<\/div><div class=\"tdesc\">Total learning content hours created per month across all formats (video, text, interactive). Content serving multiple products counted once.<\/div><div class=\"tmeta\">Hours \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Content Velocity (\u00a75) \u2014 capacity for B4 &amp; new stacks<\/div>", "t_fs_8": "<b>Vernacular Content Hours Delivered<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Content Velocity \u00b7 Section B<\/div><div class=\"tdesc\">Total vernacular-language learning content hours created per month. Tracked separately from English hours \u2014 effort per vernacular hour differs significantly.<\/div><div class=\"tmeta\">Hours \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Content Velocity (\u00a75) \u2014 vernacular capacity<\/div>", "t_fs_9": "<b>Practice &amp; Assessment Content Pieces Delivered<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Content Velocity \u00b7 Section B<\/div><div class=\"tdesc\">Total practice and assessment pieces delivered monthly across owned domains (MCQs, coding questions, projects, case studies).<\/div><div class=\"tmeta\">Count \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Content Velocity (\u00a75) \u2014 practice depth behind Journey Step Health steps 5\u20137<\/div>", "t_fs_10": "<b>Branding Content Assets Delivered<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Content Velocity \u00b7 Section B<\/div><div class=\"tdesc\">Total branded content pieces produced monthly (thumbnails, banners, promo assets).<\/div><div class=\"tmeta\">Count \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Content Velocity (\u00a75)<\/div>", "t_fs_11": "<b>Cost per Learning Hour Produced<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Content Efficiency \u00b7 Section B<\/div><div class=\"tdesc\">Average cost to produce one hour of learning content. Includes people, tools and infra involved in creation. Tracks creation efficiency \u2014 not delivery cost.<\/div><div class=\"tmeta\">INR \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Cost per Learning Hour (\u00a75 Content Efficiency)<\/div>", "t_fs_12": "<b>Cost per Vernacular Content Hour<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Content Efficiency \u00b7 Section B<\/div><div class=\"tdesc\">Average cost to produce one hour of vernacular-language content. Includes team bandwidth involved in creation (contract basis, tools &amp; infrastructure).<\/div><div class=\"tmeta\">INR \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Cost per Vernacular Content Hour (\u00a75) \u2014 production-side twin of CSI&#x27;s central track<\/div>", "t_fs_13": "<b>Cost per MCQ Generated<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Content Efficiency \u00b7 Section B<\/div><div class=\"tdesc\">Average cost to develop one objective question, including both manual and AI-assisted production.<\/div><div class=\"tmeta\">INR \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Cost per MCQ (\u00a75 Content Efficiency)<\/div>", "t_fs_14": "<b>Cost per Coding Question<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Content Efficiency \u00b7 Section B<\/div><div class=\"tdesc\">Average cost to develop one coding question, including test-case design and evaluation-engine configuration.<\/div><div class=\"tmeta\">INR \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Cost per Coding Question (\u00a75 Content Efficiency)<\/div>", "t_fs_15": "<b>Cost per Branding Content Asset<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Content Efficiency \u00b7 Section B<\/div><div class=\"tdesc\">Average cost to create one branded content piece.<\/div><div class=\"tmeta\">INR \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Cost per Branding Asset (\u00a75 Content Efficiency)<\/div>", "t_fs_16": "<b>Platform Runtime Cost per Active Learner<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Content Efficiency \u00b7 Section B<\/div><div class=\"tdesc\">Total platform delivery costs (cloud compute, code-execution infra, cloud IDE hosting, GenAI API calls) divided by active learners in the period. Tracks delivery-cost efficiency as usage scales.<\/div><div class=\"tmeta\">INR \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Platform Runtime Cost per Active Learner (\u00a75) \u2014 the team&#x27;s share of delivery cost<\/div>", "t_fs_17": "<b>Tech Stack Freshness Rate<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Content Relevance \u00b7 Section B<\/div><div class=\"tdesc\">% of tools, frameworks, libraries and environments referenced in content (and configured in IDEs, playgrounds, cloud setups) matching the current stable or LTS version at audit.<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 tracker Industry Update Adherence \u2014 the freshness audit behind relevance<\/div>", "t_fs_18": "<b>Stakeholder Content Request Fulfillment Rate<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Stakeholder Alignment \u00b7 Section B<\/div><div class=\"tdesc\">Requests from Sales, Placements, Program Ops, Assessments and Instructors fulfilled within agreed timeframes across all products.<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Stakeholder Alignment (\u00a75)<\/div>", "t_fs_19": "<b>Cross-functional Sprint Delivery Rate<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Stakeholder Alignment \u00b7 Section B<\/div><div class=\"tdesc\">% of committed tickets across Product, Pedagogy, Engineering, UI/UX and DA/DE \u2014 scoped and approved by this team \u2014 delivered within the committed sprint.<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Stakeholder Alignment (\u00a75)<\/div>", "t_fs_20": "<b>Evaluation Environment Coverage<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Domain Product Enablement \u00b7 Section B<\/div><div class=\"tdesc\">% of practice/assessment item types in this domain&#x27;s live curriculum with a production-ready evaluation environment (code judges, test harnesses, notebook/cloud envs). Domain configuration \u2014 item types, test cases, judges \u2014 by this team&#x27;s SMEs; platform build by Product Managers + Engineering.<\/div><div class=\"tmeta\">% \u00b7 Quarterly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 Practice Attempt-to-Completion (environment-friction leg) + tracker Journey Step Health steps 6\u20137 + Learning Environment Satisfaction<\/div>", "t_fs_21": "<b>Domain Capability Delivery<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Domain Product Enablement \u00b7 Section B<\/div><div class=\"tdesc\">Domain-specific learning-platform capabilities shipped vs committed per cycle. Raised and specified by this team&#x27;s SMEs; built by Product Managers + Engineering; accountability stays here \u2014 the ask and the acceptance are domain-owned.<\/div><div class=\"tmeta\">% \u00b7 Quarterly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Platform Capability Configuration Coverage (\u00a75) + the LP capability registry<\/div>", "t_fs_22": "<b>Cost of Operations<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Team Ops &amp; People \u00b7 Section B<\/div><div class=\"tdesc\">Monthly cost of running the team&#x27;s operating rhythm: manager\u2013reportee one-on-ones, roadmap reviews (Head-approved), standups &amp; learning hours, monthly check-in scheduling &amp; documentation, team assets (laptops, systems), ClickUp adoption &amp; status freshness, worklog capture, newsletters, team outings and cycle-wise appraisals \u2014 plus operational-efficiency and market-analysis work. Worklog capture is the load-bearing activity: it is what makes deliverable costing computable.<\/div><div class=\"tmeta\">INR \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: hygiene \u2014 team run-cost guardrail; no org ladder by design<\/div><div class=\"thyg\">Hygiene row \u2014 deliberately no org ladder; run by the team\u2019s PM.<\/div>", "t_fs_23": "<b>Roadmap Items Completion<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Team Ops &amp; People \u00b7 Section B<\/div><div class=\"tdesc\">Of the roadmap items committed for the cycle \u2014 reviewed in the roadmap meetings the PM schedules and approved by the Head \u2014 the % completed. The execution-predictability read for the team&#x27;s own plan.<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: hygiene \u2014 execution-predictability guardrail; no org ladder by design<\/div><div class=\"thyg\">Hygiene row \u2014 deliberately no org ladder; run by the team\u2019s PM.<\/div>", "t_fs_24": "<b>Hires Made<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Team Ops &amp; People \u00b7 Section B<\/div><div class=\"tdesc\">Offers joined against the team&#x27;s approved hiring plan for the period. Reads whether the team is growing at the planned pace.<\/div><div class=\"tmeta\">Count \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: hygiene \u2014 hiring-plan guardrail; no org ladder by design<\/div><div class=\"thyg\">Hygiene row \u2014 deliberately no org ladder; run by the team\u2019s PM.<\/div>", "t_fs_25": "<b>Cost per Hire<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Team Ops &amp; People \u00b7 Section B<\/div><div class=\"tdesc\">Average cost per closed hire \u2014 sourcing, interview bandwidth and onboarding effort attributed to hiring for this team.<\/div><div class=\"tmeta\">INR \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: hygiene \u2014 hiring-efficiency guardrail; no org ladder by design<\/div><div class=\"thyg\">Hygiene row \u2014 deliberately no org ladder; run by the team\u2019s PM.<\/div>", "t_fs_26": "<b>Team Retention Rate<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Team Ops &amp; People \u00b7 Section B<\/div><div class=\"tdesc\">% of cycle-start team members still on the team at the appraisal cycle&#x27;s end, on a trailing 12-month window. Internal transfers don&#x27;t count against the team; regrettable exits are flagged by the Lead in the remark.<\/div><div class=\"tmeta\">% \u00b7 Per appraisal cycle<\/div><div class=\"tlad\">Sheet says: hygiene \u2014 team-health guardrail; no org ladder by design<\/div><div class=\"thyg\">Hygiene row \u2014 deliberately no org ladder; run by the team\u2019s PM.<\/div>", "t_fs_27": "<b>Power Performers Created<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Team Ops &amp; People \u00b7 Section B<\/div><div class=\"tdesc\">Team members newly reaching the top appraisal band in the cycle-wise appraisal. The direct metric for &#x27;developing the best (mentoring subordinates)&#x27;.<\/div><div class=\"tmeta\">Count \u00b7 Per appraisal cycle<\/div><div class=\"tlad\">Sheet says: enabling \u2192 the \u00a75 &#x27;developing the best (mentoring subordinates)&#x27; intent \u2014 its first direct metric<\/div>", "t_fs_28": "<b>Creative Resource Utilisation Rate<\/b><span class=\"tteam tfs\">FS &amp; CS Core<\/span><div class=\"tcat\">Team Ops &amp; People \u00b7 Section B<\/div><div class=\"tdesc\">% of allocated Graphic Designer and Video Editor bandwidth utilised against planned branding and content-asset deliverables within a cycle. Primarily tracked and managed by Project Managers.<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: hygiene \u2014 creative bandwidth guardrail (PM-managed); no org ladder by design<\/div><div class=\"thyg\">Hygiene row \u2014 deliberately no org ladder; run by the team\u2019s PM.<\/div>", "a_csi": "<b>Content\u2013CSI \u2014 Section A<\/b><div class=\"tdesc\">Live mirrors of the org tracker rows this team answers for (same cells, not separate numbers):<\/div><div class=\"tmeta\">Program Delivery Gap \u00b7 Journey Step Health \u00b7 Product Issue Resolution Efficiency \u00b7 Product Issue Recurrence \u00b7 BOS Credit Acceptance \u00b7 University Communication TAT \u00b7 University Curriculum &amp; Framework Compliance<\/div>", "t_csi_0": "<b>Cost per BOS Approval<\/b><span class=\"tteam tcsi\">Content\u2013CSI<\/span><div class=\"tcat\">Content Efficiency \u00b7 Section B<\/div><div class=\"tdesc\">Average cost incurred per approved BOS across university partners. Includes CSI team payroll and non-payroll costs (travel, liaison activities) attributed to BOS approval work.<\/div><div class=\"tmeta\">INR \u00b7 Quarterly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Cost per BOS Approval (\u00a75 Content Efficiency) \u2014 the economics of the KRA-3 BOS engine<\/div>", "t_csi_1": "<b>Cost per Vernacular Content Hour<\/b><span class=\"tteam tcsi\">Content\u2013CSI<\/span><div class=\"tcat\">Content Efficiency \u00b7 Section B<\/div><div class=\"tdesc\">Average cost to produce one hour of vernacular-language content, tracked centrally by the CSI team. Includes CSI payroll and AI tooling costs attributed to vernacular production.<\/div><div class=\"tmeta\">INR \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Cost per Vernacular Content Hour (\u00a75 Content Efficiency) \u2014 central track; FS&amp;CS Core carries the production-side twin<\/div>", "t_csi_2": "<b>Cost of Operations<\/b><span class=\"tteam tcsi\">Content\u2013CSI<\/span><div class=\"tcat\">Team Ops &amp; People \u00b7 Section B<\/div><div class=\"tdesc\">Monthly cost of running the team&#x27;s operating rhythm: manager\u2013reportee one-on-ones, roadmap reviews (Head-approved), standups &amp; learning hours, monthly check-in scheduling &amp; documentation, team assets (laptops, systems), ClickUp adoption &amp; status freshness, worklog capture, newsletters, team outings and cycle-wise appraisals \u2014 plus operational-efficiency and market-analysis work. Worklog capture is the load-bearing activity: it is what makes deliverable costing computable.<\/div><div class=\"tmeta\">INR \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: hygiene \u2014 team run-cost guardrail; no org ladder by design<\/div><div class=\"thyg\">Hygiene row \u2014 deliberately no org ladder; run by the team\u2019s PM.<\/div>", "t_csi_3": "<b>Roadmap Items Completion<\/b><span class=\"tteam tcsi\">Content\u2013CSI<\/span><div class=\"tcat\">Team Ops &amp; People \u00b7 Section B<\/div><div class=\"tdesc\">Of the roadmap items committed for the cycle \u2014 reviewed in the roadmap meetings the PM schedules and approved by the Head \u2014 the % completed. The execution-predictability read for the team&#x27;s own plan.<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: hygiene \u2014 execution-predictability guardrail; no org ladder by design<\/div><div class=\"thyg\">Hygiene row \u2014 deliberately no org ladder; run by the team\u2019s PM.<\/div>", "t_csi_4": "<b>Hires Made<\/b><span class=\"tteam tcsi\">Content\u2013CSI<\/span><div class=\"tcat\">Team Ops &amp; People \u00b7 Section B<\/div><div class=\"tdesc\">Offers joined against the team&#x27;s approved hiring plan for the period. Reads whether the team is growing at the planned pace.<\/div><div class=\"tmeta\">Count \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: hygiene \u2014 hiring-plan guardrail; no org ladder by design<\/div><div class=\"thyg\">Hygiene row \u2014 deliberately no org ladder; run by the team\u2019s PM.<\/div>", "t_csi_5": "<b>Cost per Hire<\/b><span class=\"tteam tcsi\">Content\u2013CSI<\/span><div class=\"tcat\">Team Ops &amp; People \u00b7 Section B<\/div><div class=\"tdesc\">Average cost per closed hire \u2014 sourcing, interview bandwidth and onboarding effort attributed to hiring for this team.<\/div><div class=\"tmeta\">INR \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: hygiene \u2014 hiring-efficiency guardrail; no org ladder by design<\/div><div class=\"thyg\">Hygiene row \u2014 deliberately no org ladder; run by the team\u2019s PM.<\/div>", "t_csi_6": "<b>Team Retention Rate<\/b><span class=\"tteam tcsi\">Content\u2013CSI<\/span><div class=\"tcat\">Team Ops &amp; People \u00b7 Section B<\/div><div class=\"tdesc\">% of cycle-start team members still on the team at the appraisal cycle&#x27;s end, on a trailing 12-month window. Internal transfers don&#x27;t count against the team; regrettable exits are flagged by the Lead in the remark.<\/div><div class=\"tmeta\">% \u00b7 Per appraisal cycle<\/div><div class=\"tlad\">Sheet says: hygiene \u2014 team-health guardrail; no org ladder by design<\/div><div class=\"thyg\">Hygiene row \u2014 deliberately no org ladder; run by the team\u2019s PM.<\/div>", "t_csi_7": "<b>Power Performers Created<\/b><span class=\"tteam tcsi\">Content\u2013CSI<\/span><div class=\"tcat\">Team Ops &amp; People \u00b7 Section B<\/div><div class=\"tdesc\">Team members newly reaching the top appraisal band in the cycle-wise appraisal. The direct metric for &#x27;developing the best (mentoring subordinates)&#x27;.<\/div><div class=\"tmeta\">Count \u00b7 Per appraisal cycle<\/div><div class=\"tlad\">Sheet says: enabling \u2192 the \u00a75 &#x27;developing the best (mentoring subordinates)&#x27; intent \u2014 its first direct metric<\/div>", "a_cc": "<b>Content\u2013Central \u2014 Section A<\/b><div class=\"tdesc\">Live mirrors of the org tracker rows this team answers for (same cells, not separate numbers):<\/div><div class=\"tmeta\">Agentic Production Coverage<\/div>", "t_cc_0": "<b>Shared-Team Deliverables Landed<\/b><span class=\"tteam tcc\">Content\u2013Central<\/span><div class=\"tcat\">Business Ops \u2014 Shared Teams \u00b7 Section B<\/div><div class=\"tdesc\">Of the deliverables the shared-resource teams (Product, Engineering, DA/DEs, Product Design) committed to content work for the period, the % delivered and accepted. Acceptance sits with the requesting unit \u2014 Central verifies the register, not the work.<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Stakeholder Alignment (\u00a75) \u2014 the delivery contract with the embedded shared teams<\/div>", "t_cc_1": "<b>Shared-Team Spend vs Plan<\/b><span class=\"tteam tcc\">Content\u2013Central<\/span><div class=\"tcat\">Business Ops \u2014 Shared Teams \u00b7 Section B<\/div><div class=\"tdesc\">Actual spend on shared-resource team allocations vs planned spend for the period. Reads over- and under-runs early; the value-for-spend judgment stays with the Business Ops owner at the monthly review.<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Content Efficiency (\u00a75) \u2014 the \u20b9 side of the shared-team delivery contract<\/div>", "t_cc_2": "<b>Creative Resource Utilisation \u2014 All Units<\/b><span class=\"tteam tcc\">Content\u2013Central<\/span><div class=\"tcat\">Business Ops \u2014 Shared Teams \u00b7 Section B<\/div><div class=\"tdesc\">Of the Graphic Designer &amp; Video Editor bandwidth allocated across all sub-departments, the % actually used against planned deliverables in the cycle. Central reads the aggregate and the skew \u2014 which units are stretched, which under-use; day-to-day management stays with unit PMs. Low = planning gaps \u00b7 over = scope creep or under-resourcing.<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Creative Resource Utilisation (\u00a75, PMO lane) \u2014 the dept KPI lands its team owner here; domain views keep their own slice (FS: Creative Resource Utilisation Rate)<\/div>", "t_cc_3": "<b>Cross-functional Resource Utilisation \u2014 All Units<\/b><span class=\"tteam tcc\">Content\u2013Central<\/span><div class=\"tcat\">Business Ops \u2014 Shared Teams \u00b7 Section B<\/div><div class=\"tdesc\">Of the embedded function bandwidth (Engineering, Product, Pedagogy, DA/DEs, Product Design) allocated into units, the % actually used on committed work in the cycle \u2014 across every sub-department and function. Read the same way: low = planning gaps \u00b7 over = scope creep or under-resourcing.<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 dept Cross-functional Resource Utilisation (\u00a75, PMO lane) \u2014 the dept KPI lands its team owner here<\/div>", "t_cc_4": "<b>Shared Tool Adoption<\/b><span class=\"tteam tcc\">Content\u2013Central<\/span><div class=\"tcat\">Agentic Content Platform \u00b7 Section B<\/div><div class=\"tdesc\">% of shipped shared ACP tools (content-generation workflows, MCP servers, production pipelines built for all domains) that every learning-domain unit is publishing through within a month of shipping. Adopted = used in live production, not a trial.<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: enabling \u2192 tracker Agentic Production Coverage \u2014 adoption is how all units reach the 90 bar<\/div>", "t_cc_5": "<b>Worklog &amp; Status Hygiene \u2014 All Units<\/b><span class=\"tteam tcc\">Content\u2013Central<\/span><div class=\"tcat\">PMO \u00b7 Section B<\/div><div class=\"tdesc\">Of the ~10 units on the check-in calendar, the % entering the monthly check-in with complete worklogs and current deliverable statuses (ClickUp). Check-ins Run says the meeting happened; this says it was fed \u2014 and complete worklogs are what make deliverable costing computable in every unit.<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: hygiene \u2014 operating-rhythm guardrail (input side); no org ladder by design<\/div><div class=\"thyg\">Hygiene row \u2014 deliberately no org ladder; run by the team\u2019s PM.<\/div>", "t_cc_6": "<b>Check-ins Run<\/b><span class=\"tteam tcc\">Content\u2013Central<\/span><div class=\"tcat\">PMO \u00b7 Section B<\/div><div class=\"tdesc\">% of scheduled monthly unit check-ins with the HOD held on schedule, with the pre-read circulated a day before. Covers every sub-department and embedded function on the check-in calendar (~10 units).<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: hygiene \u2014 operating-rhythm guardrail; no org ladder by design<\/div><div class=\"thyg\">Hygiene row \u2014 deliberately no org ladder; run by the team\u2019s PM.<\/div>", "t_cc_7": "<b>Actions Closed<\/b><span class=\"tteam tcc\">Content\u2013Central<\/span><div class=\"tcat\">PMO \u00b7 Section B<\/div><div class=\"tdesc\">% of actions logged in a monthly check-in that are closed before that unit&#x27;s next check-in. The follow-through half of the cadence \u2014 check-ins that close loops, not meetings that merely happen.<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tlad\">Sheet says: hygiene \u2014 operating-rhythm guardrail; no org ladder by design<\/div><div class=\"thyg\">Hygiene row \u2014 deliberately no org ladder; run by the team\u2019s PM.<\/div>", "o0": "<b>Program Delivery Gap<\/b> <span class=\"tflag\">CASCADE<\/span><div class=\"tcat\">Org tracker \u00b7 KRA 1 \u2014 SPI Bands<\/div><div class=\"tdesc\">% deviation of the executed schedule vs the designed schedule, across the journey steps (lectures, quizzes, practice releases, assets) \u2014 existence only: a step that never runs counts here, not in Journey Step Health<\/div><div class=\"tmeta\">Lane: Product Learning Experience<\/div><div class=\"tmeta\">Functions that move it: CSI team + Product Managers \u2014 counterparty: Program Ops \u00b7 assets leg: Graphic Designers, Video Editors, SDIs, Packaging Teams<\/div><div class=\"tmeta\">% \u00b7 Weekly<\/div><div class=\"tsub\">\u2014 \u00b7 Program Delivery Gap \u2014 budget 0<\/div>", "o1": "<b>Module-Quiz Score Bands<\/b><div class=\"tcat\">Org tracker \u00b7 KRA 1 \u2014 SPI Bands<\/div><div class=\"tdesc\">Share of the batch in each module-quiz band (10-pt scale) \u2014 one band stricter than the org bands<\/div><div class=\"tmeta\">Lane: Learning Domains<\/div><div class=\"tmeta\">Functions that move it: Content + Pedagogy Experts + DA/DEs<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tsub\">B3 \u00b7 % in Module-Quiz Band \u22658.0 \u2014 budget 30<\/div><div class=\"tsub\">B3 \u00b7 % in Module-Quiz Band 7.0\u20138.0 \u2014 budget 40<\/div><div class=\"tsub\">B3 \u00b7 % in Module-Quiz Band 5.0\u20137.0 \u2014 budget 30<\/div><div class=\"tsub\">B3 \u00b7 % in Module-Quiz Band &lt;5.0 \u2014 budget 0<\/div><div class=\"tsub\">B4 \u00b7 % in Module-Quiz Band \u22658.0 \u2014 budget 30<\/div><div class=\"tsub\">B4 \u00b7 % in Module-Quiz Band 7.0\u20138.0 \u2014 budget 40<\/div><div class=\"tsub\">B4 \u00b7 % in Module-Quiz Band 5.0\u20137.0 \u2014 budget 30<\/div><div class=\"tsub\">B4 \u00b7 % in Module-Quiz Band &lt;5.0 \u2014 budget 0<\/div>", "o2": "<b>Content\u2013Assessment Alignment<\/b><div class=\"tcat\">Org tracker \u00b7 KRA 1 \u2014 SPI Bands<\/div><div class=\"tdesc\">|avg module-quiz score \u2212 avg biweekly skill-assessment score| \u2014 the taught-vs-tested gap<\/div><div class=\"tmeta\">Lane: Learning Domains<\/div><div class=\"tmeta\">Functions that move it: Content + Pedagogy Experts + DA/DEs<\/div><div class=\"tmeta\">pp \u00b7 Monthly<\/div><div class=\"tsub\">B3 \u00b7 Content\u2013Assessment Alignment \u2014 budget 10<\/div><div class=\"tsub\">B4 \u00b7 Content\u2013Assessment Alignment \u2014 budget 10<\/div>", "o3": "<b>Engagement-Matrix Cell Migration<\/b> <span class=\"tflag\">SAMPLE<\/span><div class=\"tcat\">Org tracker \u00b7 KRA 1 \u2014 SPI Bands<\/div><div class=\"tdesc\">% of learners in the HE\u00d7HV (high-effort \u00d7 high-value) cell; the full 3\u00d73 matrix stays diagnostic<\/div><div class=\"tmeta\">Lane: Learning Platform<\/div><div class=\"tmeta\">Functions that move it: Product Managers + Engineering + DA/DEs<\/div><div class=\"tmeta\">% \u00b7 Per cycle \u00b7 read monthly<\/div><div class=\"tsub\">All \u00b7 % Learners in HE\u00d7HV Cell \u2014 budget 10<\/div>", "o4": "<b>Content Issue Resolution Efficiency<\/b><div class=\"tcat\">Org tracker \u00b7 KRA 2 \u2014 Academics CSAT<\/div><div class=\"tdesc\">% of content issues resolved within the 2-day TAT \u2014 resolved = fix live + students notified<\/div><div class=\"tmeta\">Lane: Learning Domains<\/div><div class=\"tmeta\">Functions that move it: Content + Engineering<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tsub\">All \u00b7 Content Issue Resolution Efficiency \u2014 budget 80<\/div>", "o5": "<b>Content Issue Recurrence<\/b><div class=\"tcat\">Org tracker \u00b7 KRA 2 \u2014 Academics CSAT<\/div><div class=\"tdesc\">% of resolved content issues that recur \u2014 root-cause close: instance fixed \u00b7 artifact changed \u00b7 tripwire added \u00b7 broadcast sent<\/div><div class=\"tmeta\">Lane: Learning Domains<\/div><div class=\"tmeta\">Functions that move it: Content + Engineering<\/div><div class=\"tmeta\">% \u00b7 Quarterly<\/div><div class=\"tsub\">All \u00b7 Content Issue Recurrence \u2014 budget 2<\/div>", "o6": "<b>Agentic Production Coverage<\/b><div class=\"tcat\">Org tracker \u00b7 KRA 2 \u2014 Academics CSAT<\/div><div class=\"tdesc\">% of authorable content production (questions, slides, cheatsheets, reading material, translations) flowing through registered agentic workflows \u2014 machine first drafts, humans as reviewers not authors; blended rollup, excludes on-camera and live-delivery work<\/div><div class=\"tmeta\">Lane: Agentic Content Platform<\/div><div class=\"tmeta\">Functions that move it: Content\u2013Central + DA/DEs \u2014 pipelines &amp; production workflows; domain teams publish through them<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tsub\">All \u00b7 Agentic Production Coverage \u2014 budget 90<\/div>", "o7": "<b>Learning Environment Satisfaction<\/b><div class=\"tcat\">Org tracker \u00b7 KRA 2 \u2014 Academics CSAT<\/div><div class=\"tdesc\">Student rating of the learning environment \u2014 driven by the four platform rows below<\/div><div class=\"tmeta\">Lane: Developer Platform<\/div><div class=\"tmeta\">Functions that move it: Engineering<\/div><div class=\"tmeta\">score /5 \u00b7 Monthly<\/div><div class=\"tsub\">All \u00b7 Learning Environment Satisfaction \u2014 budget 4.5<\/div>", "o8": "<b>Availability &amp; Saturation Detection<\/b><div class=\"tcat\">Org tracker \u00b7 KRA 2 \u2014 Academics CSAT<\/div><div class=\"tdesc\">% of critical-service saturations alerted, detection \u226410 min (IDE, compiler, workflows)<\/div><div class=\"tmeta\">Lane: Developer Platform<\/div><div class=\"tmeta\">Functions that move it: Engineering<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tsub\">All \u00b7 Availability &amp; Saturation Detection \u2014 budget 100<\/div>", "o9": "<b>Tail-Latency User Impact<\/b><div class=\"tcat\">Org tracker \u00b7 KRA 2 \u2014 Academics CSAT<\/div><div class=\"tdesc\">% of students beyond P99 latency limits \u2014 IDE launch / submit / publish &lt;60 s<\/div><div class=\"tmeta\">Lane: Developer Platform<\/div><div class=\"tmeta\">Functions that move it: Engineering<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tsub\">All \u00b7 Tail-Latency User Impact \u2014 budget 0<\/div>", "o10": "<b>Platform Issue Resolution Efficiency<\/b><div class=\"tcat\">Org tracker \u00b7 KRA 2 \u2014 Academics CSAT<\/div><div class=\"tdesc\">% of platform issues resolved within the 2-day TAT (internal same-day)<\/div><div class=\"tmeta\">Lane: Developer Platform<\/div><div class=\"tmeta\">Functions that move it: Engineering<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tsub\">All \u00b7 Platform Issue Resolution Efficiency \u2014 budget 80<\/div>", "o11": "<b>Platform Issue Recurrence<\/b><div class=\"tcat\">Org tracker \u00b7 KRA 2 \u2014 Academics CSAT<\/div><div class=\"tdesc\">% of resolved platform issues that recur (quarter)<\/div><div class=\"tmeta\">Lane: Developer Platform<\/div><div class=\"tmeta\">Functions that move it: Engineering<\/div><div class=\"tmeta\">% \u00b7 Quarterly<\/div><div class=\"tsub\">All \u00b7 Platform Issue Recurrence \u2014 budget 2<\/div>", "o12": "<b>Journey Step Health<\/b><div class=\"tcat\">Org tracker \u00b7 KRA 2 \u2014 Academics CSAT<\/div><div class=\"tdesc\">% of the journey steps that ran this month finishing green (one-pager \u00a711 thresholds) \u2014 NIAT first, then per product. Health of what ran: a step that never ran counts in PDG, not here<\/div><div class=\"tmeta\">Lane: Product Learning Experience<\/div><div class=\"tmeta\">Functions that move it: Product Managers + DA/DEs + CSI team + Pedagogy Experts (journey design)<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tsub\">\u2014 \u00b7 Journey Step Health \u2014 budget TBD<\/div>", "o13": "<b>Product Issue Resolution Efficiency<\/b> <span class=\"tflag\">CROSS-FUNCTION<\/span><div class=\"tcat\">Org tracker \u00b7 KRA 2 \u2014 Academics CSAT<\/div><div class=\"tdesc\">% of student-reported product issues resolved within TAT \u2014 resolved across functions, we route; fix live + students notified<\/div><div class=\"tmeta\">Lane: Product Learning Experience<\/div><div class=\"tmeta\">Functions that move it: Product Managers + CSI team<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tsub\">\u2014 \u00b7 Product Issue Resolution Efficiency \u2014 budget TBD<\/div>", "o14": "<b>Product Issue Recurrence<\/b> <span class=\"tflag\">CROSS-FUNCTION<\/span><div class=\"tcat\">Org tracker \u00b7 KRA 2 \u2014 Academics CSAT<\/div><div class=\"tdesc\">% of resolved product issues that recur at student-journey level (quarter)<\/div><div class=\"tmeta\">Lane: Product Learning Experience<\/div><div class=\"tmeta\">Functions that move it: Product Managers + CSI team<\/div><div class=\"tmeta\">% \u00b7 Quarterly<\/div><div class=\"tsub\">\u2014 \u00b7 Product Issue Recurrence \u2014 budget 2<\/div>", "o15": "<b>BOS Credit Acceptance<\/b><div class=\"tcat\">Org tracker \u00b7 KRA 3 \u2014 University Relations CSAT<\/div><div class=\"tdesc\">% of proposed credits accepted first-pass by the university BOS<\/div><div class=\"tmeta\">Lane: Product Learning Experience<\/div><div class=\"tmeta\">Functions that move it: CSI team + Content<\/div><div class=\"tmeta\">% \u00b7 Per cycle<\/div><div class=\"tsub\">B3 \u00b7 BOS Credit Acceptance \u2014 budget 85<\/div><div class=\"tsub\">B4 \u00b7 BOS Credit Acceptance \u2014 budget 90<\/div>", "o16": "<b>University Communication TAT<\/b><div class=\"tcat\">Org tracker \u00b7 KRA 3 \u2014 University Relations CSAT<\/div><div class=\"tdesc\">% of university requests answered within TAT \u2014 ack \u22641 business day, standard 3-day TAT<\/div><div class=\"tmeta\">Lane: Product Learning Experience<\/div><div class=\"tmeta\">Functions that move it: CSI team<\/div><div class=\"tmeta\">% \u00b7 Monthly<\/div><div class=\"tsub\">\u2014 \u00b7 University Communication TAT \u2014 budget 90<\/div>", "o17": "<b>University Curriculum &amp; Framework Compliance<\/b><div class=\"tcat\">Org tracker \u00b7 KRA 3 \u2014 University Relations CSAT<\/div><div class=\"tdesc\">% of submission cycles fully compliant \u2014 approved BOS syllabus + NHQRF / Woolf / AICTE / UGC<\/div><div class=\"tmeta\">Lane: Product Learning Experience<\/div><div class=\"tmeta\">Functions that move it: CSI team + Content<\/div><div class=\"tmeta\">% \u00b7 Per cycle<\/div><div class=\"tsub\">\u2014 \u00b7 University Curriculum &amp; Framework Compliance \u2014 budget 100<\/div>", "o18": "<b>Industry Update Adherence<\/b><div class=\"tcat\">Org tracker \u00b7 KRA 4 \u2014 GRIT Novice Badges<\/div><div class=\"tdesc\">% of GRIT-tested skills covered in live course content \u2014 Learning\u2013GRIT delta \u2192 0<\/div><div class=\"tmeta\">Lane: Learning Domains<\/div><div class=\"tmeta\">Functions that move it: Content<\/div><div class=\"tmeta\">% \u00b7 Quarterly<\/div><div class=\"tsub\">\u2014 \u00b7 Industry Update Adherence \u2014 budget 100<\/div>", "d_bi": "<b>Business Impact<\/b><div class=\"tcat\">Department scoreboard \u2014 one-pager \u00a75<\/div><div class=\"tdesc\">The one-pager \u00a75 Business Impact block. The team-owned numbers ARE the department scoreboard rows of the same name (Graded Assessment Achievement, Weekly Active Users).<\/div>", "d_cv": "<b>Content Velocity<\/b><div class=\"tcat\">Department scoreboard \u2014 one-pager \u00a75<\/div><div class=\"tdesc\">The \u00a75 Content Velocity block: Learning Content Hours, Vernacular Content Hours, Practice &amp; Assessment Pieces, Branding Content Assets Delivered. Each team row rolls into its matching \u00a75 row.<\/div>", "d_ce": "<b>Content Efficiency<\/b><div class=\"tcat\">Department scoreboard \u2014 one-pager \u00a75<\/div><div class=\"tdesc\">The \u00a75 Content Efficiency block. Each team cost row rolls into its matching \u00a75 row (cost per learning hour / vernacular hour / MCQ / coding question / branding asset / runtime per learner / BOS approval; Central&#x27;s spend-vs-plan reads the same block).<\/div>", "d_pccc": "<b>Product Capability Configuration Coverage<\/b><div class=\"tcat\">Department scoreboard \u2014 one-pager \u00a75<\/div><div class=\"tdesc\">The \u00a75 Program Delivery row \u201cProduct Capability Configuration Coverage\u201d \u2014 share of journey steps where the required capability is live and configured. Domain Capability Delivery feeds it (plus the Learning Platform capability registry).<\/div>", "d_sa": "<b>Stakeholder Alignment<\/b><div class=\"tcat\">Department scoreboard \u2014 one-pager \u00a75<\/div><div class=\"tdesc\">The \u00a75 Stakeholder Alignment block: Stakeholder Content Request Fulfillment and Cross-functional Sprint Delivery. Central&#x27;s Shared-Team Deliverables Landed rolls into the same block.<\/div>", "d_dtb": "<b>Develop the Best (mentoring)<\/b><div class=\"tcat\">Department scoreboard \u2014 one-pager \u00a75<\/div><div class=\"tdesc\">\u201cDeveloping the best (mentoring subordinates)\u201d is named inside the \u00a75 Executive Ops description. Power Performers Created (FS and CSI) is the measurable form of that intent; the \u00a75 row split is deferred by agreement.<\/div>", "d_cru": "<b>Creative Resource Utilisation<\/b><div class=\"tcat\">Department scoreboard \u2014 one-pager \u00a75<\/div><div class=\"tdesc\">The \u00a75 Executive Ops row \u201cCreative Resource Utilisation\u201d \u2014 designer and video-editor bandwidth used against planned deliverables. Central&#x27;s All-Units roll-up feeds it; each team&#x27;s own rate stays team-side.<\/div>", "d_xru": "<b>Cross-functional Resource Utilisation<\/b><div class=\"tcat\">Department scoreboard \u2014 one-pager \u00a75<\/div><div class=\"tdesc\">The \u00a75 Executive Ops row \u201cCross-functional Resource Utilisation\u201d \u2014 allocated Engineering, Product, Pedagogy, DA/DE and Product Design bandwidth used. Central&#x27;s All-Units roll-up feeds it.<\/div>", "k1": "<b>KRA 1 \u2014 SPI Bands<\/b><div class=\"tcat\">Org KRA \u00b7 weight 30%<\/div>", "k2": "<b>KRA 2 \u2014 Academics CSAT<\/b><div class=\"tcat\">Org KRA<\/div>", "k3": "<b>KRA 3 \u2014 University Relations CSAT<\/b><div class=\"tcat\">Org KRA<\/div>", "k4": "<b>KRA 4 \u2014 GRIT Novice Badges<\/b><div class=\"tcat\">Org KRA<\/div>", "k5": "<b>KRA 5 \u2014 Employability<\/b><div class=\"tcat\">Org KRA<\/div><div class=\"tdesc\">B3 80% \u00b7 B4 80% \u2014 mapping deliberately not forced<\/div>"};
+const svg = document.getElementById('g'), tip = document.getElementById('tip');
+const down = {}, up = {};
+EDGES.forEach((e, i) => { (down[e.s] = down[e.s] || []).push([e.t, i]); (up[e.t] = up[e.t] || []).push([e.s, i]); });
+function reach(id) {
+  const ns = new Set([id]), es = new Set();
+  const walk = (start, adj) => { const q = [start], seen = new Set([start]);
+    while (q.length) { const c = q.pop(); (adj[c] || []).forEach(([n, i]) => { es.add(i); ns.add(n); if (!seen.has(n)) { seen.add(n); q.push(n); } }); } };
+  walk(id, down); walk(id, up);
+  return [ns, es];
+}
+let pinned = null;
+function light(id) {
+  svg.classList.add('sel');
+  svg.querySelectorAll('.hi').forEach(el => el.classList.remove('hi'));
+  const [ns, es] = reach(id);
+  ns.forEach(n => { const el = document.getElementById(n); if (el) el.classList.add('hi'); });
+  es.forEach(i => document.getElementById('e' + i).classList.add('hi'));
+}
+function clearLight() { if (pinned) return; svg.classList.remove('sel'); svg.querySelectorAll('.hi').forEach(el => el.classList.remove('hi')); }
+svg.querySelectorAll('.node').forEach(g => {
+  g.addEventListener('mouseenter', () => { if (!pinned) light(g.id); showTip(g.id); });
+  g.addEventListener('mouseleave', () => { clearLight(); tip.style.display = 'none'; });
+  g.addEventListener('click', ev => { ev.stopPropagation(); pinned = (pinned === g.id) ? null : g.id; if (pinned) light(g.id); else clearLight(); });
+  g.addEventListener('focus', () => { if (!pinned) light(g.id); showTip(g.id, true); });
+  g.addEventListener('blur', () => { clearLight(); tip.style.display = 'none'; });
+});
+document.body.addEventListener('click', () => { pinned = null; svg.classList.remove('sel'); svg.querySelectorAll('.hi').forEach(el => el.classList.remove('hi')); });
+function showTip(id, focusMode) {
+  const h = TIPS[id]; if (!h) { tip.style.display = 'none'; return; }
+  tip.innerHTML = h; tip.style.display = 'block';
+  if (focusMode) { const r = document.getElementById(id).getBoundingClientRect(); place(r.right, r.top); }
+}
+function place(x, y) {
+  const pad = 14, w = tip.offsetWidth, h = tip.offsetHeight;
+  let L = x + pad, T = y + pad;
+  if (L + w > innerWidth - 8) L = x - w - pad;
+  if (T + h > innerHeight - 8) T = Math.max(8, innerHeight - h - 8);
+  tip.style.left = Math.max(8, L) + 'px'; tip.style.top = T + 'px';
+}
+svg.addEventListener('mousemove', ev => { if (tip.style.display === 'block') place(ev.clientX, ev.clientY); });
+// team filter chips
+const chips = document.getElementById('chips');
+const TEAMSETS = {};
+['fs', 'csi', 'cc'].forEach(t => {
+  const ns = new Set(), es = new Set();
+  svg.querySelectorAll('.node[data-team="' + t + '"]').forEach(g => { const [n2, e2] = reach(g.id); n2.forEach(x => ns.add(x)); e2.forEach(x => es.add(x)); });
+  TEAMSETS[t] = [ns, es];
+});
+chips.addEventListener('click', ev => {
+  const c = ev.target.closest('.chip'); if (!c) return; ev.stopPropagation();
+  chips.querySelectorAll('.chip').forEach(x => x.classList.remove('on')); c.classList.add('on');
+  const t = c.dataset.t;
+  svg.classList.remove('tf');
+  svg.querySelectorAll('.tm-on, .m-on').forEach(el => el.classList.remove('tm-on', 'm-on'));
+  svg.querySelectorAll('.node.dim').forEach(el => el.classList.remove('dim'));
+  if (!t) return;
+  svg.classList.add('tf');
+  const [ns, es] = TEAMSETS[t];
+  svg.querySelectorAll('.node').forEach(g => {
+    if (g.dataset.team === t) g.classList.add('tm-on');
+    else if (!g.dataset.team && !ns.has(g.id)) g.classList.add('dim');
+  });
+  EDGES.forEach((e, i) => { if (es.has(i) && (e.m === t || e.m === '')) document.getElementById('e' + i).classList.add('m-on'); });
+});
+</script>

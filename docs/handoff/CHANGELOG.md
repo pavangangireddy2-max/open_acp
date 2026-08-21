@@ -304,3 +304,24 @@ Files: build_site.py, content_os.html.
   raw html is unreadable; build_site.py falls back to cwd copies when docs/handoff/artifacts/ is unreachable.
 - 🪜 + 🗺️ republished same URLs (site: capabilities omitted, downloads carried forward; ind band + footer mention
   the PM card / 6 tabs). Org tracker rows, one-pager, 🧭 untouched.
+
+## 2026-08-22 — KPI Flow Map artifact (new) 🕸️
+- **New artifact "KPI Flow Map"** https://claude.ai/code/artifact/81cb774c-3cc4-4715-9f2b-b1fafdb72c4a — one
+  interactive picture of how every KPI flows, per Pavan's ask ("some kind of graph… how all of the KPIs flow,
+  connect across sub departments, Functions to Org KPIs"). Four columns: team Section-B rows (FS teal #0D9488 /
+  CSI amber #B45309 / Content–Central violet #6D28D9, grouped by category) → dept §5 scoreboard (8 nodes:
+  4 blocks + 3 rows + the Develop-the-Best intent marker) → org tracker (19 collapsed metrics, every node
+  showing its Lane + the Functions that move it) → the five KRAs with weights.
+- **Three edge kinds:** solid team-coloured = "ladders to" (36) · dashed from each team's Section A capsule =
+  answers an org row directly (18 unique org rows: FS 10 / CSI 7 / CC 1) · grey = org row rolls into its KRA
+  (20, incl. the Program Delivery Gap cascade edge into KRA 3). Hygiene rows (FS 6 / CSI 5 / CC 3 PMO) drawn
+  dashed with deliberately no edges; Section C asks listed in the footer, not drawn as nodes.
+- **Interactions:** hover previews / click pins a node's full upstream+downstream chain (rest dims); tooltips
+  carry descriptions, unit·freq·budget, verbatim "Sheet says:" ladder prose, org Lanes + Functions, per-cohort
+  budgets; team filter chips; collapsible all-74-edges table for red-pen review.
+- Palette passed the dataviz six-checks validator (CVD + contrast on white; #0F766E and #0E7490 failed and were
+  rejected). Builder docs/handoff/artifacts/build_kpi_graph.py reads kra_training_sheet.xlsx, asserts 19 org
+  metrics / 45 team rows / zero unmapped ladder names, exits non-zero on drift — regen after any tracker or
+  team-view change.
+- One-surface-per-approval: published standalone; NOT embedded into the 🗺️ Content OS site pending a separate
+  approval. No existing artifact touched.
