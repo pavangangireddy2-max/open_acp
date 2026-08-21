@@ -172,3 +172,14 @@ Role-cards plan: Packaging-Teams question resolved; still open — title set con
 - **Pilot instantiated**: FullStack & CS Core — Full Stack 180h + CS Core 115h; High 2.0x / Medium 1.5x; metric surface = the team view (A 18 · B 25 · C 4).
 - Files: role_cards.html + role_cards.xlsx (editable master, 5 tabs: Ladder / Progression Areas / KPI Wiring / Rating Framework / Calibration) + build_role_cards.py + role_cards_source.json (parsed source; the raw corpora html stays untracked).
 - Defaults taken, all reversible: comp bands included (artifact is private — strip before wide sharing) · title set as above · FS & CS Core as pilot. Other domain teams get cards when their team views land.
+
+## 2026-08-21 — Content OS: all three artifacts published as one site, high → low
+
+"have all the three artifacts at one place like published in a website in a logical fashion, information should flow from high level to low" — NEW artifact (🗺️): https://claude.ai/code/artifact/ef86c2ad-4e52-494a-af7c-5416b579bde9
+- **One scroll, four altitudes**: Level 1 Organization (HOD one-pager, full content) → Level 2 Department (KPI tracker + training-columns toggle, working) → Level 3 Team (FullStack & CS Core functional view, generated from kra_training_sheet.xlsx: 18 inherited Section A chips w/ T-numbers · full 25-row Section B table · 4 Section C asks · anatomy explainer) → Level 4 Individual (AI Engineer Ladder). Sticky nav, hero map of the four levels, black band per level naming the standalone artifact + master file.
+- **Flow made explicit**: between every level, ▼ targets cascade (blue #004085) / numbers ladder up ▲ (teal #0e6e5c) — the system's own two accent colors used as the two directions.
+- **Embeds are copies, not links**: each artifact's css scoped via native CSS nesting (#org/#dept/#ind; shared family body hoisted); Level 3 authored fresh since team views lived only in the xlsx. Standalone artifact URLs unchanged and linked from each band + footer. ⇒ MAINTENANCE RULE: republishing any child artifact now also requires rebuilding (build_site.py) + republishing the site.
+- **Comp bands kept OFF the site** (wide-audience default, reversible): lvl-comp lines reduced to years-only; sectionlead/footnote rewritten to say where comp lives (standalone ladder artifact + role_cards.xlsx); build asserts no comp string survives.
+- **Every embedded table wrapped in a scroll container** (.tscroll, 28 tables) — page never scrolls horizontally at any width (verified 0px overflow; 9 wrappers active at 723px).
+- Excluded: 📋 dept operating view — stale (owes lane/category/APC/§10 + both Section B rounds); joins the site after its sync.
+- Files: content_os.html + build_site.py (reads the four repo artifact copies + the xlsx).
