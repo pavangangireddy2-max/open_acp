@@ -1,0 +1,207 @@
+<title>AI Engineer Ladder</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #ffffff; padding: 40px 20px; color: #1a1a1a; line-height: 1.5; }
+  .container { max-width: 1180px; margin: 0 auto; }
+  h1 { font-size: 2em; margin-bottom: 8px; font-weight: 700; }
+  .subtitle { font-size: 1em; color: #666; margin-bottom: 30px; max-width: 72ch; }
+  h2 { font-size: 1.4em; margin: 44px 0 18px 0; padding-bottom: 8px; border-bottom: 2px solid #000; font-weight: 700; }
+  .sectionlead { color: #666; font-size: 0.92em; margin: -8px 0 18px; max-width: 78ch; }
+  .key-point { background: #e6f2ef; border-left: 3px solid #0e6e5c; padding: 12px 14px; margin: 20px 0; font-size: .93em; }
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 26px; font-size: 0.85em; }
+  table.wide { min-width: 1050px; }
+  th { background: #000; color: #fff; padding: 8px 9px; text-align: left; font-weight: 600; border: 1px solid #000; }
+  td { padding: 8px 9px; border: 1px solid #ccc; vertical-align: top; }
+  .muted { color: #666; }
+  .kpi { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: .84em; display: inline-block;
+    background: #e6f2ef; color: #0b4f43; border: 1px solid #a8cfc6; border-radius: 3px;
+    padding: 0 6px; margin: 1px 2px 1px 0; white-space: nowrap; }
+  .nodesign { color: #888; font-style: italic; font-size: .92em; }
+  .ladder { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 18px 0 8px; }
+  .lvl { border: 1px solid #ccc; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
+  .lvl-head { padding: 10px 12px; }
+  .lvl-head .t { font-weight: 700; font-size: .95em; line-height: 1.25; }
+  .lvl-head .was { font-size: .76em; opacity: .75; margin-top: 3px; }
+  .lvl-comp { padding: 7px 12px; font-size: .82em; font-weight: 600; border-bottom: 1px solid #e2e2e2;
+    background: #fafafa; font-variant-numeric: tabular-nums; }
+  .lvl-body { padding: 10px 12px; font-size: .8em; color: #333; flex: 1; }
+  .lvl-surf { padding: 9px 12px; font-size: .78em; color: #0b4f43; background: #f2f8f6; border-top: 1px solid #e2e2e2; }
+  .pillar { border: 1px solid #ccc; border-radius: 4px; margin-bottom: 14px; overflow: hidden; }
+  .pillar-head { display: flex; align-items: baseline; gap: 12px; padding: 9px 12px; background: #f4f4f4;
+    border-bottom: 1px solid #ddd; }
+  .pillar-head .nm { font-weight: 700; }
+  .pillar-head .wt { font-weight: 700; color: #0e6e5c; font-variant-numeric: tabular-nums; }
+  .subline { display: grid; grid-template-columns: 210px 46px 1fr; gap: 10px; padding: 8px 12px;
+    border-bottom: 1px solid #eee; font-size: .86em; align-items: start; }
+  .subline:last-child { border-bottom: none; }
+  .subline .swt { color: #0e6e5c; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .bar { height: 4px; background: #e4e4e4; border-radius: 2px; margin-top: 5px; }
+  .bar i { display: block; height: 4px; background: #0e6e5c; border-radius: 2px; }
+  .footnote { font-size: 0.85em; color: #666; margin-top: 34px; border-top: 1px solid #ccc; padding-top: 12px; max-width: 90ch; }
+  @media (max-width: 980px) { .ladder { grid-template-columns: 1fr; } }
+</style>
+<div class="container">
+<h1>AI Engineer Ladder</h1>
+<div class="subtitle">Career framework for content-department domain teams &middot; v2, August 2026 &middot; titles follow the <strong>AI Engineer &ndash; [Domain] Learning Systems</strong> pattern &middot; descriptors carried verbatim from the March 2026 SDE Learning Systems framework &middot; editable master: <strong>role_cards.xlsx</strong> (5 tabs)</div>
+<div class="key-point"><strong>What changed in v2:</strong> titles renamed to the AI Engineer pattern; every progression area and rating line is wired to named KPI rows — anything in a <span class="kpi">mono chip</span> is a live row on the KPI tracker or the team view, so reviews read off the sheets instead of impressions. Areas with no chip say so <em>by design</em>. Level content, comp bands and the rating weights are unchanged from the source framework.</div>
+<h2>The ladder</h2>
+<div class="sectionlead">Five levels, linear — AI Engineer 3 sits above Lead (30L+ vs 24&ndash;30L, org-wide scope); the progression matrix below deliberately stops at Lead. Comp bands included; strip this column before wide sharing if needed.</div>
+<div class="ladder">
+<div class="lvl"><div class="lvl-head" style="background:#d9ece7;color:#134237"><div class="t">Associate AI Engineer – [Domain] Learning Systems</div><div class="was">formerly Associate SDE, Learning Systems - [Domain Name]</div></div><div class="lvl-comp">4.5L to 7L | 0-1 years</div><div class="lvl-body">Example: "Associate AI Engineer – FullStack Learning Systems" or "Associate AI Engineer – GenAI Learning Systems". Creates content with guidance (lessons, exercises, projects, assessments). Learns to integrate code playgrounds, evaluation judges, and learning platforms. Handles 0.5-1 domain, 40-100 content hours, reaches 2K-5K students.</div><div class="lvl-surf"><strong>Answers for:</strong> Contributes to this team's Section B rows under review — no rows answered for yet; growth is read through review evidence.</div></div>
+<div class="lvl"><div class="lvl-head" style="background:#b3d9d0;color:#113b31"><div class="t">AI Engineer 1 – [Domain] Learning Systems</div><div class="was">formerly SDE 1, Learning Systems - [Domain]</div></div><div class="lvl-comp">9L to 16L | 1-3+ years</div><div class="lvl-body">Example: "AI Engineer 1 – DS/ML Learning Systems". Creates domain content independently (lessons, exercises, projects). Engineers learning systems by selecting appropriate platforms (IDEs, cloud environments, assessment engines). Owns 1-2 domains. Manages 100-250 hours, reaches 5K-10K students.</div><div class="lvl-surf"><strong>Answers for:</strong> Answers for the Section B velocity + quality rows of the modules they own (their content hours, pieces, issue-recurrence share).</div></div>
+<div class="lvl"><div class="lvl-head" style="background:#7cbfb1;color:#0c322a"><div class="t">AI Engineer 2 – [Domain Portfolio] Learning Systems</div><div class="was">formerly SDE 2, Learning Systems - [Domain Portfolio]</div></div><div class="lvl-comp">18L to 24L | 3+ years</div><div class="lvl-body">Example: "AI Engineer 2 – FullStack, System Design &amp; CS Core Learning Systems". Leads content creation across multiple domains. Architects platform systems and optimizes evaluation pipelines. Manages 2-5 team members across 3-4 domains. Manages 250-450 hours, reaches 10K-20K students.</div><div class="lvl-surf"><strong>Answers for:</strong> Answers for a domain slice of Section B — effectiveness, velocity and Evaluation Environment Coverage for their courses; first Section C asks raised in their name.</div></div>
+<div class="lvl"><div class="lvl-head" style="background:#3f9682;color:#ffffff"><div class="t">AI Engineer Lead – [Domain Portfolio] Learning Systems</div><div class="was">formerly SDE Lead, Learning Systems - [Domain Portfolio]</div></div><div class="lvl-comp">24L to 30L | 5+ years</div><div class="lvl-body">Example: "AI Engineer Lead – Programming, FullStack, CS Core, DevOps Learning Systems". Owns content strategy and creation across portfolio. Designs platform architecture and GenAI-driven content systems. Leads 15-25 members across 4-6 domains. Manages 450+ hours, reaches 20K-40K+ students.</div><div class="lvl-surf"><strong>Answers for:</strong> Answers for the team's full Section B at review and supports the Section A lane numbers; the rating framework below applies as written.</div></div>
+<div class="lvl"><div class="lvl-head" style="background:#0e6e5c;color:#ffffff"><div class="t">AI Engineer 3 – [Domain Portfolio] Learning Systems</div><div class="was">formerly SDE 3, Learning Systems - [Domain Portfolio]</div></div><div class="lvl-comp">30L+ | 7+ years</div><div class="lvl-body">Example: "AI Engineer 3 – Portfolio (All Domains) Learning Systems". Sets org-wide content and curriculum strategy. Owns EdTech infrastructure evolution, GenAI content pipelines, and cross-product technical roadmap.</div><div class="lvl-surf"><strong>Answers for:</strong> Shapes org-tracker rows and cross-domain standards; portfolio spans teams — reads through §5 department KPIs and org KRAs, not one team view.</div></div>
+</div>
+<h2>21 progression areas</h2>
+<div class="sectionlead">Grouped into 4 categories; all areas matter, weight varies by level. Verbatim from source.</div>
+<h3 style="margin:20px 0 10px;font-size:1.05em">Foundation (2)</h3>
+<div class="scroll"><table class="wide"><tr><th style="width:13%">Area</th><th>Associate AI Engineer</th><th>AI Engineer 1</th><th>AI Engineer 2</th><th>AI Engineer Lead</th></tr>
+<tr><td><strong>Scope of Work</strong></td><td>Task-based content creation</td><td>Domain ownership (set of courses)</td><td>Multiple domains, product coverage</td><td>Multi-curriculum, product strategy</td></tr>
+<tr><td><strong>Influence</strong></td><td>Individual contributor</td><td>Influences peers, small team</td><td>Influences team, cross-product</td><td>Influences across content teams</td></tr>
+</table></div>
+<h3 style="margin:20px 0 10px;font-size:1.05em">Core Creation and Quality (9)</h3>
+<div class="scroll"><table class="wide"><tr><th style="width:13%">Area</th><th>Associate AI Engineer</th><th>AI Engineer 1</th><th>AI Engineer 2</th><th>AI Engineer Lead</th></tr>
+<tr><td><strong>Content Quality</strong></td><td>Follows templates with guidance</td><td>Creates clear, accurate content. Ensures technical accuracy and standards</td><td>Produces quality at scale. Drives QA processes</td><td>Establishes quality standards and frameworks</td></tr>
+<tr><td><strong>Content Effectiveness</strong></td><td>Learns effectiveness basics</td><td>Monitors performance metrics. Applies pedagogy best practices</td><td>Drives pedagogy initiatives. Improves via feedback analysis</td><td>Owns pedagogy R&amp;D. Optimizes effectiveness org-wide</td></tr>
+<tr><td><strong>Curriculum Design</strong></td><td>Follows structure from leads</td><td>Designs course outlines for single domain with guidance</td><td>Architects curriculum across multiple domains. Owns end-to-end journeys</td><td>Owns strategic curriculum design across portfolio</td></tr>
+<tr><td><strong>Content Velocity</strong></td><td>1 hr session/day (100 MCQs, 6 coding questions, or 2 projects)</td><td>5 hrs/month independently</td><td>12-20 hrs/month across domains</td><td>25-50 hrs/month. Manages team velocity</td></tr>
+<tr><td><strong>Industry Upgrades</strong></td><td>Receives updates from leads. Implements changes to content/systems as directed</td><td>Keeps domain content, platforms, and software current with industry standards. Updates evaluation systems and tools</td><td>Drives industry alignment across domains. Upgrades learning systems (IDEs, cloud platforms, assessment engines) proactively</td><td>Sets industry standards for portfolio. Ensures entire learning system (content, software, platforms) stays current. Anticipates industry shifts</td></tr>
+<tr><td><strong>Production Systems</strong></td><td>Uses assigned tools with guidance</td><td>Masters content production tools and workflows</td><td>Optimizes production systems for efficiency</td><td>Evaluates and selects production systems</td></tr>
+<tr><td><strong>Learning Systems Design</strong></td><td>Creates basic assessments with guidance</td><td>Manages component mix (MCQs, coding, projects). Selects learning environments</td><td>Owns component strategy. Optimizes learning environments (playgrounds, cloud IDEs, GenAI)</td><td>Strategic ownership across portfolio. Integrates support systems (AI tutor, analytics)</td></tr>
+<tr><td><strong>GenAI Orchestration &amp; Content Automation</strong></td><td>Uses GenAI to accelerate content creation (exercise generation, code examples, explanations). All output reviewed with team lead before publishing. Builds judgment on what AI does well vs. poorly. Learning to write effective prompts</td><td>Creates content specs before prompting (learning objectives, difficulty, concepts to test). Reviews all AI output for technical accuracy and pedagogy. Catches hallucinations. Uses AI for boilerplate while hand-crafting complex sequences. 30-50% velocity increase</td><td>Builds reusable prompt templates for team. Establishes review checklists for AI content. Trains team on when to use AI vs. manual creation. Monitors quality metrics across AI vs. manual content. 50-100% team velocity increase</td><td>Designs content automation pipelines (bulk generation, curriculum scaffolding, item banks). Creates prompt libraries and quality frameworks. Sets AI usage standards: what requires review, what auto-publishes, what never uses AI. Measures cost per content hour and ROI</td></tr>
+<tr><td><strong>Business Impact</strong></td><td>Supports team deliverables</td><td>Improves learning outcomes and efficiency</td><td>Drives multiple initiatives, cost optimization</td><td>Owns P&amp;L, establishes new verticals, manages budget</td></tr>
+</table></div>
+<h3 style="margin:20px 0 10px;font-size:1.05em">Operational Excellence (6)</h3>
+<div class="scroll"><table class="wide"><tr><th style="width:13%">Area</th><th>Associate AI Engineer</th><th>AI Engineer 1</th><th>AI Engineer 2</th><th>AI Engineer Lead</th></tr>
+<tr><td><strong>Problem Solving</strong></td><td>Solves minor issues within assigned domain. Fixes immediate gaps</td><td>Identifies root causes. Suggests solutions across functions</td><td>Finds root causes for all stakeholders. Drives learning improvements</td><td>Proposes and executes solutions across entire system (short/mid/long term)</td></tr>
+<tr><td><strong>Execution</strong></td><td>Executes assigned tasks. Follows workflows with guidance</td><td>Executes end-to-end for domain independently. Coordinates with cross-functional teams</td><td>Drives execution across domains and team. Plans quarterly deliverables</td><td>Drives execution across entire portfolio. Owns strategic planning (quarterly/annual)</td></tr>
+<tr><td><strong>Learnability</strong></td><td>Learns new tools with guidance</td><td>Quickly picks up new technologies. Self-directed learning</td><td>Masters new domains rapidly. Teaches others effectively</td><td>Champions learning culture. Adapts strategically. Identifies skill gaps</td></tr>
+<tr><td><strong>Communication</strong></td><td>Communicates clearly within team. Documents work</td><td>Effective with cross-functional teams. Articulates technical decisions</td><td>Communicates with stakeholders. Influences through data</td><td>Strategic communicator to leadership. Presents portfolio strategy</td></tr>
+<tr><td><strong>Ambiguity Handling</strong></td><td>Works with clear requirements</td><td>Handles moderate ambiguity. Seeks input</td><td>Translates vague problems into solutions</td><td>Identifies and scopes new ambiguous problems</td></tr>
+<tr><td><strong>Best Practices</strong></td><td>Follows established practices</td><td>Refines and shares practices</td><td>Establishes new practices</td><td>Defines and mandates org-wide practices</td></tr>
+</table></div>
+<h3 style="margin:20px 0 10px;font-size:1.05em">Collaboration and Stakeholders (4)</h3>
+<div class="scroll"><table class="wide"><tr><th style="width:13%">Area</th><th>Associate AI Engineer</th><th>AI Engineer 1</th><th>AI Engineer 2</th><th>AI Engineer Lead</th></tr>
+<tr><td><strong>Cross-Functionality</strong></td><td>Works with design and engineers on tasks</td><td>Collaborates with graphic design, product, engineers, video editors</td><td>Leads cross-functional initiatives with multiple teams</td><td>Drives cross-functional collaboration across content teams</td></tr>
+<tr><td><strong>Stakeholder Collaboration</strong></td><td>Receives requirements from product</td><td>Engages with instructors, success coaches, program managers, sales, assessments</td><td>Aligns content with stakeholder goals (placements, assessments)</td><td>Partners with product leadership on curriculum roadmap</td></tr>
+<tr><td><strong>Cross-Product Work</strong></td><td>Works within single product</td><td>Coordinates with other products (Academy, NIAT, Intensive)</td><td>Ensures content reusability across products</td><td>Optimizes content strategy across all products</td></tr>
+<tr><td><strong>Mentorship</strong></td><td>Receives mentoring from SDE 1+</td><td>Mentors junior content creators</td><td>Develops and mentors emerging leaders</td><td>Builds and develops teams of 15-25 members</td></tr>
+</table></div>
+<h2>KPI wiring</h2>
+<div class="sectionlead">The v2 addition: each area cites the rows it moves, or says why it deliberately has none. Rows live on the KPI tracker and the FullStack &amp; CS Core team view (the pilot).</div>
+<div class="scroll"><table class="wide"><tr><th style="width:15%">Category</th><th style="width:17%">Area</th><th style="width:38%">Wired to</th><th>Note</th></tr>
+<tr><td class="muted">Foundation</td><td><strong>Scope of Work</strong></td><td><span class="nodesign">— by design</span></td><td>Calibration, not a metric — read through the Portfolio Metrics matrix + domain complexity multipliers below.</td></tr>
+<tr><td class="muted">Foundation</td><td><strong>Influence</strong></td><td><span class="nodesign">— by design</span></td><td>Read through interfaces: team-view Section C asks raised and honoured, §7 counterparty standing.</td></tr>
+<tr><td class="muted">Core Creation and Quality</td><td><strong>Content Quality</strong></td><td><span class="kpi">Content Issue Resolution Efficiency</span> <span class="kpi">Content Issue Recurrence Rate</span> <span class="kpi">Module-Quiz Score Bands</span></td><td>The Learning Domains quality loop — recurrence is the tell that a fix actually held.</td></tr>
+<tr><td class="muted">Core Creation and Quality</td><td><strong>Content Effectiveness</strong></td><td><span class="kpi">Learner Accessed Content Completion Rate</span> <span class="kpi">Practice Attempt-to-Completion Rate</span> <span class="kpi">Engagement-Matrix Cell Migration</span> <span class="kpi">Summative + Formative Achievement</span></td><td>Access-conditioned stickiness pair + the matrix — conduction effects stripped by design.</td></tr>
+<tr><td class="muted">Core Creation and Quality</td><td><strong>Curriculum Design</strong></td><td><span class="kpi">Pedagogy Initiative Impact</span> <span class="kpi">University Curriculum Compliance</span></td><td>PII is SME-owned (Pedagogy Experts contribute); compliance rows apply on university-facing work.</td></tr>
+<tr><td class="muted">Core Creation and Quality</td><td><strong>Content Velocity</strong></td><td><span class="kpi">Learning Content Hours Delivered</span> <span class="kpi">Vernacular Content Hours Delivered</span> <span class="kpi">Practice &amp; Assessment Content Pieces Delivered</span></td><td>The per-level hours ladder in the matrix is the personal share of these team rows.</td></tr>
+<tr><td class="muted">Core Creation and Quality</td><td><strong>Industry Upgrades</strong></td><td><span class="kpi">Industry Update Adherence</span> <span class="kpi">Tech Stack Freshness Rate</span></td><td>Adherence = planned updates land on schedule; freshness = the audit behind relevance.</td></tr>
+<tr><td class="muted">Core Creation and Quality</td><td><strong>Production Systems</strong></td><td><span class="kpi">Agentic Production Coverage</span> <span class="kpi">R&amp;D Initiative Impact</span></td><td>Publishing through ACP pipelines; cost rows below read the efficiency it buys.</td></tr>
+<tr><td class="muted">Core Creation and Quality</td><td><strong>Learning Systems Design</strong></td><td><span class="kpi">Evaluation Environment Coverage</span> <span class="kpi">Domain Capability Delivery</span></td><td>The Domain Product Enablement pair — raised/accepted by SMEs, built by PMs + Engineering, accountability in Learning Domains. Reads: Learning Environment Satisfaction, PAtC env-friction leg.</td></tr>
+<tr><td class="muted">Core Creation and Quality</td><td><strong>GenAI Orchestration &amp; Content Automation</strong></td><td><span class="kpi">Agentic Production Coverage</span> <span class="kpi">R&amp;D Initiative Impact</span> <span class="kpi">Cost per MCQ Generated</span> <span class="kpi">Cost per Coding Question</span></td><td>Mandatory from AI Engineer 1 — orchestration shows up as coverage plus falling unit costs.</td></tr>
+<tr><td class="muted">Core Creation and Quality</td><td><strong>Business Impact</strong></td><td><span class="kpi">Summative Skill Assessment Achievement Rate</span> <span class="kpi">Formative Skill Assessment Achievement Rate</span> <span class="kpi">Graded Assessment Achievement Rate (NIAT)</span> <span class="kpi">Weekly Active Users (Launchpad)</span></td><td>The Section B Business Impact block; ladders to org KRAs 1, 4 and 5.</td></tr>
+<tr><td class="muted">Operational Excellence</td><td><strong>Problem Solving</strong></td><td><span class="nodesign">— by design</span></td><td>Review evidence — no direct KPI by design.</td></tr>
+<tr><td class="muted">Operational Excellence</td><td><strong>Execution</strong></td><td><span class="kpi">Cross-functional Sprint Delivery Rate</span> <span class="kpi">Stakeholder Content Request Fulfillment Rate</span></td><td>Committed-vs-delivered is the execution read.</td></tr>
+<tr><td class="muted">Operational Excellence</td><td><strong>Learnability</strong></td><td><span class="nodesign">— by design</span></td><td>Review evidence — GenAI adoption surfaces indirectly in Agentic Production Coverage contribution.</td></tr>
+<tr><td class="muted">Operational Excellence</td><td><strong>Communication</strong></td><td><span class="nodesign">— by design</span></td><td>Review evidence — no direct KPI by design.</td></tr>
+<tr><td class="muted">Operational Excellence</td><td><strong>Ambiguity Handling</strong></td><td><span class="nodesign">— by design</span></td><td>Review evidence — no direct KPI by design.</td></tr>
+<tr><td class="muted">Operational Excellence</td><td><strong>Best Practices</strong></td><td><span class="kpi">Operations &amp; Growth Cost</span> <span class="kpi">Creative Resource Utilisation Rate</span></td><td>Hygiene guardrails (PM-managed reads) — no org ladder by design.</td></tr>
+<tr><td class="muted">Collaboration and Stakeholders</td><td><strong>Cross-Functionality</strong></td><td><span class="kpi">Cross-functional Sprint Delivery Rate</span></td><td>Plus the health of Section C asks the person is party to.</td></tr>
+<tr><td class="muted">Collaboration and Stakeholders</td><td><strong>Stakeholder Collaboration</strong></td><td><span class="kpi">Stakeholder Content Request Fulfillment Rate</span></td><td>Ladders to dept Stakeholder Alignment (§5).</td></tr>
+<tr><td class="muted">Collaboration and Stakeholders</td><td><strong>Cross-Product Work</strong></td><td><span class="nodesign">— by design</span></td><td>Read through the Product column — Section B rows carried per product (NIAT · Academy · Launchpad slots).</td></tr>
+<tr><td class="muted">Collaboration and Stakeholders</td><td><strong>Mentorship</strong></td><td><span class="nodesign">— by design</span></td><td>Rating Pillar 3 (Develop the Best) — deliberately review-based, no KPI row.</td></tr>
+</table></div>
+<h2>Performance rating — AI Engineer Lead</h2>
+<div class="sectionlead">4 pillars, weighted. Target is 3.0+ on 5-point scale. Calculation: Final Rating = (Performance × 0.50) + (Competence × 0.25) + (Develop Best × 0.15) + (Culture × 0.10).</div>
+<div class="pillar"><div class="pillar-head"><span class="nm">Performance</span><span class="wt">50%</span></div>
+<div class="subline"><div><strong>Impact on Learning Outcomes</strong><div class="bar"><i style="width:40%"></i></div></div><div class="swt">40%</div><div>Assessment score improvements, competency progression<div style="margin-top:4px"><span class="kpi">Summative + Formative Skill Assessment Achievement</span> <span class="kpi">org KRA 1 SPI Score Bands</span></div></div></div>
+<div class="subline"><div><strong>Feedback Resolution</strong><div class="bar"><i style="width:20%"></i></div></div><div class="swt">20%</div><div>Issues resolved within SLA, quality of implementation<div style="margin-top:4px"><span class="kpi">Content Issue Resolution Efficiency</span> <span class="kpi">Content Issue Recurrence Rate</span></div></div></div>
+<div class="subline"><div><strong>Industry Upgrades</strong><div class="bar"><i style="width:20%"></i></div></div><div class="swt">20%</div><div>Planned updates on schedule, emerging skills coverage<div style="margin-top:4px"><span class="kpi">Industry Update Adherence</span> <span class="kpi">Tech Stack Freshness Rate</span></div></div></div>
+<div class="subline"><div><strong>Pedagogy/R&amp;D</strong><div class="bar"><i style="width:20%"></i></div></div><div class="swt">20%</div><div>Concept understanding improvements, completion rates, delivery innovation<div style="margin-top:4px"><span class="kpi">Pedagogy Initiative Impact</span> <span class="kpi">R&amp;D Initiative Impact</span></div></div></div>
+</div>
+<div class="pillar"><div class="pillar-head"><span class="nm">Role Competence</span><span class="wt">25%</span></div>
+<div class="subline"><div><strong>Curriculum Quality</strong><div class="bar"><i style="width:40%"></i></div></div><div class="swt">40%</div><div>Pedagogical excellence, content coherence, engagement quality<div style="margin-top:4px"><span class="kpi">Content Issue Recurrence Rate</span> <span class="kpi">Module-Quiz Score Bands</span> <span class="kpi">Engagement-Matrix Cell Migration</span></div></div></div>
+<div class="subline"><div><strong>GenAI Orchestration &amp; Automation</strong><div class="bar"><i style="width:20%"></i></div></div><div class="swt">20%</div><div>Effective use of AI for content production, quality of automation systems, cost/velocity optimization through AI, team GenAI capability development<div style="margin-top:4px"><span class="kpi">Agentic Production Coverage</span></div></div></div>
+<div class="subline"><div><strong>Cost Efficiency</strong><div class="bar"><i style="width:15%"></i></div></div><div class="swt">15%</div><div>Cost per learning hour, cost per assessment, resource optimization<div style="margin-top:4px"><span class="kpi">Cost per Learning Hour</span> <span class="kpi">Cost per MCQ</span> <span class="kpi">Cost per Coding Question</span></div></div></div>
+<div class="subline"><div><strong>Content Velocity</strong><div class="bar"><i style="width:15%"></i></div></div><div class="swt">15%</div><div>Monthly content hours delivery, practice/assessment production<div style="margin-top:4px"><span class="kpi">Learning Content Hours Delivered</span> <span class="kpi">Practice &amp; Assessment Content Pieces Delivered</span></div></div></div>
+<div class="subline"><div><strong>Cross-functional Collaboration</strong><div class="bar"><i style="width:10%"></i></div></div><div class="swt">10%</div><div>Request fulfillment within timeframes, stakeholder satisfaction<div style="margin-top:4px"><span class="kpi">Cross-functional Sprint Delivery Rate</span> <span class="kpi">Stakeholder Content Request Fulfillment Rate</span></div></div></div>
+</div>
+<div class="pillar"><div class="pillar-head"><span class="nm">Develop the Best</span><span class="wt">15%</span></div>
+<div class="subline"><div><strong>Power Performers Created</strong><div class="bar"><i style="width:30%"></i></div></div><div class="swt">30%</div><div>Members ready for next level, training program design<div style="margin-top:4px"><span class="nodesign">review-based — no KPI row by design</span></div></div></div>
+<div class="subline"><div><strong>Timely Feedback</strong><div class="bar"><i style="width:20%"></i></div></div><div class="swt">20%</div><div>Regular 1-on-1s, actionable feedback, development plan clarity<div style="margin-top:4px"><span class="nodesign">review-based — no KPI row by design</span></div></div></div>
+<div class="subline"><div><strong>Hiring</strong><div class="bar"><i style="width:15%"></i></div></div><div class="swt">15%</div><div>Active participation, candidate evaluation quality, new hire success rate<div style="margin-top:4px"><span class="nodesign">review-based — no KPI row by design</span></div></div></div>
+<div class="subline"><div><strong>Talent Nurturing</strong><div class="bar"><i style="width:20%"></i></div></div><div class="swt">20%</div><div>High potential recognition, development opportunities, succession planning<div style="margin-top:4px"><span class="nodesign">review-based — no KPI row by design</span></div></div></div>
+<div class="subline"><div><strong>Growth Opportunities</strong><div class="bar"><i style="width:15%"></i></div></div><div class="swt">15%</div><div>Stretch assignments, cross-functional exposure, leadership development<div style="margin-top:4px"><span class="nodesign">review-based — no KPI row by design</span></div></div></div>
+</div>
+<div class="pillar"><div class="pillar-head"><span class="nm">Culture and Values</span><span class="wt">10%</span></div>
+<div class="subline"><div><strong>Framework Adherence</strong><div class="bar"><i style="width:20%"></i></div></div><div class="swt">20%</div><div>Following org processes, execution consistency<div style="margin-top:4px"><span class="nodesign">review-based — no KPI row by design</span></div></div></div>
+<div class="subline"><div><strong>Learning Culture</strong><div class="bar"><i style="width:20%"></i></div></div><div class="swt">20%</div><div>Conducting learning hours, knowledge sharing, skill development<div style="margin-top:4px"><span class="nodesign">review-based — no KPI row by design</span></div></div></div>
+<div class="subline"><div><strong>Outcome Over Output</strong><div class="bar"><i style="width:20%"></i></div></div><div class="swt">20%</div><div>Business impact focus vs. volume, quality over quantity<div style="margin-top:4px"><span class="nodesign">review-based — no KPI row by design</span></div></div></div>
+<div class="subline"><div><strong>Growth Mindset</strong><div class="bar"><i style="width:20%"></i></div></div><div class="swt">20%</div><div>Staying current with trends, learning from new tech, embracing change<div style="margin-top:4px"><span class="nodesign">review-based — no KPI row by design</span></div></div></div>
+<div class="subline"><div><strong>Mission Alignment</strong><div class="bar"><i style="width:20%"></i></div></div><div class="swt">20%</div><div>Living company values, brand protection, mission-driven decisions<div style="margin-top:4px"><span class="nodesign">review-based — no KPI row by design</span></div></div></div>
+</div>
+<div class="scroll"><table style="max-width:560px"><tr><th>Rating</th><th>Label</th><th>Meaning</th></tr>
+<tr><td class="muted">5</td><td><strong>Exceptional</strong></td><td>Exceeded significantly</td></tr>
+<tr><td class="muted">4</td><td><strong>Exceeds</strong></td><td>Above expectations</td></tr>
+<tr><td class="muted">3</td><td><strong>Meets</strong></td><td>As expected (target)</td></tr>
+<tr><td class="muted">2</td><td><strong>Needs Improvement</strong></td><td>Struggled to meet</td></tr>
+<tr><td class="muted">1</td><td><strong>Unsatisfactory</strong></td><td>Failed to meet</td></tr>
+</table></div>
+<h2>Calibration</h2>
+<div class="sectionlead">Portfolio expectations by level, domain complexity multipliers, and product reach — the sizing inputs behind every card.</div>
+<div class="scroll"><table class="wide"><tr><th>Metric</th><th>Associate AI Engineer</th><th>AI Engineer 1</th><th>AI Engineer 2</th><th>AI Engineer Lead</th></tr>
+<tr><td><strong>Experience</strong></td><td>0-1 years</td><td>1-3+ years</td><td>3+ years</td><td>5+ years</td></tr>
+<tr><td><strong>Domains</strong></td><td>0.5-1</td><td>1-2</td><td>3-4</td><td>4-6</td></tr>
+<tr><td><strong>Tracks</strong></td><td>0-1</td><td>1-2</td><td>2-3</td><td>3-5+</td></tr>
+<tr><td><strong>Content Hours</strong></td><td>40-100</td><td>100-250</td><td>250-450</td><td>450+</td></tr>
+<tr><td><strong>Team Size</strong></td><td>Solo (0)</td><td>0-2</td><td>2-5</td><td>15-25</td></tr>
+<tr><td><strong>Student Reach</strong></td><td>2K-5K</td><td>5K-10K</td><td>10K-20K</td><td>20K-40K+</td></tr>
+<tr><td><strong>Products</strong></td><td>1</td><td>1-2</td><td>1-2</td><td>2-3</td></tr>
+<tr><td><strong>Key Focus</strong></td><td>Task execution</td><td>Domain ownership</td><td>Team leadership</td><td>Portfolio management</td></tr>
+</table></div>
+<h3 style="margin:20px 0 10px;font-size:1.05em">Domain complexity</h3>
+<div class="scroll"><table><tr><th>Complexity</th><th>Domains</th><th>Why It Matters</th></tr>
+<tr><td><strong>Low (1.0x)</strong></td><td>English, Aptitude, Mathematics</td><td>Stable content, fewer dependencies, straightforward pedagogy</td></tr>
+<tr><td><strong>Medium (1.5x)</strong></td><td>CS Core, DevOps, Programming</td><td>Moderate evolution, standard dependencies, regular updates</td></tr>
+<tr><td><strong>High (2.0x)</strong></td><td>FullStack, GenAI</td><td>Rapid evolution, multiple frameworks, high SME involvement</td></tr>
+<tr><td><strong>Very High (2.5x)</strong></td><td>System Design, DS&amp;Algo, DS/ML</td><td>Highest evolution rate, specialized tracks, critical for placements</td></tr>
+</table></div>
+<h3 style="margin:20px 0 10px;font-size:1.05em">Product baselines (student reach)</h3>
+<div class="scroll"><table><tr><th>Product</th><th>Students</th><th>Notes</th></tr>
+<tr><td><strong>Intensive Online</strong></td><td>~3,000</td><td>Flexible, self-paced</td></tr>
+<tr><td><strong>Intensive Offline</strong></td><td>~200</td><td>Cohort-based, in-person</td></tr>
+<tr><td><strong>Academy</strong></td><td>~30,000</td><td>Largest reach, 2 years</td></tr>
+<tr><td><strong>NIAT</strong></td><td>~8,500</td><td>University partnerships (2024-2025)</td></tr>
+<tr><td><strong>Launchpad</strong></td><td>~300</td><td>Specialized entry program</td></tr>
+</table></div>
+<h3 style="margin:20px 0 10px;font-size:1.05em">Domain catalogue</h3>
+<div class="scroll"><table><tr><th>Domain</th><th>Hours</th><th>Key Tracks</th></tr>
+<tr><td><strong>Programming</strong></td><td>125</td><td>Python (60), JS (35), Java (30)</td></tr>
+<tr><td><strong>DS &amp; Algorithms</strong></td><td>240</td><td>Fundamentals (80), Advanced (80), Problem Solving (80)</td></tr>
+<tr><td><strong>Full Stack</strong></td><td>180</td><td>MERN (120), Django (30), SpringBoot (30)</td></tr>
+<tr><td><strong>CS Core</strong></td><td>115</td><td>Database (35), OS (35), Networks (35), Linux (10)</td></tr>
+<tr><td><strong>DS &amp; ML</strong></td><td>295</td><td>Foundations (25), ML (25), Deep Learning (75), Production (30), Advanced GenAI (40)</td></tr>
+<tr><td><strong>Generative AI</strong></td><td>90</td><td>Intro (30), Building LLMs (30), Projects (30)</td></tr>
+<tr><td><strong>System Design</strong></td><td>60</td><td>High-Level (30), Low-Level (30)</td></tr>
+<tr><td><strong>Mathematics</strong></td><td>50</td><td>Probability &amp; Stats (25), Linear Algebra (25)</td></tr>
+<tr><td><strong>Aptitude</strong></td><td>120</td><td>Quant (30), Numerical (30), Logical (30), Advanced (30)</td></tr>
+<tr><td><strong>English</strong></td><td>60</td><td>Foundation (15), Advanced (15), Applied (15), Analytics (15)</td></tr>
+<tr><td><strong>DevOps &amp; Testing</strong></td><td>60</td><td>Cloud Foundations (30), Selenium (30)</td></tr>
+</table></div>
+<h2>Pilot: FullStack &amp; CS Core</h2>
+<div class="key-point"><strong>Instantiated titles:</strong> <span class="kpi">Associate AI Engineer – FullStack Learning Systems</span> &middot; <span class="kpi">AI Engineer 1 – FullStack Learning Systems</span> &middot; <span class="kpi">AI Engineer 2 – FullStack &amp; CS Core Learning Systems</span> &middot; <span class="kpi">AI Engineer Lead – FullStack &amp; CS Core Learning Systems</span><br><strong>Complexity:</strong> High (2.0x) — FullStack · Medium (1.5x) — CS Core &middot; <strong>Catalogue:</strong> Full Stack — 180h · MERN (120), Django (30), SpringBoot (30) · CS Core — 115h · Database (35), OS (35), Networks (35), Linux (10)<br>Metric surface = the FullStack &amp; CS Core team view: Section A 18 mirrored tracker rows · Section B 25 owned rows (incl. the Domain Product Enablement pair) · Section C 4 asks.</div>
+<h2>Vocabulary bridge</h2>
+<div class="scroll"><table><tr><th style="width:22%">2026 doc term</th><th>In the KPI system</th></tr>
+<tr><td><strong>Functions</strong></td><td>§10 embedded functions + the content domain teams. “Packaging Teams” = Content Systems &amp; Infra teams (Pavan, Aug 2026).</td></tr>
+<tr><td><strong>Stakeholders</strong></td><td>§7 counterparties — reached through team-view Section C asks, never staffed into lanes.</td></tr>
+<tr><td><strong>Leadership</strong></td><td>Unchanged — Founders, HODs.</td></tr>
+<tr><td><strong>Peer Content Teams</strong></td><td>The other §10 sub-departments (domain teams).</td></tr>
+<tr><td><strong>Support Teams</strong></td><td>Unchanged — HR, Finance, L&amp;D, Facilities.</td></tr>
+<tr><td><strong>“Owns” / P&amp;L language</strong></td><td>Translated to the axis rule: Lane (col L) = accountability · Functions (col K) = who works. A Lead answers for the team's Section B; lane numbers stay with lane leads.</td></tr>
+</table></div>
+<div class="footnote">Source: SDE Learning Systems Career Framework (March 2026) — descriptors, comp bands, rating weights and calibration tables carried verbatim; titles renamed and KPI wiring added in v2 (August 2026). Defaults taken pending red-pen: comp bands included (artifact is private; strip for wide sharing) &middot; level names Associate / 1 / 2 / Lead / 3 &middot; FullStack &amp; CS Core as pilot. Companion sheets: KPI tracker (kra_training_sheet.xlsx) &middot; HOD one-pager. Other domain teams get cards when their team views land.</div>
+</div>

@@ -1,0 +1,523 @@
+{
+ "sections": [
+  {
+   "h2": "Key Terms",
+   "sub": [],
+   "tables": [
+    [
+     [
+      "Term",
+      "Definition"
+     ],
+     [
+      "Functions",
+      "Teams that actively build the learning system: Content, Engineering, Product Managers, Pedagogy Experts, Graphic Designers, Video Editors, Packaging Teams, Software Development Instructors (who record content)"
+     ],
+     [
+      "Stakeholders",
+      "Product-specific teams: Sales, Placements, Product Managers, Instructors, Program Ops, Mentors, Success Coaches, Business Owners, Assessments"
+     ],
+     [
+      "Leadership",
+      "Decision makers: Founders, HODs (Heads of Department)"
+     ],
+     [
+      "Peer Content Teams",
+      "Other content teams managing different domains within the Content function"
+     ],
+     [
+      "Support Teams",
+      "Operational support: HR, Finance, L&D (Learning & Development), Facilities"
+     ]
+    ]
+   ],
+   "text": []
+  },
+  {
+   "h2": "Compensation and Scope",
+   "sub": [],
+   "tables": [],
+   "text": []
+  },
+  {
+   "h2": "Portfolio Metrics by Level",
+   "sub": [],
+   "tables": [
+    [
+     [
+      "Metric",
+      "Associate",
+      "SDE 1",
+      "SDE 2",
+      "Lead"
+     ],
+     [
+      "Experience",
+      "0-1 years",
+      "1-3+ years",
+      "3+ years",
+      "5+ years"
+     ],
+     [
+      "Domains",
+      "0.5-1",
+      "1-2",
+      "3-4",
+      "4-6"
+     ],
+     [
+      "Tracks",
+      "0-1",
+      "1-2",
+      "2-3",
+      "3-5+"
+     ],
+     [
+      "Content Hours",
+      "40-100",
+      "100-250",
+      "250-450",
+      "450+"
+     ],
+     [
+      "Team Size",
+      "Solo (0)",
+      "0-2",
+      "2-5",
+      "15-25"
+     ],
+     [
+      "Student Reach",
+      "2K-5K",
+      "5K-10K",
+      "10K-20K",
+      "20K-40K+"
+     ],
+     [
+      "Products",
+      "1",
+      "1-2",
+      "1-2",
+      "2-3"
+     ],
+     [
+      "Key Focus",
+      "Task execution",
+      "Domain ownership",
+      "Team leadership",
+      "Portfolio management"
+     ]
+    ]
+   ],
+   "text": []
+  },
+  {
+   "h2": "Domain Complexity Reference",
+   "sub": [],
+   "tables": [
+    [
+     [
+      "Complexity",
+      "Domains",
+      "Why It Matters"
+     ],
+     [
+      "Low (1.0x)",
+      "English, Aptitude, Mathematics",
+      "Stable content, fewer dependencies, straightforward pedagogy"
+     ],
+     [
+      "Medium (1.5x)",
+      "CS Core, DevOps, Programming",
+      "Moderate evolution, standard dependencies, regular updates"
+     ],
+     [
+      "High (2.0x)",
+      "FullStack, GenAI",
+      "Rapid evolution, multiple frameworks, high SME involvement"
+     ],
+     [
+      "Very High (2.5x)",
+      "System Design, DS&Algo, DS/ML",
+      "Highest evolution rate, specialized tracks, critical for placements"
+     ]
+    ]
+   ],
+   "text": [
+    "Use this to adjust expectations. Not all domains are equal."
+   ]
+  },
+  {
+   "h2": "Product Baselines (Student Reach)",
+   "sub": [],
+   "tables": [
+    [
+     [
+      "Product",
+      "Students",
+      "Notes"
+     ],
+     [
+      "Intensive Online",
+      "~3,000",
+      "Flexible, self-paced"
+     ],
+     [
+      "Intensive Offline",
+      "~200",
+      "Cohort-based, in-person"
+     ],
+     [
+      "Academy",
+      "~30,000",
+      "Largest reach, 2 years"
+     ],
+     [
+      "NIAT",
+      "~8,500",
+      "University partnerships (2024-2025)"
+     ],
+     [
+      "Launchpad",
+      "~300",
+      "Specialized entry program"
+     ]
+    ]
+   ],
+   "text": []
+  },
+  {
+   "h2": "21 Progression Areas",
+   "sub": [],
+   "tables": [
+    [
+     [
+      "Area",
+      "Associate",
+      "SDE 1",
+      "SDE 2",
+      "Lead"
+     ],
+     [
+      "Scope of Work",
+      "Task-based content creation",
+      "Domain ownership (set of courses)",
+      "Multiple domains, product coverage",
+      "Multi-curriculum, product strategy"
+     ],
+     [
+      "Influence",
+      "Individual contributor",
+      "Influences peers, small team",
+      "Influences team, cross-product",
+      "Influences across content teams"
+     ]
+    ],
+    [
+     [
+      "Area",
+      "Associate",
+      "SDE 1",
+      "SDE 2",
+      "Lead"
+     ],
+     [
+      "Content Quality",
+      "Follows templates with guidance",
+      "Creates clear, accurate content. Ensures technical accuracy and standards",
+      "Produces quality at scale. Drives QA processes",
+      "Establishes quality standards and frameworks"
+     ],
+     [
+      "Content Effectiveness",
+      "Learns effectiveness basics",
+      "Monitors performance metrics. Applies pedagogy best practices",
+      "Drives pedagogy initiatives. Improves via feedback analysis",
+      "Owns pedagogy R&D. Optimizes effectiveness org-wide"
+     ],
+     [
+      "Curriculum Design",
+      "Follows structure from leads",
+      "Designs course outlines for single domain with guidance",
+      "Architects curriculum across multiple domains. Owns end-to-end journeys",
+      "Owns strategic curriculum design across portfolio"
+     ],
+     [
+      "Content Velocity",
+      "1 hr session/day (100 MCQs, 6 coding questions, or 2 projects)",
+      "5 hrs/month independently",
+      "12-20 hrs/month across domains",
+      "25-50 hrs/month. Manages team velocity"
+     ],
+     [
+      "Industry Upgrades",
+      "Receives updates from leads. Implements changes to content/systems as directed",
+      "Keeps domain content, platforms, and software current with industry standards. Updates evaluation systems and tools",
+      "Drives industry alignment across domains. Upgrades learning systems (IDEs, cloud platforms, assessment engines) proactively",
+      "Sets industry standards for portfolio. Ensures entire learning system (content, software, platforms) stays current. Anticipates industry shifts"
+     ],
+     [
+      "Production Systems",
+      "Uses assigned tools with guidance",
+      "Masters content production tools and workflows",
+      "Optimizes production systems for efficiency",
+      "Evaluates and selects production systems"
+     ],
+     [
+      "Learning Systems Design",
+      "Creates basic assessments with guidance",
+      "Manages component mix (MCQs, coding, projects). Selects learning environments",
+      "Owns component strategy. Optimizes learning environments (playgrounds, cloud IDEs, GenAI)",
+      "Strategic ownership across portfolio. Integrates support systems (AI tutor, analytics)"
+     ],
+     [
+      "GenAI Orchestration & Content Automation",
+      "Uses GenAI to accelerate content creation (exercise generation, code examples, explanations). All output reviewed with team lead before publishing. Builds judgment on what AI does well vs. poorly. Learning to write effective prompts",
+      "Creates content specs before prompting (learning objectives, difficulty, concepts to test). Reviews all AI output for technical accuracy and pedagogy. Catches hallucinations. Uses AI for boilerplate while hand-crafting complex sequences. 30-50% velocity increase",
+      "Builds reusable prompt templates for team. Establishes review checklists for AI content. Trains team on when to use AI vs. manual creation. Monitors quality metrics across AI vs. manual content. 50-100% team velocity increase",
+      "Designs content automation pipelines (bulk generation, curriculum scaffolding, item banks). Creates prompt libraries and quality frameworks. Sets AI usage standards: what requires review, what auto-publishes, what never uses AI. Measures cost per content hour and ROI"
+     ],
+     [
+      "Business Impact",
+      "Supports team deliverables",
+      "Improves learning outcomes and efficiency",
+      "Drives multiple initiatives, cost optimization",
+      "Owns P&L, establishes new verticals, manages budget"
+     ]
+    ],
+    [
+     [
+      "Area",
+      "Associate",
+      "SDE 1",
+      "SDE 2",
+      "Lead"
+     ],
+     [
+      "Problem Solving",
+      "Solves minor issues within assigned domain. Fixes immediate gaps",
+      "Identifies root causes. Suggests solutions across functions",
+      "Finds root causes for all stakeholders. Drives learning improvements",
+      "Proposes and executes solutions across entire system (short/mid/long term)"
+     ],
+     [
+      "Execution",
+      "Executes assigned tasks. Follows workflows with guidance",
+      "Executes end-to-end for domain independently. Coordinates with cross-functional teams",
+      "Drives execution across domains and team. Plans quarterly deliverables",
+      "Drives execution across entire portfolio. Owns strategic planning (quarterly/annual)"
+     ],
+     [
+      "Learnability",
+      "Learns new tools with guidance",
+      "Quickly picks up new technologies. Self-directed learning",
+      "Masters new domains rapidly. Teaches others effectively",
+      "Champions learning culture. Adapts strategically. Identifies skill gaps"
+     ],
+     [
+      "Communication",
+      "Communicates clearly within team. Documents work",
+      "Effective with cross-functional teams. Articulates technical decisions",
+      "Communicates with stakeholders. Influences through data",
+      "Strategic communicator to leadership. Presents portfolio strategy"
+     ],
+     [
+      "Ambiguity Handling",
+      "Works with clear requirements",
+      "Handles moderate ambiguity. Seeks input",
+      "Translates vague problems into solutions",
+      "Identifies and scopes new ambiguous problems"
+     ],
+     [
+      "Best Practices",
+      "Follows established practices",
+      "Refines and shares practices",
+      "Establishes new practices",
+      "Defines and mandates org-wide practices"
+     ]
+    ],
+    [
+     [
+      "Area",
+      "Associate",
+      "SDE 1",
+      "SDE 2",
+      "Lead"
+     ],
+     [
+      "Cross-Functionality",
+      "Works with design and engineers on tasks",
+      "Collaborates with graphic design, product, engineers, video editors",
+      "Leads cross-functional initiatives with multiple teams",
+      "Drives cross-functional collaboration across content teams"
+     ],
+     [
+      "Stakeholder Collaboration",
+      "Receives requirements from product",
+      "Engages with instructors, success coaches, program managers, sales, assessments",
+      "Aligns content with stakeholder goals (placements, assessments)",
+      "Partners with product leadership on curriculum roadmap"
+     ],
+     [
+      "Cross-Product Work",
+      "Works within single product",
+      "Coordinates with other products (Academy, NIAT, Intensive)",
+      "Ensures content reusability across products",
+      "Optimizes content strategy across all products"
+     ],
+     [
+      "Mentorship",
+      "Receives mentoring from SDE 1+",
+      "Mentors junior content creators",
+      "Develops and mentors emerging leaders",
+      "Builds and develops teams of 15-25 members"
+     ]
+    ]
+   ],
+   "text": [
+    "Grouped into 4 categories. All areas matter, but weight varies by level."
+   ]
+  },
+  {
+   "h2": "Performance Rating Framework (SDE Lead Level)",
+   "sub": [
+    "Pillar 1: Performance (50%)",
+    "Pillar 2: Role Competence (25%)",
+    "Pillar 3: Develop the Best (15%)",
+    "Pillar 4: Culture and Values (10%)",
+    "Rating Scale"
+   ],
+   "tables": [
+    [
+     [
+      "Rating",
+      "Label",
+      "Meaning"
+     ],
+     [
+      "5",
+      "Exceptional",
+      "Exceeded significantly"
+     ],
+     [
+      "4",
+      "Exceeds",
+      "Above expectations"
+     ],
+     [
+      "3",
+      "Meets",
+      "As expected (target)"
+     ],
+     [
+      "2",
+      "Needs Improvement",
+      "Struggled to meet"
+     ],
+     [
+      "1",
+      "Unsatisfactory",
+      "Failed to meet"
+     ]
+    ]
+   ],
+   "text": [
+    "4 pillars, weighted. Target is 3.0+ on 5-point scale.",
+    "Impact on Learning Outcomes (40%): Assessment score improvements, competency progression",
+    "Feedback Resolution (20%): Issues resolved within SLA, quality of implementation",
+    "Industry Upgrades (20%): Planned updates on schedule, emerging skills coverage",
+    "Pedagogy/R&D (20%): Concept understanding improvements, completion rates, delivery innovation",
+    "Curriculum Quality (40%): Pedagogical excellence, content coherence, engagement quality",
+    "GenAI Orchestration & Automation (20%): Effective use of AI for content production, quality of automation systems, cost/velocity optimization through AI, team GenAI capability development",
+    "Cost Efficiency (15%): Cost per learning hour, cost per assessment, resource optimization",
+    "Content Velocity (15%): Monthly content hours delivery, practice/assessment production",
+    "Cross-functional Collaboration (10%): Request fulfillment within timeframes, stakeholder satisfaction",
+    "Power Performers Created (30%): Members ready for next level, training program design",
+    "Timely Feedback (20%): Regular 1-on-1s, actionable feedback, development plan clarity",
+    "Hiring (15%): Active participation, candidate evaluation quality, new hire success rate",
+    "Talent Nurturing (20%): High potential recognition, development opportunities, succession planning",
+    "Growth Opportunities (15%): Stretch assignments, cross-functional exposure, leadership development",
+    "Framework Adherence (20%): Following org processes, execution consistency",
+    "Learning Culture (20%): Conducting learning hours, knowledge sharing, skill development",
+    "Outcome Over Output (20%): Business impact focus vs. volume, quality over quantity",
+    "Growth Mindset (20%): Staying current with trends, learning from new tech, embracing change",
+    "Mission Alignment (20%): Living company values, brand protection, mission-driven decisions",
+    "Calculation: Final Rating = (Performance × 0.50) + (Competence × 0.25) + (Develop Best × 0.15) + (Culture × 0.10)"
+   ]
+  },
+  {
+   "h2": "Complete Domain List",
+   "sub": [],
+   "tables": [
+    [
+     [
+      "Domain",
+      "Hours",
+      "Key Tracks"
+     ],
+     [
+      "Programming",
+      "125",
+      "Python (60), JS (35), Java (30)"
+     ],
+     [
+      "DS & Algorithms",
+      "240",
+      "Fundamentals (80), Advanced (80), Problem Solving (80)"
+     ],
+     [
+      "Full Stack",
+      "180",
+      "MERN (120), Django (30), SpringBoot (30)"
+     ],
+     [
+      "CS Core",
+      "115",
+      "Database (35), OS (35), Networks (35), Linux (10)"
+     ],
+     [
+      "DS & ML",
+      "295",
+      "Foundations (25), ML (25), Deep Learning (75), Production (30), Advanced GenAI (40)"
+     ],
+     [
+      "Generative AI",
+      "90",
+      "Intro (30), Building LLMs (30), Projects (30)"
+     ],
+     [
+      "System Design",
+      "60",
+      "High-Level (30), Low-Level (30)"
+     ],
+     [
+      "Mathematics",
+      "50",
+      "Probability & Stats (25), Linear Algebra (25)"
+     ],
+     [
+      "Aptitude",
+      "120",
+      "Quant (30), Numerical (30), Logical (30), Advanced (30)"
+     ],
+     [
+      "English",
+      "60",
+      "Foundation (15), Advanced (15), Applied (15), Analytics (15)"
+     ],
+     [
+      "DevOps & Testing",
+      "60",
+      "Cloud Foundations (30), Selenium (30)"
+     ]
+    ]
+   ],
+   "text": [
+    "Total: 11 domains, 42 courses, 1,320+ hours"
+   ]
+  }
+ ],
+ "preamble": [
+  "Career progression from Associate to Lead across 21 skill areas. Last updated March 2026."
+ ]
+}

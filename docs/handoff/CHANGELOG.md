@@ -161,3 +161,14 @@ Pavan's rulings on the domain-product-work question, applied Section-B-first (or
 - FS view now **A 18 · B 25 · C 4**; 25 variance formulas; html byte-identical (team views are xlsx-only), so no artifact republish — URL content already current.
 
 Role-cards plan: Packaging-Teams question resolved; still open — title set confirmation, comp bands in/out of shared sheet, FS pilot first. Implementation waits on those.
+
+## 2026-08-21 — AI Engineer Ladder shipped: role cards v2 as a new artifact
+
+"proceed with role cards implementation" — the March 2026 SDE Learning Systems framework translated into the KPI system and published as a NEW artifact (🪜): https://claude.ai/code/artifact/dc3ab90d-c4a4-448d-bdb5-fb43a9235734
+- **Titles renamed** to the "AI Engineer – [Domain] Learning Systems" pattern: Associate AI Engineer / AI Engineer 1 / 2 / Lead / 3; source examples retitled, "formerly SDE …" kept on every card. Ladder is linear — 3 sits above Lead (30L+ vs 24–30L); the progression matrix stops at Lead by design (no dual-track needed).
+- **KPI wiring added** (the v2 value): all 21 progression areas cite named tracker / FS-view rows or say "review-based — by design" (13 wired / 8 by design); rating pillars P1+P2 sublines read from named rows (P3/P4 stay review-based); Learning Systems Design wires to the new Domain Product Enablement pair.
+- **Per-level metric surface**: Associate contributes to Section B → 1 answers module rows → 2 answers a domain slice incl. Evaluation Environment Coverage → Lead answers the team's full Section B + supports Section A lane numbers → 3 shapes org-tracker rows.
+- **Vocabulary bridge**: doc Functions ≈ §10 embedded functions (Packaging Teams = Content Systems & Infra); Stakeholders ≈ §7 counterparties reached via Section C asks; "owns"/P&L language → axis rule (Lane = accountability · Functions = who works).
+- **Pilot instantiated**: FullStack & CS Core — Full Stack 180h + CS Core 115h; High 2.0x / Medium 1.5x; metric surface = the team view (A 18 · B 25 · C 4).
+- Files: role_cards.html + role_cards.xlsx (editable master, 5 tabs: Ladder / Progression Areas / KPI Wiring / Rating Framework / Calibration) + build_role_cards.py + role_cards_source.json (parsed source; the raw corpora html stays untracked).
+- Defaults taken, all reversible: comp bands included (artifact is private — strip before wide sharing) · title set as above · FS & CS Core as pilot. Other domain teams get cards when their team views land.
