@@ -208,3 +208,8 @@ Files: build_site.py, content_os.html.
 - **PII kept as-is with pre-agreed outcome form** recorded: becomes Domain Learning-Value Uplift (ability/band improvement across the domain's courses per cycle, HE×HV machinery) once per-course ability instruments are confirmed.
 - **Legend & Notes row 24 added**: "Metric evolution (pre-agreed)" — all three forward moves in one place.
 - Builders updated (build_tracker.py, build_role_cards.py, build_site.py — FS parser ranges A 5–23 / B 25–48, asserts 19/24/4); all outputs regenerated; site republished with capabilities omitted (downloads carried forward). All four artifacts republished to same URLs (🎯 cd52be82 · 🧭 44869dfd · 🪜 dc3ab90d · 🗺️ ef86c2ad).
+
+## 2026-08-22 — Product Design added as embedded function (one-pager only)
+- Pavan's Content–Central detail-out began: Content–Central = two people — a Business Ops owner (shared-resource P&L + the ACP builders, reports to HOD) with a PMO person under them. "PMO" name confirmed over "Executive Ops". Metrics list shown in chat for approval first — tracker/team views deliberately untouched (one surface at a time).
+- One-pager: Product Design added to §10 embedded-functions table (UX/UI for learning products, read through LP capability builds + PLE journey work, no dedicated KPI rows yet) and to the §7 execution-management ask (now Product, Engineering, Product Design, Pedagogy). §2 Functions definition + §5 Cross-functional Resource Utilisation already listed Product Designers — no other surface touched yet.
+- 🎯 + 🗺️ republished (site re-embeds the one-pager).
