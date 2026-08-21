@@ -134,13 +134,13 @@ TRACKER = [
    "unit": "%", "freq": "Monthly", "lane": "Product Learning Experience",
    "remark": "Q1 baseline sets the budget — blank until then (org-tracker precedent).",
    "rows": [{"cohort": "All", "kpi": "Program Delivery:NIAT::Journey Step Health", "budget": None}]},
-  {"kra": 1, "category": "Content Efficiency", "product": "NIAT", "metric": "Product Issue Resolution Efficiency", "marker": "CROSS-DEPT",
-   "desc": "% of student-reported product issues resolved within TAT — resolved across departments, we route; fix live + students notified",
+  {"kra": 1, "category": "Content Efficiency", "product": "NIAT", "metric": "Product Issue Resolution Efficiency", "marker": "CROSS-FUNCTION",
+   "desc": "% of student-reported product issues resolved within TAT — resolved across functions, we route; fix live + students notified",
    "dep": dep(13), "funnel": fun(13), "functions": FX["prod"],
    "unit": "%", "freq": "Monthly", "lane": "Product Learning Experience",
    "remark": "Q1 baseline sets the TAT target — blank until then.",
    "rows": [{"cohort": "All", "kpi": "Content Efficiency:NIAT::Product Issue Resolution Efficiency", "budget": None}]},
-  {"kra": 1, "category": "Content Efficiency", "product": "NIAT", "metric": "Product Issue Recurrence", "marker": "CROSS-DEPT",
+  {"kra": 1, "category": "Content Efficiency", "product": "NIAT", "metric": "Product Issue Recurrence", "marker": "CROSS-FUNCTION",
    "desc": "% of resolved product issues that recur at student-journey level (quarter)",
    "dep": dep(14), "funnel": fun(14), "functions": FX["prod"],
    "unit": "%", "freq": "Quarterly", "lane": "Product Learning Experience",
@@ -371,6 +371,14 @@ lg = wb["Legend & Notes"]
 lg["B1"] = ("A KRA (Key Result Area) is an org outcome NIAT is judged on — it carries the target. One merged sheet: "
             "each numbered row is one trackable KPI under the KRA it moves; muted rows are context (org-owned or pending). "
             "Training columns — Dependent metrics · Funnel · Functions — sit in a collapsed column group.")
+lg["B3"] = ("A lane is an accountability grouping of KPIs, NOT a team — the lane lead answers for the number at review. "
+            "Learning Domains (domain curriculum, pedagogy & question banks) · Learning Platform (shared study / practice / "
+            "revision / assessment capabilities) · Product Learning Experience (product-specific learning experiences + "
+            "university delivery & compliance) · Agentic Content Platform (AI platforms & automation for content production) · "
+            "Developer Platform (IDE, compiler & platform services) · Shared/PMO (department-wide programs). "
+            "Category (col C) = what it measures · Lane (col L) = who is accountable · Functions (col K) = who does the work.")
+lg["B7"] = ("[ORG] org-owned scoreboard, tracked not owned · [CROSS-FUNCTION] resolved across functions, we route · "
+            "[SAMPLE] illustrative numbers until baselines land · [CASCADE] same KPI feeds two KRAs.")
 lg["B4"] = ("The teams that actively build the learning system (HOD one-pager §2 key terms): Content, Engineering, "
             "Product Managers, Pedagogy Experts, DA/DEs, Graphic Designers, Video Editors, Product Designers, "
             "Packaging Teams, SDIs — plus the CSI team on delivery- and university-facing rows. Draft for red-pen.")
@@ -388,17 +396,18 @@ lg["B19"] = ("Dependent metrics · Funnel · Functions are a collapsible column 
              "the +/− control above the columns. Collapsed = the org-format tracker; expanded = the training view.")
 lg["A20"] = "Metric categories (col C)"
 lg["B20"] = ("Org Head-Abstract vocabulary — Business Impact · Content Effectiveness · Content Velocity · Content Efficiency · Content Relevance · Stakeholder Alignment · Executive Ops — plus three department extensions: Program Delivery · University Alignment · Platform Reliability. Category = what the KPI measures; Lane (col L) = who is accountable; Functions (col K) = who does the work.")
-for r in (1, 4, 8, 17, 18, 19, 20):
+for r in (1, 3, 4, 7, 8, 17, 18, 19, 20):
     lg.cell(row=r, column=1).font = F(10, bold=True)
     lg.cell(row=r, column=1).alignment = Alignment(vertical="top", wrap_text=True)
     lg.cell(row=r, column=2).font = F(10)
     lg.cell(row=r, column=2).alignment = Alignment(vertical="top", wrap_text=True)
     lg.row_dimensions[r].height = 55
+lg.row_dimensions[3].height = 70
 
 wb.save(XLSX)
 
 # ---------------------------------------------------------------- html page
-TAG = {"CASCADE": "tag-cascade", "SAMPLE": "tag-sample", "CROSS-DEPT": "tag-xdept", "ORG": "tag-org"}
+TAG = {"CASCADE": "tag-cascade", "SAMPLE": "tag-sample", "CROSS-FUNCTION": "tag-xdept", "ORG": "tag-org"}
 def esc(s):
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
@@ -456,9 +465,20 @@ body.append('  <div class="key-point"><strong>How to read this sheet:</strong> a
             'key terms; <strong>Lane</strong> stays the accountability owner, not a team) — are collapsed by default: toggle them '
             'here, expand the column group in the workbook. Markers: '
             '<span class="tag tag-org">ORG</span> org-owned scoreboard, tracked not owned &middot; '
-            '<span class="tag tag-xdept">CROSS-DEPT</span> resolved across departments, we route &middot; '
+            '<span class="tag tag-xdept">CROSS-FUNCTION</span> resolved across functions, we route &middot; '
             '<span class="tag tag-sample">SAMPLE</span> illustrative until baselines land &middot; '
             '<span class="tag tag-cascade">CASCADE</span> same KPI feeds two KRAs.</div>')
+body.append('  <div class="key-point"><strong>Lanes (col L):</strong> the accountability groupings KPIs report under — '
+            'a lane is not a team; its lead answers for the number at review. <strong>Learning Domains</strong> — domain '
+            'curriculum, pedagogy &amp; question banks across the 13 domains &middot; <strong>Learning Platform</strong> — '
+            'shared study / practice / revision / assessment capabilities across products &middot; <strong>Product Learning '
+            'Experience</strong> — product-specific learning experiences plus university delivery &amp; compliance &middot; '
+            '<strong>Agentic Content Platform</strong> — AI platforms &amp; automation for curriculum creation and content '
+            'ops &middot; <strong>Developer Platform</strong> — IDE, compiler &amp; platform services students code on '
+            '&middot; <strong>Shared / PMO</strong> — department-wide programs run from the HOD office. <strong>One line to '
+            'keep the axes apart:</strong> Metric category (col C) = <em>what</em> the KPI measures &middot; Lane (col L) = '
+            '<em>who is accountable</em> for the number &middot; Functions (col K) = <em>who does the work</em> that moves '
+            'it.</div>')
 body.append('  <h2>1. KRA &rarr; KPI Tracker — FY 2026-27</h2>')
 body.append('  <div class="sectionlead">The sheet people live in after training — muted rows are context (org-owned or pending), '
             'so nothing from the training story is lost.</div>')

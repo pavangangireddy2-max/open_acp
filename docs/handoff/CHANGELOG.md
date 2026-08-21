@@ -92,3 +92,8 @@ One line per change: date · doc · what · source.
 ## 2026-08-21 — Cadence corrections (Pavan): PDG weekly, Alignment monthly vs biweekly skill assessments
 - **Program Delivery Gap [CASCADE]**: frequency Monthly → **Weekly** (tracker col N + one-pager §5).
 - **Content–Assessment Alignment**: frequency Per cycle/Quarterly → **Monthly**, comparator named as the **Biweekly Skill Assessments** (tracker description, one-pager §5 description + §6 step 3). Target-tightening rule (≤5 pp after 3 clean cycles) unchanged — it is a threshold rule, not a cadence.
+
+## 2026-08-21 — CROSS-FUNCTION rename + lane legend / axis one-liner
+- Marker rename (Pavan): `CROSS-DEPT` → `CROSS-FUNCTION` on Product Issue Resolution Efficiency + Product Issue Recurrence — resolution spans functions (PMs, Engineering, Content), not departments. All surfaces: tracker xlsx metric cells + Legend B7, tracker HTML tags + key-point legend, builder TAG dict + descs ("resolved across functions, we route"; "regardless of which function owns the fix"), kra_data.json ROWS markers, one-pager §5 tags + §6 li + tag legend. Zero stale strings.
+- Lanes now explained on both surfaces (gap Pavan flagged): tracker HTML gets a second key-point div — six lane one-liners (LD/LP/PLE/ACP/DP/Shared-PMO) + the axis line; xlsx Legend B3 rewritten with per-lane glosses + axis line (row height 70). One-pager §2 gains a "Lanes" key-term row (points at §8/§9) + a sectionlead one-liner under the table: category = what it measures · lane = who is accountable · function = who does the work.
+- Pending (unchanged): operating view (📋) category + cadence + marker sync — deferred by Pavan.
