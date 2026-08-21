@@ -38,7 +38,7 @@ FX = {
   "cell":   "Product Managers + Engineering + DA/DEs",
   "cissue": "Content + Engineering",
   "eng":    "Engineering",
-  "jsh":    "Product Managers + DA/DEs + CSI team",
+  "jsh":    "Product Managers + DA/DEs + CSI team + Pedagogy Experts (journey design)",
   "prod":   "Product Managers + CSI team",
   "bos":    "CSI team + Content",
   "tat":    "CSI team",
@@ -82,27 +82,35 @@ TRACKER = [
    "desc": "% of learners in the HE×HV (high-effort × high-value) cell; the full 3×3 matrix stays diagnostic",
    "dep": dep(3), "funnel": fun(3), "functions": FX["cell"],
    "unit": "%", "freq": "Per cycle · read monthly", "lane": "Learning Platform",
-   "remark": "SAMPLE — from ~4% baseline; budget confirms when the LE dashboard lands. Alt pick: M×M 10 → 20.",
+   "remark": "SAMPLE — from ~4% baseline; budget confirms when the LE dashboard lands. Alt pick: M×M 10 → 20. Arbitration with Score Bands: both red → the bleeding cell names the lane — high effort + low value = content not converting effort (Learning Domains); effort itself draining = engagement problem (Learning Platform).",
    "rows": [{"cohort": "All", "kpi": "Business Impact:All::% Learners in HE×HV Cell", "budget": 10}]},
   {"kra": 0, "note": "Summative & Formative Achievement — ORG scoreboard, tracked not owned: same 30/40/30 on assessment scores, per batch. Steps 1–3 held → assessments run → the 75% lands → SPI Bands."},
   # ---- KRA 2
   {"kra": 1, "category": "Content Efficiency", "product": "All", "metric": "Content Issue Resolution Efficiency", "marker": "",
    "desc": "% of content issues resolved within the 2-day TAT — resolved = fix live + students notified",
    "dep": dep(5), "funnel": fun(5), "functions": FX["cissue"],
-   "unit": "%", "freq": "Monthly", "lane": "Agentic Content Platform",
+   "unit": "%", "freq": "Monthly", "lane": "Learning Domains",
    "remark": "The % climbs over the year; the 2-day TAT itself doesn't move.",
    "rows": [{"cohort": "All", "kpi": "Content Efficiency:All::Content Issue Resolution Efficiency", "budget": 80}]},
   {"kra": 1, "category": "Content Efficiency", "product": "All", "metric": "Content Issue Recurrence", "marker": "",
    "desc": "% of resolved content issues that recur — root-cause close: instance fixed · artifact changed · tripwire added · broadcast sent",
    "dep": dep(6), "funnel": fun(6), "functions": FX["cissue"],
-   "unit": "%", "freq": "Quarterly", "lane": "Agentic Content Platform",
+   "unit": "%", "freq": "Quarterly", "lane": "Learning Domains",
    "remark": "Lower is better — variance reads inverted.",
    "rows": [{"cohort": "All", "kpi": "Content Efficiency:All::Content Issue Recurrence", "budget": 2}]},
+  {"kra": 1, "category": "Content Efficiency", "product": "All", "metric": "Agentic Production Coverage", "marker": "",
+   "desc": "% of authorable content production (questions, slides, cheatsheets, reading material, translations) flowing through registered agentic workflows — machine first drafts, humans as reviewers not authors; blended rollup, excludes on-camera and live-delivery work",
+   "dep": "per-type coverage % (questions · slides · cheatsheets · reading material · translations) · registered-workflow count (pipeline registry) · human-review pass rate · cost-per-item trend (Content–Central)",
+   "funnel": "more production through governed pipelines → faster fixes + consistent quality at scale (CIRE / CIR run through these pipes) → Academics CSAT",
+   "functions": "Content–Central + DA/DEs — pipelines & production workflows; domain teams publish through them",
+   "unit": "%", "freq": "Monthly", "lane": "Agentic Content Platform",
+   "remark": "ACP's tracker row now CIRE/CIR sit with Learning Domains — this lane builds the pipes; the issue KPIs score the fixes. Target 90% blended (§5); read with cost-per-item + Content Issue Recurrence. Functions cell draft for red-pen.",
+   "rows": [{"cohort": "All", "kpi": "Content Efficiency:All::Agentic Production Coverage", "budget": 90}]},
   {"kra": 1, "category": "Content Effectiveness", "product": "All", "metric": "Learning Environment Satisfaction", "marker": "",
    "desc": "Student rating of the learning environment — driven by the four platform rows below",
    "dep": dep(7), "funnel": fun(7), "functions": FX["eng"],
    "unit": "score /5", "freq": "Monthly", "lane": "Developer Platform",
-   "remark": "",
+   "remark": "Umbrella for the four Developer Platform rows below. Verbatims route like CROSS-FUNCTION: reliability complaints → Developer Platform backlog · capability gaps → Learning Platform capability registry.",
    "rows": [{"cohort": "All", "kpi": "Content Effectiveness:All::Learning Environment Satisfaction", "budget": 4.5}]},
   {"kra": 1, "category": "Platform Reliability", "product": "All", "metric": "Availability & Saturation Detection", "marker": "",
    "desc": "% of critical-service saturations alerted, detection ≤10 min (IDE, compiler, workflows)",
@@ -162,12 +170,12 @@ TRACKER = [
    "unit": "%", "freq": "Monthly", "lane": "Product Learning Experience",
    "remark": "University-request log builds in month 1.",
    "rows": [{"cohort": "—", "kpi": "University Alignment:NIAT::University Communication TAT", "budget": 90}]},
-  {"kra": 2, "category": "Content Relevance", "product": "NIAT", "metric": "University Curriculum & Framework Compliance", "marker": "",
+  {"kra": 2, "category": "University Alignment", "product": "NIAT", "metric": "University Curriculum & Framework Compliance", "marker": "",
    "desc": "% of submission cycles fully compliant — approved BOS syllabus + NHQRF / Woolf / AICTE / UGC",
    "dep": dep(18), "funnel": fun(18), "functions": FX["comp"],
    "unit": "%", "freq": "Per cycle", "lane": "Product Learning Experience",
    "remark": "",
-   "rows": [{"cohort": "All", "kpi": "Content Relevance:NIAT::University Curriculum & Framework Compliance", "budget": 100}]},
+   "rows": [{"cohort": "All", "kpi": "University Alignment:NIAT::University Curriculum & Framework Compliance", "budget": 100}]},
   # ---- KRA 4
   {"kra": 3, "category": "Content Relevance", "product": "NIAT", "metric": "Industry Update Adherence", "marker": "",
    "desc": "% of GRIT-tested skills covered in live course content — Learning–GRIT delta → 0",
@@ -184,14 +192,16 @@ TRACKER = [
 FUNCTIONS = [
   ["Content", "Content",
    "Module-Quiz Score Bands · Content–Assessment Alignment · Content Issue pair (fixes) · BOS curriculum artifacts · Compliance · Industry Update Adherence"],
+  ["Content–Central (production ops)", "Content–Central",
+   "Agentic Production Coverage — the agentic pipelines & production workflows the domain teams publish through"],
   ["Engineering", "Engineering",
    "LES + its four drivers (DP lane) · Content Issue pair tooling/routing (ACP lane) · Cell Migration build (LP lane)"],
   ["Product Managers", "Product Managers",
    "Program Delivery Gap (feeds KRA 1 + 3) · Engagement-Matrix Cell Migration · Journey Step Health · Product Issue pair"],
   ["Pedagogy Experts", "Pedagogy Experts",
-   "Module-Quiz Score Bands · Content–Assessment Alignment"],
+   "Module-Quiz Score Bands · Content–Assessment Alignment · Journey Step Health (journey design at the CSI team)"],
   ["DA/DEs", "DA/DE",
-   "score analysis (bands, alignment) · LE dashboard (cell migration) · Journey Step Health instrumentation"],
+   "score analysis (bands, alignment) · LE dashboard (cell migration) · Journey Step Health instrumentation · Agentic Production Coverage instrumentation"],
   ["CSI team", "CSI team",
    "Program Delivery Gap (feeds KRA 1 + 3) · Journey Step Health · Product Issue pair · BOS · University Communication TAT · Compliance"],
   ["Asset production — Graphic Designers · Video Editors · SDIs · Packaging Teams", "Graphic Designers",
@@ -212,8 +222,9 @@ C_DEP, C_FUNNEL, C_FX = 9, 10, 11          # the collapsible training cluster I:
 C_BUD, C_ACT, C_VAR, C_REM = 15, 16, 17, 18
 
 wb = load_workbook(XLSX)
-for name in ("KRA-KPI Map", "KPI Tracker FY26-27", "Session Index"):
-    if name in wb.sheetnames:
+for name in list(wb.sheetnames):  # prefix match also clears openpyxl "…View1" dedup ghosts
+    if name.startswith(("KRA-KPI Map", "KPI Tracker FY26-27", "Session Index",
+                        "CSI Team View", "FullStack & CS Core View")):
         del wb[name]
 ws = wb.create_sheet("KPI Tracker FY26-27", 0)
 
@@ -277,6 +288,7 @@ for k in range(5):
                 ws.merge_cells(start_row=r0, start_column=cc, end_row=r0 + n - 1, end_column=cc)
             put(r0, cc, v, bold=(cc == 6), center=(cc in (4, 13)))
         i = 0
+        cohort_top = {}
         while i < n:
             j = i
             while j + 1 < n and b["rows"][j + 1]["cohort"] == b["rows"][i]["cohort"]:
@@ -284,11 +296,13 @@ for k in range(5):
             if j > i:
                 ws.merge_cells(start_row=r0 + i, start_column=5, end_row=r0 + j, end_column=5)
             put(r0 + i, 5, b["rows"][i]["cohort"], center=True)
+            for q in range(i, j + 1):
+                cohort_top[r0 + q] = r0 + i
             i = j + 1
         for i, rr in enumerate(b["rows"]):
             r = r0 + i
             sno += 1
-            ROWMAP.append({"sno": sno, "r": r, "r0": r0, "metric": b["metric"],
+            ROWMAP.append({"sno": sno, "r": r, "r0": r0, "cr": cohort_top[r], "metric": b["metric"],
                            "functions": b["functions"], "dlen": len(b["desc"])})
             put(r, 1, sno, center=True)
             put(r, 7, rr["kpi"])
@@ -352,7 +366,10 @@ for i, (name, pat, rows_txt) in enumerate(FUNCTIONS):
     r = 2 + i
     si.cell(row=r, column=1, value=name).font = F(10, bold=True)
     si.cell(row=r, column=2, value=rows_txt).font = F(10)
-    si.cell(row=r, column=3, value=f'=COUNTIF({rng},"*{pat}*")').font = F(10, bold=True)
+    fml = f'=COUNTIF({rng},"*{pat}*")'
+    if pat == "Content":  # bare-Content rooms only; Content–Central has its own row
+        fml = f'=COUNTIF({rng},"*Content*")-COUNTIF({rng},"*Content–Central*")'
+    si.cell(row=r, column=3, value=fml).font = F(10, bold=True)
     for c in range(1, 4):
         si.cell(row=r, column=c).alignment = Alignment(
             horizontal="center" if c == 3 else "left", vertical="top", wrap_text=True)
@@ -403,9 +420,16 @@ lg["B21"] = ("Functional Operating Views — one satellite tab per team, docked 
             "only). Section B = KPIs the team owns, budgets & actuals here, each with a Ladders-to call: direct (an org "
             "KRA number) · enabling (a dept §5 KPI) · hygiene (guardrail, no ladder by design). Section C = asks of "
             "counterparties. Pilots: CSI team · FullStack & CS Core.")
+lg["A22"] = "Lane ↔ working teams"
+lg["B22"] = ("Worked by (primary) — staffing, never ownership (col L stays the accountability; many-to-many): "
+             "Learning Domains — Content domain teams + Pedagogy Experts (lesson-plan design, the in-classroom "
+             "experience) + DA/DEs · Learning Platform — Product Managers + Engineering + DA/DEs · Product Learning "
+             "Experience — CSI team + Product Managers + Pedagogy Experts (journey design) · Agentic Content Platform "
+             "— Content–Central + DA/DEs · Developer Platform — Engineering · Shared/PMO — PMO. Program Ops, "
+             "Instructors dept and Mentors are counterparties reached through asks (§7 / team-view Section C), not lane staff.")
 lg["A20"] = "Metric categories (col C)"
 lg["B20"] = ("Org Head-Abstract vocabulary — Business Impact · Content Effectiveness · Content Velocity · Content Efficiency · Content Relevance · Stakeholder Alignment · Executive Ops — plus three department extensions: Program Delivery · University Alignment · Platform Reliability. Category = what the KPI measures; Lane (col L) = who is accountable; Functions (col K) = who does the work.")
-for r in (1, 3, 4, 7, 8, 17, 18, 19, 20, 21):
+for r in (1, 3, 4, 7, 8, 17, 18, 19, 20, 21, 22):
     lg.cell(row=r, column=1).font = F(10, bold=True)
     lg.cell(row=r, column=1).alignment = Alignment(vertical="top", wrap_text=True)
     lg.cell(row=r, column=2).font = F(10)
@@ -413,14 +437,20 @@ for r in (1, 3, 4, 7, 8, 17, 18, 19, 20, 21):
     lg.row_dimensions[r].height = 55
 lg.row_dimensions[3].height = 70
 lg.row_dimensions[21].height = 70
+lg.row_dimensions[22].height = 84
 
 # ---------------------------------------------------------------- team views (tabs 4-5): docked to the tracker, never merged
 TRK = "KPI Tracker FY26-27"
 def tcell(col, r): return f"'{TRK}'!{col}{r}"
 def tref(col, r):  return '=IF({0}="","",{0})'.format(tcell(col, r))
 
+def fx_tokens(s):
+    # em-dash splits, en-dash doesn't: "Content–Central" stays one token
+    for d in ("—", "·", ",", ":", ";", "(", ")"):
+        s = s.replace(d, "+")
+    return [t.strip() for t in s.split("+") if t.strip()]
 def a_rows(match, twins):
-    return [rm for rm in ROWMAP if match in rm["functions"] or rm["metric"] in twins]
+    return [rm for rm in ROWMAP if match in fx_tokens(rm["functions"]) or rm["metric"] in twins]
 
 TEAM_VIEWS = [
  {"tab": "CSI Team View", "hue": 0, "team": "CSI team",
@@ -534,7 +564,7 @@ TEAM_VIEWS = [
     "INR", "Monthly", ""),
    ("Content Efficiency", "R&D Initiative Impact",
     "Implemented R&D initiatives — including adoption of agentic AI solutions and automation pipelines — with measurable content-production improvement.",
-    "enabling → dept R&D Initiative Impact + Agentic Production Coverage (§5)",
+    "enabling → dept R&D Initiative Impact (§5) + tracker row Agentic Production Coverage",
     "Count", "Quarterly", "Q1 Jul: B 0 · A 0."),
    ("Content Relevance", "Tech Stack Freshness Rate",
     "% of tools, frameworks, libraries and environments referenced in content (and configured in IDEs, playgrounds, cloud setups) matching the current stable or LTS version at audit.",
@@ -573,20 +603,20 @@ def build_team_view(tv):
     band = "FF" + BANDS[tv["hue"]]
     tint = "FF" + TINTS[tv["hue"]]
     tvs.sheet_properties.tabColor = hue
-    for col, w in zip("ABCDEFGHIJKL", (5, 6, 16, 30, 48, 30, 9, 11, 11, 10, 10, 34)):
+    for col, w in zip("ABCDEFGHIJKLMN", (5, 6, 16, 10, 9, 28, 46, 28, 9, 10, 11, 11, 10, 32)):
         tvs.column_dimensions[col].width = w
-    tvs.freeze_panes = "E4"
+    tvs.freeze_panes = "G4"
 
-    tvs.merge_cells("A1:L1")
+    tvs.merge_cells("A1:N1")
     c = tvs.cell(row=1, column=1, value=f'{tv["team"]} — Functional Operating View · FY 2026-27')
     c.font = F(13, bold=True); c.fill = PatternFill("solid", start_color=band)
     c.alignment = Alignment(vertical="center"); tvs.row_dimensions[1].height = 24
-    tvs.merge_cells("A2:L2")
+    tvs.merge_cells("A2:N2")
     c = tvs.cell(row=2, column=1, value=tv["sub"])
     c.font = F(9, italic=True, color="FF555555")
     c.alignment = Alignment(vertical="center", wrap_text=True); tvs.row_dimensions[2].height = 30
-    for j, h in enumerate(("S. No", "Sect", "Metric category", "KPI name", "Description", "Ladders to",
-                           "Unit", "Freq", "Budgeted", "Actual", "Variance", "Remarks"), 1):
+    for j, h in enumerate(("S. No", "Sect", "Metric category", "Product", "Cohort", "KPI name", "Description",
+                           "Ladders to", "Unit", "Freq", "Budgeted", "Actual", "Variance", "Remarks"), 1):
         c = tvs.cell(row=3, column=j, value=h)
         c.font = F(9, bold=True); c.fill = PatternFill("solid", start_color=band)
         c.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
@@ -596,23 +626,23 @@ def build_team_view(tv):
     rowp = [4]  # mutable row pointer
     def hdr(txt):
         r = rowp[0]
-        tvs.merge_cells(start_row=r, start_column=1, end_row=r, end_column=12)
+        tvs.merge_cells(start_row=r, start_column=1, end_row=r, end_column=14)
         c = tvs.cell(row=r, column=1, value=txt)
         c.font = F(10, bold=True, color="FFFFFFFF"); c.fill = PatternFill("solid", start_color=hue)
         c.alignment = Alignment(vertical="center", wrap_text=True)
-        for cc in range(1, 13):
+        for cc in range(1, 15):
             tvs.cell(row=r, column=cc).border = Border(left=thin, right=thin, top=med, bottom=thin)
         tvs.row_dimensions[r].height = 26
         rowp[0] = r + 1
 
-    def body_row(vals, *, fill=None, dlen=0, center_cols=(1, 2, 7, 8, 9, 10, 11), merge_detail=False):
+    def body_row(vals, *, fill=None, dlen=0, center_cols=(1, 2, 4, 5, 9, 10, 11, 12, 13), merge_detail=False):
         r = rowp[0]
         if merge_detail:
-            tvs.merge_cells(start_row=r, start_column=5, end_row=r, end_column=12)
-        for cc in range(1, 13):
+            tvs.merge_cells(start_row=r, start_column=7, end_row=r, end_column=14)
+        for cc in range(1, 15):
             c = tvs.cell(row=r, column=cc)
             if cc in vals: c.value = vals[cc]
-            c.font = F(9, bold=(cc == 4))
+            c.font = F(9, bold=(cc == 6))
             if fill: c.fill = PatternFill("solid", start_color=fill)
             c.alignment = Alignment(horizontal="center" if cc in center_cols else "left",
                                     vertical="top", wrap_text=True)
@@ -624,24 +654,31 @@ def build_team_view(tv):
     hdr("A — Inherited: org-KRA rows this team is on the hook for (live mirror — numbers live on the KPI Tracker tab; edit there)")
     for rm in a_rows(tv["match"], tv["twins"]):
         body_row({1: "T%d" % rm["sno"], 2: "A",
-                  3: tref("C", rm["r0"]), 4: tref("G", rm["r"]), 5: tref("H", rm["r0"]),
-                  6: ("inherited — team-sheet twin" if rm["metric"] in tv["twins"] else "inherited — via Functions (col K)"),
-                  7: tref("M", rm["r0"]), 8: tref("N", rm["r0"]), 9: tref("O", rm["r"]),
-                  10: tref("P", rm["r"]), 11: tref("Q", rm["r"]), 12: tref("R", rm["r0"])},
+                  3: tref("C", rm["r0"]), 4: tref("D", rm["r0"]), 5: tref("E", rm["cr"]),
+                  6: tref("G", rm["r"]), 7: tref("H", rm["r0"]),
+                  8: ("inherited — team-sheet twin" if rm["metric"] in tv["twins"] else "inherited — via Functions (col K)"),
+                  9: tref("M", rm["r0"]), 10: tref("N", rm["r0"]), 11: tref("O", rm["r"]),
+                  12: tref("P", rm["r"]), 13: tref("Q", rm["r"]), 14: tref("R", rm["r0"])},
                  fill=tint, dlen=rm["dlen"])
 
     hdr("B — Owned: functional KPIs this team runs (budgets & actuals live here) — Ladders-to key: "
         "direct = an org-KRA number · enabling = a dept §5 KPI · hygiene = guardrail by design")
     for i, (cat, name, desc, ladder, unit, freq, rem) in enumerate(tv["own"], 1):
-        r = body_row({1: i, 2: "B", 3: cat, 4: name, 5: desc, 6: ladder, 7: unit, 8: freq, 12: rem},
+        prod = "All"
+        for tag in ("NIAT + Academy", "NIAT", "Launchpad", "Academy", "Intensive"):
+            if name.endswith(f"({tag})"):
+                prod, name = tag, name[: -len(tag) - 2].rstrip()
+                break
+        r = body_row({1: i, 2: "B", 3: cat, 4: prod, 5: "All", 6: name, 7: desc, 8: ladder,
+                      9: unit, 10: freq, 14: rem},
                      dlen=max(len(desc), len(ladder)))
-        vc = tvs.cell(row=r, column=11)
-        vc.value = f'=IF(AND(ISNUMBER(I{r}),ISNUMBER(J{r})),I{r}-J{r},"")'
+        vc = tvs.cell(row=r, column=13)
+        vc.value = f'=IF(AND(ISNUMBER(K{r}),ISNUMBER(L{r})),K{r}-L{r},"")'
         vc.font = F(9, bold=True); vc.alignment = Alignment(horizontal="center", vertical="top")
 
     hdr("C — Asks: what this team needs from counterparties (thin interface contracts — reviewed monthly)")
     for i, (ask, who, detail) in enumerate(tv["asks"], 1):
-        body_row({1: i, 2: "C", 3: who, 4: ask, 5: detail}, fill=tint, dlen=0, merge_detail=True)
+        body_row({1: i, 2: "C", 3: who, 6: ask, 7: detail}, fill=tint, dlen=0, merge_detail=True)
         tvs.row_dimensions[rowp[0] - 1].height = 40
 
 for tv in TEAM_VIEWS:
@@ -822,7 +859,10 @@ body.append('  </div>')
 # session index (counts computed at metric level, matching the merged-cell COUNTIF)
 counts = []
 for name, pat, _ in FUNCTIONS:
-    counts.append(sum(1 for b in TRACKER if "rows" in b and pat in b["functions"]))
+    hits = sum(1 for b in TRACKER if "rows" in b and pat in b["functions"])
+    if pat == "Content":
+        hits -= sum(1 for b in TRACKER if "rows" in b and "Content–Central" in b["functions"])
+    counts.append(hits)
 body.append('  <h2>2. Session index — by function (the training rooms)</h2>')
 body.append('  <div class="sectionlead">Functions are where people actually sit — vocabulary from the HOD one-pager &sect;2 key '
             'terms. Counts are per metric (a band or cohort block counts once). The Functions column is a draft for red-pen — '

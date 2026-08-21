@@ -87,7 +87,7 @@
     <tr><td><strong>Stakeholder Alignment</strong></td><td>Are internal requesters served on time — content requests, cross-functional sprint commitments</td></tr>
     <tr><td><strong>Executive Ops</strong></td><td>The cost and utilisation of running the department itself — operations, growth, allocated bandwidth</td></tr>
     <tr><td><strong>Program Delivery</strong></td><td>Is the program executing as designed — planned activities happening on schedule, journey steps healthy, product capabilities configured and live</td></tr>
-    <tr><td><strong>University Alignment</strong></td><td>Are university partners served — BOS credit acceptance, university communication turnaround; the external mirror of Stakeholder Alignment</td></tr>
+    <tr><td><strong>University Alignment</strong></td><td>Are university partners and regulators served — BOS credit acceptance, university communication turnaround, curriculum &amp; framework compliance; the external mirror of Stakeholder Alignment</td></tr>
     <tr><td><strong>Platform Reliability</strong></td><td>Is the infrastructure students learn on dependable and fast — availability, tail latency, platform issue resolution, runtime currency</td></tr>
   </table>
   <div class="sectionlead" style="margin-top:-16px">Category answers one question — what does this KPI measure. Accountability lives on the lane axis (&sect;9 columns), execution on functions. The earlier Content Systems &amp; Infra and Developer Platform groups were lane names standing in as categories; their KPIs are re-homed across the categories above (&sect;5 shows each).</div>
@@ -124,8 +124,8 @@
     <tr><td><strong>Cost per BOS Approval</strong> <span class="tag tag-niat">NIAT</span> <span class="lane">PLE</span></td><td>Average cost per approved BOS — CSI payroll plus travel/liaison, excludes content production. First-time approvals cost more than renewals; tracked separately while scaling 17&rarr;34 universities</td><td class="unit">INR &middot; Per cycle</td></tr>
     <tr><td><strong>Platform Runtime Cost per Active Learner</strong> <span class="lane">DP</span></td><td>Cloud, code-execution and GenAI delivery cost per active learner — infrastructure line items only, no salary data</td><td class="unit">INR &middot; Monthly</td></tr>
     <tr><td><strong>Cost-Attribution Coverage</strong> <span class="lane">DP</span></td><td>Cost visibility per EnrollPlan, user and request — commissioning metric, retires once it holds 100%</td><td class="unit">% &middot; Monthly</td></tr>
-    <tr><td><strong>Content Issue Resolution Efficiency</strong> <span class="lane">ACP</span></td><td>Content issues resolved within SLA (48 h) as a share of total issues received — tracked per product to show where unresolved load concentrates. Target: &ge;80%, with the resolution TAT fixed at 2 days</td><td class="unit">% &middot; Monthly</td></tr>
-    <tr><td><strong>Content Issue Recurrence</strong> <span class="tag tag-new">NEW</span> <span class="lane">ACP</span></td><td>Resolved content issues that resurface — same root cause in the same or a sibling unit; counts post-triage, content-owned issues only. Pairs with Content Issue Resolution Efficiency: fix fast, fix forever — target &le;2% of resolved issues per quarter, every recurrence closed at root cause</td><td class="unit">Count &middot; Monthly</td></tr>
+    <tr><td><strong>Content Issue Resolution Efficiency</strong> <span class="lane">LD</span></td><td>Content issues resolved within SLA (48 h) as a share of total issues received — tracked per product to show where unresolved load concentrates. Target: &ge;80%, with the resolution TAT fixed at 2 days</td><td class="unit">% &middot; Monthly</td></tr>
+    <tr><td><strong>Content Issue Recurrence</strong> <span class="tag tag-new">NEW</span> <span class="lane">LD</span></td><td>Resolved content issues that resurface — same root cause in the same or a sibling unit; counts post-triage, content-owned issues only. Pairs with Content Issue Resolution Efficiency: fix fast, fix forever — target &le;2% of resolved issues per quarter, every recurrence closed at root cause</td><td class="unit">Count &middot; Monthly</td></tr>
     <tr><td><strong>Product Issue Resolution Efficiency</strong> <span class="tag tag-new">NEW</span> <span class="tag tag-xdept">CROSS-FUNCTION</span> <span class="lane">PLE</span></td><td>Student-reported issues resolved end-to-end, per product — regardless of which function owns the fix; this lane owns routing and tracking to done. Resolved means the fix is live <em>and</em> the affected students are notified within the same SLA — silent fixes don't count. First-quarter baseline sets the TAT target</td><td class="unit">% &middot; Monthly</td></tr>
     <tr><td><strong>Product Issue Recurrence</strong> <span class="tag tag-new">NEW</span> <span class="tag tag-xdept">CROSS-FUNCTION</span> <span class="lane">PLE</span></td><td>Product-level issues that resurface after resolution — never twice as the operating principle, measured at the student-journey level; target &le;2% of resolved issues per quarter from day one</td><td class="unit">Count &middot; Monthly</td></tr>
     <tr><td><strong>Agentic Production Coverage</strong> <span class="tag tag-new">NEW</span> <span class="lane">ACP</span></td><td>Share of authorable content production (questions, slides, cheatsheets, reading material, translations) flowing through registered agentic workflows — machine-generated first drafts, humans as reviewers not authors. Tracked per content type with a blended rollup; excludes on-camera and live-delivery work. Read with cost-per-item and Content Issue Recurrence. Target 90%</td><td class="unit">% &middot; Monthly</td></tr>
@@ -134,8 +134,6 @@
     <tr><td class="cat" colspan="3">Content Relevance</td></tr>
     <tr><td><strong>Industry Update Adherence (Learning&ndash;GRIT delta)</strong> <span class="lane">LD</span></td><td>Gap between mainline learning content and GRIT content, our industry benchmark — share of GRIT-tested skills covered in course content at contest level. Target: delta zero — courses teach what GRIT tests</td><td class="unit">% gap &middot; Monthly</td></tr>
     <tr><td><strong>Tech Stack Freshness</strong> <span class="lane">LD</span></td><td>Tools, frameworks, libraries and each domain's learning-environment versions (IDE/playground configs) matching current stable or LTS versions at audit</td><td class="unit">% &middot; Monthly</td></tr>
-    <tr><td><strong>Framework Compliance</strong> <span class="tag tag-academy">ACADEMY</span> <span class="tag tag-niat">NIAT</span> <span class="lane">PLE</span></td><td>Curriculum units compliant with applicable regulatory and quality frameworks — NHQRF, Woolf, AICTE, UGC; audited per framework submission cycle. The framework parallel of University Curriculum Compliance below</td><td class="unit">% &middot; Per cycle</td></tr>
-    <tr><td><strong>University Curriculum Compliance</strong> <span class="tag tag-niat">NIAT</span> <span class="lane">PLE</span></td><td>Curriculum units compliant with the approved BOS syllabus at delivery — non-compliance is a university partnership risk</td><td class="unit">% &middot; Monthly</td></tr>
 
     <tr><td class="cat" colspan="3">Stakeholder Alignment</td></tr>
     <tr><td><strong>Stakeholder Content Request Fulfillment</strong> <span class="lane">PLE</span></td><td>Requests from Sales, Placements, Program Ops, Assessments and Instructors fulfilled on time</td><td class="unit">% &middot; Monthly</td></tr>
@@ -154,6 +152,8 @@
     <tr><td class="cat" colspan="3">University Alignment</td></tr>
     <tr><td><strong>BOS Credit Acceptance</strong> <span class="tag tag-niat">NIAT</span> <span class="lane">PLE</span></td><td>Credits proposed to universities that get accepted into the approved BOS — measured per university per approval cycle across 34 partners in 2026; denominator resets yearly. Targets: 85% (B3) &middot; 90% (B4) — set from past per-credit acceptance (Sem-3 81.4%, Sem-1 90.1%)</td><td class="unit">% &middot; Per cycle</td></tr>
     <tr><td><strong>University Communication TAT</strong> <span class="tag tag-new">NEW</span> <span class="tag tag-niat">NIAT</span> <span class="lane">PLE</span></td><td>University-originated requests — BOS documentation, curriculum clarifications, compliance artefacts, exam coordination — acknowledged &le;1 business day and substantively answered within the request-class TAT (standard 3 business days; heavy artefacts pre-agreed). Target &ge;90% within TAT: slow paperwork is the silent strain on the partnership rating. First month builds the university-request log this reads from</td><td class="unit">% &middot; Monthly</td></tr>
+    <tr><td><strong>Framework Compliance</strong> <span class="tag tag-academy">ACADEMY</span> <span class="tag tag-niat">NIAT</span> <span class="lane">PLE</span></td><td>Curriculum units compliant with applicable regulatory and quality frameworks — NHQRF, Woolf, AICTE, UGC; audited per framework submission cycle. The framework parallel of University Curriculum Compliance below</td><td class="unit">% &middot; Per cycle</td></tr>
+    <tr><td><strong>University Curriculum Compliance</strong> <span class="tag tag-niat">NIAT</span> <span class="lane">PLE</span></td><td>Curriculum units compliant with the approved BOS syllabus at delivery — non-compliance is a university partnership risk</td><td class="unit">% &middot; Monthly</td></tr>
 
     <tr><td class="cat" colspan="3">Platform Reliability</td></tr>
     <tr><td><strong>Availability &amp; Saturation Detection</strong> <span class="lane">DP</span></td><td>Are learner-critical services (IDE, compiler, workflows) up — and do we detect saturation before students feel it: all critical thresholds alerted, detection within 10 minutes</td><td class="unit">% &middot; Monthly</td></tr>
@@ -178,7 +178,7 @@
     <tr>
       <td><strong>Academics CSAT</strong><br><span class="num">4.5 / 5</span></td>
       <td>Content quality, fast fixes, and reported issues that never repeat.</td>
-      <td>Content Issue Resolution Efficiency + Content Issue Recurrence <span class="lane">ACP</span> &middot; Learning Environment Satisfaction + Availability &amp; Tail-Latency User Impact <span class="lane">DP</span> &middot; Journey Step Health + Product Issue Resolution (cross-departmental) <span class="lane">PLE</span></td>
+      <td>Content Issue Resolution Efficiency + Content Issue Recurrence <span class="lane">LD</span> &middot; Learning Environment Satisfaction + Availability &amp; Tail-Latency User Impact <span class="lane">DP</span> &middot; Journey Step Health + Product Issue Resolution (cross-departmental) <span class="lane">PLE</span></td>
     </tr>
     <tr>
       <td><strong>University relations CSAT</strong><br><span class="num">4.5 &middot; 4.0 &middot; 4.0</span></td>
@@ -209,7 +209,7 @@
 
   <div class="ttree"><div class="tt"><strong>Academics CSAT</strong> &middot; <span class="num">4.5 / 5</span></div>
   <ul class="br">
-    <li><span class="lane">ACP</span> <strong>Content Issue Resolution Efficiency &ge;80% &middot; Content Issue Recurrence &le;2%/qtr</strong> — fixed in 48 h (&ge;80% within the 2-day TAT), never twice as the principle &rarr; trust in content</li>
+    <li><span class="lane">LD</span> <strong>Content Issue Resolution Efficiency &ge;80% &middot; Content Issue Recurrence &le;2%/qtr</strong> — fixed in 48 h (&ge;80% within the 2-day TAT), never twice as the principle &rarr; trust in content</li>
     <li><span class="lane">DP</span> <strong>Learning Environment Satisfaction &ge;4.5/5</strong> — the platform rating, measured monthly; driven by Availability &amp; Saturation Detection (issues caught before students feel them) &middot; Tail-Latency User Impact (coding feels instant) &middot; Platform Issue Resolution Efficiency (fixed fast) &middot; Platform Issue Recurrence (never twice)</li>
     <li><span class="lane">PLE</span> <strong>Product Issue Resolution</strong> <span class="tag tag-xdept">CROSS-FUNCTION</span> — every student-reported issue tracked to done end-to-end, whichever function owns the fix — resolved means fix live <em>and</em> affected students notified; first-quarter baseline sets the TAT target &middot; recurrence &le;2%/qtr from day one</li>
     <li><span class="lane">PLE</span> <strong>Journey Step Health</strong> <span class="tag tag-new">NEW</span> — % of the journey steps that ran this month green (&sect;11), per product — health of what ran (a step that never runs counts in Program Delivery Gap); the journey table is its diagnostic</li>
@@ -265,12 +265,13 @@
   <h2>8. How the department is organized</h2>
   <table>
     <tr><th style="width:28%">Lane</th><th>What it owns</th></tr>
-    <tr><td><strong>Learning Domains</strong></td><td>Domain-specific curriculum, pedagogy and learning innovations — course outlines, session content, question banks and industry currency across 13 domains: MERN, Java Spring, Python Django (together the FullStack family), Programming, SQL, CS Core, GenAI, DS/ML (Mathematics scoped inside, tracked at Low complexity), Aptitude, English, DS &amp; Algo, Robotics, and Compliance Courses (Physics, Chemistry, Engineering Drawing, Quantum Engineering &hellip;). Product-specific requirements for a domain are scoped and delivered inside that domain's lane — one owner per piece of curriculum, whichever product asked for it</td></tr>
-    <tr><td><strong>Learning Platform</strong></td><td>Reusable learning capabilities and student experiences shared across all products and learning domains — how students study, practice, revise and get assessed on the platform</td></tr>
-    <tr><td><strong>Product Learning Experience</strong></td><td>Product-specific learning experiences and interventions that improve learner outcomes across NIAT, Intensive and Academy — including university delivery and compliance. Represents product needs into the other lanes: a product's domain requirement is executed by that domain, not duplicated here</td></tr>
-    <tr><td><strong>Agentic Content Platform</strong></td><td>AI-powered platforms and automation that accelerate curriculum creation, content operations and shared intelligence</td></tr>
-    <tr><td><strong>Developer Platform</strong></td><td>The coding infrastructure students and engineers work on — IDE, compiler, platform services — and the tooling that improves engineering productivity</td></tr>
+    <tr><td><strong>Learning Domains</strong></td><td>Domain-specific curriculum, pedagogy and learning innovations — course outlines, session content, question banks and industry currency across 13 domains: MERN, Java Spring, Python Django (together the FullStack family), Programming, SQL, CS Core, GenAI, DS/ML (Mathematics scoped inside, tracked at Low complexity), Aptitude, English, DS &amp; Algo, Robotics, and Compliance Courses (Physics, Chemistry, Engineering Drawing, Quantum Engineering &hellip;). Product-specific requirements for a domain are scoped and delivered inside that domain's lane — one owner per piece of curriculum, whichever product asked for it<br><span class="lead"><strong>Worked by (primary):</strong> Content domain teams (&sect;10) + Pedagogy Experts (lesson-plan design — the in-classroom experience) + DA/DEs</span></td></tr>
+    <tr><td><strong>Learning Platform</strong></td><td>Reusable learning capabilities and student experiences shared across all products and learning domains — how students study, practice, revise and get assessed on the platform<br><span class="lead"><strong>Worked by (primary):</strong> Product Managers + Engineering + DA/DEs</span></td></tr>
+    <tr><td><strong>Product Learning Experience</strong></td><td>Product-specific learning experiences and interventions that improve learner outcomes across NIAT, Intensive and Academy — including university delivery and compliance. Represents product needs into the other lanes: a product's domain requirement is executed by that domain, not duplicated here<br><span class="lead"><strong>Worked by (primary):</strong> CSI team + Product Managers + Pedagogy Experts (journey design)</span></td></tr>
+    <tr><td><strong>Agentic Content Platform</strong></td><td>AI-powered platforms and automation that accelerate curriculum creation, content operations and shared intelligence<br><span class="lead"><strong>Worked by (primary):</strong> Content&ndash;Central + DA/DEs — the domain teams publish through its pipelines</span></td></tr>
+    <tr><td><strong>Developer Platform</strong></td><td>The coding infrastructure students and engineers work on — IDE, compiler, platform services — and the tooling that improves engineering productivity<br><span class="lead"><strong>Worked by (primary):</strong> Engineering</span></td></tr>
   </table>
+  <div class="sectionlead" style="margin-top:-16px">Worked by = primary staffing, never ownership — the lane lead answers for the number, and functions are many-to-many across lanes. Program Ops, the Instructors department and Mentors are counterparties reached through the &sect;7 asks, not lane staff.</div>
 
   <h2>9. Who owns what — at a glance</h2>
   <div class="sectionlead">Internal management view — number of KPIs each lane owns, per category. Every KPI has exactly one owner — a blank cell means that lane carries none in that category.</div>
@@ -280,20 +281,20 @@
     <tr><td><strong>Business Impact</strong></td><td class="c">2</td><td class="c">1</td><td class="c">2</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
     <tr><td><strong>Content Effectiveness</strong></td><td class="c">1</td><td class="c">4</td><td class="c"></td><td class="c"></td><td class="c">1</td><td class="c"></td></tr>
     <tr><td><strong>Content Velocity</strong></td><td class="c">2</td><td class="c"></td><td class="c"></td><td class="c">1</td><td class="c"></td><td class="c">1</td></tr>
-    <tr><td><strong>Content Efficiency</strong></td><td class="c">2</td><td class="c"></td><td class="c">3</td><td class="c">6</td><td class="c">2</td><td class="c">1</td></tr>
-    <tr><td><strong>Content Relevance</strong></td><td class="c">2</td><td class="c"></td><td class="c">2</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
+    <tr><td><strong>Content Efficiency</strong></td><td class="c">4</td><td class="c"></td><td class="c">3</td><td class="c">4</td><td class="c">2</td><td class="c">1</td></tr>
+    <tr><td><strong>Content Relevance</strong></td><td class="c">2</td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
     <tr><td><strong>Stakeholder Alignment</strong></td><td class="c"></td><td class="c"></td><td class="c">1</td><td class="c"></td><td class="c"></td><td class="c">1</td></tr>
     <tr><td><strong>Executive Ops</strong></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c">3</td></tr>
     <tr><td><strong>Program Delivery</strong></td><td class="c"></td><td class="c"></td><td class="c">3</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
-    <tr><td><strong>University Alignment</strong></td><td class="c"></td><td class="c"></td><td class="c">2</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
+    <tr><td><strong>University Alignment</strong></td><td class="c"></td><td class="c"></td><td class="c">4</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
     <tr><td><strong>Platform Reliability</strong></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c">5</td><td class="c"></td></tr>
-    <tr style="background:#f0f0f0"><td><strong>Total (48)</strong></td><td class="c"><strong>9</strong></td><td class="c"><strong>5</strong></td><td class="c"><strong>13</strong></td><td class="c"><strong>7</strong></td><td class="c"><strong>8</strong></td><td class="c"><strong>6</strong></td></tr>
+    <tr style="background:#f0f0f0"><td><strong>Total (48)</strong></td><td class="c"><strong>11</strong></td><td class="c"><strong>5</strong></td><td class="c"><strong>13</strong></td><td class="c"><strong>5</strong></td><td class="c"><strong>8</strong></td><td class="c"><strong>6</strong></td></tr>
     </tbody>
   </table>
   <div class="sectionlead" style="margin-top:-16px">Tech Stack Freshness sits with Learning Domains and now covers each domain's learning-environment versions too; Developer Platform carries its own Infrastructure &amp; Runtime Currency KPI for the system level. Lane KPI lists for Learning Platform, Agentic Content Platform and Product Learning Experience are being drafted next.</div>
 
-  <h2>10. Sub-departments (direct reports)</h2>
-  <div class="sectionlead">Reporting units under the HOD. A sub-department is people; a lane is accountability — sub-departments staff the lanes above.</div>
+  <h2>10. Sub-departments &amp; embedded functions</h2>
+  <div class="sectionlead">A sub-department is people; a lane is accountability — sub-departments and embedded functions staff the lanes (&sect;8 worked-by lines). <strong>Direct reports first:</strong> line and business reporting both sit here.</div>
   <table>
     <tr><th style="width:32%">Sub-department</th><th>Covers</th></tr>
     <tr><td><strong>Content&ndash;DS &amp; Algo</strong></td><td>DS &amp; Algo domain</td></tr>
@@ -303,6 +304,16 @@
     <tr><td><strong>Content&ndash;DS &amp; ML</strong></td><td>DS/ML domain, including Mathematics</td></tr>
     <tr><td><strong>Content&ndash;Central</strong></td><td>Central content operations shared across domains — production workflows and agentic tooling</td></tr>
     <tr><td><strong>Content&ndash;CSI</strong></td><td>Content systems &amp; infra — university/BOS processes, program delivery, compliance; currently also home to the Robotics and Compliance Courses domains</td></tr>
+  </table>
+  <div class="sectionlead" style="margin-top:14px"><strong>Embedded functions — business reporting, not direct line.</strong> Housed inside the content sub-departments as of now; their people report line-wise to their own function heads, and this department reads their business numbers through the lanes they staff (&sect;8). Delivery-management health of these functions sits with their own heads — the &sect;7 execution-management and creative delivery-management asks.</div>
+  <table>
+    <tr><th style="width:32%">Function</th><th>Business reporting read through</th></tr>
+    <tr><td><strong>Product Managers</strong></td><td>Learning Platform capabilities and Product Learning Experience journey work — engagement matrix, capability registry, Journey Step Health</td></tr>
+    <tr><td><strong>Engineering</strong></td><td>Developer Platform end-to-end &middot; Learning Platform capability builds &middot; agentic tooling</td></tr>
+    <tr><td><strong>Pedagogy Experts</strong></td><td>Journey design with the CSI team (Product Learning Experience) &middot; lesson-plan design — the in-classroom experience — in Learning Domains</td></tr>
+    <tr><td><strong>DA/DEs</strong></td><td>Instrumentation and dashboards behind the Business Impact, engagement and journey rows — and agentic-production measurement</td></tr>
+    <tr><td><strong>Graphic Designers &middot; Video Editors</strong></td><td>Branding velocity and cost rows (Shared/PMO) and the Program Delivery Gap assets leg; bandwidth read via Creative Resource Utilisation</td></tr>
+    <tr><td><strong>SDIs</strong></td><td>Program Delivery Gap assets leg — recorded video and PPT pipeline to the 1-month SLA</td></tr>
   </table>
 
   <h2>11. Reference: Learning Platform linkage — the student journey from class to SPI</h2>

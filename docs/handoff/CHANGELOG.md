@@ -114,3 +114,23 @@ One line per change: date · doc · what · source.
 - Footnote: "9 categories" → "10 categories" (stale since the org-7 + dept-3 re-map).
 
 Pending (unchanged): operating view (📋) category + cadence + marker sync — deferred by Pavan.
+
+## 2026-08-21 — Go-package: lane moves, APC tracker row, University Alignment, worked-by map, §10 embedded functions, team-view Product/Cohort columns
+
+**🧭 Tracker (44869dfd…):**
+- **CIRE + CIR lane** → Learning Domains (they score the fixes; ACP builds the pipes). Rows r16/r17.
+- **NEW r18 — Agentic Production Coverage** (Content Efficiency · All · ACP lane · 90% budget from §5's stated target): ACP's own tracker row; functions = "Content–Central + DA/DEs" (red-pen draft — Pavan's sketch said "Learning Domains"; chose Content–Central per §10's production-ops definition). Session Index gains a Content–Central room; bare-Content counts now exclude Content–Central (COUNTIF subtraction in xlsx, token-based fx matcher in team views — en-dash keeps "Content–Central" one token).
+- **University Curriculum & Framework Compliance** category → University Alignment (KPI string re-derived). Marker vocabulary unchanged.
+- **JSH functions** += Pedagogy Experts (journey design); Pedagogy session room notes JSH; DA/DE room notes APC instrumentation.
+- **Remarks**: Cell Migration gains the Score-Bands arbitration rule (both red → bleeding cell names the lane); LES becomes the DP umbrella with CROSS-FUNCTION-style verbatim routing.
+- **Legend row 22 — Lane ↔ working teams**: full worked-by (primary) map; staffing never ownership; counterparties reached through asks.
+- **Team views: Product + Cohort columns added (12 → 14 cols)** — Pavan's flag: this is where Academy / Intensive-offline KPI rows slot in later. Section A live-mirrors tracker cols D/E (cohort ref hits the merged run's top cell); Section B parses product from "(NIAT)"-style name suffixes (Graded Assessment → NIAT, WAU → Launchpad, CSI CpBOS → NIAT, CpVH → NIAT + Academy; rest All); Section C ask/detail re-homed to name/description cols; freeze G4.
+
+**🎯 One-pager (cd52be82…):**
+- §4 University Alignment definition now covers partners **and regulators** (+ curriculum & framework compliance).
+- §5: CIRE/CIR chips ACP→LD; Framework Compliance + University Curriculum Compliance rows moved Content Relevance → University Alignment (kept adjacent — they're explicit siblings). §6 scoreboard + mechanism-tree chips follow.
+- §8: **Worked by (primary)** line on all five lane cards + closing legend (staffing ≠ ownership; many-to-many; Program Ops/Instructors/Mentors are §7 counterparties).
+- §9 matrix: Content Efficiency LD 2→4, ACP 6→4 · Content Relevance PLE 2→0 · University Alignment PLE 2→4 · totals LD 9→11, ACP 7→5 (grand 48 unchanged — APC already counted in §5).
+- **§10 retitled "Sub-departments & embedded functions"** (Pavan's ask, verdict yes): direct-reports table unchanged; NEW second table — Product Managers, Engineering, Pedagogy Experts (journey design at CSI · lesson-plan design in LD), DA/DEs, Graphic Designers · Video Editors, SDIs — business reporting read through the lanes they staff, line reporting to their own function heads; ties to the §7 execution-management asks (lines already there).
+
+Pending: FS Section B relevance review (LE, Course Completion, Pedagogy Initiative Impact, Learner-Accessed CCR, Practice A-to-C — analysis delivered, Pavan to rule); Role cards / Career framework (Pavan attaching his earlier domain-specific versions — analyse → plan → then implement; title pattern shifting to "AI Engineer – FullStack Learning Systems" style); operating view (📋) sync still deferred — now also owes lane/category/APC + §10 changes.
