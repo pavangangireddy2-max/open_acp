@@ -224,7 +224,7 @@ C_BUD, C_ACT, C_VAR, C_REM = 15, 16, 17, 18
 wb = load_workbook(XLSX)
 for name in list(wb.sheetnames):  # prefix match also clears openpyxl "…View1" dedup ghosts
     if name.startswith(("KRA-KPI Map", "KPI Tracker FY26-27", "Session Index",
-                        "CSI Team View", "FullStack & CS Core View")):
+                        "CSI Team View", "FullStack & CS Core View", "Content–Central View")):
         del wb[name]
 ws = wb.create_sheet("KPI Tracker FY26-27", 0)
 
@@ -610,6 +610,59 @@ TEAM_VIEWS = [
    ("Classroom signal loop", "Instructors dept + Program Ops",
     "Structured instructor feedback + conduction context per module — feeds content iteration and Content Issue routing."),
   ]},
+ {"tab": "Content–Central View", "hue": 3, "team": "Content–Central",
+  "sub": ("Shared/PMO lane — the central two-person team: a Business Ops owner (shared-team delivery + Agentic Content "
+          "Platform builds; reports to the HOD) with a PMO manager reporting to them — role titles pending. Section A "
+          "mirrors the department tracker (live formulas — numbers are edited on the KPI Tracker tab only) · Section B is "
+          "owned here, budgets & actuals live on this tab · Section C = asks of counterparties."),
+  "match": "Content–Central", "twins": [],
+  "a_notes": {"Agentic Production Coverage":
+    " · Central read: units-at-bar — how many of the 5 learning-domain units hold ≥ 90 (a count, not a blended average); "
+    "each domain owns its own slice in its own view (FS & CS Core wired, others as their views land)."},
+  "own": [
+   ("Business Ops — Shared Teams", "Shared-Team Deliverables Landed",
+    "Of the deliverables the shared-resource teams (Product, Engineering, DA/DEs, Product Design) committed to content work "
+    "for the period, the % delivered and accepted. Acceptance sits with the requesting unit — Central verifies the register, "
+    "not the work.",
+    "enabling → dept Stakeholder Alignment (§5) — the delivery contract with the embedded shared teams",
+    "%", "Monthly", "Baseline first: Q1 builds the committed-deliverables register per shared team; budget set after one "
+    "full cycle. Owned by the Business Ops lead."),
+   ("Business Ops — Shared Teams", "Shared-Team Spend vs Plan",
+    "Actual spend on shared-resource team allocations vs planned spend for the period. Reads over- and under-runs early; "
+    "the value-for-spend judgment stays with the Business Ops owner at the monthly review.",
+    "enabling → dept Content Efficiency (§5) — the ₹ side of the shared-team delivery contract",
+    "%", "Monthly", "Baseline first: plan numbers come from the allocation agreed with each function head; tolerance band "
+    "set after one full cycle. Owned by the Business Ops lead."),
+   ("Agentic Content Platform", "Shared Tool Adoption",
+    "% of shipped shared ACP tools (content-generation workflows, MCP servers, production pipelines built for all domains) "
+    "that every learning-domain unit is publishing through within a month of shipping. Adopted = used in live production, "
+    "not a trial.",
+    "enabling → tracker Agentic Production Coverage — adoption is how all units reach the 90 bar",
+    "%", "Monthly", "Bar: ALL learning domains within a month of shipping — an unadopted shared tool is shelfware. Owned by "
+    "the Business Ops lead (ACP builder hat)."),
+   ("PMO", "Check-ins Run",
+    "% of scheduled monthly unit check-ins with the HOD held on schedule, with the pre-read circulated a day before. Covers "
+    "every sub-department and embedded function on the check-in calendar (~10 units).",
+    "hygiene — operating-rhythm guardrail; no org ladder by design",
+    "%", "Monthly", "Run by the PMO manager; unit PMs supply the pre-read inputs — orchestration here, the work stays with "
+    "the units."),
+   ("PMO", "Actions Closed",
+    "% of actions logged in a monthly check-in that are closed before that unit's next check-in. The follow-through half of "
+    "the cadence — check-ins that close loops, not meetings that merely happen.",
+    "hygiene — operating-rhythm guardrail; no org ladder by design",
+    "%", "Monthly", "Run by the PMO manager. Deferred companions (spend → outcome map · tracker freshness · finance "
+    "turnaround) join after the start set runs a cycle or two."),
+  ],
+  "asks": [
+   ("Execution-management KPI tracking", "Product, Engineering, Product Design & Pedagogy function heads",
+    "Own execution KPIs (roadmap predictability, on-time delivery, budget adherence…) for teams embedded with us, tracked "
+    "in their home functions — Central consumes the read at the monthly check-in; feeds Shared-Team Deliverables Landed "
+    "(§7 ask)."),
+   ("Creative delivery-management tracking", "Graphic Design & Video Editing team heads",
+    "Delivery-management KPIs for the design & video pipeline (on-time %, asset turnaround TAT, rework rate…) stay with "
+    "the creative team heads; domain PMs manage day-to-day utilisation (FS view carries Creative Resource Utilisation) — "
+    "§7 ask, reviewed quarterly."),
+  ]},
 ]
 
 def build_team_view(tv):
@@ -671,7 +724,8 @@ def build_team_view(tv):
         body_row({1: "T%d" % rm["sno"], 2: "A",
                   3: tref("C", rm["r0"]), 4: tref("D", rm["r0"]), 5: tref("E", rm["cr"]),
                   6: tref("G", rm["r"]), 7: tref("H", rm["r0"]),
-                  8: ("inherited — team-sheet twin" if rm["metric"] in tv["twins"] else "inherited — via Functions (col K)"),
+                  8: (("inherited — team-sheet twin" if rm["metric"] in tv["twins"] else "inherited — via Functions (col K)")
+                      + tv.get("a_notes", {}).get(rm["metric"], "")),
                   9: tref("M", rm["r0"]), 10: tref("N", rm["r0"]), 11: tref("O", rm["r"]),
                   12: tref("P", rm["r"]), 13: tref("Q", rm["r"]), 14: tref("R", rm["r0"])},
                  fill=tint, dlen=rm["dlen"])
@@ -748,7 +802,8 @@ body = []
 body.append('  <h1>NIAT Org KPIs as KRAs — Department KPI Tracker</h1>')
 body.append('  <div class="subtitle">Training sheet and FY 2026-27 tracker, merged &middot; August 2026 &middot; one row per '
             'trackable KPI, grouped under the org KRA it moves &middot; training columns fold out &middot; editable workbook: '
-            'kra_training_sheet.xlsx (5 tabs — incl. team views: CSI &middot; FullStack &amp; CS Core)</div>')
+            'kra_training_sheet.xlsx (6 tabs — incl. team views: CSI &middot; FullStack &amp; CS Core &middot; '
+            'Content&ndash;Central)</div>')
 body.append('  <div class="key-point"><strong>How to read this sheet:</strong> a <strong>KRA</strong> (Key Result Area) is an '
             'organizational outcome NIAT is judged on — it carries the target; each KRA block keeps its color family (a reading '
             'aid — identity is always in the text). Each numbered row is <strong>one trackable KPI</strong> — per-batch rows split '
@@ -893,9 +948,10 @@ body.append('    </tbody>')
 body.append('  </table>')
 
 body.append('  <div class="footnote">Training companion to the HOD one-pager (&sect;6 scoreboard + mechanism trees) and the '
-            'internal operating view. Downloadable editable master: <strong>kra_training_sheet.xlsx</strong> — 3 tabs: KPI '
+            'internal operating view. Downloadable editable master: <strong>kra_training_sheet.xlsx</strong> — 6 tabs: KPI '
             'Tracker FY26-27 (training columns in a collapsible group, collapsed by default) &middot; Session Index &middot; '
-            'Legend, same color coding. Variance = Budgeted &minus; Actual (org Head-Abstract convention). Functions vocabulary '
+            'Legend &middot; team views (CSI &middot; FullStack &amp; CS Core &middot; Content&ndash;Central), same color '
+            'coding. Variance = Budgeted &minus; Actual (org Head-Abstract convention). Functions vocabulary '
             'from the HOD one-pager &sect;2 key terms — draft for red-pen. SAMPLE numbers pend LE-dashboard baselines. Colors '
             'follow a CVD-validated categorical palette. Curriculum / Content Department &middot; 2026-08-21.</div>')
 

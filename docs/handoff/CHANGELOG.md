@@ -213,3 +213,29 @@ Files: build_site.py, content_os.html.
 - Pavan's Content–Central detail-out began: Content–Central = two people — a Business Ops owner (shared-resource P&L + the ACP builders, reports to HOD) with a PMO person under them. "PMO" name confirmed over "Executive Ops". Metrics list shown in chat for approval first — tracker/team views deliberately untouched (one surface at a time).
 - One-pager: Product Design added to §10 embedded-functions table (UX/UI for learning products, read through LP capability builds + PLE journey work, no dedicated KPI rows yet) and to the §7 execution-management ask (now Product, Engineering, Product Design, Pedagogy). §2 Functions definition + §5 Cross-functional Resource Utilisation already listed Product Designers — no other surface touched yet.
 - 🎯 + 🗺️ republished (site re-embeds the one-pager).
+
+## 2026-08-22 — Content–Central team view lands (Section-B-first; org tracker untouched)
+- **New xlsx tab "Content–Central View"** (amber, 6th tab) in kra_training_sheet.xlsx, built by the same
+  `build_team_view` machinery — 14-col layout, Product+Cohort columns, frozen panes, live Section A mirror.
+- **Section A (inherited, 1 row):** Agentic Production Coverage (org row S.No 15, budget 90) mirrored live via
+  the Functions token "Content–Central". Its "Ladders to" cell carries the Central read: **units-at-bar — how many
+  of the 5 learning-domain units hold ≥ 90 (a count, not a blended average)**; each domain owns its own slice in
+  its own view (FS & CS Core wired). Implemented as a new optional per-view `a_notes` key appended to the
+  provenance text — Section A numbers stay tracker-only.
+- **Section B (owned, 5 rows — the approved start set):**
+  · Business Ops — Shared Teams: **Shared-Team Deliverables Landed** (%, Monthly; enabling → dept Stakeholder
+    Alignment) · **Shared-Team Spend vs Plan** (%, Monthly; enabling → dept Content Efficiency)
+  · Agentic Content Platform: **Shared Tool Adoption** (%, Monthly; enabling → tracker APC; bar = ALL learning
+    domains within a month of shipping)
+  · PMO: **Check-ins Run** · **Actions Closed** (%, Monthly; hygiene — operating-rhythm guardrails)
+  All budgets blank — baseline-first remarks (register/allocation built in Q1, budgets after one cycle).
+  Deferred companions noted in the Actions Closed remark: spend → outcome map · tracker freshness · finance turnaround.
+- **Section C (asks, 2 rows) = the §7 asks:** execution-management KPI tracking (Product, Engineering, Product
+  Design & Pedagogy function heads) · creative delivery-management tracking (GD & VE team heads).
+- Subtitle names the two-person shape: Business Ops owner (shared-team delivery + ACP builds; reports to HOD)
+  with a PMO manager reporting to them — role titles pending.
+- **Cross-functional Resource Utilisation verified NOT an org-tracker row** (dept §5 KPI only) — so Section A is
+  APC-only; the earlier "APC + CRU" sketch was corrected. View = exactly the six approved metrics (1 inherited + 5 owned).
+- Org tracker rows byte-identical (28 rows, max S.No 28, Legend 24); FS/CSI views untouched (site asserts A19/B24/C4 pass).
+- Sync: training-sheet html subtitle + footnote now say 6 tabs (footnote's stale "3 tabs" fixed); site download
+  card names all three team views; site xlsx b64 refreshed. 🧭 + 🗺️ republished to same URLs.
