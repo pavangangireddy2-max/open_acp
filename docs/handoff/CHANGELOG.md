@@ -134,3 +134,17 @@ Pending (unchanged): operating view (📋) category + cadence + marker sync — 
 - **§10 retitled "Sub-departments & embedded functions"** (Pavan's ask, verdict yes): direct-reports table unchanged; NEW second table — Product Managers, Engineering, Pedagogy Experts (journey design at CSI · lesson-plan design in LD), DA/DEs, Graphic Designers · Video Editors, SDIs — business reporting read through the lanes they staff, line reporting to their own function heads; ties to the §7 execution-management asks (lines already there).
 
 Pending: FS Section B relevance review (LE, Course Completion, Pedagogy Initiative Impact, Learner-Accessed CCR, Practice A-to-C — analysis delivered, Pavan to rule); Role cards / Career framework (Pavan attaching his earlier domain-specific versions — analyse → plan → then implement; title pattern shifting to "AI Engineer – FullStack Learning Systems" style); operating view (📋) sync still deferred — now also owes lane/category/APC + §10 changes.
+
+## 2026-08-21 — FS Section B rulings applied: LE + Course Completion retired as budgeted rows
+
+**🧭 Tracker (44869dfd…):**
+- **Learning Engagement Effort (LE) — dropped from Section B.** Pavan's ruling on the relevance review: LE is the effort *axis* of the engagement matrix, not a KPI to budget — it already lives inside tracker Cell Migration. Stays as a dashboard instrument (the Section C ask still names it).
+- **Course Completion Rate — dropped from Section B.** Completion is conduction-driven (Program Ops holds the lever); a content team can't be budgeted on it. Demoted to a read-only cut inside the "Engagement & LE dashboards" ask (detail extended to say so and to name the owned stickiness pair).
+- **Pedagogy Initiative Impact — stays, ownership pinned.** Ruling: pedagogy initiatives live inside content departments; Pedagogy Experts may work on them but the KPI owner is the respective domain content SME. Remark added; ladder re-pointed off the retired LE row → module-quiz Bands + org KRA 2 Academics CSAT.
+- **Learner-Accessed Content Completion Rate — stays** (access-conditioned denominator strips conduction effects → genuine content signal). Ladder re-pointed off the retired Course Completion row → tracker Cell Migration, video-stickiness leg of the value axis.
+- **Practice Attempt-to-Completion Rate — stays unchanged** (strongest of the five: difficulty-calibration vs environment-friction split).
+- FS view Section counts now **A 18 · B 23 · C 3** (was B 25); 23 variance formulas; no dangling ladder references (verified).
+
+Role cards / career framework doc received (knowledge/raw/corpora/remixed-0bb5468a.html — "SDE Learning Systems Career Framework", Mar 2026): analysed this session, implementation plan proposed to Pavan — **no implementation yet** (his analyse→plan→approve rule). Open question posed by Pavan, discussion delivered, awaiting his call: domain-specific product work (evaluation environments, domain-specific LP capabilities) sits in content dept with no covering KPI — proposed generic→LP / domain-instance→LD rule + two candidate Section B rows (Evaluation Environment Coverage, Domain Capability Delivery), Section-B-first vs org-tracker-row question pending.
+
+Pending: operating view (📋) sync still deferred — owes lane/category/APC + §10 + these Section B changes.
