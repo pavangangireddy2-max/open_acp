@@ -57,7 +57,7 @@ PILLARS = [  # (name, weight, sublines, kpi reads aligned to sublines)
         "Summative + Formative Skill Assessment Achievement · org KRA 1 SPI Score Bands",
         "Content Issue Resolution Efficiency · Content Issue Recurrence Rate",
         "Industry Update Adherence · Tech Stack Freshness Rate",
-        "Pedagogy Initiative Impact · R&D Initiative Impact"]),
+        "Pedagogy Initiative Impact · Agentic Production Coverage"]),
     ("Role Competence", 25, parse_lines(RT[5:10]), [
         "Content Issue Recurrence Rate · Module-Quiz Score Bands · Engagement-Matrix Cell Migration",
         "Agentic Production Coverage",
@@ -115,14 +115,14 @@ WIRING = [  # (category, area, [kpi rows], note)
      ["Industry Update Adherence", "Tech Stack Freshness Rate"],
      "Adherence = planned updates land on schedule; freshness = the audit behind relevance."),
     ("Core Creation and Quality", "Production Systems",
-     ["Agentic Production Coverage", "R&D Initiative Impact"],
+     ["Agentic Production Coverage"],
      "Publishing through ACP pipelines; cost rows below read the efficiency it buys."),
     ("Core Creation and Quality", "Learning Systems Design",
      ["Evaluation Environment Coverage", "Domain Capability Delivery"],
      "The Domain Product Enablement pair — raised/accepted by SMEs, built by PMs + Engineering, "
      "accountability in Learning Domains. Reads: Learning Environment Satisfaction, PAtC env-friction leg."),
     ("Core Creation and Quality", "GenAI Orchestration & Content Automation",
-     ["Agentic Production Coverage", "R&D Initiative Impact", "Cost per MCQ Generated", "Cost per Coding Question"],
+     ["Agentic Production Coverage", "Cost per MCQ Generated", "Cost per Coding Question"],
      "Mandatory from AI Engineer 1 — orchestration shows up as coverage plus falling unit costs."),
     ("Core Creation and Quality", "Business Impact",
      ["Summative Skill Assessment Achievement Rate", "Formative Skill Assessment Achievement Rate",
@@ -170,8 +170,8 @@ FS_PILOT = {
                "AI Engineer Lead – FullStack & CS Core Learning Systems"],
     "complexity": "High (2.0x) — FullStack · Medium (1.5x) — CS Core",
     "domains": [r for r in DOMAINS[1:] if r[0] in ("Full Stack", "CS Core")],
-    "surface": "Metric surface = the FullStack & CS Core team view: Section A 18 mirrored tracker rows · "
-               "Section B 25 owned rows (incl. the Domain Product Enablement pair) · Section C 4 asks.",
+    "surface": "Metric surface = the FullStack & CS Core team view: Section A 19 mirrored tracker rows · "
+               "Section B 24 owned rows (incl. the Domain Product Enablement pair) · Section C 4 asks.",
 }
 
 # ---------------------------------------------------------------- xlsx

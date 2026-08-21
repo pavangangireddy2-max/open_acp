@@ -200,3 +200,11 @@ Verified over localhost: 0 page overflow, 28 tscroll wrappers intact, tracker to
 Queued from same directives: KPI rows for every rating pillar/area (one at a time, later); the standalone ladder artifact keeps formerly-lines/v2/AI Engineer 3 until a future sync is ordered.
 
 Files: build_site.py, content_os.html.
+
+## 2026-08-21 — Metric evolution: R&D Initiative Impact retired, APC takes its row
+- **R&D Initiative Impact retired everywhere** (Pavan: "make APC row instead of R&D"). Absorbed by Agentic Production Coverage (org row S.No 15, Budget 90) + the cost-per-item rows + Content Issue Recurrence — initiative counting is no longer a KPI anywhere. Removed: FS Section B tuple (build_tracker.py), one-pager §5 dept row + §9 matrix (ACP cell 4→3, column total 5→4, Total 48→47, footer "47 KPIs"), role-cards rating subline 4 KPI read + Production Systems / GenAI Orchestration progression chips.
+- **APC cascaded into FS & CS Core Section A** at the same 90 budget via the FS view `twins` list (en-dash tokenization means "Content–Central" never matched `match:"Content"` — twins is the designed extension point). FS view now A 19 · B 24 · C 4 (APC = ref G18). CSI view untouched (A 8 · B 3 · C 3).
+- **EEC/DCD kept for v1 with pre-agreed evolution trigger** recorded in remarks: at ~90% registry coverage or after two cycles, the pair folds into one funnel KPI (raised → accepted → delivered rate + TAT, capabilities-raised/quarter as non-budgeted context). EEC remark also records the gating: "Baseline first: build the item-type × environment registry, then set the budget (APC precedent)."
+- **PII kept as-is with pre-agreed outcome form** recorded: becomes Domain Learning-Value Uplift (ability/band improvement across the domain's courses per cycle, HE×HV machinery) once per-course ability instruments are confirmed.
+- **Legend & Notes row 24 added**: "Metric evolution (pre-agreed)" — all three forward moves in one place.
+- Builders updated (build_tracker.py, build_role_cards.py, build_site.py — FS parser ranges A 5–23 / B 25–48, asserts 19/24/4); all outputs regenerated; site republished with capabilities omitted (downloads carried forward). All four artifacts republished to same URLs (🎯 cd52be82 · 🧭 44869dfd · 🪜 dc3ab90d · 🗺️ ef86c2ad).

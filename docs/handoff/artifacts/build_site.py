@@ -101,17 +101,17 @@ def esc(s):
     return str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 A_ROWS = []                                                    # (T-no, kpi name)
-for r in range(5, 23):
+for r in range(5, 24):
     tno = ws.cell(r, 1).value
     f = ws.cell(r, 6).value or ""
     m = re.search(r"G(\d+)", f)
     assert tno and m, (r, tno, f)
     A_ROWS.append((tno, trk.cell(int(m.group(1)), 7).value))
-assert len(A_ROWS) == 18 and all(n for _, n in A_ROWS), A_ROWS
+assert len(A_ROWS) == 19 and all(n for _, n in A_ROWS), A_ROWS
 
 B_ROWS = [[ws.cell(r, c).value or "" for c in (1, 3, 4, 6, 7, 8, 9, 10, 14)]
-          for r in range(24, 49)]
-assert len(B_ROWS) == 25
+          for r in range(25, 49)]
+assert len(B_ROWS) == 24
 C_ROWS = [[ws.cell(r, c).value or "" for c in (3, 6, 7)] for r in range(50, 54)]
 assert len(C_ROWS) == 4
 VIEW_TITLE = ws.cell(1, 1).value

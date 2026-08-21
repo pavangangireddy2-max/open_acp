@@ -104,7 +104,7 @@ TRACKER = [
    "funnel": "more production through governed pipelines → faster fixes + consistent quality at scale (CIRE / CIR run through these pipes) → Academics CSAT",
    "functions": "Content–Central + DA/DEs — pipelines & production workflows; domain teams publish through them",
    "unit": "%", "freq": "Monthly", "lane": "Agentic Content Platform",
-   "remark": "ACP's tracker row now CIRE/CIR sit with Learning Domains — this lane builds the pipes; the issue KPIs score the fixes. Target 90% blended (§5); read with cost-per-item + Content Issue Recurrence. Functions cell draft for red-pen.",
+   "remark": "ACP's tracker row now CIRE/CIR sit with Learning Domains — this lane builds the pipes; the issue KPIs score the fixes. Target 90% blended (§5); read with cost-per-item + Content Issue Recurrence. Functions cell draft for red-pen. Absorbs the retired R&D Initiative Impact — initiative counting folds into coverage % + cost-per-item + recurrence; mirrored in FS & CS Core Section A at the same 90.",
    "rows": [{"cohort": "All", "kpi": "Content Efficiency:All::Agentic Production Coverage", "budget": 90}]},
   {"kra": 1, "category": "Content Effectiveness", "product": "All", "metric": "Learning Environment Satisfaction", "marker": "",
    "desc": "Student rating of the learning environment — driven by the four platform rows below",
@@ -436,7 +436,16 @@ lg["B23"] = ("Domain-specific product work — evaluation environments and domai
              "learner-facing systems. Section-B-first: an org-tracker row waits until the environment registry sets a baseline.")
 lg["A20"] = "Metric categories (col C)"
 lg["B20"] = ("Org Head-Abstract vocabulary — Business Impact · Content Effectiveness · Content Velocity · Content Efficiency · Content Relevance · Stakeholder Alignment · Executive Ops — plus three department extensions: Program Delivery · University Alignment · Platform Reliability. Category = what the KPI measures; Lane (col L) = who is accountable; Functions (col K) = who does the work.")
-for r in (1, 3, 4, 7, 8, 17, 18, 19, 20, 21, 22, 23):
+lg["A24"] = "Metric evolution (pre-agreed)"
+lg["B24"] = ("Forward moves recorded so the sheet evolves without relitigating. (1) R&D Initiative Impact — retired Aug 2026, "
+             "absorbed by Agentic Production Coverage (org row, mirrored in FS & CS Core Section A at 90) + the cost-per-item "
+             "rows + Content Issue Recurrence; initiative counting is no longer a KPI anywhere. (2) Evaluation Environment "
+             "Coverage + Domain Capability Delivery — at ~90% registry coverage or after two review cycles, the pair folds "
+             "into one funnel KPI: raised → accepted → delivered rate + TAT, with capabilities-raised/quarter as a "
+             "non-budgeted context line. (3) Pedagogy Initiative Impact — becomes Domain Learning-Value Uplift (ability/band "
+             "improvement across the domain's courses per cycle, HE×HV machinery, semester/quarter windows) once per-course "
+             "ability instruments are confirmed.")
+for r in (1, 3, 4, 7, 8, 17, 18, 19, 20, 21, 22, 23, 24):
     lg.cell(row=r, column=1).font = F(10, bold=True)
     lg.cell(row=r, column=1).alignment = Alignment(vertical="top", wrap_text=True)
     lg.cell(row=r, column=2).font = F(10)
@@ -445,6 +454,7 @@ for r in (1, 3, 4, 7, 8, 17, 18, 19, 20, 21, 22, 23):
 lg.row_dimensions[3].height = 70
 lg.row_dimensions[21].height = 70
 lg.row_dimensions[22].height = 84
+lg.row_dimensions[24].height = 120
 
 # ---------------------------------------------------------------- team views (tabs 4-5): docked to the tracker, never merged
 TRK = "KPI Tracker FY26-27"
@@ -491,7 +501,7 @@ TEAM_VIEWS = [
   "sub": ("Learning Domains lane — Content function. Section A mirrors the department tracker (live formulas — numbers are "
           "edited on the KPI Tracker tab only) · Section B is owned here, budgets & actuals live on this tab · Section C = "
           "asks of counterparties."),
-  "match": "Content", "twins": ["Engagement-Matrix Cell Migration", "Learning Environment Satisfaction"],
+  "match": "Content", "twins": ["Engagement-Matrix Cell Migration", "Learning Environment Satisfaction", "Agentic Production Coverage"],
   "own": [
    ("Business Impact", "Summative Skill Assessment Achievement Rate",
     "Students scoring above the defined passing threshold in summative skill assessments across owned domains. Passing threshold set by the team per domain context (default reference: 70%).",
@@ -512,7 +522,7 @@ TEAM_VIEWS = [
    ("Content Effectiveness", "Pedagogy Initiative Impact",
     "Implemented pedagogy initiatives with measurable learning-outcome improvement. Outcome baseline must be defined and agreed before the initiative is launched.",
     "enabling → module-quiz Bands + org KRA 2 Academics CSAT — pedagogy initiatives move the learning numbers",
-    "Count", "Quarterly", "Owned by the domain SME on this team; embedded Pedagogy Experts contribute to the initiatives."),
+    "Count", "Quarterly", "Owned by the domain SME on this team; embedded Pedagogy Experts contribute to the initiatives. Pre-agreed outcome form: becomes Domain Learning-Value Uplift — ability/band improvement across this domain's courses per cycle (HE×HV machinery) — once per-course ability instruments are confirmed."),
    ("Content Effectiveness", "Learner Accessed Content Completion Rate",
     "Video units: for each learner, % of video units they opened that they also completed; averaged across learners. Excludes units with zero opens.",
     "enabling → tracker Engagement-Matrix Cell Migration — video-stickiness leg of the value axis; access-conditioned, so conduction effects are stripped",
@@ -561,10 +571,6 @@ TEAM_VIEWS = [
     "Total platform delivery costs (cloud compute, code-execution infra, cloud IDE hosting, GenAI API calls) divided by active learners in the period. Tracks delivery-cost efficiency as usage scales.",
     "enabling → dept Platform Runtime Cost per Active Learner (§5) — the team's share of delivery cost",
     "INR", "Monthly", ""),
-   ("Content Efficiency", "R&D Initiative Impact",
-    "Implemented R&D initiatives — including adoption of agentic AI solutions and automation pipelines — with measurable content-production improvement.",
-    "enabling → dept R&D Initiative Impact (§5) + tracker row Agentic Production Coverage",
-    "Count", "Quarterly", "Q1 Jul: B 0 · A 0."),
    ("Content Relevance", "Tech Stack Freshness Rate",
     "% of tools, frameworks, libraries and environments referenced in content (and configured in IDEs, playgrounds, cloud setups) matching the current stable or LTS version at audit.",
     "enabling → tracker Industry Update Adherence — the freshness audit behind relevance",
@@ -580,11 +586,11 @@ TEAM_VIEWS = [
    ("Domain Product Enablement", "Evaluation Environment Coverage",
     "% of practice/assessment item types in this domain's live curriculum with a production-ready evaluation environment (code judges, test harnesses, notebook/cloud envs). Domain configuration — item types, test cases, judges — by this team's SMEs; platform build by Product Managers + Engineering.",
     "enabling → Practice Attempt-to-Completion (environment-friction leg) + tracker Journey Step Health steps 6–7 + Learning Environment Satisfaction",
-    "%", "Quarterly", "Baseline first: build the item-type × environment registry, then set the budget (APC precedent)."),
+    "%", "Quarterly", "Baseline first: build the item-type × environment registry, then set the budget (APC precedent). Pre-agreed evolution: at ~90% coverage or after two cycles, EEC + DCD fold into one funnel KPI — raised → accepted → delivered rate + TAT, with capabilities-raised/quarter as a non-budgeted context line."),
    ("Domain Product Enablement", "Domain Capability Delivery",
     "Domain-specific learning-platform capabilities shipped vs committed per cycle. Raised and specified by this team's SMEs; built by Product Managers + Engineering; accountability stays here — the ask and the acceptance are domain-owned.",
     "enabling → dept Platform Capability Configuration Coverage (§5) + the LP capability registry",
-    "%", "Quarterly", "Generic/reusable capabilities rest with the Learning Platform lane (product-owned), not here."),
+    "%", "Quarterly", "Generic/reusable capabilities rest with the Learning Platform lane (product-owned), not here. Folds into the raised → accepted → delivered funnel with EEC when the trigger lands (see EEC remark + Legend)."),
    ("Executive Ops", "Operations & Growth Cost",
     "Average cost across executive ops, operational efficiency, market analysis and hiring activities. Tracked at team scope, not per product.",
     "hygiene — team run-cost guardrail; no org ladder by design",
