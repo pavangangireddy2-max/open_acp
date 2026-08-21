@@ -3,13 +3,17 @@
 # Framework", March 2026). v2 renames titles to Pavan's "AI Engineer – [Domain]
 # Learning Systems" pattern and wires every progression area + rating line to named
 # KPI rows in the tracker / team views. Descriptors are carried verbatim from source.
-# Outputs: role_cards.xlsx (editable master, 5 tabs) + role_cards.html (artifact).
+# Outputs: role_cards.xlsx (editable master, 6 tabs) + role_cards.html (artifact).
 import json, re, html as H
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 
 SRC = "/Users/pavan/Desktop/projects/open_acp/knowledge/raw/corpora/remixed-0bb5468a.html"
-src = open(SRC, encoding="utf-8").read()
+CACHE = "comp_boxes_cache.json"  # comp boxes only — refreshed whenever SRC is readable
+try:
+    src = open(SRC, encoding="utf-8").read()
+except OSError:  # raw source is untracked / folder access unavailable — use the cache
+    src = None
 
 def clean(x):
     x = re.sub(r"<br\s*/?>", "\n", x)
@@ -17,9 +21,14 @@ def clean(x):
     return H.unescape(x).replace(" ", " ").strip()
 
 # ---------------------------------------------------------------- parse source
-comp_boxes = [(clean(a), clean(b), clean(c)) for a, b, c in re.findall(
-    r'<div class="comp-box">\s*<div class="role-level">(.*?)</div>\s*'
-    r'<div class="comp-range">(.*?)</div>\s*<div class="note">(.*?)</div>', src, re.S)]
+if src is not None:
+    comp_boxes = [(clean(a), clean(b), clean(c)) for a, b, c in re.findall(
+        r'<div class="comp-box">\s*<div class="role-level">(.*?)</div>\s*'
+        r'<div class="comp-range">(.*?)</div>\s*<div class="note">(.*?)</div>', src, re.S)]
+    json.dump([list(b) for b in comp_boxes],
+              open(CACHE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+else:
+    comp_boxes = [tuple(b) for b in json.load(open(CACHE, encoding="utf-8"))]
 assert len(comp_boxes) == 5, comp_boxes
 
 # Section text/tables come from the pre-parsed JSON (h3 headings separated into
@@ -64,7 +73,12 @@ PILLARS = [  # (name, weight, sublines, kpi reads aligned to sublines)
         "Cost per Learning Hour · Cost per MCQ · Cost per Coding Question",
         "Learning Content Hours Delivered · Practice & Assessment Content Pieces Delivered",
         "Cross-functional Sprint Delivery Rate · Stakeholder Content Request Fulfillment Rate"]),
-    ("Develop the Best", 15, parse_lines(RT[10:15]), [None] * 5),
+    ("Develop the Best", 15, parse_lines(RT[10:15]), [
+        "Power Performers Created",
+        None,
+        "Hires Made · Cost per Hire",
+        "Team Retention Rate",
+        None]),
     ("Culture and Values", 10, parse_lines(RT[15:20]), [None] * 5),
 ]
 CALC = RT[20]
@@ -137,8 +151,8 @@ WIRING = [  # (category, area, [kpi rows], note)
     ("Operational Excellence", "Communication", [], "Review evidence — no direct KPI by design."),
     ("Operational Excellence", "Ambiguity Handling", [], "Review evidence — no direct KPI by design."),
     ("Operational Excellence", "Best Practices",
-     ["Operations & Growth Cost", "Creative Resource Utilisation Rate"],
-     "Hygiene guardrails (PM-managed reads) — no org ladder by design."),
+     ["Cost of Operations", "Creative Resource Utilisation Rate"],
+     "Hygiene guardrails from the Team Ops & People block — run by the team's PM; no org ladder by design."),
     ("Collaboration and Stakeholders", "Cross-Functionality",
      ["Cross-functional Sprint Delivery Rate"],
      "Plus the health of Section C asks the person is party to."),
@@ -147,8 +161,9 @@ WIRING = [  # (category, area, [kpi rows], note)
      "Ladders to dept Stakeholder Alignment (§5)."),
     ("Collaboration and Stakeholders", "Cross-Product Work", [],
      "Read through the Product column — Section B rows carried per product (NIAT · Academy · Launchpad slots)."),
-    ("Collaboration and Stakeholders", "Mentorship", [],
-     "Rating Pillar 3 (Develop the Best) — deliberately review-based, no KPI row."),
+    ("Collaboration and Stakeholders", "Mentorship", ["Power Performers Created"],
+     "Rating Pillar 3 (Develop the Best) — first direct read: members made next-level-ready, counted per "
+     "appraisal cycle. Feedback quality and growth opportunities stay review-based."),
 ]
 assert len(WIRING) == 21
 
@@ -171,8 +186,43 @@ FS_PILOT = {
     "complexity": "High (2.0x) — FullStack · Medium (1.5x) — CS Core",
     "domains": [r for r in DOMAINS[1:] if r[0] in ("Full Stack", "CS Core")],
     "surface": "Metric surface = the FullStack & CS Core team view: Section A 19 mirrored tracker rows · "
-               "Section B 24 owned rows (incl. the Domain Product Enablement pair) · Section C 4 asks.",
+               "Section B 29 owned rows (incl. the Domain Product Enablement pair and the Team Ops & People "
+               "block) · Section C 4 asks.",
 }
+
+# The team's operating seat — added August 2026 with the Team Ops & People metric
+# block. Not a ladder level: the maker levels own content and systems; the PM runs
+# the operating rhythm. Comp band deliberately not set here.
+PM_ROLE = {
+    "title": "Project Manager – [Domain] Learning Systems",
+    "pilot": "Project Manager – FullStack & CS Core Learning Systems",
+    "reports": "The team's AI Engineer Lead. KPIs cascade Lead → PM: the Lead answers for the numbers at review; "
+               "the PM runs them day to day.",
+    "comp": "Band pending — defined with HR when the seat is staffed.",
+    "rows": ["Cost of Operations", "Roadmap Items Completion", "Hires Made", "Cost per Hire",
+             "Team Retention Rate", "Power Performers Created", "Creative Resource Utilisation Rate"],
+    "rows_note": "The Team Ops & People block of the team view — the FullStack & CS Core pilot carries all 7 "
+                 "(CSI: 6, without the creative-utilisation row). Three of these are also the Lead's "
+                 "Develop-the-Best rating reads: the PM operates the rows, the Lead answers for them.",
+    "interfaces": "Content–Central PMO: the PM feeds the monthly check-in — complete worklogs and current ClickUp "
+                  "statuses are what the PMO's Worklog & Status Hygiene — All Units read counts. Worklog capture "
+                  "is the load-bearing activity: it makes deliverable costing computable.",
+    "scope_note": "Progression and rating for the PM seat itself: not designed yet — this card fixes the seat, "
+                  "the reporting line and the metric surface first.",
+}
+PM_OPS = [  # the Cost of Operations register — verbatim intent from Pavan, Aug 2026
+    "Monthly manager–reportee one-on-ones",
+    "Scheduling roadmap review meetings + Head approval",
+    "Day-to-day ops — standups, learning hours",
+    "Scheduling monthly check-in meets & documenting them in the right place",
+    "Maintaining team assets (laptops, systems)",
+    "Ensuring ClickUp adoption",
+    "Keeping deliverable statuses up to date",
+    "Monthly worklog capture → deliverable costs computed for the check-in",
+    "Generating newsletters monthly",
+    "Conducting team outings",
+    "Conducting cycle-wise appraisal meetings",
+]
 
 # ---------------------------------------------------------------- xlsx
 TEAL, TEAL_MID, TEAL_TINT = "FF0E6E5C", "FF7CBFB1", "FFE6F2EF"
@@ -312,6 +362,30 @@ for term, mapping in BRIDGE:
     ws.row_dimensions[r].height = max(15, 13 * (len(mapping) // 120 + 1))
     r += 1
 
+# Tab 6 — Project Manager
+ws = sheet("Project Manager", (24, 120))
+r = title_row(ws, 1, "Project Manager — the team's operating seat (added August 2026 with the Team Ops & People "
+                     "metric block). Not a ladder level: reports to the AI Engineer Lead.", 2)
+r = hdr_row(ws, r, ("Field", "Detail"))
+for label, val in (
+        ("Title pattern", PM_ROLE["title"]),
+        ("Pilot instance", PM_ROLE["pilot"]),
+        ("Reports to", PM_ROLE["reports"]),
+        ("Comp", PM_ROLE["comp"]),
+        ("Owns (metric surface)", " · ".join(PM_ROLE["rows"]) + ". " + PM_ROLE["rows_note"]),
+        ("Interfaces", PM_ROLE["interfaces"]),
+        ("Progression / rating", PM_ROLE["scope_note"])):
+    put(ws, r, 1, label, bold=True)
+    put(ws, r, 2, val)
+    ws.row_dimensions[r].height = max(15, 13 * (len(val) // 115 + 1))
+    r += 1
+r += 1
+r = hdr_row(ws, r, ("#", "Ops register — the activities inside Cost of Operations (so nothing is forgotten)"))
+for i, act in enumerate(PM_OPS, 1):
+    put(ws, r, 1, str(i))
+    put(ws, r, 2, act)
+    r += 1
+
 wb.save("role_cards.xlsx")
 
 # ---------------------------------------------------------------- html
@@ -373,7 +447,7 @@ B.append('<h1>AI Engineer Ladder</h1>')
 B.append('<div class="subtitle">Career framework for content-department domain teams &middot; v2, August 2026 &middot; '
          'titles follow the <strong>AI Engineer &ndash; [Domain] Learning Systems</strong> pattern &middot; descriptors '
          'carried verbatim from the March 2026 SDE Learning Systems framework &middot; editable master: '
-         '<strong>role_cards.xlsx</strong> (5 tabs)</div>')
+         '<strong>role_cards.xlsx</strong> (6 tabs)</div>')
 B.append('<div class="key-point"><strong>What changed in v2:</strong> titles renamed to the AI Engineer pattern; every '
          'progression area and rating line is wired to named KPI rows — anything in a '
          '<span class="kpi">mono chip</span> is a live row on the KPI tracker or the team view, so reviews read off the '
@@ -453,6 +527,30 @@ B.append('<div class="key-point"><strong>Instantiated titles:</strong> ' +
          " · ".join(f'{esc(r[0])} — {esc(r[1])}h · {esc(r[2])}' for r in fp["domains"]) +
          f'<br>{esc(fp["surface"])}</div>')
 
+B.append('<h2>Project Manager — the operating role</h2>')
+B.append('<div class="sectionlead">Not a sixth ladder level — a parallel operating seat, one per domain team, added '
+         'August 2026 with the Team Ops &amp; People metric block. The maker levels above own the content and the '
+         'systems; the PM runs the team&rsquo;s operating rhythm.</div>')
+pm_ifc = esc(PM_ROLE["interfaces"]).replace(
+    "Worklog &amp; Status Hygiene — All Units",
+    '<span class="kpi">Worklog &amp; Status Hygiene — All Units</span>')
+pm_rows = [
+    ("Title pattern", f'<strong>{esc(PM_ROLE["title"])}</strong>'),
+    ("Pilot instance", f'<span class="kpi">{esc(PM_ROLE["pilot"])}</span>'),
+    ("Reports to", esc(PM_ROLE["reports"])),
+    ("Comp", esc(PM_ROLE["comp"])),
+    ("Owns (metric surface)", chips(PM_ROLE["rows"]) +
+     f'<div style="margin-top:4px" class="muted">{esc(PM_ROLE["rows_note"])}</div>'),
+    ("Runs (ops register)", '<ol style="padding-left:18px">' +
+     "".join(f'<li>{esc(a)}</li>' for a in PM_OPS) + '</ol>'),
+    ("Interfaces", pm_ifc),
+    ("Progression / rating", f'<span class="nodesign">{esc(PM_ROLE["scope_note"])}</span>'),
+]
+B.append('<div class="scroll"><table style="max-width:980px"><tr><th style="width:18%">Field</th><th>Detail</th></tr>')
+for label, val in pm_rows:
+    B.append(f'<tr><td><strong>{label}</strong></td><td>{val}</td></tr>')
+B.append('</table></div>')
+
 B.append('<h2>Vocabulary bridge</h2>')
 B.append('<div class="scroll"><table><tr><th style="width:22%">2026 doc term</th><th>In the KPI system</th></tr>')
 for term, mapping in BRIDGE:
@@ -463,7 +561,8 @@ B.append('<div class="footnote">Source: SDE Learning Systems Career Framework (M
          'rating weights and calibration tables carried verbatim; titles renamed and KPI wiring added in v2 (August 2026). '
          'Defaults taken pending red-pen: comp bands included (artifact is private; strip for wide sharing) &middot; '
          'level names Associate / 1 / 2 / Lead / 3 &middot; FullStack &amp; CS Core as pilot. Companion sheets: KPI tracker '
-         '(kra_training_sheet.xlsx) &middot; HOD one-pager. Other domain teams get cards when their team views land.</div>')
+         '(kra_training_sheet.xlsx) &middot; HOD one-pager. Other domain teams get cards when their team views land; '
+         'CSI and Content&ndash;Central role cards are queued to be built separately.</div>')
 
 html = ('<title>AI Engineer Ladder</title>\n<style>\n' + STYLE + '\n</style>\n'
         '<div class="container">\n' + "\n".join(B) + '\n</div>\n')

@@ -491,9 +491,14 @@ TEAM_VIEWS = [
     "operational-efficiency and market-analysis work. Worklog capture is the load-bearing activity: it is what makes "
     "deliverable costing computable.",
     "hygiene — team run-cost guardrail; no org ladder by design",
-    "INR", "Monthly", "Replaces Operations & Growth Cost (no baseline yet) — worklog capture builds the first read. "
-    "Sub-metrics per activity (one-on-one coverage, status freshness…) get added as reads emerge. Run by the team's PM "
-    "(reports to the Lead; KPI cascades Lead → PM)."),
+    "INR", "Monthly", "Full ops register (so nothing is forgotten): monthly manager–reportee one-on-ones · scheduling "
+    "roadmap review meetings + Head approval · day-to-day ops (standups, learning hours) · scheduling monthly check-in "
+    "meets & documenting them in the right place · maintaining team assets (laptops, systems) · ensuring ClickUp "
+    "adoption · keeping deliverable statuses up to date · monthly worklog capture → deliverable costs computed for the "
+    "check-in · generating newsletters monthly · conducting team outings · conducting cycle-wise appraisal meetings. "
+    "Replaces Operations & Growth Cost (no baseline yet) — worklog capture builds the first read. Sub-metrics per "
+    "activity (one-on-one coverage, status freshness…) get added as reads emerge. Run by the team's PM (reports to the "
+    "Lead; KPI cascades Lead → PM)."),
    ("Team Ops & People", "Roadmap Items Completion",
     "Of the roadmap items committed for the cycle — reviewed in the roadmap meetings the PM schedules and approved by the "
     "Head — the % completed. The execution-predictability read for the team's own plan.",
@@ -633,9 +638,14 @@ TEAM_VIEWS = [
     "operational-efficiency and market-analysis work. Worklog capture is the load-bearing activity: it is what makes "
     "deliverable costing computable.",
     "hygiene — team run-cost guardrail; no org ladder by design",
-    "INR", "Monthly", "Replaces Operations & Growth Cost — Jul A ₹300,863 spans ops + hiring; worklog capture splits it "
-    "from next month. Sub-metrics per activity (one-on-one coverage, status freshness…) get added as reads emerge. Run by "
-    "the team's PM (reports to the Lead; KPI cascades Lead → PM)."),
+    "INR", "Monthly", "Full ops register (so nothing is forgotten): monthly manager–reportee one-on-ones · scheduling "
+    "roadmap review meetings + Head approval · day-to-day ops (standups, learning hours) · scheduling monthly check-in "
+    "meets & documenting them in the right place · maintaining team assets (laptops, systems) · ensuring ClickUp "
+    "adoption · keeping deliverable statuses up to date · monthly worklog capture → deliverable costs computed for the "
+    "check-in · generating newsletters monthly · conducting team outings · conducting cycle-wise appraisal meetings. "
+    "Replaces Operations & Growth Cost — Jul A ₹300,863 spans ops + hiring; worklog capture splits it from next month. "
+    "Sub-metrics per activity (one-on-one coverage, status freshness…) get added as reads emerge. Run by the team's PM "
+    "(reports to the Lead; KPI cascades Lead → PM)."),
    ("Team Ops & People", "Roadmap Items Completion",
     "Of the roadmap items committed for the cycle — reviewed in the roadmap meetings the PM schedules and approved by the "
     "Head — the % completed. The execution-predictability read for the team's own plan.",

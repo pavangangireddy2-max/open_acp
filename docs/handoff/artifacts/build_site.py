@@ -20,6 +20,10 @@ import re
 from openpyxl import load_workbook
 
 ART = "/Users/pavan/Desktop/projects/open_acp/docs/handoff/artifacts/"
+try:  # repo may be unreachable (e.g. macOS folder access revoked) — fall back to cwd copies
+    open(ART + "hod_kpi_onepager.html", encoding="utf-8").close()
+except OSError:
+    ART = ""
 
 def sub1(s, old, new):
     assert s.count(old) == 1, f"count={s.count(old)} for: {old[:70]!r}"
@@ -277,7 +281,7 @@ LEVELS = [
      "Read by: team leads &middot; SMEs. Views live as tabs in the tracker master xlsx.",
      None, "kra_training_sheet.xlsx"),
     ("ind", "4", "Individual", "🪜 AI Engineer Ladder",
-     "Five levels, 21 progression areas, and the rating rubric — every area wired to the same KPI rows the levels above run on.",
+     "Five levels plus the team's Project Manager card, 21 progression areas, and the rating rubric — every area wired to the same KPI rows the levels above run on.",
      "Read by: every engineer &middot; their manager. Master: role_cards.xlsx.",
      "https://claude.ai/code/artifact/dc3ab90d-c4a4-448d-bdb5-fb43a9235734", "role_cards.xlsx"),
 ]
@@ -322,7 +326,7 @@ HERO.append('</div></div>')
 FOOTER = f"""<footer><div class="in">
 <h3>Behind this site</h3>
 <ul>
-<li>Editable masters: <span class="mono">kra_training_sheet.xlsx</span> (tracker + legend + CSI, FullStack &amp; CS Core and Content&ndash;Central team views) · <span class="mono">role_cards.xlsx</span> (ladder, 5 tabs)<span class="dlwrap" hidden> — download: {dlbtn("kra_training_sheet.xlsx")} {dlbtn("role_cards.xlsx")}</span> — in <span class="mono">docs/handoff/artifacts/</span> with the builders and CHANGELOG.</li>
+<li>Editable masters: <span class="mono">kra_training_sheet.xlsx</span> (tracker + legend + CSI, FullStack &amp; CS Core and Content&ndash;Central team views) · <span class="mono">role_cards.xlsx</span> (ladder, 6 tabs)<span class="dlwrap" hidden> — download: {dlbtn("kra_training_sheet.xlsx")} {dlbtn("role_cards.xlsx")}</span> — in <span class="mono">docs/handoff/artifacts/</span> with the builders and CHANGELOG.</li>
 <li>Standalone artifacts (updated in place; this site re-embeds them on republish): <a href="{LEVELS[0][6]}" target="_blank" rel="noopener">HOD one-pager</a> · <a href="{LEVELS[1][6]}" target="_blank" rel="noopener">KPI tracker</a> · <a href="{LEVELS[3][6]}" target="_blank" rel="noopener">AI Engineer Ladder</a>.</li>
 <li>Comp bands are deliberately kept off this site — they live in the standalone ladder artifact and <span class="mono">role_cards.xlsx</span>.</li>
 </ul>

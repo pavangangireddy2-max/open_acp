@@ -279,3 +279,28 @@ Files: build_site.py, content_os.html.
   🗺️ republished same URL (capabilities omitted).
 - Queued next surface (role cards 🪜): add the Project Manager role card (reports to Lead, carries this KPI set) and
   fix the now-stale "Operations & Growth Cost" chip on the Best Practices pillar (→ Cost of Operations).
+
+## 2026-08-22 — Project Manager role card + Cost of Operations full ops register + KPI-wiring audit fixes
+- **Cost of Operations remarks (both team views):** the row's remark now carries the full 11-activity ops register
+  verbatim (one-on-ones · roadmap reviews + Head approval · standups/learning hours · check-in scheduling +
+  documentation · team assets · ClickUp adoption · status freshness · worklog capture → deliverable costs ·
+  newsletters · outings · cycle appraisals) "so nothing is forgotten" — FS View row 47, CSI Team View row 16.
+  kra_training_sheet.html byte-identical → no 🧭 republish.
+- **PM role card shipped (🪜):** role_cards.xlsx gains Tab 6 "Project Manager" and role_cards.html a matching section
+  (between Pilot and Vocabulary bridge). Framed as the team's operating seat, not a sixth ladder level: title
+  "Project Manager – [Domain] Learning Systems" (pilot: FS & CS Core) · reports to the team's AI Engineer Lead
+  (KPIs cascade Lead → PM) · comp band pending with HR · owns the 7 Team Ops & People rows · runs the 11-activity
+  register · interfaces Content–Central PMO (feeds Worklog & Status Hygiene — All Units) · progression/rating for
+  the seat honestly marked not-designed-yet. Section passes all site-embed asserts (comp text carries no band).
+- **KPI-wiring audit (post-metric-update) — 4 stale spots fixed:** Best Practices chip Operations & Growth Cost →
+  **Cost of Operations**; Mentorship "review-based, no KPI row" → wired to **Power Performers Created**;
+  Develop-the-Best rating sublines wired (Power Performers Created 30% · Hires Made + Cost per Hire 15% ·
+  Team Retention Rate 20%; Timely Feedback + Growth Opportunities stay review-based by design); FS pilot surface
+  line Section B 24 → 29. Subtitle/footer now "(6 tabs)". Footnote records the queue: CSI and Content–Central
+  role cards to be built separately (Pavan's FYI).
+- **Builder resilience (macOS TCC incident):** the app lost ~/Desktop access mid-session; work continued from the
+  session scratchpad. build_role_cards.py now falls back to **comp_boxes_cache.json** (new, committed — round-trip
+  proven against role_cards.xlsx; makes the builder clone-runnable since the raw source stays untracked) when the
+  raw html is unreadable; build_site.py falls back to cwd copies when docs/handoff/artifacts/ is unreachable.
+- 🪜 + 🗺️ republished same URLs (site: capabilities omitted, downloads carried forward; ind band + footer mention
+  the PM card / 6 tabs). Org tracker rows, one-pager, 🧭 untouched.

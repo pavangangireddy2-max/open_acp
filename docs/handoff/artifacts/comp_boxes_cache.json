@@ -1,0 +1,27 @@
+[
+ [
+  "Associate SDE, Learning Systems - [Domain Name]",
+  "4.5L to 7L | 0-1 years",
+  "Example: \"Associate SDE, Learning Systems - FullStack\" or \"Associate SDE, Learning Systems - GenAI\". Creates content with guidance (lessons, exercises, projects, assessments). Learns to integrate code playgrounds, evaluation judges, and learning platforms. Handles 0.5-1 domain, 40-100 content hours, reaches 2K-5K students."
+ ],
+ [
+  "SDE 1, Learning Systems - [Domain]",
+  "9L to 16L | 1-3+ years",
+  "Example: \"SDE 1, Learning Systems - DS/ML\". Creates domain content independently (lessons, exercises, projects). Engineers learning systems by selecting appropriate platforms (IDEs, cloud environments, assessment engines). Owns 1-2 domains. Manages 100-250 hours, reaches 5K-10K students."
+ ],
+ [
+  "SDE 2, Learning Systems - [Domain Portfolio]",
+  "18L to 24L | 3+ years",
+  "Example: \"SDE 2, Learning Systems - FullStack, System Design & CS Core\". Leads content creation across multiple domains. Architects platform systems and optimizes evaluation pipelines. Manages 2-5 team members across 3-4 domains. Manages 250-450 hours, reaches 10K-20K students."
+ ],
+ [
+  "SDE Lead, Learning Systems - [Domain Portfolio]",
+  "24L to 30L | 5+ years",
+  "Example: \"SDE Lead, Learning Systems - Programming, FullStack, CS Core, DevOps\". Owns content strategy and creation across portfolio. Designs platform architecture and GenAI-driven content systems. Leads 15-25 members across 4-6 domains. Manages 450+ hours, reaches 20K-40K+ students."
+ ],
+ [
+  "SDE 3, Learning Systems - [Domain Portfolio]",
+  "30L+ | 7+ years",
+  "Example: \"SDE 3, Learning Systems - Portfolio (All Domains)\". Sets org-wide content and curriculum strategy. Owns EdTech infrastructure evolution, GenAI content pipelines, and cross-product technical roadmap."
+ ]
+]
