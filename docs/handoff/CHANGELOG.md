@@ -97,3 +97,20 @@ One line per change: date · doc · what · source.
 - Marker rename (Pavan): `CROSS-DEPT` → `CROSS-FUNCTION` on Product Issue Resolution Efficiency + Product Issue Recurrence — resolution spans functions (PMs, Engineering, Content), not departments. All surfaces: tracker xlsx metric cells + Legend B7, tracker HTML tags + key-point legend, builder TAG dict + descs ("resolved across functions, we route"; "regardless of which function owns the fix"), kra_data.json ROWS markers, one-pager §5 tags + §6 li + tag legend. Zero stale strings.
 - Lanes now explained on both surfaces (gap Pavan flagged): tracker HTML gets a second key-point div — six lane one-liners (LD/LP/PLE/ACP/DP/Shared-PMO) + the axis line; xlsx Legend B3 rewritten with per-lane glosses + axis line (row height 70). One-pager §2 gains a "Lanes" key-term row (points at §8/§9) + a sectionlead one-liner under the table: category = what it measures · lane = who is accountable · function = who does the work.
 - Pending (unchanged): operating view (📋) category + cadence + marker sync — deferred by Pavan.
+
+## 2026-08-21 — JSH/PDG refinement + team-view tabs (CSI · FullStack & CS Core)
+
+**🧭 Tracker (44869dfd…):**
+- PDG desc: existence-only boundary ("a step that never runs counts here, not in Journey Step Health"); remark gains assembled-KPI line (named step owners, red 2 consecutive weeks → HOD-to-HOD).
+- JSH desc: health-of-what-ran boundary (never-ran counts in PDG, not here); remark gains assembled-KPI line.
+- Dependent metrics (col I) owner-tagged on PDG + JSH rows (Program Ops / Instructors / Learning Domains / LP lane / LD-ACP per step).
+- NEW tabs 4–5: **CSI Team View** (A 8 inherited · B 3 owned · C 3 asks) and **FullStack & CS Core View** (A 18 inherited · B 25 owned · C 3 asks). Section A = live formula mirror of the tracker (blank-safe IF wrappers; shared cols reference block top-row, per-KPI cols reference own row; edit on tracker only). Section B = team-owned KPIs with own B/A/V columns (left blank for the team; Q1 Jul references in Remarks) + **Ladders to** column (direct / enabling / hygiene). Section C = asks of counterparties. CSI Section B re-homed to org vocabulary (CpBOS + CpVH → Content Efficiency, O&G → Executive Ops).
+- Legend row 21: team-view explainer (dock-not-merge, ladder key, pilots). HTML subtitle → "5 tabs".
+
+**🎯 One-pager (cd52be82…):**
+- §5 PDG + JSH descriptions carry the same existence-vs-health boundary; JSH points at the §11 owner column + escalation rule.
+- §6 JSH bullet updated (health of what ran).
+- §11: NEW **Step owner** column on the journey table (11 assignments — Program Ops / Mentors / Instructors dept / Learning Domains / LP / LD-ACP); sectionlead rewritten (named owners, §7-ask governance, HOD-to-HOD escalation).
+- Footnote: "9 categories" → "10 categories" (stale since the org-7 + dept-3 re-map).
+
+Pending (unchanged): operating view (📋) category + cadence + marker sync — deferred by Pavan.

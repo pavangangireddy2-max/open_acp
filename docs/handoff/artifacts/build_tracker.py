@@ -50,11 +50,11 @@ FX = {
 TRACKER = [
   # ---- KRA 1
   {"kra": 0, "category": "Program Delivery", "product": "NIAT", "metric": "Program Delivery Gap", "marker": "CASCADE",
-   "desc": "% deviation of the executed schedule vs the designed schedule, across the journey steps (lectures, quizzes, practice releases, assets)",
+   "desc": "% deviation of the executed schedule vs the designed schedule, across the journey steps (lectures, quizzes, practice releases, assets) — existence only: a step that never runs counts here, not in Journey Step Health",
    "dep": dep(0),
    "funnel": fun(0) + " · also: delivered = approved plan → university trust → Univ Relations CSAT (feeds KRA 3)",
    "functions": FX["pdg"], "unit": "%", "freq": "Weekly", "lane": "Product Learning Experience",
-   "remark": "CASCADE — feeds KRA 1 + KRA 3, tracked once (no double count). Lower is better — variance reads inverted.",
+   "remark": "CASCADE — feeds KRA 1 + KRA 3, tracked once (no double count). Lower is better — variance reads inverted. Assembled KPI — each dependent step carries a named owner (col I); we orchestrate, route, escalate: red 2 consecutive weeks → HOD-to-HOD.",
    "rows": [{"cohort": "All", "kpi": "Program Delivery:NIAT::Program Delivery Gap", "budget": 0}]},
   {"kra": 0, "category": "Business Impact", "product": "NIAT", "metric": "Module-Quiz Score Bands", "marker": "",
    "desc": "Share of the batch in each module-quiz band (10-pt scale) — one band stricter than the org bands",
@@ -129,10 +129,10 @@ TRACKER = [
    "remark": "Lower is better — variance reads inverted.",
    "rows": [{"cohort": "All", "kpi": "Platform Reliability:All::Platform Issue Recurrence", "budget": 2}]},
   {"kra": 1, "category": "Program Delivery", "product": "NIAT", "metric": "Journey Step Health", "marker": "",
-   "desc": "% of the 11 journey steps green — NIAT first, then per product",
+   "desc": "% of the journey steps that ran this month finishing green (one-pager §11 thresholds) — NIAT first, then per product. Health of what ran: a step that never ran counts in PDG, not here",
    "dep": dep(12), "funnel": fun(12), "functions": FX["jsh"],
    "unit": "%", "freq": "Monthly", "lane": "Product Learning Experience",
-   "remark": "Q1 baseline sets the budget — blank until then (org-tracker precedent).",
+   "remark": "Q1 baseline sets the budget — blank until then (org-tracker precedent). Assembled KPI — steps owned per col I (§11 owner column); we orchestrate, route, escalate.",
    "rows": [{"cohort": "All", "kpi": "Program Delivery:NIAT::Journey Step Health", "budget": None}]},
   {"kra": 1, "category": "Content Efficiency", "product": "NIAT", "metric": "Product Issue Resolution Efficiency", "marker": "CROSS-FUNCTION",
    "desc": "% of student-reported product issues resolved within TAT — resolved across functions, we route; fix live + students notified",
@@ -252,6 +252,7 @@ def put(r, c, v, *, bold=False, italic=False, color="FF1A1A1A", center=False):
 
 row, sno = 3, 0
 kra_ranges = []
+ROWMAP = []
 for k in range(5):
     blocks = [b for b in TRACKER if b["kra"] == k]
     kra_first = row
@@ -287,6 +288,8 @@ for k in range(5):
         for i, rr in enumerate(b["rows"]):
             r = r0 + i
             sno += 1
+            ROWMAP.append({"sno": sno, "r": r, "r0": r0, "metric": b["metric"],
+                           "functions": b["functions"], "dlen": len(b["desc"])})
             put(r, 1, sno, center=True)
             put(r, 7, rr["kpi"])
             if rr["budget"] is not None:
@@ -394,15 +397,255 @@ lg["B18"] = ("KPI name follows Category:Product:Cohort::Name; per-batch rows spl
 lg["A19"] = "Training columns (I–K)"
 lg["B19"] = ("Dependent metrics · Funnel · Functions are a collapsible column group, collapsed by default — expand with "
              "the +/− control above the columns. Collapsed = the org-format tracker; expanded = the training view.")
+lg["A21"] = "Team views (tabs 4–5)"
+lg["B21"] = ("Functional Operating Views — one satellite tab per team, docked to the tracker, never merged. Section A "
+            "mirrors the tracker rows the team is on the hook for (live formulas — numbers are edited on the tracker tab "
+            "only). Section B = KPIs the team owns, budgets & actuals here, each with a Ladders-to call: direct (an org "
+            "KRA number) · enabling (a dept §5 KPI) · hygiene (guardrail, no ladder by design). Section C = asks of "
+            "counterparties. Pilots: CSI team · FullStack & CS Core.")
 lg["A20"] = "Metric categories (col C)"
 lg["B20"] = ("Org Head-Abstract vocabulary — Business Impact · Content Effectiveness · Content Velocity · Content Efficiency · Content Relevance · Stakeholder Alignment · Executive Ops — plus three department extensions: Program Delivery · University Alignment · Platform Reliability. Category = what the KPI measures; Lane (col L) = who is accountable; Functions (col K) = who does the work.")
-for r in (1, 3, 4, 7, 8, 17, 18, 19, 20):
+for r in (1, 3, 4, 7, 8, 17, 18, 19, 20, 21):
     lg.cell(row=r, column=1).font = F(10, bold=True)
     lg.cell(row=r, column=1).alignment = Alignment(vertical="top", wrap_text=True)
     lg.cell(row=r, column=2).font = F(10)
     lg.cell(row=r, column=2).alignment = Alignment(vertical="top", wrap_text=True)
     lg.row_dimensions[r].height = 55
 lg.row_dimensions[3].height = 70
+lg.row_dimensions[21].height = 70
+
+# ---------------------------------------------------------------- team views (tabs 4-5): docked to the tracker, never merged
+TRK = "KPI Tracker FY26-27"
+def tcell(col, r): return f"'{TRK}'!{col}{r}"
+def tref(col, r):  return '=IF({0}="","",{0})'.format(tcell(col, r))
+
+def a_rows(match, twins):
+    return [rm for rm in ROWMAP if match in rm["functions"] or rm["metric"] in twins]
+
+TEAM_VIEWS = [
+ {"tab": "CSI Team View", "hue": 0, "team": "CSI team",
+  "sub": ("Curriculum Systems & Infrastructure — Product Learning Experience lane. Section A mirrors the department tracker "
+          "(live formulas — numbers are edited on the KPI Tracker tab only) · Section B is owned here, budgets & actuals live "
+          "on this tab · Section C = asks of counterparties."),
+  "match": "CSI team", "twins": [],
+  "own": [
+   ("Content Efficiency", "Cost per BOS Approval (NIAT)",
+    "Average cost incurred per approved BOS across university partners. Includes CSI team payroll and non-payroll costs (travel, liaison activities) attributed to BOS approval work.",
+    "enabling → dept Cost per BOS Approval (§5 Content Efficiency) — the economics of the KRA-3 BOS engine",
+    "INR", "Quarterly", "Q1 ref: B ₹14,040 (quarterly)."),
+   ("Content Efficiency", "Cost per Vernacular Content Hour (NIAT + Academy)",
+    "Average cost to produce one hour of vernacular-language content, tracked centrally by the CSI team. Includes CSI payroll and AI tooling costs attributed to vernacular production.",
+    "enabling → dept Cost per Vernacular Content Hour (§5 Content Efficiency) — central track; FS&CS Core carries the production-side twin",
+    "INR", "Monthly", ""),
+   ("Executive Ops", "Operations & Growth Cost",
+    "Average cost across executive ops, operational efficiency, market analysis and hiring activities. Tracked at team scope, not per product.",
+    "hygiene — team run-cost guardrail; no org ladder by design",
+    "INR", "Monthly", ""),
+  ],
+  "asks": [
+   ("Conduction adherence", "Program Ops",
+    "Zero schedule deviation on lectures / quizzes / assessments + attendance drive — feeds Program Delivery Gap & Journey Step Health (§7 ask; exact thresholds pending)."),
+   ("Learning-assets SLA", "Instructors dept",
+    "PPT + recorded video ready & loaded ≥1 month ahead of delivery — feeds the assets leg of Program Delivery Gap."),
+   ("University response windows", "Univ Relations",
+    "BOS meeting windows + response SLAs on university communications — feeds BOS Credit Acceptance & University Communication TAT."),
+  ]},
+ {"tab": "FullStack & CS Core View", "hue": 2, "team": "FullStack & CS Core",
+  "sub": ("Learning Domains lane — Content function. Section A mirrors the department tracker (live formulas — numbers are "
+          "edited on the KPI Tracker tab only) · Section B is owned here, budgets & actuals live on this tab · Section C = "
+          "asks of counterparties."),
+  "match": "Content", "twins": ["Engagement-Matrix Cell Migration", "Learning Environment Satisfaction"],
+  "own": [
+   ("Business Impact", "Summative Skill Assessment Achievement Rate",
+    "Students scoring above the defined passing threshold in summative skill assessments across owned domains. Passing threshold set by the team per domain context (default reference: 70%).",
+    "direct → org KRA 1 — the summative achievement number itself (org scoreboard; the tracker reads it via module-quiz Bands + Alignment)",
+    "%", "Quarterly", "Q1 ref: B 35 (quarterly) · default threshold 70%."),
+   ("Business Impact", "Formative Skill Assessment Achievement Rate",
+    "Students scoring above the defined passing threshold in formative skill assessments across owned domains. Passing threshold set by the team per domain context (default reference: 70%).",
+    "enabling → Summative SA Achievement (row above) + tracker Content–Assessment Alignment — the early-warning formative read",
+    "%", "Monthly", "Q1 Jul: B 23 · A 33.4 — 75% cap used as the Skill Assessments cut-off."),
+   ("Business Impact", "Graded Assessment Achievement Rate (NIAT)",
+    "Students scoring above the defined passing threshold in university-conducted graded assessments — Mid-1, Mid-2 and End Semester exams — delivered in collaboration with the university.",
+    "enabling → dept Business Impact (§5) — university-conducted exams: NIAT SPI & university trust",
+    "%", "Monthly", ""),
+   ("Business Impact", "Weekly Active Users (Launchpad)",
+    "Total prospective learner leads generated in the period through content-driven channels (organic, referral, campaigns, partnerships).",
+    "enabling → dept Business Impact (§5) — Launchpad top-of-funnel",
+    "Count", "Monthly (wkly avg)", ""),
+   ("Content Effectiveness", "Learning Engagement Effort (LE)",
+    "How much a learner meaningfully engages with learning material, adjusted for effort intensity and persistence. Passive time (video, cheatsheets) weighted at 0.5.",
+    "enabling → tracker Engagement-Matrix Cell Migration — LE is the effort axis of the matrix",
+    "Min (wtd)", "Monthly", ""),
+   ("Content Effectiveness", "Course Completion Rate",
+    "% of enrolled learners who complete a course in full. Encompasses all unit types — video, practice, projects and assessments.",
+    "enabling → dept Content Effectiveness (§5)",
+    "%", "Monthly", ""),
+   ("Content Effectiveness", "Pedagogy Initiative Impact",
+    "Implemented pedagogy initiatives with measurable learning-outcome improvement. Outcome baseline must be defined and agreed before the initiative is launched.",
+    "enabling → LE + module-quiz Bands — pedagogy initiatives move the learning numbers",
+    "Count", "Quarterly", ""),
+   ("Content Effectiveness", "Learner Accessed Content Completion Rate",
+    "Video units: for each learner, % of video units they opened that they also completed; averaged across learners. Excludes units with zero opens.",
+    "enabling → Course Completion Rate — the video-unit leg",
+    "%", "Monthly", ""),
+   ("Content Effectiveness", "Practice Attempt-to-Completion Rate",
+    "Practice units: for each learner, % of coding/project exercises attempted that they also completed. Surfaces environment friction (IDE, playground, cloud setup) vs difficulty-related drop-off.",
+    "enabling → tracker Journey Step Health steps 6–7 (practice return & completion) + Learning Environment Satisfaction",
+    "%", "Monthly", "Q1 Jul: B 38."),
+   ("Content Velocity", "Learning Content Hours Delivered",
+    "Total learning content hours created per month across all formats (video, text, interactive). Content serving multiple products counted once.",
+    "enabling → dept Content Velocity (§5) — capacity for B4 & new stacks",
+    "Hours", "Monthly", "Q1 Jul: B 50 · A 46."),
+   ("Content Velocity", "Vernacular Content Hours Delivered",
+    "Total vernacular-language learning content hours created per month. Tracked separately from English hours — effort per vernacular hour differs significantly.",
+    "enabling → dept Content Velocity (§5) — vernacular capacity",
+    "Hours", "Monthly", "Q1 Jul: B 0 — no vernacular slate yet."),
+   ("Content Velocity", "Practice & Assessment Content Pieces Delivered",
+    "Total practice and assessment pieces delivered monthly across owned domains (MCQs, coding questions, projects, case studies).",
+    "enabling → dept Content Velocity (§5) — practice depth behind Journey Step Health steps 5–7",
+    "Count", "Monthly", "Q1 Jul: B 1,600 · A 1,499 (Aug B: 1,000)."),
+   ("Content Velocity", "Branding Content Assets Delivered",
+    "Total branded content pieces produced monthly (thumbnails, banners, promo assets).",
+    "enabling → dept Content Velocity (§5)",
+    "Count", "Monthly", "Q1 Jul: B 0."),
+   ("Content Efficiency", "Cost per Learning Hour Produced",
+    "Average cost to produce one hour of learning content. Includes people, tools and infra involved in creation. Tracks creation efficiency — not delivery cost.",
+    "enabling → dept Cost per Learning Hour (§5 Content Efficiency)",
+    "INR", "Monthly", "Q1 Jul: B ₹10,000 · A ₹6,803 — 46 h across 4 products."),
+   ("Content Efficiency", "Cost per Vernacular Content Hour",
+    "Average cost to produce one hour of vernacular-language content. Includes team bandwidth involved in creation (contract basis, tools & infrastructure).",
+    "enabling → dept Cost per Vernacular Content Hour (§5) — production-side twin of CSI's central track",
+    "INR", "Monthly", "Q1 Jul: B 0 · A 0."),
+   ("Content Efficiency", "Cost per MCQ Generated",
+    "Average cost to develop one objective question, including both manual and AI-assisted production.",
+    "enabling → dept Cost per MCQ (§5 Content Efficiency)",
+    "INR", "Monthly", "Q1 Jul: B ₹40 · A ₹26 — 1,347 MCQs across 2 products."),
+   ("Content Efficiency", "Cost per Coding Question",
+    "Average cost to develop one coding question, including test-case design and evaluation-engine configuration.",
+    "enabling → dept Cost per Coding Question (§5 Content Efficiency)",
+    "INR", "Monthly", "Q1 Jul: B ₹400 · A ₹163 — 131 coding questions across 3 products."),
+   ("Content Efficiency", "Cost per Branding Content Asset",
+    "Average cost to create one branded content piece.",
+    "enabling → dept Cost per Branding Asset (§5 Content Efficiency)",
+    "INR", "Monthly", "Q1 Jul: B 0 · A 0."),
+   ("Content Efficiency", "Platform Runtime Cost per Active Learner",
+    "Total platform delivery costs (cloud compute, code-execution infra, cloud IDE hosting, GenAI API calls) divided by active learners in the period. Tracks delivery-cost efficiency as usage scales.",
+    "enabling → dept Platform Runtime Cost per Active Learner (§5) — the team's share of delivery cost",
+    "INR", "Monthly", ""),
+   ("Content Efficiency", "R&D Initiative Impact",
+    "Implemented R&D initiatives — including adoption of agentic AI solutions and automation pipelines — with measurable content-production improvement.",
+    "enabling → dept R&D Initiative Impact + Agentic Production Coverage (§5)",
+    "Count", "Quarterly", "Q1 Jul: B 0 · A 0."),
+   ("Content Relevance", "Tech Stack Freshness Rate",
+    "% of tools, frameworks, libraries and environments referenced in content (and configured in IDEs, playgrounds, cloud setups) matching the current stable or LTS version at audit.",
+    "enabling → tracker Industry Update Adherence — the freshness audit behind relevance",
+    "%", "Monthly", "Q1 Jul: B 100 · A 100."),
+   ("Stakeholder Alignment", "Stakeholder Content Request Fulfillment Rate",
+    "Requests from Sales, Placements, Program Ops, Assessments and Instructors fulfilled within agreed timeframes across all products.",
+    "enabling → dept Stakeholder Alignment (§5)",
+    "%", "Monthly", "Q1 Jul: B 90 · A 90."),
+   ("Stakeholder Alignment", "Cross-functional Sprint Delivery Rate",
+    "% of committed tickets across Product, Pedagogy, Engineering, UI/UX and DA/DE — scoped and approved by this team — delivered within the committed sprint.",
+    "enabling → dept Stakeholder Alignment (§5)",
+    "%", "Monthly", "Q1 Jul: B 100 · A 100."),
+   ("Executive Ops", "Operations & Growth Cost",
+    "Average cost across executive ops, operational efficiency, market analysis and hiring activities. Tracked at team scope, not per product.",
+    "hygiene — team run-cost guardrail; no org ladder by design",
+    "INR", "Monthly", "Q1 Jul: A ₹300,863."),
+   ("Executive Ops", "Creative Resource Utilisation Rate",
+    "% of allocated Graphic Designer and Video Editor bandwidth utilised against planned branding and content-asset deliverables within a cycle. Primarily tracked and managed by Project Managers.",
+    "hygiene — creative bandwidth guardrail (PM-managed); no org ladder by design",
+    "%", "Monthly", "Q1 Jul: A 100% — fully utilised, at times stretched."),
+  ],
+  "asks": [
+   ("Assessment blueprints per cycle", "Assessments team",
+    "Skill-assessment blueprints + knowledge points shared before authoring each cycle; changes communicated — feeds Content–Assessment Alignment (§7 ask)."),
+   ("Engagement & LE dashboards", "Learning Platform / DA-DEs",
+    "Monthly LE + engagement-matrix cuts per domain — budgets for Cell Migration and module-quiz Bands come from here."),
+   ("Classroom signal loop", "Instructors dept + Program Ops",
+    "Structured instructor feedback + conduction context per module — feeds content iteration and Content Issue routing."),
+  ]},
+]
+
+def build_team_view(tv):
+    tvs = wb.create_sheet(tv["tab"])
+    hue  = "FF" + HUES[tv["hue"]]
+    band = "FF" + BANDS[tv["hue"]]
+    tint = "FF" + TINTS[tv["hue"]]
+    tvs.sheet_properties.tabColor = hue
+    for col, w in zip("ABCDEFGHIJKL", (5, 6, 16, 30, 48, 30, 9, 11, 11, 10, 10, 34)):
+        tvs.column_dimensions[col].width = w
+    tvs.freeze_panes = "E4"
+
+    tvs.merge_cells("A1:L1")
+    c = tvs.cell(row=1, column=1, value=f'{tv["team"]} — Functional Operating View · FY 2026-27')
+    c.font = F(13, bold=True); c.fill = PatternFill("solid", start_color=band)
+    c.alignment = Alignment(vertical="center"); tvs.row_dimensions[1].height = 24
+    tvs.merge_cells("A2:L2")
+    c = tvs.cell(row=2, column=1, value=tv["sub"])
+    c.font = F(9, italic=True, color="FF555555")
+    c.alignment = Alignment(vertical="center", wrap_text=True); tvs.row_dimensions[2].height = 30
+    for j, h in enumerate(("S. No", "Sect", "Metric category", "KPI name", "Description", "Ladders to",
+                           "Unit", "Freq", "Budgeted", "Actual", "Variance", "Remarks"), 1):
+        c = tvs.cell(row=3, column=j, value=h)
+        c.font = F(9, bold=True); c.fill = PatternFill("solid", start_color=band)
+        c.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+        c.border = Border(left=thin, right=thin, top=thin, bottom=med)
+    tvs.row_dimensions[3].height = 20
+
+    rowp = [4]  # mutable row pointer
+    def hdr(txt):
+        r = rowp[0]
+        tvs.merge_cells(start_row=r, start_column=1, end_row=r, end_column=12)
+        c = tvs.cell(row=r, column=1, value=txt)
+        c.font = F(10, bold=True, color="FFFFFFFF"); c.fill = PatternFill("solid", start_color=hue)
+        c.alignment = Alignment(vertical="center", wrap_text=True)
+        for cc in range(1, 13):
+            tvs.cell(row=r, column=cc).border = Border(left=thin, right=thin, top=med, bottom=thin)
+        tvs.row_dimensions[r].height = 26
+        rowp[0] = r + 1
+
+    def body_row(vals, *, fill=None, dlen=0, center_cols=(1, 2, 7, 8, 9, 10, 11), merge_detail=False):
+        r = rowp[0]
+        if merge_detail:
+            tvs.merge_cells(start_row=r, start_column=5, end_row=r, end_column=12)
+        for cc in range(1, 13):
+            c = tvs.cell(row=r, column=cc)
+            if cc in vals: c.value = vals[cc]
+            c.font = F(9, bold=(cc == 4))
+            if fill: c.fill = PatternFill("solid", start_color=fill)
+            c.alignment = Alignment(horizontal="center" if cc in center_cols else "left",
+                                    vertical="top", wrap_text=True)
+            c.border = Border(left=thin, right=thin, top=thin, bottom=thin)
+        tvs.row_dimensions[r].height = min(92, max(30, 6 + 13 * (dlen // 50 + 1)))
+        rowp[0] = r + 1
+        return r
+
+    hdr("A — Inherited: org-KRA rows this team is on the hook for (live mirror — numbers live on the KPI Tracker tab; edit there)")
+    for rm in a_rows(tv["match"], tv["twins"]):
+        body_row({1: "T%d" % rm["sno"], 2: "A",
+                  3: tref("C", rm["r0"]), 4: tref("G", rm["r"]), 5: tref("H", rm["r0"]),
+                  6: ("inherited — team-sheet twin" if rm["metric"] in tv["twins"] else "inherited — via Functions (col K)"),
+                  7: tref("M", rm["r0"]), 8: tref("N", rm["r0"]), 9: tref("O", rm["r"]),
+                  10: tref("P", rm["r"]), 11: tref("Q", rm["r"]), 12: tref("R", rm["r0"])},
+                 fill=tint, dlen=rm["dlen"])
+
+    hdr("B — Owned: functional KPIs this team runs (budgets & actuals live here) — Ladders-to key: "
+        "direct = an org-KRA number · enabling = a dept §5 KPI · hygiene = guardrail by design")
+    for i, (cat, name, desc, ladder, unit, freq, rem) in enumerate(tv["own"], 1):
+        r = body_row({1: i, 2: "B", 3: cat, 4: name, 5: desc, 6: ladder, 7: unit, 8: freq, 12: rem},
+                     dlen=max(len(desc), len(ladder)))
+        vc = tvs.cell(row=r, column=11)
+        vc.value = f'=IF(AND(ISNUMBER(I{r}),ISNUMBER(J{r})),I{r}-J{r},"")'
+        vc.font = F(9, bold=True); vc.alignment = Alignment(horizontal="center", vertical="top")
+
+    hdr("C — Asks: what this team needs from counterparties (thin interface contracts — reviewed monthly)")
+    for i, (ask, who, detail) in enumerate(tv["asks"], 1):
+        body_row({1: i, 2: "C", 3: who, 4: ask, 5: detail}, fill=tint, dlen=0, merge_detail=True)
+        tvs.row_dimensions[rowp[0] - 1].height = 40
+
+for tv in TEAM_VIEWS:
+    build_team_view(tv)
 
 wb.save(XLSX)
 
@@ -453,7 +696,7 @@ body = []
 body.append('  <h1>NIAT Org KPIs as KRAs — Department KPI Tracker</h1>')
 body.append('  <div class="subtitle">Training sheet and FY 2026-27 tracker, merged &middot; August 2026 &middot; one row per '
             'trackable KPI, grouped under the org KRA it moves &middot; training columns fold out &middot; editable workbook: '
-            'kra_training_sheet.xlsx (3 tabs)</div>')
+            'kra_training_sheet.xlsx (5 tabs — incl. team views: CSI &middot; FullStack &amp; CS Core)</div>')
 body.append('  <div class="key-point"><strong>How to read this sheet:</strong> a <strong>KRA</strong> (Key Result Area) is an '
             'organizational outcome NIAT is judged on — it carries the target; each KRA block keeps its color family (a reading '
             'aid — identity is always in the text). Each numbered row is <strong>one trackable KPI</strong> — per-batch rows split '
