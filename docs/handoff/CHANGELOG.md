@@ -325,3 +325,29 @@ Files: build_site.py, content_os.html.
   team-view change.
 - One-surface-per-approval: published standalone; NOT embedded into the 🗺️ Content OS site pending a separate
   approval. No existing artifact touched.
+
+## 2026-08-22 — Career Growth Map artifact (new) 🧗
+- **New artifact "Career Growth Map"** https://claude.ai/code/artifact/a051587e-381c-4712-a501-9cfceaf75756 —
+  the AI Engineer ladder read against the frozen KPI system, per Pavan's ask ("explain the Career growth
+  framework design mapped with the frozen KPIs… visually"). Two parts on one page:
+  **climb band** (5 level cards + the PM operating seat, dashed, explicitly "not a rung") with a widening
+  teal beam per level — review evidence → your modules' rows → a domain slice → full Section B (29 rows) →
+  §5 + org tracker — SURFACE text verbatim from the ladder; and **one canvas**: 21 progression areas
+  (4 groups; 7 review-based areas dashed with no edges by design) → the frozen rows that evidence them
+  (all 29 FS Section B rows + the 7 org-tracker rows the ladder reads + KRA 1) → the Lead rating math
+  (19 weighted lines → 4 pillars 50/25/15/10 → Final Rating, calculation verbatim in the tooltip).
+- **Shape honesty:** not a tree and not a pure hierarchy — a linear spine (levels) + a bipartite graph
+  (areas↔rows share rows: APC read by 2 areas + a rating line) + one true tree (the rating roll-up). Three
+  edge kinds: solid teal "area is evidenced by this row" (32) · dashed teal "rating line reads this row"
+  (24) · grey "rolls up by weight" (23). 82 nodes / 79 edges; same hover/click-pin/tooltip grammar as 🕸️.
+- **Muted, named in the footer:** the 5 team rows the ladder never cites (Branding Content Assets Delivered,
+  Cost per Vernacular Content Hour, Cost per Branding Content Asset, Platform Runtime Cost per Active
+  Learner, Roadmap Items Completion — the last one PM-seat-run) as a standing red-pen invite. Comp bands
+  deliberately left in the 🪜 ladder artifact, not repeated here.
+- Builder docs/handoff/artifacts/build_career_map.py **ast-extracts WIRING/PILLARS/SURFACE/PM_ROLE from
+  build_role_cards.py** (stays in lockstep with the shipped ladder; repo path with scratchpad fallback) and
+  resolves every read against kra_training_sheet.xlsx row names via a 9-entry alias map — unresolvable reads,
+  wired/review drift (14/7), or a changed muted set fail the build loudly. Regen after any ladder or
+  team-view change.
+- One-surface-per-approval: published standalone; NOT embedded into the 🗺️ Content OS site pending a
+  separate approval. No existing artifact touched.
