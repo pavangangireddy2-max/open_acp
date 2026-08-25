@@ -256,8 +256,9 @@ GATES = [  # (transition, [numbered requirements]) — approved Aug 2026; become
     ("Conversion gate — Associate AI Engineer → AI Engineer, at 6 months", [
         "Runs assigned agent pipelines end-to-end without supervision — prompts tuned, outputs reviewed, "
         "escalations handled (A1–A2 shown).",
-        "Judgment demonstrated: their sample reviews agree with expert reviews (gold-standard comparisons, "
-        "eval passes) — they can tell good output from plausible output.",
+        "Judgment demonstrated: the responsible reviewer — their mentoring AI Engineer or Senior — confirms "
+        "the intern's reviews catch what their own review would catch, sampled on real work through the ramp; "
+        "they can tell good output from plausible output.",
         "Domain floor: has produced representative content items manually during the ramp — you can't review "
         "what you can't do.",
         "Decided by: supervising Senior / AI Engineer Lead proposes with ramp evidence; HOD confirms. "
@@ -282,26 +283,63 @@ GATES = [  # (transition, [numbered requirements]) — approved Aug 2026; become
         "By org need, not tenure. HOD proposes; founders / PM-head calibration confirm."]),
 ]
 
-STAY = [  # (level, [holding-the-role lines]) — the gates say how you climb; this says what keeping the seat means
+STAY_LEAD = ("The gates say how you climb; this says what keeping the seat means. One rule under every bar: "
+             "your rung's eight scored rows at budget — 100%, no governance breach. Below budget more than "
+             "twice in 12 months breaks the bar; two consecutive cycles below starts a structured gap "
+             "conversation with your Lead — what's missing, the plan, the timeline. A conversation, not a "
+             "demotion.")
+
+STAY = [  # (level, [holding-the-role lines]) — rewritten in merit-matrix terms (25 Aug rulings: floor 100%,
+          # cost bars rebased to ₹3 objective item / coding by domain — every number here Pavan-adjustable)
     ("Associate AI Engineer (internship)", [
-        "Ramp evidence accumulating on schedule — A1 shown, then A2, inside the 6 months."]),
+        "The readiness scorecard filling on schedule: A1 shown (assigned pipelines run unsupervised), then A2 "
+        "(a documented before/after on an agent's accuracy, retrieval quality or unit cost) — never more than "
+        "one month behind the ramp plan across the six.",
+        "Governance from day one: issue recurrence ≤ 2% on their items · unit costs inside the cost bars on "
+        "their pipelines (≤ ₹3 an objective practice item; coding questions on the domain scale below) · "
+        "worklogs complete, statuses current."]),
     ("AI Engineer", [
-        "Their modules' Section B rows at budget each cycle — velocity, quality, issue-recurrence, and the "
-        "cost rows for their courses.",
-        "Agent scope advancing: by year-end, 2–3 content agents built and adopted, impact visible in Agentic "
-        "Production Coverage or falling cost rows (A3).",
-        "Rating floor: Performance + Role Competence pillars in band. Two consecutive cycles below budget → "
-        "a structured gap conversation with their Lead: what's missing, the plan, the timeline."]),
+        "The four output rows at budget each cycle: Tech Stack Freshness Rate 100% on their ≈ 200 CWT surface "
+        "(≈ 100 topics at FullStack / GenAI complexity, double on lighter domains) · their CWT share of the "
+        "team's Learning Content Hours + Practice & Assessment Pieces · Agentic Production Coverage 90% · "
+        "Summative 35% + Formative 23% on their modules.",
+        "2–3 content agents built and adopted (A3) by year-end — mandatory for the rung, not just scored.",
+        "The four governance rows never breached: issue resolution 80% inside the 2-day TAT · recurrence ≤ 2% "
+        "· unit costs at budget (≤ ₹10,000 a learning hour · ≤ ₹3 an objective practice item — FIB, MCQ, MMCQ, "
+        "any type · coding questions under ₹100, scaled by domain below) · sprint delivery 100% + stakeholder "
+        "fulfillment 90%. A breach zeroes that slice and blocks eligibility for the cycle.",
+        "Rating floor: Performance + Role Competence pillars in band."]),
     ("Senior AI Engineer", [
-        "The 2× surface stays held at budget — Senior isn't a medal, it's a load. The slice doesn't quietly "
-        "shrink."]),
+        "The ≈ 400 CWT surface (2× an AI Engineer, complexity-weighted) held at budget — Senior isn't a medal, "
+        "it's a load; the slice doesn't quietly shrink.",
+        "A4 live: production coverage attributable to multi-agent systems they own · all their Section B rows "
+        "at budget 2+ consecutive cycles · unit costs at or below budget, and falling.",
+        "Mentorship on record: ≥ 1 power performer contributed in the trailing 12 months."]),
     ("AI Engineer Lead", [
-        "The team's full Section B in band, plus the people outcomes — retention, Power Performers Created — "
-        "read by the rating framework as written."]),
+        "The team's owned rows at budget at review — ≥ 85% of them (FS pilot: 29 rows) ⚑ — with team Freshness "
+        "at 100% and team production coverage at 90%, run through people, not personally.",
+        "Business impact at budget on the team's domains: Summative 35% · Formative 23% · SPI band contribution.",
+        "People outcomes as governance: Team Retention ≥ 90% trailing 12 months · ≥ 1 Power Performer created "
+        "per appraisal cycle · Cost of Operations at plan + Roadmap ≥ 90% (run by the team's PM, answered for "
+        "by the Lead) · stakeholder 90% + sprint 100%."]),
     ("AI Engineer 3", [
-        "The standards they authored still adopted and alive; places the org's learning-systems bets — "
-        "defines what “proven to work” means across domains."]),
+        "Reads through department KPIs and org KRAs, not one team view — the bar stays directional until those "
+        "budgets land: the standards they authored still adopted and alive · portfolio Section B healthy across "
+        "teams · a Lead bench ready behind them · places the org's learning-systems bets."]),
 ]
+
+STAY_NOTES = [  # rendered under the stay-bar table in both outputs
+    "Low-refresh domains (English, Aptitude, Mathematics, Programming, CS Core, DS & Algo, DevOps, System "
+    "Design) run the same bar with two occupants swapped: Tech Stack Freshness → Learning Systems Design "
+    "impact · Business Impact → Pedagogy Initiative Impact. The refresh audit still runs — 100% of the "
+    "surface audited each cycle, rebuilt where the audit calls.",
+    "Cost bars scale with domain complexity, and every number here is adjustable as real costs land: an "
+    "objective practice item (FIB, MCQ, MMCQ — any type) ≤ ₹3 · a coding question under ₹100 baseline — "
+    "~₹200 where a question is effectively a project (FullStack, GenAI), up to ₹300 where it ships "
+    "editorials, brute-force and efficient solutions (DS & Algo).",
+]
+CWT_DEF = ("CWT — complexity-weighted topics: topic count × the domain complexity multiplier. ≈ 200 CWT per "
+           "AI Engineer per 6-month cycle (= ≈ 100 topics at FullStack / GenAI 2.0×); a Senior holds ≈ 400.")
 
 BRIDGE = [
     ("Functions", "§10 embedded functions + the content domain teams. “Packaging Teams” = Content Systems & Infra teams (Pavan, Aug 2026)."),
@@ -441,10 +479,19 @@ for trans, lines in GATES:
     r += 1
 r += 1
 r = hdr_row(ws, r, ("Level", "Holding the role (the stay bar)"))
+put(ws, r, 1, "One rule", bold=True, color=MUTED)
+put(ws, r, 2, STAY_LEAD)
+ws.row_dimensions[r].height = 42
+r += 1
 for lvl, lines in STAY:
     put(ws, r, 1, lvl, bold=True)
     put(ws, r, 2, "\n".join(lines))
-    ws.row_dimensions[r].height = max(28, 26 * len(lines))
+    ws.row_dimensions[r].height = max(28, 14 * sum(len(ln) // 110 + 1 for ln in lines) + 6)
+    r += 1
+for note in STAY_NOTES + [CWT_DEF]:
+    put(ws, r, 1, "Note", color=MUTED, italic=True)
+    put(ws, r, 2, note, italic=True, color=MUTED)
+    ws.row_dimensions[r].height = max(15, 14 * (len(note) // 110 + 1))
     r += 1
 
 # Tab 3 — Progression Areas
@@ -668,12 +715,15 @@ for trans, lines in GATES:
              "".join(f'<li>{esc(ln)}</li>' for ln in lines) + '</ol></div>')
 
 B.append('<h2>Holding the role — the stay bars</h2>')
-B.append('<div class="sectionlead">The gates say how you climb; this says what keeping the seat means. Missing the bar '
-         'starts a structured conversation, not a demotion.</div>')
+B.append(f'<div class="sectionlead">{esc(STAY_LEAD)}</div>')
 B.append('<div class="scroll"><table style="max-width:980px"><tr><th style="width:22%">Level</th><th>Holding the role means</th></tr>')
 for lvl, lines in STAY:
     B.append(f'<tr><td><strong>{esc(lvl)}</strong></td><td>' + "<br>".join(esc(ln) for ln in lines) + '</td></tr>')
 B.append('</table></div>')
+for note in STAY_NOTES:
+    B.append(f'<p class="muted" style="font-size:.85em;max-width:90ch;margin:-14px 0 14px">{esc(note)}</p>')
+B.append('<p class="muted" style="font-size:.85em;max-width:90ch;margin:-2px 0 26px"><strong>' +
+         esc(CWT_DEF).replace(" — complexity-weighted topics:", "</strong> — complexity-weighted topics:", 1) + '</p>')
 
 B.append('<h2>21 progression areas</h2>')
 B.append('<div class="sectionlead">Grouped into 4 categories; all areas matter, weight varies by level. Carried '
@@ -736,7 +786,9 @@ B.append('<div class="key-point"><strong>Topic surface — how a rung&rsquo;s lo
          'recorded video session + practice content + quiz content, so a domain&rsquo;s catalogue hours are ≈ its '
          'topic count. Every topic is refreshed on a 6-month cycle and planned as a from-scratch rebuild. That puts '
          'one AI Engineer&rsquo;s surface at ≈ 100 topics of FullStack / GenAI complexity per cycle, and a '
-         'Senior&rsquo;s at ≈ 2&times; that, complexity-weighted. Lighter-refresh domains — English, Aptitude, '
+         'Senior&rsquo;s at ≈ 2&times; that, complexity-weighted — the cards write this as <strong>CWT</strong> '
+         '(complexity-weighted topics: topic count &times; the domain multiplier, ≈ 200 per AI Engineer, ≈ 400 '
+         'for a Senior). Lighter-refresh domains — English, Aptitude, '
          'programming fundamentals, CS Core, Mathematics, DS &amp; Algo — carry roughly double the topic count, and '
          'those seats are weighed harder on <strong>Learning Systems Design</strong> and <strong>Production '
          'Systems</strong>: refreshing costs less there, so invention and agent building are where the load belongs. '

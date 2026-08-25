@@ -424,3 +424,39 @@ Files: build_site.py, content_os.html.
 - **Review draft, uncommitted:** `docs/handoff/workbench/proposals/role_progression_merit_framework.md` —
   the Sales BDM → ASM framework's first two sections (eligibility criteria + the 8-KPI / 12.5% merit matrix)
   adapted per rung. Delivered to Pavan for review; deliberately not committed and not shipped to an artifact.
+
+## 2026-08-25 — Stay bars rewritten in merit-matrix terms + cost bars rebased (🪜 + 🗺️ republished, same URLs)
+
+- **The ladder's "Holding the role" section now reads in the merit framework's terms** (Pavan's "Go, ship it
+  with the glossary line" after preview). One rule under every bar, stated once in the section lead: your
+  rung's eight scored rows at budget — 100%, no governance breach; below budget more than twice in 12 months
+  breaks the bar; two consecutive cycles below starts a structured gap conversation with your Lead — a
+  conversation, not a demotion. Per-rung bars rewritten to name the actual rows: Associate = the readiness
+  scorecard on the ramp schedule + governance from day one · AI Engineer = the four output rows at budget
+  (Freshness 100% on ≈ 200 CWT, CWT share of team velocity rows, APC 90%, Summative 35% + Formative 23%) +
+  2–3 agents (A3) mandatory + the four governance rows never breached + rating floor · Senior = the ≈ 400 CWT
+  surface held ("Senior isn't a medal, it's a load") + A4 live + mentorship on record · Lead = ≥ 85% of the
+  team's owned rows at budget ⚑ + business impact + people outcomes as governance · AI Engineer 3 =
+  directional until dept/org budgets land. Chain preserved: stay bar(R) = own matrix at baseline; the next
+  rung's stay bar is what the peak trigger demonstrates pre-title.
+- **Cost bars rebased (ruling 10, Pavan, all numbers explicitly adjustable):** an objective practice item —
+  FIB, MCQ, MMCQ, any type — **≤ ₹3** · a coding question **under ₹100 baseline**, scaled by domain
+  complexity: **~₹200 FullStack / GenAI** (a question is effectively a project) · **up to ₹300 DS & Algo**
+  (editorials + brute-force + efficient solutions). Carried in the bars and in a STAY_NOTES line under the
+  stay-bar table (html + xlsx). CpLH ₹10,000 unchanged.
+- **CWT glossary shipped (the approved "glossary line"):** CWT — complexity-weighted topics: topic count ×
+  the domain complexity multiplier; ≈ 200 per AI Engineer per 6-month cycle (= ≈ 100 topics at FullStack /
+  GenAI 2.0×), Senior ≈ 400. Rendered under the stay-bar table in both outputs + a tie-in at the
+  topic-surface key point. Second STAY_NOTES line carries the low-churn slot-swap (Freshness → LSD impact ·
+  Business Impact → Pedagogy Initiative Impact; refresh audit still 100%).
+- **Conversion gate softened per ruling 5:** "gold-standard comparisons, eval passes" → the responsible
+  reviewer — their mentoring AI Engineer or Senior — confirms the intern's reviews catch what their own
+  review would catch, sampled on real work through the ramp.
+- **Republished, same URLs:** 🪜 role_cards (`stay-bars-matrix-terms`) · 🗺️ content_os (same label,
+  `capabilities` omitted — stored `downloads:true` + contract pin 0.2.12 carried forward). 🧗 career map
+  untouched (build_career_map.py consumes neither GATES nor STAY — verified by grep). 🎯 🧭 🕸️ untouched.
+- **Framework draft updated in place (still uncommitted):** ruling 10 added to §10, the Associate + AI
+  Engineer matrices' cost rows rebased to the new numbers, the "next surface" item marked shipped.
+- **Known-stale, deliberately not touched:** tracker FS Section B still carries **Cost per MCQ ₹40** and
+  **Cost per Coding Question ₹400** (visible on the 🗺️ team view and 🕸️). Ruling 10 implies a row rename +
+  budget change — separate tracker surface, awaiting Pavan's call.
