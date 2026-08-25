@@ -315,7 +315,7 @@ HERO.append('</div></div>')
 FOOTER = f"""<footer><div class="in">
 <h3>Behind this site</h3>
 <ul>
-<li>Editable masters: <span class="mono">kra_training_sheet.xlsx</span> (tracker + legend + CSI, FullStack &amp; CS Core and Content&ndash;Central team views) · <span class="mono">role_cards.xlsx</span> (ladder, 7 tabs)<span class="dlwrap" hidden> — download: {dlbtn("kra_training_sheet.xlsx")} {dlbtn("role_cards.xlsx")}</span> — in <span class="mono">docs/handoff/artifacts/</span> with the builders and CHANGELOG.</li>
+<li>Editable masters: <span class="mono">kra_training_sheet.xlsx</span> (tracker + legend + CSI, FullStack &amp; CS Core and Content&ndash;Central team views) · <span class="mono">role_cards.xlsx</span> (ladder, 8 tabs)<span class="dlwrap" hidden> — download: {dlbtn("kra_training_sheet.xlsx")} {dlbtn("role_cards.xlsx")}</span> — in <span class="mono">docs/handoff/artifacts/</span> with the builders and CHANGELOG.</li>
 <li>Standalone artifacts (updated in place; this site re-embeds them on republish): <a href="{LEVELS[0][6]}" target="_blank" rel="noopener">HOD one-pager</a> · <a href="{LEVELS[1][6]}" target="_blank" rel="noopener">KPI tracker</a> · <a href="{LEVELS[3][6]}" target="_blank" rel="noopener">AI Engineer Ladder</a>.</li>
 <li>Comp bands are deliberately kept off this site — they live in the standalone ladder artifact and <span class="mono">role_cards.xlsx</span>.</li>
 </ul>

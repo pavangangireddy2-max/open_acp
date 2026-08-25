@@ -8,7 +8,7 @@
 # bars + the A1–A4 Agent Scope scale; Learning Systems Design elevated to 4 reads;
 # two matrix rows (▲) rewritten agent-first. Everything else stays verbatim from
 # source; comp for the changed rungs is parked with HR — no invented numbers.
-# Outputs: role_cards.xlsx (editable master, 7 tabs) + role_cards.html (artifact).
+# Outputs: role_cards.xlsx (editable master, 8 tabs) + role_cards.html (artifact).
 import json, re, html as H
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
@@ -287,46 +287,102 @@ STAY_LEAD = ("The gates say how you climb; this says what keeping the seat means
              "your rung's eight scored rows at budget — 100%, no governance breach. Below budget more than "
              "twice in 12 months breaks the bar; two consecutive cycles below starts a structured gap "
              "conversation with your Lead — what's missing, the plan, the timeline. A conversation, not a "
-             "demotion.")
+             "demotion. The tables below are those eight rows, per rung — the same grid the merit rating "
+             "scores: four output rows, four governance rows, 12.5% each.")
 
-STAY = [  # (level, [holding-the-role lines]) — rewritten in merit-matrix terms (25 Aug rulings: floor 100%,
-          # cost bars rebased to ₹3 objective item / coding by domain — every number here Pavan-adjustable)
-    ("Associate AI Engineer (internship)", [
-        "The readiness scorecard filling on schedule: A1 shown (assigned pipelines run unsupervised), then A2 "
-        "(a documented before/after on an agent's accuracy, retrieval quality or unit cost) — never more than "
-        "one month behind the ramp plan across the six.",
-        "Governance from day one: issue recurrence ≤ 2% on their items · unit costs inside the cost bars on "
-        "their pipelines (≤ ₹3 an objective practice item; coding questions on the domain scale below) · "
-        "worklogs complete, statuses current."]),
-    ("AI Engineer", [
-        "The four output rows at budget each cycle: Tech Stack Freshness Rate 100% on their ≈ 200 CWT surface "
-        "(≈ 100 topics at FullStack / GenAI complexity, double on lighter domains) · their CWT share of the "
-        "team's Learning Content Hours + Practice & Assessment Pieces · Agentic Production Coverage 90% · "
-        "Summative 35% + Formative 23% on their modules.",
-        "2–3 content agents built and adopted (A3) by year-end — mandatory for the rung, not just scored.",
-        "The four governance rows never breached: issue resolution 80% inside the 2-day TAT · recurrence ≤ 2% "
-        "· unit costs at budget (≤ ₹10,000 a learning hour · ≤ ₹3 an objective practice item — FIB, MCQ, MMCQ, "
-        "any type · coding questions under ₹100, scaled by domain below) · sprint delivery 100% + stakeholder "
-        "fulfillment 90%. A breach zeroes that slice and blocks eligibility for the cycle.",
-        "Rating floor: Performance + Role Competence pillars in band."]),
-    ("Senior AI Engineer", [
-        "The ≈ 400 CWT surface (2× an AI Engineer, complexity-weighted) held at budget — Senior isn't a medal, "
-        "it's a load; the slice doesn't quietly shrink.",
-        "A4 live: production coverage attributable to multi-agent systems they own · all their Section B rows "
-        "at budget 2+ consecutive cycles · unit costs at or below budget, and falling.",
-        "Mentorship on record: ≥ 1 power performer contributed in the trailing 12 months."]),
-    ("AI Engineer Lead", [
-        "The team's owned rows at budget at review — ≥ 85% of them (FS pilot: 29 rows) ⚑ — with team Freshness "
-        "at 100% and team production coverage at 90%, run through people, not personally.",
-        "Business impact at budget on the team's domains: Summative 35% · Formative 23% · SPI band contribution.",
-        "People outcomes as governance: Team Retention ≥ 90% trailing 12 months · ≥ 1 Power Performer created "
-        "per appraisal cycle · Cost of Operations at plan + Roadmap ≥ 90% (run by the team's PM, answered for "
-        "by the Lead) · stakeholder 90% + sprint 100%."]),
-    ("AI Engineer 3", [
-        "Reads through department KPIs and org KRAs, not one team view — the bar stays directional until those "
-        "budgets land: the standards they authored still adopted and alive · portfolio Section B healthy across "
-        "teams · a Lead bench ready behind them · places the org's learning-systems bets."]),
+STAY_KEY = ("How to read the gate column: Mandatory = the rung's defining requirement · Breach blocks = a "
+            "breach zeroes that 12.5% slice and blocks eligibility for the cycle · ⚑ = a number not locked "
+            "yet (a proposed default, adjustable).")
+
+STAY_LEGEND = ("Domain chips — build complexity sets the topic count behind the same ≈ 200 CWT per cycle: "
+               "{lo|Low 1.0× — English · Aptitude · Mathematics} {md|Medium 1.5× — Programming · CS Core · "
+               "DevOps} {hi|High 2.0× — FullStack · GenAI} {vh|Very High 2.5× — System Design · DS & Algo · "
+               "DS / ML} · {lc|low-churn} marks the two slots that swap on low-refresh domains (note below).")
+
+# Chip tokens {lo|..} {md|..} {hi|..} {vh|..} {lc|..} render as colored chips in the html and as
+# plain text in the xlsx: lo/md/hi/vh = the four build-complexity classes, lc = the low-churn slot
+# swap. Content unchanged from the 25 Aug stay-bar ship — every ₹ / % / default stays Pavan-adjustable.
+STAY = [  # (level, context line, footer line, rows); row = ("A"|"B", row name, bar to hold, gate)
+    ("Associate AI Engineer (internship)",
+     "A readiness scorecard — read ready / not ready. Interns answer for no team rows by design.",
+     "Ramp cadence: A1 shown, then A2 — never more than one month behind the ramp plan across the six.",
+     [("A", "Agent Pipeline Operation (A1)",
+       "Assigned pipelines run unsupervised — two consecutive months", "Mandatory"),
+      ("A", "Agent Improvement Delta (A2)",
+       "≥ 1 documented before/after on an agent's accuracy, retrieval quality or unit cost", "Mandatory"),
+      ("A", "Domain floor output",
+       "⚑ propose: 25% of an AI Engineer's monthly share, produced hands-on (FS: ≈ 12 hrs · 400 pieces)",
+       "Mandatory"),
+      ("A", "Review judgment",
+       "The responsible reviewer signs off their review calls on real work", "Mandatory"),
+      ("B", "Content Issue Recurrence — their items", "≤ 2%", "Breach blocks"),
+      ("B", "Unit costs — their pipelines",
+       "Objective practice item (FIB, MCQ, MMCQ — any type) ≤ ₹3 · coding question on the domain scale "
+       "{hi|~₹200 FullStack / GenAI} {vh|up to ₹300 DS & Algo}", "Breach blocks"),
+      ("B", "Worklog & Status Hygiene", "100% — worklogs complete, statuses current", "Breach blocks"),
+      ("B", "Culture & Values pillar", "In band", "Breach blocks")]),
+    ("AI Engineer",
+     None,
+     "Rating floor: Performance + Role Competence pillars in band.",
+     [("A", "Tech Stack Freshness Rate {lc|low-churn: slot → Learning Systems Design impact}",
+       "100% of the ≈ 200 CWT surface each 6-month cycle — {lo|200 topics} {md|133 topics} "
+       "{hi|100 topics} {vh|80 topics}", "Below 90% blocks ⚑"),
+      ("A", "Learning Content Hours + Practice & Assessment Pieces",
+       "Their CWT share of the team budget (FS team: 50 hrs · 1,600 pieces a month)", "At budget"),
+      ("A", "Agentic Production Coverage",
+       "90% — with 2–3 content agents built and adopted (A3) by year-end", "Agents mandatory"),
+      ("A", "Summative + Formative Achievement {lc|low-churn: slot → Pedagogy Initiative Impact}",
+       "Summative 35% quarterly · Formative 23% monthly, on their modules", "At budget"),
+      ("B", "Content Issue Resolution Efficiency", "80% inside the 2-day TAT", "Breach blocks"),
+      ("B", "Content Issue Recurrence", "≤ 2%", "Breach blocks"),
+      ("B", "Unit costs",
+       "CpLH ≤ ₹10,000 · objective practice item (FIB, MCQ, MMCQ — any type) ≤ ₹3 · coding question "
+       "under ₹100 baseline {hi|~₹200 FullStack / GenAI} {vh|up to ₹300 DS & Algo}", "Breach blocks"),
+      ("B", "Sprint Delivery + Stakeholder Fulfillment", "Sprint 100% · stakeholder 90%", "Breach blocks")]),
+    ("Senior AI Engineer",
+     None,
+     None,
+     [("A", "Complexity-weighted surface",
+       "≈ 400 CWT held at budget — 2× an AI Engineer; Senior isn't a medal, it's a load, and the slice "
+       "doesn't quietly shrink", "Mandatory"),
+      ("A", "Learning Systems Design impact",
+       "⚑ review evidence until budgets land (engagement-experience contribution + drop-off/completion delta)",
+       "Review-based"),
+      ("A", "Agent Orchestration (A4)",
+       "90% production coverage attributable to multi-agent systems they own", "Mandatory"),
+      ("A", "Pedagogy Initiative Impact", "⚑ review evidence until a budget lands", "Review-based"),
+      ("B", "Their Section B rows", "All at budget, 2+ consecutive cycles", "Breach blocks"),
+      ("B", "Content Issue Recurrence — wider slice", "≤ 2%", "Breach blocks"),
+      ("B", "Unit-cost trend — their courses", "At or below budget, and falling", "Breach blocks"),
+      ("B", "Mentorship on record",
+       "≥ 1 power performer contributed, trailing 12 months (adjustable)", "Breach blocks")]),
+    ("AI Engineer Lead",
+     None,
+     None,
+     [("A", "Team Section B in-band rate",
+       "⚑ propose: ≥ 85% of the team's owned rows at budget (FS pilot: 29 rows)", "Mandatory"),
+      ("A", "Team Tech Stack Freshness", "100% across the team's whole surface", "Below 90% blocks ⚑"),
+      ("A", "Team Agentic Production Coverage", "90% — run through people, not personally", "Mandatory"),
+      ("A", "Business impact — the team's domains",
+       "Summative 35% · Formative 23% · SPI band contribution", "At budget"),
+      ("B", "Team Retention Rate", "≥ 90%, trailing 12 months (adjustable)", "Breach blocks"),
+      ("B", "Power Performers Created", "≥ 1 per appraisal cycle (adjustable)", "Breach blocks"),
+      ("B", "Cost of Operations + Roadmap",
+       "At plan ⚑ · ≥ 90% ⚑ — run by the team's PM, answered for by the Lead", "Breach blocks"),
+      ("B", "Stakeholder Fulfillment + Sprint Delivery", "Stakeholder 90% · sprint 100%", "Breach blocks")]),
+    ("AI Engineer 3",
+     "Reads through department KPIs and org KRAs, not one team view — the bar stays directional until those "
+     "budgets land: the standards they authored still adopted and alive · portfolio Section B healthy across "
+     "teams · a Lead bench ready behind them · places the org's learning-systems bets.",
+     None,
+     []),
 ]
+for _lvl, _ctx, _foot, _rows in STAY:  # every rung with a table carries exactly the 4+4 grid
+    assert not _rows or (sum(1 for c, *_ in _rows if c == "A") == 4 and
+                         sum(1 for c, *_ in _rows if c == "B") == 4), _lvl
+
+def chip_txt(s):  # xlsx / plain-text rendering: chip tokens → their text
+    return re.sub(r"\{(?:lo|md|hi|vh|lc)\|([^}]*)\}", r"\1", s)
 
 STAY_NOTES = [  # rendered under the stay-bar table in both outputs
     "Low-refresh domains (English, Aptitude, Mathematics, Programming, CS Core, DS & Algo, DevOps, System "
@@ -481,20 +537,55 @@ r += 1
 r = hdr_row(ws, r, ("Level", "Holding the role (the stay bar)"))
 put(ws, r, 1, "One rule", bold=True, color=MUTED)
 put(ws, r, 2, STAY_LEAD)
-ws.row_dimensions[r].height = 42
+ws.row_dimensions[r].height = 56
 r += 1
-for lvl, lines in STAY:
-    put(ws, r, 1, lvl, bold=True)
-    put(ws, r, 2, "\n".join(lines))
-    ws.row_dimensions[r].height = max(28, 14 * sum(len(ln) // 110 + 1 for ln in lines) + 6)
+put(ws, r, 1, "Per-rung matrices", bold=True, color=MUTED)
+put(ws, r, 2, "See the Stay Bars tab — each rung's eight rows in the merit-matrix format "
+              "(Category · Row · Bar · Gate · Weight), with the domain-scaled numbers spelled out.")
+ws.row_dimensions[r].height = 28
+r += 1
+
+# Tab 3 — Stay Bars (per-rung, merit-matrix format — 25 Aug readability pass)
+ws = sheet("Stay Bars", (18, 38, 58, 18, 8))
+r = title_row(ws, 1, "Holding the role — each rung's stay bar as its eight scored rows "
+                     "(4 output + 4 governance × 12.5%). " + STAY_LEAD, 5)
+put(ws, r, 1, "Key", bold=True, color=MUTED)
+put(ws, r, 2, STAY_KEY + "  " + chip_txt(STAY_LEGEND), italic=True, color=MUTED)
+ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=5)
+ws.row_dimensions[r].height = 42
+r += 2
+for lvl, ctx, foot, stay_rows in STAY:
+    put(ws, r, 1, lvl, bold=True, sz=10)
+    put(ws, r, 2, chip_txt(ctx) if ctx else "", italic=True, color=MUTED)
+    ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=5)
+    ws.row_dimensions[r].height = 30 if ctx else 16
+    r += 1
+    if stay_rows:
+        r = hdr_row(ws, r, ("Category", "Row", "Bar — hold at 100%", "Gate", "Weight"))
+        for cat, nm, bar, gate in stay_rows:
+            put(ws, r, 1, "A — Output" if cat == "A" else "B — Governance",
+                color=("0B4F43" if cat == "A" else "8A2C18"), bold=True)
+            put(ws, r, 2, chip_txt(nm), bold=True)
+            put(ws, r, 3, chip_txt(bar))
+            put(ws, r, 4, chip_txt(gate))
+            put(ws, r, 5, "12.5%")
+            ws.row_dimensions[r].height = max(26, 13 * (len(chip_txt(bar)) // 56 + 1) + 4)
+            r += 1
+    if foot:
+        put(ws, r, 1, "Note", color=MUTED, italic=True)
+        put(ws, r, 2, foot, italic=True, color=MUTED)
+        ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=5)
+        ws.row_dimensions[r].height = 16
+        r += 1
     r += 1
 for note in STAY_NOTES + [CWT_DEF]:
     put(ws, r, 1, "Note", color=MUTED, italic=True)
     put(ws, r, 2, note, italic=True, color=MUTED)
+    ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=5)
     ws.row_dimensions[r].height = max(15, 14 * (len(note) // 110 + 1))
     r += 1
 
-# Tab 3 — Progression Areas
+# Tab 4 — Progression Areas
 ws = sheet("Progression Areas", (24, 22, 34, 34, 34, 34))
 r = title_row(ws, 1, "21 progression areas × 4 levels — carried verbatim from the framework except the rows "
                      "marked ▲ (rewritten agent-first). AI Engineer 3 sits above Lead (org-wide scope); "
@@ -508,7 +599,7 @@ for cat, area, a, e1, e2, ld in AREAS:
     ws.row_dimensions[r].height = max(40, 13 * (max(len(x) for x in (a, e1, e2, ld)) // 34 + 1))
     r += 1
 
-# Tab 4 — KPI Wiring
+# Tab 5 — KPI Wiring
 ws = sheet("KPI Wiring", (24, 26, 62, 62))
 r = title_row(ws, 1, "Progression area → named KPI rows (tracker / FullStack & CS Core team view). Every area "
                      "cites the rows it moves, or says why it deliberately has none.", 4)
@@ -521,7 +612,7 @@ for cat, area, rows, note in WIRING:
     ws.row_dimensions[r].height = max(28, 13 * (len(note) // 60 + 1))
     r += 1
 
-# Tab 5 — Rating Framework
+# Tab 6 — Rating Framework
 ws = sheet("Rating Framework", (26, 9, 58, 58))
 r = title_row(ws, 1, "Performance rating — AI Engineer Lead level. 4 pillars, weighted; target 3.0+ on 5. "
                      "Each line now reads from named KPI rows.", 4)
@@ -543,7 +634,7 @@ for sc in SCALE[1:]:
     put(ws, r, 1, sc[0]); put(ws, r, 2, sc[1]); put(ws, r, 3, sc[2]); put(ws, r, 4, "")
     r += 1
 
-# Tab 6 — Calibration
+# Tab 7 — Calibration
 ws = sheet("Calibration", (26, 34, 34, 34, 34))
 r = title_row(ws, 1, "Calibration: portfolio by level · domain complexity · product baselines · "
                      "domain catalogue · vocabulary bridge (2026 doc → KPI system)", 5)
@@ -584,7 +675,7 @@ for term, mapping in BRIDGE:
     ws.row_dimensions[r].height = max(15, 13 * (len(mapping) // 120 + 1))
     r += 1
 
-# Tab 7 — Project Manager
+# Tab 8 — Project Manager
 ws = sheet("Project Manager", (24, 120))
 r = title_row(ws, 1, "Project Manager — the team's operating seat (added August 2026 with the Team Ops & People "
                      "metric block). Not a ladder level: reports to the AI Engineer Lead.", 2)
@@ -641,6 +732,20 @@ STYLE = """  * { margin: 0; padding: 0; box-sizing: border-box; }
     background: #e6f2ef; color: #0b4f43; border: 1px solid #a8cfc6; border-radius: 3px;
     padding: 0 6px; margin: 1px 2px 1px 0; white-space: nowrap; }
   .nodesign { color: #888; font-style: italic; font-size: .92em; }
+  .staytbl { min-width: 900px; }
+  .staytbl td.cat { font-weight: 600; white-space: nowrap; width: 1%; }
+  .staytbl td.catA { background: #f2f8f6; color: #0b4f43; }
+  .staytbl td.catB { background: #fdf1ee; color: #8a2c18; }
+  .staytbl td.gA { color: #0b4f43; font-weight: 600; white-space: nowrap; }
+  .staytbl td.gB { color: #8a2c18; font-weight: 600; white-space: nowrap; }
+  .dchip { display: inline-block; font-size: .88em; font-weight: 600; padding: 0 7px; border-radius: 9px;
+    margin: 1px 3px 1px 0; white-space: nowrap; border: 1px solid transparent; }
+  .dc-lo { background: #eef7f4; color: #134237; border-color: #cfe6df; }
+  .dc-md { background: #d9ece7; color: #134237; border-color: #b9d9d1; }
+  .dc-hi { background: #b3d9d0; color: #113b31; border-color: #93c6ba; }
+  .dc-vh { background: #7cbfb1; color: #0c322a; border-color: #5da997; }
+  .dc-lc { background: #eceef8; color: #3a4a8c; border-color: #c8cdea; }
+  .stayfoot { font-size: .82em; color: #666; margin: -18px 0 24px; max-width: 90ch; }
   .ladder { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 18px 0 8px; }
   .lvl { border: 1px solid #ccc; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
   .lvl-head { padding: 10px 12px; }
@@ -672,7 +777,7 @@ B.append('<h1>AI Engineer Ladder</h1>')
 B.append('<div class="subtitle">Career framework for content-department domain teams &middot; August 2026 &middot; '
          'titles follow the <strong>AI Engineer &ndash; [Domain] Learning Systems</strong> pattern &middot; five '
          'levels, from a 6-month internship to the org seat &middot; editable master: '
-         '<strong>role_cards.xlsx</strong> (7 tabs)</div>')
+         '<strong>role_cards.xlsx</strong> (8 tabs)</div>')
 B.append('<div class="key-point"><strong>How to read the cards:</strong> every progression area and rating line is '
          'wired to named KPI rows — anything in a <span class="kpi">mono chip</span> is a live row on the KPI tracker '
          'or the team view, so reviews read off the sheets instead of impressions. Areas with no chip say so '
@@ -714,14 +819,36 @@ for trans, lines in GATES:
     B.append(f'<div class="gate"><div class="gate-h">{esc(trans)}</div><ol>' +
              "".join(f'<li>{esc(ln)}</li>' for ln in lines) + '</ol></div>')
 
+def chip_html(s):  # chip tokens → colored spans (escape first; tokens carry no &<>)
+    return re.sub(r"\{(lo|md|hi|vh|lc)\|([^}]*)\}",
+                  lambda m: f'<span class="dchip dc-{m.group(1)}">{m.group(2)}</span>', esc(s))
+
 B.append('<h2>Holding the role — the stay bars</h2>')
 B.append(f'<div class="sectionlead">{esc(STAY_LEAD)}</div>')
-B.append('<div class="scroll"><table style="max-width:980px"><tr><th style="width:22%">Level</th><th>Holding the role means</th></tr>')
-for lvl, lines in STAY:
-    B.append(f'<tr><td><strong>{esc(lvl)}</strong></td><td>' + "<br>".join(esc(ln) for ln in lines) + '</td></tr>')
-B.append('</table></div>')
+B.append(f'<div class="sectionlead" style="margin-top:-10px">{esc(STAY_KEY)}</div>')
+B.append(f'<div class="sectionlead" style="margin-top:-10px">{chip_html(STAY_LEGEND)}</div>')
+for lvl, ctx, foot, stay_rows in STAY:
+    B.append(f'<h3 style="margin:24px 0 8px;font-size:1.05em">{esc(lvl)}</h3>')
+    if not stay_rows:
+        B.append(f'<p style="font-size:.9em;max-width:90ch;margin:0 0 24px">{esc(ctx)}</p>')
+        continue
+    if ctx:
+        B.append(f'<div class="sectionlead" style="margin:0 0 10px">{esc(ctx)}</div>')
+    B.append('<div class="scroll"><table class="staytbl"><tr><th style="width:12%">Category</th>'
+             '<th style="width:25%">The row</th><th>The bar — hold at 100%</th>'
+             '<th style="width:13%">Gate</th><th style="width:7%">Weight</th></tr>')
+    for i, (cat, nm, bar, gate) in enumerate(stay_rows):
+        catcell = ''
+        if i == 0 or stay_rows[i - 1][0] != cat:
+            label = "A — Output" if cat == "A" else "B — Governance"
+            catcell = f'<td class="cat cat{cat}" rowspan="4">{label}</td>'
+        B.append(f'<tr>{catcell}<td><strong>{chip_html(nm)}</strong></td><td>{chip_html(bar)}</td>'
+                 f'<td class="g{cat}">{esc(gate)}</td><td>12.5%</td></tr>')
+    B.append('</table></div>')
+    if foot:
+        B.append(f'<div class="stayfoot">{esc(foot)}</div>')
 for note in STAY_NOTES:
-    B.append(f'<p class="muted" style="font-size:.85em;max-width:90ch;margin:-14px 0 14px">{esc(note)}</p>')
+    B.append(f'<p class="muted" style="font-size:.85em;max-width:90ch;margin:-6px 0 14px">{esc(note)}</p>')
 B.append('<p class="muted" style="font-size:.85em;max-width:90ch;margin:-2px 0 26px"><strong>' +
          esc(CWT_DEF).replace(" — complexity-weighted topics:", "</strong> — complexity-weighted topics:", 1) + '</p>')
 

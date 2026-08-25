@@ -460,3 +460,33 @@ Files: build_site.py, content_os.html.
 - **Known-stale, deliberately not touched:** tracker FS Section B still carries **Cost per MCQ ₹40** and
   **Cost per Coding Question ₹400** (visible on the 🗺️ team view and 🕸️). Ruling 10 implies a row rename +
   budget change — separate tracker surface, awaiting Pavan's call.
+
+## 2026-08-25 — Stay bars reformatted as per-rung merit-matrix tables (🪜 + 🗺️ republished, same URLs)
+
+- **Representation only — content unchanged.** Pavan: format the holding-the-role section for readability,
+  "like the 8-KPI Matrix format in the sales doc … represent the points specific to domain in some coloring."
+  Every number, gate and footer line from the 25 Aug stay-bar rewrite is preserved verbatim; what changed is
+  the shape: prose paragraphs → one matrix table per rung.
+- **Per-rung tables (html):** each of Associate / AI Engineer / Senior / Lead now renders as a 5-column
+  table — Category (A — Output / B — Governance, rowspanned) · The row · The bar — hold at 100% · Gate ·
+  Weight (12.5% each) — exactly 4 output + 4 governance rows per rung, asserted in the builder. Context line
+  above each table, footer line (ramp cadence / rating floor) as a caption below. AI Engineer 3 stays a
+  directional paragraph — it has no scored matrix by design.
+- **Domain specifics as colored chips:** complexity carried by a sequential teal ramp — {lo} Low 1.0×
+  English · Aptitude · Mathematics (200 topics) · {md} Medium 1.5× Programming · CS Core · DevOps (133) ·
+  {hi} High 2.0× FullStack · GenAI (100) · {vh} Very High 2.5× System Design · DS & Algo · DS/ML (80) — same
+  ≈ 200 CWT everywhere; slate {lc} chips mark the low-churn slot swaps (→ LSD impact · → Pedagogy Initiative
+  Impact). A key line explains Gate semantics (Mandatory / breach zeroes the 12.5% slice + blocks
+  eligibility / ⚑ number not locked) and the chip legend sits in the section lead.
+- **xlsx: new Stay Bars tab (Tab 3, 8 tabs now).** Same per-rung matrices in sheet form (Category · Row ·
+  Bar · Gate · Weight), key + legend up top, STAY_NOTES + CWT glossary at the end; the Gates & Scope tab's
+  stay block is now the one-rule line + a pointer to the new tab. Chip tokens render as plain text in the
+  sheet. All "7 tabs" mentions bumped to 8 (ladder subtitle, builder comment, site footer).
+- **Single source of truth:** the STAY structure in build_role_cards.py now carries (level, context, footer,
+  rows) with inline chip tokens; chip_html() renders the colored spans, chip_txt() strips tokens for the
+  xlsx — both outputs read the same literals.
+- **Republished, same URLs:** 🪜 role_cards + 🗺️ content_os (both `stay-bars-matrix-format`; site
+  `capabilities` omitted — stored `downloads:true` + contract pin 0.2.12 carried forward, confirmed).
+  Site retitle intact: the new stay h3s pick up the global "AI Engineer 3" → "Head of [Domain Portfolio]
+  Learning Systems" replace (5 mentions, 0 raw). 🧗 untouched — build_career_map.py consumes neither GATES
+  nor STAY. 🎯 🧭 🕸️ untouched.
