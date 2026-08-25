@@ -8,6 +8,7 @@
 # ladder) resolved against kra_training_sheet.xlsx row names. Unresolvable reads
 # fail the build loudly — no silent drops.
 import ast, json, re, html as H, openpyxl
+from functools import reduce
 
 XLSX = "kra_training_sheet.xlsx"
 OUT  = "career_map.html"
@@ -31,12 +32,12 @@ lits, pillars_node = {}, None
 for node in ast.walk(tree):
     if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
         nm = node.targets[0].id
-        if nm in ("WIRING", "SURFACE", "NEW_TITLE", "PM_ROLE", "AREA_OVERRIDES"):
+        if nm in ("WIRING", "SURFACE", "NEW_TITLE", "PM_ROLE", "AREA_OVERRIDES", "INLINE_RETITLE"):
             lits[nm] = ast.literal_eval(node.value)
         elif nm == "PILLARS":
             pillars_node = node.value
 WIRING, SURFACE, NEW_TITLE, PM_ROLE = lits["WIRING"], lits["SURFACE"], lits["NEW_TITLE"], lits["PM_ROLE"]
-AREA_OVERRIDES = lits["AREA_OVERRIDES"]
+AREA_OVERRIDES, INLINE_RETITLE = lits["AREA_OVERRIDES"], lits["INLINE_RETITLE"]
 assert len(WIRING) == 21 and len(SURFACE) == 5 and pillars_node is not None
 
 sections = {s["h2"]: s for s in json.load(open(SRC_PATH, encoding="utf-8"))["sections"]}
@@ -77,7 +78,11 @@ for cat, t in zip(CATS, AREAS_T):
         AREA_LEVELS[r[0]] = (r[1], r[2], r[3], r[4])
 assert set(AREA_LEVELS) == {a for _, a, _, _ in WIRING}
 assert set(AREA_OVERRIDES) <= set(AREA_LEVELS), sorted(AREA_OVERRIDES)
-AREA_LEVELS.update(AREA_OVERRIDES)  # ▲ v3 agent-first rewrites replace the source matrix text
+AREA_LEVELS.update(AREA_OVERRIDES)  # ▲ agent-first rewrites replace the source matrix text
+# the shipped builder's inline retitle pass, applied here too so the map carries no old titles
+AREA_LEVELS = {a: tuple(reduce(lambda s, p: s.replace(*p), INLINE_RETITLE, c) for c in cells)
+               for a, cells in AREA_LEVELS.items()}
+assert not any("SDE" in c for cells in AREA_LEVELS.values() for c in cells)
 
 # ---------------- frozen rows from the tracker workbook ----------------
 wb = openpyxl.load_workbook(XLSX, data_only=False)
@@ -308,7 +313,7 @@ for nid, n in nodes.items():
         climb = "".join(f'<div class="tsub"><b>{esc(lv)}:</b> {esc(cut(tx, 150))}</div>'
                         for lv, tx in zip(LEVEL_SHORT, AREA_LEVELS[n["area"]]))
         mark = " ▲" if n["area"] in AREA_OVERRIDES else ""
-        v3n = " · rewritten agent-first in v3" if mark else ""
+        v3n = " · rewritten agent-first" if mark else ""
         tips[nid] = (f'<b>{esc(n["area"])}{mark}</b><div class="tcat">{esc(n["cat"])} · {esc(wired_line)}{v3n}</div>'
                      f'<div class="tdesc">{esc(n["note"])}</div>'
                      f'<div class="tmeta" style="margin-top:4px"><b>The climb (trimmed):</b></div>{climb}'

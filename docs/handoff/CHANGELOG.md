@@ -379,3 +379,48 @@ Files: build_site.py, content_os.html.
   unchanged by the rebuild.
 - Queued separately (not in this pass): standing Progression Policy doc, bus-factor register, goal-vs-reality
   memo, CSI + Content–Central role cards, comp numbers with HR/Varun.
+
+## 2026-08-25 — Freshness row redefined + ladder lineage terms removed (all five artifacts republished)
+- **Tech Stack Freshness Rate rewritten** (FS & CS Core Section B, row 18) on Pavan's approval. A **topic**
+  is now defined in the row itself: PPT + recorded video session + practice content + quiz content (plus
+  question pools, adaptivity and the domain learning environment where the topic carries them), and the
+  **Domain Catalogue's hours ≈ the topic count**, so the catalogue is the surface of record. A refresh
+  reworks the topic against the feedback that landed on it (reactive + proactive channels) and is
+  **capacity-planned as a from-scratch rebuild, not a patch** — Pavan's assumption, stated as an assumption
+  rather than a claim that everything changed. Version currency (tools, frameworks, libraries, IDE /
+  playground / cloud setups on current stable or LTS) is audited inside every refresh. Row name, unit (%),
+  frequency (Monthly) and the Q1 budget (100) are unchanged — the name is load-bearing in three builders.
+- **Domain complexity now scales the target, inside the same row.** Workload standard recorded: one AI
+  Engineer's surface ≈ **100 topics at FullStack / GenAI complexity per 6-month cycle**; Senior ≈ **2× that,
+  complexity-weighted**. A lighter-refresh surface (English, Aptitude, programming fundamentals, CS Core,
+  Mathematics, DS & Algo) carries **roughly double** the topic count, and those roles are weighed more
+  aggressively on **Learning Systems Design** and **Production Systems** — the refresh costs less there, so
+  the invention and the agent build are where the load sits. The Industry Upgrades wiring note carries the
+  same definition so the ladder and the tracker can't drift.
+- **Legacy ladder terms removed** from every output on Pavan's instruction — the v2/v3 lineage sublines
+  ("was Associate SDE — reframed as a 6-month internship", "merger of SDE 1 + SDE 2 (AI Engineer 1 + 2 in
+  v2)"), the `class="was"` render + its CSS, the "What changed in v3" box (replaced by "How to read the
+  cards"), the ▲ tooltip's v3 reference, and the four remaining "v3" mentions in card copy. Audit method:
+  base64 payloads stripped before pattern counting (the site embeds two xlsx as base64 — short tokens like
+  `SDE` hit those payloads and read as false positives). Final audit clean across all five HTMLs + both xlsx.
+- **New `INLINE_RETITLE` pass in build_role_cards.py** — ordered longest-first so "SDE 1+" resolves before
+  "SDE 1"; it catches source-doc text that the v3 overrides don't replace (e.g. the Mentorship cell
+  "Receives mentoring from SDE 1+"). **build_career_map.py now ast-extracts `INLINE_RETITLE` too** and
+  applies it after `AREA_OVERRIDES`, with an assert — the map reads literals straight from the source, so a
+  runtime transformation in the shipped builder is invisible to it unless replicated. That leak had surfaced
+  in a node tooltip.
+- **build_site.py:** the was-subline strip and its `assert n_was == 5` are gone — the source itself is clean
+  now, so there is nothing left to strip. The two "What changed in v3" sub1s are gone for the same reason.
+  All downstream guard asserts kept (no "formerly", no `class="was"`, no "AI Engineer 3", no "was Associate
+  SDE", 5 download buttons, Section A 19 / B 29 / C 4).
+- **Republished, same URLs:** 🧭 kra_training_sheet · 🪜 role_cards (`lineage-terms-removed`) · 🕸️ kpi_graph
+  (`freshness-topic-surface`) · 🧗 career_map (`lineage-terms-removed`) · 🗺️ content_os
+  (`freshness-row-lineage-clean`, `capabilities` omitted so the stored `downloads:true` and contract pin
+  0.2.12 carry forward). 🎯 hod_kpi_onepager untouched. **Note:** the 🧭 training sheet covers org KRAs only
+  and carries no team-view rows — the Freshness rewrite is visible on 🗺️ (FS team view row 18), on 🕸️ (node
+  `t_fs_17`) and in the downloadable xlsx.
+- **Held, not built:** the KRA 5 Employability placements-count input — Pavan asked to hold it, so no
+  placements metric entered the tracker, the ladder or the framework draft.
+- **Review draft, uncommitted:** `docs/handoff/workbench/proposals/role_progression_merit_framework.md` —
+  the Sales BDM → ASM framework's first two sections (eligibility criteria + the 8-KPI / 12.5% merit matrix)
+  adapted per rung. Delivered to Pavan for review; deliberately not committed and not shipped to an artifact.

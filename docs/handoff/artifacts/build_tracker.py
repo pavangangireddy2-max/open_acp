@@ -612,9 +612,20 @@ TEAM_VIEWS = [
     "enabling → dept Platform Runtime Cost per Active Learner (§5) — the team's share of delivery cost",
     "INR", "Monthly", ""),
    ("Content Relevance", "Tech Stack Freshness Rate",
-    "% of tools, frameworks, libraries and environments referenced in content (and configured in IDEs, playgrounds, cloud setups) matching the current stable or LTS version at audit.",
-    "enabling → tracker Industry Update Adherence — the freshness audit behind relevance",
-    "%", "Monthly", "Q1 Jul: B 100 · A 100."),
+    "% of the team's assigned topics refreshed inside their 6-month cycle. A topic = PPT + recorded video session + "
+    "practice content + quiz content (plus question pools, adaptivity and the domain learning environment wherever the "
+    "topic carries them); the Domain Catalogue's hours ≈ the topic count, so the catalogue is the surface of record. A "
+    "refresh reworks the topic against the feedback that landed on it — reactive and proactive channels both — and is "
+    "capacity-planned as a from-scratch rebuild, not a patch. Version currency (tools, frameworks, libraries and the "
+    "IDE / playground / cloud setups on current stable or LTS) is audited inside every refresh.",
+    "enabling → tracker Industry Update Adherence — the topic-refresh audit behind relevance",
+    "%", "Monthly", "Q1 Jul: B 100 · A 100. Workload standard behind the number: one AI Engineer's surface ≈ 100 topics "
+    "at FullStack / GenAI complexity per 6-month cycle · Senior AI Engineer ≈ 2× that, complexity-weighted. Domain "
+    "complexity scales the target: a lighter-refresh surface (English, Aptitude, programming fundamentals, CS Core, "
+    "Mathematics, DS & Algo) carries roughly double the topic count of a FullStack / GenAI surface, and those roles are "
+    "weighed more aggressively on Learning Systems Design and Production Systems — the refresh itself costs less there, "
+    "so the invention and the agent build are where the load sits. Every topic is assumed rebuilt from scratch when "
+    "refreshed: that is the capacity assumption, not a claim that everything changed."),
    ("Stakeholder Alignment", "Stakeholder Content Request Fulfillment Rate",
     "Requests from Sales, Placements, Program Ops, Assessments and Instructors fulfilled within agreed timeframes across all products.",
     "enabling → dept Stakeholder Alignment (§5)",

@@ -8,9 +8,8 @@
 # The site's own chrome (nav, altitude map, level bands, Level 3, download
 # buttons) is authored here. The embedded ladder deliberately DIVERGES from the
 # standalone artifact (site = wide audience; directives 2026-08-21): comp bands
-# stripped, was/merger sublines removed, "What changed in v3" dialogue replaced
-# by a neutral chip legend, level 5 retitled "Head of [Domain Portfolio]
-# Learning Systems" (directional, not finalized). Both master xlsx files are
+# stripped and level 5 retitled "Head of [Domain Portfolio] Learning Systems"
+# (directional, not finalized). Both master xlsx files are
 # base64-embedded and offered through the viewer's `downloads` runtime
 # capability (publish with capabilities={downloads: true}); the buttons stay
 # hidden wherever the capability is absent — including local preview.
@@ -54,11 +53,11 @@ ld_css, ld_body, ld_scripts = load_artifact("role_cards.html")
 assert not op_scripts and not ld_scripts and len(tr_scripts) == 1
 
 # ---- ladder embed: site-only divergences from the standalone artifact ------
-# ---- (comp stripped; formerly-lines out; v2 dialogue out; level 5 retitled).
+# ---- (comp stripped; level 5 retitled). Lineage sublines and the version
+# ---- dialogue box left the source itself in the Aug-25 pass, so the strips
+# ---- that used to remove them here are gone — the asserts below still guard.
 ld_body = re.sub(r'<div class="lvl-comp">[^<|]*\|\s*([^<]*?)</div>',
                  r'<div class="lvl-comp">\1</div>', ld_body)
-ld_body, n_was = re.subn(r'<div class="was">[^<]*</div>', "", ld_body)
-assert n_was == 5, n_was
 ld_body = sub1(ld_body,
     "Five levels, linear — an internship rung, then four employee rungs; AI Engineer 3 sits above Lead "
     "(org-wide scope) and the progression matrix below deliberately stops at Lead. Comp: Lead and AI Engineer 3 "
@@ -67,18 +66,6 @@ ld_body = sub1(ld_body,
     "Five levels, linear — an internship rung, then four employee rungs; above Lead sits the head-of-domain "
     "role (directional for now) and the progression matrix below deliberately stops at Lead. Comp bands are "
     "kept off this site — they live in the standalone ladder artifact and role_cards.xlsx.")
-ld_body = sub1(ld_body,
-    '<div class="key-point"><strong>What changed in v3:</strong> the Associate rung is now a 6-month internship '
-    'that manages agents from day one; AI Engineer 1 + 2 merge into one <strong>AI Engineer</strong> band; '
-    '<strong>Senior AI Engineer</strong> is the new force-multiplier rung (the 2&times; bar); every transition '
-    'has a written gate and every rung a stay bar; the A1&ndash;A4 Agent Scope scale grades agent work; comp for '
-    'the changed rungs is with HR. KPI wiring keeps its v2 shape — anything in a <span class="kpi">mono '
-    'chip</span> is a live row on the KPI tracker or the team view. Areas with no chip say so '
-    '<em>by design</em>.</div>',
-    '<div class="key-point"><strong>How to read the cards:</strong> every progression area and rating line is '
-    'wired to named KPI rows — anything in a <span class="kpi">mono chip</span> is a live row on the KPI '
-    'tracker or the team view, so reviews read off the sheets instead of impressions. Areas with no chip say '
-    'so <em>by design</em>.</div>')
 ld_body = sub1(ld_body,
     '<div class="t">AI Engineer 3 – [Domain Portfolio] Learning Systems</div>',
     '<div class="t">Head of [Domain Portfolio] Learning Systems</div>')
@@ -91,9 +78,6 @@ ld_body = ld_body.replace("AI Engineer 3", "Head of [Domain Portfolio] Learning 
 ld_body = sub1(ld_body,
     "Defaults taken pending red-pen: comp bands included (artifact is private; strip for wide sharing) &middot; ",
     "Defaults taken pending red-pen: comp bands kept off this site (standalone artifact + xlsx carry them) &middot; ")
-ld_body = sub1(ld_body,
-    "titles renamed and KPI wiring added in v2 (August 2026)",
-    "titles renamed and KPI wiring added (August 2026)")
 ld_body = sub1(ld_body,
     "level names Associate (internship) / Engineer / Senior / Lead / 3",
     "level names Associate (internship) / Engineer / Senior / Lead / Head-of-domain (directional)")
