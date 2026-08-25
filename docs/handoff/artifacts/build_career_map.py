@@ -4,7 +4,7 @@
 # PM operating seat, widening metric surface), then one canvas — 21 progression
 # areas → the frozen rows that evidence them → the Lead rating math (19 lines →
 # 4 pillars → final). Every wire comes from build_role_cards.py (WIRING / PILLARS /
-# SURFACE / PM_ROLE, ast-extracted so this stays in lockstep with the shipped
+# SURFACE / AREA_OVERRIDES / PM_ROLE, ast-extracted so this stays in lockstep with the shipped
 # ladder) resolved against kra_training_sheet.xlsx row names. Unresolvable reads
 # fail the build loudly — no silent drops.
 import ast, json, re, html as H, openpyxl
@@ -31,11 +31,12 @@ lits, pillars_node = {}, None
 for node in ast.walk(tree):
     if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
         nm = node.targets[0].id
-        if nm in ("WIRING", "SURFACE", "NEW_TITLE", "PM_ROLE"):
+        if nm in ("WIRING", "SURFACE", "NEW_TITLE", "PM_ROLE", "AREA_OVERRIDES"):
             lits[nm] = ast.literal_eval(node.value)
         elif nm == "PILLARS":
             pillars_node = node.value
 WIRING, SURFACE, NEW_TITLE, PM_ROLE = lits["WIRING"], lits["SURFACE"], lits["NEW_TITLE"], lits["PM_ROLE"]
+AREA_OVERRIDES = lits["AREA_OVERRIDES"]
 assert len(WIRING) == 21 and len(SURFACE) == 5 and pillars_node is not None
 
 sections = {s["h2"]: s for s in json.load(open(SRC_PATH, encoding="utf-8"))["sections"]}
@@ -75,6 +76,8 @@ for cat, t in zip(CATS, AREAS_T):
     for r in t[1:]:
         AREA_LEVELS[r[0]] = (r[1], r[2], r[3], r[4])
 assert set(AREA_LEVELS) == {a for _, a, _, _ in WIRING}
+assert set(AREA_OVERRIDES) <= set(AREA_LEVELS), sorted(AREA_OVERRIDES)
+AREA_LEVELS.update(AREA_OVERRIDES)  # ▲ v3 agent-first rewrites replace the source matrix text
 
 # ---------------- frozen rows from the tracker workbook ----------------
 wb = openpyxl.load_workbook(XLSX, data_only=False)
@@ -171,7 +174,7 @@ for ai, (cat, area, reads, note) in enumerate(WIRING):
         for tid in resolve(key):
             ev_edges.append((f"a{ai}", tid))
 assert len(wired) == 14 and len(review) == 7, (wired, review)
-assert len(ev_edges) == 32, len(ev_edges)
+assert len(ev_edges) == 35, len(ev_edges)
 
 # rating-read edges: row -> subline
 SUBS = []       # (sid, pillar_idx, name, weight, descriptor, reads_keys)
@@ -294,7 +297,7 @@ HEIGHT = int(mid_bottom + 40)
 esc = lambda s: H.escape(str(s), quote=True)
 def cut(s, n):
     return s if len(s) <= n else s[:n - 1].rstrip() + "…"
-LEVEL_SHORT = ["Associate AI Engineer", "AI Engineer 1", "AI Engineer 2", "AI Engineer Lead"]
+LEVEL_SHORT = ["Associate AI Engineer (Intern)", "AI Engineer", "Senior AI Engineer", "AI Engineer Lead"]
 tips = {}
 for nid, n in nodes.items():
     k = n["kind"]
@@ -304,9 +307,11 @@ for nid, n in nodes.items():
                       if n["reads"] else "review-based — no direct row, by design")
         climb = "".join(f'<div class="tsub"><b>{esc(lv)}:</b> {esc(cut(tx, 150))}</div>'
                         for lv, tx in zip(LEVEL_SHORT, AREA_LEVELS[n["area"]]))
-        tips[nid] = (f'<b>{esc(n["area"])}</b><div class="tcat">{esc(n["cat"])} · {esc(wired_line)}</div>'
+        mark = " ▲" if n["area"] in AREA_OVERRIDES else ""
+        v3n = " · rewritten agent-first in v3" if mark else ""
+        tips[nid] = (f'<b>{esc(n["area"])}{mark}</b><div class="tcat">{esc(n["cat"])} · {esc(wired_line)}{v3n}</div>'
                      f'<div class="tdesc">{esc(n["note"])}</div>'
-                     f'<div class="tmeta" style="margin-top:4px"><b>The climb (verbatim, trimmed):</b></div>{climb}'
+                     f'<div class="tmeta" style="margin-top:4px"><b>The climb (trimmed):</b></div>{climb}'
                      f'<div class="tlad">Full per-level text lives in the AI Engineer Ladder cards.</div>')
     elif k == "kpi" and "fs" in n:
         r = n["fs"]
@@ -435,7 +440,7 @@ rows_html = "".join(f"<tr><td>{esc(node_name(s))}</td><td>{KINDL[k]}</td><td>{es
                     for s, t, k in edges)
 
 # ---------------- climb band ----------------
-BEAM = [("reads: review evidence", 12), ("answers: your modules' rows", 34),
+BEAM = [("reads: ramp evidence", 12), ("answers: your modules' rows", 34),
         ("answers: a domain slice", 58), ("answers: full Section B — 29 rows", 100),
         ("shapes: §5 + org tracker", 100)]
 OLD_ORDER = ["Associate SDE", "SDE 1", "SDE 2", "SDE Lead", "SDE 3"]
@@ -550,7 +555,7 @@ html_out = f"""<meta charset="utf-8">
     <p><b>Review-based rating lines:</b> {esc(" · ".join(review_subs))}. Judged in the appraisal conversation, not by a row.</p>
     <p><b>Team rows the ladder never cites (muted):</b> {esc(" · ".join(n for n in unused_fs if n != "Roadmap Items Completion"))} — plus <b>Roadmap Items Completion</b>, which the PM operating seat runs. Fine if deliberate; red-pen anything you want wired.</p>
     <p><b>The rating math applies at AI Engineer Lead</b> and cascades Lead → PM for the Team Ops &amp; People rows. Below Lead, the same 21 areas are read at review depth per the climb band. Pilot team: FullStack &amp; CS Core; CSI and Content–Central cards are queued separately. Comp bands deliberately live in the AI Engineer Ladder artifact, not here.</p>
-    <p>Generated from build_role_cards.py (WIRING · PILLARS · SURFACE · PM_ROLE), role_cards_source.json and kra_training_sheet.xlsx · 22 Aug 2026.</p>
+    <p>Generated from build_role_cards.py (WIRING · PILLARS · SURFACE · AREA_OVERRIDES · PM_ROLE), role_cards_source.json and kra_training_sheet.xlsx · 25 Aug 2026.</p>
   </div>
 </div>
 <script>

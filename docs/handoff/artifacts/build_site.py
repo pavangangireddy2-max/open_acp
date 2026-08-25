@@ -8,7 +8,7 @@
 # The site's own chrome (nav, altitude map, level bands, Level 3, download
 # buttons) is authored here. The embedded ladder deliberately DIVERGES from the
 # standalone artifact (site = wide audience; directives 2026-08-21): comp bands
-# stripped, "formerly …" lines removed, "What changed in v2" dialogue replaced
+# stripped, was/merger sublines removed, "What changed in v3" dialogue replaced
 # by a neutral chip legend, level 5 retitled "Head of [Domain Portfolio]
 # Learning Systems" (directional, not finalized). Both master xlsx files are
 # base64-embedded and offered through the viewer's `downloads` runtime
@@ -57,21 +57,24 @@ assert not op_scripts and not ld_scripts and len(tr_scripts) == 1
 # ---- (comp stripped; formerly-lines out; v2 dialogue out; level 5 retitled).
 ld_body = re.sub(r'<div class="lvl-comp">[^<|]*\|\s*([^<]*?)</div>',
                  r'<div class="lvl-comp">\1</div>', ld_body)
-ld_body, n_was = re.subn(r'<div class="was">formerly [^<]*</div>', "", ld_body)
+ld_body, n_was = re.subn(r'<div class="was">[^<]*</div>', "", ld_body)
 assert n_was == 5, n_was
 ld_body = sub1(ld_body,
-    "Five levels, linear — AI Engineer 3 sits above Lead (30L+ vs 24&ndash;30L, org-wide "
-    "scope); the progression matrix below deliberately stops at Lead. Comp bands included; strip this column before "
-    "wide sharing if needed.",
-    "Five levels, linear — above Lead sits the head-of-domain role (directional for now); the progression "
-    "matrix below deliberately stops at Lead. Comp bands are kept off this site — they live in the standalone "
-    "ladder artifact and role_cards.xlsx.")
+    "Five levels, linear — an internship rung, then four employee rungs; AI Engineer 3 sits above Lead "
+    "(org-wide scope) and the progression matrix below deliberately stops at Lead. Comp: Lead and AI Engineer 3 "
+    "keep inherited bands; the changed rungs are with HR — no invented numbers. Strip the comp line before wide "
+    "sharing if needed.",
+    "Five levels, linear — an internship rung, then four employee rungs; above Lead sits the head-of-domain "
+    "role (directional for now) and the progression matrix below deliberately stops at Lead. Comp bands are "
+    "kept off this site — they live in the standalone ladder artifact and role_cards.xlsx.")
 ld_body = sub1(ld_body,
-    '<div class="key-point"><strong>What changed in v2:</strong> titles renamed to the AI Engineer pattern; '
-    'every progression area and rating line is wired to named KPI rows — anything in a '
-    '<span class="kpi">mono chip</span> is a live row on the KPI tracker or the team view, so reviews read off '
-    'the sheets instead of impressions. Areas with no chip say so <em>by design</em>. Level content, comp bands '
-    'and the rating weights are unchanged from the source framework.</div>',
+    '<div class="key-point"><strong>What changed in v3:</strong> the Associate rung is now a 6-month internship '
+    'that manages agents from day one; AI Engineer 1 + 2 merge into one <strong>AI Engineer</strong> band; '
+    '<strong>Senior AI Engineer</strong> is the new force-multiplier rung (the 2&times; bar); every transition '
+    'has a written gate and every rung a stay bar; the A1&ndash;A4 Agent Scope scale grades agent work; comp for '
+    'the changed rungs is with HR. KPI wiring keeps its v2 shape — anything in a <span class="kpi">mono '
+    'chip</span> is a live row on the KPI tracker or the team view. Areas with no chip say so '
+    '<em>by design</em>.</div>',
     '<div class="key-point"><strong>How to read the cards:</strong> every progression area and rating line is '
     'wired to named KPI rows — anything in a <span class="kpi">mono chip</span> is a live row on the KPI '
     'tracker or the team view, so reviews read off the sheets instead of impressions. Areas with no chip say '
@@ -83,6 +86,8 @@ ld_body = sub1(ld_body,
     'Example: "AI Engineer 3 – Portfolio (All Domains) Learning Systems". Sets org-wide',
     '<em>Directional for now — title and shape indicative, not finalized.</em> '
     'Example: "Head of FullStack &amp; CS Core Learning Systems". Sets org-wide')
+# v3 mentions the role in gates / stay bars / A-scale mapping / footnote too — retitle everywhere
+ld_body = ld_body.replace("AI Engineer 3", "Head of [Domain Portfolio] Learning Systems")
 ld_body = sub1(ld_body,
     "Defaults taken pending red-pen: comp bands included (artifact is private; strip for wide sharing) &middot; ",
     "Defaults taken pending red-pen: comp bands kept off this site (standalone artifact + xlsx carry them) &middot; ")
@@ -90,11 +95,11 @@ ld_body = sub1(ld_body,
     "titles renamed and KPI wiring added in v2 (August 2026)",
     "titles renamed and KPI wiring added (August 2026)")
 ld_body = sub1(ld_body,
-    "level names Associate / 1 / 2 / Lead / 3",
-    "level names Associate / 1 / 2 / Lead / Head-of-domain (directional)")
+    "level names Associate (internship) / Engineer / Senior / Lead / 3",
+    "level names Associate (internship) / Engineer / Senior / Lead / Head-of-domain (directional)")
 assert "L to " not in ld_body and "30L+" not in ld_body   # no comp band survives on the site
 assert "formerly" not in ld_body and 'class="was"' not in ld_body
-assert "AI Engineer 3" not in ld_body and "What changed in v2" not in ld_body
+assert "AI Engineer 3" not in ld_body and "What changed in v3" not in ld_body
 
 # ---- Level 3: FullStack & CS Core view, read from the master xlsx ----------
 wbf = load_workbook(ART + "kra_training_sheet.xlsx")          # formulas (A refs)
@@ -281,7 +286,7 @@ LEVELS = [
      "Read by: team leads &middot; SMEs. Views live as tabs in the tracker master xlsx.",
      None, "kra_training_sheet.xlsx"),
     ("ind", "4", "Individual", "🪜 AI Engineer Ladder",
-     "Five levels plus the team's Project Manager card, 21 progression areas, and the rating rubric — every area wired to the same KPI rows the levels above run on.",
+     "An internship rung plus four employee levels, the team's Project Manager card, promotion gates and stay bars, 21 progression areas, and the rating rubric — every area wired to the same KPI rows the levels above run on.",
      "Read by: every engineer &middot; their manager. Master: role_cards.xlsx.",
      "https://claude.ai/code/artifact/dc3ab90d-c4a4-448d-bdb5-fb43a9235734", "role_cards.xlsx"),
 ]
@@ -326,7 +331,7 @@ HERO.append('</div></div>')
 FOOTER = f"""<footer><div class="in">
 <h3>Behind this site</h3>
 <ul>
-<li>Editable masters: <span class="mono">kra_training_sheet.xlsx</span> (tracker + legend + CSI, FullStack &amp; CS Core and Content&ndash;Central team views) · <span class="mono">role_cards.xlsx</span> (ladder, 6 tabs)<span class="dlwrap" hidden> — download: {dlbtn("kra_training_sheet.xlsx")} {dlbtn("role_cards.xlsx")}</span> — in <span class="mono">docs/handoff/artifacts/</span> with the builders and CHANGELOG.</li>
+<li>Editable masters: <span class="mono">kra_training_sheet.xlsx</span> (tracker + legend + CSI, FullStack &amp; CS Core and Content&ndash;Central team views) · <span class="mono">role_cards.xlsx</span> (ladder, 7 tabs)<span class="dlwrap" hidden> — download: {dlbtn("kra_training_sheet.xlsx")} {dlbtn("role_cards.xlsx")}</span> — in <span class="mono">docs/handoff/artifacts/</span> with the builders and CHANGELOG.</li>
 <li>Standalone artifacts (updated in place; this site re-embeds them on republish): <a href="{LEVELS[0][6]}" target="_blank" rel="noopener">HOD one-pager</a> · <a href="{LEVELS[1][6]}" target="_blank" rel="noopener">KPI tracker</a> · <a href="{LEVELS[3][6]}" target="_blank" rel="noopener">AI Engineer Ladder</a>.</li>
 <li>Comp bands are deliberately kept off this site — they live in the standalone ladder artifact and <span class="mono">role_cards.xlsx</span>.</li>
 </ul>
@@ -370,8 +375,8 @@ page.append(tr_scripts[0])
 page.append(DL_SCRIPT)
 
 out = "\n".join(page) + "\n"
-assert "AI Engineer 3" not in out and "formerly Associate SDE" not in out
-assert "What changed in v2" not in out
+assert "AI Engineer 3" not in out and "was Associate SDE" not in out
+assert "What changed in v3" not in out
 assert out.count('class="dlbtn"') == 5          # dept + team + ind bands, footer ×2
 open("content_os.html", "w", encoding="utf-8").write(out)
 print("chars:", len(out), "| braces:", out.count("{") == out.count("}"),

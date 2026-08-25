@@ -1,9 +1,14 @@
-# AI Engineer Ladder — career framework v2 for content-department domain teams.
+# AI Engineer Ladder — career framework v3 for content-department domain teams.
 # Source: knowledge/raw/corpora/remixed-0bb5468a.html ("SDE Learning Systems Career
-# Framework", March 2026). v2 renames titles to Pavan's "AI Engineer – [Domain]
-# Learning Systems" pattern and wires every progression area + rating line to named
-# KPI rows in the tracker / team views. Descriptors are carried verbatim from source.
-# Outputs: role_cards.xlsx (editable master, 6 tabs) + role_cards.html (artifact).
+# Framework", March 2026). v2 renamed titles to Pavan's "AI Engineer – [Domain]
+# Learning Systems" pattern and wired every progression area + rating line to named
+# KPI rows. v3 (Aug 2026, talk-first approved): Associate = 6-month internship that
+# manages agents from day one; AI Engineer 1 + 2 merged into one AI Engineer band;
+# Senior AI Engineer added (the 2× force-multiplier bar); promotion gates + stay
+# bars + the A1–A4 Agent Scope scale; Learning Systems Design elevated to 4 reads;
+# two matrix rows (▲) rewritten agent-first. Everything else stays verbatim from
+# source; comp for the changed rungs is parked with HR — no invented numbers.
+# Outputs: role_cards.xlsx (editable master, 7 tabs) + role_cards.html (artifact).
 import json, re, html as H
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
@@ -54,6 +59,21 @@ for cat, t in zip(CATS, AREAS_T):
     for r in t[1:]:
         AREAS.append((cat, r[0], r[1], r[2], r[3], r[4]))
 
+AREA_OVERRIDES = {  # v3 (▲): the two agent-first matrix rewrites — Intern / AI Engineer / Senior / Lead
+    "Production Systems": (
+        "Manages and improves the agents they run: accuracy, retrieval quality, cost metrics held inside budget (A1–A2).",
+        "Builds new content agents end-to-end — at least 2–3 built and adopted, impact visible in the metrics (A3).",
+        "Orchestrates systems of agents carrying production: multi-agent workflows, escalation design, agents other people run (A4).",
+        "Runs the team's agent fleet through people: fleet health, standards, and the coverage number answered for at review."),
+    "Learning Systems Design": (
+        "Sees how learning is measured up close: item stats, quiz score bands, eval outcomes for the modules they support.",
+        "Instruments their own modules: formative and summative signals watched, weak items found and fixed, learning deltas shown.",
+        "Invents new ways to teach that take advantage of agentic AI — and applies rigorous measurement to prove users are "
+        "developing new skills and retaining them. Raises the EEC / DCD asks from the SME seat.",
+        "Makes invention repeatable: eval environments and capability delivery answered for, measurement standards set for the team."),
+}
+AREAS = [(cat, area) + AREA_OVERRIDES.get(area, tuple(rest)) for cat, area, *rest in AREAS]
+
 def parse_lines(lines):
     out = []
     for ln in lines:
@@ -83,34 +103,62 @@ PILLARS = [  # (name, weight, sublines, kpi reads aligned to sublines)
 ]
 CALC = RT[20]
 
-# ---------------------------------------------------------------- v2 additions
-NEW_TITLE = {"Associate SDE": "Associate AI Engineer", "SDE 1": "AI Engineer 1",
-             "SDE 2": "AI Engineer 2", "SDE Lead": "AI Engineer Lead", "SDE 3": "AI Engineer 3"}
+# ------------------------------------------------------------ v2/v3 additions
+NEW_TITLE = {"Associate SDE": "Associate AI Engineer", "SDE 1": "AI Engineer",
+             "SDE 2": "Senior AI Engineer", "SDE Lead": "AI Engineer Lead", "SDE 3": "AI Engineer 3"}
 
 def retitle_example(note):
     return re.sub(r'(Associate SDE|SDE Lead|SDE [123]), Learning Systems - ([^"]+)',
                   lambda m: f"{NEW_TITLE[m.group(1)]} – {m.group(2)} Learning Systems", note)
 
-LEVELS = []  # (new_title_pattern, old_title, comp, exp, note, surface)
+LEVELS = []  # (new_title_pattern, old_title, comp, v3_role, src_note, surface)
 SURFACE = [
-    "Contributes to this team's Section B rows under review — no rows answered for yet; growth is read through review evidence.",
-    "Answers for the Section B velocity + quality rows of the modules they own (their content hours, pieces, issue-recurrence share).",
-    "Answers for a domain slice of Section B — effectiveness, velocity and Evaluation Environment Coverage for their courses; first Section C asks raised in their name.",
-    "Answers for the team's full Section B at review and supports the Section A lane numbers; the rating framework below applies as written.",
+    "Contributes on sample surfaces along the internship ramp — no rows answered for; growth is read through ramp evidence (A1→A2 on the Agent Scope scale).",
+    "Answers for the Section B velocity + quality rows of the modules they own (their content hours, pieces, issue-recurrence share) — with 2–3 content agents built and adopted (A3).",
+    "Answers for a domain slice ≈ 2× an AI Engineer's complexity-weighted surface — by depth, breadth, or leverage (A4 agent systems); first Section C asks raised in their name.",
+    "Answers for the team's full Section B at review and supports the Section A lane numbers; span ~5–8 members; the rating framework below applies as written.",
     "Shapes org-tracker rows and cross-domain standards; portfolio spans teams — reads through §5 department KPIs and org KRAs, not one team view.",
 ]
-for (title, comp, note), surf in zip(comp_boxes, SURFACE):
+V3_COMP = {  # comp overrides for the changed rungs — numbers parked with HR (talk-first, Aug 2026).
+             # Format is "band | tenure": the site keeps only the right side of the pipe.
+    0: "Internship stipend — set by HR | 6-month internship",
+    1: "9–24L, band under HR review (spans the two merged bands) | ≥1 year in role before Senior eligibility",
+    2: "Band under HR review — new rung | reached through the 2× gate below",
+}
+V3_WAS = [  # lineage sublines (the site strips these; the word 'formerly' is avoided — site asserts on it)
+    "was Associate SDE — reframed as a 6-month internship",
+    "merger of SDE 1 + SDE 2 (AI Engineer 1 + 2 in v2)",
+    "new rung in v3 — the force-multiplier seat",
+    "was SDE Lead — same seat; people outcomes define it",
+    "was SDE 3 — unchanged, org-wide scope",
+]
+V3_ROLE = [  # v3 card bodies (the "what you manage" identity); source scope notes stay in the xlsx.
+    "6-month internship — manages agents under supervision from day one: runs existing pipelines, reviews outputs, "
+    "tunes prompts, handles escalations (A1), then shows measurable improvement on an agent's numbers (A2). Produces "
+    "representative content items manually during the ramp — the domain floor. Converts through the gate below.",
+    "Manages agents. Owns modules end-to-end and builds new content agents — 2–3 built and adopted by year-end, "
+    "impact visible in the metrics (A3). One band: the old AI Engineer 1 and 2 merge here.",
+    "Manages agent systems and mentors humans — the force-multiplier rung. Holds ≈2× an AI Engineer's "
+    "complexity-weighted surface by depth, breadth, or leverage; orchestrating systems of agents (A4) is the "
+    "leverage route. Invents new ways to teach with agentic AI and proves them with rigorous measurement.",
+    "Manages humans who manage agents. Runs the team: full Section B answered for at review; people outcomes — "
+    "ratings, retention, growth, hiring — define the title. Span ~5–8 members (number with HR).",
+    None,  # AI Engineer 3 — unchanged rung: the card shows the source scope, examples retitled
+]
+for i, ((title, comp, note), surf) in enumerate(zip(comp_boxes, SURFACE)):
     old = title.split(",")[0].strip()
     scope = title[title.find("["):title.find("]") + 1] if "[" in title else "[Domain]"
     scope = scope.replace("Domain Name", "Domain")  # normalize the placeholder token
-    LEVELS.append((f"{NEW_TITLE[old]} – {scope} Learning Systems",
-                   title, comp, retitle_example(note), surf))
+    src_note = retitle_example(note)
+    LEVELS.append((f"{NEW_TITLE[old]} – {scope} Learning Systems", title,
+                   V3_COMP.get(i, comp), V3_ROLE[i] or src_note, src_note, surf))
 
 WIRING = [  # (category, area, [kpi rows], note)
     ("Foundation", "Scope of Work", [],
      "Calibration, not a metric — read through the Portfolio Metrics matrix + domain complexity multipliers below."),
     ("Foundation", "Influence", [],
-     "Read through interfaces: team-view Section C asks raised and honoured, §7 counterparty standing."),
+     "Review evidence — influence is work adopted beyond your lane: SOPs and agents other teams run, "
+     "team-view Section C asks raised → accepted → delivered, §7 counterparty standing."),
     ("Core Creation and Quality", "Content Quality",
      ["Content Issue Resolution Efficiency", "Content Issue Recurrence Rate", "Module-Quiz Score Bands"],
      "The Learning Domains quality loop — recurrence is the tell that a fix actually held."),
@@ -130,14 +178,20 @@ WIRING = [  # (category, area, [kpi rows], note)
      "Adherence = planned updates land on schedule; freshness = the audit behind relevance."),
     ("Core Creation and Quality", "Production Systems",
      ["Agentic Production Coverage"],
-     "Publishing through ACP pipelines; cost rows below read the efficiency it buys."),
+     "Publishing through ACP pipelines; cost rows below read the efficiency it buys. The Agent Scope scale "
+     "grades the work — operate and improve (A1–A2), build (A3), orchestrate (A4); agent-ops observability "
+     "lives here: the day starts and ends in the pipeline dashboards."),
     ("Core Creation and Quality", "Learning Systems Design",
-     ["Evaluation Environment Coverage", "Domain Capability Delivery"],
+     ["Evaluation Environment Coverage", "Domain Capability Delivery",
+      "Summative + Formative Achievement", "Module-Quiz Score Bands"],
      "The Domain Product Enablement pair — raised/accepted by SMEs, built by PMs + Engineering, "
-     "accountability in Learning Domains. Reads: Learning Environment Satisfaction, PAtC env-friction leg."),
+     "accountability in Learning Domains — plus the v3 measurement proof: achievement and quiz-band reads "
+     "shared with Content Effectiveness / Content Quality (the APC double-read precedent). Also reads: "
+     "Learning Environment Satisfaction, PAtC env-friction leg."),
     ("Core Creation and Quality", "GenAI Orchestration & Content Automation",
      ["Agentic Production Coverage", "Cost per MCQ Generated", "Cost per Coding Question"],
-     "Mandatory from AI Engineer 1 — orchestration shows up as coverage plus falling unit costs."),
+     "Mandatory from day one — the internship runs on it. Orchestration shows up as coverage plus falling "
+     "unit costs; prompt craftsmanship and AI operational literacy are named expectations here."),
     ("Core Creation and Quality", "Business Impact",
      ["Summative Skill Assessment Achievement Rate", "Formative Skill Assessment Achievement Rate",
       "Graded Assessment Achievement Rate (NIAT)", "Weekly Active Users (Launchpad)"],
@@ -152,7 +206,8 @@ WIRING = [  # (category, area, [kpi rows], note)
     ("Operational Excellence", "Ambiguity Handling", [], "Review evidence — no direct KPI by design."),
     ("Operational Excellence", "Best Practices",
      ["Cost of Operations", "Creative Resource Utilisation Rate"],
-     "Hygiene guardrails from the Team Ops & People block — run by the team's PM; no org ladder by design."),
+     "Hygiene guardrails from the Team Ops & People block — run by the team's PM; no org ladder by design. "
+     "SOPs runnable by others are the review evidence — the bus-factor guard."),
     ("Collaboration and Stakeholders", "Cross-Functionality",
      ["Cross-functional Sprint Delivery Rate"],
      "Plus the health of Section C asks the person is party to."),
@@ -167,6 +222,79 @@ WIRING = [  # (category, area, [kpi rows], note)
 ]
 assert len(WIRING) == 21
 
+# ------------------------------------------------- v3 progression machinery
+PRINCIPLE = ("All content production runs through agents — humans design, review, and improve the systems "
+             "that produce. Named exception, so the claim stays honest: the video production pipeline "
+             "(recording, editing, review) — agenticity not required there. This principle is what makes the "
+             "first two rungs' job descriptions true, and it turns Agentic Production Coverage from a metric "
+             "into a mandate.")
+
+AGENT_SCOPE = [  # the A1–A4 scale — grades agent work without colliding with role levels
+    ("A1", "Operate", "Run an existing agent pipeline: review outputs, tune prompts, handle escalations; "
+                      "keep accuracy and cost inside budget."),
+    ("A2", "Improve", "Move an agent's numbers: evals, retrieval quality, unit-cost reduction — with a "
+                      "before/after you can show."),
+    ("A3", "Build", "Design and ship a new content agent end-to-end whose impact holds in the metrics. "
+                    "AI Engineer bar: at least 2–3 built and adopted."),
+    ("A4", "Orchestrate", "Systems of agents carrying production: multi-agent workflows, escalation design "
+                          "(when agents act alone, when they hand to humans), agents other people run."),
+]
+AGENT_SCOPE_MAP = ("Intern converts having shown A1 + A2 · AI Engineer reaches A3 within the year · Senior "
+                   "operates at A4 (the leverage route) · Lead runs the team's agent fleet through people · "
+                   "AI Engineer 3 sets the org's agent architecture.")
+
+GATES = [  # (transition, [numbered requirements]) — approved Aug 2026; becomes the standing
+           # Progression Policy document when Pavan calls for it.
+    ("Conversion gate — Associate AI Engineer → AI Engineer, at 6 months", [
+        "Runs assigned agent pipelines end-to-end without supervision — prompts tuned, outputs reviewed, "
+        "escalations handled (A1–A2 shown).",
+        "Judgment demonstrated: their sample reviews agree with expert reviews (gold-standard comparisons, "
+        "eval passes) — they can tell good output from plausible output.",
+        "Domain floor: has produced representative content items manually during the ramp — you can't review "
+        "what you can't do.",
+        "Decided by: supervising Senior / AI Engineer Lead proposes with ramp evidence; HOD confirms. "
+        "Package set by HR at conversion."]),
+    ("AI Engineer → Senior AI Engineer — the 2× bar", [
+        "Surface ≈ 2× an AI Engineer's — courses × complexity, any mix of depth, breadth, or leverage "
+        "(A4 agent systems are the leverage route).",
+        "Quality held: all their Section B rows at budget, 2+ consecutive cycles.",
+        "Leverage visible: Agentic Production Coverage contribution plus falling cost rows for their courses.",
+        "People growing: mentorship evidence (Power Performers Created) — guiding work, not owning ratings.",
+        "AI Engineer Lead proposes with row evidence; HOD + calibration confirm. Minimum 1 year in role."]),
+    ("Senior AI Engineer → AI Engineer Lead — people outcomes define the title", [
+        "A Lead seat exists — the span rule creates them: ~5–8 members per Lead (number with HR).",
+        "Already answering beyond their slice: full-Section-B literacy shown at reviews, Section A lane "
+        "awareness.",
+        "People outcomes proven as a mentor: retention and growth of the people they guided.",
+        "Accepts the accountability that defines the title: ratings, retention, growth and hiring for members.",
+        "HOD + PM-head calibration confirm."]),
+    ("AI Engineer Lead → AI Engineer 3 — the org seat", [
+        "Org-level surface already held: org-tracker rows shaped, cross-domain standards authored and adopted.",
+        "Their team runs without them day to day — the bus-factor test, passed.",
+        "By org need, not tenure. HOD proposes; founders / PM-head calibration confirm."]),
+]
+
+STAY = [  # (level, [holding-the-role lines]) — the gates say how you climb; this says what keeping the seat means
+    ("Associate AI Engineer (internship)", [
+        "Ramp evidence accumulating on schedule — A1 shown, then A2, inside the 6 months."]),
+    ("AI Engineer", [
+        "Their modules' Section B rows at budget each cycle — velocity, quality, issue-recurrence, and the "
+        "cost rows for their courses.",
+        "Agent scope advancing: by year-end, 2–3 content agents built and adopted, impact visible in Agentic "
+        "Production Coverage or falling cost rows (A3).",
+        "Rating floor: Performance + Role Competence pillars in band. Two consecutive cycles below budget → "
+        "a structured gap conversation with their Lead: what's missing, the plan, the timeline."]),
+    ("Senior AI Engineer", [
+        "The 2× surface stays held at budget — Senior isn't a medal, it's a load. The slice doesn't quietly "
+        "shrink."]),
+    ("AI Engineer Lead", [
+        "The team's full Section B in band, plus the people outcomes — retention, Power Performers Created — "
+        "read by the rating framework as written."]),
+    ("AI Engineer 3", [
+        "The standards they authored still adopted and alive; places the org's learning-systems bets — "
+        "defines what “proven to work” means across domains."]),
+]
+
 BRIDGE = [
     ("Functions", "§10 embedded functions + the content domain teams. “Packaging Teams” = Content Systems & Infra teams (Pavan, Aug 2026)."),
     ("Stakeholders", "§7 counterparties — reached through team-view Section C asks, never staffed into lanes."),
@@ -179,9 +307,9 @@ BRIDGE = [
 
 FS_PILOT = {
     "team": "FullStack & CS Core",
-    "titles": ["Associate AI Engineer – FullStack Learning Systems",
-               "AI Engineer 1 – FullStack Learning Systems",
-               "AI Engineer 2 – FullStack & CS Core Learning Systems",
+    "titles": ["Associate AI Engineer – FullStack Learning Systems (6-month internship)",
+               "AI Engineer – FullStack Learning Systems",
+               "Senior AI Engineer – FullStack & CS Core Learning Systems",
                "AI Engineer Lead – FullStack & CS Core Learning Systems"],
     "complexity": "High (2.0x) — FullStack · Medium (1.5x) — CS Core",
     "domains": [r for r in DOMAINS[1:] if r[0] in ("Full Stack", "CS Core")],
@@ -197,7 +325,7 @@ PM_ROLE = {
     "title": "Project Manager – [Domain] Learning Systems",
     "pilot": "Project Manager – FullStack & CS Core Learning Systems",
     "reports": "The team's AI Engineer Lead. KPIs cascade Lead → PM: the Lead answers for the numbers at review; "
-               "the PM runs them day to day.",
+               "the PM runs them day to day. Team shape guardrail: ~5–8 makers per Lead (number with HR).",
     "comp": "Band pending — defined with HR when the seat is staffed.",
     "rows": ["Cost of Operations", "Roadmap Items Completion", "Hires Made", "Cost per Hire",
              "Team Retention Rate", "Power Performers Created", "Creative Resource Utilisation Rate"],
@@ -264,36 +392,74 @@ def hdr_row(ws, r, cells):
     return r + 1
 
 # Tab 1 — Ladder
-ws = sheet("Ladder", (26, 30, 16, 60, 60))
-r = title_row(ws, 1, "AI Engineer Ladder — content-department domain teams · v2 August 2026 "
-                     "(titles renamed from the March 2026 SDE framework; descriptors verbatim)", 5)
-r = hdr_row(ws, r, ("Title (v2 pattern)", "Formerly", "Comp | Experience", "Scope (source, examples retitled)", "Metric surface (v2)"))
-for new, old, comp, note, surf in LEVELS:
+ws = sheet("Ladder", (26, 26, 22, 46, 46, 46))
+r = title_row(ws, 1, "AI Engineer Ladder — content-department domain teams · v3 August 2026 "
+                     "(internship rung · AI Engineer 1 + 2 merged · Senior AI Engineer added · "
+                     "descriptors from the March 2026 SDE framework; comp for changed rungs with HR)", 6)
+r = hdr_row(ws, r, ("Title (v3 pattern)", "Formerly (source)", "Comp | Tenure", "Role (v3)",
+                    "Scope (source, examples retitled)", "Metric surface (v3)"))
+for new, old, comp, role, src_note, surf in LEVELS:
     put(ws, r, 1, new, bold=True)
     put(ws, r, 2, old, color=MUTED)
     put(ws, r, 3, comp)
-    put(ws, r, 4, note)
-    put(ws, r, 5, surf)
-    ws.row_dimensions[r].height = max(52, 14 * (len(note) // 78 + 1))
+    put(ws, r, 4, role)
+    put(ws, r, 5, src_note)
+    put(ws, r, 6, surf)
+    ws.row_dimensions[r].height = max(60, 14 * (max(len(role), len(src_note)) // 60 + 1))
     r += 1
 
-# Tab 2 — Progression Areas
+# Tab 2 — Gates & Scope (v3)
+ws = sheet("Gates & Scope", (32, 120))
+r = title_row(ws, 1, "v3 progression machinery — the production principle, the A1–A4 Agent Scope scale, "
+                     "promotion gates, and stay bars. Becomes the standing Progression Policy document "
+                     "when formalized.", 2)
+put(ws, r, 1, "Production principle", bold=True)
+put(ws, r, 2, PRINCIPLE)
+ws.row_dimensions[r].height = 52
+r += 2
+r = hdr_row(ws, r, ("Agent Scope", "Definition"))
+for code, nm, desc in AGENT_SCOPE:
+    put(ws, r, 1, f"{code} — {nm}", bold=True)
+    put(ws, r, 2, desc)
+    ws.row_dimensions[r].height = 28
+    r += 1
+put(ws, r, 1, "Role mapping", bold=True, color=MUTED)
+put(ws, r, 2, AGENT_SCOPE_MAP)
+ws.row_dimensions[r].height = 28
+r += 2
+r = hdr_row(ws, r, ("Promotion gate", "Requirements (all of them)"))
+for trans, lines in GATES:
+    put(ws, r, 1, trans, bold=True)
+    put(ws, r, 2, "\n".join(f"{i}. {ln}" for i, ln in enumerate(lines, 1)))
+    ws.row_dimensions[r].height = 15 + 26 * len(lines)
+    r += 1
+r += 1
+r = hdr_row(ws, r, ("Level", "Holding the role (the stay bar)"))
+for lvl, lines in STAY:
+    put(ws, r, 1, lvl, bold=True)
+    put(ws, r, 2, "\n".join(lines))
+    ws.row_dimensions[r].height = max(28, 26 * len(lines))
+    r += 1
+
+# Tab 3 — Progression Areas
 ws = sheet("Progression Areas", (24, 22, 34, 34, 34, 34))
-r = title_row(ws, 1, "21 progression areas × 4 levels — verbatim from source. AI Engineer 3 sits above "
-                     "Lead (org-wide scope); the matrix deliberately stops at Lead.", 6)
-r = hdr_row(ws, r, ("Category", "Area", "Associate AI Engineer", "AI Engineer 1", "AI Engineer 2", "AI Engineer Lead"))
+r = title_row(ws, 1, "21 progression areas × 4 levels — verbatim from source except rows marked ▲ "
+                     "(rewritten agent-first in v3). AI Engineer 3 sits above Lead (org-wide scope); "
+                     "the matrix deliberately stops at Lead.", 6)
+r = hdr_row(ws, r, ("Category", "Area", "Associate AI Engineer (Intern)", "AI Engineer", "Senior AI Engineer", "AI Engineer Lead"))
 for cat, area, a, e1, e2, ld in AREAS:
     put(ws, r, 1, cat, color=MUTED)
-    put(ws, r, 2, area, bold=True)
+    put(ws, r, 2, area + (" ▲" if area in AREA_OVERRIDES else ""), bold=True)
     for c, v in enumerate((a, e1, e2, ld), 3):
         put(ws, r, c, v)
     ws.row_dimensions[r].height = max(40, 13 * (max(len(x) for x in (a, e1, e2, ld)) // 34 + 1))
     r += 1
 
-# Tab 3 — KPI Wiring
+# Tab 4 — KPI Wiring
 ws = sheet("KPI Wiring", (24, 26, 62, 62))
 r = title_row(ws, 1, "Progression area → named KPI rows (tracker / FullStack & CS Core team view). "
-                     "The v2 addition: every area now cites live rows, or says why it deliberately has none.", 4)
+                     "v2 wired every area to live rows (or said why not, by design); v3 adds the "
+                     "Learning Systems Design measurement reads.", 4)
 r = hdr_row(ws, r, ("Category", "Area", "Wired to (KPI rows)", "Note"))
 for cat, area, rows, note in WIRING:
     put(ws, r, 1, cat, color=MUTED)
@@ -303,7 +469,7 @@ for cat, area, rows, note in WIRING:
     ws.row_dimensions[r].height = max(28, 13 * (len(note) // 60 + 1))
     r += 1
 
-# Tab 4 — Rating Framework
+# Tab 5 — Rating Framework
 ws = sheet("Rating Framework", (26, 9, 58, 58))
 r = title_row(ws, 1, "Performance rating — AI Engineer Lead level. 4 pillars, weighted; target 3.0+ on 5. "
                      "Each line now reads from named KPI rows.", 4)
@@ -325,17 +491,21 @@ for sc in SCALE[1:]:
     put(ws, r, 1, sc[0]); put(ws, r, 2, sc[1]); put(ws, r, 3, sc[2]); put(ws, r, 4, "")
     r += 1
 
-# Tab 5 — Calibration
+# Tab 6 — Calibration
 ws = sheet("Calibration", (26, 34, 34, 34, 34))
 r = title_row(ws, 1, "Calibration: portfolio by level · domain complexity · product baselines · "
                      "domain catalogue · vocabulary bridge (2026 doc → KPI system)", 5)
-r = hdr_row(ws, r, tuple(PORTF[0][:1] + ["Associate AI Engineer", "AI Engineer 1", "AI Engineer 2", "AI Engineer Lead"]))
+r = hdr_row(ws, r, tuple(PORTF[0][:1] + ["Associate AI Engineer (Intern)", "AI Engineer", "Senior AI Engineer", "AI Engineer Lead"]))
 for row in PORTF[1:]:
     put(ws, r, 1, row[0], bold=True)
     for c, v in enumerate(row[1:], 2):
         put(ws, r, c, v)
     r += 1
-r += 1
+put(ws, r, 1, "v3 note", bold=True, color=MUTED)
+ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=5)
+put(ws, r, 2, "After the merge, the old level-1 column calibrates entry into the AI Engineer band; "
+              "the old level-2 column calibrates the Senior bar.")
+r += 2
 r = hdr_row(ws, r, tuple(COMPLEX[0] + [""] * (5 - len(COMPLEX[0]))))
 for row in COMPLEX[1:]:
     for c, v in enumerate(row, 1):
@@ -362,7 +532,7 @@ for term, mapping in BRIDGE:
     ws.row_dimensions[r].height = max(15, 13 * (len(mapping) // 120 + 1))
     r += 1
 
-# Tab 6 — Project Manager
+# Tab 7 — Project Manager
 ws = sheet("Project Manager", (24, 120))
 r = title_row(ws, 1, "Project Manager — the team's operating seat (added August 2026 with the Team Ops & People "
                      "metric block). Not a ladder level: reports to the AI Engineer Lead.", 2)
@@ -440,48 +610,85 @@ STYLE = """  * { margin: 0; padding: 0; box-sizing: border-box; }
   .bar { height: 4px; background: #e4e4e4; border-radius: 2px; margin-top: 5px; }
   .bar i { display: block; height: 4px; background: #0e6e5c; border-radius: 2px; }
   .footnote { font-size: 0.85em; color: #666; margin-top: 34px; border-top: 1px solid #ccc; padding-top: 12px; max-width: 90ch; }
+  .gate { border: 1px solid #ccc; border-radius: 4px; margin-bottom: 12px; overflow: hidden; }
+  .gate-h { padding: 9px 12px; background: #f4f4f4; border-bottom: 1px solid #ddd; font-weight: 700; font-size: .92em; }
+  .gate ol { padding: 10px 14px 10px 32px; font-size: .86em; margin: 0; }
+  .gate li { margin: 3px 0; }
   @media (max-width: 980px) { .ladder { grid-template-columns: 1fr; } }"""
 
 B = []
 B.append('<h1>AI Engineer Ladder</h1>')
-B.append('<div class="subtitle">Career framework for content-department domain teams &middot; v2, August 2026 &middot; '
-         'titles follow the <strong>AI Engineer &ndash; [Domain] Learning Systems</strong> pattern &middot; descriptors '
-         'carried verbatim from the March 2026 SDE Learning Systems framework &middot; editable master: '
-         '<strong>role_cards.xlsx</strong> (6 tabs)</div>')
-B.append('<div class="key-point"><strong>What changed in v2:</strong> titles renamed to the AI Engineer pattern; every '
-         'progression area and rating line is wired to named KPI rows — anything in a '
-         '<span class="kpi">mono chip</span> is a live row on the KPI tracker or the team view, so reviews read off the '
-         'sheets instead of impressions. Areas with no chip say so <em>by design</em>. Level content, comp bands and the '
-         'rating weights are unchanged from the source framework.</div>')
+B.append('<div class="subtitle">Career framework for content-department domain teams &middot; v3, August 2026 &middot; '
+         'titles follow the <strong>AI Engineer &ndash; [Domain] Learning Systems</strong> pattern &middot; an '
+         'internship rung, a merged AI Engineer band, and the new Senior force-multiplier rung &middot; editable '
+         'master: <strong>role_cards.xlsx</strong> (7 tabs)</div>')
+B.append('<div class="key-point"><strong>What changed in v3:</strong> the Associate rung is now a 6-month internship '
+         'that manages agents from day one; AI Engineer 1 + 2 merge into one <strong>AI Engineer</strong> band; '
+         '<strong>Senior AI Engineer</strong> is the new force-multiplier rung (the 2&times; bar); every transition '
+         'has a written gate and every rung a stay bar; the A1&ndash;A4 Agent Scope scale grades agent work; comp for '
+         'the changed rungs is with HR. KPI wiring keeps its v2 shape — anything in a <span class="kpi">mono chip</span> '
+         'is a live row on the KPI tracker or the team view. Areas with no chip say so <em>by design</em>.</div>')
+B.append('<div class="key-point"><strong>Production principle:</strong> all content production runs through agents — '
+         'humans design, review, and improve the systems that produce. Named exception, so the claim stays honest: '
+         'the video production pipeline (recording, editing, review) — agenticity not required there. This is what '
+         'makes the first two rungs&rsquo; job descriptions true, and it turns '
+         '<span class="kpi">Agentic Production Coverage</span> from a metric into a mandate.</div>')
 
 B.append('<h2>The ladder</h2>')
-B.append('<div class="sectionlead">Five levels, linear — AI Engineer 3 sits above Lead (30L+ vs 24&ndash;30L, org-wide '
-         'scope); the progression matrix below deliberately stops at Lead. Comp bands included; strip this column before '
-         'wide sharing if needed.</div>')
+B.append('<div class="sectionlead">Five levels, linear — an internship rung, then four employee rungs; AI Engineer 3 '
+         'sits above Lead (org-wide scope) and the progression matrix below deliberately stops at Lead. Comp: Lead and '
+         'AI Engineer 3 keep inherited bands; the changed rungs are with HR — no invented numbers. Strip the comp line '
+         'before wide sharing if needed.</div>')
 B.append('<div class="ladder">')
-for (new, old, comp, note, surf), (bg, fg) in zip(LEVELS, RAMP):
+for i, ((new, old, comp, role, src_note, surf), (bg, fg)) in enumerate(zip(LEVELS, RAMP)):
     B.append(f'<div class="lvl"><div class="lvl-head" style="background:{bg};color:{fg}">'
-             f'<div class="t">{esc(new)}</div><div class="was">formerly {esc(old)}</div></div>'
+             f'<div class="t">{esc(new)}</div><div class="was">{esc(V3_WAS[i])}</div></div>'
              f'<div class="lvl-comp">{esc(comp)}</div>'
-             f'<div class="lvl-body">{esc(note)}</div>'
+             f'<div class="lvl-body">{esc(role)}</div>'
              f'<div class="lvl-surf"><strong>Answers for:</strong> {esc(surf)}</div></div>')
 B.append('</div>')
 
+B.append('<h2>Agent Scope — the A1&ndash;A4 scale</h2>')
+B.append('<div class="sectionlead">Role levels say what you answer for; the A-scale grades the agent work itself. '
+         'The gates and stay bars below cite it.</div>')
+B.append('<div class="scroll"><table style="max-width:980px"><tr><th style="width:16%">Scope</th><th>What it means</th></tr>')
+for code, nm, desc in AGENT_SCOPE:
+    B.append(f'<tr><td><strong>{code} — {esc(nm)}</strong></td><td>{esc(desc)}</td></tr>')
+B.append('</table></div>')
+B.append(f'<div class="key-point"><strong>Role mapping:</strong> {esc(AGENT_SCOPE_MAP)}</div>')
+
+B.append('<h2>Promotion gates</h2>')
+B.append('<div class="sectionlead">Each transition has a written gate — all requirements, plus who proposes and who '
+         'confirms. These blocks become the standing Progression Policy document when formalized.</div>')
+for trans, lines in GATES:
+    B.append(f'<div class="gate"><div class="gate-h">{esc(trans)}</div><ol>' +
+             "".join(f'<li>{esc(ln)}</li>' for ln in lines) + '</ol></div>')
+
+B.append('<h2>Holding the role — the stay bars</h2>')
+B.append('<div class="sectionlead">The gates say how you climb; this says what keeping the seat means. Missing the bar '
+         'starts a structured conversation, not a demotion.</div>')
+B.append('<div class="scroll"><table style="max-width:980px"><tr><th style="width:22%">Level</th><th>Holding the role means</th></tr>')
+for lvl, lines in STAY:
+    B.append(f'<tr><td><strong>{esc(lvl)}</strong></td><td>' + "<br>".join(esc(ln) for ln in lines) + '</td></tr>')
+B.append('</table></div>')
+
 B.append('<h2>21 progression areas</h2>')
-B.append('<div class="sectionlead">Grouped into 4 categories; all areas matter, weight varies by level. Verbatim from source.</div>')
+B.append('<div class="sectionlead">Grouped into 4 categories; all areas matter, weight varies by level. Verbatim from '
+         'source except the rows marked ▲ — rewritten agent-first in v3.</div>')
 for cat in CATS:
     rows = [a for a in AREAS if a[0] == cat]
     B.append(f'<h3 style="margin:20px 0 10px;font-size:1.05em">{esc(cat)} ({len(rows)})</h3>')
     B.append('<div class="scroll"><table class="wide"><tr><th style="width:13%">Area</th>'
-             '<th>Associate AI Engineer</th><th>AI Engineer 1</th><th>AI Engineer 2</th><th>AI Engineer Lead</th></tr>')
+             '<th>Associate AI Engineer (Intern)</th><th>AI Engineer</th><th>Senior AI Engineer</th><th>AI Engineer Lead</th></tr>')
     for _, area, a, e1, e2, ld in rows:
-        B.append(f'<tr><td><strong>{esc(area)}</strong></td><td>{esc(a)}</td><td>{esc(e1)}</td>'
+        mark = ' <span title="rewritten agent-first in v3">▲</span>' if area in AREA_OVERRIDES else ''
+        B.append(f'<tr><td><strong>{esc(area)}</strong>{mark}</td><td>{esc(a)}</td><td>{esc(e1)}</td>'
                  f'<td>{esc(e2)}</td><td>{esc(ld)}</td></tr>')
     B.append('</table></div>')
 
 B.append('<h2>KPI wiring</h2>')
-B.append('<div class="sectionlead">The v2 addition: each area cites the rows it moves, or says why it deliberately has '
-         'none. Rows live on the KPI tracker and the FullStack &amp; CS Core team view (the pilot).</div>')
+B.append('<div class="sectionlead">Each area cites the rows it moves, or says why it deliberately has none. Rows live '
+         'on the KPI tracker and the FullStack &amp; CS Core team view (the pilot).</div>')
 B.append('<div class="scroll"><table class="wide"><tr><th style="width:15%">Category</th><th style="width:17%">Area</th>'
          '<th style="width:38%">Wired to</th><th>Note</th></tr>')
 for cat, area, rows, note in WIRING:
@@ -490,7 +697,8 @@ for cat, area, rows, note in WIRING:
 B.append('</table></div>')
 
 B.append('<h2>Performance rating — AI Engineer Lead</h2>')
-B.append(f'<div class="sectionlead">{esc(RT[0])} {esc(CALC)}.</div>')
+B.append(f'<div class="sectionlead">{esc(RT[0])} {esc(CALC)}. The rating samples the surface; the role answers for '
+         'all of it.</div>')
 for name, wt, subs, reads in PILLARS:
     B.append(f'<div class="pillar"><div class="pillar-head"><span class="nm">{esc(name)}</span>'
              f'<span class="wt">{wt}%</span></div>')
@@ -508,10 +716,12 @@ B.append('<h2>Calibration</h2>')
 B.append('<div class="sectionlead">Portfolio expectations by level, domain complexity multipliers, and product reach — '
          'the sizing inputs behind every card.</div>')
 B.append('<div class="scroll"><table class="wide"><tr>' + "".join(
-    f"<th>{esc(h)}</th>" for h in [PORTF[0][0], "Associate AI Engineer", "AI Engineer 1", "AI Engineer 2", "AI Engineer Lead"]) + "</tr>")
+    f"<th>{esc(h)}</th>" for h in [PORTF[0][0], "Associate AI Engineer (Intern)", "AI Engineer", "Senior AI Engineer", "AI Engineer Lead"]) + "</tr>")
 for row in PORTF[1:]:
     B.append("<tr><td><strong>" + esc(row[0]) + "</strong></td>" + "".join(f"<td>{esc(v)}</td>" for v in row[1:]) + "</tr>")
 B.append('</table></div>')
+B.append('<p class="muted" style="font-size:.85em;margin:-16px 0 22px">After the merge, the old level-1 column '
+         'calibrates entry into the AI Engineer band; the old level-2 column calibrates the Senior bar.</p>')
 for tab, cap in ((COMPLEX, "Domain complexity"), (PRODUCTS, "Product baselines (student reach)"), (DOMAINS, "Domain catalogue")):
     B.append(f'<h3 style="margin:20px 0 10px;font-size:1.05em">{cap}</h3>')
     B.append('<div class="scroll"><table><tr>' + "".join(f"<th>{esc(h)}</th>" for h in tab[0]) + "</tr>")
@@ -557,12 +767,17 @@ for term, mapping in BRIDGE:
     B.append(f'<tr><td><strong>{esc(term)}</strong></td><td>{esc(mapping)}</td></tr>')
 B.append('</table></div>')
 
-B.append('<div class="footnote">Source: SDE Learning Systems Career Framework (March 2026) — descriptors, comp bands, '
-         'rating weights and calibration tables carried verbatim; titles renamed and KPI wiring added in v2 (August 2026). '
+B.append('<div class="footnote">Source: SDE Learning Systems Career Framework (March 2026) — descriptors, rating '
+         'weights and calibration tables carried verbatim except the two matrix rows marked ▲; titles renamed and KPI '
+         'wiring added in v2 (August 2026); the internship rung, the 1 + 2 merger, the Senior force-multiplier rung, '
+         'promotion gates, stay bars and the Agent Scope scale added in v3 (August 2026). The rating samples the '
+         'surface; the role answers for all of it. Comp: Lead and AI Engineer 3 keep inherited bands; the changed '
+         'rungs are with HR — no invented numbers. '
          'Defaults taken pending red-pen: comp bands included (artifact is private; strip for wide sharing) &middot; '
-         'level names Associate / 1 / 2 / Lead / 3 &middot; FullStack &amp; CS Core as pilot. Companion sheets: KPI tracker '
-         '(kra_training_sheet.xlsx) &middot; HOD one-pager. Other domain teams get cards when their team views land; '
-         'CSI and Content&ndash;Central role cards are queued to be built separately.</div>')
+         'level names Associate (internship) / Engineer / Senior / Lead / 3 &middot; FullStack &amp; CS Core as pilot. '
+         'Companion sheets: KPI tracker (kra_training_sheet.xlsx) &middot; HOD one-pager. Other domain teams get cards '
+         'when their team views land; CSI and Content&ndash;Central role cards are queued separately; the gate blocks '
+         'above become the standing Progression Policy document when called for.</div>')
 
 html = ('<title>AI Engineer Ladder</title>\n<style>\n' + STYLE + '\n</style>\n'
         '<div class="container">\n' + "\n".join(B) + '\n</div>\n')

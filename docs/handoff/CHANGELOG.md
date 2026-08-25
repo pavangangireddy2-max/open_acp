@@ -351,3 +351,31 @@ Files: build_site.py, content_os.html.
   team-view change.
 - One-surface-per-approval: published standalone; NOT embedded into the 🗺️ Content OS site pending a
   separate approval. No existing artifact touched.
+
+## 2026-08-25 — AI Engineer Ladder v3: agent-first redesign (🪜 + 🗺️ + 🧗 republished, same URLs)
+- **Ladder v3 shipped on Pavan's "Go"** — the five rungs are now: **Associate AI Engineer** (reframed as a
+  6-month internship — manages agents from day one, A1–A2), **AI Engineer** (merger of AI Engineer 1 + 2;
+  ≥1 year in role before Senior eligibility, A3), **Senior AI Engineer** (new force-multiplier rung, ≈2× an
+  AI Engineer's complexity-weighted surface, A4), **AI Engineer Lead** (same seat — people outcomes define
+  it; span ~5–8 ⚑HR), **AI Engineer 3** (unchanged, org surface). Titles keep "– [Domain] Learning Systems".
+- **New machinery in the cards:** written **promotion gates** on every transition + a **stay bar** per rung
+  (what it takes just to hold the seat); the **A1–A4 Agent Scope scale** grading agent work; two matrix rows
+  rewritten agent-first via AREA_OVERRIDES (▲): **Production Systems** (manage/improve agents → build 2–3
+  adopted agents → orchestrate agent systems → run the fleet through people) and **Learning Systems Design**
+  (Pavan's "invent new ways to teach with agentic AI + rigorous measurement" line at Senior). Learning
+  Systems Design now carries 4 read keys (Module-Quiz Score Bands + Summative/Formative Achievement added)
+  — evidence edges 32 → 35.
+- **Migration ruling (approved):** stretch-target yes · title-on-clearing yes · title-before-clearing no.
+  **Comp:** numbers parked with HR — cards carry band-status lines only (stipend ⚑HR; merged band under
+  review; Senior band new ⚑HR; Lead/3 inherit their bands). Strawman numbers never shipped.
+- **🪜 republished** (label v3-agent-first): role_cards.xlsx + html regenerated, 7 tabs, "What changed in v3"
+  box. **🗺️ site rebuilt + republished** (label ladder-v3-embed; capabilities carried forward): was-sublines
+  and the v3 box stripped for the wide audience, comp bands kept off-site (they live in 🪜 + the xlsx),
+  site-only retitle AI Engineer 3 → "Head of [Domain Portfolio] Learning Systems" (directional). **🧗
+  rebuilt + republished** (label v3-ladder-sync): climb band retitled via NEW_TITLE, ramp-evidence beam
+  label, ▲ tooltips carry the agent-first matrix text, 82 edges (ev 35 · rd 24 · tr 23).
+- Builders: build_role_cards.py carries all v3 texts (canonical source); build_site.py sub1s updated
+  (was-strip generalized); build_career_map.py now ast-extracts AREA_OVERRIDES too. comp_boxes_cache.json
+  unchanged by the rebuild.
+- Queued separately (not in this pass): standing Progression Policy doc, bus-factor register, goal-vs-reality
+  memo, CSI + Content–Central role cards, comp numbers with HR/Varun.
