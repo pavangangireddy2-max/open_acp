@@ -1,32 +1,23 @@
-# Content OS — one site, four altitudes. Embeds the three published artifacts
-# (HOD one-pager → KPI tracker → AI Engineer Ladder) with a site-generated Team
-# level (FullStack & CS Core pilot, read from the master xlsx), so information
-# flows org → department → team → individual on a single scroll.
-#
-# Technique: each artifact's CSS is wrapped in its section id via native CSS
-# nesting (body{} hoisted out — all three share the identical family body).
-# The site's own chrome (nav, altitude map, level bands, Level 3, download
-# buttons) is authored here. The embedded ladder deliberately DIVERGES from the
-# standalone artifact (site = wide audience; directives 2026-08-21): comp bands
-# stripped and level 5 retitled "Head of [Domain Portfolio] Learning Systems"
-# (directional, not finalized). Both master xlsx files are
-# base64-embedded and offered through the viewer's `downloads` runtime
-# capability (publish with capabilities={downloads: true}); the buttons stay
-# hidden wherever the capability is absent — including local preview.
+# Content OS — one site, four altitudes. Level 1 (the HOD one-pager) is embedded
+# in full; Levels 2–4 are reference sections that LINK to the standalone artifacts
+# (KPI tracker, KPI Flow Map, AI Engineer Ladder, Career Growth Map) instead of
+# re-rendering their content — directive 2026-08-26: from the second section,
+# reference the URLs only, so the site stays lean and a child-artifact republish
+# no longer forces a site rebuild (only xlsx content changes do — both masters
+# stay base64-embedded and offered through the viewer's `downloads` runtime
+# capability; the artifact already stores capabilities={downloads: true}, and a
+# republish OMITS the capabilities field to carry it forward). Download buttons
+# ship hidden and unhide only where the capability resolves — local preview stays
+# buttonless.
 import base64
 import json
 import re
-from openpyxl import load_workbook
 
 ART = "/Users/pavan/Desktop/projects/open_acp/docs/handoff/artifacts/"
 try:  # repo may be unreachable (e.g. macOS folder access revoked) — fall back to cwd copies
     open(ART + "hod_kpi_onepager.html", encoding="utf-8").close()
 except OSError:
     ART = ""
-
-def sub1(s, old, new):
-    assert s.count(old) == 1, f"count={s.count(old)} for: {old[:70]!r}"
-    return s.replace(old, new)
 
 def load_artifact(fname):
     h = open(ART + fname, encoding="utf-8").read()
@@ -48,130 +39,15 @@ def scope(css, sel):
     return f"{sel} {{\n{css}\n}}"
 
 op_css, op_body, op_scripts = load_artifact("hod_kpi_onepager.html")
-tr_css, tr_body, tr_scripts = load_artifact("kra_training_sheet.html")
-ld_css, ld_body, ld_scripts = load_artifact("role_cards.html")
-assert not op_scripts and not ld_scripts and len(tr_scripts) == 1
+assert not op_scripts
 
-# ---- ladder embed: site-only divergences from the standalone artifact ------
-# ---- (comp stripped; level 5 retitled). Lineage sublines and the version
-# ---- dialogue box left the source itself in the Aug-25 pass, so the strips
-# ---- that used to remove them here are gone — the asserts below still guard.
-ld_body = re.sub(r'<div class="lvl-comp">[^<|]*\|\s*([^<]*?)</div>',
-                 r'<div class="lvl-comp">\1</div>', ld_body)
-ld_body = sub1(ld_body,
-    "Five levels, linear — an internship rung, then four employee rungs; AI Engineer 3 sits above Lead "
-    "(org-wide scope) and the progression matrix below deliberately stops at Lead. Comp: Lead and AI Engineer 3 "
-    "keep inherited bands; the changed rungs are with HR — no invented numbers. Strip the comp line before wide "
-    "sharing if needed.",
-    "Five levels, linear — an internship rung, then four employee rungs; above Lead sits the head-of-domain "
-    "role (directional for now) and the progression matrix below deliberately stops at Lead. Comp bands are "
-    "kept off this site — they live in the standalone ladder artifact and role_cards.xlsx.")
-ld_body = sub1(ld_body,
-    '<div class="t">AI Engineer 3 – [Domain Portfolio] Learning Systems</div>',
-    '<div class="t">Head of [Domain Portfolio] Learning Systems</div>')
-ld_body = sub1(ld_body,
-    'Example: "AI Engineer 3 – Portfolio (All Domains) Learning Systems". Sets org-wide',
-    '<em>Directional for now — title and shape indicative, not finalized.</em> '
-    'Example: "Head of FullStack &amp; CS Core Learning Systems". Sets org-wide')
-# v3 mentions the role in gates / stay bars / A-scale mapping / footnote too — retitle everywhere
-ld_body = ld_body.replace("AI Engineer 3", "Head of [Domain Portfolio] Learning Systems")
-ld_body = sub1(ld_body,
-    "Defaults taken pending red-pen: comp bands included (artifact is private; strip for wide sharing) &middot; ",
-    "Defaults taken pending red-pen: comp bands kept off this site (standalone artifact + xlsx carry them) &middot; ")
-ld_body = sub1(ld_body,
-    "level names Associate (internship) / Engineer / Senior / Lead / 3",
-    "level names Associate (internship) / Engineer / Senior / Lead / Head-of-domain (directional)")
-assert "L to " not in ld_body and "30L+" not in ld_body   # no comp band survives on the site
-assert "formerly" not in ld_body and 'class="was"' not in ld_body
-assert "AI Engineer 3" not in ld_body and "What changed in v3" not in ld_body
-
-# ---- Level 3: FullStack & CS Core view, read from the master xlsx ----------
-wbf = load_workbook(ART + "kra_training_sheet.xlsx")          # formulas (A refs)
-ws = wbf["FullStack & CS Core View"]
-trk = wbf["KPI Tracker FY26-27"]
-
-def esc(s):
-    return str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-
-A_ROWS = []                                                    # (T-no, kpi name)
-for r in range(5, 20):
-    tno = ws.cell(r, 1).value
-    f = ws.cell(r, 6).value or ""
-    m = re.search(r"G(\d+)", f)
-    assert tno and m, (r, tno, f)
-    A_ROWS.append((tno, trk.cell(int(m.group(1)), 7).value))
-assert len(A_ROWS) == 15 and all(n for _, n in A_ROWS), A_ROWS
-
-B_ROWS = [[ws.cell(r, c).value or "" for c in (1, 3, 4, 6, 7, 8, 9, 10, 14)]
-          for r in range(21, 50)]
-assert len(B_ROWS) == 29
-C_ROWS = [[ws.cell(r, c).value or "" for c in (3, 6, 7)] for r in range(51, 55)]
-assert len(C_ROWS) == 4
-VIEW_TITLE = ws.cell(1, 1).value
-LANE_LINE = ws.cell(2, 1).value
-
-L3 = []
-L3.append(f'<h1>{esc(VIEW_TITLE)}</h1>')
-L3.append(f'<div class="subtitle">{esc(LANE_LINE)} &middot; pilot team view — the template every '
-          'domain team copies &middot; live grid with budget/actual/variance columns: '
-          '<strong>kra_training_sheet.xlsx</strong>, tab &ldquo;FullStack &amp; CS Core View&rdquo; '
-          '(other live views there: CSI team — A 8 &middot; B 8 &middot; C 3 · Content&ndash;Central — '
-          'A 1 &middot; B 8 &middot; C 2)</div>')
-L3.append('<div class="key-point"><strong>Anatomy of a team view:</strong> '
-          '<strong>Section A — inherited</strong>: the tracker rows above that this team works on through the '
-          'Functions column; the number is answered for at department level. '
-          '<strong>Section B — owned</strong>: the team&rsquo;s functional KPIs; each row names the tracker or '
-          'department row it ladders to, so nothing here is an orphan metric. '
-          '<strong>Section C — asks</strong>: what this team needs from other teams, named, so dependencies are '
-          'contracts instead of surprises. Every view carries Product + Cohort columns — expansion slots for '
-          'Academy / Intensive rows to land without a redesign.</div>')
-L3.append(f'<h2>Section A — inherited from the tracker ({len(A_ROWS)} rows)</h2>')
-L3.append('<div class="sectionlead">Mirrors of Level 2 rows (T-numbers) this team contributes to via '
-          'Functions — shown as references here; the full rows with budgets live in the tracker above.</div>')
-L3.append('<div class="achips">' + "".join(
-    f'<span class="achip"><b>{esc(t)}</b> {esc(n)}</span>' for t, n in A_ROWS) + '</div>')
-L3.append(f'<h2>Section B — owned by this team ({len(B_ROWS)} rows)</h2>')
-L3.append('<div class="scroll"><table class="wide"><tr><th>#</th><th>Metric category</th><th>Product</th>'
-          '<th>KPI name</th><th>Description</th><th>Ladders to</th><th>Unit</th><th>Freq</th><th>Remarks</th></tr>')
-for sno, cat, prod, name, desc, ladder, unit, freq, rem in B_ROWS:
-    prodc = f'<span class="prod">{esc(prod)}</span>' if prod != "All" else '<span class="muted">All</span>'
-    L3.append(f'<tr><td class="muted">{esc(sno)}</td><td>{esc(cat)}</td><td>{prodc}</td>'
-              f'<td class="kpiname">{esc(name)}</td><td>{esc(desc)}</td><td class="ladder">{esc(ladder)}</td>'
-              f'<td>{esc(unit)}</td><td>{esc(freq)}</td><td class="muted">{esc(rem)}</td></tr>')
-L3.append('</table></div>')
-L3.append(f'<h2>Section C — asks of other teams ({len(C_ROWS)})</h2>')
-L3.append('<div class="asks">')
-for who, ask, detail in C_ROWS:
-    L3.append(f'<div class="ask"><div class="ask-h"><b>{esc(ask)}</b><span class="of">of {esc(who)}</span></div>'
-              f'<div class="ask-d">{esc(detail)}</div></div>')
-L3.append('</div>')
-tm_body = '<div class="container">\n' + "\n".join(L3) + '\n</div>'
-
-tm_css = """  * { margin: 0; padding: 0; box-sizing: border-box; }
-  .container { max-width: 1320px; margin: 0 auto; }
-  h1 { font-size: 2em; margin-bottom: 8px; font-weight: 700; }
-  .subtitle { font-size: 1em; color: #666; margin-bottom: 26px; max-width: 84ch; }
-  h2 { font-size: 1.4em; margin: 38px 0 14px 0; padding-bottom: 8px; border-bottom: 2px solid #000; font-weight: 700; }
-  .sectionlead { color: #666; font-size: .92em; margin: -4px 0 14px; max-width: 84ch; }
-  .key-point { background: #e7f3ff; border-left: 3px solid #004085; padding: 12px 14px; margin: 18px 0; font-size: .93em; }
-  .achips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .achip { border: 1px solid #999; border-radius: 3px; padding: 2px 8px; font-size: .82em; background: #fafafa; }
-  .achip b { color: #004085; margin-right: 4px; }
-  .scroll { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; margin-bottom: 26px; font-size: .84em; }
-  table.wide { min-width: 1150px; }
-  th { background: #000; color: #fff; padding: 8px 9px; text-align: left; font-weight: 600; border: 1px solid #000; }
-  td { padding: 8px 9px; border: 1px solid #ccc; vertical-align: top; }
-  .muted { color: #666; }
-  .kpiname { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: .93em; font-weight: 600; }
-  .ladder { color: #0b4f43; }
-  .prod { border: 1px solid #999; border-radius: 3px; padding: 0 6px; font-size: .92em; white-space: nowrap; }
-  .asks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .ask { border: 1px solid #ccc; border-radius: 4px; padding: 12px 14px; }
-  .ask-h { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; margin-bottom: 6px; }
-  .ask-h .of { color: #666; font-size: .85em; white-space: nowrap; }
-  .ask-d { font-size: .87em; color: #333; }
-  @media (max-width: 860px) { .asks { grid-template-columns: 1fr; } }"""
+URLS = {
+    "onepager":  "https://claude.ai/code/artifact/cd52be82-3fd5-4264-a7aa-5b4e5e132ed9",
+    "tracker":   "https://claude.ai/code/artifact/44869dfd-506f-4f4c-9d2b-0581b8e065d1",
+    "kpimap":    "https://claude.ai/code/artifact/81cb774c-3cc4-4715-9f2b-b1fafdb72c4a",
+    "ladder":    "https://claude.ai/code/artifact/dc3ab90d-c4a4-448d-bdb5-fb43a9235734",
+    "careermap": "https://claude.ai/code/artifact/a051587e-381c-4712-a501-9cfceaf75756",
+}
 
 # ---- downloadable masters: base64-embedded, saved via the viewer's
 # ---- `downloads` capability. Buttons ship hidden; the script unhides them
@@ -243,6 +119,18 @@ SITE_CSS = """  * { margin: 0; padding: 0; box-sizing: border-box; }
   .band a { color: #fff; font-size: .82em; text-decoration: none; border: 1px solid #666; border-radius: 3px; padding: 2px 9px; white-space: nowrap; }
   .band a:hover, .band a:focus-visible { border-color: #fff; outline: none; }
   .band .chipfile { color: #bbb; font-size: .82em; border: 1px dashed #555; border-radius: 3px; padding: 2px 9px; white-space: nowrap; }
+  .refsec { padding: 34px 20px 46px; }
+  .refin { max-width: 1180px; margin: 0 auto; }
+  .reflead { color: #444; font-size: .95em; max-width: 90ch; margin-bottom: 18px; }
+  .refs { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; max-width: 980px; }
+  .refcard { display: grid; grid-template-columns: 44px 1fr auto; gap: 12px; align-items: center;
+    border: 1px solid #ccc; border-radius: 5px; padding: 14px 16px; color: inherit; text-decoration: none; background: #fff; }
+  .refcard:hover, .refcard:focus-visible { border-color: #000; outline: none; }
+  .refcard .re { font-size: 1.7em; line-height: 1; }
+  .refcard .rt { font-size: .9em; color: #444; }
+  .refcard .rt b { display: block; font-size: 1.06em; color: #1a1a1a; margin-bottom: 2px; }
+  .refcard .ro { color: #004085; font-size: .82em; white-space: nowrap; }
+  .refnote { color: #666; font-size: .85em; margin-top: 14px; max-width: 90ch; }
   footer { border-top: 2px solid #000; margin-top: 20px; padding: 30px 20px 46px; }
   footer .in { max-width: 1180px; margin: 0 auto; font-size: .88em; color: #444; }
   footer h3 { font-size: 1em; margin-bottom: 8px; }
@@ -260,19 +148,19 @@ LEVELS = [
     ("org", "1", "Organization", "🎯 HOD one-pager",
      "What the org holds this department to — the KRAs, and the department KPI baseline that answers them.",
      "Read by: Founders &middot; HOD. The contract everything below serves.",
-     "https://claude.ai/code/artifact/cd52be82-3fd5-4264-a7aa-5b4e5e132ed9", None),
+     URLS["onepager"], None),
     ("dept", "2", "Department", "🧭 KPI tracker",
      "The 28 rows the department runs on — metric category says <em>what</em>, lane says <em>who answers</em>, cadence says <em>when</em>.",
      "Read by: HOD &middot; lane leads &middot; PMs. Master: kra_training_sheet.xlsx.",
-     "https://claude.ai/code/artifact/44869dfd-506f-4f4c-9d2b-0581b8e065d1", "kra_training_sheet.xlsx"),
+     URLS["tracker"], "kra_training_sheet.xlsx"),
     ("team", "3", "Team", "Team scorecards",
-     "One team's slice: Section A inherited from the tracker &middot; Section B owned &middot; Section C asks of other teams. Pilot below: FullStack &amp; CS Core.",
+     "One team's slice: Section A inherited from the tracker &middot; Section B owned &middot; Section C asks of other teams. Pilot: FullStack &amp; CS Core.",
      "Read by: team leads &middot; SMEs. Views live as tabs in the tracker master xlsx.",
      None, "kra_training_sheet.xlsx"),
     ("ind", "4", "Individual", "🪜 AI Engineer Ladder",
-     "An internship rung plus four employee levels, the team's Project Manager card, promotion gates and stay bars, 21 progression areas, and the rating rubric — every area wired to the same KPI rows the levels above run on.",
+     "An internship rung plus four employee levels, the team's Project Manager card, stay bars, 21 progression areas, and the rating rubric — every area wired to the same KPI rows the levels above run on.",
      "Read by: every engineer &middot; their manager. Master: role_cards.xlsx.",
-     "https://claude.ai/code/artifact/dc3ab90d-c4a4-448d-bdb5-fb43a9235734", "role_cards.xlsx"),
+     URLS["ladder"], "role_cards.xlsx"),
 ]
 
 def band(key, no, name, art, desc, meta, url, master):
@@ -286,6 +174,52 @@ def band(key, no, name, art, desc, meta, url, master):
             f'<span class="lv">Level {no} · {name}</span><span class="nm">{art}</span>'
             f'<span class="links">{"".join(links)}</span>'
             f'<span class="desc">{desc}</span></div></div>')
+
+def refcard(emoji, name, url, sub):
+    return (f'<a class="refcard" href="{url}" target="_blank" rel="noopener">'
+            f'<span class="re">{emoji}</span><span class="rt"><b>{name}</b>{sub}</span>'
+            f'<span class="ro">open ↗</span></a>')
+
+def refsection(key, lead, cards, note):
+    return (f'<div class="site-section refsec" id="{key}"><div class="refin">'
+            f'<div class="reflead">{lead}</div>'
+            f'<div class="refs">{"".join(cards)}</div>'
+            f'<div class="refnote">{note}</div>'
+            f'</div></div>')
+
+# ---- Levels 2–4: reference sections (URLs only — content lives in the artifacts)
+DEPT_SEC = refsection("dept",
+    "Not re-rendered here — the department layer lives in its own artifacts, updated in place. "
+    "The tracker is the operating sheet; the flow map draws how every row connects.",
+    [refcard("🧭", "KPI tracker", URLS["tracker"],
+             "The 28 department rows — metric category, lane, cadence, budgets — plus the legend that "
+             "decodes them."),
+     refcard("🕸️", "KPI Flow Map", URLS["kpimap"],
+             "Every KPI drawn as a node — team rows ladder into department rows into org KRAs.")],
+    "The live grid with budget / actual / variance columns is the master xlsx — "
+    "<span class=\"mono\">kra_training_sheet.xlsx</span>, download from the band above or the footer.")
+
+TEAM_SEC = refsection("team",
+    "A team view has three sections: <strong>A — inherited</strong> from the tracker (the rows this team "
+    "works on; the number answers at department level) · <strong>B — owned</strong> (the team's functional "
+    "KPIs, each naming the row it ladders to) · <strong>C — asks</strong> of other teams, named, so "
+    "dependencies are contracts instead of surprises. Every view carries Product + Cohort columns.",
+    [refcard("🕸️", "KPI Flow Map", URLS["kpimap"],
+             "The same map, read from the team end — where each owned row goes when it ladders up.")],
+    "The team views themselves are tabs in <span class=\"mono\">kra_training_sheet.xlsx</span> — "
+    "FullStack &amp; CS Core (the pilot every domain team copies) · CSI · Content&ndash;Central. "
+    "Download from the band above or the footer.")
+
+IND_SEC = refsection("ind",
+    "Careers wire to the same rows the levels above run on — the ladder carries the levels, stay bars, "
+    "progression areas and the rating rubric; the growth map draws it all as one picture.",
+    [refcard("🪜", "AI Engineer Ladder", URLS["ladder"],
+             "Five levels with stay bars, the A1&ndash;A4 agent scale, 21 progression areas, the rating "
+             "rubric and the Project Manager card."),
+     refcard("🧗", "Career Growth Map", URLS["careermap"],
+             "The ladder as one drawn map — rungs, progression areas and the evidence wires between them.")],
+    "Editable master: <span class=\"mono\">role_cards.xlsx</span> (8 tabs) — download from the band above "
+    "or the footer. Comp bands are deliberately kept off this site.")
 
 NAV = ('<nav id="topnav"><span class="brand">Content OS</span>'
        '<a href="#map">The map</a>'
@@ -316,7 +250,8 @@ FOOTER = f"""<footer><div class="in">
 <h3>Behind this site</h3>
 <ul>
 <li>Editable masters: <span class="mono">kra_training_sheet.xlsx</span> (tracker + legend + CSI, FullStack &amp; CS Core and Content&ndash;Central team views) · <span class="mono">role_cards.xlsx</span> (ladder, 8 tabs)<span class="dlwrap" hidden> — download: {dlbtn("kra_training_sheet.xlsx")} {dlbtn("role_cards.xlsx")}</span> — in <span class="mono">docs/handoff/artifacts/</span> with the builders and CHANGELOG.</li>
-<li>Standalone artifacts (updated in place; this site re-embeds them on republish): <a href="{LEVELS[0][6]}" target="_blank" rel="noopener">HOD one-pager</a> · <a href="{LEVELS[1][6]}" target="_blank" rel="noopener">KPI tracker</a> · <a href="{LEVELS[3][6]}" target="_blank" rel="noopener">AI Engineer Ladder</a>.</li>
+<li>Standalone artifacts, each updated in place (Level 1 is embedded above; Levels 2&ndash;4 link out rather than re-rendering): <a href="{URLS["onepager"]}" target="_blank" rel="noopener">HOD one-pager</a> · <a href="{URLS["tracker"]}" target="_blank" rel="noopener">KPI tracker</a> · <a href="{URLS["kpimap"]}" target="_blank" rel="noopener">KPI Flow Map</a> · <a href="{URLS["ladder"]}" target="_blank" rel="noopener">AI Engineer Ladder</a> · <a href="{URLS["careermap"]}" target="_blank" rel="noopener">Career Growth Map</a>.</li>
+<li>Each artifact link opens subject to that artifact's own sharing settings.</li>
 <li>Comp bands are deliberately kept off this site — they live in the standalone ladder artifact and <span class="mono">role_cards.xlsx</span>.</li>
 </ul>
 </div></footer>"""
@@ -329,19 +264,16 @@ def wrap_tables(body):
     body = body.replace("<table", '<div class="tscroll"><table')
     return body.replace("</table>", "</table></div>")
 
-for _c in (op_css, tr_css, ld_css, tm_css, SITE_CSS, op_body, tr_body, tm_body, ld_body):
+for _c in (op_css, SITE_CSS, op_body):
     assert "tscroll" not in _c
-op_body, tr_body, tm_body, ld_body = map(wrap_tables, (op_body, tr_body, tm_body, ld_body))
+op_body = wrap_tables(op_body)
 
 page = []
 page.append("<title>Content OS</title>")
 page.append("<style>")
 page.append(SITE_CSS)
 page.append(scope(op_css, "#org"))
-page.append(scope(tr_css, "#dept"))
-page.append(scope(ld_css, "#ind"))
-page.append(f"#team {{\n{tm_css}\n}}")
-page.append("#org, #dept, #team, #ind { padding: 40px 20px; }")
+page.append("#org { padding: 40px 20px; }")
 page.append(".tscroll { overflow-x: auto; }")
 page.append("</style>")
 page.append(NAV)
@@ -349,22 +281,22 @@ page.extend(HERO)
 page.append(band(*LEVELS[0]))
 page.append(f'<div class="site-section" id="org">\n{op_body}\n</div>')
 page.append(band(*LEVELS[1]))
-page.append(f'<div class="site-section" id="dept">\n{tr_body}\n</div>')
+page.append(DEPT_SEC)
 page.append(band(*LEVELS[2]))
-page.append(f'<div class="site-section" id="team">\n{tm_body}\n</div>')
+page.append(TEAM_SEC)
 page.append(band(*LEVELS[3]))
-page.append(f'<div class="site-section" id="ind">\n{ld_body}\n</div>')
+page.append(IND_SEC)
 page.append(FOOTER)
-page.append(tr_scripts[0])
 page.append(DL_SCRIPT)
 
 out = "\n".join(page) + "\n"
-assert "AI Engineer 3" not in out and "was Associate SDE" not in out
-assert "What changed in v3" not in out
 assert out.count('class="dlbtn"') == 5          # dept + team + ind bands, footer ×2
+assert out.count('class="refcard"') == 5        # tracker, kpimap ×2, ladder, careermap
+for u in URLS.values():
+    assert out.count(u) >= 2 or u == URLS["careermap"], u   # band/card + footer
 open("content_os.html", "w", encoding="utf-8").write(out)
 print("chars:", len(out), "| braces:", out.count("{") == out.count("}"),
-      "| sections:", [k for k, *_ in LEVELS], "| A chips:", len(A_ROWS),
-      "| B rows:", len(B_ROWS), "| asks:", len(C_ROWS),
-      "| dlbtns:", out.count('class="dlbtn"'),
-      "| b64 chars:", {k: len(v) for k, v in XLSX_B64.items()})
+    "| sections:", [k for k, *_ in LEVELS],
+    "| refcards:", out.count('class="refcard"'),
+    "| dlbtns:", out.count('class="dlbtn"'),
+    "| b64 chars:", {k: len(v) for k, v in XLSX_B64.items()})

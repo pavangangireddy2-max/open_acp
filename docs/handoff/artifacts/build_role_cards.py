@@ -8,7 +8,9 @@
 # bars + the A1–A4 Agent Scope scale; Learning Systems Design elevated to 4 reads;
 # three matrix rows (▲) rewritten agent-first. Stay bars rewritten in person
 # language (26 Aug, Pavan's per-rung inputs): LSD + PII standard occupants, low-churn
-# slot swaps dissolved, Culture & Values out of the 8 (pillar + gate). Everything
+# slot swaps dissolved, Culture & Values out of the 8 (pillar + gate). Lean pass
+# (26 Aug): promotion gates moved out to the Progression Policy & Merit Framework
+# draft (docs/handoff/workbench/proposals/); vocabulary bridge dropped. Everything
 # else stays verbatim from source; comp for the changed rungs is parked with HR —
 # no invented numbers.
 # Outputs: role_cards.xlsx (editable master, 8 tabs) + role_cards.html (artifact).
@@ -262,40 +264,11 @@ AGENT_SCOPE_MAP = ("Intern converts having shown A1 + A2 · AI Engineer reaches 
                    "operates at A4 (the leverage route) · Lead runs the team's agent fleet through people · "
                    "AI Engineer 3 sets the org's agent architecture.")
 
-GATES = [  # (transition, [numbered requirements]) — approved Aug 2026; becomes the standing
-           # Progression Policy document when Pavan calls for it.
-    ("Conversion gate — Associate AI Engineer → AI Engineer, at 6 months", [
-        "Runs assigned agent pipelines end-to-end without supervision — prompts tuned, outputs reviewed, "
-        "escalations handled (A1–A2 shown).",
-        "Judgment demonstrated: the responsible reviewer — their mentoring AI Engineer or Senior — confirms "
-        "the intern's reviews catch what their own review would catch, sampled on real work through the ramp; "
-        "they can tell good output from plausible output.",
-        "Domain floor: has produced representative content items manually during the ramp — ⚑ propose: "
-        "≈ 25% of an AI Engineer's monthly share, held as ramp evidence — you can't review what you "
-        "can't do.",
-        "Decided by: supervising Senior / AI Engineer Lead proposes with ramp evidence; HOD confirms. "
-        "Package set by HR at conversion."]),
-    ("AI Engineer → Senior AI Engineer — the 2× bar", [
-        "Surface ≈ 2× an AI Engineer's — courses × complexity, any mix of depth, breadth, or leverage "
-        "(A4 agent systems are the leverage route).",
-        "Quality held: all their Section B rows at budget, 2+ consecutive cycles.",
-        "Leverage visible: Agentic Production Coverage contribution plus falling cost rows for their courses.",
-        "People growing: mentorship evidence (Power Performers Created) — guiding work, not owning ratings.",
-        "AI Engineer Lead proposes with row evidence; HOD + calibration confirm. Minimum 1 year in role."]),
-    ("Senior AI Engineer → AI Engineer Lead — people outcomes define the title", [
-        "A Lead seat exists — the span rule creates them: ~5–8 members per Lead (number with HR).",
-        "Already answering beyond their slice: full-Section-B literacy shown at reviews, Section A lane "
-        "awareness.",
-        "People outcomes proven as a mentor: retention and growth of the people they guided.",
-        "Accepts the accountability that defines the title: ratings, retention, growth and hiring for members.",
-        "HOD + PM-head calibration confirm."]),
-    ("AI Engineer Lead → AI Engineer 3 — the org seat", [
-        "Org-level surface already held: org-tracker rows shaped, cross-domain standards authored and adopted.",
-        "Their team runs without them day to day — the bus-factor test, passed.",
-        "By org need, not tenure. HOD proposes; founders / PM-head calibration confirm."]),
-]
+# Promotion gates moved out 26 Aug — they live in the Progression Policy & Merit
+# Framework (drafted in docs/handoff/workbench/proposals/, shipped when Pavan calls).
 
-STAY_LEAD = ("The gates say how you climb; this says what keeping the seat means. One rule under every bar: "
+STAY_LEAD = ("How you climb lives in the Progression Policy & Merit Framework — its own document; "
+             "this says what keeping the seat means. One rule under every bar: "
              "your rung's eight scored rows at budget — 100%, no governance breach. Below budget more than "
              "twice in 12 months breaks the bar; two consecutive cycles below starts a structured gap "
              "conversation with your Lead — what's missing, the plan, the timeline. A conversation, not a "
@@ -331,19 +304,19 @@ STAY = [  # (level, context line, footer line, rows); row = ("A"|"B", row name, 
       ("A", "Agent improvement delta (A2)",
        "⚑ ≥ 4 documented before/afters on accuracy, retrieval quality or unit cost — spread across the "
        "agents they run, not four tweaks to one", "Mandatory"),
-      ("A", "Their topic surface",
+      ("A", "Topic surface",
        "⚑ Half an AI Engineer's — ≈ 100 CWT across the six months, produced through the agents",
        "Mandatory"),
       ("A", "Feedback → backpropagation plans",
        "Runs the feedback agents — reactive and proactive channels, every dimension — and outputs the "
        "plan; review inputs logged by the mentoring AI Engineer reach zero by the final two months",
        "Mandatory"),
-      ("B", "Content issues — their items", "80% fixed inside the 2-day TAT", "Breach blocks"),
-      ("B", "Recurrence — their items", "≤ 2% — fixes stay fixed", "Breach blocks"),
+      ("B", "Content issues", "80% fixed inside the 2-day TAT", "Breach blocks"),
+      ("B", "Recurrence", "≤ 2% — fixes stay fixed", "Breach blocks"),
       ("B", "Process adherence",
        "The team's guidelines followed end-to-end — checklists, review sheets, worklogs current",
        "Breach blocks"),
-      ("B", "Unit costs — their pipelines",
+      ("B", "Unit costs",
        "Objective practice item (FIB, MCQ, MMCQ — any type) ≤ ₹3 · coding question on the domain scale "
        "{hi|~₹200 FullStack / GenAI} {vh|up to ₹300 DS & Algo}", "Breach blocks")]),
     ("AI Engineer",
@@ -434,16 +407,6 @@ STAY_NOTES = [  # rendered under the stay-bar table in both outputs
 ]
 CWT_DEF = ("CWT — complexity-weighted topics: topic count × the domain complexity multiplier. ≈ 200 CWT per "
            "AI Engineer per 6-month cycle (= ≈ 100 topics at FullStack / GenAI 2.0×); a Senior holds ≈ 400.")
-
-BRIDGE = [
-    ("Functions", "§10 embedded functions + the content domain teams. “Packaging Teams” = Content Systems & Infra teams (Pavan, Aug 2026)."),
-    ("Stakeholders", "§7 counterparties — reached through team-view Section C asks, never staffed into lanes."),
-    ("Leadership", "Unchanged — Founders, HODs."),
-    ("Peer Content Teams", "The other §10 sub-departments (domain teams)."),
-    ("Support Teams", "Unchanged — HR, Finance, L&D, Facilities."),
-    ("“Owns” / P&L language", "Translated to the axis rule: Lane (col L) = accountability · Functions (col K) = who works. "
-     "A Lead answers for the team's Section B; lane numbers stay with lane leads."),
-]
 
 FS_PILOT = {
     "team": "FullStack & CS Core",
@@ -546,11 +509,11 @@ for new, old, comp, role, src_note, surf in LEVELS:
     ws.row_dimensions[r].height = max(60, 14 * (max(len(role), len(src_note)) // 60 + 1))
     r += 1
 
-# Tab 2 — Gates & Scope (v3)
-ws = sheet("Gates & Scope", (32, 120))
+# Tab 2 — Agent Scope (v3; promotion gates moved to the Progression Policy & Merit Framework, 26 Aug)
+ws = sheet("Agent Scope", (32, 120))
 r = title_row(ws, 1, "Progression machinery — the production principle, the A1–A4 Agent Scope scale, "
-                     "promotion gates, and stay bars. Becomes the standing Progression Policy document "
-                     "when formalized.", 2)
+                     "and the stay-bar rule. Promotion gates live in the Progression Policy & Merit "
+                     "Framework — its own document.", 2)
 put(ws, r, 1, "Production principle", bold=True)
 put(ws, r, 2, PRINCIPLE)
 ws.row_dimensions[r].height = 52
@@ -565,13 +528,6 @@ put(ws, r, 1, "Role mapping", bold=True, color=MUTED)
 put(ws, r, 2, AGENT_SCOPE_MAP)
 ws.row_dimensions[r].height = 28
 r += 2
-r = hdr_row(ws, r, ("Promotion gate", "Requirements (all of them)"))
-for trans, lines in GATES:
-    put(ws, r, 1, trans, bold=True)
-    put(ws, r, 2, "\n".join(f"{i}. {ln}" for i, ln in enumerate(lines, 1)))
-    ws.row_dimensions[r].height = 15 + 26 * len(lines)
-    r += 1
-r += 1
 r = hdr_row(ws, r, ("Level", "Holding the role (the stay bar)"))
 put(ws, r, 1, "One rule", bold=True, color=MUTED)
 put(ws, r, 2, STAY_LEAD)
@@ -630,9 +586,8 @@ for note in STAY_NOTES + [CWT_DEF]:
 
 # Tab 4 — Progression Areas
 ws = sheet("Progression Areas", (24, 22, 34, 34, 34, 34))
-r = title_row(ws, 1, "21 progression areas × 4 levels — carried verbatim from the framework except the rows "
-                     "marked ▲ (rewritten agent-first). AI Engineer 3 sits above Lead (org-wide scope); "
-                     "the matrix deliberately stops at Lead.", 6)
+r = title_row(ws, 1, "21 progression areas × 4 levels (▲ = rewritten agent-first, Aug 2026). AI Engineer 3 "
+                     "sits above Lead (org-wide scope); the matrix deliberately stops at Lead.", 6)
 r = hdr_row(ws, r, ("Category", "Area", "Associate AI Engineer (Intern)", "AI Engineer", "Senior AI Engineer", "AI Engineer Lead"))
 for cat, area, a, e1, e2, ld in AREAS:
     put(ws, r, 1, cat, color=MUTED)
@@ -680,7 +635,7 @@ for sc in SCALE[1:]:
 # Tab 7 — Calibration
 ws = sheet("Calibration", (26, 34, 34, 34, 34))
 r = title_row(ws, 1, "Calibration: portfolio by level · domain complexity · product baselines · "
-                     "domain catalogue · vocabulary bridge (2026 doc → KPI system)", 5)
+                     "domain catalogue", 5)
 r = hdr_row(ws, r, tuple(PORTF[0][:1] + ["Associate AI Engineer (Intern)", "AI Engineer", "Senior AI Engineer", "AI Engineer Lead"]))
 for row in PORTF[1:]:
     put(ws, r, 1, row[0], bold=True)
@@ -708,14 +663,6 @@ r = hdr_row(ws, r, tuple(DOMAINS[0] + [""] * (5 - len(DOMAINS[0]))))
 for row in DOMAINS[1:]:
     for c, v in enumerate(row, 1):
         put(ws, r, c, v, bold=(c == 1))
-    r += 1
-r += 1
-r = hdr_row(ws, r, ("2026 doc term", "In the KPI system", "", "", ""))
-for term, mapping in BRIDGE:
-    put(ws, r, 1, term, bold=True)
-    ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=5)
-    put(ws, r, 2, mapping)
-    ws.row_dimensions[r].height = max(15, 13 * (len(mapping) // 120 + 1))
     r += 1
 
 # Tab 8 — Project Manager
@@ -808,10 +755,6 @@ STYLE = """  * { margin: 0; padding: 0; box-sizing: border-box; }
   .bar { height: 4px; background: #e4e4e4; border-radius: 2px; margin-top: 5px; }
   .bar i { display: block; height: 4px; background: #0e6e5c; border-radius: 2px; }
   .footnote { font-size: 0.85em; color: #666; margin-top: 34px; border-top: 1px solid #ccc; padding-top: 12px; max-width: 90ch; }
-  .gate { border: 1px solid #ccc; border-radius: 4px; margin-bottom: 12px; overflow: hidden; }
-  .gate-h { padding: 9px 12px; background: #f4f4f4; border-bottom: 1px solid #ddd; font-weight: 700; font-size: .92em; }
-  .gate ol { padding: 10px 14px 10px 32px; font-size: .86em; margin: 0; }
-  .gate li { margin: 3px 0; }
   @media (max-width: 980px) { .ladder { grid-template-columns: 1fr; } }"""
 
 B = []
@@ -823,8 +766,9 @@ B.append('<div class="subtitle">Career framework for content-department domain t
 B.append('<div class="key-point"><strong>How to read the cards:</strong> every progression area and rating line is '
          'wired to named KPI rows — anything in a <span class="kpi">mono chip</span> is a live row on the KPI tracker '
          'or the team view, so reviews read off the sheets instead of impressions. Areas with no chip say so '
-         '<em>by design</em>. Every transition has a written gate, every rung a stay bar, and the A1&ndash;A4 Agent '
-         'Scope scale grades the agent work; comp for the changed rungs sits with HR.</div>')
+         '<em>by design</em>. Every rung has a stay bar, and the A1&ndash;A4 Agent Scope scale grades the agent '
+         'work; promotion gates live in the Progression Policy &amp; Merit Framework — its own document; comp '
+         'for the changed rungs sits with HR.</div>')
 B.append('<div class="key-point"><strong>Production principle:</strong> all content production runs through agents — '
          'humans design, review, and improve the systems that produce. Named exception, so the claim stays honest: '
          'the video production pipeline (recording, editing, review) — agenticity not required there. This is what '
@@ -847,19 +791,12 @@ B.append('</div>')
 
 B.append('<h2>Agent Scope — the A1&ndash;A4 scale</h2>')
 B.append('<div class="sectionlead">Role levels say what you answer for; the A-scale grades the agent work itself. '
-         'The gates and stay bars below cite it.</div>')
+         'The stay bars below cite it.</div>')
 B.append('<div class="scroll"><table style="max-width:980px"><tr><th style="width:16%">Scope</th><th>What it means</th></tr>')
 for code, nm, desc in AGENT_SCOPE:
     B.append(f'<tr><td><strong>{code} — {esc(nm)}</strong></td><td>{esc(desc)}</td></tr>')
 B.append('</table></div>')
 B.append(f'<div class="key-point"><strong>Role mapping:</strong> {esc(AGENT_SCOPE_MAP)}</div>')
-
-B.append('<h2>Promotion gates</h2>')
-B.append('<div class="sectionlead">Each transition has a written gate — all requirements, plus who proposes and who '
-         'confirms. These blocks become the standing Progression Policy document when formalized.</div>')
-for trans, lines in GATES:
-    B.append(f'<div class="gate"><div class="gate-h">{esc(trans)}</div><ol>' +
-             "".join(f'<li>{esc(ln)}</li>' for ln in lines) + '</ol></div>')
 
 def chip_html(s):  # chip tokens → colored spans (escape first; tokens carry no &<>)
     return re.sub(r"\{(lo|md|hi|vh)\|([^}]*)\}",
@@ -895,8 +832,7 @@ B.append('<p class="muted" style="font-size:.85em;max-width:90ch;margin:-2px 0 2
          esc(CWT_DEF).replace(" — complexity-weighted topics:", "</strong> — complexity-weighted topics:", 1) + '</p>')
 
 B.append('<h2>21 progression areas</h2>')
-B.append('<div class="sectionlead">Grouped into 4 categories; all areas matter, weight varies by level. Carried '
-         'verbatim from the framework except the rows marked ▲ — rewritten agent-first.</div>')
+B.append('<div class="sectionlead">Grouped into 4 categories; all areas matter, weight varies by level.</div>')
 for cat in CATS:
     rows = [a for a in AREAS if a[0] == cat]
     B.append(f'<h3 style="margin:20px 0 10px;font-size:1.05em">{esc(cat)} ({len(rows)})</h3>')
@@ -995,23 +931,17 @@ for label, val in pm_rows:
     B.append(f'<tr><td><strong>{label}</strong></td><td>{val}</td></tr>')
 B.append('</table></div>')
 
-B.append('<h2>Vocabulary bridge</h2>')
-B.append('<div class="scroll"><table><tr><th style="width:22%">2026 doc term</th><th>In the KPI system</th></tr>')
-for term, mapping in BRIDGE:
-    B.append(f'<tr><td><strong>{esc(term)}</strong></td><td>{esc(mapping)}</td></tr>')
-B.append('</table></div>')
-
 B.append('<div class="footnote">Source: the department&rsquo;s March 2026 career framework — descriptors, rating '
          'weights and calibration tables carried verbatim except the matrix rows marked ▲; titles renamed and KPI '
          'wiring added (August 2026); the internship rung, the Senior force-multiplier rung, '
-         'promotion gates, stay bars and the Agent Scope scale added August 2026. The rating samples the '
+         'stay bars and the Agent Scope scale added August 2026. The rating samples the '
          'surface; the role answers for all of it. Comp: Lead and AI Engineer 3 keep inherited bands; the changed '
          'rungs are with HR — no invented numbers. '
          'Defaults taken pending red-pen: comp bands included (artifact is private; strip for wide sharing) &middot; '
          'level names Associate (internship) / Engineer / Senior / Lead / 3 &middot; FullStack &amp; CS Core as pilot. '
          'Companion sheets: KPI tracker (kra_training_sheet.xlsx) &middot; HOD one-pager. Other domain teams get cards '
-         'when their team views land; CSI and Content&ndash;Central role cards are queued separately; the gate blocks '
-         'above become the standing Progression Policy document when called for.</div>')
+         'when their team views land; CSI and Content&ndash;Central role cards are queued separately; promotion '
+         'gates and eligibility live in the Progression Policy &amp; Merit Framework — its own document.</div>')
 
 html = ('<title>AI Engineer Ladder</title>\n<style>\n' + STYLE + '\n</style>\n'
         '<div class="container">\n' + "\n".join(B) + '\n</div>\n')

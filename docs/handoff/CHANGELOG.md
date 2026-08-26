@@ -563,3 +563,35 @@ Files: build_site.py, content_os.html.
   same eight person-language rows; §3.3 retitled "Low-churn domains — the slot-swap, dissolved (26 Aug)";
   §2.3 culture-not-a-row bullet + coverage-rule paragraph; §7 Lead matrix carries a pre-note that it
   predates this pass by ruling; §10 gains rulings 11–14 (now "Rulings — landed 25–26 August 2026").
+
+## 2026-08-26 — Ladder slims (gates → policy doc), Content OS goes lean/link-based (🪜 🗺️ republished)
+
+- **Pavan's ordered edits (from the nine-part message):** (1) Vocabulary bridge section cut from the
+  ladder — not needed. (2) Promotion gates cut from the ladder — they move to a separate **Progression
+  Policy & Merit Framework** artifact ("similar to sales doc. Draft one and keep it with you").
+  (3) Content OS sections 2–4 stop re-rendering artifact content — reference the URLs instead, with the
+  KPI Map and Career Growth Map hyperlinked in and the updated xlsx re-embedded, to save tokens; a full
+  generated playbook may be asked for later, after all inputs land. (4) The "Carried verbatim from the
+  framework except the rows marked ▲" explainer line removed from 21 Progression Areas. (5) The Associate
+  stay-bar "their" wording dropped — rows renamed to "Topic surface", "Content issues", "Recurrence",
+  "Unit costs".
+- **🪜 ladder rebuilt** (build_role_cards.py −96/+26): gates block + vocab bridge deleted; STAY_LEAD now
+  opens "How you climb lives in the Progression Policy & Merit Framework — its own document; this says
+  what keeping the seat means."; intro + footnote point at the policy doc; xlsx Tab 2 renamed **Agent
+  Scope** (was Scope & Gates), workbook stays 8 tabs; ▲ markers themselves KEPT (tooltip + xlsx key)
+  — only the explainer sentence went.
+- **🗺️ Content OS rewritten lean** (build_site.py full rewrite): the org one-pager stays the only
+  embed; Levels 2–4 are now link-reference sections — 🧭 tracker, 🕸️ KPI Flow Map (dept + team ends),
+  🪜 ladder, 🧗 Career Growth Map as refcards with standalone-artifact links; both xlsx masters
+  (kra_training_sheet.xlsx + updated role_cards.xlsx) still embedded with download buttons; footer
+  carries the full 5-artifact roster. Page 177,282 chars (was ~311KB). **Structural win: build_site.py
+  now reads only hod_kpi_onepager.html + the two xlsx — child-artifact republishes no longer force a
+  site rebuild** (only one-pager or xlsx changes do).
+- **Policy draft created and held:** docs/handoff/workbench/proposals/progression_policy_merit_framework.html
+  — the four promotion gates verbatim (their new home), composition + floors + merit mechanics, per-rung
+  matrices, DRAFT banner. **Not published, not committed** — goes live only when Pavan calls for it.
+- **Republished, same URLs:** 🪜 `gates-to-policy-lean`, 🗺️ `lean-link-sections` (site `capabilities`
+  omitted — stored `downloads:true` + contract 0.2.12 carried forward, confirmed). 🎯 🧭 🕸️ 🧗
+  untouched — git confirmed zero career-map ast inputs changed. comp_boxes_cache.json byte-identical.
+- **Discussion items 6–9 (couplings, Associate repetition, the Lead rung) answered in chat — nothing
+  shipped on them without a go.**
