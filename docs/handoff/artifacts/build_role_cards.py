@@ -101,9 +101,9 @@ PILLARS = [  # (name, weight, sublines, kpi reads aligned to sublines)
         "Industry Update Adherence · Tech Stack Freshness Rate",
         "Pedagogy Initiative Impact · Agentic Production Coverage"]),
     ("Role Competence", 25, parse_lines(RT[5:10]), [
-        "Content Issue Recurrence Rate · Module-Quiz Score Bands · Engagement-Matrix Cell Migration",
+        "Content Issue Recurrence Rate · Practice → Module-Quiz Conversion · Engagement-Matrix Cell Migration",
         "Agentic Production Coverage",
-        "Cost per Learning Hour · Cost per MCQ · Cost per Coding Question",
+        "Cost per Learning Hour · Cost per Objective Practice Item · Cost per Coding Question",
         "Learning Content Hours Delivered · Practice & Assessment Content Pieces Delivered",
         "Cross-functional Sprint Delivery Rate · Stakeholder Content Request Fulfillment Rate"]),
     ("Develop the Best", 15, parse_lines(RT[10:15]), [
@@ -166,7 +166,7 @@ WIRING = [  # (category, area, [kpi rows], note)
      "Review evidence — influence is work adopted beyond your lane: SOPs and agents other teams run, "
      "team-view Section C asks raised → accepted → delivered, §7 counterparty standing."),
     ("Core Creation and Quality", "Content Quality",
-     ["Content Issue Resolution Efficiency", "Content Issue Recurrence Rate", "Module-Quiz Score Bands"],
+     ["Content Issue Resolution Efficiency", "Content Issue Recurrence Rate", "Practice → Module-Quiz Conversion"],
      "The Learning Domains quality loop — recurrence is the tell that a fix actually held."),
     ("Core Creation and Quality", "Content Effectiveness",
      ["Learner Accessed Content Completion Rate", "Practice Attempt-to-Completion Rate",
@@ -191,13 +191,13 @@ WIRING = [  # (category, area, [kpi rows], note)
      "lives here: the day starts and ends in the pipeline dashboards."),
     ("Core Creation and Quality", "Learning Systems Design",
      ["Evaluation Environment Coverage", "Domain Capability Delivery",
-      "Summative + Formative Achievement", "Module-Quiz Score Bands"],
+      "Summative + Formative Achievement", "Module-Quiz → Formative Conversion"],
      "The Domain Product Enablement pair — raised/accepted by SMEs, built by PMs + Engineering, "
-     "accountability in Learning Domains — plus the measurement proof: achievement and quiz-band reads "
+     "accountability in Learning Domains — plus the measurement proof: achievement and conversion-chain reads "
      "shared with Content Effectiveness / Content Quality (the APC double-read precedent). Also reads: "
      "Learning Environment Satisfaction, PAtC env-friction leg."),
     ("Core Creation and Quality", "GenAI Orchestration & Content Automation",
-     ["Agentic Production Coverage", "Cost per MCQ Generated", "Cost per Coding Question"],
+     ["Agentic Production Coverage", "Cost per Objective Practice Item", "Cost per Coding Question"],
      "Mandatory from day one — the internship runs on it. Orchestration shows up as coverage plus falling "
      "unit costs; prompt craftsmanship and AI operational literacy are named expectations here."),
     ("Core Creation and Quality", "Business Impact",

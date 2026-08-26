@@ -110,7 +110,7 @@ for r in range(3, org.max_row + 1):
                "unit": str(org.cell(r, 13).value or "").strip(),
                "freq": str(org.cell(r, 14).value or "").strip()}
         org_metrics.append(cur)
-assert len(org_metrics) == 19, [m["name"] for m in org_metrics]
+assert len(org_metrics) == 20, [m["name"] for m in org_metrics]
 
 ws = wb["FullStack & CS Core View"]
 hdr = next(r for r in range(1, 8) if "KPI name" in [str(ws.cell(r, c).value or "") for c in range(1, 16)])
@@ -146,7 +146,6 @@ ALIAS = {  # ladder shorthand -> frozen row(s); "Summative + Formative" fans out
     "University Curriculum Compliance": [("org", "University Curriculum & Framework Compliance")],
     "Content Issue Recurrence Rate": [("org", "Content Issue Recurrence")],
     "Cost per Learning Hour": [("fs", "Cost per Learning Hour Produced")],
-    "Cost per MCQ": [("fs", "Cost per MCQ Generated")],
 }
 def resolve(key):
     """-> list of node ids (f#, g#, k1)."""
@@ -204,8 +203,9 @@ edges = [(s, t, "ev") for s, t in ev_edges] + [(s, t, "rd") for s, t in rd_edges
 used = {t for s, t in ev_edges} | {s for s, _ in rd_edges}
 org_used = sorted({int(t[1:]) for t in used if t.startswith("g")})
 assert {org_metrics[i]["name"] for i in org_used} == {
-    "Content Issue Resolution Efficiency", "Content Issue Recurrence", "Module-Quiz Score Bands",
-    "Engagement-Matrix Cell Migration", "University Curriculum & Framework Compliance",
+    "Content Issue Resolution Efficiency", "Content Issue Recurrence", "Practice → Module-Quiz Conversion",
+    "Module-Quiz → Formative Conversion", "Engagement-Matrix Cell Migration",
+    "University Curriculum & Framework Compliance",
     "Industry Update Adherence", "Agentic Production Coverage"}, [org_metrics[i]["name"] for i in org_used]
 unused_fs = [r["name"] for i, r in enumerate(fs_rows) if f"f{i}" not in used]
 assert set(unused_fs) == {"Branding Content Assets Delivered", "Cost per Vernacular Content Hour",
@@ -614,6 +614,6 @@ print(f"OK {OUT}: {len(html_out):,} chars · nodes: {len(nodes)} "
       f"(21 areas / {len(fs_rows)} FS / {len(org_used)} org / 1 KRA / 19 lines / 4 pillars / 1 final) · "
       f"edges: {len(edges)} (ev {len(ev_edges)} · rd {len(rd_edges)} · tr {len(tr_edges)}) · "
       f"canvas {WIDTH}×{HEIGHT} · wired {len(wired)}/review {len(review)} · muted FS {len(unused_fs)}")
-assert len(nodes) == 21 + 29 + 7 + 1 + 19 + 4 + 1, len(nodes)
+assert len(nodes) == 21 + 29 + 8 + 1 + 19 + 4 + 1, len(nodes)
 assert html_out.count('class="edge') == len(edges)
 assert ">None<" not in html_out and "UNMAPPED" not in html_out

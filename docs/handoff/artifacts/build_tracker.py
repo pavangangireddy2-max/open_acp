@@ -33,8 +33,7 @@ def fun(i): return ROWS[i][5]
 # Video Editors, DA/DEs, Product Designers, Packaging Teams, SDIs (+ CSI team).
 FX = {
   "pdg":    "CSI team + Product Managers — counterparty: Program Ops · assets leg: Graphic Designers, Video Editors, SDIs, Packaging Teams",
-  "bands":  "Content + Pedagogy Experts + DA/DEs",
-  "align":  "Content + Pedagogy Experts + DA/DEs",
+  "conv":   "Content + Pedagogy Experts + DA/DEs",
   "cell":   "Product Managers + Engineering + DA/DEs",
   "cissue": "Content + Engineering",
   "eng":    "Engineering",
@@ -56,33 +55,41 @@ TRACKER = [
    "functions": FX["pdg"], "unit": "%", "freq": "Weekly", "lane": "Product Learning Experience",
    "remark": "CASCADE — feeds KRA 1 + KRA 3, tracked once (no double count). Lower is better — variance reads inverted. Assembled KPI — each dependent step carries a named owner (col I); we orchestrate, route, escalate: red 2 consecutive weeks → HOD-to-HOD.",
    "rows": [{"cohort": "All", "kpi": "Program Delivery:NIAT::Program Delivery Gap", "budget": 0}]},
-  {"kra": 0, "category": "Business Impact", "product": "NIAT", "metric": "Module-Quiz Score Bands", "marker": "",
-   "desc": "Share of the batch in each module-quiz band (10-pt scale) — one band stricter than the org bands",
-   "dep": dep(1), "funnel": fun(1), "functions": FX["bands"],
+  {"kra": 0, "category": "Business Impact", "product": "NIAT", "metric": "Practice → Module-Quiz Conversion", "marker": "",
+   "desc": "Of learners who completed the module's practice (completion = ≥90% of the module's pieces — threshold adjustable), % scoring ≥8.0 on that module's quiz — same learners tracked through the module window, not period aggregates",
+   "dep": "practice completion per learner per module (≥90% threshold — adjustable) · module-quiz conduction (Program Ops, quiz-code mechanism) · per-learner score joins within the module window (DA/DEs)",
+   "funnel": "content + practice teach the module → completers clear the quiz at ≥8.0 → quiz mastery feeds the formative leg → SPI",
+   "functions": FX["conv"],
    "unit": "%", "freq": "Monthly", "lane": "Learning Domains",
-   "remark": "Four band rows per batch sum to 100; the <5.0 rows target 0 (lower is better). B4 rows go live with the batch's first module quiz.",
+   "remark": "Stage 1 of the learning-conversion chain — the teaching-effectiveness read, conditioned on our own funnel input so intake and engagement effects are stripped. Anti-gaming pair: FS Section B Practice Attempt-to-Completion (B 38) — a conversion rising while completion falls is being gamed. Budgets blank until the first measured cycle (org-tracker precedent). B4 rows go live with the batch's first module quiz. Band distribution stays as a read-only DA/DE cut.",
    "rows": [
-     {"cohort": "B3", "kpi": "Business Impact:NIAT:B3::% in Module-Quiz Band ≥8.0",    "budget": 30},
-     {"cohort": "B3", "kpi": "Business Impact:NIAT:B3::% in Module-Quiz Band 7.0–8.0", "budget": 40},
-     {"cohort": "B3", "kpi": "Business Impact:NIAT:B3::% in Module-Quiz Band 5.0–7.0", "budget": 30},
-     {"cohort": "B3", "kpi": "Business Impact:NIAT:B3::% in Module-Quiz Band <5.0",    "budget": 0},
-     {"cohort": "B4", "kpi": "Business Impact:NIAT:B4::% in Module-Quiz Band ≥8.0",    "budget": 30},
-     {"cohort": "B4", "kpi": "Business Impact:NIAT:B4::% in Module-Quiz Band 7.0–8.0", "budget": 40},
-     {"cohort": "B4", "kpi": "Business Impact:NIAT:B4::% in Module-Quiz Band 5.0–7.0", "budget": 30},
-     {"cohort": "B4", "kpi": "Business Impact:NIAT:B4::% in Module-Quiz Band <5.0",    "budget": 0}]},
-  {"kra": 0, "category": "Business Impact", "product": "NIAT", "metric": "Content–Assessment Alignment", "marker": "",
-   "desc": "|avg module-quiz score − avg biweekly skill-assessment score| — the taught-vs-tested gap",
-   "dep": dep(2), "funnel": fun(2), "functions": FX["align"],
-   "unit": "pp", "freq": "Monthly", "lane": "Learning Domains",
-   "remark": "Lower is better — variance reads inverted. Tightens to ≤5 pp after 3 clean cycles (cycle = semester).",
+     {"cohort": "B3", "kpi": "Business Impact:NIAT:B3::Practice-Completed → Module-Quiz ≥8.0 Conversion", "budget": None},
+     {"cohort": "B4", "kpi": "Business Impact:NIAT:B4::Practice-Completed → Module-Quiz ≥8.0 Conversion", "budget": None}]},
+  {"kra": 0, "category": "Business Impact", "product": "NIAT", "metric": "Module-Quiz → Formative Conversion", "marker": "",
+   "desc": "Of learners scoring ≥8.0 on the module quiz, % scoring ≥8.0 on the formative skill assessment covering that module — did the learning transfer beyond the quiz",
+   "dep": "module-quiz ≥8.0 roster (stage-1 output) · formative skill-assessment conduction & scores (Assessments-dept instruments) · blueprint visibility per cycle (§7 ask)",
+   "funnel": "quiz mastery transfers to formative skill assessments → the formative share of the external 75% lands → SPI",
+   "functions": FX["conv"],
+   "unit": "%", "freq": "Monthly", "lane": "Learning Domains",
+   "remark": "Stage 2 — the teach-to-the-quiz check: stage 1 high with stage 2 low means quiz-fitted content, not learning. Two-sided row — formative instruments are authored by the Assessments department; when this dips, the DA/DE alignment cut says whether it's a learning failure or an instrument shift. Budgets blank until the first measured cycle.",
    "rows": [
-     {"cohort": "B3", "kpi": "Business Impact:NIAT:B3::Content–Assessment Alignment", "budget": 10},
-     {"cohort": "B4", "kpi": "Business Impact:NIAT:B4::Content–Assessment Alignment", "budget": 10}]},
+     {"cohort": "B3", "kpi": "Business Impact:NIAT:B3::Module-Quiz ≥8.0 → Formative ≥8.0 Conversion", "budget": None},
+     {"cohort": "B4", "kpi": "Business Impact:NIAT:B4::Module-Quiz ≥8.0 → Formative ≥8.0 Conversion", "budget": None}]},
+  {"kra": 0, "category": "Business Impact", "product": "NIAT", "metric": "Formative → Summative Conversion", "marker": "",
+   "desc": "Of learners scoring ≥8.0 on the module's formative skill assessments, % holding ≥8.0 on the summative skill assessment — the retention read guarding the heaviest SPI weight (50%)",
+   "dep": "formative ≥8.0 roster (stage-2 output) · summative skill-assessment conduction & scores (Assessments dept) · semester-window mapping of modules to the summative (DA/DEs)",
+   "funnel": "formative mastery holds to semester end → the summative 50% of SPI lands → SPI bands + university trust",
+   "functions": FX["conv"],
+   "unit": "%", "freq": "Per semester", "lane": "Learning Domains",
+   "remark": "Stage 3 — the cram-vs-retention detector: students who pass everything fresh and lose it by semester end show up only here. Instruments authored by the Assessments department (two-sided row — read with the DA/DE alignment cut). All ≥8.0 thresholds sit at the dept-strict band — adjustable. Budgets blank until the first measured cycle.",
+   "rows": [
+     {"cohort": "B3", "kpi": "Business Impact:NIAT:B3::Formative ≥8.0 → Summative ≥8.0 Conversion", "budget": None},
+     {"cohort": "B4", "kpi": "Business Impact:NIAT:B4::Formative ≥8.0 → Summative ≥8.0 Conversion", "budget": None}]},
   {"kra": 0, "category": "Business Impact", "product": "All", "metric": "Engagement-Matrix Cell Migration", "marker": "SAMPLE",
    "desc": "% of learners in the HE×HV (high-effort × high-value) cell; the full 3×3 matrix stays diagnostic",
    "dep": dep(3), "funnel": fun(3), "functions": FX["cell"],
    "unit": "%", "freq": "Per cycle · read monthly", "lane": "Learning Platform",
-   "remark": "SAMPLE — from ~4% baseline; budget confirms when the LE dashboard lands. Alt pick: M×M 10 → 20. Arbitration with Score Bands: both red → the bleeding cell names the lane — high effort + low value = content not converting effort (Learning Domains); effort itself draining = engagement problem (Learning Platform).",
+   "remark": "SAMPLE — from ~4% baseline; budget confirms when the LE dashboard lands. Alt pick: M×M 10 → 20. Arbitration with the conversion chain: both red → the bleeding cell names the lane — high effort + low value = content not converting effort (Learning Domains); effort itself draining = engagement problem (Learning Platform).",
    "rows": [{"cohort": "All", "kpi": "Business Impact:All::% Learners in HE×HV Cell", "budget": 10}]},
   {"kra": 0, "note": "Summative & Formative Achievement — ORG scoreboard, tracked not owned: same 30/40/30 on assessment scores, per batch. Steps 1–3 held → assessments run → the 75% lands → SPI Bands."},
   # ---- KRA 2
@@ -191,7 +198,7 @@ TRACKER = [
 # Session-index rooms: (display name, COUNTIF pattern, rows text)
 FUNCTIONS = [
   ["Content", "Content",
-   "Module-Quiz Score Bands · Content–Assessment Alignment · Content Issue pair (fixes) · BOS curriculum artifacts · Compliance · Industry Update Adherence"],
+   "Learning-conversion chain (Practice → Module-Quiz → Formative → Summative) · Content Issue pair (fixes) · BOS curriculum artifacts · Compliance · Industry Update Adherence"],
   ["Content–Central (production ops)", "Content–Central",
    "Agentic Production Coverage — the agentic pipelines & production workflows the domain teams publish through"],
   ["Engineering", "Engineering",
@@ -199,9 +206,9 @@ FUNCTIONS = [
   ["Product Managers", "Product Managers",
    "Program Delivery Gap (feeds KRA 1 + 3) · Engagement-Matrix Cell Migration · Journey Step Health · Product Issue pair"],
   ["Pedagogy Experts", "Pedagogy Experts",
-   "Module-Quiz Score Bands · Content–Assessment Alignment · Journey Step Health (journey design at the CSI team)"],
+   "Learning-conversion chain (Practice → Module-Quiz → Formative → Summative) · Journey Step Health (journey design at the CSI team)"],
   ["DA/DEs", "DA/DE",
-   "score analysis (bands, alignment) · LE dashboard (cell migration) · Journey Step Health instrumentation · Agentic Production Coverage instrumentation"],
+   "score analysis (conversion chain; band + alignment diagnostic cuts) · LE dashboard (cell migration) · Journey Step Health instrumentation · Agentic Production Coverage instrumentation"],
   ["CSI team", "CSI team",
    "Program Delivery Gap (feeds KRA 1 + 3) · Journey Step Health · Product Issue pair · BOS · University Communication TAT · Compliance"],
   ["Asset production — Graphic Designers · Video Editors · SDIs · Packaging Teams", "Graphic Designers",
@@ -377,7 +384,7 @@ for i, (name, pat, rows_txt) in enumerate(FUNCTIONS):
 note_r = 2 + len(FUNCTIONS)
 si.merge_cells(start_row=note_r, start_column=1, end_row=note_r, end_column=3)
 nc = si.cell(row=note_r, column=1,
-             value="Counts are per metric — a band/cohort block counts once (the Functions cell spans its rows). "
+             value="Counts are per metric — a metric/cohort block counts once (the Functions cell spans its rows). "
                    "Functions vocabulary from the HOD one-pager §2 key terms; edit column K on the tracker and the counts recompute.")
 nc.font = F(10, italic=True, color="FF777777")
 nc.alignment = Alignment(vertical="top", wrap_text=True)
@@ -444,7 +451,10 @@ lg["B24"] = ("Forward moves recorded so the sheet evolves without relitigating. 
              "into one funnel KPI: raised → accepted → delivered rate + TAT, with capabilities-raised/quarter as a "
              "non-budgeted context line. (3) Pedagogy Initiative Impact — becomes Domain Learning-Value Uplift (ability/band "
              "improvement across the domain's courses per cycle, HE×HV machinery, semester/quarter windows) once per-course "
-             "ability instruments are confirmed.")
+             "ability instruments are confirmed. (4) Module-Quiz Score Bands + Content–Assessment Alignment — retired as "
+             "budgeted rows Aug 2026, replaced by the three-row learning-conversion chain (each stage conditioned on its own "
+             "funnel input); both stay as read-only diagnostic cuts in the DA/DE monthly score analysis — alignment uniquely "
+             "catches the quiz-too-harsh direction (formative above quiz).")
 for r in (1, 3, 4, 7, 8, 17, 18, 19, 20, 21, 22, 23, 24):
     lg.cell(row=r, column=1).font = F(10, bold=True)
     lg.cell(row=r, column=1).alignment = Alignment(vertical="top", wrap_text=True)
@@ -545,11 +555,11 @@ TEAM_VIEWS = [
   "own": [
    ("Business Impact", "Summative Skill Assessment Achievement Rate",
     "Students scoring above the defined passing threshold in summative skill assessments across owned domains. Passing threshold set by the team per domain context (default reference: 70%).",
-    "direct → org KRA 1 — the summative achievement number itself (org scoreboard; the tracker reads it via module-quiz Bands + Alignment)",
+    "direct → org KRA 1 — the summative achievement number itself (org scoreboard; the tracker reads the funnel into it via the three conversion rows — the Formative → Summative leg lands here)",
     "%", "Quarterly", "Q1 ref: B 35 (quarterly) · default threshold 70%."),
    ("Business Impact", "Formative Skill Assessment Achievement Rate",
     "Students scoring above the defined passing threshold in formative skill assessments across owned domains. Passing threshold set by the team per domain context (default reference: 70%).",
-    "enabling → Summative SA Achievement (row above) + tracker Content–Assessment Alignment — the early-warning formative read",
+    "enabling → Summative SA Achievement (row above) + tracker Module-Quiz → Formative Conversion — the early-warning formative read",
     "%", "Monthly", "Q1 Jul: B 23 · A 33.4 — 75% cap used as the Skill Assessments cut-off."),
    ("Business Impact", "Graded Assessment Achievement Rate (NIAT)",
     "Students scoring above the defined passing threshold in university-conducted graded assessments — Mid-1, Mid-2 and End Semester exams — delivered in collaboration with the university.",
@@ -595,14 +605,14 @@ TEAM_VIEWS = [
     "Average cost to produce one hour of vernacular-language content. Includes team bandwidth involved in creation (contract basis, tools & infrastructure).",
     "enabling → dept Cost per Vernacular Content Hour (§5) — production-side twin of CSI's central track",
     "INR", "Monthly", "Q1 Jul: B 0 · A 0."),
-   ("Content Efficiency", "Cost per MCQ Generated",
-    "Average cost to develop one objective question, including both manual and AI-assisted production.",
-    "enabling → dept Cost per MCQ (§5 Content Efficiency)",
-    "INR", "Monthly", "Q1 Jul: B ₹40 · A ₹26 — 1,347 MCQs across 2 products."),
+   ("Content Efficiency", "Cost per Objective Practice Item",
+    "Average cost to develop one objective practice item (FIB, MCQ, MMCQ — any objective type), including both manual and AI-assisted production.",
+    "enabling → dept Cost per Objective Practice Item (§5 Content Efficiency)",
+    "INR", "Monthly", "B ₹3 (rebased Aug 2026 — adjustable) · Q1 Jul on the old MCQ basis: B ₹40 · A ₹26 — 1,347 MCQs across 2 products."),
    ("Content Efficiency", "Cost per Coding Question",
-    "Average cost to develop one coding question, including test-case design and evaluation-engine configuration.",
+    "Average cost to develop one coding question, including test-case design and evaluation-engine configuration. Varies by domain complexity.",
     "enabling → dept Cost per Coding Question (§5 Content Efficiency)",
-    "INR", "Monthly", "Q1 Jul: B ₹400 · A ₹163 — 131 coding questions across 3 products."),
+    "INR", "Monthly", "B ₹100 baseline · ~₹200 FullStack/GenAI (project-style) · up to ₹300 DS&Algo (editorials + brute-force + efficient) — rebased Aug 2026, adjustable · Q1 Jul: B ₹400 · A ₹163 — 131 coding questions across 3 products."),
    ("Content Efficiency", "Cost per Branding Content Asset",
     "Average cost to create one branded content piece.",
     "enabling → dept Cost per Branding Asset (§5 Content Efficiency)",
@@ -693,9 +703,9 @@ TEAM_VIEWS = [
   ],
   "asks": [
    ("Assessment blueprints per cycle", "Assessments team",
-    "Skill-assessment blueprints + knowledge points shared before authoring each cycle; changes communicated — feeds Content–Assessment Alignment (§7 ask)."),
+    "Skill-assessment blueprints + knowledge points shared before authoring each cycle; changes communicated — feeds the Module-Quiz → Formative and Formative → Summative Conversions + the alignment diagnostic cut (§7 ask)."),
    ("Engagement & LE dashboards", "Learning Platform / DA-DEs",
-    "Monthly LE + engagement-matrix cuts per domain — budgets for Cell Migration and module-quiz Bands come from here. Course-completion cuts included as a read-only view: completion is conduction-driven (Program Ops); the team's owned stickiness KPIs are Learner-Accessed Completion + Practice Attempt-to-Completion."),
+    "Monthly LE + engagement-matrix cuts per domain — budgets for Cell Migration and the three conversion rows come from here after the first measured cycle. Module-quiz band distribution + content–assessment alignment ride along as read-only diagnostic cuts, next to the course-completion cuts: completion is conduction-driven (Program Ops); the team's owned stickiness KPIs are Learner-Accessed Completion + Practice Attempt-to-Completion."),
    ("Domain-specific capability build", "Learning Platform (PMs + Engineering)",
     "Build slots for domain-raised capabilities and evaluation environments — SMEs here raise and accept; PMs + Engineering build. Boundary: generic/reusable capability = Learning Platform lane (product-owned) · domain-specific instance = KPI here, in Learning Domains · ACP = content-facing production pipelines, domain product work = learner-facing systems."),
    ("Classroom signal loop", "Instructors dept + Program Ops",

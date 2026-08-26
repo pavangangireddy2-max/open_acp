@@ -58,7 +58,7 @@ for r in range(3, org.max_row + 1):
     cur["rows"].append(r)
     row2metric[r] = len(org_metrics) - 1
 
-assert len(org_metrics) == 19, f"expected 19 org metrics, got {len(org_metrics)}: {[m['name'] for m in org_metrics]}"
+assert len(org_metrics) == 20, f"expected 20 org metrics, got {len(org_metrics)}: {[m['name'] for m in org_metrics]}"
 assert {"KRA 1", "KRA 2", "KRA 3", "KRA 4"} <= set(kras) <= {"KRA 1", "KRA 2", "KRA 3", "KRA 4", "KRA 5"}, sorted(kras)
 # KRA 5 carries targets, not a weight; mapping deliberately not forced — hard-set it
 kras["KRA 5"] = {"name": "Employability", "weight": "", "note": "B3 80% · B4 80% — mapping deliberately not forced"}
@@ -112,7 +112,7 @@ for tid, tlabel, sheet in TEAMS:
     team_rows[tid], mirrors[tid], asks[tid] = B, mir, C
 
 assert [len(team_rows[t]) for t in ("fs", "csi", "cc")] == [29, 8, 8], [len(team_rows[t]) for t in ("fs","csi","cc")]
-assert [len(mirrors[t])  for t in ("fs", "csi", "cc")] == [10, 7, 1], [len(mirrors[t]) for t in ("fs","csi","cc")]
+assert [len(mirrors[t])  for t in ("fs", "csi", "cc")] == [11, 7, 1], [len(mirrors[t]) for t in ("fs","csi","cc")]
 assert [len(asks[t])     for t in ("fs", "csi", "cc")] == [4, 3, 2], [len(asks[t]) for t in ("fs","csi","cc")]
 
 # ---------------- dept-layer nodes (§5 of the one-pager) ----------------
@@ -122,7 +122,7 @@ DEPT = {
  "cv":  ("Content Velocity", "§5 block — 4 delivery rows",
          "The §5 Content Velocity block: Learning Content Hours, Vernacular Content Hours, Practice & Assessment Pieces, Branding Content Assets Delivered. Each team row rolls into its matching §5 row."),
  "ce":  ("Content Efficiency", "§5 block — matching cost-per-item rows",
-         "The §5 Content Efficiency block. Each team cost row rolls into its matching §5 row (cost per learning hour / vernacular hour / MCQ / coding question / branding asset / runtime per learner / BOS approval; Central's spend-vs-plan reads the same block)."),
+         "The §5 Content Efficiency block. Each team cost row rolls into its matching §5 row (cost per learning hour / vernacular hour / objective practice item / coding question / branding asset / runtime per learner / BOS approval; Central's spend-vs-plan reads the same block)."),
  "sa":  ("Stakeholder Alignment", "§5 block — request fulfillment · sprint delivery",
          "The §5 Stakeholder Alignment block: Stakeholder Content Request Fulfillment and Cross-functional Sprint Delivery. Central's Shared-Team Deliverables Landed rolls into the same block."),
  "pccc":("Product Capability Configuration Coverage", "§5 row · Product Learning Experience lane",
@@ -139,11 +139,11 @@ DEPT = {
 # key: (team, exact Section-B KPI name) -> list of targets or "HYG"
 # targets: ("k", n) org KRA · ("o", org-metric key) tracker row · ("d", dept id) §5 · ("t", sibling row name)
 L = {
- ("fs", "Summative Skill Assessment Achievement Rate"): [("k", 1)],
- ("fs", "Formative Skill Assessment Achievement Rate"): [("t", "Summative Skill Assessment Achievement Rate"), ("o", "Content-Assessment Alignment")],
+ ("fs", "Summative Skill Assessment Achievement Rate"): [("o", "Formative → Summative Conversion"), ("k", 1)],
+ ("fs", "Formative Skill Assessment Achievement Rate"): [("t", "Summative Skill Assessment Achievement Rate"), ("o", "Module-Quiz → Formative Conversion")],
  ("fs", "Graded Assessment Achievement Rate"): [("d", "bi")],
  ("fs", "Weekly Active Users"): [("d", "bi")],
- ("fs", "Pedagogy Initiative Impact"): [("o", "Module-Quiz Score Bands"), ("k", 2)],
+ ("fs", "Pedagogy Initiative Impact"): [("o", "Practice → Module-Quiz Conversion"), ("k", 2)],
  ("fs", "Learner Accessed Content Completion Rate"): [("o", "Engagement-Matrix Cell Migration")],
  ("fs", "Practice Attempt-to-Completion Rate"): [("o", "Journey Step Health"), ("o", "Learning Environment Satisfaction")],
  ("fs", "Learning Content Hours Delivered"): [("d", "cv")],
@@ -152,7 +152,7 @@ L = {
  ("fs", "Branding Content Assets Delivered"): [("d", "cv")],
  ("fs", "Cost per Learning Hour Produced"): [("d", "ce")],
  ("fs", "Cost per Vernacular Content Hour"): [("d", "ce")],
- ("fs", "Cost per MCQ Generated"): [("d", "ce")],
+ ("fs", "Cost per Objective Practice Item"): [("d", "ce")],
  ("fs", "Cost per Coding Question"): [("d", "ce")],
  ("fs", "Cost per Branding Content Asset"): [("d", "ce")],
  ("fs", "Platform Runtime Cost per Active Learner"): [("d", "ce")],

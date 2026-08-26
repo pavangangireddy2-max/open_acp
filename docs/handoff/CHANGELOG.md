@@ -490,3 +490,39 @@ Files: build_site.py, content_os.html.
   Site retitle intact: the new stay h3s pick up the global "AI Engineer 3" → "Head of [Domain Portfolio]
   Learning Systems" replace (5 mentions, 0 raw). 🧗 untouched — build_career_map.py consumes neither GATES
   nor STAY. 🎯 🧭 🕸️ untouched.
+
+## 2026-08-26 — Learning-conversion chain replaces quiz bands + alignment; cost rows renamed/rebased (all six artifacts republished)
+
+- **The dept scoreboard's Module-Quiz Score Bands (8 budgeted rows) and Content–Assessment Alignment (2
+  budgeted rows) are retired**, replaced by a three-stage learning-conversion chain — 6 rows, B3 + B4 × 3
+  stages, at tracker rows 4–9. Pavan's ruling: "i am fine with those calls you have taken. also add those 3
+  conversions. can retire content-assessment alignment may be. Lets use Summative, formative only for now.
+  might change them later."
+- **The three stages (per cohort):** Practice-Completed → Module-Quiz ≥ 8.0 (teaching effectiveness,
+  monthly) · Module-Quiz ≥ 8.0 → Formative ≥ 8.0 (transfer / teach-to-the-quiz check, monthly, two-sided —
+  Assessments-dept instruments) · Formative ≥ 8.0 → Summative ≥ 8.0 (cram-vs-retention, per semester —
+  guards the 50% Summative weight in SPI, the lagging metric Pavan flagged). Anti-gaming pair: FS Practice
+  Attempt-to-Completion Rate (B 38). Terminology is Summative / Formative only (biweekly SA = Formative,
+  Grand SA = Summative); names may change later.
+- **Budgets ship blank** — "blank until the first measured cycle" (org-tracker precedent): measure first,
+  set bars after. The ≥ 8.0 bar sits one SPI band above the org target by design.
+- **Band distribution + alignment survive as read-only DA/DE diagnostic cuts**, not scored rows; the
+  tracker legend's forward-move entry (4) records the retirement.
+- **Cost rows renamed + rebased in the same pass (clears the 25 Aug known-stale note):** Cost per MCQ ₹40 →
+  **Cost per Objective Practice Item ₹3** (any objective type — FIB / MCQ / MMCQ …) · Cost per Coding
+  Question ₹400 → **₹100 baseline / ~₹200 FullStack-GenAI (project-like) / ≤₹300 DS&Algo (editorials +
+  brute-force + efficient)** — all "rebased Aug 2026, adjustable". Q1 Jul actuals preserved in remarks (MCQ
+  B ₹40 · A ₹26 — 1,347 items / Coding B ₹400 · A ₹163 — 131 questions).
+- **Surface deltas:** 🧭 tracker 24 numbered rows, 6 xlsx tabs · 🕸️ flow map 20 org rows, dept mirrors
+  [11, 7, 1], 81 nodes / 77 edges · 🧗 career map 20 org metrics, 83 nodes / 82 edges ("Cost per MCQ" alias
+  dropped) · 🪜 ladder evidence lists, GenAI progression area + LSD prose re-pointed at the chain (org
+  scoreboard "SPI Score Bands" read kept — it names the org KRA 1 row, not the retired dept rows) · 🎯
+  one-pager 14 passages replaced · 🗺️ site rebuilt from children (Section A 15 formula rows, B 29 rows,
+  asks 4; both xlsx downloads re-embedded).
+- **Republished, same URLs, all `conversion-chain-v1`:** 🧭 🕸️ 🪜 🧗 🎯 🗺️ (site `capabilities` omitted —
+  stored `downloads:true` + contract pin 0.2.12 carried forward, confirmed). Note: 🎯 is link-shared with
+  viewers pinned to an earlier version — republishing moves the live version only; the pin must be moved
+  from the share menu for link viewers to see this update. 📋 dept OS sheet stays stale / deferred.
+- **Framework draft updated in place (still uncommitted):** §2.1 QL → SR → ER mapping row now names the
+  learning-conversion chain, unit-cost trend row renamed, Senior stay-bar note re-pointed, residue bullet
+  closed out as a shipped-26-Aug record.
