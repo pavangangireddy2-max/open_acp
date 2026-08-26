@@ -526,3 +526,40 @@ Files: build_site.py, content_os.html.
 - **Framework draft updated in place (still uncommitted):** §2.1 QL → SR → ER mapping row now names the
   learning-conversion chain, unit-cost trend row renamed, Senior stay-bar note re-pointed, residue bullet
   closed out as a shipped-26-Aug record.
+
+## 2026-08-26 — Stay bars rewritten in person language; low-churn slot-swap dissolved (🪜 🗺️ 🧗 republished)
+
+- **Pavan's four rulings (the Go):** (1) Culture & Values comes OUT of the eight scored rows — it stays as
+  a rating pillar (10%) and as the eligibility gate, never a matrix row. (2) Unit-cost trend: "−10% per
+  year can be the direction may be… −40% per year is the target." (3) Associate feedback→backprop inputs
+  glide to **zero by the final two months** of the internship (a glide, not a hard zero). (4) **Lead rows
+  untouched this pass** — "lead inputs lets see after these are applied. its the same treatment for it as
+  well." The Lead matrix gets the person-language rewrite in a later pass, after he reviews this one.
+- **The redesign: each rung's stay bars now read as the eight things *this person* is answerable for**, not
+  eight tracker rows with a name attached. Associate / AI Engineer / Senior fully rewritten (8 rows each);
+  LSD + PII become standard occupants for AI Engineer and Senior. Dropped as matrix slots (they survive as
+  review reads, not monthly rows): Hours + Pieces split, Summative + Formative conversion rows, the Senior
+  catch-all row. The Associate's 25%-of-team-throughput share moves from monthly matrix row to **gate
+  evidence** (⚑ 25% floor note on Gates req 3).
+- **Low-churn slot-swap dissolved.** The {lc} chip and the swap paragraph are deleted everywhere; freshness
+  is simply 100% of whatever the audit calls, agentic throughput 90% for everyone — freed low-churn
+  capacity reads into LSD + PII instead of swapping rows.
+- **Two new fixtures on every stay table:** a culture-gate line in the key ("a Culture & Values flag in the
+  cycle blocks eligibility whatever the score — culture is rated in the pillars (10%), never scored as a
+  row") and a decisive-slice footnote ("These eight are the decisive slice for this seat — the rest of the
+  team view is answered at team level by the Lead (≥ 85% of rows in band) and run day to day by the PM.").
+- **Scope ladder stated in three places** (stay bars · WIRING Foundation note · AREA_OVERRIDES "Scope of
+  Work"): Associate = half a domain's surface ≈ 100 CWT across the internship · AI Engineer = a domain
+  across all products ≈ 200 CWT/cycle · Senior = across domains, all products ≈ 400 CWT · Lead = the
+  team's whole surface through people.
+- **Surface deltas:** 🪜 ladder + xlsx rebuilt (8 tabs, 72 kpi chips) · 🗺️ site rebuilt from children
+  (A 15 chips / B 29 rows / asks 4; both xlsx re-embedded; new stay text picks up the AI Engineer 3
+  retitle) · 🧗 career map rebuilt — the AREA_OVERRIDES entry flows into node a0's tooltip ("Scope of
+  Work ▲", 83 nodes / 82 edges unchanged). comp_boxes_cache.json byte-identical — untouched.
+- **Republished, same URLs:** 🪜 🧗 `stay-bars-person-language`, 🗺️ `stay-bars-person-language-embed`
+  (site `capabilities` omitted — stored `downloads:true` + contract pin 0.2.12 carried forward, confirmed).
+  🎯 🧭 🕸️ untouched. 🎯 link-viewers remain pinned to their earlier version.
+- **Framework draft mirrored in place (still uncommitted, 13 edits):** §§4–6 matrices replaced with the
+  same eight person-language rows; §3.3 retitled "Low-churn domains — the slot-swap, dissolved (26 Aug)";
+  §2.3 culture-not-a-row bullet + coverage-rule paragraph; §7 Lead matrix carries a pre-note that it
+  predates this pass by ruling; §10 gains rulings 11–14 (now "Rulings — landed 25–26 August 2026").
