@@ -595,3 +595,35 @@ Files: build_site.py, content_os.html.
   untouched — git confirmed zero career-map ast inputs changed. comp_boxes_cache.json byte-identical.
 - **Discussion items 6–9 (couplings, Associate repetition, the Lead rung) answered in chat — nothing
   shipped on them without a go.**
+
+## 2026-08-26 — Numberless ladder for the Leads' input round; AI Engineer 3 → Product Lead; churn table + TA on 🎯 (🪜 🎯 🧗 🗺️ republished)
+
+- **Pavan's multi-part reply, folded in (rulings 15–18):** (15) Associate quality row reads the final-QC
+  verdict — "no major findings at final QC" — while the backprop row keeps the review-input glide; both
+  stand. (16) Lead stay bar approved as the eight person-language rows, with **Power Performers raised
+  to ≥ 2 per appraisal cycle**. (17) Deep-IC "AI Engineer 3" path CLOSED — the seat above Lead is
+  **Product Lead – [Academy | Intensive | NIAT] Learning Systems** (product ownership through Leads,
+  Product-Owner-type responsibility; "Senior AI Engineer Lead" recorded as a latent intermediate that
+  activates only when a product carries several Leads). (18) Vocabulary: "The bar — hold at 100%" →
+  **Baseline Target**, "Gate" → **Eligibility Gate**, everywhere.
+- **🪜 ladder stripped of every stay-bar value** for the Leads' input round: %, ₹, counts, SPI bands,
+  TAT/recurrence numbers, topic chips all replaced by ⚑ "value lands after the Leads' input, then
+  founder review". Calibration layer KEPT (A1–A4, 12.5% weights, pillar 50/25/15/10, complexity
+  multipliers, CWT ≈200/≈400, scope ladder, ratios, cycle/ramp/breach mechanics). Values preserved in
+  the two held drafts + git history. Rung 5 renamed on card, matrix headers now Baseline Target /
+  Eligibility Gate.
+- **🎯 one-pager:** §3 gains the refresh-churn table under Domain Complexity (High churn = FullStack ·
+  GenAI · DS/ML; Low churn = the other seven; System Design the proof that build complexity ≠ churn);
+  §2 Support Teams row now includes **TA (Talent Acquisition)**.
+- **🧗 career map rebuilt** from AST inputs: level-5 rung + nodes retitled Product Lead, 0 stale
+  "AI Engineer 3" strings (83 nodes / 82 edges).
+- **🗺️ site rebuilt** (one-pager embed changed): churn table + TA flow through; refcards/dlbtns intact.
+- **Republished, same URLs:** 🪜 `leads-input-no-numbers` · 🎯 `churn-table-ta` · 🧗
+  `product-path-retitle` · 🗺️ `onepager-refresh` (site `capabilities` omitted — stored
+  `downloads:true` + contract 0.2.12 carried forward, confirmed). 🧭 🕸️ untouched. 🎯 🪜
+  link-viewers remain PINNED to earlier versions until Pavan moves the pins.
+- **Both held drafts fully mirrored (still uncommitted/unpublished):** framework .md + policy .html now
+  carry rulings 15–18, the Lead values matrix (Summative 35% · Formative 23% · SPI at team level,
+  PP ≥ 2), §6.5/§8 Product Lead (directional), and a **drafted 8-row Project Manager stay bar in policy
+  §7** (operate frame — enters the shipped ladder only on Pavan's go). Metric-source question (conversion
+  chain vs org-KRA SPI in PII/business rows) recorded as open, awaiting his call.

@@ -447,7 +447,7 @@ rows_html = "".join(f"<tr><td>{esc(node_name(s))}</td><td>{KINDL[k]}</td><td>{es
 # ---------------- climb band ----------------
 BEAM = [("reads: ramp evidence", 12), ("answers: your modules' rows", 34),
         ("answers: a domain slice", 58), ("answers: full Section B — 29 rows", 100),
-        ("shapes: §5 + org tracker", 100)]
+        ("answers: one product end to end", 100)]
 OLD_ORDER = ["Associate SDE", "SDE 1", "SDE 2", "SDE Lead", "SDE 3"]
 rungs = []
 for i, old in enumerate(OLD_ORDER):
@@ -540,7 +540,7 @@ html_out = f"""<meta charset="utf-8">
 <div class="container">
   <h1>Career Growth Map</h1>
   <p class="subtitle">The AI Engineer ladder read against the frozen KPI system. The climb band shows how the metric surface widens level by level; the canvas below wires the 21 progression areas to the named rows that evidence them, and those same rows into the Lead's rating math. Hover or click anything to light up its full path.</p>
-  <div class="seclab">THE CLIMB — ONE LADDER, WIDENING METRIC SURFACE ({esc(NEW_TITLE["Associate SDE"])} → {esc(NEW_TITLE["SDE 3"])} – [Domain] Learning Systems)</div>
+  <div class="seclab">THE CLIMB — ONE LADDER, WIDENING METRIC SURFACE ({esc(NEW_TITLE["Associate SDE"])} → {esc(NEW_TITLE["SDE 3"])} – [Academy | Intensive | NIAT] Learning Systems)</div>
   <div class="band">{BAND}</div>
   <div class="seclab">THE WIRING — AREAS → FROZEN ROWS → RATING MATH</div>
   <div class="lg">

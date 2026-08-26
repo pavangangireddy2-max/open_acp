@@ -10,9 +10,14 @@
 # language (26 Aug, Pavan's per-rung inputs): LSD + PII standard occupants, low-churn
 # slot swaps dissolved, Culture & Values out of the 8 (pillar + gate). Lean pass
 # (26 Aug): promotion gates moved out to the Progression Policy & Merit Framework
-# draft (docs/handoff/workbench/proposals/); vocabulary bridge dropped. Everything
-# else stays verbatim from source; comp for the changed rungs is parked with HR —
-# no invented numbers.
+# draft (docs/handoff/workbench/proposals/); vocabulary bridge dropped. Leads-input
+# pass (26 Aug pm): columns renamed Baseline Target / Eligibility Gate; every bar
+# value and comp number withheld — this version is presented to Leads for their
+# input first (working defaults live in the policy + framework drafts); Lead stay
+# bar = the approved person-language eight; the deep-IC "AI Engineer 3" path is
+# closed — level 5 is now Product Lead – [Academy | Intensive | NIAT] Learning
+# Systems (title = one word to change if Pavan picks another). Everything else
+# stays verbatim from source; comp is parked with HR — no invented numbers.
 # Outputs: role_cards.xlsx (editable master, 8 tabs) + role_cards.html (artifact).
 import json, re, html as H
 from openpyxl import Workbook
@@ -72,7 +77,7 @@ AREA_OVERRIDES = {  # v3 (▲): the agent-first matrix rewrites — Intern / AI 
         "The team's whole surface — every domain's coverage answered for through people."),
     "Production Systems": (
         "Manages and improves the agents they run: accuracy, retrieval quality, cost metrics held inside budget (A1–A2).",
-        "Builds new content agents end-to-end — at least 2–3 built and adopted, impact visible in the metrics (A3).",
+        "Builds new content agents end-to-end — shipped and adopted, impact visible in the metrics (A3).",
         "Orchestrates systems of agents carrying production: multi-agent workflows, escalation design, agents other people run (A4).",
         "Runs the team's agent fleet through people: fleet health, standards, and the coverage number answered for at review."),
     "Learning Systems Design": (
@@ -87,7 +92,7 @@ AREAS = [(cat, area) + AREA_OVERRIDES.get(area, tuple(rest)) for cat, area, *res
 # Source descriptors occasionally name the old titles inline ("mentoring from SDE 1+").
 # The ladder carries no lineage language, so those are retitled in place too.
 INLINE_RETITLE = [("SDE 1+", "AI Engineers and above"), ("Associate SDE", "Associate AI Engineer"),
-                  ("SDE Lead", "AI Engineer Lead"), ("SDE 3", "AI Engineer 3"),
+                  ("SDE Lead", "AI Engineer Lead"), ("SDE 3", "Product Lead"),
                   ("SDE 2", "Senior AI Engineer"), ("SDE 1", "AI Engineer")]
 
 def retitle_text(s):
@@ -128,7 +133,7 @@ CALC = RT[20]
 
 # ------------------------------------------------------------ v2/v3 additions
 NEW_TITLE = {"Associate SDE": "Associate AI Engineer", "SDE 1": "AI Engineer",
-             "SDE 2": "Senior AI Engineer", "SDE Lead": "AI Engineer Lead", "SDE 3": "AI Engineer 3"}
+             "SDE 2": "Senior AI Engineer", "SDE Lead": "AI Engineer Lead", "SDE 3": "Product Lead"}
 
 def retitle_example(note):
     return re.sub(r'(Associate SDE|SDE Lead|SDE [123]), Learning Systems - ([^"]+)',
@@ -137,35 +142,48 @@ def retitle_example(note):
 LEVELS = []  # (new_title_pattern, old_title, comp, v3_role, src_note, surface)
 SURFACE = [
     "Contributes on sample surfaces along the internship ramp — no rows answered for; growth is read through ramp evidence (A1→A2 on the Agent Scope scale).",
-    "Answers for the Section B velocity + quality rows of the modules they own (their content hours, pieces, issue-recurrence share) — a topic surface of ≈ 100 topics at FullStack / GenAI complexity, refreshed every 6 months, with 2–3 content agents built and adopted (A3).",
+    "Answers for the Section B velocity + quality rows of the modules they own (their content hours, pieces, issue-recurrence share) — a topic surface of ≈ 100 topics at FullStack / GenAI complexity, refreshed every 6 months, with new content agents built and adopted (A3).",
     "Answers for a domain slice ≈ 2× an AI Engineer's complexity-weighted topic surface — by depth, breadth, or leverage (A4 agent systems); first Section C asks raised in their name.",
     "Answers for the team's full Section B at review and supports the Section A lane numbers; span ~5–8 members; the rating framework below applies as written.",
-    "Shapes org-tracker rows and cross-domain standards; portfolio spans teams — reads through §5 department KPIs and org KRAs, not one team view.",
+    "Answers for one whole product's content surface — every domain team shipping into it — through the product's Leads; reads through §5 department KPIs and the org KRAs, not one team view.",
 ]
-V3_COMP = {  # comp overrides for the changed rungs — numbers parked with HR (talk-first, Aug 2026).
-             # Format is "band | tenure": the site keeps only the right side of the pipe.
+V3_COMP = {  # comp overrides — every band parked with HR; this version carries no comp numbers
+             # (leads-input round, 26 Aug). Format is "band | tenure": the site keeps the right side.
     0: "Internship stipend — set by HR | 6-month internship",
-    1: "9–24L, band under HR review (the full IC span) | ≥1 year in role before Senior eligibility",
-    2: "Band under HR review — new rung | reached through the 2× gate below",
+    1: "Band with HR — the full IC span | ≥1 year in role before Senior eligibility",
+    2: "Band with HR — new rung | reached through the 2× gate",
+    3: "Band with HR | reached from Senior AI Engineer — the people route",
+    4: "Band with HR | reached from AI Engineer Lead",
 }
 V3_ROLE = [  # v3 card bodies (the "what you manage" identity); source scope notes stay in the xlsx.
     "6-month internship — manages agents under supervision from day one: runs existing pipelines, reviews outputs, "
     "tunes prompts, handles escalations (A1), then shows measurable improvement on an agent's numbers (A2). Produces "
     "representative content items manually during the ramp — the domain floor. Converts through the gate below.",
-    "Manages agents. Owns modules end-to-end and builds new content agents — 2–3 built and adopted by year-end, "
+    "Manages agents. Owns modules end-to-end and builds new content agents — shipped and adopted by year-end, "
     "impact visible in the metrics (A3). One band, covering the full individual-contributor span before Senior.",
     "Manages agent systems and mentors humans — the force-multiplier rung. Holds ≈2× an AI Engineer's "
     "complexity-weighted surface by depth, breadth, or leverage; orchestrating systems of agents (A4) is the "
     "leverage route. Invents new ways to teach with agentic AI and proves them with rigorous measurement.",
     "Manages humans who manage agents. Runs the team: full Section B answered for at review; people outcomes — "
     "ratings, retention, growth, hiring — define the title. Span ~5–8 members (number with HR).",
-    None,  # AI Engineer 3 — unchanged rung: the card shows the source scope, examples retitled
+    "Owns one whole product end to end — Academy, Intensive or NIAT. Every domain team shipping into that "
+    "product rolls up here: its content surface, its learning outcomes, its cost envelope, its roadmap — "
+    "answered for through the product's Leads. Product-Owner responsibility comes with the seat: the roadmap "
+    "is set with founders and stakeholders, not just executed. Cross-domain complexity is the growth — "
+    "end-to-end ownership across every domain the product touches. The deep-IC path above Lead is closed.",
 ]
+V3_NOTE = {  # rung-4 framework-descriptor override: the source SDE 3 text described a deep-IC org seat
+    4: "Replaces the framework's SDE 3 seat (Aug 2026): the deep-IC path above Lead is closed — growth "
+       "beyond Lead is product ownership. Where a product carries several Leads, a Senior AI Engineer "
+       "Lead rung can sit between Lead and this seat — activated by scale, not tenure.",
+}
 for i, ((title, comp, note), surf) in enumerate(zip(comp_boxes, SURFACE)):
     old = title.split(",")[0].strip()
     scope = title[title.find("["):title.find("]") + 1] if "[" in title else "[Domain]"
     scope = scope.replace("Domain Name", "Domain")  # normalize the placeholder token
-    src_note = retitle_example(note)
+    if i == 4:
+        scope = "[Academy | Intensive | NIAT]"  # product seat, not a domain seat
+    src_note = V3_NOTE.get(i, retitle_example(note))
     LEVELS.append((f"{NEW_TITLE[old]} – {scope} Learning Systems", title,
                    V3_COMP.get(i, comp), V3_ROLE[i] or src_note, src_note, surf))
 
@@ -256,28 +274,30 @@ AGENT_SCOPE = [  # the A1–A4 scale — grades agent work without colliding wit
     ("A2", "Improve", "Move an agent's numbers: evals, retrieval quality, unit-cost reduction — with a "
                       "before/after you can show."),
     ("A3", "Build", "Design and ship a new content agent end-to-end whose impact holds in the metrics. "
-                    "AI Engineer bar: at least 2–3 built and adopted."),
+                    "AI Engineer bar: new agents built and adopted every year ⚑."),
     ("A4", "Orchestrate", "Systems of agents carrying production: multi-agent workflows, escalation design "
                           "(when agents act alone, when they hand to humans), agents other people run."),
 ]
 AGENT_SCOPE_MAP = ("Intern converts having shown A1 + A2 · AI Engineer reaches A3 within the year · Senior "
                    "operates at A4 (the leverage route) · Lead runs the team's agent fleet through people · "
-                   "AI Engineer 3 sets the org's agent architecture.")
+                   "the Product Lead answers for agent-first across every team shipping into their product.")
 
 # Promotion gates moved out 26 Aug — they live in the Progression Policy & Merit
 # Framework (drafted in docs/handoff/workbench/proposals/, shipped when Pavan calls).
 
 STAY_LEAD = ("How you climb lives in the Progression Policy & Merit Framework — its own document; "
              "this says what keeping the seat means. One rule under every bar: "
-             "your rung's eight scored rows at budget — 100%, no governance breach. Below budget more than "
-             "twice in 12 months breaks the bar; two consecutive cycles below starts a structured gap "
-             "conversation with your Lead — what's missing, the plan, the timeline. A conversation, not a "
-             "demotion. The tables below are those eight rows, per rung — the same grid the merit rating "
+             "your rung's eight scored rows at their Baseline Targets, no governance breach. Below target "
+             "more than twice in 12 months breaks the bar; two consecutive cycles below starts a structured "
+             "gap conversation with your Lead — what's missing, the plan, the timeline. A conversation, not "
+             "a demotion. The tables below are those eight rows, per rung — the same grid the merit rating "
              "scores: four output rows, four governance rows, 12.5% each.")
 
-STAY_KEY = ("How to read the gate column: Mandatory = the rung's defining requirement · Breach blocks = a "
-            "breach zeroes that 12.5% slice and blocks eligibility for the cycle · ⚑ = a number not locked "
-            "yet (a proposed default, adjustable). One gate above every table: a Culture & Values flag in "
+STAY_KEY = ("How to read the Eligibility Gate column: Mandatory = the rung's defining requirement · Breach "
+            "blocks = a breach zeroes that 12.5% slice and blocks eligibility for the cycle · ⚑ = the "
+            "numeric value is deliberately not printed in this version — Baseline Target values land after "
+            "the Leads' input round, then founder review; the working defaults are held in the Progression "
+            "Policy & Merit Framework draft. One gate above every table: a Culture & Values flag in "
             "the cycle blocks eligibility whatever the score — culture is rated in the pillars (10%), "
             "never scored as a row.")
 
@@ -287,103 +307,129 @@ STAY_LEGEND = ("Domain chips — build complexity sets the topic count behind th
                "DS / ML}.")
 
 STAY_SLICE = ("These eight are the decisive slice for this seat — the rest of the team view is answered at "
-              "team level by the Lead (≥ 85% of rows in band) and run day to day by the PM.")
+              "team level by the Lead's scoreboard row and run day to day by the PM.")
 
 # Chip tokens {lo|..} {md|..} {hi|..} {vh|..} render as colored chips in the html and as plain text
 # in the xlsx: lo/md/hi/vh = the four build-complexity classes. Rows rewritten in person language
 # 26 Aug (Pavan's per-rung inputs); the low-churn slot swap is gone — LSD + PII are standard
-# occupants now. Every ₹ / % / default stays Pavan-adjustable.
+# occupants now. Numeric values stripped 26 Aug pm for the leads-input round: ⚑ marks a value that
+# lands after the Leads' input, then founder review; working defaults live in the held Progression
+# Policy & Merit Framework draft (and in git history before this pass).
 STAY = [  # (level, context line, footer line, rows); row = ("A"|"B", row name, bar to hold, gate)
     ("Associate AI Engineer (internship)",
      "A readiness scorecard — read ready / not ready. Interns answer for no team rows by design.",
      "Ramp cadence: A1 shown, then A2 — never more than one month behind the ramp plan across the six. "
      "The hands-on domain floor (items produced manually) is conversion-gate evidence, not a monthly row.",
      [("A", "Content quality & standards",
-       "Work ships simplified, aesthetic, technically accurate, to the team's standards — accepted "
-       "first-pass through review", "Mandatory"),
+       "Work ships simplified, aesthetic, technically accurate, to the team's standards — no major "
+       "findings at final QC", "Mandatory"),
       ("A", "Agent improvement delta (A2)",
-       "⚑ ≥ 4 documented before/afters on accuracy, retrieval quality or unit cost — spread across the "
-       "agents they run, not four tweaks to one", "Mandatory"),
+       "Documented before/afters on accuracy, retrieval quality or unit cost — spread across the "
+       "agents they run, not repeat tweaks to one", "Mandatory ⚑"),
       ("A", "Topic surface",
-       "⚑ Half an AI Engineer's — ≈ 100 CWT across the six months, produced through the agents",
-       "Mandatory"),
+       "Half an AI Engineer's surface across the six months, produced through the agents",
+       "Mandatory ⚑"),
       ("A", "Feedback → backpropagation plans",
        "Runs the feedback agents — reactive and proactive channels, every dimension — and outputs the "
        "plan; review inputs logged by the mentoring AI Engineer reach zero by the final two months",
        "Mandatory"),
-      ("B", "Content issues", "80% fixed inside the 2-day TAT", "Breach blocks"),
-      ("B", "Recurrence", "≤ 2% — fixes stay fixed", "Breach blocks"),
+      ("B", "Content issues", "Fixed inside the turnaround bar", "Breach blocks ⚑"),
+      ("B", "Recurrence", "Fixes stay fixed — recurrence at the bar", "Breach blocks ⚑"),
       ("B", "Process adherence",
        "The team's guidelines followed end-to-end — checklists, review sheets, worklogs current",
        "Breach blocks"),
       ("B", "Unit costs",
-       "Objective practice item (FIB, MCQ, MMCQ — any type) ≤ ₹3 · coding question on the domain scale "
-       "{hi|~₹200 FullStack / GenAI} {vh|up to ₹300 DS & Algo}", "Breach blocks")]),
+       "Objective practice item (FIB, MCQ, MMCQ — any type) and coding question each inside its cost "
+       "bar — scaled by domain complexity {hi|FullStack / GenAI} {vh|DS & Algo}", "Breach blocks ⚑")]),
     ("AI Engineer",
      None,
      "Rating floor: Performance + Role Competence pillars in band.",
      [("A", "Tech Stack Freshness Rate",
-       "100% of their domain's surface — ≈ 200 CWT each 6-month cycle; the domain = its set of courses, "
-       "across all products — {lo|200 topics} {md|133 topics} {hi|100 topics} {vh|80 topics}",
-       "Below 90% blocks ⚑"),
+       "The domain's whole surface refreshed each cycle — the domain = its set of courses, across all "
+       "products; the topic count behind it scales with the complexity multiplier",
+       "Below floor blocks ⚑"),
       ("A", "Agentic Production Coverage",
-       "90% — with 2–3 content agents built and adopted (A3) by year-end", "Agents mandatory"),
+       "Agent-first is how the domain ships — content agents built and adopted (A3) by year-end",
+       "Agents mandatory ⚑"),
       ("A", "Pedagogy Initiative Impact",
-       "Their domain's students land the org SPI bands — 30% at ≥ 8.0 · 40% at 7.0–8.0 · 30% at "
-       "6.0–7.0 (two-sided with Assessments, same as the conversion chain)", "At the bands ⚑"),
+       "Their domain's students land the org SPI bands (two-sided with Assessments, same instrument "
+       "as the conversion chain)", "At the bands ⚑"),
       ("A", "Learning Systems Design impact",
        "The domain's learner-facing capabilities built and adopted — evaluation environments included — "
-       "with Learning Environment Satisfaction holding 4.5 / 5 on them", "At budget ⚑"),
-      ("B", "Content Issue Resolution Efficiency", "80% inside the 2-day TAT", "Breach blocks"),
-      ("B", "Content Issue Recurrence", "≤ 2%", "Breach blocks"),
+       "with Learning Environment Satisfaction holding at its bar", "At budget ⚑"),
+      ("B", "Content Issue Resolution Efficiency", "Issues fixed inside the turnaround bar",
+       "Breach blocks ⚑"),
+      ("B", "Content Issue Recurrence", "Fixes stay fixed — recurrence at the bar", "Breach blocks ⚑"),
       ("B", "Unit costs",
-       "CpLH ≤ ₹10,000 · objective practice item (FIB, MCQ, MMCQ — any type) ≤ ₹3 · coding question "
-       "under ₹100 baseline {hi|~₹200 FullStack / GenAI} {vh|up to ₹300 DS & Algo}", "Breach blocks"),
-      ("B", "Sprint Delivery + Stakeholder Fulfillment", "Sprint 100% · stakeholder 90%", "Breach blocks")]),
+       "Cost per Learning Hour, objective practice item and coding question each inside its bar — "
+       "scaled by domain complexity {hi|FullStack / GenAI} {vh|DS & Algo}", "Breach blocks ⚑"),
+      ("B", "Sprint Delivery + Stakeholder Fulfillment",
+       "Sprint commitments delivered in full · stakeholder requests fulfilled at the bar",
+       "Breach blocks ⚑")]),
     ("Senior AI Engineer",
      None,
      None,
      [("A", "Tech Stack Freshness Rate",
-       "Double an AI Engineer — ≈ 400 CWT per cycle, across domains, all products; Senior isn't a medal, "
-       "it's a load, and the slice doesn't quietly shrink", "Below 90% blocks ⚑"),
+       "Double an AI Engineer's complexity-weighted surface — across domains, all products; Senior "
+       "isn't a medal, it's a load, and the slice doesn't quietly shrink", "Below floor blocks ⚑"),
       ("A", "Content agents across domains (A4)",
-       "The agents they build or pick run in every domain's production — 90% coverage attributable "
+       "The agents they build or pick run in every domain's production — coverage attributable "
        "to them", "Mandatory"),
       ("A", "Learning Systems Design impact",
-       "⚑ 6–10 learner-facing initiatives a year, proposed and implemented — Adaptive Objective "
+       "A steady flow of learner-facing initiatives proposed and implemented — Adaptive Objective "
        "Practice, Adaptive Coding Practice, Programming Coach and the like — moving the conversion "
-       "chain for all products", "Mandatory"),
+       "chain for all products", "Mandatory ⚑"),
       ("A", "Pedagogy Initiative Impact",
        "Those initiatives pedagogically grounded — baseline agreed before launch — and the SPI bands "
        "hold across every domain they touch; the surface, not the activity, separates this from an "
        "AI Engineer", "At the bands ⚑"),
       ("B", "Content issues — wider slice",
-       "80% inside the 2-day TAT · recurrence ≤ 2%, across the courses they answer for", "Breach blocks"),
+       "Inside the turnaround bar and fixes stay fixed — across the courses they answer for",
+       "Breach blocks ⚑"),
       ("B", "Topic production cost — their courses",
-       "Every unit cost at or below budget (CpLH ₹10,000 · item ₹3 · coding ₹100–₹300) and falling "
-       "year on year — ⚑ −40% the target, −10% the minimum direction", "Breach blocks"),
+       "Every unit cost at or below its bar and falling year on year", "Breach blocks ⚑"),
       ("B", "Sprint Delivery + Stakeholder Fulfillment",
-       "Sprint 100% · stakeholder 90% — they raise the Section C asks", "Breach blocks"),
+       "Sprint commitments delivered in full · stakeholder requests fulfilled at the bar — they raise "
+       "the Section C asks", "Breach blocks ⚑"),
       ("B", "Mentorship on record",
-       "≥ 1 power performer contributed, trailing 12 months (adjustable)", "Breach blocks")]),
+       "Power performers contributed on record, trailing 12 months", "Breach blocks ⚑")]),
     ("AI Engineer Lead",
+     "Answers for the whole surface through people — every row here is the team's number, not "
+     "personal output.",
      None,
-     None,
-     [("A", "Team Section B in-band rate",
-       "⚑ propose: ≥ 85% of the team's owned rows at budget (FS pilot: 29 rows)", "Mandatory"),
-      ("A", "Team Tech Stack Freshness", "100% across the team's whole surface", "Below 90% blocks ⚑"),
-      ("A", "Team Agentic Production Coverage", "90% — run through people, not personally", "Mandatory"),
+     [("A", "Team Tech Stack Freshness",
+       "The whole surface is covered — every domain in the team's portfolio fresh on its cycle, no "
+       "domain orphaned", "Below floor blocks ⚑"),
+      ("A", "Team Section B in-band rate",
+       "The team scoreboard holds — the agreed share of the team's owned rows at Baseline Target "
+       "(FS pilot: 29 rows)", "Mandatory ⚑"),
       ("A", "Business impact — the team's domains",
-       "Summative 35% · Formative 23% · SPI band contribution", "At budget"),
-      ("B", "Team Retention Rate", "≥ 90%, trailing 12 months (adjustable)", "Breach blocks"),
-      ("B", "Power Performers Created", "≥ 1 per appraisal cycle (adjustable)", "Breach blocks"),
-      ("B", "Cost of Operations + Roadmap",
-       "At plan ⚑ · ≥ 90% ⚑ — run by the team's PM, answered for by the Lead", "Breach blocks"),
-      ("B", "Stakeholder Fulfillment + Sprint Delivery", "Stakeholder 90% · sprint 100%", "Breach blocks")]),
-    ("AI Engineer 3",
-     "Reads through department KPIs and org KRAs, not one team view — the bar stays directional until those "
-     "budgets land: the standards they authored still adopted and alive · portfolio Section B healthy across "
-     "teams · a Lead bench ready behind them · places the org's learning-systems bets.",
+       "The business feels it — the team's Summative and Formative achievement and SPI contribution, "
+       "the same numbers the org reads (KRA 1)", "At budget ⚑"),
+      ("A", "Team Agentic Production Coverage",
+       "The agent fleet is the team's, not the Lead's — agent-first shipping achieved through people, "
+       "the fleet maturing up the A-scale", "Mandatory"),
+      ("B", "People engine — Retention · Power Performers · Hires",
+       "The people engine runs — people stay, Power Performers come up every cycle, open seats fill "
+       "fast", "Breach blocks ⚑"),
+      ("B", "Cost of Operations + unit costs",
+       "The whole operation is affordable — cost of operations at plan, every unit cost at its bar and "
+       "trending down year on year — run by the team's PM, answered for by the Lead", "Breach blocks ⚑"),
+      ("B", "Team issue flow — resolution + recurrence",
+       "Issues drain team-wide — fixed inside the turnaround bar and they stay fixed, read across the "
+       "whole surface", "Breach blocks ⚑"),
+      ("B", "Roadmap + process + worklogs",
+       "The machine is documented — roadmap on track, process adherence end-to-end, worklogs current "
+       "across the team", "Breach blocks ⚑")]),
+    ("Product Lead (Academy · Intensive · NIAT)",
+     "The deep-IC 'AI Engineer 3' path is closed — beyond Lead, growth is owning a whole product: "
+     "Academy, Intensive or NIAT, end to end, through its Leads. Product-Owner-type responsibility "
+     "comes with the seat: the product's roadmap is set with founders and stakeholders, not just "
+     "executed; cross-domain complexity is the growth. The bar stays directional until the seat is "
+     "staffed: the product's whole surface fresh through its Leads · the product's team scoreboards "
+     "healthy · its learning outcomes and cost envelope answered for with founders · a Lead bench "
+     "ready behind them. Where a product carries several Leads, a Senior AI Engineer Lead rung can "
+     "sit between Lead and this seat — activated by scale, not tenure.",
      None,
      []),
 ]
@@ -397,13 +443,13 @@ def chip_txt(s):  # xlsx / plain-text rendering: chip tokens → their text
 STAY_NOTES = [  # rendered under the stay-bar table in both outputs
     "Low-refresh domains (English, Aptitude, Mathematics, Programming, CS Core, DS & Algo, DevOps, System "
     "Design) run the same eight rows — no slot swaps: Pedagogy Initiative Impact and Learning Systems "
-    "Design impact are standard occupants for everyone now. The freshness bar is 100% of whatever the "
-    "audit calls, so a low-churn domain simply has a smaller refresh surface; the freed capacity goes to "
-    "the LSD and PII rows.",
-    "Cost bars scale with domain complexity, and every number here is adjustable as real costs land: an "
-    "objective practice item (FIB, MCQ, MMCQ — any type) ≤ ₹3 · a coding question under ₹100 baseline — "
-    "~₹200 where a question is effectively a project (FullStack, GenAI), up to ₹300 where it ships "
-    "editorials, brute-force and efficient solutions (DS & Algo).",
+    "Design impact are standard occupants for everyone now. The freshness bar is the whole of whatever "
+    "the audit calls, so a low-churn domain simply has a smaller refresh surface; the freed capacity "
+    "goes to the LSD and PII rows.",
+    "Cost bars scale with domain complexity — an objective practice item (FIB, MCQ, MMCQ — any type) is "
+    "the cheapest unit; a coding question carries more where a question is effectively a project "
+    "(FullStack, GenAI) and the most where it ships editorials, brute-force and efficient solutions "
+    "(DS & Algo). Every bar lands with real cost data.",
 ]
 CWT_DEF = ("CWT — complexity-weighted topics: topic count × the domain complexity multiplier. ≈ 200 CWT per "
            "AI Engineer per 6-month cycle (= ≈ 100 topics at FullStack / GenAI 2.0×); a Senior holds ≈ 400.")
@@ -497,8 +543,8 @@ def hdr_row(ws, r, cells):
 # Tab 1 — Ladder
 ws = sheet("Ladder", (26, 22, 46, 46, 46))
 r = title_row(ws, 1, "AI Engineer Ladder — content-department domain teams · August 2026 · five levels: a 6-month "
-                     "internship rung, three employee rungs to Lead, then the org seat. Comp for the changed rungs "
-                     "sits with HR.", 5)
+                     "internship rung, three employee rungs to Lead, then the product seat (Product Lead — Academy, "
+                     "Intensive or NIAT). All comp bands sit with HR; this version carries no numbers.", 5)
 r = hdr_row(ws, r, ("Title", "Comp | Tenure", "Role", "Scope (framework descriptor)", "Metric surface"))
 for new, old, comp, role, src_note, surf in LEVELS:
     put(ws, r, 1, new, bold=True)
@@ -535,7 +581,8 @@ ws.row_dimensions[r].height = 56
 r += 1
 put(ws, r, 1, "Per-rung matrices", bold=True, color=MUTED)
 put(ws, r, 2, "See the Stay Bars tab — each rung's eight rows in the merit-matrix format "
-              "(Category · Row · Bar · Gate · Weight), with the domain-scaled numbers spelled out.")
+              "(Category · Row · Baseline Target · Eligibility Gate · Weight). Numeric values are "
+              "deliberately blank in this version — they land after the Leads' input round.")
 ws.row_dimensions[r].height = 28
 r += 1
 
@@ -555,7 +602,7 @@ for lvl, ctx, foot, stay_rows in STAY:
     ws.row_dimensions[r].height = 30 if ctx else 16
     r += 1
     if stay_rows:
-        r = hdr_row(ws, r, ("Category", "Row", "Bar — hold at 100%", "Gate", "Weight"))
+        r = hdr_row(ws, r, ("Category", "Row", "Baseline Target", "Eligibility Gate", "Weight"))
         for cat, nm, bar, gate in stay_rows:
             put(ws, r, 1, "A — Output" if cat == "A" else "B — Governance",
                 color=("0B4F43" if cat == "A" else "8A2C18"), bold=True)
@@ -586,8 +633,8 @@ for note in STAY_NOTES + [CWT_DEF]:
 
 # Tab 4 — Progression Areas
 ws = sheet("Progression Areas", (24, 22, 34, 34, 34, 34))
-r = title_row(ws, 1, "21 progression areas × 4 levels (▲ = rewritten agent-first, Aug 2026). AI Engineer 3 "
-                     "sits above Lead (org-wide scope); the matrix deliberately stops at Lead.", 6)
+r = title_row(ws, 1, "21 progression areas × 4 levels (▲ = rewritten agent-first, Aug 2026). The Product Lead "
+                     "seat (Academy · Intensive · NIAT) sits above Lead; the matrix deliberately stops at Lead.", 6)
 r = hdr_row(ws, r, ("Category", "Area", "Associate AI Engineer (Intern)", "AI Engineer", "Senior AI Engineer", "AI Engineer Lead"))
 for cat, area, a, e1, e2, ld in AREAS:
     put(ws, r, 1, cat, color=MUTED)
@@ -761,14 +808,15 @@ B = []
 B.append('<h1>AI Engineer Ladder</h1>')
 B.append('<div class="subtitle">Career framework for content-department domain teams &middot; August 2026 &middot; '
          'titles follow the <strong>AI Engineer &ndash; [Domain] Learning Systems</strong> pattern &middot; five '
-         'levels, from a 6-month internship to the org seat &middot; editable master: '
+         'levels, from a 6-month internship to the product seat &middot; editable master: '
          '<strong>role_cards.xlsx</strong> (8 tabs)</div>')
 B.append('<div class="key-point"><strong>How to read the cards:</strong> every progression area and rating line is '
          'wired to named KPI rows — anything in a <span class="kpi">mono chip</span> is a live row on the KPI tracker '
          'or the team view, so reviews read off the sheets instead of impressions. Areas with no chip say so '
          '<em>by design</em>. Every rung has a stay bar, and the A1&ndash;A4 Agent Scope scale grades the agent '
-         'work; promotion gates live in the Progression Policy &amp; Merit Framework — its own document; comp '
-         'for the changed rungs sits with HR.</div>')
+         'work; promotion gates live in the Progression Policy &amp; Merit Framework — its own document; all comp '
+         'bands sit with HR. This version deliberately prints no numeric bar values — Baseline Targets land '
+         'after the Leads&rsquo; input round, then founder review.</div>')
 B.append('<div class="key-point"><strong>Production principle:</strong> all content production runs through agents — '
          'humans design, review, and improve the systems that produce. Named exception, so the claim stays honest: '
          'the video production pipeline (recording, editing, review) — agenticity not required there. This is what '
@@ -776,10 +824,10 @@ B.append('<div class="key-point"><strong>Production principle:</strong> all cont
          '<span class="kpi">Agentic Production Coverage</span> from a metric into a mandate.</div>')
 
 B.append('<h2>The ladder</h2>')
-B.append('<div class="sectionlead">Five levels, linear — an internship rung, then four employee rungs; AI Engineer 3 '
-         'sits above Lead (org-wide scope) and the progression matrix below deliberately stops at Lead. Comp: Lead and '
-         'AI Engineer 3 keep inherited bands; the changed rungs are with HR — no invented numbers. Strip the comp line '
-         'before wide sharing if needed.</div>')
+B.append('<div class="sectionlead">Five levels, linear — an internship rung, then four employee rungs. Above Lead '
+         'the deep-IC path is closed: growth is the <strong>Product Lead</strong> seat — one whole product (Academy, '
+         'Intensive or NIAT) owned end to end through its Leads; the progression matrix below deliberately stops at '
+         'Lead. Comp: every band sits with HR — this version carries no numbers.</div>')
 B.append('<div class="ladder">')
 for (new, old, comp, role, src_note, surf), (bg, fg) in zip(LEVELS, RAMP):
     B.append(f'<div class="lvl"><div class="lvl-head" style="background:{bg};color:{fg}">'
@@ -814,8 +862,8 @@ for lvl, ctx, foot, stay_rows in STAY:
     if ctx:
         B.append(f'<div class="sectionlead" style="margin:0 0 10px">{esc(ctx)}</div>')
     B.append('<div class="scroll"><table class="staytbl"><tr><th style="width:12%">Category</th>'
-             '<th style="width:25%">The row</th><th>The bar — hold at 100%</th>'
-             '<th style="width:13%">Gate</th><th style="width:7%">Weight</th></tr>')
+             '<th style="width:25%">The row</th><th>Baseline Target</th>'
+             '<th style="width:15%">Eligibility Gate</th><th style="width:7%">Weight</th></tr>')
     for i, (cat, nm, bar, gate) in enumerate(stay_rows):
         catcell = ''
         if i == 0 or stay_rows[i - 1][0] != cat:
@@ -935,10 +983,11 @@ B.append('<div class="footnote">Source: the department&rsquo;s March 2026 career
          'weights and calibration tables carried verbatim except the matrix rows marked ▲; titles renamed and KPI '
          'wiring added (August 2026); the internship rung, the Senior force-multiplier rung, '
          'stay bars and the Agent Scope scale added August 2026. The rating samples the '
-         'surface; the role answers for all of it. Comp: Lead and AI Engineer 3 keep inherited bands; the changed '
-         'rungs are with HR — no invented numbers. '
-         'Defaults taken pending red-pen: comp bands included (artifact is private; strip for wide sharing) &middot; '
-         'level names Associate (internship) / Engineer / Senior / Lead / 3 &middot; FullStack &amp; CS Core as pilot. '
+         'surface; the role answers for all of it. Comp: every band sits with HR — this version carries no '
+         'numbers, and no numeric bar values either: Baseline Targets land after the Leads&rsquo; input round, '
+         'then founder review (working defaults held in the Progression Policy &amp; Merit Framework draft). '
+         'Level names: Associate (internship) / Engineer / Senior / Lead / Product Lead &middot; FullStack &amp; '
+         'CS Core as pilot. '
          'Companion sheets: KPI tracker (kra_training_sheet.xlsx) &middot; HOD one-pager. Other domain teams get cards '
          'when their team views land; CSI and Content&ndash;Central role cards are queued separately; promotion '
          'gates and eligibility live in the Progression Policy &amp; Merit Framework — its own document.</div>')
