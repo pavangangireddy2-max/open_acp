@@ -1,0 +1,60 @@
+[
+  {
+    "question_id": "4b970c5f-dc6e-4b78-a7a9-e1a4a120c2a4",
+    "topic": "Logical Operators & Conditonal Statements",
+    "difficulty": null,
+    "statement": "Write a program that reads a number, and checks if the given number is between **25** and **75**.\r\n\r\n---\r\n\r\n#### Input\r\n\r\nThe input will be a single line containing an integer.\r\n\r\n---\r\n\r\n#### Output\r\n\r\nThe output should be a single line containing a boolean. **True** should be printed if the given number is between **25** and **75**, otherwise **False** should be printed.\r\n\r\n---\r\n\r\n#### Explanation\r\n\r\nFor example, if the given number is **35**,\r\n\r\n- The number **35** is greater than **25**.\r\n- The number **35** is less than **75**.\r\n- So, the number **35** is between **25** and **75**.\r\n\r\nThe output should be **True**.",
+    "reference_solution": "n = int(input())\nis_between = ((n > 25) and (n < 75))\nprint(is_between)\n",
+    "tests": [
+      {
+        "input": "20",
+        "expected": "False"
+      },
+      {
+        "input": "25",
+        "expected": "False\n"
+      },
+      {
+        "input": "74",
+        "expected": "True\n"
+      },
+      {
+        "input": "35",
+        "expected": "True"
+      },
+      {
+        "input": "75",
+        "expected": "False\n"
+      }
+    ]
+  },
+  {
+    "question_id": "f46a4dc6-3516-4678-88d6-26989428d4a3",
+    "topic": "Logical Operators & Conditonal Statements",
+    "difficulty": "EASY",
+    "statement": "Write a program that reads a three-digit number and checks if the given number contains **0**.\n\n---\n\n#### Input\n\nThe input will be a single line containing a three-digit integer.\n\n---\n\n#### Output\n\nThe output should be a single line containing a boolean. **True** should be printed if the given number contains **0**, otherwise **False** should be printed.\n\n---\n\n#### Explanation\n\nFor example, if the given number is **120**,\n\n\u2716 The first digit is equal to **0**. (**1** is not equal to **0**)\n\u2716 The second digit is equal to **0**. (**2** is not equal to **0**)\n\u2714 The third digit is equal to **0**. (**0** is equal to **0**)\n\nThe output should be **True** as the given number contains **0**.\n",
+    "reference_solution": "number = input()\n\nfirst_digit = number[0]\nsecond_digit = number[1]\nthird_digit = number[2]\n\nfirst_digit = int(first_digit)\nsecond_digit = int(second_digit)\nthird_digit = int(third_digit)\n\nresult = (first_digit == 0) or (second_digit == 0) or (third_digit == 0)\nprint(result)",
+    "tests": [
+      {
+        "input": "999",
+        "expected": "False"
+      },
+      {
+        "input": "120",
+        "expected": "True"
+      },
+      {
+        "input": "100",
+        "expected": "True"
+      },
+      {
+        "input": "678",
+        "expected": "False"
+      },
+      {
+        "input": "111",
+        "expected": "False"
+      }
+    ]
+  }
+]

@@ -1,0 +1,146 @@
+{
+  "topics": [
+    {
+      "topic": "Problem Solving with Python",
+      "count": 49,
+      "difficulties": [
+        "EASY"
+      ]
+    },
+    {
+      "topic": "Functions",
+      "count": 32,
+      "difficulties": [
+        "EASY"
+      ]
+    },
+    {
+      "topic": "Lists - 2",
+      "count": 26,
+      "difficulties": [
+        "EASY"
+      ]
+    },
+    {
+      "topic": "Conditional Statements",
+      "count": 25,
+      "difficulties": [
+        "EASY",
+        "MEDIUM"
+      ]
+    },
+    {
+      "topic": "Sets and Set Operations",
+      "count": 19,
+      "difficulties": []
+    },
+    {
+      "topic": "Type Conversions",
+      "count": 18,
+      "difficulties": [
+        "EASY"
+      ]
+    },
+    {
+      "topic": "Sequence of Instructions",
+      "count": 17,
+      "difficulties": [
+        "EASY"
+      ]
+    },
+    {
+      "topic": "Lists",
+      "count": 16,
+      "difficulties": [
+        "EASY"
+      ]
+    },
+    {
+      "topic": "Logical Operators & Conditonal Statements",
+      "count": 15,
+      "difficulties": [
+        "EASY",
+        "MEDIUM"
+      ]
+    },
+    {
+      "topic": "Dictionaries",
+      "count": 14,
+      "difficulties": []
+    },
+    {
+      "topic": "String Methods & Problem Solving and Debugging - 3",
+      "count": 14,
+      "difficulties": [
+        "EASY"
+      ]
+    },
+    {
+      "topic": "List Methods and Tuples",
+      "count": 13,
+      "difficulties": []
+    },
+    {
+      "topic": "Built-in Functions & Recursions",
+      "count": 12,
+      "difficulties": [
+        "EASY"
+      ]
+    },
+    {
+      "topic": "List Methods and Nested Lists",
+      "count": 11,
+      "difficulties": [
+        "EASY"
+      ]
+    },
+    {
+      "topic": "Python Standard Library",
+      "count": 11,
+      "difficulties": []
+    },
+    {
+      "topic": "Loops",
+      "count": 11,
+      "difficulties": [
+        "EASY"
+      ]
+    },
+    {
+      "topic": "Operators",
+      "count": 10,
+      "difficulties": [
+        "EASY"
+      ]
+    },
+    {
+      "topic": "Comparing Strings & Naming Variables",
+      "count": 9,
+      "difficulties": [
+        "EASY"
+      ]
+    },
+    {
+      "topic": "Nested Loops & Loop control Statements",
+      "count": 8,
+      "difficulties": [
+        "EASY"
+      ]
+    },
+    {
+      "topic": "For Loop",
+      "count": 6,
+      "difficulties": [
+        "EASY",
+        "MEDIUM"
+      ]
+    },
+    {
+      "topic": "Introduction to Python",
+      "count": 4,
+      "difficulties": [
+        "EASY"
+      ]
+    }
+  ]
+}
