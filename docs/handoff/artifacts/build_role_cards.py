@@ -293,13 +293,15 @@ STAY_LEAD = ("How you climb lives in the Progression Policy & Merit Framework �
              "a demotion. The tables below are those eight rows, per rung — the same grid the merit rating "
              "scores: four output rows, four governance rows, 12.5% each.")
 
-STAY_KEY = ("How to read the Eligibility Gate column: Mandatory = the rung's defining requirement · Breach "
-            "blocks = a breach zeroes that 12.5% slice and blocks eligibility for the cycle · ⚑ = the "
-            "numeric value is deliberately not printed in this version — Baseline Target values land after "
-            "the Leads' input round, then founder review; the working defaults are held in the Progression "
-            "Policy & Merit Framework draft. One gate above every table: a Culture & Values flag in "
-            "the cycle blocks eligibility whatever the score — culture is rated in the pillars (10%), "
-            "never scored as a row.")
+STAY_KEY = ("Baseline Targets carry two readings: the tentative number — the working value for the Leads' "
+            "input round; nothing is locked, every number can move before founder review, and ⚑ marks a "
+            "proposed default that hasn't been ruled yet — and the plain-words meaning of the same row. "
+            "How to read the Eligibility Gate column: Mandatory = the rung's defining requirement · Breach "
+            "blocks = a breach zeroes that 12.5% slice and blocks eligibility for the cycle. Rows sit in "
+            "the same order on every rung — output: the surface · the agents · learning impact · learning "
+            "systems; governance: issues · costs · delivery · people, where the rung carries a people row. "
+            "One gate above every table: a Culture & Values flag in the cycle blocks eligibility whatever "
+            "the score — culture is rated in the pillars (10%), never scored as a row.")
 
 STAY_LEGEND = ("Domain chips — build complexity sets the topic count behind the same ≈ 200 CWT per cycle: "
                "{lo|Low 1.0× — English · Aptitude · Mathematics} {md|Medium 1.5× — Programming · CS Core · "
@@ -311,116 +313,178 @@ STAY_SLICE = ("These eight are the decisive slice for this seat — the rest of 
 
 # Chip tokens {lo|..} {md|..} {hi|..} {vh|..} render as colored chips in the html and as plain text
 # in the xlsx: lo/md/hi/vh = the four build-complexity classes. Rows rewritten in person language
-# 26 Aug (Pavan's per-rung inputs); the low-churn slot swap is gone — LSD + PII are standard
-# occupants now. Numeric values stripped 26 Aug pm for the leads-input round: ⚑ marks a value that
-# lands after the Leads' input, then founder review; working defaults live in the held Progression
-# Policy & Merit Framework draft (and in git history before this pass).
-STAY = [  # (level, context line, footer line, rows); row = ("A"|"B", row name, bar to hold, gate)
+# 26 Aug (Pavan's per-rung inputs). 28 Aug: every Baseline Target carries TWO readings — the
+# tentative number (default view; ⚑ = a proposed default not yet ruled — nothing is locked until
+# the Leads' round closes, then founder review) and the plain-words meaning (the html toggle; the
+# xlsx prints both side by side). num=None → the row has no numeric form; same text both views.
+# Row order canonicalized across rungs — A: surface · agents · learning impact · learning systems;
+# B: issues · costs · delivery · people (recurrence splits out at the single-domain rungs; interns
+# carry process adherence in the people slot).
+STAY = [  # (level, context, footer, rows); row = ("A"|"B", name, tentative-number bar or None, plain-words bar, gate)
     ("Associate AI Engineer (internship)",
      "A readiness scorecard — read ready / not ready. Interns answer for no team rows by design.",
      "Ramp cadence: A1 shown, then A2 — never more than one month behind the ramp plan across the six. "
      "The hands-on domain floor (items produced manually) is conversion-gate evidence, not a monthly row.",
-     [("A", "Content quality & standards",
+     [("A", "Topic surface",
+       "⚑ ≈ 100 CWT across the six months — half an AI Engineer's surface, produced through the agents",
+       "Half an AI Engineer's surface across the six months, produced through the agents",
+       "Mandatory"),
+      ("A", "Agent improvement delta (A2)",
+       "⚑ ≥ 4 documented before/afters on accuracy, retrieval quality or unit cost — spread across "
+       "the agents they run, not repeat tweaks to one",
+       "Documented before/afters on accuracy, retrieval quality or unit cost — spread across the "
+       "agents they run, not repeat tweaks to one", "Mandatory"),
+      ("A", "Content quality & standards",
+       None,
        "Work ships simplified, aesthetic, technically accurate, to the team's standards — no major "
        "findings at final QC", "Mandatory"),
-      ("A", "Agent improvement delta (A2)",
-       "Documented before/afters on accuracy, retrieval quality or unit cost — spread across the "
-       "agents they run, not repeat tweaks to one", "Mandatory ⚑"),
-      ("A", "Topic surface",
-       "Half an AI Engineer's surface across the six months, produced through the agents",
-       "Mandatory ⚑"),
       ("A", "Feedback → backpropagation plans",
+       None,
        "Runs the feedback agents — reactive and proactive channels, every dimension — and outputs the "
        "plan; review inputs logged by the mentoring AI Engineer reach zero by the final two months",
        "Mandatory"),
-      ("B", "Content issues", "Fixed inside the turnaround bar", "Breach blocks ⚑"),
-      ("B", "Recurrence", "Fixes stay fixed — recurrence at the bar", "Breach blocks ⚑"),
-      ("B", "Process adherence",
-       "The team's guidelines followed end-to-end — checklists, review sheets, worklogs current",
-       "Breach blocks"),
+      ("B", "Content issues",
+       "80% fixed inside the 2-day TAT",
+       "Fixed inside the turnaround bar", "Breach blocks"),
+      ("B", "Recurrence",
+       "≤ 2% — fixes stay fixed",
+       "Fixes stay fixed — recurrence at the bar", "Breach blocks"),
       ("B", "Unit costs",
+       "Objective practice item (FIB, MCQ, MMCQ — any type) ≤ ₹3 · coding question inside its domain "
+       "bar {hi|~₹200 FullStack / GenAI} {vh|up to ₹300 DS & Algo}",
        "Objective practice item (FIB, MCQ, MMCQ — any type) and coding question each inside its cost "
-       "bar — scaled by domain complexity {hi|FullStack / GenAI} {vh|DS & Algo}", "Breach blocks ⚑")]),
+       "bar — scaled by domain complexity {hi|FullStack / GenAI} {vh|DS & Algo}", "Breach blocks"),
+      ("B", "Process adherence",
+       None,
+       "The team's guidelines followed end-to-end — checklists, review sheets, worklogs current",
+       "Breach blocks")]),
     ("AI Engineer",
      None,
      "Rating floor: Performance + Role Competence pillars in band.",
      [("A", "Tech Stack Freshness Rate",
+       "100% of the domain's surface each 6-month cycle — ⚑ ≈ 200 CWT: {lo|200 topics} {md|133} "
+       "{hi|100} {vh|80}",
        "The domain's whole surface refreshed each cycle — the domain = its set of courses, across all "
        "products; the topic count behind it scales with the complexity multiplier",
-       "Below floor blocks ⚑"),
+       "Below 90% blocks ⚑"),
       ("A", "Agentic Production Coverage",
+       "90% agent-first · 2–3 content agents built and adopted (A3) by year-end",
        "Agent-first is how the domain ships — content agents built and adopted (A3) by year-end",
-       "Agents mandatory ⚑"),
+       "Agents mandatory"),
       ("A", "Pedagogy Initiative Impact",
+       "Students land the org SPI bands — 30% ≥ 8.0 · 40% 7.0–8.0 · 30% 6.0–7.0 (two-sided with "
+       "Assessments, same instrument as the conversion chain)",
        "Their domain's students land the org SPI bands (two-sided with Assessments, same instrument "
-       "as the conversion chain)", "At the bands ⚑"),
+       "as the conversion chain)", "At the bands"),
       ("A", "Learning Systems Design impact",
+       "The domain's learner-facing capabilities built and adopted — Learning Environment "
+       "Satisfaction holding ⚑ 4.5 / 5",
        "The domain's learner-facing capabilities built and adopted — evaluation environments included — "
-       "with Learning Environment Satisfaction holding at its bar", "At budget ⚑"),
-      ("B", "Content Issue Resolution Efficiency", "Issues fixed inside the turnaround bar",
-       "Breach blocks ⚑"),
-      ("B", "Content Issue Recurrence", "Fixes stay fixed — recurrence at the bar", "Breach blocks ⚑"),
+       "with Learning Environment Satisfaction holding at its bar", "At budget"),
+      ("B", "Content Issue Resolution Efficiency",
+       "80% fixed inside the 2-day TAT",
+       "Issues fixed inside the turnaround bar", "Breach blocks"),
+      ("B", "Content Issue Recurrence",
+       "≤ 2% — fixes stay fixed",
+       "Fixes stay fixed — recurrence at the bar", "Breach blocks"),
       ("B", "Unit costs",
+       "Cost per Learning Hour ≤ ₹10,000 · objective practice item ≤ ₹3 · coding question from a "
+       "₹100 base {hi|~₹200 FullStack / GenAI} {vh|up to ₹300 DS & Algo}",
        "Cost per Learning Hour, objective practice item and coding question each inside its bar — "
-       "scaled by domain complexity {hi|FullStack / GenAI} {vh|DS & Algo}", "Breach blocks ⚑"),
+       "scaled by domain complexity {hi|FullStack / GenAI} {vh|DS & Algo}", "Breach blocks"),
       ("B", "Sprint Delivery + Stakeholder Fulfillment",
+       "Sprint 100% · stakeholder fulfillment 90%",
        "Sprint commitments delivered in full · stakeholder requests fulfilled at the bar",
-       "Breach blocks ⚑")]),
+       "Breach blocks")]),
     ("Senior AI Engineer",
      None,
      None,
      [("A", "Tech Stack Freshness Rate",
+       "≈ 400 CWT per cycle — double an AI Engineer, across domains, all products; the slice "
+       "doesn't quietly shrink",
        "Double an AI Engineer's complexity-weighted surface — across domains, all products; Senior "
-       "isn't a medal, it's a load, and the slice doesn't quietly shrink", "Below floor blocks ⚑"),
+       "isn't a medal, it's a load, and the slice doesn't quietly shrink", "Below 90% blocks ⚑"),
       ("A", "Content agents across domains (A4)",
-       "The agents they build or pick run in every domain's production — coverage attributable "
-       "to them", "Mandatory"),
+       "At least 2–3 agents of this class built and adopted 100% by all teams — e.g. a Slides "
+       "Creation Workflow · QC agents like a Practice Question Production Evaluator or a Pedagogy "
+       "Guidelines Evaluator · a Configurator agent that pushes finished content onto the learning "
+       "portal over MCP — a considerable, attributable lift in Agentic Production Coverage across "
+       "teams; improving one, or adapting it to a new domain's use-case, counts",
+       "The agents they build or pick run in every domain's production — the kind of agent: a Slides "
+       "Creation Workflow · QC agents like a Practice Question Production Evaluator or a Pedagogy "
+       "Guidelines Evaluator · a Configurator agent that pushes finished content onto the learning "
+       "portal over MCP. Improving one, or adapting it to a new domain's use-case, counts the same "
+       "as building new", "Mandatory"),
+      ("A", "Pedagogy Initiative Impact",
+       "Every initiative carries an agreed baseline before launch · the SPI bands hold — 30% ≥ 8.0 · "
+       "40% 7.0–8.0 · 30% 6.0–7.0 — across every domain they touch",
+       "Every LSD initiative pedagogically grounded — baseline agreed before launch — and the SPI "
+       "bands hold across every domain they touch; the surface, not the activity, separates this "
+       "from an AI Engineer", "At the bands"),
       ("A", "Learning Systems Design impact",
+       "8–10 learner-facing initiatives a year, proposed and implemented — Adaptive Objective "
+       "Practice, Adaptive Coding Practice, Programming Coach and the like — moving the conversion "
+       "chain for all products",
        "A steady flow of learner-facing initiatives proposed and implemented — Adaptive Objective "
        "Practice, Adaptive Coding Practice, Programming Coach and the like — moving the conversion "
-       "chain for all products", "Mandatory ⚑"),
-      ("A", "Pedagogy Initiative Impact",
-       "Those initiatives pedagogically grounded — baseline agreed before launch — and the SPI bands "
-       "hold across every domain they touch; the surface, not the activity, separates this from an "
-       "AI Engineer", "At the bands ⚑"),
+       "chain for all products", "Mandatory"),
       ("B", "Content issues — wider slice",
+       "80% inside the 2-day TAT · recurrence ≤ 2% — across the courses they answer for",
        "Inside the turnaround bar and fixes stay fixed — across the courses they answer for",
-       "Breach blocks ⚑"),
+       "Breach blocks"),
       ("B", "Topic production cost — their courses",
-       "Every unit cost at or below its bar and falling year on year", "Breach blocks ⚑"),
+       "Every unit cost at or below its bar (CpLH ₹10,000 · item ₹3 · coding ₹100–₹300) and falling "
+       "year on year — −40% per year the target, −10% the minimum direction",
+       "Every unit cost at or below its bar and falling year on year", "Breach blocks"),
       ("B", "Sprint Delivery + Stakeholder Fulfillment",
+       "Sprint 100% · stakeholder fulfillment 90% — they raise the Section C asks",
        "Sprint commitments delivered in full · stakeholder requests fulfilled at the bar — they raise "
-       "the Section C asks", "Breach blocks ⚑"),
-      ("B", "Mentorship on record",
-       "Power performers contributed on record, trailing 12 months", "Breach blocks ⚑")]),
+       "the Section C asks", "Breach blocks"),
+      ("B", "Power Performers Created",
+       "≥ 1 Power Performer created per appraisal cycle",
+       "People they mentor become the team's next Power Performers — created on record, through "
+       "guiding real work", "Breach blocks")]),
     ("AI Engineer Lead",
      "Answers for the whole surface through people — every row here is the team's number, not "
      "personal output.",
      None,
      [("A", "Team Tech Stack Freshness",
+       "100% of whatever the audit calls, across every domain in the team's portfolio — no domain "
+       "orphaned",
        "The whole surface is covered — every domain in the team's portfolio fresh on its cycle, no "
-       "domain orphaned", "Below floor blocks ⚑"),
-      ("A", "Team Section B in-band rate",
-       "The team scoreboard holds — the agreed share of the team's owned rows at Baseline Target "
-       "(FS pilot: 29 rows)", "Mandatory ⚑"),
-      ("A", "Business impact — the team's domains",
-       "The business feels it — the team's Summative and Formative achievement and SPI contribution, "
-       "the same numbers the org reads (KRA 1)", "At budget ⚑"),
+       "domain orphaned", "Below 90% blocks ⚑"),
       ("A", "Team Agentic Production Coverage",
+       "90% blended across the team — the fleet maturing up the A-scale, agent-first through people",
        "The agent fleet is the team's, not the Lead's — agent-first shipping achieved through people, "
        "the fleet maturing up the A-scale", "Mandatory"),
-      ("B", "People engine — Retention · Power Performers · Hires",
-       "The people engine runs — people stay, Power Performers come up every cycle, open seats fill "
-       "fast", "Breach blocks ⚑"),
-      ("B", "Cost of Operations + unit costs",
-       "The whole operation is affordable — cost of operations at plan, every unit cost at its bar and "
-       "trending down year on year — run by the team's PM, answered for by the Lead", "Breach blocks ⚑"),
+      ("A", "Business impact — the team's domains",
+       "Summative 35% · Formative 23% · SPI contribution at team level — the same numbers the org "
+       "reads: KRA 1 bands 30% ≥ 8.0 · 40% 7.0–8.0 · 30% 6.0–7.0; Graded Assessment for NIAT ⚑",
+       "The business feels it — the team's Summative and Formative achievement and SPI contribution, "
+       "the same numbers the org reads (KRA 1)", "At budget"),
+      ("A", "Team Section B in-band rate",
+       "⚑ ≥ 85% of the team's owned rows at Baseline Target (FS pilot: 29 rows)",
+       "The team scoreboard holds — the agreed share of the team's owned rows at Baseline Target "
+       "(FS pilot: 29 rows)", "Mandatory"),
       ("B", "Team issue flow — resolution + recurrence",
+       "80% inside the 2-day TAT team-wide · recurrence ≤ 2% — read across the whole surface",
        "Issues drain team-wide — fixed inside the turnaround bar and they stay fixed, read across the "
-       "whole surface", "Breach blocks ⚑"),
+       "whole surface", "Breach blocks"),
+      ("B", "Cost of Operations + unit costs",
+       "Cost of Operations at plan ⚑ · every unit cost at its bar (CpLH ₹10,000 · item ₹3 · coding "
+       "₹100–₹300), trending −10% per year minimum toward −40% — run by the team's PM, answered for "
+       "by the Lead",
+       "The whole operation is affordable — cost of operations at plan, every unit cost at its bar and "
+       "trending down year on year — run by the team's PM, answered for by the Lead", "Breach blocks"),
       ("B", "Roadmap + process + worklogs",
+       "Roadmap ⚑ ≥ 90% completion · process adherence end-to-end · worklogs current across the team",
        "The machine is documented — roadmap on track, process adherence end-to-end, worklogs current "
-       "across the team", "Breach blocks ⚑")]),
+       "across the team", "Breach blocks"),
+      ("B", "People engine — Retention · Power Performers · Hires",
+       "Retention ≥ 90% trailing 12 months (internal transfers don't count) · ≥ 2 Power Performers "
+       "per appraisal cycle · open seats fill fast — hire TAT with the PM",
+       "The people engine runs — people stay, Power Performers come up every cycle, open seats fill "
+       "fast", "Breach blocks")]),
     ("Product Lead (Academy · Intensive · NIAT)",
      "The deep-IC 'AI Engineer 3' path is closed — beyond Lead, growth is owning a whole product: "
      "Academy, Intensive or NIAT, end to end, through its Leads. Product-Owner-type responsibility "
@@ -580,54 +644,58 @@ put(ws, r, 2, STAY_LEAD)
 ws.row_dimensions[r].height = 56
 r += 1
 put(ws, r, 1, "Per-rung matrices", bold=True, color=MUTED)
-put(ws, r, 2, "See the Stay Bars tab — each rung's eight rows in the merit-matrix format "
-              "(Category · Row · Baseline Target · Eligibility Gate · Weight). Numeric values are "
-              "deliberately blank in this version — they land after the Leads' input round.")
+put(ws, r, 2, "See the Stay Bars tab — each rung's eight rows in the merit-matrix format, with the "
+              "Baseline Target printed both ways (tentative number · what the row means). The numbers "
+              "are the working values for the Leads' input round — nothing locked until it closes, "
+              "then founder review.")
 ws.row_dimensions[r].height = 28
 r += 1
 
-# Tab 3 — Stay Bars (per-rung, merit-matrix format — 25 Aug readability pass)
-ws = sheet("Stay Bars", (18, 38, 58, 18, 8))
+# Tab 3 — Stay Bars (per-rung, merit-matrix format; 28 Aug: both Baseline Target readings side by side)
+ws = sheet("Stay Bars", (18, 30, 46, 46, 16, 8))
 r = title_row(ws, 1, "Holding the role — each rung's stay bar as its eight scored rows "
-                     "(4 output + 4 governance × 12.5%). " + STAY_LEAD, 5)
+                     "(4 output + 4 governance × 12.5%). " + STAY_LEAD, 6)
 put(ws, r, 1, "Key", bold=True, color=MUTED)
 put(ws, r, 2, STAY_KEY + "  " + chip_txt(STAY_LEGEND), italic=True, color=MUTED)
-ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=5)
+ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=6)
 ws.row_dimensions[r].height = 42
 r += 2
 for lvl, ctx, foot, stay_rows in STAY:
     put(ws, r, 1, lvl, bold=True, sz=10)
     put(ws, r, 2, chip_txt(ctx) if ctx else "", italic=True, color=MUTED)
-    ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=5)
+    ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=6)
     ws.row_dimensions[r].height = 30 if ctx else 16
     r += 1
     if stay_rows:
-        r = hdr_row(ws, r, ("Category", "Row", "Baseline Target", "Eligibility Gate", "Weight"))
-        for cat, nm, bar, gate in stay_rows:
+        r = hdr_row(ws, r, ("Category", "Row", "Baseline Target — tentative number",
+                            "What the row means", "Eligibility Gate", "Weight"))
+        for cat, nm, num, desc, gate in stay_rows:
             put(ws, r, 1, "A — Output" if cat == "A" else "B — Governance",
                 color=("0B4F43" if cat == "A" else "8A2C18"), bold=True)
             put(ws, r, 2, chip_txt(nm), bold=True)
-            put(ws, r, 3, chip_txt(bar))
-            put(ws, r, 4, chip_txt(gate))
-            put(ws, r, 5, "12.5%")
-            ws.row_dimensions[r].height = max(26, 13 * (len(chip_txt(bar)) // 56 + 1) + 4)
+            put(ws, r, 3, chip_txt(num) if num else "— (no numeric form)")
+            put(ws, r, 4, chip_txt(desc))
+            put(ws, r, 5, chip_txt(gate))
+            put(ws, r, 6, "12.5%")
+            _longest = max(len(chip_txt(num)) if num else 0, len(chip_txt(desc)))
+            ws.row_dimensions[r].height = max(26, 13 * (_longest // 46 + 1) + 4)
             r += 1
         put(ws, r, 1, "Note", color=MUTED, italic=True)
         put(ws, r, 2, STAY_SLICE, italic=True, color=MUTED)
-        ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=5)
+        ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=6)
         ws.row_dimensions[r].height = 16
         r += 1
     if foot:
         put(ws, r, 1, "Note", color=MUTED, italic=True)
         put(ws, r, 2, foot, italic=True, color=MUTED)
-        ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=5)
+        ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=6)
         ws.row_dimensions[r].height = 16
         r += 1
     r += 1
 for note in STAY_NOTES + [CWT_DEF]:
     put(ws, r, 1, "Note", color=MUTED, italic=True)
     put(ws, r, 2, note, italic=True, color=MUTED)
-    ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=5)
+    ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=6)
     ws.row_dimensions[r].height = max(15, 14 * (len(note) // 110 + 1))
     r += 1
 
@@ -782,6 +850,15 @@ STYLE = """  * { margin: 0; padding: 0; box-sizing: border-box; }
   .dc-hi { background: #b3d9d0; color: #113b31; border-color: #93c6ba; }
   .dc-vh { background: #7cbfb1; color: #0c322a; border-color: #5da997; }
   .stayfoot { font-size: .82em; color: #666; margin: -18px 0 24px; max-width: 90ch; }
+  .staytoggle { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 14px 0 18px; }
+  .staytoggle button { font: inherit; font-size: .85em; font-weight: 600; padding: 5px 14px; cursor: pointer;
+    border: 1px solid #0e6e5c; background: #fff; color: #0e6e5c; border-radius: 15px; }
+  .staytoggle button.on { background: #0e6e5c; color: #fff; }
+  .staytoggle button:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+  .stayhint { font-size: .8em; color: #666; }
+  .v-desc { display: none; }
+  #staybars.stay-desc .v-num { display: none; }
+  #staybars.stay-desc .v-desc { display: inline; }
   .ladder { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 18px 0 8px; }
   .lvl { border: 1px solid #ccc; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
   .lvl-head { padding: 10px 12px; }
@@ -850,10 +927,22 @@ def chip_html(s):  # chip tokens → colored spans (escape first; tokens carry n
     return re.sub(r"\{(lo|md|hi|vh)\|([^}]*)\}",
                   lambda m: f'<span class="dchip dc-{m.group(1)}">{m.group(2)}</span>', esc(s))
 
+def stay_cell(num, desc):  # both readings in one cell; CSS + the toggle pick which shows
+    if not num:
+        return chip_html(desc)
+    return (f'<span class="v-num">{chip_html(num)}</span>'
+            f'<span class="v-desc">{chip_html(desc)}</span>')
+
 B.append('<h2>Holding the role — the stay bars</h2>')
 B.append(f'<div class="sectionlead">{esc(STAY_LEAD)}</div>')
 B.append(f'<div class="sectionlead" style="margin-top:-10px">{esc(STAY_KEY)}</div>')
 B.append(f'<div class="sectionlead" style="margin-top:-10px">{chip_html(STAY_LEGEND)}</div>')
+B.append('<div class="staytoggle" role="group" aria-label="Baseline Target view">'
+         '<button type="button" id="tg-num" class="on" aria-pressed="true">Tentative numbers</button>'
+         '<button type="button" id="tg-desc" aria-pressed="false">What the row means</button>'
+         '<span class="stayhint">nothing locked — values move with the Leads&rsquo; input, '
+         'then founder review</span></div>')
+B.append('<div id="staybars">')
 for lvl, ctx, foot, stay_rows in STAY:
     B.append(f'<h3 style="margin:24px 0 8px;font-size:1.05em">{esc(lvl)}</h3>')
     if not stay_rows:
@@ -864,16 +953,17 @@ for lvl, ctx, foot, stay_rows in STAY:
     B.append('<div class="scroll"><table class="staytbl"><tr><th style="width:12%">Category</th>'
              '<th style="width:25%">The row</th><th>Baseline Target</th>'
              '<th style="width:15%">Eligibility Gate</th><th style="width:7%">Weight</th></tr>')
-    for i, (cat, nm, bar, gate) in enumerate(stay_rows):
+    for i, (cat, nm, num, desc, gate) in enumerate(stay_rows):
         catcell = ''
         if i == 0 or stay_rows[i - 1][0] != cat:
             label = "A — Output" if cat == "A" else "B — Governance"
             catcell = f'<td class="cat cat{cat}" rowspan="4">{label}</td>'
-        B.append(f'<tr>{catcell}<td><strong>{chip_html(nm)}</strong></td><td>{chip_html(bar)}</td>'
+        B.append(f'<tr>{catcell}<td><strong>{chip_html(nm)}</strong></td><td>{stay_cell(num, desc)}</td>'
                  f'<td class="g{cat}">{esc(gate)}</td><td>12.5%</td></tr>')
     B.append('</table></div>')
     B.append('<div class="stayfoot">' + esc(STAY_SLICE) +
              (f'<br>{esc(foot)}' if foot else '') + '</div>')
+B.append('</div>')
 for note in STAY_NOTES:
     B.append(f'<p class="muted" style="font-size:.85em;max-width:90ch;margin:-6px 0 14px">{esc(note)}</p>')
 B.append('<p class="muted" style="font-size:.85em;max-width:90ch;margin:-2px 0 26px"><strong>' +
@@ -984,16 +1074,31 @@ B.append('<div class="footnote">Source: the department&rsquo;s March 2026 career
          'wiring added (August 2026); the internship rung, the Senior force-multiplier rung, '
          'stay bars and the Agent Scope scale added August 2026. The rating samples the '
          'surface; the role answers for all of it. Comp: every band sits with HR — this version carries no '
-         'numbers, and no numeric bar values either: Baseline Targets land after the Leads&rsquo; input round, '
-         'then founder review (working defaults held in the Progression Policy &amp; Merit Framework draft). '
+         'comp numbers. Baseline Targets print as tentative numbers (with a plain-words toggle): nothing is '
+         'locked until the Leads&rsquo; input round closes, then founder review. '
          'Level names: Associate (internship) / Engineer / Senior / Lead / Product Lead &middot; FullStack &amp; '
          'CS Core as pilot. '
          'Companion sheets: KPI tracker (kra_training_sheet.xlsx) &middot; HOD one-pager. Other domain teams get cards '
          'when their team views land; CSI and Content&ndash;Central role cards are queued separately; promotion '
          'gates and eligibility live in the Progression Policy &amp; Merit Framework — its own document.</div>')
 
+STAY_SCRIPT = """<script>
+(() => {
+  const wrap = document.getElementById('staybars');
+  const bN = document.getElementById('tg-num'), bD = document.getElementById('tg-desc');
+  if (!wrap || !bN || !bD) return;
+  const set = (desc) => {
+    wrap.classList.toggle('stay-desc', desc);
+    bN.classList.toggle('on', !desc); bD.classList.toggle('on', desc);
+    bN.setAttribute('aria-pressed', String(!desc)); bD.setAttribute('aria-pressed', String(desc));
+  };
+  bN.addEventListener('click', () => set(false));
+  bD.addEventListener('click', () => set(true));
+})();
+</script>"""
+
 html = ('<title>AI Engineer Ladder</title>\n<style>\n' + STYLE + '\n</style>\n'
-        '<div class="container">\n' + "\n".join(B) + '\n</div>\n')
+        '<div class="container">\n' + "\n".join(B) + '\n</div>\n' + STAY_SCRIPT + '\n')
 open("role_cards.html", "w", encoding="utf-8").write(html)
 
 print("xlsx tabs:", wb.sheetnames)

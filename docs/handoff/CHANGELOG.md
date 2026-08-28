@@ -627,3 +627,43 @@ Files: build_site.py, content_os.html.
   PP ≥ 2), §6.5/§8 Product Lead (directional), and a **drafted 8-row Project Manager stay bar in policy
   §7** (operate frame — enters the shipped ladder only on Pavan's go). Metric-source question (conversion
   chain vs org-KRA SPI in PII/business rows) recorded as open, awaiting his call.
+
+## 2026-08-28 — Stay bars get a tentative-numbers/plain-words toggle; canonical row order; Senior inputs land (rulings 19–20) (🪜 🗺️ republished)
+
+- **Pavan's four asks, all landed:** (1) a toggle at the stay-bars section — **tentative numbers by
+  default**, one click flips every Baseline Target to its plain-words meaning; (2) Output/Governance
+  **row order made consistent across all rungs**; (3) the Content OS download bug addressed two ways —
+  builder fix + both sheets attached directly in chat; (4) the four **Senior AI Engineer inputs**.
+- **Rulings 19–20 (the ledger now reads twenty):** (19) Senior values — *Content agents across domains
+  (A4)*: at least **2–3 agents built and adopted 100% by all teams**, with named examples (Slides
+  Creation Workflow · Practice Question Production Evaluator · Pedagogy Guidelines Evaluator ·
+  Configurator agent pushing content onto the learning portal over MCP); improving one or adapting it
+  to a new domain's use-case counts — a considerable, attributable lift in Agentic Production Coverage.
+  *Mentorship on record* → **Power Performers Created, ≥ 1 per appraisal cycle**. *Learning Systems
+  Design impact* → **8–10 learner-facing initiatives a year** (was ⚑ 6–10). (20) Tentative numbers
+  print **by default** with the plain-words toggle (supersedes the 26 Aug numberless pass — the values
+  come back, flagged as the working set for the Leads' round); row order canonicalized: Output = the
+  surface · the agents · learning impact · learning systems; Governance = issues · costs · delivery ·
+  people-last. ⚑ redefined in the key: a proposed default not yet ruled — Pavan's own ruled numbers
+  carry no ⚑.
+- **🪜 rebuilt:** STAY list → 5-tuples (tentative-number bar + plain-words bar per row; three Associate
+  rows have no numeric form and read the same both ways); segmented toggle control (numbers default,
+  pure-CSS no-JS fallback = numbers); single-string gates with numeric forms restored; Senior PII
+  reworded "Every LSD initiative pedagogically grounded…" (order now puts PII before LSD); xlsx Stay
+  Bars tab → 6 columns (tentative number + what-the-row-means side by side).
+- **🗺️ download-bug fix:** failures were silent — capability never granted meant buttons simply never
+  appeared. Now: capability absent → a visible footer note explains the view can't save files and
+  points at the chat/repo copies; save errors surface their error code on the button; probe timeout
+  1800→2600 ms. Both sheets also sent directly in chat (role_cards.xlsx updated, kra_training_sheet.xlsx
+  unchanged).
+- **Republished, same URLs:** 🪜 `stay-toggle-tentative-numbers` · 🗺️ `stay-toggle-dl-note` (site
+  `capabilities` omitted — stored `downloads:true` + contract 0.2.12 carried forward, confirmed).
+  🎯 🧭 🕸️ 🧗 untouched. 🎯 🪜 link-viewers remain PINNED to earlier versions until Pavan moves the pins.
+- **Both held drafts mirrored (still uncommitted/unpublished):** policy .html — §6.1/§6.4 reordered,
+  §6.3 Senior rewritten (agents examples + 2–3 bar, PII↔LSD order + reword, LSD 8–10, Power Performers
+  Created), stale "prints none of them" pend-note updated, footer → "twenty rulings", dated 28 Aug;
+  framework .md — Senior §2 matrix same four changes + reorder, status line now points at the policy
+  draft as the running ledger (rulings 15–20), LSD budget-hole note narrowed to the LES evidence bar.
+- **Still open with Pavan:** metric-source call (conversion-chain stages vs org-KRA SPI) · PM
+  operate-vs-answer-for ruling · the Product Lead title word · KRA-5 un-hold · the 150% cap · moving
+  the two pinned shares.

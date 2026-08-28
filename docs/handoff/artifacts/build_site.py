@@ -62,7 +62,10 @@ DL_SCRIPT = """<script>
 (async () => {
   const XLSX = """ + json.dumps(XLSX_B64) + """;
   const dl = (window.claude && window.claude.use) ? await window.claude.use("downloads") : null;
-  if (!dl) return;               // this view can't save files — buttons stay hidden
+  if (!dl) {                     // this view can't save files — say so instead of hiding silently
+    document.querySelectorAll(".dlnote").forEach(n => { n.hidden = false; });
+    return;
+  }
   document.querySelectorAll(".dlwrap").forEach(w => { w.hidden = false; });
   document.querySelectorAll(".dlbtn").forEach(b => {
     b.hidden = false;
@@ -73,9 +76,11 @@ DL_SCRIPT = """<script>
         await dl.save({ filename: name, data: Uint8Array.from(atob(XLSX[name]), c => c.charCodeAt(0)) });
         b.textContent = "saved \\u2713";
       } catch (e) {
-        b.textContent = (e && e.code === "declined") ? label : "couldn't save \\u2014 try again";
+        const code = e && e.code;
+        b.textContent = code === "declined" ? label
+          : "couldn't save" + (code ? " (" + code + ")" : "") + " \\u2014 try again";
       }
-      setTimeout(() => { b.textContent = label; b.disabled = false; }, 1800);
+      setTimeout(() => { b.textContent = label; b.disabled = false; }, 2600);
     });
   });
 })();
@@ -249,7 +254,7 @@ HERO.append('</div></div>')
 FOOTER = f"""<footer><div class="in">
 <h3>Behind this site</h3>
 <ul>
-<li>Editable masters: <span class="mono">kra_training_sheet.xlsx</span> (tracker + legend + CSI, FullStack &amp; CS Core and Content&ndash;Central team views) · <span class="mono">role_cards.xlsx</span> (ladder, 8 tabs)<span class="dlwrap" hidden> — download: {dlbtn("kra_training_sheet.xlsx")} {dlbtn("role_cards.xlsx")}</span> — in <span class="mono">docs/handoff/artifacts/</span> with the builders and CHANGELOG.</li>
+<li>Editable masters: <span class="mono">kra_training_sheet.xlsx</span> (tracker + legend + CSI, FullStack &amp; CS Core and Content&ndash;Central team views) · <span class="mono">role_cards.xlsx</span> (ladder, 8 tabs)<span class="dlwrap" hidden> — download: {dlbtn("kra_training_sheet.xlsx")} {dlbtn("role_cards.xlsx")}</span><span class="dlnote" hidden> — <em>this view can&rsquo;t save files (the viewer didn&rsquo;t grant the file-save capability), so the download buttons are hidden; the same two sheets are attached in the Claude chat and live in the repo</em></span> — in <span class="mono">docs/handoff/artifacts/</span> with the builders and CHANGELOG.</li>
 <li>Standalone artifacts, each updated in place (Level 1 is embedded above; Levels 2&ndash;4 link out rather than re-rendering): <a href="{URLS["onepager"]}" target="_blank" rel="noopener">HOD one-pager</a> · <a href="{URLS["tracker"]}" target="_blank" rel="noopener">KPI tracker</a> · <a href="{URLS["kpimap"]}" target="_blank" rel="noopener">KPI Flow Map</a> · <a href="{URLS["ladder"]}" target="_blank" rel="noopener">AI Engineer Ladder</a> · <a href="{URLS["careermap"]}" target="_blank" rel="noopener">Career Growth Map</a>.</li>
 <li>Each artifact link opens subject to that artifact's own sharing settings.</li>
 <li>Comp bands are deliberately kept off this site — they live in the standalone ladder artifact and <span class="mono">role_cards.xlsx</span>.</li>
@@ -291,6 +296,7 @@ page.append(DL_SCRIPT)
 
 out = "\n".join(page) + "\n"
 assert out.count('class="dlbtn"') == 5          # dept + team + ind bands, footer ×2
+assert out.count('class="dlnote"') == 1         # capability-absent fallback, footer only
 assert out.count('class="refcard"') == 5        # tracker, kpimap ×2, ladder, careermap
 for u in URLS.values():
     assert out.count(u) >= 2 or u == URLS["careermap"], u   # band/card + footer
