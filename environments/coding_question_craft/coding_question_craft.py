@@ -22,11 +22,14 @@ the baseline and gave no gradient.
 
 from __future__ import annotations
 
+import asyncio
 import json
 import subprocess
 import sys
 from pathlib import Path
 from textwrap import dedent
+
+from pydantic import Field
 
 import verifiers.v1 as vf
 
@@ -159,11 +162,9 @@ def _empty_run(n_tests: int, error: str) -> dict:
             "trivial_solved": 0, "trivial": {}}
 
 
-def run_reference(question: dict, timeout: float = 6.0) -> dict:
-    """Run reference_solution on each test's stdin; compare stdout. Also probe
-    trivial baselines. Returns {passed, total, error, trivial_solved, trivial}."""
-    prog = question.get("reference_solution", "")
-    tests = question.get("tests", [])
+def _exec_tests(prog: str, tests: list[dict], timeout: float = 6.0) -> tuple[int, int, str | None]:
+    """Run one program against every test's stdin, comparing stdout. Returns
+    (passed, total, error). Shared by the reference check and the solver."""
     total = len(tests)
     passed = 0
     error = None
@@ -185,6 +186,15 @@ def run_reference(question: dict, timeout: float = 6.0) -> dict:
             passed += 1
         elif error is None and proc.stderr:
             error = f"stderr: {proc.stderr.strip()[-160:]}"
+    return passed, total, error
+
+
+def run_reference(question: dict, timeout: float = 6.0) -> dict:
+    """Run reference_solution on each test's stdin; compare stdout. Also probe
+    trivial baselines. Returns {passed, total, error, trivial_solved, trivial}."""
+    prog = question.get("reference_solution", "")
+    tests = question.get("tests", [])
+    passed, total, error = _exec_tests(prog, tests, timeout)
 
     # Adversarial trivial baselines, computed without running code.
     trivial = {}
@@ -269,6 +279,65 @@ def parse_question(text: str) -> dict | None:
     return obj
 
 
+def _extract_code_block(text: str) -> str | None:
+    """Pull the contents of the first fenced code block (```lang ... ```). Falls
+    back to the whole text when the model answers with a bare program."""
+    text = text or ""
+    fence = text.find("```")
+    if fence == -1:
+        return text.strip() or None
+    nl = text.find("\n", fence + 3)
+    if nl == -1:
+        return None
+    start = nl + 1
+    end = text.find("```", start)
+    body = text[start:] if end == -1 else text[start:end]
+    return body.strip() or None
+
+
+# --------------------------------------------------------------------------- #
+# Solver: an auxiliary model that attempts the authored problem from the
+# statement alone (never the reference / expected values). Its solve-rate over k
+# samples is the *empirical* difficulty, replacing the tautological self-label.
+# --------------------------------------------------------------------------- #
+
+_SOLVER_PROMPT = dedent(
+    """\
+    Solve this programming problem. Your program must read from standard input and
+    print the answer to standard output.
+
+    {title}
+
+    {statement}
+
+    Respond with a SINGLE fenced ```python code block containing a complete program,
+    and nothing else.
+    """
+)
+
+# What fraction of solver attempts *should* succeed at each requested difficulty.
+_DIFFICULTY_TARGET = {"EASY": 1.0, "MEDIUM": 0.5, "HARD": 0.0}
+
+
+class SolverConfig(vf.JudgeConfig):
+    # A capable, cheap solver; a HARD problem is one this model cannot solve.
+    base_url: str = "https://openrouter.ai/api/v1"
+    api_key_var: str = "OPENROUTER_API_KEY"
+    model: str = "openai/gpt-4.1-mini"
+    sampling: vf.SamplingConfig = Field(
+        default_factory=lambda: vf.SamplingConfig(temperature=0.7, max_tokens=2000)
+    )
+
+
+class Solver(vf.Judge[str, SolverConfig]):
+    """A `vf.Judge` that returns a program instead of a verdict."""
+
+    prompt = _SOLVER_PROMPT
+
+    def parse(self, response: vf.JudgeResponse[str]) -> str:
+        return _extract_code_block(response.text) or ""
+
+
 # --------------------------------------------------------------------------- #
 # Deterministic static checks over the declared tests.
 # --------------------------------------------------------------------------- #
@@ -317,10 +386,17 @@ def _solvable(info: dict) -> bool:
     return bool(r.get("total")) and r.get("passed") == r.get("total") and r.get("error") is None
 
 
-class CraftTask(vf.Task[QuestionSpec]):
+class CraftTaskConfig(vf.TaskConfig):
+    solver: SolverConfig = Field(default_factory=SolverConfig)
+    solver_samples: int = 4  # k; targets {0,.25,.5,.75,1} are all exactly hittable
+    calibrate_difficulty: bool = True  # set False to skip solver calls (cheap eval)
+
+
+class CraftTask(vf.Task[QuestionSpec, vf.State, CraftTaskConfig]):
     async def finalize(self, trace: vf.Trace, runtime: vf.Runtime) -> None:
         """Parse + run the reference exactly once; cache everything scoring needs."""
         info = trace.info
+        info["solver"] = None
         q = parse_question(trace.last_reply)
         info["parsed_ok"] = q is not None
         if q is None:
@@ -338,6 +414,42 @@ class CraftTask(vf.Task[QuestionSpec]):
         info["edge_inputs"] = _edge_inputs(tests)
         info["num_tests"] = len(tests)
         info["difficulty"] = str(q.get("difficulty", "")).upper()
+
+        # Empirical difficulty: only meaningful once the problem is self-consistent,
+        # so gate the (paid) solver calls on the deterministic core passing first.
+        if self.config.calibrate_difficulty and _gate(info) and _solvable(info):
+            info["solver"] = await self._calibrate(trace, q, tests)
+
+    async def _calibrate(self, trace: vf.Trace, q: dict, tests: list[dict]) -> dict:
+        solver = Solver(self.config.solver)
+        k = max(1, self.config.solver_samples)
+        title, statement = q.get("title", ""), q.get("statement", "")
+        attempts = await asyncio.gather(
+            *(
+                solver.evaluate(trace=trace, title=title, statement=statement)
+                for _ in range(k)
+            ),
+            return_exceptions=True,
+        )
+        solved = 0
+        for a in attempts:
+            if isinstance(a, Exception):
+                continue
+            prog = a.parsed or ""
+            if not prog.strip():
+                continue
+            passed, total, error = _exec_tests(prog, tests)
+            if total > 0 and passed == total and error is None:
+                solved += 1
+        solve_rate = solved / k
+        target = _DIFFICULTY_TARGET.get(self.data.difficulty, 0.5)
+        return {
+            "k": k,
+            "solved": solved,
+            "solve_rate": solve_rate,
+            "target": target,
+            "calibration": 1.0 - abs(target - solve_rate),
+        }
 
     @vf.reward(weight=0.5)
     async def format_valid(self, trace: vf.Trace) -> float:
@@ -365,6 +477,16 @@ class CraftTask(vf.Task[QuestionSpec]):
         r = info["run"]
         return float(r.get("trivial_solved", 0) == 0 and info["distinct_expected"] >= 2)
 
+    @vf.reward(weight=1.5)
+    async def difficulty_calibrated(self, trace: vf.Trace) -> float:
+        """Reward = 1 - |target_solve_rate - observed_solve_rate|. An independent
+        solver attempts the problem from the statement alone; a problem labeled
+        HARD that the solver aces (or EASY the solver fails) is mis-calibrated and
+        scores low. Zero unless the deterministic core already passed (solver
+        gated on solvable in finalize)."""
+        s = trace.info.get("solver")
+        return float(s["calibration"]) if s else 0.0
+
     # NOTE: edge coverage is a METRIC, not a reward. The gold-set regression
     # showed only ~33% of *verified* questions satisfy any cheap stdin edge
     # heuristic (real edges are domain-specific), so rewarding it would penalize
@@ -390,10 +512,20 @@ class CraftTask(vf.Task[QuestionSpec]):
     async def edge_inputs(self, trace: vf.Trace) -> float:
         return float(trace.info.get("edge_inputs", 0))
 
+    @vf.metric
+    async def solver_solve_rate(self, trace: vf.Trace) -> float:
+        s = trace.info.get("solver")
+        return float(s["solve_rate"]) if s else 0.0
+
+    @vf.metric
+    async def solver_ran(self, trace: vf.Trace) -> float:
+        return float(trace.info.get("solver") is not None)
+
 
 class CraftConfig(vf.TasksetConfig):
     num_tasks: int = 12
     seed: int = 0
+    task: CraftTaskConfig = Field(default_factory=CraftTaskConfig)
 
 
 class CodingQuestionCraftTaskset(vf.Taskset[CraftTask, CraftConfig]):

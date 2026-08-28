@@ -4,6 +4,24 @@ outputs/eval/cqc_baseline.json.
 """
 import asyncio, json, os
 from pathlib import Path
+
+
+def _load_dotenv(path=".env"):
+    """Populate os.environ from a .env file (verifiers resolves keys from the
+    process environment; nothing auto-loads .env)."""
+    p = Path(path)
+    if not p.exists():
+        return
+    for line in p.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        k, v = line.split("=", 1)
+        os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
+
+_load_dotenv()
+
 from verifiers.v1.cli.eval.runner import run_eval
 from verifiers.v1.cli.resolve import narrow_config, with_positional_taskset
 from verifiers.v1.configs.cli.eval import EvalConfig
@@ -27,7 +45,7 @@ cfg = CfgT.model_validate({
         },
     },
     "model": MODEL, "client": CLIENT, "sampling": SAMPLING,
-    "num_tasks": N, "num_rollouts": 1, "max_concurrent": N,
+    "num_tasks": N, "num_rollouts": 1, "max_concurrent": min(N, 8),
     "rich": None, "serve": None,
 })
 
